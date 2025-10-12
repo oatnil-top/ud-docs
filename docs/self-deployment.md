@@ -475,7 +475,7 @@ If you encounter issues:
 Now that you have UnderControl running:
 
 - Create your first admin account
-- Explore the [Features](/features/accounts) documentation
+- Explore the [Features](/docs/features/accounts) documentation
 - Set up integrations (S3/R2, OpenAI)
 - Configure backups
 - Customize your deployment
