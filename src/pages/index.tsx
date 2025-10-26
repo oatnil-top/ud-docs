@@ -67,25 +67,6 @@ function PrinciplesSection() {
   );
 }
 
-function ArchitectureSection() {
-  return (
-    <section className={styles.architectureSection}>
-      <div className="container">
-        <Heading as="h2" className="margin-bottom--lg">
-          Architecture
-        </Heading>
-        <div>
-          <img
-            src="/img/Arch.png"
-            alt="UnderControl Architecture Diagram"
-            style={{maxWidth: '100%', height: 'auto'}}
-          />
-        </div>
-      </div>
-    </section>
-  );
-}
-
 export default function Home(): ReactNode {
   const {siteConfig} = useDocusaurusContext();
   return (
@@ -96,7 +77,6 @@ export default function Home(): ReactNode {
       <main>
         <PrinciplesSection />
         <HomepageFeatures />
-        <ArchitectureSection />
       </main>
     </Layout>
   );

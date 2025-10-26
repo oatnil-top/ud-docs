@@ -15,6 +15,10 @@ UnderControl is a modern web application for managing accounts, budgets, and exp
 - **Proxy**: Traefik for routing and load balancing
 - **Database**: SQLite (included, no external database required)
 
+### Architecture
+
+![UnderControl Architecture](/img/Arch.png)
+
 ## Prerequisites
 
 Before you begin, ensure you have the following installed:

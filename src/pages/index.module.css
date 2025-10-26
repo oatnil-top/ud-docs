@@ -58,14 +58,8 @@
   font-weight: normal;
 }
 
-.architectureSection {
-  padding: 3rem 0;
-  border-top: 1px solid var(--ifm-color-emphasis-200);
-}
-
 @media screen and (max-width: 996px) {
-  .principlesSection,
-  .architectureSection {
+  .principlesSection {
     padding: 2rem 0;
   }
 
