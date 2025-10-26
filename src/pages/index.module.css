@@ -24,48 +24,43 @@
 }
 
 .principlesSection {
-  padding: 4rem 0;
-  background-color: var(--ifm-color-emphasis-100);
+  padding: 3rem 0;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
 }
 
 .principleCard {
   display: flex;
   align-items: flex-start;
-  gap: 1rem;
-  padding: 1.5rem;
-  background-color: var(--ifm-background-color);
-  border-radius: 0.75rem;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  transition: box-shadow 0.2s;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--ifm-color-emphasis-100);
 }
 
-.principleCard:hover {
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+.principleCard:last-child {
+  border-bottom: none;
 }
 
 .checkmark {
   flex-shrink: 0;
-  width: 1.5rem;
-  height: 1.5rem;
-  border-radius: 50%;
-  background-color: var(--ifm-color-success);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  margin-top: 0.125rem;
+  width: 1rem;
+  height: 1rem;
+  color: var(--ifm-color-emphasis-600);
+  margin-top: 0.35rem;
+  font-size: 1.25rem;
+  font-weight: normal;
 }
 
 .principleText {
   margin: 0;
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   color: var(--ifm-color-emphasis-800);
   line-height: 1.6;
+  font-weight: normal;
 }
 
 .architectureSection {
-  padding: 4rem 0;
+  padding: 3rem 0;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
 }
 
 @media screen and (max-width: 996px) {
@@ -75,10 +70,6 @@
   }
 
   .principleCard {
-    padding: 1rem;
-  }
-
-  .principleText {
-    font-size: 1rem;
+    padding: 0.5rem 0;
   }
 }

@@ -58,7 +58,7 @@ function Feature({title, icon: Icon, description}: FeatureItem) {
     <div className={clsx('col col--6 col--md-3')}>
       <div className="text--center">
         <div className={styles.featureIcon}>
-          <Icon size={48} strokeWidth={1.5} />
+          <Icon size={32} strokeWidth={1.5} />
         </div>
       </div>
       <div className="text--center padding-horiz--md">

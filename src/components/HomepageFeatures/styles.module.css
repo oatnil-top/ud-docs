@@ -1,9 +1,9 @@
 .features {
   display: flex;
   align-items: center;
-  padding: 4rem 0;
+  padding: 3rem 0;
   width: 100%;
-  background-color: var(--ifm-background-surface-color);
+  border-top: 1px solid var(--ifm-color-emphasis-200);
 }
 
 .featureSvg {
@@ -15,26 +15,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 1.5rem;
-  border-radius: 1rem;
-  background: linear-gradient(135deg, var(--ifm-color-primary-lighter) 0%, var(--ifm-color-primary) 100%);
-  color: white;
-  transition: transform 0.2s ease-in-out;
-}
-
-.featureIcon:hover {
-  transform: translateY(-4px);
+  margin: 0 auto 0.75rem;
+  color: var(--ifm-color-emphasis-700);
 }
 
 @media screen and (max-width: 996px) {
   .features {
     padding: 2rem 0;
-  }
-
-  .featureIcon {
-    width: 64px;
-    height: 64px;
   }
 }

@@ -49,17 +49,14 @@ function PrinciplesSection() {
   return (
     <section className={styles.principlesSection}>
       <div className="container">
-        <Heading as="h2" className="text--center margin-bottom--lg">
-          Our Privacy Commitment
+        <Heading as="h2" className="margin-bottom--lg">
+          Privacy Commitment
         </Heading>
-        <p className="text--center margin-bottom--xl" style={{fontSize: '1.1rem', color: 'var(--ifm-color-emphasis-700)'}}>
-          Independent developer's mission: give users complete control over their data
-        </p>
         <div className="row">
           {principles.map((principle, idx) => (
-            <div key={idx} className="col col--12 margin-bottom--md">
+            <div key={idx} className="col col--12">
               <div className={styles.principleCard}>
-                <div className={styles.checkmark}>✓</div>
+                <div className={styles.checkmark}>•</div>
                 <p className={styles.principleText}>{principle}</p>
               </div>
             </div>
@@ -74,10 +71,10 @@ function ArchitectureSection() {
   return (
     <section className={styles.architectureSection}>
       <div className="container">
-        <Heading as="h2" className="text--center margin-bottom--lg">
+        <Heading as="h2" className="margin-bottom--lg">
           Architecture
         </Heading>
-        <div className="text--center">
+        <div>
           <img
             src="/img/Arch.png"
             alt="UnderControl Architecture Diagram"
