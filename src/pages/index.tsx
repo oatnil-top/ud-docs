@@ -29,6 +29,25 @@ function HomepageHeader() {
   );
 }
 
+function ArchitectureSection() {
+  return (
+    <section className={styles.architectureSection}>
+      <div className="container">
+        <Heading as="h2" className="text--center margin-bottom--lg">
+          Architecture
+        </Heading>
+        <div className="text--center">
+          <img
+            src="/img/Arch.png"
+            alt="UnderControl Architecture Diagram"
+            style={{maxWidth: '100%', height: 'auto'}}
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function Home(): ReactNode {
   const {siteConfig} = useDocusaurusContext();
   return (
@@ -37,6 +56,7 @@ export default function Home(): ReactNode {
       description="Description will go into a meta tag in <head />">
       <HomepageHeader />
       <main>
+        <ArchitectureSection />
         <HomepageFeatures />
       </main>
     </Layout>
