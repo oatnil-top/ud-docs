@@ -20,4 +20,65 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 1rem;
+}
+
+.principlesSection {
+  padding: 4rem 0;
+  background-color: var(--ifm-color-emphasis-100);
+}
+
+.principleCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.5rem;
+  background-color: var(--ifm-background-color);
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.2s;
+}
+
+.principleCard:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.checkmark {
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background-color: var(--ifm-color-success);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-top: 0.125rem;
+}
+
+.principleText {
+  margin: 0;
+  font-size: 1.05rem;
+  color: var(--ifm-color-emphasis-800);
+  line-height: 1.6;
+}
+
+.architectureSection {
+  padding: 4rem 0;
+}
+
+@media screen and (max-width: 996px) {
+  .principlesSection,
+  .architectureSection {
+    padding: 2rem 0;
+  }
+
+  .principleCard {
+    padding: 1rem;
+  }
+
+  .principleText {
+    font-size: 1rem;
+  }
 }

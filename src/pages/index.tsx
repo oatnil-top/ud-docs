@@ -14,18 +14,59 @@ function HomepageHeader() {
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
         <Heading as="h1" className="hero__title">
-          {siteConfig.title}
+          Your Data, Your Control
         </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
+        <p className="hero__subtitle">
+          Open-source, self-hostable platform for managing your data with complete privacy and control.
+          Built for individuals and teams who value data sovereignty.
+        </p>
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
             to="/docs/intro">
-            Docusaurus Tutorial - 5min ⏱️
+            Get Started
+          </Link>
+          <Link
+            className="button button--outline button--lg"
+            to="/docs/deployment"
+            style={{marginLeft: '1rem'}}>
+            Self-Deploy
           </Link>
         </div>
       </div>
     </header>
+  );
+}
+
+function PrinciplesSection() {
+  const principles = [
+    'Your data belongs to you. We never access or sell your data without authorization.',
+    'Delete, export, or migrate your data anytime without technical barriers.',
+    'Local-first storage reduces dependency on cloud services.',
+    'Independent development team with no complex commercial conflicts.',
+  ];
+
+  return (
+    <section className={styles.principlesSection}>
+      <div className="container">
+        <Heading as="h2" className="text--center margin-bottom--lg">
+          Our Privacy Commitment
+        </Heading>
+        <p className="text--center margin-bottom--xl" style={{fontSize: '1.1rem', color: 'var(--ifm-color-emphasis-700)'}}>
+          Independent developer's mission: give users complete control over their data
+        </p>
+        <div className="row">
+          {principles.map((principle, idx) => (
+            <div key={idx} className="col col--12 margin-bottom--md">
+              <div className={styles.principleCard}>
+                <div className={styles.checkmark}>✓</div>
+                <p className={styles.principleText}>{principle}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -53,11 +94,12 @@ export default function Home(): ReactNode {
   return (
     <Layout
       title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
+      description="Open-source, self-hostable platform for managing your data with complete privacy and control">
       <HomepageHeader />
       <main>
-        <ArchitectureSection />
+        <PrinciplesSection />
         <HomepageFeatures />
+        <ArchitectureSection />
       </main>
     </Layout>
   );
