@@ -1,18 +1,19 @@
 import type {ReactNode} from 'react';
 import clsx from 'clsx';
 import Heading from '@theme/Heading';
+import { Lock, Download, Server, Eye } from 'lucide-react';
 import styles from './styles.module.css';
 
 type FeatureItem = {
   title: string;
-  emoji: string;
+  icon: typeof Lock;
   description: ReactNode;
 };
 
 const FeatureList: FeatureItem[] = [
   {
     title: 'End-to-End Encryption',
-    emoji: '🔒',
+    icon: Lock,
     description: (
       <>
         All data transmission uses HTTPS/TLS encryption. Sensitive information
@@ -22,7 +23,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Complete Data Export',
-    emoji: '📦',
+    icon: Download,
     description: (
       <>
         Export all your data in JSON, CSV, or Markdown formats with one click.
@@ -32,7 +33,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Self-Hosting Ready',
-    emoji: '🏠',
+    icon: Server,
     description: (
       <>
         Deploy on your own infrastructure with Docker. Support for major cloud
@@ -42,7 +43,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Transparent Access Control',
-    emoji: '👁️',
+    icon: Eye,
     description: (
       <>
         JWT and API Key-based permission management. You always know who accessed
@@ -52,11 +53,13 @@ const FeatureList: FeatureItem[] = [
   },
 ];
 
-function Feature({title, emoji, description}: FeatureItem) {
+function Feature({title, icon: Icon, description}: FeatureItem) {
   return (
     <div className={clsx('col col--6 col--md-3')}>
       <div className="text--center">
-        <div className={styles.featureEmoji}>{emoji}</div>
+        <div className={styles.featureIcon}>
+          <Icon size={48} strokeWidth={1.5} />
+        </div>
       </div>
       <div className="text--center padding-horiz--md">
         <Heading as="h3">{title}</Heading>
