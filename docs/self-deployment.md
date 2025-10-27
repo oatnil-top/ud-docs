@@ -8,15 +8,14 @@ Choose your deployment method based on your infrastructure and requirements.
 
 ## Architecture
 
-UnderControl consists of three main components:
+UnderControl consists of two main components:
 
-- **Backend**: Go-based API server
+- **Backend**: Go-based API server with CORS support
 - **Frontend**: Next.js web application
-- **Proxy**: Traefik for routing and load balancing
 
 ![UnderControl Architecture](/img/Arch.png)
 
-The architecture diagram shows how these components work together. The backend handles API requests and data storage, the frontend provides the user interface, and Traefik routes traffic between them.
+The architecture diagram shows how these components work together. The backend handles API requests and data storage, while the frontend provides the user interface. Communication between components is handled via CORS-enabled HTTP requests.
 
 ## Deployment Options
 

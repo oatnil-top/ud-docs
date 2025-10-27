@@ -12,9 +12,8 @@ This deployment includes:
 
 - **Storage**: Local filesystem (Docker volume)
 - **Database**: SQLite
-- **Backend**: Go-based API server
+- **Backend**: Go-based API server (with CORS enabled)
 - **Frontend**: Next.js web application
-- **Proxy**: Traefik reverse proxy
 
 ## Prerequisites
 
@@ -53,6 +52,9 @@ GIN_MODE=release
 
 # JWT Authentication (REQUIRED - Change this!)
 JWT_SECRET=your-super-secret-jwt-key-change-this
+
+# CORS Configuration
+CORS_ALLOWED_ORIGINS=http://localhost:3000
 
 # Storage Configuration
 S3_ENABLED="false"
@@ -95,11 +97,11 @@ services:
     restart: unless-stopped
     env_file:
       - .env
+    ports:
+      - "8080:8080"
     volumes:
       - backend-data:/data
       - ./license.txt:/etc/undercontrol/license.txt:ro
-    networks:
-      - ud-network
     logging:
       driver: "json-file"
       options:
@@ -113,13 +115,6 @@ services:
         reservations:
           cpus: '0.5'
           memory: 512M
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.api.rule=PathPrefix(`/ud-api`)"
-      - "traefik.http.routers.api.entrypoints=web"
-      - "traefik.http.routers.api.middlewares=ud-server-stripprefix"
-      - "traefik.http.services.api.loadbalancer.server.port=8080"
-      - "traefik.http.middlewares.ud-server-stripprefix.stripprefix.prefixes=/ud-api"
 
   # Next.js Web Application
   web:
@@ -127,9 +122,9 @@ services:
     container_name: ud-web
     environment:
       - NODE_ENV=production
-      - NEXT_PUBLIC_API_URL=/ud-api
-    networks:
-      - ud-network
+      - NEXT_PUBLIC_API_URL=http://localhost:8080
+    ports:
+      - "3000:3000"
     restart: unless-stopped
     logging:
       driver: "json-file"
@@ -144,55 +139,10 @@ services:
         reservations:
           cpus: '0.25'
           memory: 256M
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.web.rule=PathPrefix(`/ud`)"
-      - "traefik.http.routers.web.entrypoints=web"
-      - "traefik.http.routers.web.priority=1"
-      - "traefik.http.services.web.loadbalancer.server.port=3000"
-
-  # Traefik Reverse Proxy
-  traefik:
-    image: traefik:v3.0
-    container_name: ud-traefik
-    command:
-      - "--api.dashboard=true"
-      - "--api.insecure=true"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--providers.docker.network=ud-network"
-      - "--entrypoints.web.address=:80"
-      - "--entrypoints.traefik.address=:8080"
-      - "--entrypoints.web-secure.address=:443"
-      - "--log.level=INFO"
-      - "--accesslog=true"
-    ports:
-      - 20080:80
-      - 28080:8080
-      - 20443:443
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    networks:
-      - ud-network
-    restart: unless-stopped
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.dashboard.rule=Host(`traefik.localhost`)"
-      - "traefik.http.routers.dashboard.entrypoints=web"
-      - "traefik.http.routers.dashboard.service=api@internal"
 
 volumes:
   backend-data:
     driver: local
-
-networks:
-  ud-network:
-    driver: bridge
 ```
 
 ### 5. Start the Services
@@ -207,16 +157,14 @@ Check container status:
 docker compose ps
 ```
 
-You should see three running containers:
+You should see two running containers:
 - `undercontrol-backend`
 - `ud-web`
-- `ud-traefik`
 
 ### 6. Access the Application
 
-- **Web Application**: http://localhost:20080/ud
-- **API Endpoint**: http://localhost:20080/ud-api
-- **Traefik Dashboard**: http://localhost:28080
+- **Web Application**: http://localhost:3000
+- **API Endpoint**: http://localhost:8080
 
 ## Configuration Reference
 
@@ -228,23 +176,37 @@ You should see three running containers:
 | `PORT` | Backend server port | `8080` |
 | `UD_DATA_PATH` | Database and file storage path | `/data` |
 | `GIN_MODE` | Framework mode | `release` |
+| `CORS_ALLOWED_ORIGINS` | Allowed CORS origins | `http://localhost:3000` |
 | `S3_ENABLED` | Enable S3 storage | `false` |
 
 ### Port Configuration
 
 Default ports:
-- `20080`: HTTP (web and API)
-- `28080`: Traefik dashboard
-- `20443`: HTTPS (requires SSL configuration)
+- `3000`: Web application
+- `8080`: Backend API
 
-To change ports, edit the `traefik` service in `docker-compose.yml`:
+To change ports, edit the `ports` section in `docker-compose.yml`:
 
 ```yaml
-ports:
-  - 8080:80      # Your HTTP port
-  - 8888:8080    # Your dashboard port
-  - 8443:443     # Your HTTPS port
+services:
+  server:
+    ports:
+      - "8080:8080"    # Change first 8080 to your preferred port
+
+  web:
+    ports:
+      - "3000:3000"    # Change first 3000 to your preferred port
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8080  # Update if you change backend port
 ```
+
+:::tip CORS Configuration
+If you change the web application port, update `CORS_ALLOWED_ORIGINS` in your `.env` file:
+
+```bash
+CORS_ALLOWED_ORIGINS=http://localhost:3001
+```
+:::
 
 ## Managing Your Deployment
 
@@ -259,7 +221,6 @@ Specific service:
 ```bash
 docker compose logs -f server
 docker compose logs -f web
-docker compose logs -f traefik
 ```
 
 ### Stop Services
@@ -315,16 +276,25 @@ docker compose logs
 ```
 
 Common issues:
-- Port conflicts (20080, 28080, 20443 in use)
+- Port conflicts (3000 or 8080 already in use)
 - Missing `license.txt` file
 - Invalid or missing `JWT_SECRET`
+- CORS configuration mismatch
 
 ### Cannot Access Application
 
 1. Verify containers are running: `docker compose ps`
-2. Check Traefik dashboard: http://localhost:28080
-3. Test network connectivity: `docker compose exec web ping server`
-4. Check browser console for errors
+2. Check if ports are accessible: `curl http://localhost:8080/health`
+3. Verify CORS settings in `.env` match your frontend URL
+4. Check browser console for CORS errors
+
+### CORS Errors
+
+If you see CORS errors in the browser console:
+
+1. Verify `CORS_ALLOWED_ORIGINS` in `.env` matches your frontend URL
+2. If using a different port, update the environment variable
+3. Restart the backend after changing CORS settings: `docker compose restart server`
 
 ### Database Issues
 
@@ -352,35 +322,58 @@ docker compose up -d
 
 For production use:
 
-1. **HTTPS/SSL**: Configure Let's Encrypt certificates
-2. **Backups**: Set up automated daily backups
-3. **Monitoring**: Enable OpenTelemetry
-4. **Resource Limits**: Adjust based on usage
-5. **Security**: Use strong JWT_SECRET, restrict network access
-6. **Updates**: Monitor for security patches
+1. **Reverse Proxy**: Add nginx or Caddy for HTTPS/SSL termination
+2. **CORS**: Update allowed origins to your production domain
+3. **Backups**: Set up automated daily backups
+4. **Monitoring**: Enable OpenTelemetry
+5. **Resource Limits**: Adjust based on usage
+6. **Security**: Use strong JWT_SECRET, restrict network access
+7. **Updates**: Monitor for security patches
 
-### HTTPS with Let's Encrypt
+### Production Reverse Proxy Example
 
-Add to Traefik service in `docker-compose.yml`:
+For production, add a reverse proxy like nginx:
 
 ```yaml
-traefik:
-  command:
-    # ... existing commands ...
-    - "--certificatesresolvers.letsencrypt.acme.email=your-email@example.com"
-    - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
-    - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web"
-  volumes:
-    - ./letsencrypt:/letsencrypt
-    - /var/run/docker.sock:/var/run/docker.sock:ro
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - server
+      - web
 ```
 
-Add labels to your services:
+Example nginx configuration:
 
-```yaml
-labels:
-  - "traefik.http.routers.web.tls=true"
-  - "traefik.http.routers.web.tls.certresolver=letsencrypt"
+```nginx
+server {
+    listen 80;
+    server_name your-domain.com;
+
+    location / {
+        proxy_pass http://web:3000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    location /api {
+        proxy_pass http://server:8080;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}
+```
+
+Update CORS for production:
+
+```bash
+CORS_ALLOWED_ORIGINS=https://your-domain.com
 ```
 
 ## Next Steps
