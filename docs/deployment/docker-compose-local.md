@@ -39,6 +39,17 @@ mkdir undercontrol-deployment
 cd undercontrol-deployment
 ```
 
+After completing all setup steps, your directory structure should look like this:
+
+```
+undercontrol-deployment/
+├── .env                    # Environment configuration
+├── docker-compose.yml      # Docker services definition
+├── license.txt             # Your license file
+└── backups/               # Backup directory (optional)
+    └── backup-20241027.tar.gz
+```
+
 ### 2. Create Configuration File
 
 Create a `.env` file with your configuration:
@@ -92,7 +103,7 @@ version: '3.8'
 services:
   # UnderControl Backend (Go API Server)
   server:
-    image: lintao0o0/undercontrol-backend:sha-6df2635
+    image: lintao0o0/undercontrol-backend:sha-0e5d92f
     container_name: undercontrol-backend
     restart: unless-stopped
     env_file:
@@ -118,7 +129,7 @@ services:
 
   # Next.js Web Application
   web:
-    image: ghcr.io/oatnil-top/ud-all-in-one-next-web:main-7f78bb0
+    image: lintao0o0/undercontrol-next-web:production-fccf736
     container_name: ud-web
     environment:
       - NODE_ENV=production
