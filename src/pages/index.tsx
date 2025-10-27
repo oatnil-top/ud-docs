@@ -17,18 +17,18 @@ function HomepageHeader() {
           Your Data, Your Control
         </Heading>
         <p className="hero__subtitle">
-          Open-source, self-hostable platform for managing your data with complete privacy and control.
+          Self-hostable platform for managing your data with complete privacy and control.
           Built for individuals and teams who value data sovereignty.
         </p>
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
-            to="/docs/intro">
+            to="https://oatnil.top/ud/login">
             Get Started
           </Link>
           <Link
             className="button button--outline button--lg"
-            to="/docs/deployment"
+            to="/docs/self-deployment"
             style={{marginLeft: '1rem'}}>
             Self-Deploy
           </Link>

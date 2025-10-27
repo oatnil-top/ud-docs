@@ -45,9 +45,7 @@ After completing all setup steps, your directory structure should look like this
 undercontrol-deployment/
 ├── .env                    # Environment configuration
 ├── docker-compose.yml      # Docker services definition
-├── license.txt             # Your license file
-└── backups/               # Backup directory (optional)
-    └── backup-20241027.tar.gz
+└── license.txt             # Your license file
 ```
 
 ### 2. Create Configuration File
