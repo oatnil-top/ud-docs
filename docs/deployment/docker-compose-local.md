@@ -215,7 +215,9 @@ You should see two running containers:
 
 ## Configuration Reference
 
-### Environment Variables
+For a complete list of all available environment variables, see the [Environment Variables Reference](./environment-variables.md).
+
+### Essential Environment Variables
 
 | Variable | Description | Default |
 |----------|-------------|---------|
