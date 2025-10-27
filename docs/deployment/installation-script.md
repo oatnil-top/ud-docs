@@ -1,8 +1,24 @@
+---
+sidebar_position: 5
+---
+
+# Installation Script
+
+This page contains the automated installation script for UnderControl Docker Compose deployment with local storage and SQLite.
+
+## How to Use
+
+1. Copy the script below to a file named `install.sh`
+2. Make it executable: `chmod +x install.sh`
+3. Run it: `./install.sh`
+
+## Installation Script
+
+```bash
 #!/bin/sh
 set -e
 
 # UnderControl Docker Compose Installation Script
-# Usage: curl -fsSL https://your-domain.com/scripts/install-docker-compose-local.sh | sh
 
 echo "=================================="
 echo "UnderControl Installation Script"
@@ -199,3 +215,38 @@ fi
 
 echo "For help and documentation, visit: https://docs.undercontrol.io"
 echo ""
+```
+
+## What the Script Does
+
+The installation script automates the following steps:
+
+1. **Prerequisites Check**: Verifies Docker and Docker Compose are installed
+2. **Directory Setup**: Creates a deployment directory (`undercontrol-deployment`)
+3. **Security Configuration**: Generates a secure JWT_SECRET automatically
+4. **Environment Configuration**: Creates `.env` file with all necessary settings
+5. **Service Definition**: Creates `docker-compose.yml` with backend and web services
+6. **License Check**: Checks for license file and guides through setup
+7. **Service Start**: Automatically starts services if license file is present
+
+## After Running the Script
+
+If you already have a license file, the script will start the services automatically. Otherwise:
+
+```bash
+cd undercontrol-deployment
+cp /path/to/license.txt ./license.txt
+docker compose up -d
+```
+
+Then access your UnderControl instance at:
+- **Web Application**: http://localhost:3000
+- **API Endpoint**: http://localhost:8080
+
+## Customization
+
+You can customize the deployment directory by setting the `DEPLOY_DIR` environment variable:
+
+```bash
+DEPLOY_DIR=my-custom-directory ./install.sh
+```

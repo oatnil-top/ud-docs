@@ -34,20 +34,27 @@ docker compose version
 
 ### Option 1: Automated Installation (Recommended)
 
-Run this single command to automatically set up UnderControl:
+Use the automated installation script to set up UnderControl in one command.
+
+**Steps:**
+
+1. Copy the installation script from the [Installation Script page](/docs/deployment/installation-script)
+2. Save it to a file named `install.sh`
+3. Make it executable and run:
 
 ```bash
-curl -fsSL https://docs.undercontrol.io/scripts/install-docker-compose-local.sh | sh
+chmod +x install.sh
+./install.sh
 ```
 
-This script will:
+The script will automatically:
 - Check Docker and Docker Compose prerequisites
 - Create deployment directory (`undercontrol-deployment`)
 - Generate a secure JWT_SECRET automatically
 - Create `.env` configuration file
 - Create `docker-compose.yml` with both services
 - Guide you through license file setup
-- Automatically start services if license file is present
+- Start services automatically if license file is present
 
 After running the script, if you didn't have a license file yet, simply copy it to the deployment directory and start the services:
 
