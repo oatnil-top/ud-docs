@@ -106,7 +106,7 @@ CORS_ALLOWED_ORIGINS=http://localhost:3000
 S3_ENABLED="false"
 
 # Monitoring (Disabled by default)
-OTEL_ENABLED=false
+OTEL_ENABLED="false"
 
 # Optional: OpenAI Integration
 # OPENAI_BASE_URL=https://api.openai.com/v1
@@ -140,7 +140,7 @@ version: '3.8'
 services:
   # UnderControl Backend (Go API Server)
   server:
-    image: lintao0o0/undercontrol-backend:sha-0e5d92f
+    image: lintao0o0/undercontrol-backend:latest
     container_name: undercontrol-backend
     restart: unless-stopped
     env_file:
@@ -166,7 +166,7 @@ services:
 
   # Next.js Web Application
   web:
-    image: lintao0o0/undercontrol-next-web:production-fccf736
+    image: lintao0o0/undercontrol-next-web:production-latest
     container_name: ud-web
     environment:
       - NODE_ENV=production
