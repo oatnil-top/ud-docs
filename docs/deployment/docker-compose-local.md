@@ -88,10 +88,9 @@ undercontrol-deployment/
 
 ### 2. Create Configuration File
 
-Create a `.env` file with your configuration:
+Create a `.env` file with the following content:
 
 ```bash
-cat > .env <<EOF
 # Backend Configuration
 PORT=8080
 UD_DATA_PATH=/data
@@ -106,11 +105,13 @@ CORS_ALLOWED_ORIGINS=http://localhost:3000
 # Storage Configuration
 S3_ENABLED="false"
 
+# Monitoring (Disabled by default)
+OTEL_ENABLED=false
+
 # Optional: OpenAI Integration
 # OPENAI_BASE_URL=https://api.openai.com/v1
 # OPENAI_API_KEY=your-openai-api-key
 # OPENAI_MODEL=gpt-4o-mini
-EOF
 ```
 
 :::danger Security Warning

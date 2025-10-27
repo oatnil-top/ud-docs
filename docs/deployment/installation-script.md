@@ -78,6 +78,9 @@ CORS_ALLOWED_ORIGINS=http://localhost:3000
 # Storage Configuration
 S3_ENABLED="false"
 
+# Monitoring (Disabled by default)
+OTEL_ENABLED=false
+
 # Optional: OpenAI Integration
 # OPENAI_BASE_URL=https://api.openai.com/v1
 # OPENAI_API_KEY=your-openai-api-key
