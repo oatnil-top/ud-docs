@@ -38,35 +38,6 @@ function HomepageHeader() {
   );
 }
 
-function PrinciplesSection() {
-  const principles = [
-    'Your data belongs to you. We never access or sell your data without authorization.',
-    'Delete, export, or migrate your data anytime without technical barriers.',
-    'Local-first storage reduces dependency on cloud services.',
-    'Independent development team with no complex commercial conflicts.',
-  ];
-
-  return (
-    <section className={styles.principlesSection}>
-      <div className="container">
-        <Heading as="h2" className="margin-bottom--lg">
-          Privacy Commitment
-        </Heading>
-        <div className="row">
-          {principles.map((principle, idx) => (
-            <div key={idx} className="col col--12">
-              <div className={styles.principleCard}>
-                <div className={styles.checkmark}>•</div>
-                <p className={styles.principleText}>{principle}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 export default function Home(): ReactNode {
   const {siteConfig} = useDocusaurusContext();
   return (
@@ -75,7 +46,6 @@ export default function Home(): ReactNode {
       description="Open-source, self-hostable platform for managing your data with complete privacy and control">
       <HomepageHeader />
       <main>
-        <PrinciplesSection />
         <HomepageFeatures />
       </main>
     </Layout>

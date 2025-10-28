@@ -99,9 +99,6 @@ GIN_MODE=release
 # JWT Authentication (REQUIRED - Change this!)
 JWT_SECRET=your-super-secret-jwt-key-change-this
 
-# CORS Configuration
-CORS_ALLOWED_ORIGINS=http://localhost:3000
-
 # Storage Configuration
 S3_ENABLED="false"
 
@@ -112,6 +109,9 @@ OTEL_ENABLED="false"
 # OPENAI_BASE_URL=https://api.openai.com/v1
 # OPENAI_API_KEY=your-openai-api-key
 # OPENAI_MODEL=gpt-4o-mini
+
+# CORS Configuration(default to http://localhost:8080)
+# CORS_ALLOWED_ORIGINS=http://localhost:8080
 ```
 
 :::danger Security Warning
@@ -168,9 +168,6 @@ services:
   web:
     image: lintao0o0/undercontrol-next-web:production-latest
     container_name: ud-web
-    environment:
-      - NODE_ENV=production
-      - NEXT_PUBLIC_API_URL=http://localhost:8080
     ports:
       - "3000:3000"
     restart: unless-stopped
@@ -258,40 +255,6 @@ CORS_ALLOWED_ORIGINS=http://localhost:3001
 ```
 :::
 
-## Managing Your Deployment
-
-### View Logs
-
-All services:
-```bash
-docker compose logs -f
-```
-
-Specific service:
-```bash
-docker compose logs -f server
-docker compose logs -f web
-```
-
-### Stop Services
-
-```bash
-docker compose stop
-```
-
-### Restart Services
-
-```bash
-docker compose restart
-```
-
-### Update Services
-
-```bash
-docker compose pull
-docker compose up -d
-```
-
 ### Backup Data
 
 The SQLite database and files are in the `backend-data` volume:
@@ -368,63 +331,6 @@ docker volume rm undercontrol-deployment_backend-data
 docker compose up -d
 ```
 
-## Production Considerations
-
-For production use:
-
-1. **Reverse Proxy**: Add nginx or Caddy for HTTPS/SSL termination
-2. **CORS**: Update allowed origins to your production domain
-3. **Backups**: Set up automated daily backups
-4. **Monitoring**: Enable OpenTelemetry
-5. **Resource Limits**: Adjust based on usage
-6. **Security**: Use strong JWT_SECRET, restrict network access
-7. **Updates**: Monitor for security patches
-
-### Production Reverse Proxy Example
-
-For production, add a reverse proxy like nginx:
-
-```yaml
-services:
-  nginx:
-    image: nginx:alpine
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./ssl:/etc/nginx/ssl:ro
-    depends_on:
-      - server
-      - web
-```
-
-Example nginx configuration:
-
-```nginx
-server {
-    listen 80;
-    server_name your-domain.com;
-
-    location / {
-        proxy_pass http://web:3000;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-    }
-
-    location /api {
-        proxy_pass http://server:8080;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-    }
-}
-```
-
-Update CORS for production:
-
-```bash
-CORS_ALLOWED_ORIGINS=https://your-domain.com
-```
 
 ## Next Steps
 
