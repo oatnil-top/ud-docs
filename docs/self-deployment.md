@@ -4,18 +4,53 @@ sidebar_position: 2
 
 # Self-Deployment Guide
 
+**Quick Start**: Want to get started immediately? Jump to [Docker Compose with Local Storage + SQLite](/docs/deployment/docker-compose-local) - the simplest self-deployment option.
+
+---
+
 Choose your deployment method based on your infrastructure and requirements.
-
-## Architecture
-
-UnderControl consists of two main components:
-
-- **Backend**: Go-based API server with CORS support
-- **Frontend**: Next.js web application
 
 ![UnderControl Architecture](/img/Arch.png)
 
-The architecture diagram shows how these components work together. The backend handles API requests and data storage, while the frontend provides the user interface. Communication between components is handled via CORS-enabled HTTP requests.
+The architecture diagram shows how users interact with the system through their browser, which connects to the frontend. The frontend and backend communicate via CORS or reverse proxy. The backend orchestrates connections to the database and optional external services (AI, S3 storage, and OTEL monitoring).
+
+## Architecture
+
+UnderControl consists of two main components and several optional external services:
+
+### Core Components
+
+- **Backend (ud-backend)**: Go-based API server with CORS support
+  - Handles all API requests and business logic
+  - Connects to database and external services
+  - Supports both PostgreSQL and SQLite databases
+
+- **Frontend (ud-frontend)**: Next.js web application
+  - User interface for web and mobile browsers
+  - Communicates with backend via CORS or reverse proxy
+  - Server-side rendering for optimal performance
+
+### External Services (Optional)
+
+- **AI Provider**: OpenAI-compatible API for AI-powered features
+  - Configurable base URL and API key
+  - Supports models like GPT-4o-mini
+  - Can use OpenAI or compatible alternatives
+
+- **S3 Provider**: S3-compatible object storage for file attachments
+  - Works with AWS S3, Cloudflare R2, MinIO, etc.
+  - Stores uploaded files and resources
+  - Can fallback to local filesystem storage
+
+- **OTEL Backend (Optional)**: OpenTelemetry for observability
+  - Monitoring and tracing
+  - Works with OneUptime and other OTEL-compatible platforms
+  - Disabled by default
+
+- **Database**: Data persistence layer
+  - **PostgreSQL**: Recommended for production (concurrent access, better performance)
+  - **SQLite**: Suitable for development/testing (simpler setup, single-file database)
+
 
 ## Deployment Options
 

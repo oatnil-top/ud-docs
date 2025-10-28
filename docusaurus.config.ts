@@ -74,10 +74,6 @@ const config: Config = {
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
       title: 'UnderControl',
-      logo: {
-        alt: 'UnderControl Logo',
-        src: 'img/logo.svg',
-      },
       items: [
         {
           type: 'docSidebar',
