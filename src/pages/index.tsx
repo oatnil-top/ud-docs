@@ -17,14 +17,13 @@ function HomepageHeader() {
           Your Data, Your Control
         </Heading>
         <p className="hero__subtitle">
-          Self-hostable platform for managing your data with complete privacy and control.
-          Built for individuals and teams who value data sovereignty.
+          Record anything anytime with all data controlled by yourself, empowered by AI
         </p>
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
             to="https://oatnil.top/ud/login">
-            Get Started
+            Try Online
           </Link>
           <Link
             className="button button--outline button--lg"
@@ -33,6 +32,11 @@ function HomepageHeader() {
             Self-Deploy
           </Link>
         </div>
+        <p className="hero__subtitle" style={{fontSize: '0.9rem', marginTop: '1.5rem', opacity: 0.9}}>
+          <strong>Try Online:</strong> Start immediately with our SaaS service—data securely saved in our cloud.
+          <br />
+          <strong>Self-Deploy:</strong> Full control—you decide where to run, where to save data, even fully offline.
+        </p>
       </div>
     </header>
   );
@@ -43,7 +47,7 @@ export default function Home(): ReactNode {
   return (
     <Layout
       title={`Hello from ${siteConfig.title}`}
-      description="Open-source, self-hostable platform for managing your data with complete privacy and control">
+      description="Record anything anytime with all data controlled by yourself, empowered by AI">
       <HomepageHeader />
       <main>
         <HomepageFeatures />
