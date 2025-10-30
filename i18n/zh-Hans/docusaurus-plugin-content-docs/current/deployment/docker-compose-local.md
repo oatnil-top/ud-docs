@@ -2,55 +2,55 @@
 sidebar_position: 1
 ---
 
-# Docker Compose: Local Storage + SQLite
+# Docker Compose：本地存储 + SQLite
 
-Simple deployment using Docker Compose with local filesystem storage and SQLite database. Perfect for getting started, development, and small production deployments.
+使用 Docker Compose、本地文件系统存储和 SQLite 数据库进行简单部署。非常适合入门、开发和小型生产部署。
 
-## Stack Overview
+## 技术栈概述
 
-This deployment includes:
+此部署包括：
 
-- **Storage**: Local filesystem (Docker volume)
-- **Database**: SQLite
-- **Backend**: Go-based API server (with CORS enabled)
-- **Frontend**: Next.js web application
+- **存储**：本地文件系统（Docker 卷）
+- **数据库**：SQLite
+- **后端**：基于 Go 的 API 服务器（已启用 CORS）
+- **前端**：Next.js Web 应用程序
 
-## Prerequisites
+## 前置条件
 
-Before you begin, ensure you have:
+开始之前，请确保您拥有：
 
-- **Docker**: Version 20.10 or higher
-- **Docker Compose**: Version 2.0 or higher
+- **Docker**：版本 20.10 或更高
+- **Docker Compose**：版本 2.0 或更高
 
-Verify your Docker installation:
+验证您的 Docker 安装：
 
 ```bash
 docker --version
 docker compose version
 ```
 
-## Installation Options
+## 安装选项
 
-### Option 1: Automated Installation (Recommended)
+### 选项 1：自动化安装（推荐）
 
-Set up UnderControl with a single command. The installation script will automatically handle all configuration and setup.
+使用单个命令设置 UnderControl。安装脚本将自动处理所有配置和设置。
 
-**Quick Install:**
+**快速安装：**
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/oatnil-top/ud-docs/main/scripts/install.sh | sh
 ```
 
-The script will automatically:
-- Check Docker and Docker Compose prerequisites
-- Create deployment directory (`undercontrol-deployment`)
-- Generate a secure JWT_SECRET automatically
-- Create `.env` configuration file with early access license
-- Create `docker-compose.yml` with both services
-- Pull Docker images and start services
+脚本将自动：
+- 检查 Docker 和 Docker Compose 前置条件
+- 创建部署目录（`undercontrol-deployment`）
+- 自动生成安全的 JWT_SECRET
+- 创建包含早期访问许可证的 `.env` 配置文件
+- 创建包含两个服务的 `docker-compose.yml`
+- 拉取 Docker 镜像并启动服务
 
-:::tip Alternative Installation
-If you prefer to review the script before running it:
+:::tip 替代安装方式
+如果您希望在运行之前查看脚本：
 ```bash
 curl -fsSL https://raw.githubusercontent.com/oatnil-top/ud-docs/main/scripts/install.sh -o install.sh
 chmod +x install.sh
@@ -58,30 +58,30 @@ chmod +x install.sh
 ```
 :::
 
-### Option 2: Manual Installation
+### 选项 2：手动安装
 
-If you prefer to set up everything manually or need custom configuration, follow the steps below.
+如果您希望手动设置所有内容或需要自定义配置，请按照以下步骤操作。
 
-## Quick Start
+## 快速开始
 
-### 1. Create Deployment Directory
+### 1. 创建部署目录
 
 ```bash
 mkdir undercontrol-deployment
 cd undercontrol-deployment
 ```
 
-After completing all setup steps, your directory structure should look like this:
+完成所有设置步骤后，您的目录结构应如下所示：
 
 ```
 undercontrol-deployment/
-├── .env                    # Environment configuration (includes license)
-└── docker-compose.yml      # Docker services definition
+├── .env                    # 环境配置（包括许可证）
+└── docker-compose.yml      # Docker 服务定义
 ```
 
-### 2. Create Configuration File
+### 2. 创建配置文件
 
-Create a `.env` file with the following content:
+创建一个 `.env` 文件，内容如下：
 
 ```bash
 # License (Early Access - valid until 2025-12-19)

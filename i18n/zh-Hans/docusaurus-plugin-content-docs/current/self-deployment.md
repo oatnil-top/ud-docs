@@ -2,128 +2,128 @@
 sidebar_position: 2
 ---
 
-# Self-Deployment Guide
+# 自部署指南
 
-**Quick Start**: Want to get started immediately? Jump to [Docker Compose with Local Storage + SQLite](/docs/deployment/docker-compose-local) - the simplest self-deployment option.
+**快速开始**：想要立即开始？跳转到 [Docker Compose 本地存储 + SQLite](/docs/deployment/docker-compose-local) - 最简单的自部署选项。
 
 ---
 
-Choose your deployment method based on your infrastructure and requirements.
+根据您的基础设施和需求选择部署方法。
 
 ![UnderControl Architecture](/img/Arch.png)
 
-The architecture diagram shows how users interact with the system through their browser, which connects to the frontend. The frontend and backend communicate via CORS or reverse proxy. The backend orchestrates connections to the database and optional external services (AI, S3 storage, and OTEL monitoring).
+该架构图展示了用户如何通过浏览器与系统交互，浏览器连接到前端。前端和后端通过 CORS 或反向代理进行通信。后端协调与数据库和可选外部服务（AI、S3 存储和 OTEL 监控）的连接。
 
-## Architecture
+## 架构
 
-UnderControl consists of two main components and several optional external services:
+UnderControl 由两个主要组件和几个可选的外部服务组成：
 
-### Core Components
+### 核心组件
 
-- **Backend (ud-backend)**: Go-based API server with CORS support
-  - Handles all API requests and business logic
-  - Connects to database and external services
-  - Supports both PostgreSQL and SQLite databases
+- **后端 (ud-backend)**：基于 Go 的 API 服务器，支持 CORS
+  - 处理所有 API 请求和业务逻辑
+  - 连接到数据库和外部服务
+  - 支持 PostgreSQL 和 SQLite 数据库
 
-- **Frontend (ud-frontend)**: Next.js web application
-  - User interface for web and mobile browsers
-  - Communicates with backend via CORS or reverse proxy
-  - Server-side rendering for optimal performance
+- **前端 (ud-frontend)**：Next.js Web 应用程序
+  - 用于 Web 和移动浏览器的用户界面
+  - 通过 CORS 或反向代理与后端通信
+  - 服务器端渲染以实现最佳性能
 
-### External Services (Optional)
+### 外部服务（可选）
 
-- **AI Provider**: OpenAI-compatible API for AI-powered features
-  - Configurable base URL and API key
-  - Supports models like GPT-4o-mini
-  - Can use OpenAI or compatible alternatives
+- **AI 提供商**：OpenAI 兼容的 API，用于 AI 驱动的功能
+  - 可配置的基础 URL 和 API 密钥
+  - 支持 GPT-4o-mini 等模型
+  - 可以使用 OpenAI 或兼容的替代方案
 
-- **S3 Provider**: S3-compatible object storage for file attachments
-  - Works with AWS S3, Cloudflare R2, MinIO, etc.
-  - Stores uploaded files and resources
-  - Can fallback to local filesystem storage
+- **S3 提供商**：S3 兼容的对象存储，用于文件附件
+  - 支持 AWS S3、Cloudflare R2、MinIO 等
+  - 存储上传的文件和资源
+  - 可以回退到本地文件系统存储
 
-- **OTEL Backend (Optional)**: OpenTelemetry for observability
-  - Monitoring and tracing
-  - Works with OneUptime and other OTEL-compatible platforms
-  - Disabled by default
+- **OTEL 后端（可选）**：OpenTelemetry 用于可观测性
+  - 监控和追踪
+  - 支持 OneUptime 和其他 OTEL 兼容平台
+  - 默认禁用
 
-- **Database**: Data persistence layer
-  - **PostgreSQL**: Recommended for production (concurrent access, better performance)
-  - **SQLite**: Suitable for development/testing (simpler setup, single-file database)
+- **数据库**：数据持久化层
+  - **PostgreSQL**：推荐用于生产环境（并发访问，更好的性能）
+  - **SQLite**：适用于开发/测试（设置更简单，单文件数据库）
 
 
-## Deployment Options
+## 部署选项
 
-### Docker Compose Deployments
+### Docker Compose 部署
 
-Simple, straightforward deployments using Docker Compose:
+使用 Docker Compose 进行简单直接的部署：
 
-- **[Local Storage + SQLite](/docs/deployment/docker-compose-local)** - Recommended for getting started
-  - Local filesystem storage
-  - SQLite database
-  - Minimal configuration required
+- **[本地存储 + SQLite](/docs/deployment/docker-compose-local)** - 推荐用于入门
+  - 本地文件系统存储
+  - SQLite 数据库
+  - 所需配置最少
 
-- **[Local Storage + PostgreSQL](/docs/deployment/docker-compose-postgres)** - Better for production
-  - Local filesystem storage
-  - PostgreSQL database
-  - Improved performance and reliability
+- **[本地存储 + PostgreSQL](/docs/deployment/docker-compose-postgres)** - 更适合生产环境
+  - 本地文件系统存储
+  - PostgreSQL 数据库
+  - 提高性能和可靠性
 
-- **[S3/R2 Storage + PostgreSQL](/docs/deployment/docker-compose-s3)** - Cloud-ready
-  - S3-compatible cloud storage
-  - PostgreSQL database
-  - Scalable file storage
+- **[S3/R2 存储 + PostgreSQL](/docs/deployment/docker-compose-s3)** - 云就绪
+  - S3 兼容的云存储
+  - PostgreSQL 数据库
+  - 可扩展的文件存储
 
-### Kubernetes Deployments
+### Kubernetes 部署
 
-Enterprise-grade deployments for production environments:
+适用于生产环境的企业级部署：
 
-- **[Kubernetes with Helm](/docs/deployment/kubernetes-helm)** - Production-ready
-  - Helm chart deployment
-  - Scalable and highly available
-  - Advanced configuration options
+- **[Kubernetes 使用 Helm](/docs/deployment/kubernetes-helm)** - 生产就绪
+  - Helm chart 部署
+  - 可扩展且高可用
+  - 高级配置选项
 
-## Which Deployment Should I Choose?
+## 我应该选择哪种部署方式？
 
-### For Development or Testing
-→ **[Docker Compose with Local Storage + SQLite](/docs/deployment/docker-compose-local)**
+### 用于开发或测试
+→ **[Docker Compose 本地存储 + SQLite](/docs/deployment/docker-compose-local)**
 
-Simple setup, minimal dependencies, perfect for trying out UnderControl.
+设置简单，依赖项最少，非常适合试用 UnderControl。
 
-### For Small Production Deployments
-→ **[Docker Compose with Local Storage + PostgreSQL](/docs/deployment/docker-compose-postgres)**
+### 用于小型生产部署
+→ **[Docker Compose 本地存储 + PostgreSQL](/docs/deployment/docker-compose-postgres)**
 
-More reliable than SQLite for concurrent access, still easy to manage.
+对于并发访问比 SQLite 更可靠，仍然易于管理。
 
-### For Production with Cloud Storage
-→ **[Docker Compose with S3/R2 + PostgreSQL](/docs/deployment/docker-compose-s3)**
+### 用于使用云存储的生产环境
+→ **[Docker Compose S3/R2 + PostgreSQL](/docs/deployment/docker-compose-s3)**
 
-Offload file storage to cloud, keep database local or use managed PostgreSQL.
+将文件存储卸载到云端，数据库保持本地或使用托管 PostgreSQL。
 
-### For Enterprise or High Availability
-→ **[Kubernetes with Helm](/docs/deployment/kubernetes-helm)**
+### 用于企业或高可用性
+→ **[Kubernetes 使用 Helm](/docs/deployment/kubernetes-helm)**
 
-Full orchestration, auto-scaling, rolling updates, and production-grade reliability.
+完整的编排、自动扩展、滚动更新和生产级可靠性。
 
-## Common Requirements
+## 通用要求
 
-All deployment methods require:
+所有部署方法都需要：
 
-- **License File**: Contact the UnderControl team for a license file
-- **JWT Secret**: A secure random string for authentication
-- **Container Runtime**: Docker or compatible container runtime
+- **许可证文件**：联系 UnderControl 团队获取许可证文件
+- **JWT 密钥**：用于身份验证的安全随机字符串
+- **容器运行时**：Docker 或兼容的容器运行时
 
-## Next Steps
+## 下一步
 
-1. Choose a deployment method above
-2. Follow the detailed guide for your chosen method
-3. Configure your environment variables
-4. Deploy and access your UnderControl instance
+1. 从上面选择一种部署方法
+2. 按照所选方法的详细指南进行操作
+3. 配置您的环境变量
+4. 部署并访问您的 UnderControl 实例
 
-## Getting Help
+## 获取帮助
 
-If you encounter issues during deployment:
+如果您在部署过程中遇到问题：
 
-1. Check the troubleshooting section in your deployment guide
-2. Review the logs for error messages
-3. Visit the [documentation](/) for additional help
-4. Contact support with your configuration (remove sensitive data)
+1. 检查部署指南中的故障排除部分
+2. 查看日志以获取错误消息
+3. 访问[文档](/)获取更多帮助
+4. 联系支持并提供您的配置（删除敏感数据）

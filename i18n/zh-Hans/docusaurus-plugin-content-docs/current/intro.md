@@ -2,53 +2,53 @@
 sidebar_position: 1
 ---
 
-# Welcome to UnderControl
+# 欢迎使用 UnderControl
 
-UnderControl is a self-hosted platform designed to help you manage and control your infrastructure with ease.
+UnderControl 是一个自托管平台，旨在帮助您轻松管理和控制您的基础设施。
 
-## What is UnderControl?
+## 什么是 UnderControl？
 
-UnderControl provides a comprehensive solution for managing your infrastructure, featuring:
+UnderControl 提供了一个全面的基础设施管理解决方案，具有以下特性：
 
-- **User Account Management**: Create and manage user accounts with role-based access control
-- **API Integration**: RESTful API for programmatic access
-- **Self-Hosted**: Full control over your data and deployment
-- **Flexible Storage**: Support for local storage, S3-compatible storage, and more
-- **Multiple Database Options**: SQLite for simplicity, PostgreSQL for production
+- **用户账户管理**：创建和管理具有基于角色的访问控制的用户账户
+- **API 集成**：用于程序化访问的 RESTful API
+- **自托管**：完全控制您的数据和部署
+- **灵活的存储**：支持本地存储、S3 兼容存储等
+- **多种数据库选项**：SQLite 简单易用，PostgreSQL 适用于生产环境
 
-## Key Features
+## 主要功能
 
-### Account Management
-Manage user accounts, permissions, and access control with a user-friendly interface.
+### 账户管理
+使用友好的用户界面管理用户账户、权限和访问控制。
 
-### API Access
-Integrate UnderControl into your existing workflows with a comprehensive RESTful API.
+### API 访问
+通过全面的 RESTful API 将 UnderControl 集成到您现有的工作流程中。
 
-### Multiple Deployment Options
-Deploy UnderControl using Docker Compose for simplicity or Kubernetes for enterprise-scale deployments.
+### 多种部署选项
+使用 Docker Compose 简化部署，或使用 Kubernetes 进行企业级部署。
 
-### Security First
-Built-in JWT authentication, CORS support, and secure configuration management.
+### 安全优先
+内置 JWT 身份验证、CORS 支持和安全配置管理。
 
-## Getting Started
+## 快速开始
 
-Ready to deploy UnderControl? Check out our [Self-Deployment Guide](./self-deployment.md) to choose the deployment method that fits your needs.
+准备好部署 UnderControl 了吗？查看我们的 [自部署指南](./self-deployment.md) 选择适合您需求的部署方法。
 
-### Quick Links
+### 快速链接
 
-- [Self-Deployment Guide](./self-deployment.md) - Choose your deployment method
-- [Docker Compose: Local Storage + SQLite](./deployment/docker-compose-local.md) - Quick start guide
-- [Account Management](./features/accounts.md) - Learn about user accounts
-- [API Documentation](./features/accounts-api.md) - Integrate with your applications
+- [自部署指南](./self-deployment.md) - 选择您的部署方法
+- [Docker Compose：本地存储 + SQLite](./deployment/docker-compose-local.md) - 快速入门指南
+- [账户管理](./features/accounts.md) - 了解用户账户
+- [API 文档](./features/accounts-api.md) - 与您的应用程序集成
 
-## Requirements
+## 系统要求
 
-To deploy UnderControl, you'll need:
+要部署 UnderControl，您需要：
 
-- Docker and Docker Compose (or Kubernetes)
-- A valid license file
-- Basic understanding of container deployments
+- Docker 和 Docker Compose（或 Kubernetes）
+- 有效的许可证文件
+- 对容器部署的基本了解
 
-## Support
+## 支持
 
-Need help? Check out our documentation or contact the UnderControl team for assistance.
+需要帮助？查看我们的文档或联系 UnderControl 团队寻求帮助。
