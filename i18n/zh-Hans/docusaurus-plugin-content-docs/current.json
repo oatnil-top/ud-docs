@@ -1,0 +1,14 @@
+{
+  "version.label": {
+    "message": "最新版本",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.deployment": {
+    "message": "部署",
+    "description": "The label for category deployment in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.features": {
+    "message": "功能特性",
+    "description": "The label for category features in sidebar tutorialSidebar"
+  }
+}

@@ -1,0 +1,69 @@
+/**
+ * CSS files with the .module.css suffix will be treated as CSS modules
+ * and scoped locally.
+ */
+
+.heroBanner {
+  padding: 4rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 2rem;
+  }
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.principlesSection {
+  padding: 3rem 0;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.principleCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--ifm-color-emphasis-100);
+}
+
+.principleCard:last-child {
+  border-bottom: none;
+}
+
+.checkmark {
+  flex-shrink: 0;
+  width: auto;
+  line-height: 1.6;
+  color: var(--ifm-color-emphasis-600);
+  font-size: 0.95rem;
+  font-weight: normal;
+}
+
+.principleText {
+  margin: 0;
+  flex: 1;
+  font-size: 0.95rem;
+  color: var(--ifm-color-emphasis-800);
+  line-height: 1.6;
+  font-weight: normal;
+}
+
+@media screen and (max-width: 996px) {
+  .principlesSection {
+    padding: 2rem 0;
+  }
+
+  .principleCard {
+    padding: 0.5rem 0;
+  }
+}
