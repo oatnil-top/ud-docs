@@ -21,7 +21,6 @@ Before you begin, ensure you have:
 
 - **Docker**: Version 20.10 or higher
 - **Docker Compose**: Version 2.0 or higher
-- **License File**: Contact the UnderControl team for a license file
 
 Verify your Docker installation:
 
@@ -34,35 +33,30 @@ docker compose version
 
 ### Option 1: Automated Installation (Recommended)
 
-Use the automated installation script to set up UnderControl in one command.
+Set up UnderControl with a single command. The installation script will automatically handle all configuration and setup.
 
-**Steps:**
-
-1. Copy the installation script from the [Installation Script page](/docs/deployment/installation-script)
-2. Save it to a file named `install.sh`
-3. Make it executable and run:
+**Quick Install:**
 
 ```bash
-chmod +x install.sh
-./install.sh
+curl -fsSL https://raw.githubusercontent.com/oatnil-top/ud-docs/main/scripts/install.sh | sh
 ```
 
 The script will automatically:
 - Check Docker and Docker Compose prerequisites
 - Create deployment directory (`undercontrol-deployment`)
 - Generate a secure JWT_SECRET automatically
-- Create `.env` configuration file
+- Create `.env` configuration file with early access license
 - Create `docker-compose.yml` with both services
-- Guide you through license file setup
-- Start services automatically if license file is present
+- Pull Docker images and start services
 
-After running the script, if you didn't have a license file yet, simply copy it to the deployment directory and start the services:
-
+:::tip Alternative Installation
+If you prefer to review the script before running it:
 ```bash
-cd undercontrol-deployment
-cp /path/to/license.txt ./license.txt
-docker compose up -d
+curl -fsSL https://raw.githubusercontent.com/oatnil-top/ud-docs/main/scripts/install.sh -o install.sh
+chmod +x install.sh
+./install.sh
 ```
+:::
 
 ### Option 2: Manual Installation
 
@@ -81,9 +75,8 @@ After completing all setup steps, your directory structure should look like this
 
 ```
 undercontrol-deployment/
-├── .env                    # Environment configuration
-├── docker-compose.yml      # Docker services definition
-└── license.txt             # Your license file
+├── .env                    # Environment configuration (includes license)
+└── docker-compose.yml      # Docker services definition
 ```
 
 ### 2. Create Configuration File
@@ -91,13 +84,15 @@ undercontrol-deployment/
 Create a `.env` file with the following content:
 
 ```bash
-# Backend Configuration
-PORT=8080
-UD_DATA_PATH=/data
-GIN_MODE=release
+# License (Early Access - valid until 2025-12-19)
+LICENSE=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b21lcl9pZCI6IjE1ODdlZDRiLTkyMzEtNDYwZi1iOWNkLWZlZmUyNGRmOGYwMiIsImN1c3RvbWVyX25hbWUiOiJFYXJseUFjY2VzcyIsImV4cGlyZXNfYXQiOiIyMDI1LTEyLTE5IiwiaXNzdWVkX2F0IjoiMjAyNS0xMC0zMCIsImxpY2Vuc2VfaWQiOiJkZDZjZGE4YS05ODgyLTQyZjYtODc3Yy1lMWY4ODZhYTQ4MDciLCJtYXhfdXNlcnMiOjEwMCwicHJvZHVjdCI6IlVuZGVyQ29udHJvbCIsInRpZXIiOiJlbnRlcnByaXNlIn0.y3-UQaKDZ7QuXxpX0nynUZ1V96WfHHqqiJOeKkzrzBY
 
 # JWT Authentication (REQUIRED - Change this!)
 JWT_SECRET=your-super-secret-jwt-key-change-this
+
+# Admin User Configuration (Optional - Override defaults)
+# ADMIN_USERNAME=admin@oatnil.com
+# ADMIN_PASSWORD=admin123
 
 # Storage Configuration
 S3_ENABLED="false"
@@ -110,7 +105,7 @@ OTEL_ENABLED="false"
 # OPENAI_API_KEY=your-openai-api-key
 # OPENAI_MODEL=gpt-4o-mini
 
-# CORS Configuration(default to http://localhost:8080)
+# CORS Configuration (default to http://localhost:8080)
 # CORS_ALLOWED_ORIGINS=http://localhost:8080
 ```
 
@@ -122,15 +117,11 @@ openssl rand -base64 32
 ```
 :::
 
-### 3. Add License File
+:::info Early Access License
+The license included above is an **Early Access** license valid until **December 19, 2025**, supporting up to **100 users**. This allows you to get started immediately without any barriers. For production use beyond this period, you can obtain an extended license.
+:::
 
-Place your `license.txt` file in the deployment directory:
-
-```bash
-cp /path/to/your/license.txt ./license.txt
-```
-
-### 4. Create docker-compose.yml
+### 3. Create docker-compose.yml
 
 Create a `docker-compose.yml` file:
 
@@ -149,7 +140,6 @@ services:
       - "8080:8080"
     volumes:
       - backend-data:/data
-      - ./license.txt:/etc/undercontrol/license.txt:ro
     logging:
       driver: "json-file"
       options:
@@ -190,7 +180,7 @@ volumes:
     driver: local
 ```
 
-### 5. Start the Services
+### 4. Start the Services
 
 ```bash
 docker compose up -d
@@ -206,7 +196,7 @@ You should see two running containers:
 - `undercontrol-backend`
 - `ud-web`
 
-### 6. Access the Application
+### 5. Access the Application
 
 - **Web Application**: http://localhost:3000
 - **API Endpoint**: http://localhost:8080
@@ -219,63 +209,27 @@ For a complete list of all available environment variables, see the [Environment
 
 | Variable | Description | Default |
 |----------|-------------|---------|
+| `LICENSE` | License token (included in early access) | Provided |
 | `JWT_SECRET` | JWT token signing key (REQUIRED) | - |
-| `PORT` | Backend server port | `8080` |
+| `ADMIN_USERNAME` | Admin username (override default) | `admin@oatnil.com` |
+| `ADMIN_PASSWORD` | Admin password (override default) | `admin123` |
 | `UD_DATA_PATH` | Database and file storage path | `/data` |
 | `GIN_MODE` | Framework mode | `release` |
 | `CORS_ALLOWED_ORIGINS` | Allowed CORS origins | `http://localhost:3000` |
 | `S3_ENABLED` | Enable S3 storage | `false` |
 
-### Port Configuration
+### Default Admin Account
 
-Default ports:
-- `3000`: Web application
-- `8080`: Backend API
+An admin account is automatically created on first startup with these credentials:
 
-To change ports, edit the `ports` section in `docker-compose.yml`:
+| Field | Value |
+|-------|-------|
+| Username | `admin@oatnil.com` |
+| Password | `admin123` |
 
-```yaml
-services:
-  server:
-    ports:
-      - "8080:8080"    # Change first 8080 to your preferred port
-
-  web:
-    ports:
-      - "3000:3000"    # Change first 3000 to your preferred port
-    environment:
-      - NEXT_PUBLIC_API_URL=http://localhost:8080  # Update if you change backend port
-```
-
-:::tip CORS Configuration
-If you change the web application port, update `CORS_ALLOWED_ORIGINS` in your `.env` file:
-
-```bash
-CORS_ALLOWED_ORIGINS=http://localhost:3001
-```
+:::warning Security Notice
+**Change the default password immediately** after your first login for security. You can override these defaults by setting `ADMIN_USERNAME` and `ADMIN_PASSWORD` in your `.env` file before the first startup.
 :::
-
-### Backup Data
-
-The SQLite database and files are in the `backend-data` volume:
-
-```bash
-# Create backup
-mkdir -p backups
-docker run --rm \
-  -v undercontrol-deployment_backend-data:/data \
-  -v $(pwd)/backups:/backup \
-  alpine tar czf /backup/backup-$(date +%Y%m%d).tar.gz /data
-```
-
-Restore from backup:
-
-```bash
-docker run --rm \
-  -v undercontrol-deployment_backend-data:/data \
-  -v $(pwd)/backups:/backup \
-  alpine tar xzf /backup/backup-YYYYMMDD.tar.gz -C /
-```
 
 ## Troubleshooting
 
@@ -290,8 +244,8 @@ docker compose logs
 
 Common issues:
 - Port conflicts (3000 or 8080 already in use)
-- Missing `license.txt` file
 - Invalid or missing `JWT_SECRET`
+- Missing or invalid `LICENSE` environment variable
 - CORS configuration mismatch
 
 ### Cannot Access Application
