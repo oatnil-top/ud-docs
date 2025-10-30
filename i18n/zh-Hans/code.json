@@ -321,5 +321,77 @@
   "theme.tags.tagsPageTitle": {
     "message": "标签",
     "description": "The title of the tag list page"
+  },
+  "homepage.hero.title": {
+    "message": "您的数据，您做主",
+    "description": "The homepage hero title"
+  },
+  "homepage.hero.subtitle": {
+    "message": "随时随地记录任何内容，所有数据由您自己控制，AI 赋能",
+    "description": "The homepage hero subtitle"
+  },
+  "homepage.hero.tryOnline": {
+    "message": "在线试用",
+    "description": "Try online button text"
+  },
+  "homepage.hero.selfDeploy": {
+    "message": "自主部署",
+    "description": "Self-deploy button text"
+  },
+  "homepage.hero.tryOnlineLabel": {
+    "message": "在线试用：",
+    "description": "Try online label"
+  },
+  "homepage.hero.tryOnlineDesc": {
+    "message": "立即开始使用我们的 SaaS 服务——数据安全地保存在我们的云端。",
+    "description": "Try online description"
+  },
+  "homepage.hero.selfDeployLabel": {
+    "message": "自主部署：",
+    "description": "Self-deploy label"
+  },
+  "homepage.hero.selfDeployDesc": {
+    "message": "完全掌控——您决定在哪里运行、在哪里保存数据，甚至可以完全离线。",
+    "description": "Self-deploy description"
+  },
+  "homepage.title": {
+    "message": "欢迎使用 {title}",
+    "description": "The homepage meta title"
+  },
+  "homepage.description": {
+    "message": "随时随地记录任何内容，所有数据由您自己控制，AI 赋能",
+    "description": "The homepage meta description"
+  },
+  "homepage.features.encryption.title": {
+    "message": "端到端加密",
+    "description": "Feature title: End-to-End Encryption"
+  },
+  "homepage.features.encryption.description": {
+    "message": "所有数据传输均使用 HTTPS/TLS 加密。敏感信息在数据库中使用行业标准的 AES-256 加密算法进行加密。",
+    "description": "Feature description: End-to-End Encryption"
+  },
+  "homepage.features.export.title": {
+    "message": "完整数据导出",
+    "description": "Feature title: Complete Data Export"
+  },
+  "homepage.features.export.description": {
+    "message": "一键导出您的所有数据为 JSON、CSV 或 Markdown 格式。无限制，无供应商锁定。您的数据始终可访问。",
+    "description": "Feature description: Complete Data Export"
+  },
+  "homepage.features.selfhost.title": {
+    "message": "支持自托管",
+    "description": "Feature title: Self-Hosting Ready"
+  },
+  "homepage.features.selfhost.description": {
+    "message": "使用 Docker 在您自己的基础设施上部署。支持主流云服务商和本地网络部署。您决定数据的存储位置。",
+    "description": "Feature description: Self-Hosting Ready"
+  },
+  "homepage.features.access.title": {
+    "message": "透明访问控制",
+    "description": "Feature title: Transparent Access Control"
+  },
+  "homepage.features.access.description": {
+    "message": "基于 JWT 和 API Key 的权限管理。您始终知道谁在何时访问了哪些数据。包含完整的审计跟踪。",
+    "description": "Feature description: Transparent Access Control"
   }
 }

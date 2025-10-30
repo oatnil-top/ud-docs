@@ -84,46 +84,46 @@ undercontrol-deployment/
 创建一个 `.env` 文件，内容如下：
 
 ```bash
-# License (Early Access - valid until 2025-12-19)
+# 许可证（早期访问 - 有效期至 2025-12-19）
 LICENSE=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b21lcl9pZCI6IjE1ODdlZDRiLTkyMzEtNDYwZi1iOWNkLWZlZmUyNGRmOGYwMiIsImN1c3RvbWVyX25hbWUiOiJFYXJseUFjY2VzcyIsImV4cGlyZXNfYXQiOiIyMDI1LTEyLTE5IiwiaXNzdWVkX2F0IjoiMjAyNS0xMC0zMCIsImxpY2Vuc2VfaWQiOiJkZDZjZGE4YS05ODgyLTQyZjYtODc3Yy1lMWY4ODZhYTQ4MDciLCJtYXhfdXNlcnMiOjEwMCwicHJvZHVjdCI6IlVuZGVyQ29udHJvbCIsInRpZXIiOiJlbnRlcnByaXNlIn0.y3-UQaKDZ7QuXxpX0nynUZ1V96WfHHqqiJOeKkzrzBY
 
-# JWT Authentication (REQUIRED - Change this!)
+# JWT 身份验证（必需 - 请修改！）
 JWT_SECRET=your-super-secret-jwt-key-change-this
 
-# Admin User Configuration (Optional - Override defaults)
+# 管理员用户配置（可选 - 覆盖默认值）
 # ADMIN_USERNAME=admin@oatnil.com
 # ADMIN_PASSWORD=admin123
 
-# Storage Configuration
+# 存储配置
 S3_ENABLED="false"
 
-# Monitoring (Disabled by default)
+# 监控（默认禁用）
 OTEL_ENABLED="false"
 
-# Optional: OpenAI Integration
+# 可选：OpenAI 集成
 # OPENAI_BASE_URL=https://api.openai.com/v1
 # OPENAI_API_KEY=your-openai-api-key
 # OPENAI_MODEL=gpt-4o-mini
 
-# CORS Configuration (default to http://localhost:8080)
+# CORS 配置（默认为 http://localhost:8080）
 # CORS_ALLOWED_ORIGINS=http://localhost:8080
 ```
 
-:::danger Security Warning
-**You MUST change the `JWT_SECRET`** to a random, secure value:
+:::danger 安全警告
+**您必须将 `JWT_SECRET` 更改为**一个随机、安全的值：
 
 ```bash
 openssl rand -base64 32
 ```
 :::
 
-:::info Early Access License
-The license included above is an **Early Access** license valid until **December 19, 2025**, supporting up to **100 users**. This allows you to get started immediately without any barriers. For production use beyond this period, you can obtain an extended license.
+:::info 早期访问许可证
+上述许可证是**早期访问**许可证，有效期至 **2025 年 12 月 19 日**，支持最多 **100 个用户**。这使您可以立即开始使用，无需任何障碍。如需在此期间之后用于生产环境，您可以获取延期许可证。
 :::
 
-### 3. Create docker-compose.yml
+### 3. 创建 docker-compose.yml
 
-Create a `docker-compose.yml` file:
+创建一个 `docker-compose.yml` 文件：
 
 ```yaml
 version: '3.8'
@@ -180,92 +180,92 @@ volumes:
     driver: local
 ```
 
-### 4. Start the Services
+### 4. 启动服务
 
 ```bash
 docker compose up -d
 ```
 
-Check container status:
+检查容器状态：
 
 ```bash
 docker compose ps
 ```
 
-You should see two running containers:
+您应该看到两个正在运行的容器：
 - `undercontrol-backend`
 - `ud-web`
 
-### 5. Access the Application
+### 5. 访问应用程序
 
-- **Web Application**: http://localhost:3000
-- **API Endpoint**: http://localhost:8080
+- **Web 应用程序**：http://localhost:3000
+- **API 端点**：http://localhost:8080
 
-## Configuration Reference
+## 配置参考
 
-For a complete list of all available environment variables, see the [Environment Variables Reference](./environment-variables.md).
+有关所有可用环境变量的完整列表，请参阅[环境变量参考](./environment-variables.md)。
 
-### Essential Environment Variables
+### 基本环境变量
 
-| Variable | Description | Default |
+| 变量 | 描述 | 默认值 |
 |----------|-------------|---------|
-| `LICENSE` | License token (included in early access) | Provided |
-| `JWT_SECRET` | JWT token signing key (REQUIRED) | - |
-| `ADMIN_USERNAME` | Admin username (override default) | `admin@oatnil.com` |
-| `ADMIN_PASSWORD` | Admin password (override default) | `admin123` |
-| `UD_DATA_PATH` | Database and file storage path | `/data` |
-| `GIN_MODE` | Framework mode | `release` |
-| `CORS_ALLOWED_ORIGINS` | Allowed CORS origins | `http://localhost:3000` |
-| `S3_ENABLED` | Enable S3 storage | `false` |
+| `LICENSE` | 许可证令牌（早期访问已包含） | 已提供 |
+| `JWT_SECRET` | JWT 令牌签名密钥（必需） | - |
+| `ADMIN_USERNAME` | 管理员用户名（覆盖默认值） | `admin@oatnil.com` |
+| `ADMIN_PASSWORD` | 管理员密码（覆盖默认值） | `admin123` |
+| `UD_DATA_PATH` | 数据库和文件存储路径 | `/data` |
+| `GIN_MODE` | 框架模式 | `release` |
+| `CORS_ALLOWED_ORIGINS` | 允许的 CORS 来源 | `http://localhost:3000` |
+| `S3_ENABLED` | 启用 S3 存储 | `false` |
 
-### Default Admin Account
+### 默认管理员账户
 
-An admin account is automatically created on first startup with these credentials:
+首次启动时会自动创建一个管理员账户，凭据如下：
 
-| Field | Value |
+| 字段 | 值 |
 |-------|-------|
-| Username | `admin@oatnil.com` |
-| Password | `admin123` |
+| 用户名 | `admin@oatnil.com` |
+| 密码 | `admin123` |
 
-:::warning Security Notice
-**Change the default password immediately** after your first login for security. You can override these defaults by setting `ADMIN_USERNAME` and `ADMIN_PASSWORD` in your `.env` file before the first startup.
+:::warning 安全提示
+出于安全考虑，**首次登录后请立即更改默认密码**。您可以在首次启动之前通过在 `.env` 文件中设置 `ADMIN_USERNAME` 和 `ADMIN_PASSWORD` 来覆盖这些默认值。
 :::
 
-## Troubleshooting
+## 故障排除
 
-### Services Not Starting
+### 服务无法启动
 
-Check container status and logs:
+检查容器状态和日志：
 
 ```bash
 docker compose ps
 docker compose logs
 ```
 
-Common issues:
-- Port conflicts (3000 or 8080 already in use)
-- Invalid or missing `JWT_SECRET`
-- Missing or invalid `LICENSE` environment variable
-- CORS configuration mismatch
+常见问题：
+- 端口冲突（3000 或 8080 已被占用）
+- `JWT_SECRET` 无效或缺失
+- `LICENSE` 环境变量缺失或无效
+- CORS 配置不匹配
 
-### Cannot Access Application
+### 无法访问应用程序
 
-1. Verify containers are running: `docker compose ps`
-2. Check if ports are accessible: `curl http://localhost:8080/health`
-3. Verify CORS settings in `.env` match your frontend URL
-4. Check browser console for CORS errors
+1. 验证容器是否正在运行：`docker compose ps`
+2. 检查端口是否可访问：`curl http://localhost:8080/health`
+3. 验证 `.env` 中的 CORS 设置是否与前端 URL 匹配
+4. 检查浏览器控制台是否有 CORS 错误
 
-### CORS Errors
+### CORS 错误
 
-If you see CORS errors in the browser console:
+如果您在浏览器控制台中看到 CORS 错误：
 
-1. Verify `CORS_ALLOWED_ORIGINS` in `.env` matches your frontend URL
-2. If using a different port, update the environment variable
-3. Restart the backend after changing CORS settings: `docker compose restart server`
+1. 验证 `.env` 中的 `CORS_ALLOWED_ORIGINS` 是否与前端 URL 匹配
+2. 如果使用不同的端口，请更新环境变量
+3. 更改 CORS 设置后重启后端：`docker compose restart server`
 
-### Database Issues
+### 数据库问题
 
-Access the backend container to inspect the database:
+访问后端容器以检查数据库：
 
 ```bash
 docker compose exec server sh
@@ -273,10 +273,10 @@ ls -lh /data/
 exit
 ```
 
-### Complete Reset
+### 完全重置
 
-:::danger Data Loss Warning
-This will delete all your data!
+:::danger 数据丢失警告
+这将删除您的所有数据！
 :::
 
 ```bash
@@ -286,17 +286,17 @@ docker compose up -d
 ```
 
 
-## Next Steps
+## 下一步
 
-- Create your first admin account
-- Configure optional integrations (OpenAI)
-- Set up automated backups
-- Explore the [Features documentation](/docs/intro)
+- 创建您的第一个管理员账户
+- 配置可选集成（OpenAI）
+- 设置自动备份
+- 探索[功能文档](/docs/intro)
 
-## When to Upgrade
+## 何时升级
 
-Consider upgrading to a different deployment if:
+如果出现以下情况，请考虑升级到不同的部署方式：
 
-- You need better database performance → [Local Storage + PostgreSQL](/docs/deployment/docker-compose-postgres)
-- You need cloud file storage → [S3/R2 + PostgreSQL](/docs/deployment/docker-compose-s3)
-- You need high availability → [Kubernetes with Helm](/docs/deployment/kubernetes-helm)
+- 需要更好的数据库性能 → [本地存储 + PostgreSQL](/docs/deployment/docker-compose-postgres)
+- 需要云文件存储 → [S3/R2 + PostgreSQL](/docs/deployment/docker-compose-s3)
+- 需要高可用性 → [Kubernetes with Helm](/docs/deployment/kubernetes-helm)
