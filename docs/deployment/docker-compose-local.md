@@ -35,19 +35,13 @@ docker compose version
 
 Set up UnderControl with a single command. The installation script will automatically handle all configuration and setup.
 
+#### Linux / macOS / WSL
+
 **Quick Install:**
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/oatnil-top/ud-docs/main/scripts/install.sh | sh
 ```
-
-The script will automatically:
-- Check Docker and Docker Compose prerequisites
-- Create deployment directory (`undercontrol-deployment`)
-- Generate a secure JWT_SECRET automatically
-- Create `.env` configuration file with early access license
-- Create `docker-compose.yml` with both services
-- Pull Docker images and start services
 
 :::tip Alternative Installation
 If you prefer to review the script before running it:
@@ -57,6 +51,39 @@ chmod +x install.sh
 ./install.sh
 ```
 :::
+
+#### Windows (PowerShell)
+
+**Quick Install:**
+
+```powershell
+irm https://raw.githubusercontent.com/oatnil-top/ud-docs/main/scripts/install.ps1 | iex
+```
+
+:::tip Alternative Installation
+If you prefer to review the script before running it:
+```powershell
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/oatnil-top/ud-docs/main/scripts/install.ps1" -OutFile "install.ps1"
+.\install.ps1
+```
+:::
+
+:::info PowerShell Execution Policy
+If you encounter an execution policy error, run PowerShell as Administrator and execute:
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+:::
+
+**What the Script Does:**
+
+The installation script will automatically:
+- Check Docker and Docker Compose prerequisites
+- Create deployment directory (`undercontrol-deployment`)
+- Generate a secure JWT_SECRET automatically
+- Create `.env` configuration file with early access license
+- Create `docker-compose.yml` with both services
+- Pull Docker images and start services
 
 ### Option 2: Manual Installation
 
@@ -112,8 +139,14 @@ OTEL_ENABLED="false"
 :::danger Security Warning
 **You MUST change the `JWT_SECRET`** to a random, secure value:
 
+**Linux/macOS/WSL:**
 ```bash
 openssl rand -base64 32
+```
+
+**Windows PowerShell:**
+```powershell
+[Convert]::ToBase64String((1..32 | ForEach-Object { Get-Random -Maximum 256 }))
 ```
 :::
 
@@ -284,7 +317,6 @@ docker compose down
 docker volume rm undercontrol-deployment_backend-data
 docker compose up -d
 ```
-
 
 ## Next Steps
 

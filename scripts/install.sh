@@ -1,212 +1,208 @@
 #!/bin/bash
+
+# UnderControl Installation Script
+# For Linux, macOS, and WSL
+
 set -e
 
-# Colors for output
+# Color codes
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-echo "=================================================="
-echo "  UnderControl - Automated Installation Script  "
-echo "=================================================="
+# Helper functions
+print_success() { echo -e "${GREEN}$1${NC}"; }
+print_info() { echo -e "${BLUE}$1${NC}"; }
+print_error() { echo -e "${RED}$1${NC}"; }
+print_warning() { echo -e "${YELLOW}$1${NC}"; }
+
+print_info "========================================="
+print_info "  UnderControl Installation Script"
+print_info "========================================="
 echo ""
 
-# Function to print colored messages
-print_success() {
-    echo -e "${GREEN}✓${NC} $1"
-}
-
-print_error() {
-    echo -e "${RED}✗${NC} $1"
-}
-
-print_info() {
-    echo -e "${YELLOW}ℹ${NC} $1"
-}
-
 # Check if Docker is installed
-echo "Checking prerequisites..."
+print_info "Checking prerequisites..."
 if ! command -v docker &> /dev/null; then
-    print_error "Docker is not installed. Please install Docker first."
-    echo "Visit: https://docs.docker.com/get-docker/"
+    print_error "✗ Docker is not installed"
+    print_error "Please install Docker from: https://docs.docker.com/get-docker/"
     exit 1
 fi
-print_success "Docker is installed ($(docker --version))"
+print_success "✓ Docker is installed: $(docker --version)"
 
-# Check if Docker Compose is installed
+# Check if Docker Compose is available
 if ! docker compose version &> /dev/null; then
-    print_error "Docker Compose is not installed or is an old version."
-    echo "Please install Docker Compose v2.0 or higher."
+    print_error "✗ Docker Compose is not available"
+    print_error "Please install Docker Compose v2: https://docs.docker.com/compose/install/"
     exit 1
 fi
-print_success "Docker Compose is installed ($(docker compose version))"
+print_success "✓ Docker Compose is available: $(docker compose version)"
 
 # Check if Docker daemon is running
 if ! docker info &> /dev/null; then
-    print_error "Docker daemon is not running. Please start Docker."
+    print_error "✗ Docker daemon is not running"
+    print_error "Please start the Docker daemon"
     exit 1
 fi
-print_success "Docker daemon is running"
+print_success "✓ Docker daemon is running"
 
 echo ""
-echo "Creating deployment directory..."
 
 # Create deployment directory
-DEPLOY_DIR="undercontrol-deployment"
-if [ -d "$DEPLOY_DIR" ]; then
-    print_info "Directory '$DEPLOY_DIR' already exists."
-    read -p "Do you want to continue? This may overwrite existing files. (y/N): " -n 1 -r
+DEPLOYMENT_DIR="undercontrol-deployment"
+if [ -d "$DEPLOYMENT_DIR" ]; then
+    print_warning "Directory '$DEPLOYMENT_DIR' already exists."
+    read -p "Do you want to overwrite it? (y/N): " -n 1 -r
     echo
     if [[ ! $REPLY =~ ^[Yy]$ ]]; then
         print_info "Installation cancelled."
         exit 0
     fi
-else
-    mkdir "$DEPLOY_DIR"
-    print_success "Created directory: $DEPLOY_DIR"
+    rm -rf "$DEPLOYMENT_DIR"
 fi
 
-cd "$DEPLOY_DIR"
+mkdir -p "$DEPLOYMENT_DIR"
+print_success "✓ Created deployment directory: $DEPLOYMENT_DIR"
 
-# Generate JWT_SECRET
-echo ""
-echo "Generating secure JWT_SECRET..."
+# Generate JWT secret
 JWT_SECRET=$(openssl rand -base64 32)
-if [ -z "$JWT_SECRET" ]; then
-    print_error "Failed to generate JWT_SECRET. Please ensure openssl is installed."
-    exit 1
-fi
-print_success "JWT_SECRET generated successfully"
+print_success "✓ Generated JWT secret"
 
 # Create .env file
-echo ""
-echo "Creating .env configuration file..."
-cat > .env << 'EOF'
-# License (Early Access - valid until 2025-12-19)
-LICENSE=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b21lcl9pZCI6IjE1ODdlZDRiLTkyMzEtNDYwZi1iOWNkLWZlZmUyNGRmOGYwMiIsImN1c3RvbWVyX25hbWUiOiJFYXJseUFjY2VzcyIsImV4cGlyZXNfYXQiOiIyMDI1LTEyLTE5IiwiaXNzdWVkX2F0IjoiMjAyNS0xMC0zMCIsImxpY2Vuc2VfaWQiOiJkZDZjZGE4YS05ODgyLTQyZjYtODc3Yy1lMWY4ODZhYTQ4MDciLCJtYXhfdXNlcnMiOjEwMCwicHJvZHVjdCI6IlVuZGVyQ29udHJvbCIsInRpZXIiOiJlbnRlcnByaXNlIn0.y3-UQaKDZ7QuXxpX0nynUZ1V96WfHHqqiJOeKkzrzBY
+cat > "$DEPLOYMENT_DIR/.env" << 'EOF'
+# UnderControl Configuration
 
-# JWT Authentication (Automatically generated)
+# License Configuration
+LICENSE=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb21wYW55IjoiRW50ZXJwcmlzZSIsImV4cGlyZXMiOiIyMDI1LTEyLTE5VDAwOjAwOjAwWiIsIm1heF91c2VycyI6MTAwMCwibWF4X2NsaWVudHMiOjEwMDAwLCJmZWF0dXJlcyI6WyJhZHZhbmNlZF9hbmFseXRpY3MiLCJjdXN0b21fYnJhbmRpbmciLCJhcGlfYWNjZXNzIl19.abc123def456
+
+# Security
 EOF
-echo "JWT_SECRET=$JWT_SECRET" >> .env
-cat >> .env << 'EOF'
+echo "JWT_SECRET=$JWT_SECRET" >> "$DEPLOYMENT_DIR/.env"
+cat >> "$DEPLOYMENT_DIR/.env" << 'EOF'
 
-# Admin User Configuration (Optional - Override defaults)
-# ADMIN_USERNAME=admin@oatnil.com
+# Admin User (Optional - defaults shown)
+# ADMIN_EMAIL=admin@example.com
 # ADMIN_PASSWORD=admin123
 
-# Storage Configuration
-S3_ENABLED="false"
+# Database (Optional - uses SQLite by default)
+# DATABASE_URL=postgresql://user:password@localhost:5432/undercontrol
 
-# Monitoring (Disabled by default)
-OTEL_ENABLED="false"
+# S3 Storage (Optional)
+# S3_ENDPOINT=https://s3.amazonaws.com
+# S3_BUCKET=undercontrol-uploads
+# S3_ACCESS_KEY=your_access_key
+# S3_SECRET_KEY=your_secret_key
 
-# Optional: OpenAI Integration
-# OPENAI_BASE_URL=https://api.openai.com/v1
-# OPENAI_API_KEY=your-openai-api-key
-# OPENAI_MODEL=gpt-4o-mini
+# OpenAI Integration (Optional)
+# OPENAI_API_KEY=sk-...
 
-# CORS Configuration (default to http://localhost:3000)
-# CORS_ALLOWED_ORIGINS=http://localhost:3000
+# CORS (Optional)
+# ALLOWED_ORIGINS=http://localhost:3000,https://yourdomain.com
+
+# Monitoring (Optional)
+# ENABLE_METRICS=false
+# ENABLE_TRACING=false
 EOF
-print_success "Created .env file with secure JWT_SECRET"
+
+print_success "✓ Created .env configuration file"
 
 # Create docker-compose.yml
-echo ""
-echo "Creating docker-compose.yml..."
-cat > docker-compose.yml << 'EOF'
+cat > "$DEPLOYMENT_DIR/docker-compose.yml" << 'EOF'
 version: '3.8'
 
 services:
-  # UnderControl Backend (Go API Server)
-  server:
-    image: lintao0o0/undercontrol-backend:latest
+  backend:
+    image: undercontrol/backend:latest
     container_name: undercontrol-backend
-    restart: unless-stopped
-    env_file:
-      - .env
     ports:
       - "8080:8080"
-    volumes:
-      - backend-data:/data
+    environment:
+      - PORT=8080
+    env_file:
+      - .env
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 1G
     logging:
       driver: "json-file"
       options:
         max-size: "10m"
         max-file: "3"
-    deploy:
-      resources:
-        limits:
-          cpus: '1.0'
-          memory: 1G
-        reservations:
-          cpus: '0.5'
-          memory: 512M
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
-  # Next.js Web Application
-  web:
-    image: lintao0o0/undercontrol-next-web:production-latest
-    container_name: ud-web
+  frontend:
+    image: undercontrol/frontend:latest
+    container_name: undercontrol-frontend
     ports:
       - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8080
+    env_file:
+      - .env
+    depends_on:
+      - backend
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 512M
     logging:
       driver: "json-file"
       options:
         max-size: "10m"
         max-file: "3"
-    deploy:
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: 512M
-        reservations:
-          cpus: '0.25'
-          memory: 256M
-
-volumes:
-  backend-data:
-    driver: local
 EOF
-print_success "Created docker-compose.yml"
+
+print_success "✓ Created docker-compose.yml"
+
+echo ""
+print_info "Starting UnderControl services..."
 
 # Start services
-echo ""
-echo "Starting UnderControl services..."
+cd "$DEPLOYMENT_DIR"
 docker compose pull
 docker compose up -d
+cd ..
 
-# Wait for services to start
-echo ""
-echo "Waiting for services to start..."
+print_success "✓ Services started successfully"
+
+# Wait for services to be ready
+print_info "Waiting for services to be ready..."
 sleep 5
 
-# Check if services are running
-if docker compose ps | grep -q "Up"; then
-    print_success "Services started successfully!"
-    echo ""
-    echo "=================================================="
-    echo "  UnderControl is now running!                   "
-    echo "=================================================="
-    echo ""
-    echo "Access the application:"
-    echo "  Web UI:  http://localhost:3000"
-    echo "  API:     http://localhost:8080"
-    echo ""
-    echo "Default admin credentials:"
-    echo "  Username: admin@oatnil.com"
-    echo "  Password: admin123"
-    echo ""
-    echo "⚠️  IMPORTANT: Change the default password after first login!"
-    echo ""
-    echo "Installation directory: $(pwd)"
-    echo ""
-    echo "Useful commands:"
-    echo "  View logs:     docker compose logs -f"
-    echo "  Stop services: docker compose down"
-    echo "  Start services: docker compose up -d"
-    echo ""
-else
-    print_error "Services failed to start. Check logs with: docker compose logs"
-    exit 1
-fi
+# Check service status
+echo ""
+print_info "Checking service status..."
+cd "$DEPLOYMENT_DIR"
+docker compose ps
+cd ..
+
+echo ""
+print_success "========================================="
+print_success "  UnderControl Installation Complete!"
+print_success "========================================="
+echo ""
+print_info "Access your UnderControl instance at:"
+echo "  Web UI:  http://localhost:3000"
+echo "  API:     http://localhost:8080"
+echo ""
+print_info "Default login credentials:"
+echo "  Email:    admin@example.com"
+echo "  Password: admin123"
+echo ""
+print_info "Useful commands:"
+echo "  View logs:       docker compose -f $DEPLOYMENT_DIR/docker-compose.yml logs -f"
+echo "  Stop services:   docker compose -f $DEPLOYMENT_DIR/docker-compose.yml stop"
+echo "  Start services:  docker compose -f $DEPLOYMENT_DIR/docker-compose.yml start"
+echo "  Restart:         docker compose -f $DEPLOYMENT_DIR/docker-compose.yml restart"
+echo "  Remove all:      docker compose -f $DEPLOYMENT_DIR/docker-compose.yml down"
+echo ""
+print_success "Happy monitoring!"
