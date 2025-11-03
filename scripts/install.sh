@@ -33,12 +33,17 @@ fi
 print_success "✓ Docker is installed: $(docker --version)"
 
 # Check if Docker Compose is available
-if ! docker compose version &> /dev/null; then
+DOCKER_COMPOSE_CMD=""
+if docker compose version &> /dev/null; then
+    DOCKER_COMPOSE_CMD="docker compose"
+elif docker-compose version &> /dev/null; then
+    DOCKER_COMPOSE_CMD="docker-compose"
+else
     print_error "✗ Docker Compose is not available"
-    print_error "Please install Docker Compose v2: https://docs.docker.com/compose/install/"
+    print_error "Please install Docker Compose: https://docs.docker.com/compose/install/"
     exit 1
 fi
-print_success "✓ Docker Compose is available: $(docker compose version)"
+print_success "✓ Docker Compose is available: $($DOCKER_COMPOSE_CMD version)"
 
 # Check if Docker daemon is running
 if ! docker info &> /dev/null; then
@@ -168,8 +173,8 @@ print_info "Starting UnderControl services..."
 
 # Start services
 cd "$DEPLOYMENT_DIR"
-docker compose pull
-docker compose up -d
+$DOCKER_COMPOSE_CMD pull
+$DOCKER_COMPOSE_CMD up -d
 cd ..
 
 print_success "✓ Services started successfully"
@@ -182,7 +187,7 @@ sleep 5
 echo ""
 print_info "Checking service status..."
 cd "$DEPLOYMENT_DIR"
-docker compose ps
+$DOCKER_COMPOSE_CMD ps
 cd ..
 
 echo ""
@@ -199,10 +204,10 @@ echo "  Email:    admin@example.com"
 echo "  Password: admin123"
 echo ""
 print_info "Useful commands:"
-echo "  View logs:       docker compose -f $DEPLOYMENT_DIR/docker-compose.yml logs -f"
-echo "  Stop services:   docker compose -f $DEPLOYMENT_DIR/docker-compose.yml stop"
-echo "  Start services:  docker compose -f $DEPLOYMENT_DIR/docker-compose.yml start"
-echo "  Restart:         docker compose -f $DEPLOYMENT_DIR/docker-compose.yml restart"
-echo "  Remove all:      docker compose -f $DEPLOYMENT_DIR/docker-compose.yml down"
+echo "  View logs:       $DOCKER_COMPOSE_CMD -f $DEPLOYMENT_DIR/docker-compose.yml logs -f"
+echo "  Stop services:   $DOCKER_COMPOSE_CMD -f $DEPLOYMENT_DIR/docker-compose.yml stop"
+echo "  Start services:  $DOCKER_COMPOSE_CMD -f $DEPLOYMENT_DIR/docker-compose.yml start"
+echo "  Restart:         $DOCKER_COMPOSE_CMD -f $DEPLOYMENT_DIR/docker-compose.yml restart"
+echo "  Remove all:      $DOCKER_COMPOSE_CMD -f $DEPLOYMENT_DIR/docker-compose.yml down"
 echo ""
 print_success "Happy monitoring!"
