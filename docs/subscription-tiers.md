@@ -73,7 +73,7 @@ If UnderControl is already installed, add your license to the configuration file
 ```yaml
 services:
   server:
-    image: undercontrol/backend:latest
+    image: lintao0o0/undercontrol-backend:latest
     environment:
       - LICENSE_TOKEN=your-license-key-here  # Add this line
     # ... rest of your configuration

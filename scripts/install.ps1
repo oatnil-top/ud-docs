@@ -55,6 +55,7 @@ Write-Host ""
 $deploymentDir = "undercontrol-deployment"
 if (Test-Path $deploymentDir) {
     Write-Warning-Custom "Directory '$deploymentDir' already exists."
+    Write-Info "To delete it manually, run: Remove-Item -Path $deploymentDir -Recurse -Force"
     $response = Read-Host "Do you want to overwrite it? (y/N)"
     if ($response -ne "y" -and $response -ne "Y") {
         Write-Info "Installation cancelled."
@@ -118,7 +119,7 @@ version: '3.8'
 
 services:
   backend:
-    image: undercontrol/backend:latest
+    image: lintao0o0/undercontrol-backend:latest
     container_name: undercontrol-backend
     ports:
       - "8080:8080"
@@ -143,7 +144,7 @@ services:
       retries: 3
 
   frontend:
-    image: undercontrol/frontend:latest
+    image: lintao0o0/undercontrol-next-web:latest
     container_name: undercontrol-frontend
     ports:
       - "3000:3000"

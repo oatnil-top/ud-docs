@@ -59,6 +59,7 @@ echo ""
 DEPLOYMENT_DIR="undercontrol-deployment"
 if [ -d "$DEPLOYMENT_DIR" ]; then
     print_warning "Directory '$DEPLOYMENT_DIR' already exists."
+    print_info "To delete it manually, run: rm -rf $DEPLOYMENT_DIR"
     read -p "Do you want to overwrite it? (y/N): " -n 1 -r
     echo
     if [[ ! $REPLY =~ ^[Yy]$ ]]; then
@@ -119,7 +120,7 @@ version: '3.8'
 
 services:
   backend:
-    image: undercontrol/backend:latest
+    image: lintao0o0/undercontrol-backend:latest
     container_name: undercontrol-backend
     ports:
       - "8080:8080"
@@ -144,7 +145,7 @@ services:
       retries: 3
 
   frontend:
-    image: undercontrol/frontend:latest
+    image: lintao0o0/undercontrol-next-web:latest
     container_name: undercontrol-frontend
     ports:
       - "3000:3000"
