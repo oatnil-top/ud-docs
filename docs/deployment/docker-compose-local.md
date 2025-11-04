@@ -83,7 +83,7 @@ The installation script will automatically:
 - Check Docker and Docker Compose prerequisites
 - Create deployment directory (`undercontrol-deployment`)
 - Generate a secure JWT_SECRET automatically
-- Create `.env` configuration file with early access license
+- Create `.env` configuration file
 - Create `docker-compose.yml` with both services
 - Pull Docker images and start services
 
@@ -104,7 +104,7 @@ After completing all setup steps, your directory structure should look like this
 
 ```
 undercontrol-deployment/
-├── .env                    # Environment configuration (includes license)
+├── .env                    # Environment configuration
 └── docker-compose.yml      # Docker services definition
 ```
 
@@ -113,15 +113,15 @@ undercontrol-deployment/
 Create a `.env` file with the following content:
 
 ```bash
-# License (Early Access - valid until 2025-12-19)
-LICENSE=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b21lcl9pZCI6IjE1ODdlZDRiLTkyMzEtNDYwZi1iOWNkLWZlZmUyNGRmOGYwMiIsImN1c3RvbWVyX25hbWUiOiJFYXJseUFjY2VzcyIsImV4cGlyZXNfYXQiOiIyMDI1LTEyLTE5IiwiaXNzdWVkX2F0IjoiMjAyNS0xMC0zMCIsImxpY2Vuc2VfaWQiOiJkZDZjZGE4YS05ODgyLTQyZjYtODc3Yy1lMWY4ODZhYTQ4MDciLCJtYXhfdXNlcnMiOjEwMCwicHJvZHVjdCI6IlVuZGVyQ29udHJvbCIsInRpZXIiOiJlbnRlcnByaXNlIn0.y3-UQaKDZ7QuXxpX0nynUZ1V96WfHHqqiJOeKkzrzBY
-
 # JWT Authentication (REQUIRED - Change this!)
 JWT_SECRET=your-super-secret-jwt-key-change-this
 
 # Admin User Configuration (Optional - Override defaults)
 # ADMIN_USERNAME=admin@oatnil.com
 # ADMIN_PASSWORD=admin123
+
+# License (Optional - only for Pro/Max tiers)
+# LICENSE=your-license-key-here
 
 # Storage Configuration
 S3_ENABLED="false"
@@ -152,8 +152,10 @@ openssl rand -base64 32
 ```
 :::
 
-:::info Early Access License
-The license included above is an **Early Access** license valid until **December 19, 2025**, supporting up to **100 users**. This allows you to get started immediately without any barriers. For production use beyond this period, you can obtain an extended license.
+:::info Free Personal Tier
+UnderControl starts with a **free Personal tier** - no license required! Perfect for individual use with 1 user and all core features included (SQLite database, local storage).
+
+Want team features, cloud storage, or PostgreSQL? Upgrade to [Pro or Max](/docs/subscription-tiers) and add your license key to the `.env` file.
 :::
 
 ### 3. Create docker-compose.yml
@@ -247,8 +249,8 @@ For a complete list of all available environment variables, see the [Environment
 
 | Variable | Description | Default |
 |----------|-------------|---------|
-| `LICENSE` | License token (included in early access) | Provided |
 | `JWT_SECRET` | JWT token signing key (REQUIRED) | - |
+| `LICENSE` | License key for Pro/Max tiers (optional) | None (Personal tier) |
 | `ADMIN_USERNAME` | Admin username (override default) | `admin@oatnil.com` |
 | `ADMIN_PASSWORD` | Admin password (override default) | `admin123` |
 | `UD_DATA_PATH` | Database and file storage path | `/data` |
@@ -283,7 +285,6 @@ docker compose logs
 Common issues:
 - Port conflicts (3000 or 8080 already in use)
 - Invalid or missing `JWT_SECRET`
-- Missing or invalid `LICENSE` environment variable
 - CORS configuration mismatch
 
 ### Cannot Access Application
@@ -310,6 +311,34 @@ docker compose exec backend sh
 ls -lh /app/data/
 exit
 ```
+
+### Data Backup
+
+To backup your data from the Docker volume to your local machine:
+
+```bash
+# Create a backup of the data directory
+docker cp undercontrol-backend:/app/data ./backup-data
+
+# Or backup to a specific path
+docker cp undercontrol-backend:/app/data /path/to/backup/location
+```
+
+To restore data back to the container:
+
+```bash
+# Restore from backup
+docker cp ./backup-data/. undercontrol-backend:/app/data/
+```
+
+:::tip Automated Backups
+Consider setting up a cron job or scheduled task to automatically backup your data regularly:
+
+```bash
+# Example: Backup daily at 2 AM
+0 2 * * * docker cp undercontrol-backend:/app/data ~/backups/undercontrol-$(date +\%Y\%m\%d)
+```
+:::
 
 ### Complete Reset
 

@@ -47,7 +47,7 @@ curl -fsSL https://raw.githubusercontent.com/oatnil-top/ud-docs/main/scripts/ins
 - 检查 Docker 和 Docker Compose 前置条件
 - 创建部署目录（`undercontrol-deployment`）
 - 自动生成安全的 JWT_SECRET
-- 创建包含早期访问许可证的 `.env` 配置文件
+- 创建 `.env` 配置文件
 - 创建包含两个服务的 `docker-compose.yml`
 - 拉取 Docker 镜像并启动服务
 
@@ -77,7 +77,7 @@ cd undercontrol-deployment
 
 ```
 undercontrol-deployment/
-├── .env                    # 环境配置（包括许可证）
+├── .env                    # 环境配置
 └── docker-compose.yml      # Docker 服务定义
 ```
 
@@ -86,15 +86,15 @@ undercontrol-deployment/
 创建一个 `.env` 文件，内容如下：
 
 ```bash
-# 许可证（早期访问 - 有效期至 2025-12-19）
-LICENSE=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b21lcl9pZCI6IjE1ODdlZDRiLTkyMzEtNDYwZi1iOWNkLWZlZmUyNGRmOGYwMiIsImN1c3RvbWVyX25hbWUiOiJFYXJseUFjY2VzcyIsImV4cGlyZXNfYXQiOiIyMDI1LTEyLTE5IiwiaXNzdWVkX2F0IjoiMjAyNS0xMC0zMCIsImxpY2Vuc2VfaWQiOiJkZDZjZGE4YS05ODgyLTQyZjYtODc3Yy1lMWY4ODZhYTQ4MDciLCJtYXhfdXNlcnMiOjEwMCwicHJvZHVjdCI6IlVuZGVyQ29udHJvbCIsInRpZXIiOiJlbnRlcnByaXNlIn0.y3-UQaKDZ7QuXxpX0nynUZ1V96WfHHqqiJOeKkzrzBY
-
 # JWT 身份验证（必需 - 请修改！）
 JWT_SECRET=your-super-secret-jwt-key-change-this
 
 # 管理员用户配置（可选 - 覆盖默认值）
 # ADMIN_USERNAME=admin@oatnil.com
 # ADMIN_PASSWORD=admin123
+
+# 许可证（可选 - 仅用于 Pro/Max 版本）
+# LICENSE=your-license-key-here
 
 # 存储配置
 S3_ENABLED="false"
@@ -119,8 +119,10 @@ openssl rand -base64 32
 ```
 :::
 
-:::info 早期访问许可证
-上述许可证是**早期访问**许可证，有效期至 **2025 年 12 月 19 日**，支持最多 **100 个用户**。这使您可以立即开始使用，无需任何障碍。如需在此期间之后用于生产环境，您可以获取延期许可证。
+:::info 免费个人版
+UnderControl 提供**免费个人版** - 无需许可证！非常适合个人使用，支持 1 个用户和所有核心功能（SQLite 数据库、本地存储）。
+
+需要团队功能、云存储或 PostgreSQL？升级到 [Pro 或 Max 版本](/docs/subscription-tiers)，并在 `.env` 文件中添加您的许可证密钥。
 :::
 
 ### 3. 创建 docker-compose.yml
@@ -214,8 +216,8 @@ docker compose ps
 
 | 变量 | 描述 | 默认值 |
 |----------|-------------|---------|
-| `LICENSE` | 许可证令牌（早期访问已包含） | 已提供 |
 | `JWT_SECRET` | JWT 令牌签名密钥（必需） | - |
+| `LICENSE` | Pro/Max 版本许可证密钥（可选） | 无（个人版） |
 | `ADMIN_USERNAME` | 管理员用户名（覆盖默认值） | `admin@oatnil.com` |
 | `ADMIN_PASSWORD` | 管理员密码（覆盖默认值） | `admin123` |
 | `UD_DATA_PATH` | 数据库和文件存储路径 | `/data` |
@@ -250,7 +252,6 @@ docker compose logs
 常见问题：
 - 端口冲突（3000 或 8080 已被占用）
 - `JWT_SECRET` 无效或缺失
-- `LICENSE` 环境变量缺失或无效
 - CORS 配置不匹配
 
 ### 无法访问应用程序
@@ -277,6 +278,34 @@ docker compose exec backend sh
 ls -lh /app/data/
 exit
 ```
+
+### 数据备份
+
+将数据从 Docker 卷备份到本地机器：
+
+```bash
+# 创建数据目录的备份
+docker cp undercontrol-backend:/app/data ./backup-data
+
+# 或备份到指定路径
+docker cp undercontrol-backend:/app/data /path/to/backup/location
+```
+
+从备份恢复数据到容器：
+
+```bash
+# 从备份恢复
+docker cp ./backup-data/. undercontrol-backend:/app/data/
+```
+
+:::tip 自动备份
+考虑设置 cron 作业或计划任务来自动定期备份数据：
+
+```bash
+# 示例：每天凌晨 2 点备份
+0 2 * * * docker cp undercontrol-backend:/app/data ~/backups/undercontrol-$(date +\%Y\%m\%d)
+```
+:::
 
 ### 完全重置
 

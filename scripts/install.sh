@@ -80,13 +80,13 @@ print_success "✓ Generated JWT secret"
 cat > "$DEPLOYMENT_DIR/.env" << 'EOF'
 # UnderControl Configuration
 
-# License Configuration
-LICENSE=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb21wYW55IjoiRW50ZXJwcmlzZSIsImV4cGlyZXMiOiIyMDI1LTEyLTE5VDAwOjAwOjAwWiIsIm1heF91c2VycyI6MTAwMCwibWF4X2NsaWVudHMiOjEwMDAwLCJmZWF0dXJlcyI6WyJhZHZhbmNlZF9hbmFseXRpY3MiLCJjdXN0b21fYnJhbmRpbmciLCJhcGlfYWNjZXNzIl19.abc123def456
-
-# Security
+# Security (REQUIRED)
 EOF
 echo "JWT_SECRET=$JWT_SECRET" >> "$DEPLOYMENT_DIR/.env"
 cat >> "$DEPLOYMENT_DIR/.env" << 'EOF'
+
+# License (Optional - only for Pro/Max tiers)
+# LICENSE=your-license-key-here
 
 # Data Directory
 UD_DATA_PATH=/app/data
