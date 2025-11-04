@@ -37,19 +37,13 @@ docker compose version
 
 使用单个命令设置 UnderControl。安装脚本将自动处理所有配置和设置。
 
+#### Linux / macOS / WSL
+
 **快速安装：**
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/oatnil-top/ud-docs/main/scripts/install.sh | sh
 ```
-
-脚本将自动：
-- 检查 Docker 和 Docker Compose 前置条件
-- 创建部署目录（`undercontrol-deployment`）
-- 自动生成安全的 JWT_SECRET
-- 创建 `.env` 配置文件
-- 创建包含两个服务的 `docker-compose.yml`
-- 拉取 Docker 镜像并启动服务
 
 :::tip 替代安装方式
 如果您希望在运行之前查看脚本：
@@ -59,6 +53,32 @@ chmod +x install.sh
 ./install.sh
 ```
 :::
+
+#### Windows (PowerShell)
+
+下载并运行安装脚本：
+
+```powershell
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/oatnil-top/ud-docs/main/scripts/install.ps1" -OutFile "install.ps1"
+.\install.ps1
+```
+
+:::info PowerShell 执行策略
+如果遇到执行策略错误，请以管理员身份运行 PowerShell 并执行：
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+:::
+
+**安装脚本的功能：**
+
+安装脚本将自动：
+- 检查 Docker 和 Docker Compose 前置条件
+- 创建部署目录（`undercontrol-deployment`）
+- 自动生成安全的 JWT_SECRET
+- 创建 `.env` 配置文件
+- 创建包含两个服务的 `docker-compose.yml`
+- 拉取 Docker 镜像并启动服务
 
 ### 选项 2：手动安装
 
@@ -114,8 +134,14 @@ OTEL_ENABLED="false"
 :::danger 安全警告
 **您必须将 `JWT_SECRET` 更改为**一个随机、安全的值：
 
+**Linux/macOS/WSL：**
 ```bash
 openssl rand -base64 32
+```
+
+**Windows PowerShell：**
+```powershell
+[Convert]::ToBase64String((1..32 | ForEach-Object { Get-Random -Maximum 256 }))
 ```
 :::
 
