@@ -70,9 +70,7 @@ if [ -d "$DEPLOYMENT_DIR" ]; then
 fi
 
 mkdir -p "$DEPLOYMENT_DIR"
-mkdir -p "$DEPLOYMENT_DIR/data"
 print_success "✓ Created deployment directory: $DEPLOYMENT_DIR"
-print_success "✓ Created data directory: $DEPLOYMENT_DIR/data"
 
 # Generate JWT secret
 JWT_SECRET=$(openssl rand -base64 32)
@@ -149,7 +147,7 @@ services:
       timeout: 10s
       retries: 3
     volumes:
-      - ./data:/app/data
+      - undercontrol-data:/app/data
 
   frontend:
     image: lintao0o0/undercontrol-next-web:latest
@@ -172,6 +170,10 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
+
+volumes:
+  undercontrol-data:
+    driver: local
 EOF
 
 print_success "✓ Created docker-compose.yml"
@@ -217,5 +219,11 @@ echo "  Stop services:   $DOCKER_COMPOSE_CMD -f $DEPLOYMENT_DIR/docker-compose.y
 echo "  Start services:  $DOCKER_COMPOSE_CMD -f $DEPLOYMENT_DIR/docker-compose.yml start"
 echo "  Restart:         $DOCKER_COMPOSE_CMD -f $DEPLOYMENT_DIR/docker-compose.yml restart"
 echo "  Remove all:      $DOCKER_COMPOSE_CMD -f $DEPLOYMENT_DIR/docker-compose.yml down"
+echo ""
+print_info "Data management:"
+echo "  Backup data:     docker run --rm -v undercontrol-data:/data -v \$(pwd):/backup alpine tar czf /backup/undercontrol-backup.tar.gz -C /data ."
+echo "  Restore data:    docker run --rm -v undercontrol-data:/data -v \$(pwd):/backup alpine tar xzf /backup/undercontrol-backup.tar.gz -C /data"
+echo "  View data:       docker volume inspect undercontrol-data"
+echo "  Remove data:     docker volume rm undercontrol-data (warning: deletes all data!)"
 echo ""
 print_success "Happy monitoring!"

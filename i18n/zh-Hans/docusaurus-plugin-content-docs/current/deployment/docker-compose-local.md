@@ -1,5 +1,7 @@
 ---
 sidebar_position: 1
+# IMPORTANT: Keep docker-compose.yml content in sync with scripts/install.sh
+# Any changes to the docker-compose configuration must be reflected in both files
 ---
 
 # Docker Compose：本地存储 + SQLite
@@ -129,54 +131,57 @@ openssl rand -base64 32
 version: '3.8'
 
 services:
-  # UnderControl Backend (Go API Server)
-  server:
+  backend:
     image: lintao0o0/undercontrol-backend:latest
     container_name: undercontrol-backend
-    restart: unless-stopped
-    env_file:
-      - .env
     ports:
       - "8080:8080"
-    volumes:
-      - backend-data:/data
+    environment:
+      - PORT=8080
+    env_file:
+      - .env
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 1G
     logging:
       driver: "json-file"
       options:
         max-size: "10m"
         max-file: "3"
-    deploy:
-      resources:
-        limits:
-          cpus: '1.0'
-          memory: 1G
-        reservations:
-          cpus: '0.5'
-          memory: 512M
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    volumes:
+      - undercontrol-data:/app/data
 
-  # Next.js Web Application
-  web:
-    image: lintao0o0/undercontrol-next-web:production-latest
-    container_name: ud-web
+  frontend:
+    image: lintao0o0/undercontrol-next-web:latest
+    container_name: undercontrol-frontend
     ports:
       - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8080
+    env_file:
+      - .env
+    depends_on:
+      - backend
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 512M
     logging:
       driver: "json-file"
       options:
         max-size: "10m"
         max-file: "3"
-    deploy:
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: 512M
-        reservations:
-          cpus: '0.25'
-          memory: 256M
 
 volumes:
-  backend-data:
+  undercontrol-data:
     driver: local
 ```
 
@@ -194,7 +199,7 @@ docker compose ps
 
 您应该看到两个正在运行的容器：
 - `undercontrol-backend`
-- `ud-web`
+- `undercontrol-frontend`
 
 ### 5. 访问应用程序
 
@@ -261,15 +266,15 @@ docker compose logs
 
 1. 验证 `.env` 中的 `CORS_ALLOWED_ORIGINS` 是否与前端 URL 匹配
 2. 如果使用不同的端口，请更新环境变量
-3. 更改 CORS 设置后重启后端：`docker compose restart server`
+3. 更改 CORS 设置后重启后端：`docker compose restart backend`
 
 ### 数据库问题
 
 访问后端容器以检查数据库：
 
 ```bash
-docker compose exec server sh
-ls -lh /data/
+docker compose exec backend sh
+ls -lh /app/data/
 exit
 ```
 
@@ -281,7 +286,7 @@ exit
 
 ```bash
 docker compose down
-docker volume rm undercontrol-deployment_backend-data
+docker volume rm undercontrol-data
 docker compose up -d
 ```
 

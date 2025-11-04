@@ -1,5 +1,7 @@
 ---
 sidebar_position: 1
+# IMPORTANT: Keep docker-compose.yml content in sync with scripts/install.sh
+# Any changes to the docker-compose configuration must be reflected in both files
 ---
 
 # Docker Compose: Local Storage + SQLite
@@ -162,54 +164,57 @@ Create a `docker-compose.yml` file:
 version: '3.8'
 
 services:
-  # UnderControl Backend (Go API Server)
-  server:
+  backend:
     image: lintao0o0/undercontrol-backend:latest
     container_name: undercontrol-backend
-    restart: unless-stopped
-    env_file:
-      - .env
     ports:
       - "8080:8080"
-    volumes:
-      - backend-data:/data
+    environment:
+      - PORT=8080
+    env_file:
+      - .env
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 1G
     logging:
       driver: "json-file"
       options:
         max-size: "10m"
         max-file: "3"
-    deploy:
-      resources:
-        limits:
-          cpus: '1.0'
-          memory: 1G
-        reservations:
-          cpus: '0.5'
-          memory: 512M
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    volumes:
+      - undercontrol-data:/app/data
 
-  # Next.js Web Application
-  web:
-    image: lintao0o0/undercontrol-next-web:production-latest
-    container_name: ud-web
+  frontend:
+    image: lintao0o0/undercontrol-next-web:latest
+    container_name: undercontrol-frontend
     ports:
       - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8080
+    env_file:
+      - .env
+    depends_on:
+      - backend
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 512M
     logging:
       driver: "json-file"
       options:
         max-size: "10m"
         max-file: "3"
-    deploy:
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: 512M
-        reservations:
-          cpus: '0.25'
-          memory: 256M
 
 volumes:
-  backend-data:
+  undercontrol-data:
     driver: local
 ```
 
@@ -227,7 +232,7 @@ docker compose ps
 
 You should see two running containers:
 - `undercontrol-backend`
-- `ud-web`
+- `undercontrol-frontend`
 
 ### 5. Access the Application
 
@@ -294,15 +299,15 @@ If you see CORS errors in the browser console:
 
 1. Verify `CORS_ALLOWED_ORIGINS` in `.env` matches your frontend URL
 2. If using a different port, update the environment variable
-3. Restart the backend after changing CORS settings: `docker compose restart server`
+3. Restart the backend after changing CORS settings: `docker compose restart backend`
 
 ### Database Issues
 
 Access the backend container to inspect the database:
 
 ```bash
-docker compose exec server sh
-ls -lh /data/
+docker compose exec backend sh
+ls -lh /app/data/
 exit
 ```
 
@@ -314,7 +319,7 @@ This will delete all your data!
 
 ```bash
 docker compose down
-docker volume rm undercontrol-deployment_backend-data
+docker volume rm undercontrol-data
 docker compose up -d
 ```
 
