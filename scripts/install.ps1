@@ -78,13 +78,15 @@ Write-Success "✓ Generated JWT secret"
 # Create .env file
 $envContent = @"
 # UnderControl Configuration
-# Generated on $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
 
-# License Configuration
-LICENSE=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb21wYW55IjoiRW50ZXJwcmlzZSIsImV4cGlyZXMiOiIyMDI1LTEyLTE5VDAwOjAwOjAwWiIsIm1heF91c2VycyI6MTAwMCwibWF4X2NsaWVudHMiOjEwMDAwLCJmZWF0dXJlcyI6WyJhZHZhbmNlZF9hbmFseXRpY3MiLCJjdXN0b21fYnJhbmRpbmciLCJhcGlfYWNjZXNzIl19.abc123def456
-
-# Security
+# Security (REQUIRED)
 JWT_SECRET=$jwtSecret
+
+# License (Optional - only for Pro/Max tiers)
+# LICENSE=your-license-key-here
+
+# Data Directory
+UD_DATA_PATH=/app/data
 
 # Admin User (Optional - defaults shown)
 # ADMIN_EMAIL=admin@example.com
@@ -94,6 +96,7 @@ JWT_SECRET=$jwtSecret
 # DATABASE_URL=postgresql://user:password@localhost:5432/undercontrol
 
 # S3 Storage (Optional)
+S3_ENABLED=false
 # S3_ENDPOINT=https://s3.amazonaws.com
 # S3_BUCKET=undercontrol-uploads
 # S3_ACCESS_KEY=your_access_key
@@ -106,6 +109,7 @@ JWT_SECRET=$jwtSecret
 # ALLOWED_ORIGINS=http://localhost:3000,https://yourdomain.com
 
 # Monitoring (Optional)
+OTEL_ENABLED=false
 # ENABLE_METRICS=false
 # ENABLE_TRACING=false
 "@
@@ -142,6 +146,8 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
+    volumes:
+      - undercontrol-data:/app/data
 
   frontend:
     image: lintao0o0/undercontrol-next-web:latest
@@ -164,6 +170,10 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
+
+volumes:
+  undercontrol-data:
+    driver: local
 "@
 
 Set-Content -Path "$deploymentDir\docker-compose.yml" -Value $composeContent -NoNewline
@@ -219,5 +229,11 @@ Write-Host "  Stop services:   docker compose -f $deploymentDir\docker-compose.y
 Write-Host "  Start services:  docker compose -f $deploymentDir\docker-compose.yml start"
 Write-Host "  Restart:         docker compose -f $deploymentDir\docker-compose.yml restart"
 Write-Host "  Remove all:      docker compose -f $deploymentDir\docker-compose.yml down"
+Write-Host ""
+Write-Info "Data management:"
+Write-Host "  Backup data:     docker run --rm -v undercontrol-data:/data -v `${PWD}:/backup alpine tar czf /backup/undercontrol-backup.tar.gz -C /data ."
+Write-Host "  Restore data:    docker run --rm -v undercontrol-data:/data -v `${PWD}:/backup alpine tar xzf /backup/undercontrol-backup.tar.gz -C /data"
+Write-Host "  View data:       docker volume inspect undercontrol-data"
+Write-Host "  Remove data:     docker volume rm undercontrol-data (warning: deletes all data!)"
 Write-Host ""
 Write-Success "Happy monitoring!"
