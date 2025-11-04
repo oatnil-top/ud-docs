@@ -70,7 +70,9 @@ if [ -d "$DEPLOYMENT_DIR" ]; then
 fi
 
 mkdir -p "$DEPLOYMENT_DIR"
+mkdir -p "$DEPLOYMENT_DIR/data"
 print_success "✓ Created deployment directory: $DEPLOYMENT_DIR"
+print_success "✓ Created data directory: $DEPLOYMENT_DIR/data"
 
 # Generate JWT secret
 JWT_SECRET=$(openssl rand -base64 32)
@@ -87,6 +89,9 @@ LICENSE=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb21wYW55IjoiRW50ZXJwcmlzZSIsImV
 EOF
 echo "JWT_SECRET=$JWT_SECRET" >> "$DEPLOYMENT_DIR/.env"
 cat >> "$DEPLOYMENT_DIR/.env" << 'EOF'
+
+# Data Directory
+UD_DATA_PATH=/app/data
 
 # Admin User (Optional - defaults shown)
 # ADMIN_EMAIL=admin@example.com
@@ -143,6 +148,8 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
+    volumes:
+      - ./data:/app/data
 
   frontend:
     image: lintao0o0/undercontrol-next-web:latest
