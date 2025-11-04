@@ -56,19 +56,12 @@ chmod +x install.sh
 
 #### Windows (PowerShell)
 
-**Quick Install:**
+Download and run the installation script:
 
-```powershell
-irm https://raw.githubusercontent.com/oatnil-top/ud-docs/main/scripts/install.ps1 | iex
-```
-
-:::tip Alternative Installation
-If you prefer to review the script before running it:
 ```powershell
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/oatnil-top/ud-docs/main/scripts/install.ps1" -OutFile "install.ps1"
 .\install.ps1
 ```
-:::
 
 :::info PowerShell Execution Policy
 If you encounter an execution policy error, run PowerShell as Administrator and execute:
