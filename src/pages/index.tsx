@@ -73,7 +73,7 @@ function HomepageHeader() {
           <Translate
             id="homepage.hero.selfDeployDesc"
             description="Self-deploy description">
-            Complete control. Deploy to your server/internal network. Work offline. Your data never leaves your infrastructure. Personal tier free forever—no limitations.
+            Complete control. Deploy to your server/internal network. Work offline. Your data never leaves your infrastructure. Personal tier free forever.
           </Translate>
         </p>
       </div>

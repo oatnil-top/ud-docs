@@ -351,7 +351,7 @@
     "description": "Self-deploy label"
   },
   "homepage.hero.selfDeployDesc": {
-    "message": "完全掌控。部署到您的服务器/内部网络。离线工作。您的数据永不离开您的基础设施。个人版永久免费——无任何限制。",
+    "message": "完全掌控。部署到您的服务器/内部网络。离线工作。您的数据永不离开您的基础设施。个人版永久免费。",
     "description": "Self-deploy description"
   },
   "homepage.title": {
