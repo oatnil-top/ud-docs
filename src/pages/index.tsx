@@ -25,7 +25,7 @@ function HomepageHeader() {
           <Translate
             id="homepage.hero.subtitle"
             description="The homepage hero subtitle">
-            Record anything anytime with all data controlled by yourself, empowered by AI
+            Built by indie developer + AI collaboration. Your data, your rules—self-host, work offline, stay secure. Personal tier free forever.
           </Translate>
         </p>
         <div className={styles.buttons}>
@@ -60,20 +60,20 @@ function HomepageHeader() {
           <Translate
             id="homepage.hero.tryOnlineDesc"
             description="Try online description">
-            Start immediately with our SaaS service—data securely saved in our cloud.
+            Quick start with our SaaS—but we respect zero trust.
           </Translate>
           <br />
           <strong>
             <Translate
               id="homepage.hero.selfDeployLabel"
               description="Self-deploy label">
-              Self-Deploy:
+              Self-Deploy (Recommended):
             </Translate>
           </strong>{' '}
           <Translate
             id="homepage.hero.selfDeployDesc"
             description="Self-deploy description">
-            Full control—you decide where to run, where to save data, even fully offline.
+            Complete control. Deploy to your server/internal network. Work offline. Your data never leaves your infrastructure. Personal tier free forever—no limitations.
           </Translate>
         </p>
       </div>
@@ -92,7 +92,7 @@ export default function Home(): ReactNode {
       }, {title: siteConfig.title})}
       description={translate({
         id: 'homepage.description',
-        message: 'Record anything anytime with all data controlled by yourself, empowered by AI',
+        message: 'Built by indie developer + AI. Self-host, work offline, deploy to internal network. Your data stays yours. Personal tier free forever. Zero trust, full control.',
         description: 'The homepage meta description',
       })}>
       <HomepageHeader />
