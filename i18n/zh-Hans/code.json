@@ -347,7 +347,7 @@
     "description": "Try online description"
   },
   "homepage.hero.selfDeployLabel": {
-    "message": "自主部署（推荐）：",
+    "message": "自主部署：",
     "description": "Self-deploy label"
   },
   "homepage.hero.selfDeployDesc": {

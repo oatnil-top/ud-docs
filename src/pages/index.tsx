@@ -67,7 +67,7 @@ function HomepageHeader() {
             <Translate
               id="homepage.hero.selfDeployLabel"
               description="Self-deploy label">
-              Self-Deploy (Recommended):
+              Self-Deploy:
             </Translate>
           </strong>{' '}
           <Translate
