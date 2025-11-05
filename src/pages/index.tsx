@@ -60,7 +60,7 @@ function HomepageHeader() {
           <Translate
             id="homepage.hero.tryOnlineDesc"
             description="Try online description">
-            Quick start with a visitor account, no fussing. But we respect zero trust—even big companies leak data. For true security, deploy on your own trusted machine.
+            Quick start with a visitor account, no fussing. We will do the best to secure the data, but we respect zero trust—even big companies leak data. For true security, deploy on your own trusted machine.
           </Translate>
           <br />
           <strong>

@@ -343,7 +343,7 @@
     "description": "Try online label"
   },
   "homepage.hero.tryOnlineDesc": {
-    "message": "使用访客账户快速开始，无需繁琐注册。但我们尊重零信任原则——即使大公司也会泄露数据。要获得真正的安全，请部署到您自己信任的机器上。",
+    "message": "使用访客账户快速开始，无需繁琐注册。我们会尽力保护数据，但我们尊重零信任原则——即使大公司也会泄露数据。要获得真正的安全，请部署到您自己信任的机器上。",
     "description": "Try online description"
   },
   "homepage.hero.selfDeployLabel": {
