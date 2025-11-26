@@ -150,14 +150,10 @@ services:
       - undercontrol-data:/app/data
 
   frontend:
-    image: lintao0o0/undercontrol-next-web:latest
+    image: lintao0o0/ud-vite-app:latest
     container_name: undercontrol-frontend
     ports:
-      - "3000:3000"
-    environment:
-      - NEXT_PUBLIC_API_URL=http://localhost:8080
-    env_file:
-      - .env
+      - "3000:80"
     depends_on:
       - backend
     restart: unless-stopped

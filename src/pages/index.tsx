@@ -1,83 +1,195 @@
-import type {ReactNode} from 'react';
-import clsx from 'clsx';
+import {useState, type ReactNode} from 'react';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
-import HomepageFeatures from '@site/src/components/HomepageFeatures';
-import Heading from '@theme/Heading';
 import Translate, {translate} from '@docusaurus/Translate';
+import {ExternalLink, Download, Server, Lock, ArrowDownToLine} from 'lucide-react';
+
+type Platform = 'macOS' | 'Windows' | 'Linux';
+
+const downloadUrls: Record<Platform, string> = {
+  macOS: '/docs/download#macos',
+  Windows: '/docs/download#windows',
+  Linux: '/docs/download#linux',
+};
 
 import styles from './index.module.css';
 
-function HomepageHeader() {
-  const {siteConfig} = useDocusaurusContext();
+function HeroSection() {
   return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
+    <section className={styles.heroSection}>
       <div className="container">
-        <Heading as="h1" className="hero__title">
+        <span className={styles.versionBadge}>
+          <Translate
+            id="homepage.hero.version"
+            description="Version badge text">
+            v2.1.0 Available Now
+          </Translate>
+        </span>
+        <h1 className={styles.heroTitle}>
           <Translate
             id="homepage.hero.title"
             description="The homepage hero title">
-            Your Data, Your Control
+            Your Data, Your Control.
           </Translate>
-        </Heading>
-        <p className="hero__subtitle">
+        </h1>
+        <p className={styles.heroSubtitle}>
           <Translate
             id="homepage.hero.subtitle"
             description="The homepage hero subtitle">
-            Built by indie developer + AI collaboration. Your data, your rules—self-host, work offline, stay secure. Personal tier free forever.
-          </Translate>
-        </p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="https://oatnil.top/ud/login">
-            <Translate
-              id="homepage.hero.tryOnline"
-              description="Try online button text">
-              Try Online
-            </Translate>
-          </Link>
-          <Link
-            className="button button--outline button--lg"
-            to="/docs/self-deployment"
-            style={{marginLeft: '1rem'}}>
-            <Translate
-              id="homepage.hero.selfDeploy"
-              description="Self-deploy button text">
-              Self-Deploy
-            </Translate>
-          </Link>
-        </div>
-        <p className="hero__subtitle" style={{fontSize: '0.9rem', marginTop: '1.5rem', opacity: 0.9}}>
-          <strong>
-            <Translate
-              id="homepage.hero.tryOnlineLabel"
-              description="Try online label">
-              Try Online:
-            </Translate>
-          </strong>{' '}
-          <Translate
-            id="homepage.hero.tryOnlineDesc"
-            description="Try online description">
-            Quick start with a visitor account, no fussing. We will do the best to secure the data, but we respect zero trust—even big companies leak data. For true security, deploy on your own trusted machine.
-          </Translate>
-          <br />
-          <strong>
-            <Translate
-              id="homepage.hero.selfDeployLabel"
-              description="Self-deploy label">
-              Self-Deploy:
-            </Translate>
-          </strong>{' '}
-          <Translate
-            id="homepage.hero.selfDeployDesc"
-            description="Self-deploy description">
-            Complete control. Deploy to your server/internal network. Work offline. Your data never leaves your infrastructure. Personal tier free forever.
+            Built by indie developer + AI. The ultimate secure workspace.
           </Translate>
         </p>
       </div>
-    </header>
+    </section>
+  );
+}
+
+function CardsSection() {
+  const [selectedPlatform, setSelectedPlatform] = useState<Platform>('macOS');
+  const platforms: Platform[] = ['macOS', 'Windows', 'Linux'];
+
+  return (
+    <section className={styles.cardsSection}>
+      <div className="container">
+        <div className={styles.cardsGrid}>
+          {/* Try Online Card */}
+          <div className={styles.card}>
+            <div className={styles.cardHeader}>
+              <span className={styles.cardLabel}>
+                <Translate id="homepage.cards.web.label">WEB</Translate>
+              </span>
+              <div className={styles.cardIcon}>
+                <ExternalLink size={20} strokeWidth={2} />
+              </div>
+            </div>
+            <h3 className={styles.cardTitle}>
+              <Translate id="homepage.cards.web.title">Try Online / Subscribe</Translate>
+            </h3>
+            <p className={styles.cardDescription}>
+              <Translate id="homepage.cards.web.description">
+                Quick start with a visitor account, or subscribe to our hosted service. We will do the best to secure the data, but we respect zero trust—even big companies leak data. For true security, deploy on your own trusted machine.
+              </Translate>
+            </p>
+            <div className={styles.cardButton}>
+              <Link
+                className={styles.cardButtonOutline}
+                to="https://oatnil.top/ud/login">
+                <Translate id="homepage.cards.web.button">Launch Web App</Translate>
+              </Link>
+            </div>
+          </div>
+
+          {/* Download App Card */}
+          <div className={styles.card}>
+            <div className={styles.cardHeader}>
+              <span className={styles.cardLabel}>
+                <Translate id="homepage.cards.desktop.label">DESKTOP APP</Translate>
+              </span>
+              <div className={styles.cardIcon}>
+                <Download size={20} strokeWidth={2} />
+              </div>
+            </div>
+            <h3 className={styles.cardTitle}>
+              <Translate id="homepage.cards.desktop.title">Download App</Translate>
+            </h3>
+            <p className={styles.cardDescription}>
+              <Translate id="homepage.cards.desktop.description">
+                Native performance, totally offline, and system integration. The best way to experience UnderControl. Free forever for personal usage.
+              </Translate>
+            </p>
+            <div className={styles.cardPlatforms}>
+              {platforms.map((platform, index) => (
+                <span key={platform}>
+                  <button
+                    type="button"
+                    className={`${styles.platformButton} ${selectedPlatform === platform ? styles.platformButtonActive : ''}`}
+                    onClick={() => setSelectedPlatform(platform)}>
+                    {platform}
+                  </button>
+                  {index < platforms.length - 1 && <span className={styles.platformSeparator}>·</span>}
+                </span>
+              ))}
+            </div>
+            <div className={styles.cardButton}>
+              <Link
+                className={styles.cardButtonPrimary}
+                to={downloadUrls[selectedPlatform]}>
+                <Translate id="homepage.cards.desktop.button">Download</Translate>
+              </Link>
+            </div>
+          </div>
+
+          {/* Self-Deploy Card */}
+          <div className={styles.card}>
+            <div className={styles.cardHeader}>
+              <span className={styles.cardLabel}>
+                <Translate id="homepage.cards.selfhost.label">SELF-HOST</Translate>
+              </span>
+              <div className={styles.cardIcon}>
+                <Server size={20} strokeWidth={2} />
+              </div>
+            </div>
+            <h3 className={styles.cardTitle}>
+              <Translate id="homepage.cards.selfhost.title">Self-Deploy</Translate>
+            </h3>
+            <p className={styles.cardDescription}>
+              <Translate id="homepage.cards.selfhost.description">
+                Complete control. Deploy to your server/internal network. Work offline. Your data never leaves your infrastructure. Personal tier free forever.
+              </Translate>
+            </p>
+            <div className={styles.cardButton}>
+              <Link
+                className={styles.cardButtonOutline}
+                to="/docs/self-deployment">
+                <Translate id="homepage.cards.selfhost.button">View Docs</Translate>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FeaturesSection() {
+  return (
+    <section className={styles.featuresSection}>
+      <div className="container">
+        <div className={styles.featuresGrid}>
+          <div className={styles.feature}>
+            <div className={styles.featureHeader}>
+              <Lock size={20} strokeWidth={1.5} className={styles.featureIcon} />
+              <span className={styles.featureTitle}>
+                <Translate id="homepage.features.encryption.title">
+                  End-to-End Encryption
+                </Translate>
+              </span>
+            </div>
+            <p className={styles.featureDescription}>
+              <Translate id="homepage.features.encryption.description">
+                AES-256 encryption at rest. Zero-knowledge architecture available for self-hosted instances.
+              </Translate>
+            </p>
+          </div>
+          <div className={styles.feature}>
+            <div className={styles.featureHeader}>
+              <ArrowDownToLine size={20} strokeWidth={1.5} className={styles.featureIcon} />
+              <span className={styles.featureTitle}>
+                <Translate id="homepage.features.export.title">
+                  No Vendor Lock-in
+                </Translate>
+              </span>
+            </div>
+            <p className={styles.featureDescription}>
+              <Translate id="homepage.features.export.description">
+                Export to JSON/Markdown/CSV at any time. Your data structure is open and documented.
+              </Translate>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -95,9 +207,10 @@ export default function Home(): ReactNode {
         message: 'Built by indie developer + AI. Self-host, work offline, deploy to internal network. Your data stays yours. Personal tier free forever. Zero trust, full control.',
         description: 'The homepage meta description',
       })}>
-      <HomepageHeader />
       <main>
-        <HomepageFeatures />
+        <HeroSection />
+        <CardsSection />
+        <FeaturesSection />
       </main>
     </Layout>
   );

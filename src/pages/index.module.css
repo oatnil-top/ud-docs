@@ -1,69 +1,264 @@
 /**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
+ * Flat and Minimal design - Swiss Style inspired
  */
 
-.heroBanner {
-  padding: 4rem 0;
+.heroSection {
+  padding: 4rem 0 3rem;
   text-align: center;
-  position: relative;
-  overflow: hidden;
+  background: var(--ifm-background-color);
 }
 
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
-  }
+.versionBadge {
+  display: inline-block;
+  padding: 0.35rem 1rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 2rem;
+  font-size: 0.8rem;
+  color: var(--ifm-color-emphasis-700);
+  margin-bottom: 1.5rem;
+  font-family: monospace;
 }
 
-.buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
+.heroTitle {
+  font-size: 3.5rem;
+  font-weight: 400;
+  font-style: italic;
+  margin-bottom: 1rem;
+  color: var(--ifm-font-color-base);
+  letter-spacing: -0.02em;
 }
 
-.principlesSection {
+.heroSubtitle {
+  font-size: 1.1rem;
+  color: var(--ifm-color-emphasis-600);
+  margin-bottom: 0;
+}
+
+/* Cards Section */
+.cardsSection {
   padding: 3rem 0;
   border-top: 1px solid var(--ifm-color-emphasis-200);
 }
 
-.principleCard {
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+
+.card {
+  padding: 2rem;
+  border-right: 1px solid var(--ifm-color-emphasis-200);
   display: flex;
+  flex-direction: column;
+  min-height: 280px;
+}
+
+.card:last-child {
+  border-right: none;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
   align-items: flex-start;
-  gap: 0.5rem;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid var(--ifm-color-emphasis-100);
+  margin-bottom: 1.5rem;
 }
 
-.principleCard:last-child {
-  border-bottom: none;
-}
-
-.checkmark {
-  flex-shrink: 0;
-  width: auto;
-  line-height: 1.6;
+.cardLabel {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   color: var(--ifm-color-emphasis-600);
-  font-size: 0.95rem;
-  font-weight: normal;
 }
 
-.principleText {
-  margin: 0;
+.cardIcon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ifm-color-emphasis-900);
+  color: var(--ifm-background-color);
+  border-radius: 6px;
+}
+
+[data-theme='dark'] .cardIcon {
+  background: var(--ifm-color-emphasis-100);
+  color: var(--ifm-color-emphasis-900);
+}
+
+.cardTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--ifm-font-color-base);
+}
+
+.cardDescription {
+  font-size: 0.95rem;
+  color: var(--ifm-color-emphasis-600);
+  line-height: 1.5;
   flex: 1;
-  font-size: 0.95rem;
-  color: var(--ifm-color-emphasis-800);
-  line-height: 1.6;
-  font-weight: normal;
 }
 
+.cardPlatforms {
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-500);
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.platformButton {
+  background: none;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-500);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: color 0.2s, background-color 0.2s;
+}
+
+.platformButton:hover {
+  color: var(--ifm-color-emphasis-800);
+  background-color: var(--ifm-color-emphasis-100);
+}
+
+.platformButtonActive {
+  color: var(--ifm-color-emphasis-900);
+  background-color: var(--ifm-color-emphasis-200);
+  font-weight: 500;
+}
+
+.platformSeparator {
+  color: var(--ifm-color-emphasis-400);
+}
+
+.cardButton {
+  margin-top: 1.5rem;
+  align-self: flex-start;
+}
+
+.cardButtonPrimary {
+  display: inline-block;
+  padding: 0.6rem 1.5rem;
+  background: var(--ifm-color-emphasis-900);
+  color: var(--ifm-background-color);
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.cardButtonPrimary:hover {
+  opacity: 0.85;
+  color: var(--ifm-background-color);
+  text-decoration: none;
+}
+
+[data-theme='dark'] .cardButtonPrimary {
+  background: var(--ifm-color-emphasis-100);
+  color: var(--ifm-color-emphasis-900);
+}
+
+.cardButtonOutline {
+  display: inline-block;
+  padding: 0.6rem 1.5rem;
+  background: transparent;
+  color: var(--ifm-font-color-base);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: border-color 0.2s;
+}
+
+.cardButtonOutline:hover {
+  border-color: var(--ifm-color-emphasis-500);
+  color: var(--ifm-font-color-base);
+  text-decoration: none;
+}
+
+/* Features Section */
+.featuresSection {
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+}
+
+.feature {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.feature:first-child {
+  border-right: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.featureHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.featureIcon {
+  color: var(--ifm-color-emphasis-700);
+}
+
+.featureTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ifm-font-color-base);
+}
+
+.featureDescription {
+  font-size: 0.9rem;
+  color: var(--ifm-color-emphasis-600);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Responsive */
 @media screen and (max-width: 996px) {
-  .principlesSection {
-    padding: 2rem 0;
+  .heroSection {
+    padding: 3rem 1rem 2rem;
   }
 
-  .principleCard {
-    padding: 0.5rem 0;
+  .heroTitle {
+    font-size: 2.5rem;
+  }
+
+  .cardsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    border-right: none;
+    border-bottom: 1px solid var(--ifm-color-emphasis-200);
+    min-height: auto;
+  }
+
+  .card:last-child {
+    border-bottom: none;
+  }
+
+  .featuresGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .feature:first-child {
+    border-right: none;
+    border-bottom: 1px solid var(--ifm-color-emphasis-200);
   }
 }

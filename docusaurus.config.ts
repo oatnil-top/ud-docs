@@ -7,7 +7,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 const config: Config = {
   title: 'UnderControl',
   tagline: 'Personal budget and expense management',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.svg',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
@@ -82,10 +82,12 @@ const config: Config = {
   ],
 
   themeConfig: {
-    // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
     navbar: {
       title: 'UnderControl',
+      logo: {
+        alt: 'UnderControl Logo',
+        src: 'img/favicon.svg',
+      },
       items: [
         {
           type: 'docSidebar',
