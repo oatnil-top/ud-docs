@@ -1,21 +1,25 @@
-import {useState, type ReactNode} from 'react';
+import {useState, useRef, useEffect, type ReactNode} from 'react';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import Translate, {translate} from '@docusaurus/Translate';
-import {ExternalLink, Download, Server, Lock, ArrowDownToLine} from 'lucide-react';
+import {ExternalLink, Download, Server, Lock, ArrowDownToLine, ChevronDown} from 'lucide-react';
 
 type Platform = 'macOS (Apple Silicon)' | 'macOS (Intel)' | 'Windows' | 'Linux';
 
-const RELEASE_VERSION = '0.1.3';
+const AVAILABLE_VERSIONS = ['0.1.3', '0.1.2', '0.1.1'];
+const LATEST_VERSION = AVAILABLE_VERSIONS[0];
 const R2_BASE_URL = 'https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/releases';
 
-const downloadUrls: Record<Platform, string> = {
-  'macOS (Apple Silicon)': `${R2_BASE_URL}/${RELEASE_VERSION}/undercontrol-desktop-${RELEASE_VERSION}-arm64.dmg`,
-  'macOS (Intel)': `${R2_BASE_URL}/${RELEASE_VERSION}/undercontrol-desktop-${RELEASE_VERSION}-x64.dmg`,
-  Windows: `${R2_BASE_URL}/${RELEASE_VERSION}/undercontrol-desktop-${RELEASE_VERSION}-setup.exe`,
-  Linux: `${R2_BASE_URL}/${RELEASE_VERSION}/undercontrol-desktop-${RELEASE_VERSION}.AppImage`,
-};
+function getDownloadUrl(platform: Platform, version: string): string {
+  const fileNames: Record<Platform, string> = {
+    'macOS (Apple Silicon)': `undercontrol-desktop-${version}-arm64.dmg`,
+    'macOS (Intel)': `undercontrol-desktop-${version}-x64.dmg`,
+    Windows: `undercontrol-desktop-${version}-setup.exe`,
+    Linux: `undercontrol-desktop-${version}.AppImage`,
+  };
+  return `${R2_BASE_URL}/${version}/${fileNames[platform]}`;
+}
 
 import styles from './index.module.css';
 
@@ -51,7 +55,30 @@ function HeroSection() {
 
 function CardsSection() {
   const [selectedPlatform, setSelectedPlatform] = useState<Platform>('macOS (Apple Silicon)');
+  const [showVersionDropdown, setShowVersionDropdown] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const platforms: Platform[] = ['macOS (Apple Silicon)', 'macOS (Intel)', 'Windows', 'Linux'];
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setShowVersionDropdown(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const handleDownloadClick = () => {
+    setShowVersionDropdown(!showVersionDropdown);
+  };
+
+  const handleVersionSelect = (version: string) => {
+    const url = getDownloadUrl(selectedPlatform, version);
+    window.location.href = url;
+    setShowVersionDropdown(false);
+  };
 
   return (
     <section className={styles.cardsSection}>
@@ -114,11 +141,31 @@ function CardsSection() {
               ))}
             </div>
             <div className={styles.cardButton}>
-              <Link
-                className={styles.cardButtonPrimary}
-                to={downloadUrls[selectedPlatform]}>
-                <Translate id="homepage.cards.desktop.button">Download</Translate>
-              </Link>
+              <div className={styles.downloadDropdown} ref={dropdownRef}>
+                <button
+                  type="button"
+                  className={styles.downloadButton}
+                  onClick={handleDownloadClick}>
+                  <Translate id="homepage.cards.desktop.button">Download</Translate>
+                  <ChevronDown size={16} strokeWidth={2} />
+                </button>
+                {showVersionDropdown && (
+                  <div className={styles.versionDropdown}>
+                    {AVAILABLE_VERSIONS.map((version) => (
+                      <button
+                        key={version}
+                        type="button"
+                        className={styles.versionOption}
+                        onClick={() => handleVersionSelect(version)}>
+                        v{version}
+                        {version === LATEST_VERSION && (
+                          <span className={styles.latestBadge}>Latest</span>
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 
