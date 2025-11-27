@@ -76,61 +76,23 @@ print_success "✓ Created deployment directory: $DEPLOYMENT_DIR"
 JWT_SECRET=$(openssl rand -base64 32)
 print_success "✓ Generated JWT secret"
 
-# Create .env file
-cat > "$DEPLOYMENT_DIR/.env" << 'EOF'
-# UnderControl Configuration
-
-# Security (REQUIRED)
-EOF
-echo "JWT_SECRET=$JWT_SECRET" >> "$DEPLOYMENT_DIR/.env"
-cat >> "$DEPLOYMENT_DIR/.env" << 'EOF'
-
-# License (Optional - only for Pro/Max tiers)
-# LICENSE=your-license-key-here
-
-# Data Directory
-UD_DATA_PATH=/app/data
-
-# Admin User (Optional - defaults shown)
-# ADMIN_EMAIL=admin@example.com
-# ADMIN_PASSWORD=admin123
-
-# Database (Optional - uses SQLite by default)
-# DATABASE_URL=postgresql://user:password@localhost:5432/undercontrol
-
-# S3 Storage (Optional)
-# S3_ENDPOINT=https://s3.amazonaws.com
-# S3_BUCKET=undercontrol-uploads
-# S3_ACCESS_KEY=your_access_key
-# S3_SECRET_KEY=your_secret_key
-
-# OpenAI Integration (Optional)
-# OPENAI_API_KEY=sk-...
-
-# CORS (Optional)
-# ALLOWED_ORIGINS=http://localhost:3000,https://yourdomain.com
-
-# Monitoring (Optional)
-# ENABLE_METRICS=false
-# ENABLE_TRACING=false
-EOF
-
-print_success "✓ Created .env configuration file"
-
-# Create docker-compose.yml
-cat > "$DEPLOYMENT_DIR/docker-compose.yml" << 'EOF'
-version: '3.8'
-
+# Create docker-compose.yml with entrypoint
+cat > "$DEPLOYMENT_DIR/docker-compose.yml" << EOF
 services:
   backend:
     image: lintao0o0/undercontrol-backend:latest
-    container_name: undercontrol-backend
     ports:
       - "8080:8080"
-    environment:
-      - PORT=8080
-    env_file:
-      - .env
+    entrypoint:
+      - /usr/local/bin/undercontrol-backend
+      - --port=8080
+      - --environment=production
+      - --data-path=/app/data
+      - --database-type=sqlite
+      - --jwt-secret=$JWT_SECRET
+      - --s3-enabled=false
+      - --otel-enabled=false
+      - --cors-allowed-origins=http://localhost:3000
     restart: unless-stopped
     deploy:
       resources:
@@ -151,7 +113,6 @@ services:
 
   frontend:
     image: lintao0o0/ud-vite-app:latest
-    container_name: undercontrol-frontend
     ports:
       - "3000:80"
     depends_on:
@@ -206,7 +167,7 @@ echo "  Web UI:  http://localhost:3000"
 echo "  API:     http://localhost:8080"
 echo ""
 print_info "Default login credentials:"
-echo "  Email:    admin@example.com"
+echo "  Email:    admin@oatnil.com"
 echo "  Password: admin123"
 echo ""
 print_info "Useful commands:"

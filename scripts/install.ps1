@@ -75,62 +75,23 @@ $jwtSecret = [Convert]::ToBase64String($bytes)
 $rng.Dispose()
 Write-Success "✓ Generated JWT secret"
 
-# Create .env file
-$envContent = @"
-# UnderControl Configuration
-
-# Security (REQUIRED)
-JWT_SECRET=$jwtSecret
-
-# License (Optional - only for Pro/Max tiers)
-# LICENSE=your-license-key-here
-
-# Data Directory
-UD_DATA_PATH=/app/data
-
-# Admin User (Optional - defaults shown)
-# ADMIN_EMAIL=admin@example.com
-# ADMIN_PASSWORD=admin123
-
-# Database (Optional - uses SQLite by default)
-# DATABASE_URL=postgresql://user:password@localhost:5432/undercontrol
-
-# S3 Storage (Optional)
-S3_ENABLED=false
-# S3_ENDPOINT=https://s3.amazonaws.com
-# S3_BUCKET=undercontrol-uploads
-# S3_ACCESS_KEY=your_access_key
-# S3_SECRET_KEY=your_secret_key
-
-# OpenAI Integration (Optional)
-# OPENAI_API_KEY=sk-...
-
-# CORS (Optional)
-# ALLOWED_ORIGINS=http://localhost:3000,https://yourdomain.com
-
-# Monitoring (Optional)
-OTEL_ENABLED=false
-# ENABLE_METRICS=false
-# ENABLE_TRACING=false
-"@
-
-Set-Content -Path "$deploymentDir\.env" -Value $envContent -NoNewline
-Write-Success "✓ Created .env configuration file"
-
-# Create docker-compose.yml
+# Create docker-compose.yml with entrypoint
 $composeContent = @"
-version: '3.8'
-
 services:
   backend:
     image: lintao0o0/undercontrol-backend:latest
-    container_name: undercontrol-backend
     ports:
       - "8080:8080"
-    environment:
-      - PORT=8080
-    env_file:
-      - .env
+    entrypoint:
+      - /usr/local/bin/undercontrol-backend
+      - --port=8080
+      - --environment=production
+      - --data-path=/app/data
+      - --database-type=sqlite
+      - --jwt-secret=$jwtSecret
+      - --s3-enabled=false
+      - --otel-enabled=false
+      - --cors-allowed-origins=http://localhost:3000
     restart: unless-stopped
     deploy:
       resources:
@@ -151,7 +112,6 @@ services:
 
   frontend:
     image: lintao0o0/ud-vite-app:latest
-    container_name: undercontrol-frontend
     ports:
       - "3000:80"
     depends_on:
@@ -216,7 +176,7 @@ Write-Host "  Web UI:  " -NoNewline; Write-Success "http://localhost:3000"
 Write-Host "  API:     " -NoNewline; Write-Success "http://localhost:8080"
 Write-Host ""
 Write-Info "Default login credentials:"
-Write-Host "  Email:    " -NoNewline; Write-Success "admin@example.com"
+Write-Host "  Email:    " -NoNewline; Write-Success "admin@oatnil.com"
 Write-Host "  Password: " -NoNewline; Write-Success "admin123"
 Write-Host ""
 Write-Info "Useful commands:"

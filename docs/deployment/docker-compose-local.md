@@ -97,77 +97,29 @@ After completing all setup steps, your directory structure should look like this
 
 ```
 undercontrol-deployment/
-├── .env                    # Environment configuration
 └── docker-compose.yml      # Docker services definition
 ```
 
-### 2. Create Configuration File
-
-Create a `.env` file with the following content:
-
-```bash
-# JWT Authentication (REQUIRED - Change this!)
-JWT_SECRET=your-super-secret-jwt-key-change-this
-
-# Admin User Configuration (Optional - Override defaults)
-# ADMIN_USERNAME=admin@oatnil.com
-# ADMIN_PASSWORD=admin123
-
-# License (Optional - only for Pro/Max tiers)
-# LICENSE=your-license-key-here
-
-# Storage Configuration
-S3_ENABLED="false"
-
-# Monitoring (Disabled by default)
-OTEL_ENABLED="false"
-
-# Optional: OpenAI Integration
-# OPENAI_BASE_URL=https://api.openai.com/v1
-# OPENAI_API_KEY=your-openai-api-key
-# OPENAI_MODEL=gpt-4o-mini
-
-# CORS Configuration (default to http://localhost:8080)
-# CORS_ALLOWED_ORIGINS=http://localhost:8080
-```
-
-:::danger Security Warning
-**You MUST change the `JWT_SECRET`** to a random, secure value:
-
-**Linux/macOS/WSL:**
-```bash
-openssl rand -base64 32
-```
-
-**Windows PowerShell:**
-```powershell
-[Convert]::ToBase64String((1..32 | ForEach-Object { Get-Random -Maximum 256 }))
-```
-:::
-
-:::info Free Personal Tier
-UnderControl starts with a **free Personal tier** - no license required! Perfect for individual use with 1 user and all core features included (SQLite database, local storage).
-
-Want team features, cloud storage, or PostgreSQL? Upgrade to [Pro or Max](/docs/subscription-tiers) and add your license key to the `.env` file.
-:::
-
-### 3. Create docker-compose.yml
+### 2. Create docker-compose.yml
 
 Create a `docker-compose.yml` file:
 
 ```yaml
-version: '3.8'
-
 services:
   backend:
     image: lintao0o0/undercontrol-backend:latest
-    container_name: undercontrol-backend
     ports:
       - "8080:8080"
-    environment:
-      - PORT=8080
-    env_file:
-      - .env
+    entrypoint:
+      - /usr/local/bin/undercontrol-backend
+      - --port=8080
+      - --environment=production
+      - --data-path=/app/data
+      - --database-type=sqlite
+      - --jwt-secret=your-super-secret-jwt-key-change-this
+      - --s3-enabled=false
+      - --otel-enabled=false
+      - --cors-allowed-origins=http://localhost:23773
     restart: unless-stopped
     deploy:
       resources:
@@ -188,9 +140,8 @@ services:
 
   frontend:
     image: lintao0o0/ud-vite-app:latest
-    container_name: undercontrol-frontend
     ports:
-      - "3000:80"
+      - "23773:80"
     depends_on:
       - backend
     restart: unless-stopped
@@ -209,7 +160,31 @@ volumes:
     driver: local
 ```
 
-### 4. Start the Services
+:::danger Security Warning
+**You MUST change the `--jwt-secret`** to a random, secure value:
+
+**Linux/macOS/WSL:**
+```bash
+openssl rand -base64 32
+```
+
+**Windows PowerShell:**
+```powershell
+[Convert]::ToBase64String((1..32 | ForEach-Object { Get-Random -Maximum 256 }))
+```
+:::
+
+:::info Free Personal Tier
+UnderControl starts with a **free Personal tier** - no license required! Perfect for individual use with 1 user and all core features included (SQLite database, local storage).
+
+Want team features, cloud storage, or PostgreSQL? Upgrade to [Pro or Max](/docs/subscription-tiers) and add your license key using `--license-token=your-key`.
+:::
+
+:::tip All Configuration Options
+See the [Configuration Guide](./environment-variables.md) for all available CLI flags and options.
+:::
+
+### 3. Start the Services
 
 ```bash
 docker compose up -d
@@ -225,27 +200,37 @@ You should see two running containers:
 - `undercontrol-backend`
 - `undercontrol-frontend`
 
-### 5. Access the Application
+### 4. Access the Application
 
-- **Web Application**: http://localhost:3000
+- **Web Application**: http://localhost:23773
 - **API Endpoint**: http://localhost:8080
 
 ## Configuration Reference
 
-For a complete list of all available environment variables, see the [Environment Variables Reference](./environment-variables.md).
+For a complete list of all available options, see the [Configuration Guide](./environment-variables.md).
 
-### Essential Environment Variables
+### CLI Flags Used in This Deployment
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `JWT_SECRET` | JWT token signing key (REQUIRED) | - |
-| `LICENSE` | License key for Pro/Max tiers (optional) | None (Personal tier) |
-| `ADMIN_USERNAME` | Admin username (override default) | `admin@oatnil.com` |
-| `ADMIN_PASSWORD` | Admin password (override default) | `admin123` |
-| `UD_DATA_PATH` | Database and file storage path | `/data` |
-| `GIN_MODE` | Framework mode | `release` |
-| `CORS_ALLOWED_ORIGINS` | Allowed CORS origins | `http://localhost:3000` |
-| `S3_ENABLED` | Enable S3 storage | `false` |
+| Flag | Description | Value |
+|------|-------------|-------|
+| `--port` | HTTP server port | `8080` |
+| `--environment` | Application environment | `production` |
+| `--data-path` | Database and file storage path | `/app/data` |
+| `--database-type` | Database type | `sqlite` |
+| `--jwt-secret` | JWT token signing key | **Change this!** |
+| `--s3-enabled` | Enable S3 storage | `false` |
+| `--otel-enabled` | Enable OpenTelemetry | `false` |
+| `--cors-allowed-origins` | Allowed CORS origins | `http://localhost:3000` |
+
+### Optional CLI Flags
+
+| Flag | Description | Default |
+|------|-------------|---------|
+| `--admin-username` | Admin username | `admin@oatnil.com` |
+| `--admin-password` | Admin password | `admin123` |
+| `--license-token` | License key for Pro/Max tiers | - |
+| `--openai-api-key` | OpenAI API key for AI features | - |
+| `--openai-model` | OpenAI model name | `gpt-3.5-turbo` |
 
 ### Default Admin Account
 
