@@ -102,6 +102,17 @@
   flex: 1;
 }
 
+.cardNote {
+  font-size: 0.8rem;
+  color: var(--ifm-color-emphasis-500);
+  line-height: 1.4;
+  margin: 0;
+  font-family: monospace;
+  background: var(--ifm-color-emphasis-100);
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+}
+
 .cardButton {
   margin-top: 1.5rem;
   align-self: flex-start;
@@ -126,6 +137,8 @@
   font-weight: 500;
   cursor: pointer;
   transition: opacity 0.2s;
+  height: 40px;
+  box-sizing: border-box;
 }
 
 .downloadButton:hover {
@@ -173,7 +186,9 @@
 }
 
 .cardButtonPrimary {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 0.6rem 1.5rem;
   background: var(--ifm-color-emphasis-900);
   color: var(--ifm-background-color);
@@ -182,6 +197,8 @@
   font-weight: 500;
   text-decoration: none;
   transition: opacity 0.2s;
+  height: 40px;
+  box-sizing: border-box;
 }
 
 .cardButtonPrimary:hover {
@@ -196,7 +213,9 @@
 }
 
 .cardButtonOutline {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 0.6rem 1.5rem;
   background: transparent;
   color: var(--ifm-font-color-base);
@@ -206,6 +225,8 @@
   font-weight: 500;
   text-decoration: none;
   transition: border-color 0.2s;
+  height: 40px;
+  box-sizing: border-box;
 }
 
 .cardButtonOutline:hover {

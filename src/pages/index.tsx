@@ -128,6 +128,11 @@ function CardsSection() {
                 Native performance, totally offline, and system integration. The best way to experience UnderControl. Free forever for personal usage.
               </Translate>
             </p>
+            <p className={styles.cardNote}>
+              <Translate id="homepage.cards.desktop.note">
+                macOS: Run "xattr -cr /Applications/UnderControl.app" in Terminal to enable unsigned app.
+              </Translate>
+            </p>
             <div className={styles.cardButton}>
               <div className={styles.downloadDropdown} ref={dropdownRef}>
                 <button
