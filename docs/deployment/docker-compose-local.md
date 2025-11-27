@@ -119,7 +119,7 @@ services:
       - --jwt-secret=your-super-secret-jwt-key-change-this
       - --s3-enabled=false
       - --otel-enabled=false
-      - --cors-allowed-origins=http://localhost:23773
+      - --cors-allowed-origins=*
     restart: unless-stopped
     deploy:
       resources:
@@ -226,24 +226,9 @@ For a complete list of all available options, see the [Configuration Guide](./en
 
 | Flag | Description | Default |
 |------|-------------|---------|
-| `--admin-username` | Admin username | `admin@oatnil.com` |
-| `--admin-password` | Admin password | `admin123` |
 | `--license-token` | License key for Pro/Max tiers | - |
 | `--openai-api-key` | OpenAI API key for AI features | - |
 | `--openai-model` | OpenAI model name | `gpt-3.5-turbo` |
-
-### Default Admin Account
-
-An admin account is automatically created on first startup with these credentials:
-
-| Field | Value |
-|-------|-------|
-| Username | `admin@oatnil.com` |
-| Password | `admin123` |
-
-:::warning Security Notice
-**Change the default password immediately** after your first login for security. You can override these defaults by setting `ADMIN_USERNAME` and `ADMIN_PASSWORD` in your `.env` file before the first startup.
-:::
 
 ## Troubleshooting
 
@@ -257,23 +242,23 @@ docker compose logs
 ```
 
 Common issues:
-- Port conflicts (3000 or 8080 already in use)
-- Invalid or missing `JWT_SECRET`
+- Port conflicts (23773 or 8080 already in use)
+- Invalid or missing `--jwt-secret`
 - CORS configuration mismatch
 
 ### Cannot Access Application
 
 1. Verify containers are running: `docker compose ps`
 2. Check if ports are accessible: `curl http://localhost:8080/health`
-3. Verify CORS settings in `.env` match your frontend URL
+3. Verify `--cors-allowed-origins` matches your frontend URL
 4. Check browser console for CORS errors
 
 ### CORS Errors
 
 If you see CORS errors in the browser console:
 
-1. Verify `CORS_ALLOWED_ORIGINS` in `.env` matches your frontend URL
-2. If using a different port, update the environment variable
+1. Verify `--cors-allowed-origins` in docker-compose.yml matches your frontend URL
+2. If using a different port, update the entrypoint flag
 3. Restart the backend after changing CORS settings: `docker compose restart backend`
 
 ### Database Issues

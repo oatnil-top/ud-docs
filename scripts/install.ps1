@@ -91,7 +91,7 @@ services:
       - --jwt-secret=$jwtSecret
       - --s3-enabled=false
       - --otel-enabled=false
-      - --cors-allowed-origins=http://localhost:3000
+      - --cors-allowed-origins=*
     restart: unless-stopped
     deploy:
       resources:
@@ -113,7 +113,7 @@ services:
   frontend:
     image: lintao0o0/ud-vite-app:latest
     ports:
-      - "3000:80"
+      - "23773:80"
     depends_on:
       - backend
     restart: unless-stopped
@@ -172,12 +172,8 @@ Write-Success "  UnderControl Installation Complete!"
 Write-Success "========================================="
 Write-Host ""
 Write-Info "Access your UnderControl instance at:"
-Write-Host "  Web UI:  " -NoNewline; Write-Success "http://localhost:3000"
+Write-Host "  Web UI:  " -NoNewline; Write-Success "http://localhost:23773"
 Write-Host "  API:     " -NoNewline; Write-Success "http://localhost:8080"
-Write-Host ""
-Write-Info "Default login credentials:"
-Write-Host "  Email:    " -NoNewline; Write-Success "admin@oatnil.com"
-Write-Host "  Password: " -NoNewline; Write-Success "admin123"
 Write-Host ""
 Write-Info "Useful commands:"
 Write-Host "  View logs:       docker compose -f $deploymentDir\docker-compose.yml logs -f"
