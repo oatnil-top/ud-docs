@@ -7,7 +7,7 @@ import {ExternalLink, Download, Server, Lock, ArrowDownToLine, ChevronDown} from
 
 type Platform = 'macOS (Apple Silicon)' | 'macOS (Intel)' | 'Windows' | 'Linux';
 
-const AVAILABLE_VERSIONS = ['0.1.3', '0.1.2', '0.1.1'];
+const AVAILABLE_VERSIONS = ['0.1.4', '0.1.3', '0.1.2', '0.1.1'];
 const LATEST_VERSION = AVAILABLE_VERSIONS[0];
 const R2_BASE_URL = 'https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/releases';
 
