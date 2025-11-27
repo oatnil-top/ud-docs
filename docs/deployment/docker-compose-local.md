@@ -4,7 +4,7 @@ sidebar_position: 1
 # Any changes to the docker-compose configuration must be reflected in both files
 ---
 
-# Docker Compose: Local Storage + SQLite
+# Docker Compose: Free Personal
 
 Simple deployment using Docker Compose with local filesystem storage and SQLite database. Perfect for getting started, development, and small production deployments.
 
@@ -181,7 +181,7 @@ Want team features, cloud storage, or PostgreSQL? Upgrade to [Pro or Max](/docs/
 :::
 
 :::tip All Configuration Options
-See the [Configuration Guide](./environment-variables.md) for all available CLI flags and options.
+See the [Configuration Guide](./backend-config.md) for all available CLI flags and options.
 :::
 
 ### 3. Start the Services
@@ -207,7 +207,7 @@ You should see two running containers:
 
 ## Configuration Reference
 
-For a complete list of all available options, see the [Configuration Guide](./environment-variables.md).
+For a complete list of all available options, see the [Configuration Guide](./backend-config.md).
 
 ### CLI Flags Used in This Deployment
 

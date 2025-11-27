@@ -236,7 +236,7 @@ docker compose ps
 
 ## 配置参考
 
-有关所有可用环境变量的完整列表，请参阅[环境变量参考](./environment-variables.md)。
+有关所有可用环境变量的完整列表，请参阅[后端配置参考](./backend-config.md)。
 
 ### 基本环境变量
 
