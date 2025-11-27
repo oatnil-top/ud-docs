@@ -54,8 +54,7 @@ function HeroSection() {
 }
 
 function CardsSection() {
-  const [selectedPlatform, setSelectedPlatform] = useState<Platform>('macOS (Apple Silicon)');
-  const [showVersionDropdown, setShowVersionDropdown] = useState(false);
+  const [showPlatformDropdown, setShowPlatformDropdown] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const platforms: Platform[] = ['macOS (Apple Silicon)', 'macOS (Intel)', 'Windows', 'Linux'];
 
@@ -63,7 +62,7 @@ function CardsSection() {
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setShowVersionDropdown(false);
+        setShowPlatformDropdown(false);
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
@@ -71,13 +70,13 @@ function CardsSection() {
   }, []);
 
   const handleDownloadClick = () => {
-    setShowVersionDropdown(!showVersionDropdown);
+    setShowPlatformDropdown(!showPlatformDropdown);
   };
 
-  const handleVersionSelect = (version: string) => {
-    const url = getDownloadUrl(selectedPlatform, version);
+  const handlePlatformSelect = (platform: Platform) => {
+    const url = getDownloadUrl(platform, LATEST_VERSION);
     window.location.href = url;
-    setShowVersionDropdown(false);
+    setShowPlatformDropdown(false);
   };
 
   return (
@@ -129,17 +128,6 @@ function CardsSection() {
                 Native performance, totally offline, and system integration. The best way to experience UnderControl. Free forever for personal usage.
               </Translate>
             </p>
-            <div className={styles.cardPlatforms}>
-              {platforms.map((platform) => (
-                <button
-                  key={platform}
-                  type="button"
-                  className={`${styles.platformButton} ${selectedPlatform === platform ? styles.platformButtonActive : ''}`}
-                  onClick={() => setSelectedPlatform(platform)}>
-                  {platform}
-                </button>
-              ))}
-            </div>
             <div className={styles.cardButton}>
               <div className={styles.downloadDropdown} ref={dropdownRef}>
                 <button
@@ -149,18 +137,15 @@ function CardsSection() {
                   <Translate id="homepage.cards.desktop.button">Download</Translate>
                   <ChevronDown size={16} strokeWidth={2} />
                 </button>
-                {showVersionDropdown && (
-                  <div className={styles.versionDropdown}>
-                    {AVAILABLE_VERSIONS.map((version) => (
+                {showPlatformDropdown && (
+                  <div className={styles.platformDropdown}>
+                    {platforms.map((platform) => (
                       <button
-                        key={version}
+                        key={platform}
                         type="button"
-                        className={styles.versionOption}
-                        onClick={() => handleVersionSelect(version)}>
-                        v{version}
-                        {version === LATEST_VERSION && (
-                          <span className={styles.latestBadge}>Latest</span>
-                        )}
+                        className={styles.platformOption}
+                        onClick={() => handlePlatformSelect(platform)}>
+                        {platform}
                       </button>
                     ))}
                   </div>

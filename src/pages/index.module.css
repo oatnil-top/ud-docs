@@ -102,41 +102,6 @@
   flex: 1;
 }
 
-.cardPlatforms {
-  font-size: 0.85rem;
-  color: var(--ifm-color-emphasis-500);
-  margin-top: 0.5rem;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.platformButton {
-  background: none;
-  border: 1px solid var(--ifm-color-emphasis-200);
-  padding: 0.35rem 0.75rem;
-  font-size: 0.8rem;
-  color: var(--ifm-color-emphasis-600);
-  cursor: pointer;
-  border-radius: 4px;
-  transition: color 0.2s, background-color 0.2s, border-color 0.2s;
-  white-space: nowrap;
-}
-
-.platformButton:hover {
-  color: var(--ifm-color-emphasis-800);
-  background-color: var(--ifm-color-emphasis-100);
-  border-color: var(--ifm-color-emphasis-300);
-}
-
-.platformButtonActive {
-  color: var(--ifm-color-emphasis-900);
-  background-color: var(--ifm-color-emphasis-200);
-  border-color: var(--ifm-color-emphasis-400);
-  font-weight: 500;
-}
-
 .cardButton {
   margin-top: 1.5rem;
   align-self: flex-start;
@@ -172,7 +137,7 @@
   color: var(--ifm-color-emphasis-900);
 }
 
-.versionDropdown {
+.platformDropdown {
   position: absolute;
   top: 100%;
   left: 0;
@@ -181,15 +146,13 @@
   border: 1px solid var(--ifm-color-emphasis-200);
   border-radius: 4px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  min-width: 150px;
+  min-width: 180px;
   z-index: 100;
   overflow: hidden;
 }
 
-.versionOption {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.platformOption {
+  display: block;
   width: 100%;
   padding: 0.6rem 1rem;
   background: none;
@@ -201,21 +164,12 @@
   text-align: left;
 }
 
-.versionOption:hover {
+.platformOption:hover {
   background-color: var(--ifm-color-emphasis-100);
 }
 
-.versionOption:not(:last-child) {
+.platformOption:not(:last-child) {
   border-bottom: 1px solid var(--ifm-color-emphasis-100);
-}
-
-.latestBadge {
-  font-size: 0.7rem;
-  padding: 0.15rem 0.4rem;
-  background: var(--ifm-color-success-contrast-background);
-  color: var(--ifm-color-success);
-  border-radius: 3px;
-  font-weight: 500;
 }
 
 .cardButtonPrimary {
