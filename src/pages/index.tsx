@@ -103,16 +103,14 @@ function CardsSection() {
               </Translate>
             </p>
             <div className={styles.cardPlatforms}>
-              {platforms.map((platform, index) => (
-                <span key={platform}>
-                  <button
-                    type="button"
-                    className={`${styles.platformButton} ${selectedPlatform === platform ? styles.platformButtonActive : ''}`}
-                    onClick={() => setSelectedPlatform(platform)}>
-                    {platform}
-                  </button>
-                  {index < platforms.length - 1 && <span className={styles.platformSeparator}>·</span>}
-                </span>
+              {platforms.map((platform) => (
+                <button
+                  key={platform}
+                  type="button"
+                  className={`${styles.platformButton} ${selectedPlatform === platform ? styles.platformButtonActive : ''}`}
+                  onClick={() => setSelectedPlatform(platform)}>
+                  {platform}
+                </button>
               ))}
             </div>
             <div className={styles.cardButton}>
