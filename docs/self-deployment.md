@@ -5,13 +5,8 @@ sidebar_position: 2
 # Self-Deployment Guide
 
 :::info Quick Start
-UnderControl starts with a **free Personal tier** - no license required! Perfect for individual use with 1 user and all core features included (SQLite database, local storage).
-
-Want team features, cloud storage, or PostgreSQL? Upgrade to [Pro or Max](/docs/subscription-tiers) and add your license key using `--license-token=your-key`.
+Want to get started immediately? Jump to [Docker Compose with Local Storage + SQLite](/docs/deployment/docker-compose-local) - the simplest self-deployment option.
 :::
-**Quick Start**: Want to get started immediately? Jump to [Docker Compose with Local Storage + SQLite](/docs/deployment/docker-compose-local) - the simplest self-deployment option.
-
----
 
 Choose your deployment method based on your infrastructure and requirements.
 
