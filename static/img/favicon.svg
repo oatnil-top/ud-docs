@@ -1,10 +1,10 @@
 <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <!-- Background: Technical Black Squircle -->
-    <rect width="64" height="64" rx="16" fill="#111111"/>
-    
+    <!-- Background: Vibrant Blue Squircle -->
+    <rect width="64" height="64" rx="16" fill="#6366f1"/>
+
     <!-- The "U" Container -->
-    <path d="M20 20V40C20 46.6274 25.3726 52 32 52C38.6274 52 44 46.6274 44 40V20" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-    
+    <path d="M20 20V40C20 46.6274 25.3726 52 32 52C38.6274 52 44 46.6274 44 40V20" stroke="#ffffff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+
     <!-- The "Control" Dot (Data Point) -->
-    <circle cx="32" cy="34" r="4" fill="white"/>
+    <circle cx="32" cy="34" r="4" fill="#ffffff"/>
 </svg>
