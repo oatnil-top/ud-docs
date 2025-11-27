@@ -5,12 +5,16 @@ import Layout from '@theme/Layout';
 import Translate, {translate} from '@docusaurus/Translate';
 import {ExternalLink, Download, Server, Lock, ArrowDownToLine} from 'lucide-react';
 
-type Platform = 'macOS' | 'Windows' | 'Linux';
+type Platform = 'macOS (Apple Silicon)' | 'macOS (Intel)' | 'Windows' | 'Linux';
+
+const RELEASE_VERSION = '0.1.3';
+const R2_BASE_URL = 'https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/releases';
 
 const downloadUrls: Record<Platform, string> = {
-  macOS: '/docs/download#macos',
-  Windows: '/docs/download#windows',
-  Linux: '/docs/download#linux',
+  'macOS (Apple Silicon)': `${R2_BASE_URL}/${RELEASE_VERSION}/undercontrol-desktop-${RELEASE_VERSION}-arm64.dmg`,
+  'macOS (Intel)': `${R2_BASE_URL}/${RELEASE_VERSION}/undercontrol-desktop-${RELEASE_VERSION}-x64.dmg`,
+  Windows: `${R2_BASE_URL}/${RELEASE_VERSION}/undercontrol-desktop-${RELEASE_VERSION}-setup.exe`,
+  Linux: `${R2_BASE_URL}/${RELEASE_VERSION}/undercontrol-desktop-${RELEASE_VERSION}.AppImage`,
 };
 
 import styles from './index.module.css';
@@ -46,8 +50,8 @@ function HeroSection() {
 }
 
 function CardsSection() {
-  const [selectedPlatform, setSelectedPlatform] = useState<Platform>('macOS');
-  const platforms: Platform[] = ['macOS', 'Windows', 'Linux'];
+  const [selectedPlatform, setSelectedPlatform] = useState<Platform>('macOS (Apple Silicon)');
+  const platforms: Platform[] = ['macOS (Apple Silicon)', 'macOS (Intel)', 'Windows', 'Linux'];
 
   return (
     <section className={styles.cardsSection}>
