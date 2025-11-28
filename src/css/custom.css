@@ -143,3 +143,8 @@ a:hover {
 .menu a:hover {
   text-decoration: none;
 }
+
+/* Hide Docusaurus default footer */
+.footer {
+  display: none;
+}
