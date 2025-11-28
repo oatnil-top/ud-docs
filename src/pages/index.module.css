@@ -32,8 +32,8 @@
   background-image: url('/img/showcase.png');
   background-size: cover;
   background-position: center;
-  filter: blur(8px);
-  opacity: 0.15;
+  filter: blur(1px);
+  opacity: 0.1;
   z-index: 0;
 }
 
