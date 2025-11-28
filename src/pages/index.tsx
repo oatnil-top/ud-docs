@@ -398,7 +398,7 @@ function Feature2Section() {
   );
 }
 
-function Feature3Section() {
+function ResourceFeatureSection() {
   const resourcesMainImg = useBaseUrl('/img/resources-main.en.png');
   const resourcesDetailsImg = useBaseUrl('/img/resources-details.en.png');
   const resourcesAttachedImg = useBaseUrl('/img/resources-attached.en.png');
@@ -575,7 +575,7 @@ export default function Home(): ReactNode {
         <CardsSection />
         <TaskFeatureSection />
         <Feature2Section />
-        <Feature3Section />
+        <ResourceFeatureSection />
         <FooterSection />
       </main>
     </Layout>
