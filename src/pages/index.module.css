@@ -18,6 +18,28 @@
   text-align: center;
   background: var(--ifm-background-color);
   border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  position: relative;
+  overflow: hidden;
+}
+
+.heroSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/img/showcase.png');
+  background-size: cover;
+  background-position: center;
+  filter: blur(8px);
+  opacity: 0.15;
+  z-index: 0;
+}
+
+.heroSection > * {
+  position: relative;
+  z-index: 1;
 }
 
 .versionBadge {
