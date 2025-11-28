@@ -402,10 +402,10 @@ function FooterSection() {
     <footer className={styles.footerSection}>
       <div className={styles.footerBrand}>
         <span className={styles.footerLogo}>UnderControl</span>
-        <span className={styles.footerCopyright}>© 2024</span>
+        <span className={styles.footerCopyright}>© 2025</span>
       </div>
       <div className={styles.footerLinks}>
-        <Link to="/docs/self-deployment" className={styles.footerLink}>
+        <Link to="/docs/download" className={styles.footerLink}>
           <Translate id="homepage.footer.download">Download</Translate>
         </Link>
         <Link to="/docs/intro" className={styles.footerLink}>
