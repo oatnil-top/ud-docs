@@ -393,5 +393,145 @@
   "homepage.features.access.description": {
     "message": "基于 JWT 和 API Key 的权限管理。您始终知道谁在何时访问了哪些数据。包含完整的审计跟踪。",
     "description": "Feature description: Transparent Access Control"
+  },
+  "homepage.hero.version": {
+    "message": "v2.1.0 现已发布",
+    "description": "Version badge text"
+  },
+  "homepage.cards.web.label": {
+    "message": "网页版",
+    "description": "Web card label"
+  },
+  "homepage.cards.web.title": {
+    "message": "在线试用",
+    "description": "Web card title"
+  },
+  "homepage.cards.web.description": {
+    "message": "使用访客账户快速开始，即刻体验所有功能。",
+    "description": "Web card description"
+  },
+  "homepage.cards.web.button": {
+    "message": "启动 Web 应用",
+    "description": "Web card button"
+  },
+  "homepage.cards.desktop.label": {
+    "message": "桌面版",
+    "description": "Desktop card label"
+  },
+  "homepage.cards.desktop.title": {
+    "message": "下载应用",
+    "description": "Desktop card title"
+  },
+  "homepage.cards.desktop.description": {
+    "message": "原生性能，离线支持，深度系统集成。",
+    "description": "Desktop card description"
+  },
+  "homepage.cards.desktop.button": {
+    "message": "下载",
+    "description": "Desktop card button"
+  },
+  "homepage.cards.selfhost.label": {
+    "message": "服务器",
+    "description": "Self-host card label"
+  },
+  "homepage.cards.selfhost.title": {
+    "message": "自主部署",
+    "description": "Self-host card title"
+  },
+  "homepage.cards.selfhost.description": {
+    "message": "通过 Docker 部署。您的数据永不离开您的基础设施。",
+    "description": "Self-host card description"
+  },
+  "homepage.cards.selfhost.button": {
+    "message": "查看文档",
+    "description": "Self-host card button"
+  },
+  "homepage.features.tracker.title": {
+    "message": "您的个人轻量级任务追踪器",
+    "description": "Issue tracker feature title"
+  },
+  "homepage.features.tracker.linking.title": {
+    "message": "双向链接",
+    "description": "Bi-directional linking feature title"
+  },
+  "homepage.features.tracker.linking.description": {
+    "message": "笔记具备上下文感知能力。可在文本编辑器中直接关联内容，或使用系统链接提供器。",
+    "description": "Bi-directional linking feature description"
+  },
+  "homepage.features.tracker.markdown.title": {
+    "message": "Markdown 优先",
+    "description": "Markdown first feature title"
+  },
+  "homepage.features.tracker.markdown.description": {
+    "message": "真正的一等公民。以纯 Markdown 格式编辑、组织和保存所有内容。",
+    "description": "Markdown first feature description"
+  },
+  "homepage.features.tracker.export.title": {
+    "message": "导出与分享",
+    "description": "Export & Share feature title"
+  },
+  "homepage.features.tracker.export.description": {
+    "message": "无供应商锁定。即时导出数据，或与朋友和同事分享特定账户。",
+    "description": "Export & Share feature description"
+  },
+  "homepage.features.ai.title": {
+    "message": "AI 驱动的工作流",
+    "description": "AI-Driven Workflows feature title"
+  },
+  "homepage.features.ai.snap.title": {
+    "message": "拍照记账",
+    "description": "Snap & Log feature title"
+  },
+  "homepage.features.ai.snap.description": {
+    "message": "只需将图片发送给 AI，它就像您的私人会计，自动解析收据并创建支出记录。",
+    "description": "Snap & Log feature description"
+  },
+  "homepage.features.ai.shortcuts.title": {
+    "message": "Apple 快捷指令集成",
+    "description": "Apple Shortcuts feature title"
+  },
+  "homepage.features.ai.shortcuts.description": {
+    "message": "一键访问您的 AI 助手。无缝集成到操作系统，快速捕捉信息。",
+    "description": "Apple Shortcuts feature description"
+  },
+  "homepage.features.resources.title": {
+    "message": "统一资源管理",
+    "description": "Unified Resource Management feature title"
+  },
+  "homepage.features.resources.location.title": {
+    "message": "数据自主存储",
+    "description": "Your Data, Your Location feature title"
+  },
+  "homepage.features.resources.location.description": {
+    "message": "决定您的资源存储位置。可存储在本地系统，也可配置远程 S3 存储服务。",
+    "description": "Your Data, Your Location feature description"
+  },
+  "homepage.features.resources.attachments.title": {
+    "message": "通用附件",
+    "description": "Universal Attachments feature title"
+  },
+  "homepage.features.resources.attachments.description": {
+    "message": "轻松将资源附加到任务、支出或笔记。支持拖放上传、粘贴或文件选择。",
+    "description": "Universal Attachments feature description"
+  },
+  "homepage.features.resources.ui.title": {
+    "message": "友好的用户界面",
+    "description": "User-Friendly UI feature title"
+  },
+  "homepage.features.resources.ui.description": {
+    "message": "无需担心图片存放位置。统一的界面为您自动处理文件组织。",
+    "description": "User-Friendly UI feature description"
+  },
+  "homepage.footer.download": {
+    "message": "下载",
+    "description": "Footer download link"
+  },
+  "homepage.footer.documentation": {
+    "message": "文档",
+    "description": "Footer documentation link"
+  },
+  "homepage.footer.pricing": {
+    "message": "定价",
+    "description": "Footer pricing link"
   }
 }
