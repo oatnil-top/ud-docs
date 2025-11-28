@@ -380,6 +380,12 @@
   font-family: 'JetBrains Mono', monospace;
 }
 
+.mockupImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 /* Mobile Mockup */
 .mockupMobile {
   width: 100%;

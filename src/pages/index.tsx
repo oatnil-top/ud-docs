@@ -1,6 +1,7 @@
 import {useState, useRef, useEffect, type ReactNode} from 'react';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 import Layout from '@theme/Layout';
 import Translate, {translate} from '@docusaurus/Translate';
 import {
@@ -204,6 +205,11 @@ function CardsSection() {
 }
 
 function Feature1Section() {
+  const {i18n} = useDocusaurusContext();
+  const locale = i18n.currentLocale;
+  const imgSuffix = locale === 'zh-Hans' ? 'zh' : 'en';
+  const tasksImg = useBaseUrl(`/img/tasks-show-${imgSuffix}.png`);
+
   return (
     <section className={styles.featureSection}>
       <div className={styles.featureContent}>
@@ -262,10 +268,7 @@ function Feature1Section() {
             <span className={`${styles.mockupDot} ${styles.mockupDotGreen}`} />
           </div>
           <div className={styles.mockupBody}>
-            <div className={styles.mockupPlaceholder}>
-              <LayoutIcon size={64} strokeWidth={1} />
-              <div className={styles.mockupPlaceholderText}>App Interface Screenshot</div>
-            </div>
+            <img src={tasksImg} alt="Tasks Interface" className={styles.mockupImage} />
           </div>
         </div>
       </div>
