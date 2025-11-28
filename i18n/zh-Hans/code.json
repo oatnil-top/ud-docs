@@ -327,7 +327,7 @@
     "description": "The homepage hero title"
   },
   "homepage.hero.subtitle": {
-    "message": "独立开发者 + AI 协作构建。对您的数据毫无兴趣。",
+    "message": "独立开发者 + AI 协作构建。无广告、无追踪，没有动机窥探您的隐私。",
     "description": "The homepage hero subtitle"
   },
   "homepage.hero.tryOnline": {
