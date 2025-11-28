@@ -261,16 +261,7 @@ function Feature1Section() {
         </ul>
       </div>
       <div className={styles.featureMedia}>
-        <div className={styles.mockupWindow}>
-          <div className={styles.mockupHeader}>
-            <span className={`${styles.mockupDot} ${styles.mockupDotRed}`} />
-            <span className={`${styles.mockupDot} ${styles.mockupDotYellow}`} />
-            <span className={`${styles.mockupDot} ${styles.mockupDotGreen}`} />
-          </div>
-          <div className={styles.mockupBody}>
-            <img src={tasksImg} alt="Tasks Interface" className={styles.mockupImage} />
-          </div>
-        </div>
+        <img src={tasksImg} alt="Tasks Interface" className={styles.showcaseImage} />
       </div>
     </section>
   );
