@@ -61,7 +61,7 @@ function HeroSection() {
         <Translate
           id="homepage.hero.subtitle"
           description="The homepage hero subtitle">
-          Built by indie developer + AI. The ultimate secure workspace.
+          Built by indie developer + AI. Not interested in your data.
         </Translate>
       </p>
     </section>

@@ -327,7 +327,7 @@
     "description": "The homepage hero title"
   },
   "homepage.hero.subtitle": {
-    "message": "独立开发者 + AI 协作构建。您的数据，您的规则——自主托管、离线使用、安全可靠。个人版永久免费。",
+    "message": "独立开发者 + AI 协作构建。对您的数据毫无兴趣。",
     "description": "The homepage hero subtitle"
   },
   "homepage.hero.tryOnline": {
