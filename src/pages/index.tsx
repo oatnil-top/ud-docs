@@ -212,6 +212,30 @@ function TaskFeatureSection() {
   const tasksDetailsImg = useBaseUrl('/img/tasks-details-en.png');
   const tasksMarkdownImg = useBaseUrl('/img/tasks-details-markdown-en.png');
 
+  const images = [
+    { src: tasksShowImg, alt: 'Tasks List' },
+    { src: tasksDetailsImg, alt: 'Task Details' },
+    { src: tasksMarkdownImg, alt: 'Markdown Editor' },
+  ];
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % images.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [images.length]);
+
+  const goToPrev = () => {
+    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  const goToNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % images.length);
+  };
+
   return (
     <section className={styles.featureSection}>
       <div className={styles.featureContent}>
@@ -263,12 +287,74 @@ function TaskFeatureSection() {
         </ul>
       </div>
       <div className={styles.featureMedia}>
-        <div className={styles.showcaseGallery}>
-          <img src={tasksShowImg} alt="Tasks List" className={styles.showcaseImage} />
-          <img src={tasksDetailsImg} alt="Task Details" className={styles.showcaseImage} />
-          <img src={tasksMarkdownImg} alt="Markdown Editor" className={styles.showcaseImage} />
+        <div className={styles.carousel}>
+          <button
+            type="button"
+            className={styles.carouselBtn}
+            onClick={goToPrev}
+            aria-label="Previous image">
+            ‹
+          </button>
+          <div className={styles.carouselImageWrapper}>
+            <img
+              src={images[currentIndex].src}
+              alt={images[currentIndex].alt}
+              className={styles.showcaseImage}
+              onClick={() => setIsLightboxOpen(true)}
+            />
+          </div>
+          <button
+            type="button"
+            className={styles.carouselBtn}
+            onClick={goToNext}
+            aria-label="Next image">
+            ›
+          </button>
+        </div>
+        <div className={styles.carouselDots}>
+          {images.map((_, index) => (
+            <button
+              key={index}
+              type="button"
+              className={`${styles.carouselDot} ${index === currentIndex ? styles.carouselDotActive : ''}`}
+              onClick={() => setCurrentIndex(index)}
+              aria-label={`Go to image ${index + 1}`}
+            />
+          ))}
         </div>
       </div>
+
+      {isLightboxOpen && (
+        <div className={styles.lightbox} onClick={() => setIsLightboxOpen(false)}>
+          <button
+            type="button"
+            className={styles.lightboxClose}
+            onClick={() => setIsLightboxOpen(false)}
+            aria-label="Close lightbox">
+            ×
+          </button>
+          <img
+            src={images[currentIndex].src}
+            alt={images[currentIndex].alt}
+            className={styles.lightboxImage}
+            onClick={(e) => e.stopPropagation()}
+          />
+          <button
+            type="button"
+            className={`${styles.lightboxNav} ${styles.lightboxPrev}`}
+            onClick={(e) => { e.stopPropagation(); goToPrev(); }}
+            aria-label="Previous image">
+            ‹
+          </button>
+          <button
+            type="button"
+            className={`${styles.lightboxNav} ${styles.lightboxNext}`}
+            onClick={(e) => { e.stopPropagation(); goToNext(); }}
+            aria-label="Next image">
+            ›
+          </button>
+        </div>
+      )}
     </section>
   );
 }
