@@ -54,7 +54,7 @@ function HeroSection() {
         <Translate
           id="homepage.hero.title"
           description="The homepage hero title">
-          Your Data, Your Control.
+          Manage your money and time in one single app, own 100% of your data
         </Translate>
       </h1>
       <p className={styles.heroSubtitle}>
