@@ -288,39 +288,23 @@ function TaskFeatureSection() {
       </div>
       <div className={styles.featureMedia}>
         <div className={styles.carousel}>
-          <button
-            type="button"
-            className={styles.carouselBtn}
-            onClick={goToPrev}
-            aria-label="Previous image">
-            ‹
-          </button>
-          <div className={styles.carouselImageWrapper}>
-            <img
-              src={images[currentIndex].src}
-              alt={images[currentIndex].alt}
-              className={styles.showcaseImage}
-              onClick={() => setIsLightboxOpen(true)}
-            />
+          <img
+            src={images[currentIndex].src}
+            alt={images[currentIndex].alt}
+            className={styles.showcaseImage}
+            onClick={() => setIsLightboxOpen(true)}
+          />
+          <div className={styles.carouselDots}>
+            {images.map((_, index) => (
+              <button
+                key={index}
+                type="button"
+                className={`${styles.carouselDot} ${index === currentIndex ? styles.carouselDotActive : ''}`}
+                onClick={() => setCurrentIndex(index)}
+                aria-label={`Go to image ${index + 1}`}
+              />
+            ))}
           </div>
-          <button
-            type="button"
-            className={styles.carouselBtn}
-            onClick={goToNext}
-            aria-label="Next image">
-            ›
-          </button>
-        </div>
-        <div className={styles.carouselDots}>
-          {images.map((_, index) => (
-            <button
-              key={index}
-              type="button"
-              className={`${styles.carouselDot} ${index === currentIndex ? styles.carouselDotActive : ''}`}
-              onClick={() => setCurrentIndex(index)}
-              aria-label={`Go to image ${index + 1}`}
-            />
-          ))}
         </div>
       </div>
 

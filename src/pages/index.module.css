@@ -419,47 +419,19 @@
 /* Carousel */
 .carousel {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 12px;
   width: 100%;
 }
 
-.carouselImageWrapper {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 300px;
-}
-
-.carouselImageWrapper .showcaseImage {
+.carousel .showcaseImage {
   cursor: pointer;
   transition: transform 0.2s;
+  width: 100%;
 }
 
-.carouselImageWrapper .showcaseImage:hover {
+.carousel .showcaseImage:hover {
   transform: scale(1.02);
-}
-
-.carouselBtn {
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--ifm-color-emphasis-300);
-  border-radius: 50%;
-  background: var(--ifm-background-color);
-  color: var(--ifm-font-color-base);
-  font-size: 24px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s, border-color 0.2s;
-  flex-shrink: 0;
-}
-
-.carouselBtn:hover {
-  background: var(--ifm-color-emphasis-100);
-  border-color: var(--ifm-color-emphasis-400);
 }
 
 .carouselDots {
