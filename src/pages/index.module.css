@@ -416,6 +416,18 @@
   box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1);
 }
 
+.showcaseGallery {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.showcaseGallery .showcaseImage {
+  width: 100%;
+  height: auto;
+}
+
 /* Mobile Mockup */
 .mockupMobile {
   width: 100%;

@@ -204,11 +204,13 @@ function CardsSection() {
   );
 }
 
-function Feature1Section() {
+function TaskFeatureSection() {
   const {i18n} = useDocusaurusContext();
   const locale = i18n.currentLocale;
   const imgSuffix = locale === 'zh-Hans' ? 'zh' : 'en';
-  const tasksImg = useBaseUrl(`/img/tasks-show-${imgSuffix}.png`);
+  const tasksShowImg = useBaseUrl(`/img/tasks-show-${imgSuffix}.png`);
+  const tasksDetailsImg = useBaseUrl('/img/tasks-details-en.png');
+  const tasksMarkdownImg = useBaseUrl('/img/tasks-details-markdown-en.png');
 
   return (
     <section className={styles.featureSection}>
@@ -261,7 +263,11 @@ function Feature1Section() {
         </ul>
       </div>
       <div className={styles.featureMedia}>
-        <img src={tasksImg} alt="Tasks Interface" className={styles.showcaseImage} />
+        <div className={styles.showcaseGallery}>
+          <img src={tasksShowImg} alt="Tasks List" className={styles.showcaseImage} />
+          <img src={tasksDetailsImg} alt="Task Details" className={styles.showcaseImage} />
+          <img src={tasksMarkdownImg} alt="Markdown Editor" className={styles.showcaseImage} />
+        </div>
       </div>
     </section>
   );
@@ -430,7 +436,7 @@ export default function Home(): ReactNode {
       <main className={styles.mainContainer}>
         <HeroSection />
         <CardsSection />
-        <Feature1Section />
+        <TaskFeatureSection />
         <Feature2Section />
         <Feature3Section />
         <FooterSection />
