@@ -402,11 +402,13 @@ function ResourceFeatureSection() {
   const resourcesMainImg = useBaseUrl('/img/resources-main.en.png');
   const resourcesDetailsImg = useBaseUrl('/img/resources-details.en.png');
   const resourcesAttachedImg = useBaseUrl('/img/resources-attached.en.png');
+  const resourcesUploadImg = useBaseUrl('/img/resources-upload.en.png');
 
   const images = [
     { src: resourcesMainImg, alt: 'Resources Gallery' },
     { src: resourcesDetailsImg, alt: 'Resource Details' },
     { src: resourcesAttachedImg, alt: 'Attached Resources' },
+    { src: resourcesUploadImg, alt: 'Upload Resources' },
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
