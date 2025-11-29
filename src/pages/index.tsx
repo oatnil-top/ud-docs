@@ -343,7 +343,7 @@ function TaskFeatureSection() {
   );
 }
 
-function Feature2Section() {
+function AiFeatureSection() {
   return (
     <section className={styles.featureSectionReverse}>
       <div className={styles.featureContent}>
@@ -576,7 +576,7 @@ export default function Home(): ReactNode {
         <HeroSection />
         <CardsSection />
         <TaskFeatureSection />
-        <Feature2Section />
+        <AiFeatureSection />
         <ResourceFeatureSection />
         <FooterSection />
       </main>
