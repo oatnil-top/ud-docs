@@ -357,12 +357,12 @@ function Feature2Section() {
             <h3>
               <Camera size={16} strokeWidth={2} />
               <Translate id="homepage.features.ai.snap.title">
-                Snap & Log Expenses
+                Snap & Log Anything
               </Translate>
             </h3>
             <p>
               <Translate id="homepage.features.ai.snap.description">
-                Simply send an image to the AI. It acts as your accountant, parsing the receipt and creating a tasked expense automatically.
+                Send images, text, or voice to the AI. It helps you log expenses, create tasks, and manage everything in the app automatically.
               </Translate>
             </p>
           </li>

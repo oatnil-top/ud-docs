@@ -479,11 +479,11 @@
     "description": "AI-Driven Workflows feature title"
   },
   "homepage.features.ai.snap.title": {
-    "message": "拍照记账",
+    "message": "随手记录一切",
     "description": "Snap & Log feature title"
   },
   "homepage.features.ai.snap.description": {
-    "message": "只需将图片发送给 AI，它就像您的私人会计，自动解析收据并创建支出记录。",
+    "message": "发送图片、文字或语音给 AI，它能帮您记账、创建任务，自动管理应用中的一切。",
     "description": "Snap & Log feature description"
   },
   "homepage.features.ai.shortcuts.title": {
