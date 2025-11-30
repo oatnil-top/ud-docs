@@ -2,7 +2,7 @@
 title: Download
 description: Download UnderControl for your platform
 # SYNC: When updating version, also update LATEST_VERSION in src/pages/index.tsx
-# Current version: 0.1.5
+# Current version: 0.1.16
 # R2 URL pattern: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/releases/{version}/{filename}
 ---
 
@@ -14,8 +14,8 @@ Choose your platform to download UnderControl.
 
 Download the macOS version:
 
-- [Download for macOS (Apple Silicon)](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/releases/0.1.5/undercontrol-desktop-0.1.5-arm64.dmg)
-- [Download for macOS (Intel)](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/releases/0.1.5/undercontrol-desktop-0.1.5-x64.dmg)
+- [Download for macOS (Apple Silicon)](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/releases/0.1.16/undercontrol-desktop-0.1.16-arm64.dmg)
+- [Download for macOS (Intel)](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/releases/0.1.16/undercontrol-desktop-0.1.16-x64.dmg)
 
 > **Note:** Run `xattr -cr /Applications/UnderControl.app` in Terminal to enable unsigned app.
 
@@ -23,10 +23,10 @@ Download the macOS version:
 
 Download the Windows version:
 
-- [Download for Windows](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/releases/0.1.5/undercontrol-desktop-0.1.5-setup.exe)
+- [Download for Windows](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/releases/0.1.16/undercontrol-desktop-0.1.16-setup.exe)
 
 ## Linux {#linux}
 
 Download the Linux version:
 
-- [Download for Linux (AppImage)](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/releases/0.1.5/undercontrol-desktop-0.1.5.AppImage)
+- [Download for Linux (AppImage)](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/releases/0.1.16/undercontrol-desktop-0.1.16.AppImage)
