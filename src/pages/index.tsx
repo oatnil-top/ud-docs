@@ -47,7 +47,7 @@ function HeroSection() {
         <Translate
           id="homepage.hero.version"
           description="Version badge text">
-          v0.1.16 Available Now
+          v0.1.26 Available Now
         </Translate>
       </span>
       <h1 className={styles.heroTitle}>
