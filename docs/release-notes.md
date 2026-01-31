@@ -18,6 +18,20 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.21.9 (2026-01-31)
+
+### Improvements
+
+#### Board Type Selection
+
+When creating boards, you can now choose the board type (private or shared), giving you more flexibility in organizing tasks.
+
+#### Simplified Private Boards
+
+Private boards no longer create unnecessary groups, making personal task management cleaner and simpler.
+
+---
+
 ## v0.21.8 (2026-01-31)
 
 ### New Features
