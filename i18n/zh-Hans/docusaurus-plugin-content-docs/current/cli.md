@@ -308,6 +308,90 @@ ud task nlquery "上周创建的任务"
 
 ---
 
+## 备注命令
+
+备注功能允许你为任务添加评论、进度更新和上下文信息。适用于跟踪工作历史和 AI 助手协作。
+
+### 添加备注
+
+```bash
+ud task note add <task-id> "<内容>"
+ud task note add <task-id> -f <文件>
+echo "内容" | ud task note add <task-id> -
+```
+
+**标志：**
+- `-f, --file`：从文件读取备注内容
+
+**示例：**
+```bash
+# 添加行内备注
+ud task note add abc123 "开始实现"
+
+# 添加进度更新
+ud task note add abc123 "✓ 认证中间件完成"
+
+# 从文件添加
+ud task note add abc123 -f progress.md
+
+# 从标准输入添加
+echo "审查完成" | ud task note add abc123 -
+```
+
+### 列出备注
+
+```bash
+ud task note list <task-id>
+ud task note ls <task-id>  # 别名
+```
+
+**输出格式：**
+```
+[4223db11] 2025-01-31 11:08
+✓ 认证中间件完成
+---
+[3150c5ce] 2025-01-31 10:45
+开始实现
+```
+
+### 删除备注
+
+```bash
+ud task note delete <task-id> <note-id>
+ud task note rm <task-id> <note-id>  # 别名
+```
+
+**示例：**
+```bash
+ud task note delete abc123 4223db11
+```
+
+### AI 助手工作流
+
+备注功能实现了人机无缝协作：
+
+```bash
+# AI 从计划创建任务
+ud task create -f plan.md
+# Created task: abc12345
+
+# 人类在界面审查，通过备注添加上下文
+
+# AI 获取任务并记录进度
+ud task view abc123
+ud task note add abc123 "✓ 完成步骤 1：数据库模型"
+ud task note add abc123 "✓ 完成步骤 2：API 接口"
+ud task note add abc123 "⚠️ 阻塞：需要外部服务的 API 密钥"
+
+# 人类看到进度，解除阻塞
+
+# AI 继续并完成任务
+ud task note add abc123 "✓ 所有步骤已完成"
+ud task done abc123
+```
+
+---
+
 ## TUI 模式
 
 不带参数运行 `ud` 进入交互式终端界面。

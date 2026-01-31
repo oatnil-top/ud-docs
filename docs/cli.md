@@ -308,6 +308,90 @@ ud task nlquery "tasks created in the last week"
 
 ---
 
+## Note Commands
+
+Notes allow you to add comments, progress updates, and context to tasks. They're useful for tracking work history and AI agent collaboration.
+
+### Add Note
+
+```bash
+ud task note add <task-id> "<content>"
+ud task note add <task-id> -f <file>
+echo "content" | ud task note add <task-id> -
+```
+
+**Flags:**
+- `-f, --file`: Read note content from file
+
+**Examples:**
+```bash
+# Add inline note
+ud task note add abc123 "Started implementation"
+
+# Add progress update
+ud task note add abc123 "✓ Auth middleware done"
+
+# From file
+ud task note add abc123 -f progress.md
+
+# From stdin
+echo "Completed review" | ud task note add abc123 -
+```
+
+### List Notes
+
+```bash
+ud task note list <task-id>
+ud task note ls <task-id>  # Alias
+```
+
+**Output format:**
+```
+[4223db11] 2025-01-31 11:08
+✓ Auth middleware done
+---
+[3150c5ce] 2025-01-31 10:45
+Started implementation
+```
+
+### Delete Note
+
+```bash
+ud task note delete <task-id> <note-id>
+ud task note rm <task-id> <note-id>  # Alias
+```
+
+**Example:**
+```bash
+ud task note delete abc123 4223db11
+```
+
+### AI Agent Workflow
+
+Notes enable seamless collaboration between humans and AI agents:
+
+```bash
+# AI creates task from plan
+ud task create -f plan.md
+# Created task: abc12345
+
+# Human reviews in UI, adds context via notes
+
+# AI fetches task and logs progress
+ud task view abc123
+ud task note add abc123 "✓ Completed step 1: Database schema"
+ud task note add abc123 "✓ Completed step 2: API endpoints"
+ud task note add abc123 "⚠️ Blocked: Need API key for external service"
+
+# Human sees progress, unblocks AI
+
+# AI continues and completes
+ud task note add abc123 "✓ All steps completed"
+ud task done abc123
+```
+
+---
+
 ## TUI Mode
 
 Run `ud` without arguments to enter the interactive terminal UI.
