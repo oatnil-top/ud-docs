@@ -18,6 +18,29 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.21.8 (2026-01-31)
+
+### New Features
+
+#### CLI Task Notes
+
+Add notes, progress updates, and comments to tasks via CLI for seamless human-AI collaboration.
+
+```bash
+# Add a progress note
+ud task note add abc123 "✓ Auth module done"
+
+# List all notes for a task
+ud task note list abc123
+
+# Delete a note
+ud task note delete abc123 note-id
+```
+
+This enables workflows where AI agents can log progress while humans track and provide context.
+
+---
+
 ## v0.21.7 (2026-01-31)
 
 ### New Features
