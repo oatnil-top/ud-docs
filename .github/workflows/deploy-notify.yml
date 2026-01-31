@@ -1,0 +1,116 @@
+name: Deploy & Notify
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs/**'
+      - 'i18n/**'
+      - 'docusaurus.config.ts'
+      - 'sidebars.ts'
+
+jobs:
+  notify-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Get changed files
+        id: changes
+        run: |
+          # Get list of changed doc files
+          CHANGED_DOCS=$(git diff --name-only HEAD~1 HEAD -- 'docs/*.md' 'i18n/**/*.md' | head -5)
+          if [ -n "$CHANGED_DOCS" ]; then
+            # Format as bullet list
+            DOCS_LIST=$(echo "$CHANGED_DOCS" | sed 's/^/• /' | tr '\n' '\\n' | sed 's/\\n$//')
+            echo "docs_changed=true" >> $GITHUB_OUTPUT
+            echo "docs_list<<EOF" >> $GITHUB_OUTPUT
+            echo "$CHANGED_DOCS" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          else
+            echo "docs_changed=false" >> $GITHUB_OUTPUT
+          fi
+
+          # Count total changes
+          TOTAL_CHANGES=$(git diff --name-only HEAD~1 HEAD | wc -l | tr -d ' ')
+          echo "total_changes=$TOTAL_CHANGES" >> $GITHUB_OUTPUT
+
+      - name: Notify Slack - Docs Deployed
+        uses: slackapi/slack-github-action@v1.27.0
+        with:
+          payload: |
+            {
+              "text": "📚 Documentation Updated",
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "📚 Documentation Updated"
+                  }
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Commit:*\n<${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}|${{ github.sha }}>"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Author:*\n${{ github.actor }}"
+                    }
+                  ]
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Message:*\n${{ github.event.head_commit.message }}"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Files changed:* ${{ steps.changes.outputs.total_changes }}"
+                  }
+                },
+                {
+                  "type": "actions",
+                  "elements": [
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "View Docs (EN)"
+                      },
+                      "url": "https://ud-docs.lintao-amons.workers.dev/docs/"
+                    },
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "View Docs (中文)"
+                      },
+                      "url": "https://ud-docs.lintao-amons.workers.dev/zh-Hans/docs/"
+                    },
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "View Commit"
+                      },
+                      "url": "${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}"
+                    }
+                  ]
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
