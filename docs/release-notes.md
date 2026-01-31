@@ -18,6 +18,21 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.21.6 (2026-01-31)
+
+### New Features
+
+#### Natural Language Task Query
+
+Query your tasks using natural language from the CLI:
+
+```bash
+ud nlquery "show me tasks due this week"
+ud nlquery "what are my high priority tasks?"
+```
+
+---
+
 ## v0.21.5 (2026-01-31)
 
 ### New Features
