@@ -18,6 +18,29 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.21.7 (2026-01-31)
+
+### New Features
+
+#### Custom Field Sorting
+
+Task lists now support sorting by custom fields, allowing you to organize tasks based on project-specific fields.
+
+#### CLI Improvements
+
+- **Short ID Matching**: Use task ID prefixes to quickly select tasks without typing the full ID
+- **Batch Update Command**: New `task apply` command for file-based batch updates
+
+```bash
+# Use short IDs to operate on tasks
+ud task get abc     # Matches tasks starting with "abc"
+
+# Batch update tasks from file
+ud task apply tasks.yaml
+```
+
+---
+
 ## v0.21.6 (2026-01-31)
 
 ### New Features
