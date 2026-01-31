@@ -142,6 +142,24 @@ ud task view <id>
 
 显示任务详情，包括标题、描述、状态、标签、截止日期和时间戳。
 
+:::tip 短 ID 支持
+所有接受任务 ID 的命令都支持**前缀匹配**。你可以使用 `task list` 显示的 8 位短 ID，或者更短的前缀（只要唯一即可）。
+
+```bash
+ud task view 3de9f82b    # 列表中的完整短 ID
+ud task view 3de         # 更短的前缀（如果唯一）
+ud task view 3de9f82b-fc49-4e84-b288-9ae3174f69ae  # 完整 UUID 也可以
+```
+
+如果前缀匹配多个任务，会显示错误并列出匹配项：
+```
+Error: ambiguous ID prefix '3' matches 2 tasks:
+  3de9f82b (任务标题一)
+  3fbf7c24 (任务标题二)
+Please use a longer prefix
+```
+:::
+
 ### 标记任务完成
 
 ```bash

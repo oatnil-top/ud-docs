@@ -142,6 +142,24 @@ ud task view <id>
 
 Displays task details including title, description, status, tags, deadline, and timestamps.
 
+:::tip Short ID Support
+All commands that accept a task ID support **prefix matching**. You can use the 8-character short IDs shown in `task list` output, or even shorter prefixes as long as they're unique.
+
+```bash
+ud task view 3de9f82b    # Full short ID from list
+ud task view 3de         # Shorter prefix (if unique)
+ud task view 3de9f82b-fc49-4e84-b288-9ae3174f69ae  # Full UUID also works
+```
+
+If a prefix matches multiple tasks, you'll see an error listing the matches:
+```
+Error: ambiguous ID prefix '3' matches 2 tasks:
+  3de9f82b (Task title one)
+  3fbf7c24 (Task title two)
+Please use a longer prefix
+```
+:::
+
 ### Mark Task Done
 
 ```bash
