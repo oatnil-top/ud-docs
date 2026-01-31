@@ -97,6 +97,11 @@ const config: Config = {
         },
         {to: '/blog', label: 'Blog', position: 'left'},
         {
+          type: 'html',
+          position: 'right',
+          value: '<span class="navbar__item navbar__link" style="color: var(--ifm-color-primary); font-weight: 500;">v0.21.5</span>',
+        },
+        {
           type: 'localeDropdown',
           position: 'right',
         },
