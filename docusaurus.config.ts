@@ -2,6 +2,10 @@ import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
+// Centralized version - update version.json when releasing
+const versionConfig = require('./version.json');
+const VERSION = versionConfig.version;
+
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
@@ -99,7 +103,7 @@ const config: Config = {
         {
           type: 'html',
           position: 'right',
-          value: '<span class="navbar__item navbar__link" style="color: var(--ifm-color-primary); font-weight: 500;">v0.21.5</span>',
+          value: `<span class="navbar__item navbar__link" style="color: var(--ifm-color-primary); font-weight: 500;">v${VERSION}</span>`,
         },
         {
           type: 'localeDropdown',

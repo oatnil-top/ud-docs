@@ -22,13 +22,16 @@ import {
   Image,
 } from 'lucide-react';
 
+// Centralized version - update version.json when releasing
+import versionConfig from '../../version.json';
+const VERSION = versionConfig.version;
+const AVAILABLE_VERSIONS = versionConfig.availableVersions;
+
 type Platform = 'macOS (Apple Silicon)' | 'macOS (Intel)' | 'Windows' | 'Linux';
 
-const AVAILABLE_VERSIONS = ['0.1.26', '0.1.25', '0.1.16', '0.1.13', '0.1.11', '0.1.8', '0.1.5', '0.1.4', '0.1.3', '0.1.2', '0.1.1'];
-const LATEST_VERSION = AVAILABLE_VERSIONS[0];
 const R2_BASE_URL = 'https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/releases';
 
-function getDownloadUrl(platform: Platform, version: string): string {
+function getDownloadUrl(platform: Platform, version: string = VERSION): string {
   const fileNames: Record<Platform, string> = {
     'macOS (Apple Silicon)': `undercontrol-desktop-${version}-arm64.dmg`,
     'macOS (Intel)': `undercontrol-desktop-${version}-x64.dmg`,
@@ -46,8 +49,9 @@ function HeroSection() {
       <span className={styles.versionBadge}>
         <Translate
           id="homepage.hero.version"
-          description="Version badge text">
-          v0.1.26 Available Now
+          description="Version badge text"
+          values={{version: VERSION}}>
+          {'v{version} Available Now'}
         </Translate>
       </span>
       <h1 className={styles.heroTitle}>
@@ -88,7 +92,7 @@ function CardsSection() {
   };
 
   const handlePlatformSelect = (platform: Platform) => {
-    const url = getDownloadUrl(platform, LATEST_VERSION);
+    const url = getDownloadUrl(platform, VERSION);
     window.location.href = url;
     setShowPlatformDropdown(false);
   };
