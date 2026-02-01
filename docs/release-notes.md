@@ -18,6 +18,31 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.21.10 (2026-02-01)
+
+### New Features
+
+#### CLI Apply Command
+
+New kubectl-style `apply` command for managing tasks using YAML files:
+
+```bash
+ud task apply -f task.yaml
+```
+
+#### Kanban Custom Field Sorting
+
+Kanban now supports sorting by custom fields with intelligent direction labels based on field type.
+
+### Bug Fixes
+
+- Fix custom field sorting to properly handle null values
+- Fix CLI status values to use correct format
+- Fix private board updates to allow owners proper access
+- Improve error messages for board permission issues
+
+---
+
 ## v0.21.9 (2026-01-31)
 
 ### Improvements
