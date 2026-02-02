@@ -18,6 +18,32 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.22.0 (2026-02-02)
+
+### New Features
+
+#### Kanban Card Transfer Actions
+
+Cards can now automatically trigger preset actions when moving between columns:
+- Support for column exit actions (exitAction)
+- Smart break logic to prevent duplicate triggers
+- Multiple actions are merged for efficient execution
+
+#### ud-cli Task Linking Commands
+
+New `link` and `unlink` commands to associate and disassociate tasks
+
+### Improvements
+
+- Personal tier users can now see dedicated feature entry points
+
+### Bug Fixes
+
+- Fixed kanban column actions not saving correctly in some cases
+- Fixed default column action generation when creating boards
+
+---
+
 ## v0.21.11 (2026-02-02)
 
 ### Improvements
