@@ -18,6 +18,20 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.21.11 (2026-02-02)
+
+### Improvements
+
+#### Kanban Column Sort Order
+
+Set sort order when creating kanban columns for more flexible task organization.
+
+### Bug Fixes
+
+- Fixed slash menu keyboard navigation scroll and Enter key issues in markdown editor
+
+---
+
 ## v0.21.10 (2026-02-01)
 
 ### New Features
