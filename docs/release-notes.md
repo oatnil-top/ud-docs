@@ -18,6 +18,31 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.22.1 (2026-02-03)
+
+### New Features
+
+#### Dashboard Quick Search
+
+Added a command palette widget to the dashboard. Click to quickly search tasks, expenses, and commands without memorizing keyboard shortcuts.
+
+#### Kanban Tag Filtering Enhancement
+
+- Support "not contains" operator for filtering tasks without specific tags
+- Clearer "contains/not contains" labels in condition configuration
+
+#### CLI Improvements
+
+- Require confirmation before marking tasks as done to prevent accidental completion
+
+### Bug Fixes
+
+- Fixed tag query consistency in Kanban boards
+- Improved column configuration form layout
+- Fixed issue where empty boards couldn't add columns
+
+---
+
 ## v0.22.0 (2026-02-02)
 
 ### New Features
