@@ -18,6 +18,30 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.22.2 (2026-02-03)
+
+### New Features
+
+#### Trash & Recycle Bin
+
+Tasks can now be safely deleted with the ability to restore them later.
+
+- View deleted tasks in the new Trash page
+- Restore accidentally deleted tasks with one click
+- Kanban boards show a recycle bin widget in the sidebar
+
+### Improvements
+
+- Keyboard shortcuts now accessible via command palette
+
+### Bug Fixes
+
+- Fixed loading spinners appearing unnecessarily on kanban columns
+- Fixed task deletion causing brief flicker in todo list
+- Improved state handling when deleting tasks
+
+---
+
 ## v0.22.1 (2026-02-03)
 
 ### New Features
