@@ -18,6 +18,50 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.23.0 (2026-02-05)
+
+### New Features
+
+#### Advanced Kanban Filtering and Querying
+
+Kanban boards now support more powerful task filtering capabilities to help you find exactly what you need.
+
+- String fields support fuzzy matching (LIKE, ILIKE) and null checks (IS NULL, IS NOT NULL)
+- Number fields support full comparison operators (equals, greater than, less than, etc.)
+- Enum fields support IN operator with multi-select for matching multiple values at once
+- Added 8 new queryable fields: Status, Scheduled Date, Due Date, Started Time, Paused Time, Completed Time, Tag IDs, Priority
+
+#### Custom Fields Improvements
+
+- Custom field keys are now auto-generated, eliminating manual input
+- Kanban cards now display task status
+- Custom field dropdowns now show usernames instead of user IDs for better clarity
+
+#### Command Palette Enhancement
+
+Command palette now auto-detects and looks up entity UUIDs, making it easy to quickly locate tasks, budgets, and other resources.
+
+#### User Experience Improvements
+
+- Slash menu reordered: Task List moved to the top, Text formatting to the bottom, matching usage frequency
+- Added Chinese translation support for Kanban interface
+
+### Bug Fixes
+
+- Fixed user field dropdown options not populating in Kanban
+- Fixed custom fields not refreshing when task tags change
+- Fixed Kanban query string parsing for comparison operators
+- Fixed Kanban IN operator query formatting
+- Fixed i18n translation key paths for field names
+- Fixed field names not updating when language changes
+
+### Improvements
+
+- User dropdowns now refresh automatically when opened, ensuring up-to-date data
+- Enhanced Chinese translations throughout Kanban interface
+
+---
+
 ## v0.22.2 (2026-02-03)
 
 ### New Features
