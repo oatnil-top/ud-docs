@@ -18,6 +18,32 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.24.0 (2026-02-06)
+
+### New Features
+
+#### Kanban Task Creation Matches Column Conditions
+
+When creating a task from a specific column, the task automatically inherits the column's filter values. For example, creating a task in the "High Priority" column will automatically set it as high priority.
+
+#### Custom Field Namespace System
+
+Custom field names now support Unicode characters including Chinese, allowing you to name fields more naturally.
+
+### Improvements
+
+- Kanban column actions now support Chinese/English i18n
+- System boards show an edit protection warning to prevent accidental modifications
+- User-type enum fields supported in kanban column conditions
+
+### Bug Fixes
+
+- Fixed custom field metadata prefix handling in task detail panel
+- Fixed shared boards not appearing in "Add to Board" modal
+- Fixed user candidate prefetching and caching
+
+---
+
 ## v0.23.0 (2026-02-05)
 
 ### New Features
