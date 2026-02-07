@@ -18,6 +18,29 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.25.0 (2026-02-07)
+
+### New Features
+
+#### Saved Queries
+
+Save and reuse your frequently used task search queries for quick access. Expandable task rows let you view descriptions and notes inline without navigating to the detail page.
+
+#### Sidebar Collapsible Sections
+
+Navigation items are now organized into collapsible sections with clean divider labels, making the sidebar more organized and easier to navigate.
+
+### Improvements
+
+- Updated application icons
+
+### Bug Fixes
+
+- Fixed duplicate task creation when pressing Ctrl+Enter in Kanban view
+- Fixed custom field support in saved query validation and autofill
+
+---
+
 ## v0.24.0 (2026-02-06)
 
 ### New Features
