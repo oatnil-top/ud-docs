@@ -18,6 +18,18 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.25.1 (2026-02-08)
+
+### Improvements
+
+- Query builder simple mode now supports all field types (text, number, date, boolean, select, etc.) with appropriate input controls for each type
+
+### Bug Fixes
+
+- Fixed CONTAINS_ALL query generating incorrect syntax in the query builder
+
+---
+
 ## v0.25.0 (2026-02-07)
 
 ### New Features
