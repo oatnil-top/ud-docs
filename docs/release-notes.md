@@ -18,6 +18,28 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.25.4 (2026-02-08)
+
+### New Features
+
+#### Sidebar Advanced Search
+
+Added advanced search entry point in the sidebar for quick navigation to the search page.
+
+#### CLI Note Apply Command
+
+New `ud task note apply` command to create or update task notes directly from the CLI.
+
+### Improvements
+
+- Admin pages (users, roles, groups) now use mobile-first card layouts for better browsing on mobile devices
+
+### Bug Fixes
+
+- Fixed command palette selecting extra items when pressing Ctrl/Cmd+Enter in link modal
+
+---
+
 ## v0.25.3 (2026-02-08)
 
 ### New Features
