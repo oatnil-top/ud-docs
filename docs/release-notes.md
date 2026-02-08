@@ -18,6 +18,16 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.25.3 (2026-02-08)
+
+### New Features
+
+#### Natural Language Search
+
+Search your data using natural language queries in the advanced search page, no need to remember complex query syntax.
+
+---
+
 ## v0.25.2 (2026-02-08)
 
 ### Improvements
