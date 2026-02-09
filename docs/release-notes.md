@@ -18,6 +18,22 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.25.5 (2026-02-09)
+
+### New Features
+
+#### kubectl-style CLI Commands
+
+The CLI now supports `get`, `describe`, `apply`, `delete` as top-level commands for managing tasks, making operations more intuitive.
+
+### Improvements
+
+- Saved query task rows can now be opened in a new tab
+- In-app CLI documentation updated with kubectl-style command reference
+- Query docs now link to full documentation site
+
+---
+
 ## v0.25.4 (2026-02-08)
 
 ### New Features
