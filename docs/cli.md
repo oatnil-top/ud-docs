@@ -77,13 +77,17 @@ ud login --context work --api-url https://ud.company.com
 
 ---
 
-## Task Commands
+## Resource Commands (kubectl-style)
 
-### List Tasks
+The CLI supports kubectl-style top-level verbs for managing resources. These are the **recommended** way to interact with resources.
+
+### Get Resources
 
 ```bash
-ud task list [--status <status>]
+ud get task [id] [--status <status>]
 ```
+
+Display one or many tasks in a table format.
 
 **Options:**
 - `--status`: Filter by status (`todo`, `in-progress`, `pending`, `stale`, `done`, `archived`)
@@ -91,14 +95,159 @@ ud task list [--status <status>]
 **Examples:**
 ```bash
 # List all tasks
-ud task list
+ud get task
 
 # List only todo tasks
-ud task list --status todo
+ud get task --status todo
 
-# List in-progress tasks
-ud task list --status in-progress
+# Show a single task in table format
+ud get task abc123
 ```
+
+### Describe Resource
+
+```bash
+ud describe task <id>
+```
+
+Show detailed information about a specific task, including title, description, status, tags, deadline, timestamps, linked tasks, attachments, and notes.
+
+**Examples:**
+```bash
+# View full task details
+ud describe task abc123
+
+# Using short prefix
+ud describe task 3de
+```
+
+:::tip Short ID Support
+All commands that accept a task ID support **prefix matching**. You can use the 8-character short IDs shown in `get task` output, or even shorter prefixes as long as they're unique.
+
+```bash
+ud describe task 3de9f82b    # Full short ID from list
+ud describe task 3de         # Shorter prefix (if unique)
+ud describe task 3de9f82b-fc49-4e84-b288-9ae3174f69ae  # Full UUID also works
+```
+
+If a prefix matches multiple tasks, you'll see an error listing the matches:
+```
+Error: ambiguous ID prefix '3' matches 2 tasks:
+  3de9f82b (Task title one)
+  3fbf7c24 (Task title two)
+Please use a longer prefix
+```
+:::
+
+### Apply Resource from File
+
+```bash
+ud apply -f <file>
+ud apply -f -  # Read from stdin
+```
+
+Create or update a resource from a Markdown file with YAML frontmatter. The file is the single source of truth:
+- If `id` is present in frontmatter → **update** the existing task
+- If no `id` → **create** a new task
+
+Currently supports `.md` files. YAML support is planned for future releases.
+
+**Flags:**
+- `-f, --file`: File to apply (required, use `-` for stdin)
+
+**File format:**
+```markdown
+---
+id: abc123          # optional - if present, updates existing task
+title: Task Title
+status: in-progress
+tags:
+  - work
+  - urgent
+deadline: 2025-03-15
+---
+
+Task description content here.
+Multi-line supported.
+```
+
+**Supported fields:**
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | string | Task ID (optional — present = update, absent = create) |
+| `title` | string | Task title (required for new tasks) |
+| `status` | string | Task status |
+| `tags` | array | List of tags |
+| `deadline` | string | Deadline date (YYYY-MM-DD or ISO 8601) |
+| (body) | string | Becomes the description |
+
+**Valid status values:**
+- `todo` - Not started
+- `in-progress` - Currently working on
+- `pending` - Waiting for something
+- `stale` - Inactive/stagnant
+- `done` - Completed
+- `archived` - Archived
+
+**Examples:**
+```bash
+# Create a new task (no id in file)
+ud apply -f task.md
+
+# Update an existing task (id in file)
+ud apply -f task.md
+
+# From stdin
+cat task.md | ud apply -f -
+
+# Quick create from stdin
+echo '---
+title: New Task
+status: todo
+---
+Description here.' | ud apply -f -
+```
+
+**Deadline formats:**
+```yaml
+# Date only (midnight UTC)
+deadline: 2025-03-15
+deadline: 2025/03/15
+
+# With time
+deadline: 2025-03-15T14:30:00
+deadline: 2025-03-15T14:30:00Z
+deadline: 2025-03-15T14:30:00+08:00
+```
+
+### Delete Resource
+
+```bash
+ud delete task <id>
+```
+
+Delete a task by ID.
+
+**Examples:**
+```bash
+ud delete task abc123
+ud delete task 3de9f82b
+```
+
+---
+
+## Task Commands
+
+:::caution Deprecated Commands
+The following `ud task` subcommands are **deprecated** and will be removed in a future release. They still work but print a deprecation warning. Use the kubectl-style commands instead:
+
+| Deprecated | Use instead |
+|------------|-------------|
+| `ud task list` | `ud get task` |
+| `ud task view <id>` | `ud describe task <id>` |
+| `ud task apply -f <file>` | `ud apply -f <file>` |
+| `ud task delete <id>` | `ud delete task <id>` |
+:::
 
 ### Create Task
 
@@ -134,32 +283,6 @@ The rest of the file
 becomes the description.
 ```
 
-### View Task
-
-```bash
-ud task view <id>
-```
-
-Displays task details including title, description, status, tags, deadline, and timestamps.
-
-:::tip Short ID Support
-All commands that accept a task ID support **prefix matching**. You can use the 8-character short IDs shown in `task list` output, or even shorter prefixes as long as they're unique.
-
-```bash
-ud task view 3de9f82b    # Full short ID from list
-ud task view 3de         # Shorter prefix (if unique)
-ud task view 3de9f82b-fc49-4e84-b288-9ae3174f69ae  # Full UUID also works
-```
-
-If a prefix matches multiple tasks, you'll see an error listing the matches:
-```
-Error: ambiguous ID prefix '3' matches 2 tasks:
-  3de9f82b (Task title one)
-  3fbf7c24 (Task title two)
-Please use a longer prefix
-```
-:::
-
 ### Mark Task Done
 
 ```bash
@@ -178,84 +301,6 @@ Opens the task in your `$EDITOR` (defaults to `vi`). The file format is:
 - First line: title
 - Blank line
 - Rest: description
-
-### Apply Changes from File
-
-```bash
-ud task apply -f <file> <id>
-ud task apply -f - <id>  # Read from stdin
-```
-
-Updates a task using a Markdown file with YAML frontmatter. Only specified fields are updated.
-
-**Flags:**
-- `-f, --file`: Markdown file with frontmatter (required, use `-` for stdin)
-
-**File format:**
-```markdown
----
-title: Updated Task Title
-status: in-progress
-tags:
-  - work
-  - urgent
-deadline: 2025-03-15
----
-
-Task description content here.
-Multi-line supported.
-```
-
-**Supported fields:**
-| Field | Type | Description |
-|-------|------|-------------|
-| `title` | string | Task title |
-| `status` | string | Task status |
-| `tags` | array | List of tags |
-| `deadline` | string | Deadline date (YYYY-MM-DD or ISO 8601) |
-| (body) | string | Becomes the description |
-
-**Valid status values:**
-- `todo` - Not started
-- `in-progress` - Currently working on
-- `pending` - Waiting for something
-- `stale` - Inactive/stagnant
-- `done` - Completed
-- `archived` - Archived
-
-**Examples:**
-```bash
-# Update from file
-ud task apply -f task.md abc123
-
-# Update from stdin
-cat task.md | ud task apply -f - abc123
-
-# Pipe from echo
-echo '---
-title: Quick Update
-status: done
----' | ud task apply -f - abc123
-```
-
-**Deadline formats:**
-```yaml
-# Date only (midnight UTC)
-deadline: 2025-03-15
-deadline: 2025/03/15
-
-# With time
-deadline: 2025-03-15T14:30:00
-deadline: 2025-03-15T14:30:00Z
-deadline: 2025-03-15T14:30:00+08:00
-```
-
-### Delete Task
-
-```bash
-ud task delete <id>
-ud task rm <id>  # Alias
-```
 
 ### Query Tasks
 
@@ -522,10 +567,12 @@ Create `.claude/instructions.md` or `.cursorrules` in your project:
 
 Use UnderControl CLI to manage project tasks:
 
-- View tasks: `ud task list`
+- List tasks: `ud get task`
+- View task details: `ud describe task <id>`
 - Create task: `ud task create "title" -d "description"`
 - Complete task: `ud task done <id>`
-- Update task: `ud task apply -f task.md <id>`
+- Update task: `ud apply -f task.md`
+- Delete task: `ud delete task <id>`
 
 Before implementing features, check related tasks for context.
 ```
@@ -535,16 +582,12 @@ Before implementing features, check related tasks for context.
 Create a template file and apply to multiple tasks:
 
 ```bash
-# Create status update template
-cat > done.md << 'EOF'
----
-status: done
----
-EOF
-
-# Apply to multiple tasks
+# Create status update template for each task
 for id in abc123 def456 ghi789; do
-  ud task apply -f done.md $id
+  echo "---
+id: $id
+status: done
+---" | ud apply -f -
 done
 ```
 
@@ -552,11 +595,12 @@ done
 
 ```bash
 # View task, copy content
-ud task view abc123
+ud describe task abc123
 
-# Create markdown file with updates
+# Create markdown file with updates (include id for update)
 cat > update.md << 'EOF'
 ---
+id: abc123
 title: Updated Title
 status: in-progress
 tags:
@@ -568,7 +612,7 @@ Updated description with new requirements.
 EOF
 
 # Apply changes
-ud task apply -f update.md abc123
+ud apply -f update.md
 ```
 
 ---

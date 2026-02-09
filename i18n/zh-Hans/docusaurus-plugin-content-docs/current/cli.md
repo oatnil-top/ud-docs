@@ -77,13 +77,17 @@ ud login --context work --api-url https://ud.company.com
 
 ---
 
-## 任务命令
+## 资源命令（kubectl 风格）
 
-### 列出任务
+CLI 支持 kubectl 风格的顶层动词来管理资源。这是**推荐**的交互方式。
+
+### 获取资源
 
 ```bash
-ud task list [--status <status>]
+ud get task [id] [--status <status>]
 ```
+
+以表格形式显示一个或多个任务。
 
 **选项：**
 - `--status`：按状态过滤（`todo`、`in-progress`、`pending`、`stale`、`done`、`archived`）
@@ -91,14 +95,159 @@ ud task list [--status <status>]
 **示例：**
 ```bash
 # 列出所有任务
-ud task list
+ud get task
 
 # 只列出待办任务
-ud task list --status todo
+ud get task --status todo
 
-# 列出进行中的任务
-ud task list --status in-progress
+# 以表格形式显示单个任务
+ud get task abc123
 ```
+
+### 查看资源详情
+
+```bash
+ud describe task <id>
+```
+
+显示任务的详细信息，包括标题、描述、状态、标签、截止日期、时间戳、关联任务、附件和备注。
+
+**示例：**
+```bash
+# 查看完整任务详情
+ud describe task abc123
+
+# 使用短前缀
+ud describe task 3de
+```
+
+:::tip 短 ID 支持
+所有接受任务 ID 的命令都支持**前缀匹配**。你可以使用 `get task` 显示的 8 位短 ID，或者更短的前缀（只要唯一即可）。
+
+```bash
+ud describe task 3de9f82b    # 列表中的完整短 ID
+ud describe task 3de         # 更短的前缀（如果唯一）
+ud describe task 3de9f82b-fc49-4e84-b288-9ae3174f69ae  # 完整 UUID 也可以
+```
+
+如果前缀匹配多个任务，会显示错误并列出匹配项：
+```
+Error: ambiguous ID prefix '3' matches 2 tasks:
+  3de9f82b (任务标题一)
+  3fbf7c24 (任务标题二)
+Please use a longer prefix
+```
+:::
+
+### 从文件应用资源
+
+```bash
+ud apply -f <file>
+ud apply -f -  # 从标准输入读取
+```
+
+从带有 YAML frontmatter 的 Markdown 文件创建或更新资源。文件是唯一的数据源：
+- 如果 frontmatter 中有 `id` → **更新**现有任务
+- 如果没有 `id` → **创建**新任务
+
+目前支持 `.md` 文件。YAML 支持将在未来版本中添加。
+
+**标志：**
+- `-f, --file`：要应用的文件（必需，使用 `-` 从标准输入读取）
+
+**文件格式：**
+```markdown
+---
+id: abc123          # 可选 - 如果存在则更新现有任务
+title: 任务标题
+status: in-progress
+tags:
+  - work
+  - urgent
+deadline: 2025-03-15
+---
+
+任务描述内容在这里。
+支持多行。
+```
+
+**支持的字段：**
+| 字段 | 类型 | 说明 |
+|------|------|------|
+| `id` | 字符串 | 任务 ID（可选 — 存在则更新，不存在则创建） |
+| `title` | 字符串 | 任务标题（创建新任务时必需） |
+| `status` | 字符串 | 任务状态 |
+| `tags` | 数组 | 标签列表 |
+| `deadline` | 字符串 | 截止日期（YYYY-MM-DD 或 ISO 8601） |
+| (正文) | 字符串 | 成为任务描述 |
+
+**有效的状态值：**
+- `todo` - 未开始
+- `in-progress` - 进行中
+- `pending` - 等待中
+- `stale` - 已停滞
+- `done` - 已完成
+- `archived` - 已归档
+
+**示例：**
+```bash
+# 创建新任务（文件中无 id）
+ud apply -f task.md
+
+# 更新现有任务（文件中有 id）
+ud apply -f task.md
+
+# 从标准输入
+cat task.md | ud apply -f -
+
+# 快速从标准输入创建
+echo '---
+title: 新任务
+status: todo
+---
+描述内容。' | ud apply -f -
+```
+
+**截止日期格式：**
+```yaml
+# 仅日期（UTC 午夜）
+deadline: 2025-03-15
+deadline: 2025/03/15
+
+# 带时间
+deadline: 2025-03-15T14:30:00
+deadline: 2025-03-15T14:30:00Z
+deadline: 2025-03-15T14:30:00+08:00
+```
+
+### 删除资源
+
+```bash
+ud delete task <id>
+```
+
+按 ID 删除任务。
+
+**示例：**
+```bash
+ud delete task abc123
+ud delete task 3de9f82b
+```
+
+---
+
+## 任务命令
+
+:::caution 已弃用的命令
+以下 `ud task` 子命令已**弃用**，将在未来版本中移除。它们仍然可用，但会打印弃用警告。请使用 kubectl 风格的命令代替：
+
+| 已弃用 | 替代命令 |
+|--------|----------|
+| `ud task list` | `ud get task` |
+| `ud task view <id>` | `ud describe task <id>` |
+| `ud task apply -f <file>` | `ud apply -f <file>` |
+| `ud task delete <id>` | `ud delete task <id>` |
+:::
 
 ### 创建任务
 
@@ -134,32 +283,6 @@ ud task create -f requirements.md
 成为任务描述。
 ```
 
-### 查看任务
-
-```bash
-ud task view <id>
-```
-
-显示任务详情，包括标题、描述、状态、标签、截止日期和时间戳。
-
-:::tip 短 ID 支持
-所有接受任务 ID 的命令都支持**前缀匹配**。你可以使用 `task list` 显示的 8 位短 ID，或者更短的前缀（只要唯一即可）。
-
-```bash
-ud task view 3de9f82b    # 列表中的完整短 ID
-ud task view 3de         # 更短的前缀（如果唯一）
-ud task view 3de9f82b-fc49-4e84-b288-9ae3174f69ae  # 完整 UUID 也可以
-```
-
-如果前缀匹配多个任务，会显示错误并列出匹配项：
-```
-Error: ambiguous ID prefix '3' matches 2 tasks:
-  3de9f82b (任务标题一)
-  3fbf7c24 (任务标题二)
-Please use a longer prefix
-```
-:::
-
 ### 标记任务完成
 
 ```bash
@@ -178,84 +301,6 @@ ud task edit <id>
 - 第一行：标题
 - 空行
 - 其余：描述
-
-### 从文件应用更改
-
-```bash
-ud task apply -f <file> <id>
-ud task apply -f - <id>  # 从标准输入读取
-```
-
-使用带有 YAML frontmatter 的 Markdown 文件更新任务。只更新指定的字段。
-
-**标志：**
-- `-f, --file`：带 frontmatter 的 Markdown 文件（必需，使用 `-` 从标准输入读取）
-
-**文件格式：**
-```markdown
----
-title: 更新后的任务标题
-status: in-progress
-tags:
-  - work
-  - urgent
-deadline: 2025-03-15
----
-
-任务描述内容在这里。
-支持多行。
-```
-
-**支持的字段：**
-| 字段 | 类型 | 说明 |
-|------|------|------|
-| `title` | 字符串 | 任务标题 |
-| `status` | 字符串 | 任务状态 |
-| `tags` | 数组 | 标签列表 |
-| `deadline` | 字符串 | 截止日期（YYYY-MM-DD 或 ISO 8601） |
-| (正文) | 字符串 | 成为任务描述 |
-
-**有效的状态值：**
-- `todo` - 未开始
-- `in-progress` - 进行中
-- `pending` - 等待中
-- `stale` - 已停滞
-- `done` - 已完成
-- `archived` - 已归档
-
-**示例：**
-```bash
-# 从文件更新
-ud task apply -f task.md abc123
-
-# 从标准输入更新
-cat task.md | ud task apply -f - abc123
-
-# 通过 echo 传入
-echo '---
-title: 快速更新
-status: done
----' | ud task apply -f - abc123
-```
-
-**截止日期格式：**
-```yaml
-# 仅日期（UTC 午夜）
-deadline: 2025-03-15
-deadline: 2025/03/15
-
-# 带时间
-deadline: 2025-03-15T14:30:00
-deadline: 2025-03-15T14:30:00Z
-deadline: 2025-03-15T14:30:00+08:00
-```
-
-### 删除任务
-
-```bash
-ud task delete <id>
-ud task rm <id>  # 别名
-```
 
 ### 查询任务
 
@@ -522,10 +567,12 @@ export EDITOR=vim
 
 使用 UnderControl CLI 管理项目任务：
 
-- 查看任务：`ud task list`
+- 列出任务：`ud get task`
+- 查看任务详情：`ud describe task <id>`
 - 创建任务：`ud task create "标题" -d "描述"`
 - 完成任务：`ud task done <id>`
-- 更新任务：`ud task apply -f task.md <id>`
+- 更新任务：`ud apply -f task.md`
+- 删除任务：`ud delete task <id>`
 
 在实现功能前，先查看相关任务获取上下文。
 ```
@@ -535,16 +582,12 @@ export EDITOR=vim
 创建模板文件并应用到多个任务：
 
 ```bash
-# 创建状态更新模板
-cat > done.md << 'EOF'
----
-status: done
----
-EOF
-
-# 应用到多个任务
+# 为每个任务创建状态更新模板
 for id in abc123 def456 ghi789; do
-  ud task apply -f done.md $id
+  echo "---
+id: $id
+status: done
+---" | ud apply -f -
 done
 ```
 
@@ -552,11 +595,12 @@ done
 
 ```bash
 # 查看任务，复制内容
-ud task view abc123
+ud describe task abc123
 
-# 创建包含更新的 markdown 文件
+# 创建包含更新的 markdown 文件（包含 id 用于更新）
 cat > update.md << 'EOF'
 ---
+id: abc123
 title: 更新后的标题
 status: in-progress
 tags:
@@ -568,7 +612,7 @@ tags:
 EOF
 
 # 应用更改
-ud task apply -f update.md abc123
+ud apply -f update.md
 ```
 
 ---
