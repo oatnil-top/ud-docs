@@ -18,6 +18,20 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.27.2 (2026-02-10)
+
+### New Features
+
+#### CLI File Upload & Attachment
+
+Upload files and attach resources to tasks directly from the terminal — no need to open the web app.
+
+- `ud upload resource <file>` — Upload a file to your resource library
+- `ud attach resource <resource-id> --entity-type <type> --entity-id <id>` — Attach a resource to a task or other entity
+- Upload and attach in one step by specifying the target entity during upload
+
+---
+
 ## v0.27.1 (2026-02-10)
 
 ### New Features
