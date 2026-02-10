@@ -18,6 +18,20 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.27.1 (2026-02-10)
+
+### New Features
+
+#### Dataflow AI Generation
+
+Generate dataflow diagrams using AI directly in the diagram editor. Supports multiple AI providers — describe your data flow in natural language and get a diagram instantly.
+
+### Improvements
+
+- Sidebar auto-hides when editing diagrams for more workspace
+
+---
+
 ## v0.27.0 (2026-02-10)
 
 ### New Features
