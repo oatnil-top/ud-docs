@@ -18,6 +18,22 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.27.0 (2026-02-10)
+
+### New Features
+
+#### Tag Management Page
+
+A new dedicated page for browsing and managing your tags. The left panel shows all tags with usage counts, and the right panel displays tasks for the selected tag.
+
+- Master-detail two-column layout for easy navigation
+- Sort tags by most used, alphabetical, or recent
+- Search to filter tags quickly
+- View all tasks associated with a tag, with pagination
+- Delete unused tags directly from the list
+
+---
+
 ## v0.26.0 (2026-02-09)
 
 ### New Features
