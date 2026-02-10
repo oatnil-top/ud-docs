@@ -437,6 +437,119 @@ ud task done abc123
 
 ---
 
+## File Upload & Attachment Commands
+
+Upload files as resources and optionally attach them to entities like tasks or expenses. Files are uploaded via presigned URLs directly to cloud storage.
+
+### Upload a File
+
+```bash
+ud upload resource <file-path> [flags]
+```
+
+Upload a file as a resource. Optionally attach it to an entity in a single step.
+
+**Flags:**
+- `-t, --entity-type`: Entity type to attach to (e.g., `todolist`, `expense`)
+- `-e, --entity-id`: Entity ID to attach to (supports prefix matching for tasks)
+
+**Examples:**
+```bash
+# Upload a standalone file
+ud upload resource ./receipt.png
+
+# Upload and attach to a task
+ud upload resource ./design.pdf --entity-type todolist --entity-id abc123
+
+# Short flags
+ud upload resource ./photo.jpg -t todolist -e abc123
+
+# Upload a document to a task (partial ID)
+ud upload resource ./notes.txt -t todolist -e 3de
+```
+
+**Output:**
+```
+Uploading ./receipt.png...
+Uploaded: receipt.png
+  ID:   2a2e542e-0711-4e7f-aafb-09a432e71860
+  Type: image
+  Size: 102.4 KB
+  MIME: image/png
+```
+
+:::tip MIME Type Detection
+The CLI automatically detects MIME types from file extensions. Common mappings:
+- Images: `.png`, `.jpg`, `.gif`, `.webp`, `.svg` → `image`
+- Documents: `.pdf`, `.doc`, `.docx`, `.txt`, `.csv` → `document`
+- Diagrams: `.drawio`, `.drawio.png` → `diagram`
+- Other: all other extensions → `other`
+:::
+
+### Attach Existing Resource
+
+```bash
+ud attach resource <resource-id> --entity-type <type> --entity-id <id>
+```
+
+Link an already-uploaded resource to an entity. Both `--entity-type` and `--entity-id` are required.
+
+**Flags:**
+- `-t, --entity-type`: Entity type (required)
+- `-e, --entity-id`: Entity ID (required, supports prefix matching for tasks)
+
+**Supported entity types:**
+| Entity Type | Description |
+|-------------|-------------|
+| `todolist` | Tasks |
+| `expense` | Expenses |
+| `budget` | Budgets |
+| `account` | Accounts |
+
+**Examples:**
+```bash
+# Attach resource to a task
+ud attach resource 2a2e542e-0711-4e7f-aafb-09a432e71860 -t todolist -e abc123
+
+# Attach to an expense
+ud attach resource 2a2e542e -t expense -e def456
+```
+
+### Download a Resource
+
+To download a resource, use `ud entity get` to retrieve the presigned download URL, then download with `curl`:
+
+```bash
+# Get resource details (includes presigned download URL)
+ud entity get 2a2e542e-0711-4e7f-aafb-09a432e71860
+
+# Download using the presigned URL from the response
+curl -o receipt.png "https://storage.example.com/...?signature=..."
+```
+
+### Upload Workflow Example
+
+A typical workflow for attaching files to tasks:
+
+```bash
+# 1. Find the task
+ud get task --status in-progress
+
+# 2. Upload and attach a file
+ud upload resource ./screenshot.png -t todolist -e 3de9f82b
+
+# 3. Verify the attachment
+ud describe task 3de9f82b
+# Shows: [2a2e542e] screenshot.png (image/png, 102.4 KB)
+
+# 4. Later, download the file
+ud entity get 2a2e542e
+# Copy the presignedUrl from the output
+curl -o screenshot.png "<presigned-url>"
+```
+
+---
+
 ## TUI Mode
 
 Run `ud` without arguments to enter the interactive terminal UI.

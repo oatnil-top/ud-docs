@@ -437,6 +437,119 @@ ud task done abc123
 
 ---
 
+## 文件上传与附件命令
+
+上传文件作为资源，并可选择性地将其附加到任务或费用等实体。文件通过预签名 URL 直接上传到云存储。
+
+### 上传文件
+
+```bash
+ud upload resource <文件路径> [flags]
+```
+
+上传文件作为资源。可选择同时附加到某个实体。
+
+**标志：**
+- `-t, --entity-type`：要附加到的实体类型（如 `todolist`、`expense`）
+- `-e, --entity-id`：要附加到的实体 ID（任务支持前缀匹配）
+
+**示例：**
+```bash
+# 上传独立文件
+ud upload resource ./receipt.png
+
+# 上传并附加到任务
+ud upload resource ./design.pdf --entity-type todolist --entity-id abc123
+
+# 使用短标志
+ud upload resource ./photo.jpg -t todolist -e abc123
+
+# 上传文档到任务（部分 ID）
+ud upload resource ./notes.txt -t todolist -e 3de
+```
+
+**输出：**
+```
+Uploading ./receipt.png...
+Uploaded: receipt.png
+  ID:   2a2e542e-0711-4e7f-aafb-09a432e71860
+  Type: image
+  Size: 102.4 KB
+  MIME: image/png
+```
+
+:::tip MIME 类型自动检测
+CLI 会根据文件扩展名自动检测 MIME 类型。常见映射：
+- 图片：`.png`、`.jpg`、`.gif`、`.webp`、`.svg` → `image`
+- 文档：`.pdf`、`.doc`、`.docx`、`.txt`、`.csv` → `document`
+- 图表：`.drawio`、`.drawio.png` → `diagram`
+- 其他：所有其他扩展名 → `other`
+:::
+
+### 附加已有资源
+
+```bash
+ud attach resource <资源ID> --entity-type <类型> --entity-id <ID>
+```
+
+将已上传的资源链接到实体。`--entity-type` 和 `--entity-id` 均为必填。
+
+**标志：**
+- `-t, --entity-type`：实体类型（必填）
+- `-e, --entity-id`：实体 ID（必填，任务支持前缀匹配）
+
+**支持的实体类型：**
+| 实体类型 | 说明 |
+|----------|------|
+| `todolist` | 任务 |
+| `expense` | 费用 |
+| `budget` | 预算 |
+| `account` | 账户 |
+
+**示例：**
+```bash
+# 将资源附加到任务
+ud attach resource 2a2e542e-0711-4e7f-aafb-09a432e71860 -t todolist -e abc123
+
+# 附加到费用
+ud attach resource 2a2e542e -t expense -e def456
+```
+
+### 下载资源
+
+使用 `ud entity get` 获取预签名下载 URL，然后用 `curl` 下载：
+
+```bash
+# 获取资源详情（包含预签名下载 URL）
+ud entity get 2a2e542e-0711-4e7f-aafb-09a432e71860
+
+# 使用响应中的预签名 URL 下载
+curl -o receipt.png "https://storage.example.com/...?signature=..."
+```
+
+### 上传工作流示例
+
+为任务附加文件的典型工作流：
+
+```bash
+# 1. 找到任务
+ud get task --status in-progress
+
+# 2. 上传并附加文件
+ud upload resource ./screenshot.png -t todolist -e 3de9f82b
+
+# 3. 验证附件
+ud describe task 3de9f82b
+# 显示：[2a2e542e] screenshot.png (image/png, 102.4 KB)
+
+# 4. 之后下载文件
+ud entity get 2a2e542e
+# 复制输出中的 presignedUrl
+curl -o screenshot.png "<presigned-url>"
+```
+
+---
+
 ## TUI 模式
 
 不带参数运行 `ud` 进入交互式终端界面。
