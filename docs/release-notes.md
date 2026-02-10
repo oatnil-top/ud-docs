@@ -18,6 +18,25 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.26.0 (2026-02-09)
+
+### New Features
+
+#### Tag Autocomplete
+
+All tag inputs now show smart suggestions from your existing tags. Suggestions appear immediately when you focus the input — no typing required. The suggestion dropdown stays open when selecting multiple tags for faster batch tagging.
+
+### Improvements
+
+- Tags now display as `#tag` pill badges consistently across the app
+- Tag names now support special characters
+
+### Bug Fixes
+
+- Fixed tag suggestions not refreshing after saving task tags
+
+---
+
 ## v0.25.5 (2026-02-09)
 
 ### New Features
