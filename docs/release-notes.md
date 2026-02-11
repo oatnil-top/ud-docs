@@ -18,6 +18,26 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.28.0 (2026-02-11)
+
+### New Features
+
+#### UDQ Inline Task Query Blocks
+
+Embed dynamic task queries directly in Markdown documents. Use `udq` code blocks to query tasks by status, priority, tags, and more — results render live inline.
+
+#### Discord Community
+
+Added a Discord invite link to the contact page for easy access to the community.
+
+### Bug Fixes
+
+- Fixed sidebar overlapping fullscreen editors (DrawIO diagrams, Mind Maps)
+- Fixed duplicate API key label on profile page
+- Fixed profile page content not using full available width
+
+---
+
 ## v0.27.2 (2026-02-10)
 
 ### New Features
