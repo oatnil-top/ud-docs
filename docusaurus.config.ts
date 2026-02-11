@@ -6,35 +6,24 @@ import type * as Preset from '@docusaurus/preset-classic';
 const versionConfig = require('./version.json');
 const VERSION = versionConfig.version;
 
-// This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
-
 const config: Config = {
   title: 'UnderControl',
   tagline: 'Personal budget and expense management',
   favicon: 'img/favicon.svg',
 
-  // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
-    v4: true, // Improve compatibility with the upcoming Docusaurus v4
+    v4: true,
   },
 
-  // Set the production url of your site here
   url: 'https://ud-docs.lintao-amons.workers.dev',
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
 
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'oatnil-top', // Usually your GitHub org/user name.
-  projectName: 'ud-docs', // Usually your repo name.
+  organizationName: 'oatnil-top',
+  projectName: 'ud-docs',
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
 
-  // Even if you don't use internationalization, you can use this field to set
-  // useful metadata like html lang. For example, if your site is Chinese, you
-  // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'zh-Hans'],
@@ -58,8 +47,6 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/oatnil-top/ud-docs/tree/main/',
         },
@@ -69,11 +56,8 @@ const config: Config = {
             type: ['rss', 'atom'],
             xslt: true,
           },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/oatnil-top/ud-docs/tree/main/',
-          // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
           onUntruncatedBlogPosts: 'warn',
@@ -95,11 +79,10 @@ const config: Config = {
       items: [
         {
           type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
+          sidebarId: 'docsSidebar',
           position: 'left',
           label: 'Docs',
         },
-        {to: '/blog', label: 'Blog', position: 'left'},
         {
           type: 'html',
           position: 'right',
@@ -107,6 +90,11 @@ const config: Config = {
         },
         {
           type: 'localeDropdown',
+          position: 'right',
+        },
+        {
+          to: '/contact',
+          label: 'Contact',
           position: 'right',
         },
         {
@@ -129,6 +117,23 @@ const config: Config = {
           ],
         },
         {
+          title: 'Community',
+          items: [
+            {
+              label: 'Discord',
+              href: 'https://discord.gg/vkw2nhxE',
+            },
+            {
+              label: 'GitHub Discussions',
+              href: 'https://github.com/oatnil-top/ud-docs/discussions',
+            },
+            {
+              label: 'Contact',
+              to: '/contact',
+            },
+          ],
+        },
+        {
           title: 'Resources',
           items: [
             {
@@ -141,17 +146,8 @@ const config: Config = {
             },
           ],
         },
-        {
-          title: 'More',
-          items: [
-            {
-              label: 'Blog',
-              to: '/blog',
-            },
-          ],
-        },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} UnderControl Project. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} UnderControl Project.`,
     },
     prism: {
       theme: prismThemes.github,

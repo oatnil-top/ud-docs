@@ -533,5 +533,81 @@
   "homepage.footer.pricing": {
     "message": "定价",
     "description": "Footer pricing link"
+  },
+  "contact.meta.title": {
+    "message": "联系我们",
+    "description": "The contact page meta title"
+  },
+  "contact.meta.description": {
+    "message": "联系 UnderControl 团队。邮件、GitHub、Discord 或微信。",
+    "description": "The contact page meta description"
+  },
+  "contact.hero.title": {
+    "message": "联系我们",
+    "description": "Contact page hero title"
+  },
+  "contact.hero.subtitle": {
+    "message": "我们很乐意听取您的意见。选择最适合您的联系方式。",
+    "description": "Contact page hero subtitle"
+  },
+  "contact.methods.email.title": {
+    "message": "电子邮件",
+    "description": "Email contact method title"
+  },
+  "contact.methods.email.description": {
+    "message": "用于一般咨询、功能请求或商务讨论。我们通常会在 24-48 小时内回复。",
+    "description": "Email contact method description"
+  },
+  "contact.methods.email.linkText": {
+    "message": "发送邮件",
+    "description": "Email contact method link text"
+  },
+  "contact.methods.github.title": {
+    "message": "GitHub Issues",
+    "description": "GitHub contact method title"
+  },
+  "contact.methods.github.description": {
+    "message": "发现了 Bug 或有技术问题？在 GitHub 上提交 Issue 可以更快解决。",
+    "description": "GitHub contact method description"
+  },
+  "contact.methods.github.linkText": {
+    "message": "提交 Issue",
+    "description": "GitHub contact method link text"
+  },
+  "contact.methods.discord.title": {
+    "message": "Discord",
+    "description": "Discord contact method title"
+  },
+  "contact.methods.discord.description": {
+    "message": "加入我们的 Discord 服务器，进行实时聊天、获取支持和参与社区讨论。",
+    "description": "Discord contact method description"
+  },
+  "contact.methods.discord.linkText": {
+    "message": "加入 Discord",
+    "description": "Discord contact method link text"
+  },
+  "contact.methods.community.title": {
+    "message": "社区",
+    "description": "Community contact method title"
+  },
+  "contact.methods.community.description": {
+    "message": "加入讨论、分享想法，在 GitHub Discussions 中与其他用户交流。",
+    "description": "Community contact method description"
+  },
+  "contact.methods.community.linkText": {
+    "message": "加入讨论",
+    "description": "Community contact method link text"
+  },
+  "contact.info.title": {
+    "message": "其他信息",
+    "description": "Additional info section title"
+  },
+  "contact.info.responseTime": {
+    "message": "我们会在工作日的 24-48 小时内回复所有咨询。",
+    "description": "Response time info"
+  },
+  "contact.info.languages": {
+    "message": "我们支持中文和英文沟通。",
+    "description": "Supported languages info"
   }
 }

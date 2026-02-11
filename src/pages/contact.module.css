@@ -1,0 +1,231 @@
+/**
+ * Contact page — Flat and Minimal, Swiss Style
+ * Mirrors the homepage design patterns from index.module.css
+ */
+
+/* Main Container */
+.mainContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  border-left: 1px solid var(--ifm-color-emphasis-200);
+  border-right: 1px solid var(--ifm-color-emphasis-200);
+  background: var(--ifm-background-color);
+}
+
+/* Hero Section */
+.heroSection {
+  padding: 80px 48px 60px;
+  text-align: center;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.heroTitle {
+  font-size: 40px;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--ifm-font-color-base);
+}
+
+.heroSubtitle {
+  font-size: 16px;
+  color: var(--ifm-color-emphasis-600);
+  max-width: 500px;
+  margin: 0 auto;
+  font-weight: 400;
+}
+
+/* Cards Section */
+.cardsSection {
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+}
+
+.card {
+  padding: 40px;
+  border-right: 1px solid var(--ifm-color-emphasis-200);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 280px;
+  transition: background 0.2s;
+}
+
+.card:last-child {
+  border-right: none;
+}
+
+.card:hover {
+  background: var(--ifm-color-emphasis-100);
+}
+
+.cardIcon {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  color: var(--ifm-font-color-base);
+}
+
+.cardTitle {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  color: var(--ifm-font-color-base);
+}
+
+.cardDescription {
+  font-size: 14px;
+  color: var(--ifm-color-emphasis-600);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.cardButton {
+  margin-top: 24px;
+  align-self: flex-start;
+}
+
+.cardButtonOutline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.cardButtonOutline:hover {
+  background: var(--ifm-color-emphasis-100);
+  color: var(--ifm-font-color-base);
+  text-decoration: none;
+}
+
+/* Info Section */
+.infoSection {
+  padding: 48px;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.infoTitle {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+  color: var(--ifm-font-color-base);
+}
+
+.infoContent {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.infoContent p {
+  font-size: 14px;
+  color: var(--ifm-color-emphasis-600);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Footer */
+.footerSection {
+  padding: 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background: var(--ifm-background-color);
+}
+
+.footerBrand {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footerLogo {
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: -0.02em;
+  color: var(--ifm-font-color-base);
+}
+
+.footerCopyright {
+  font-size: 11px;
+  color: var(--ifm-color-emphasis-500);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.footerLinks {
+  display: flex;
+  gap: 32px;
+}
+
+.footerLink {
+  font-size: 13px;
+  color: var(--ifm-color-emphasis-600);
+  text-decoration: none;
+}
+
+.footerLink:hover {
+  color: var(--ifm-font-color-base);
+  text-decoration: none;
+}
+
+/* Responsive */
+@media screen and (max-width: 996px) {
+  .heroSection {
+    padding: 60px 24px 40px;
+  }
+
+  .heroTitle {
+    font-size: 32px;
+  }
+
+  .cardsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    border-right: none;
+    border-bottom: 1px solid var(--ifm-color-emphasis-200);
+    min-height: auto;
+    padding: 32px;
+  }
+
+  .card:last-child {
+    border-bottom: none;
+  }
+
+  .infoSection {
+    padding: 32px 24px;
+  }
+
+  .footerSection {
+    flex-direction: column;
+    gap: 32px;
+    padding: 32px 24px;
+  }
+
+  .footerLinks {
+    flex-wrap: wrap;
+    gap: 16px 32px;
+  }
+}
