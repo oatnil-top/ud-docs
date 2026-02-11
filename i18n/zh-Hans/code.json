@@ -609,5 +609,677 @@
   "contact.info.languages": {
     "message": "我们支持中文和英文沟通。",
     "description": "Supported languages info"
+  },
+  "privacy.meta.title": {
+    "message": "隐私政策",
+    "description": "The privacy page meta title"
+  },
+  "privacy.meta.description": {
+    "message": "一个独立开发者关于数据隐私的真心话。您的数据，您做主。",
+    "description": "The privacy page meta description"
+  },
+  "privacy.title": {
+    "message": "隐私政策",
+    "description": "Privacy page title"
+  },
+  "privacy.subtitle": {
+    "message": "一个独立开发者关于数据隐私的真心话",
+    "description": "Privacy page subtitle"
+  },
+  "privacy.lastUpdated": {
+    "message": "最后更新：2025年12月",
+    "description": "Privacy page last updated date"
+  },
+  "privacy.sections.honestTake.title": {
+    "message": "说点真心话",
+    "description": "Honest take section title"
+  },
+  "privacy.sections.honestTake.p1": {
+    "message": "我是一个独立开发者，不是什么大公司。我做 UnderControl 的一大初衷，就是想把自己的敏感数据——任务、财务、个人笔记——完全掌控在自己手里，而不是交给大公司。我先是为自己做的，现在分享给大家。",
+    "description": "Honest take paragraph 1"
+  },
+  "privacy.sections.honestTake.p2": {
+    "message": "我对你的数据没有任何兴趣、能力、精力或动机去做什么。话虽如此，我理解你可能不完全信任我——你本来就不应该盲目信任网上的任何人。那些有专业安全团队的大公司都会被黑客攻破，你凭什么信任一个独立开发者？你完全有权保持怀疑。",
+    "description": "Honest take paragraph 2"
+  },
+  "privacy.sections.yourChoices.title": {
+    "message": "你的选择",
+    "description": "Your choices section title"
+  },
+  "privacy.sections.yourChoices.p1_before": {
+    "message": "所以我给你选择。你不必使用云服务。你可以用桌面应用——",
+    "description": "Your choices paragraph 1 before highlight"
+  },
+  "privacy.sections.yourChoices.p1_highlight": {
+    "message": "数据100%留在你的设备上，永远不会碰到任何服务器。或者你可以自托管——运行自己的实例，完全掌控，你的基础设施。",
+    "description": "Your choices paragraph 1 highlight"
+  },
+  "privacy.sections.yourChoices.p2": {
+    "message": "云服务存在是为了方便，不是因为我想要你的数据。如果隐私是你的首要考虑，就用本地版或自托管。我完全理解。",
+    "description": "Your choices paragraph 2"
+  },
+  "privacy.sections.whatWeCollect.title": {
+    "message": "服务器上保存什么",
+    "description": "What we collect section title"
+  },
+  "privacy.sections.whatWeCollect.p1": {
+    "message": "如果你使用云服务：账户信息（邮箱、用户名）和你创建的数据——任务、支出、预算等。我承诺不会查看你的数据，但你不必信任我。",
+    "description": "What we collect paragraph 1"
+  },
+  "privacy.sections.whatWeCollect.p2_highlight": {
+    "message": "选择桌面应用或者自部署，完全控制自己的数据",
+    "description": "What we collect highlight"
+  },
+  "privacy.sections.security.title": {
+    "message": "安全性",
+    "description": "Security section title"
+  },
+  "privacy.sections.security.p1": {
+    "message": "我尽力做好：全站 HTTPS，密码加密存储，数据库有安全防护。但我不是安全专家。如果你处理敏感数据，建议自托管或使用桌面应用。",
+    "description": "Security paragraph 1"
+  },
+  "privacy.sections.security.p2": {
+    "message": "对于自托管用户，安全掌握在你自己手中。保持服务器更新，遵循基本的安全实践。",
+    "description": "Security paragraph 2"
+  },
+  "privacy.options.desktop.title": {
+    "message": "桌面应用",
+    "description": "Desktop option title"
+  },
+  "privacy.options.desktop.description": {
+    "message": "100% 本地，仅存储在你的设备",
+    "description": "Desktop option description"
+  },
+  "privacy.options.selfhost.title": {
+    "message": "自托管",
+    "description": "Self-host option title"
+  },
+  "privacy.options.selfhost.description": {
+    "message": "你的服务器，完全掌控",
+    "description": "Self-host option description"
+  },
+  "privacy.contact.title": {
+    "message": "有问题？",
+    "description": "Privacy contact title"
+  },
+  "privacy.contact.description": {
+    "message": "有任何问题或顾虑，直接联系我。我是一个真人，不是工单系统。",
+    "description": "Privacy contact description"
+  },
+  "privacy.contact.button": {
+    "message": "联系我",
+    "description": "Privacy contact button"
+  },
+  "subscribe.meta.title": {
+    "message": "订阅与下载",
+    "description": "The subscribe page meta title"
+  },
+  "subscribe.meta.description": {
+    "message": "下载 UnderControl 桌面应用，订阅云服务，或在自己的基础设施上自托管。",
+    "description": "The subscribe page meta description"
+  },
+  "subscribe.whatsNew": {
+    "message": "最新动态",
+    "description": "What's new badge text"
+  },
+  "subscribe.titleLine1": {
+    "message": "任务 · 知识 · 财富",
+    "description": "Subscribe hero title line 1"
+  },
+  "subscribe.titleLine2": {
+    "message": "一切尽在「掌控」",
+    "description": "Subscribe hero title line 2"
+  },
+  "subscribe.slogan": {
+    "message": "兼具 Jira 的强大、Obsidian 的灵活与 Expensify 的财务追踪——专为个人与团队打造的统一工作台。",
+    "description": "Subscribe slogan"
+  },
+  "subscribe.privacyNote": {
+    "message": "个人永久免费。使用离线桌面版本或自部署，数据完全自控，不分享给任何人。",
+    "description": "Subscribe privacy note"
+  },
+  "subscribe.cards.web.label": {
+    "message": "网页版",
+    "description": "Web card label"
+  },
+  "subscribe.cards.web.title": {
+    "message": "在线试用",
+    "description": "Web card title"
+  },
+  "subscribe.cards.web.description": {
+    "message": "访客快速体验，或注册账号多设备同步。无需任何配置。",
+    "description": "Web card description"
+  },
+  "subscribe.cards.web.button": {
+    "message": "启动网页应用",
+    "description": "Web card button"
+  },
+  "subscribe.cards.desktop.label": {
+    "message": "桌面版",
+    "description": "Desktop card label"
+  },
+  "subscribe.cards.desktop.title": {
+    "message": "下载应用",
+    "description": "Desktop card title"
+  },
+  "subscribe.cards.desktop.description": {
+    "message": "本地优先，数据保存在你的电脑上。可选配置远程服务器同步。",
+    "description": "Desktop card description"
+  },
+  "subscribe.cards.desktop.button": {
+    "message": "下载",
+    "description": "Desktop card button"
+  },
+  "subscribe.cards.selfhost.label": {
+    "message": "服务器",
+    "description": "Self-host card label"
+  },
+  "subscribe.cards.selfhost.title": {
+    "message": "自托管部署",
+    "description": "Self-host card title"
+  },
+  "subscribe.cards.selfhost.description": {
+    "message": "通过 Docker 部署，数据永远不会离开你的服务器。",
+    "description": "Self-host card description"
+  },
+  "subscribe.cards.selfhost.button": {
+    "message": "查看文档",
+    "description": "Self-host card button"
+  },
+  "subscribe.comingSoon": {
+    "message": "即将推出",
+    "description": "Coming soon button text"
+  },
+  "subscribe.saasSection.title": {
+    "message": "SAAS（托管云）",
+    "description": "SaaS section title"
+  },
+  "subscribe.saasSection.description": {
+    "message": "我们为您托管和管理一切。只需注册即可开始使用。",
+    "description": "SaaS section description"
+  },
+  "subscribe.saasSection.inviteCodeRequired": {
+    "message": "注册需要邀请码",
+    "description": "SaaS invite code note"
+  },
+  "subscribe.saasBasic.title": {
+    "message": "基础版",
+    "description": "SaaS Basic tier title"
+  },
+  "subscribe.saasBasic.badge": {
+    "message": "SAAS",
+    "description": "SaaS Basic badge"
+  },
+  "subscribe.saasBasic.description": {
+    "message": "从基本功能开始使用",
+    "description": "SaaS Basic description"
+  },
+  "subscribe.saasBasic.price": {
+    "message": "免费",
+    "description": "SaaS Basic price"
+  },
+  "subscribe.saasBasic.features.feature1": {
+    "message": "1 个用户账户",
+    "description": "SaaS Basic feature 1"
+  },
+  "subscribe.saasBasic.features.feature2": {
+    "message": "核心功能",
+    "description": "SaaS Basic feature 2"
+  },
+  "subscribe.saasBasic.features.feature3": {
+    "message": "云端托管",
+    "description": "SaaS Basic feature 3"
+  },
+  "subscribe.saasBasic.features.feature4": {
+    "message": "基础存储空间",
+    "description": "SaaS Basic feature 4"
+  },
+  "subscribe.saasBasic.features.feature5": {
+    "message": "社区支持",
+    "description": "SaaS Basic feature 5"
+  },
+  "subscribe.saasBasic.cta": {
+    "message": "获取邀请码",
+    "description": "SaaS Basic CTA"
+  },
+  "subscribe.saasMonthly.title": {
+    "message": "月付",
+    "description": "SaaS Monthly title"
+  },
+  "subscribe.saasMonthly.badge": {
+    "message": "SAAS",
+    "description": "SaaS Monthly badge"
+  },
+  "subscribe.saasMonthly.description": {
+    "message": "按月付费，随时取消",
+    "description": "SaaS Monthly description"
+  },
+  "subscribe.saasMonthly.price": {
+    "message": "$9.99",
+    "description": "SaaS Monthly price"
+  },
+  "subscribe.saasMonthly.priceUnit": {
+    "message": "/月",
+    "description": "SaaS Monthly price unit"
+  },
+  "subscribe.saasMonthly.features.feature1": {
+    "message": "1 个用户账户",
+    "description": "SaaS Monthly feature 1"
+  },
+  "subscribe.saasMonthly.features.feature2": {
+    "message": "所有核心功能",
+    "description": "SaaS Monthly feature 2"
+  },
+  "subscribe.saasMonthly.features.feature3": {
+    "message": "云端托管",
+    "description": "SaaS Monthly feature 3"
+  },
+  "subscribe.saasMonthly.features.feature4": {
+    "message": "自动备份",
+    "description": "SaaS Monthly feature 4"
+  },
+  "subscribe.saasMonthly.features.feature5": {
+    "message": "邮件支持",
+    "description": "SaaS Monthly feature 5"
+  },
+  "subscribe.saasMonthly.cta": {
+    "message": "获取邀请码",
+    "description": "SaaS Monthly CTA"
+  },
+  "subscribe.saasQuarterly.title": {
+    "message": "季付",
+    "description": "SaaS Quarterly title"
+  },
+  "subscribe.saasQuarterly.badge": {
+    "message": "SAAS",
+    "description": "SaaS Quarterly badge"
+  },
+  "subscribe.saasQuarterly.description": {
+    "message": "季度付费，节省 15%",
+    "description": "SaaS Quarterly description"
+  },
+  "subscribe.saasQuarterly.price": {
+    "message": "$25.47",
+    "description": "SaaS Quarterly price"
+  },
+  "subscribe.saasQuarterly.priceUnit": {
+    "message": "/3 个月",
+    "description": "SaaS Quarterly price unit"
+  },
+  "subscribe.saasQuarterly.originalPrice": {
+    "message": "$29.97",
+    "description": "SaaS Quarterly original price"
+  },
+  "subscribe.saasQuarterly.features.feature1": {
+    "message": "1 个用户账户",
+    "description": "SaaS Quarterly feature 1"
+  },
+  "subscribe.saasQuarterly.features.feature2": {
+    "message": "所有核心功能",
+    "description": "SaaS Quarterly feature 2"
+  },
+  "subscribe.saasQuarterly.features.feature3": {
+    "message": "云端托管",
+    "description": "SaaS Quarterly feature 3"
+  },
+  "subscribe.saasQuarterly.features.feature4": {
+    "message": "自动备份",
+    "description": "SaaS Quarterly feature 4"
+  },
+  "subscribe.saasQuarterly.features.feature5": {
+    "message": "优先支持",
+    "description": "SaaS Quarterly feature 5"
+  },
+  "subscribe.saasQuarterly.cta": {
+    "message": "获取邀请码",
+    "description": "SaaS Quarterly CTA"
+  },
+  "subscribe.saasYearly.title": {
+    "message": "年付",
+    "description": "SaaS Yearly title"
+  },
+  "subscribe.saasYearly.badge": {
+    "message": "SAAS",
+    "description": "SaaS Yearly badge"
+  },
+  "subscribe.saasYearly.description": {
+    "message": "年度付费，节省 30%",
+    "description": "SaaS Yearly description"
+  },
+  "subscribe.saasYearly.price": {
+    "message": "$83.88",
+    "description": "SaaS Yearly price"
+  },
+  "subscribe.saasYearly.priceUnit": {
+    "message": "/年",
+    "description": "SaaS Yearly price unit"
+  },
+  "subscribe.saasYearly.originalPrice": {
+    "message": "$119.88",
+    "description": "SaaS Yearly original price"
+  },
+  "subscribe.saasYearly.features.feature1": {
+    "message": "1 个用户账户",
+    "description": "SaaS Yearly feature 1"
+  },
+  "subscribe.saasYearly.features.feature2": {
+    "message": "所有核心功能",
+    "description": "SaaS Yearly feature 2"
+  },
+  "subscribe.saasYearly.features.feature3": {
+    "message": "云端托管",
+    "description": "SaaS Yearly feature 3"
+  },
+  "subscribe.saasYearly.features.feature4": {
+    "message": "自动备份",
+    "description": "SaaS Yearly feature 4"
+  },
+  "subscribe.saasYearly.features.feature5": {
+    "message": "优先支持",
+    "description": "SaaS Yearly feature 5"
+  },
+  "subscribe.saasYearly.cta": {
+    "message": "获取邀请码",
+    "description": "SaaS Yearly CTA"
+  },
+  "subscribe.desktopSection.title": {
+    "message": "桌面应用",
+    "description": "Desktop section title"
+  },
+  "subscribe.desktopSection.freeLabel": {
+    "message": "免费使用",
+    "description": "Desktop free label"
+  },
+  "subscribe.desktopSection.description": {
+    "message": "下载桌面应用，获得最佳的本地优先体验，并可选择云同步。",
+    "description": "Desktop section description"
+  },
+  "subscribe.desktopSection.hint": {
+    "message": "免注册登录，单人本地立即使用",
+    "description": "Desktop hint"
+  },
+  "subscribe.desktopSection.featuresTitle": {
+    "message": "为什么选择桌面版？",
+    "description": "Desktop features title"
+  },
+  "subscribe.desktopSection.selectPlatform": {
+    "message": "选择您的平台",
+    "description": "Desktop select platform"
+  },
+  "subscribe.desktopSection.features.feature1": {
+    "message": "本地优先：数据保存在您的电脑上",
+    "description": "Desktop feature 1"
+  },
+  "subscribe.desktopSection.features.feature2": {
+    "message": "完全离线可用，数据安全保存在您的设备上",
+    "description": "Desktop feature 2"
+  },
+  "subscribe.desktopSection.features.feature3": {
+    "message": "原生性能和系统集成",
+    "description": "Desktop feature 3"
+  },
+  "subscribe.desktopSection.features.feature4": {
+    "message": "可选远程服务器同步",
+    "description": "Desktop feature 4"
+  },
+  "subscribe.desktopSection.chinaNote": {
+    "message": "由于云存储预算有限，国内下载可能不可用，如有需要请联系我。感谢 Cloudflare R2 提供免费的海外下载服务！",
+    "description": "Desktop China note"
+  },
+  "subscribe.desktopSection.macosNote": {
+    "message": "macOS 用户：应用未进行代码签名（苹果开发者账号年费 $99，作为独立项目实在囊中羞涩）。下载后，请在终端中运行以下命令：",
+    "description": "Desktop macOS note"
+  },
+  "subscribe.shortcutsSection.title": {
+    "message": "Apple 快捷指令",
+    "description": "Shortcuts section title"
+  },
+  "subscribe.shortcutsSection.description": {
+    "message": "在 iPhone、iPad 或 Mac 上一键快速操作。",
+    "description": "Shortcuts section description"
+  },
+  "subscribe.shortcutsSection.featuresTitle": {
+    "message": "功能特点",
+    "description": "Shortcuts features title"
+  },
+  "subscribe.shortcutsSection.getShortcut": {
+    "message": "添加到快捷指令",
+    "description": "Shortcuts get shortcut"
+  },
+  "subscribe.shortcutsSection.addShortcut": {
+    "message": "获取快捷指令",
+    "description": "Shortcuts add shortcut"
+  },
+  "subscribe.shortcutsSection.requirement": {
+    "message": "需要 iOS 15+ 或 macOS 12+",
+    "description": "Shortcuts requirement"
+  },
+  "subscribe.shortcutsSection.features.feature1": {
+    "message": "一键创建任务或记录支出",
+    "description": "Shortcuts feature 1"
+  },
+  "subscribe.shortcutsSection.features.feature2": {
+    "message": "添加到主屏幕或小组件快速访问",
+    "description": "Shortcuts feature 2"
+  },
+  "subscribe.shortcutsSection.features.feature3": {
+    "message": "通过 Siri 触发：\"嘿 Siri，运行 [快捷指令名称]\"",
+    "description": "Shortcuts feature 3"
+  },
+  "subscribe.cliSection.title": {
+    "message": "命令行工具",
+    "description": "CLI section title"
+  },
+  "subscribe.cliSection.description": {
+    "message": "从终端访问你的任务。适合 SSH 远程会话、无界面服务器或 AI 编程助手。",
+    "description": "CLI section description"
+  },
+  "subscribe.cliSection.freeLabel": {
+    "message": "免费",
+    "description": "CLI free label"
+  },
+  "subscribe.cliSection.featuresTitle": {
+    "message": "使用场景",
+    "description": "CLI features title"
+  },
+  "subscribe.cliSection.selectPlatform": {
+    "message": "选择你的平台",
+    "description": "CLI select platform"
+  },
+  "subscribe.cliSection.downloadCLI": {
+    "message": "下载 CLI",
+    "description": "CLI download button"
+  },
+  "subscribe.cliSection.viewDocs": {
+    "message": "查看文档",
+    "description": "CLI view docs"
+  },
+  "subscribe.cliSection.homebrewInstall": {
+    "message": "通过 Homebrew 安装 (macOS)",
+    "description": "CLI homebrew install"
+  },
+  "subscribe.cliSection.homebrewNote": {
+    "message": "推荐 macOS 用户使用",
+    "description": "CLI homebrew note"
+  },
+  "subscribe.cliSection.manualInstall": {
+    "message": "手动安装（所有平台）",
+    "description": "CLI manual install"
+  },
+  "subscribe.cliSection.features.feature1": {
+    "message": "SSH 远程访问：在没有图形界面的服务器上管理任务",
+    "description": "CLI feature 1"
+  },
+  "subscribe.cliSection.features.feature2": {
+    "message": "AI 助手集成：让 Claude Code 或 Codex 访问你的笔记",
+    "description": "CLI feature 2"
+  },
+  "subscribe.cliSection.features.feature3": {
+    "message": "TUI 模式：支持 vim 快捷键的交互式终端界面",
+    "description": "CLI feature 3"
+  },
+  "subscribe.cliSection.features.feature4": {
+    "message": "单次命令：从脚本快速创建任务",
+    "description": "CLI feature 4"
+  },
+  "subscribe.selfHostedSection.title": {
+    "message": "自托管部署",
+    "description": "Self-hosted section title"
+  },
+  "subscribe.selfHostedSection.description": {
+    "message": "在您自己的基础设施上部署 UnderControl。您控制数据和托管。",
+    "description": "Self-hosted section description"
+  },
+  "subscribe.personalTier.title": {
+    "message": "个人版",
+    "description": "Personal tier title"
+  },
+  "subscribe.personalTier.badge": {
+    "message": "永久免费",
+    "description": "Personal tier badge"
+  },
+  "subscribe.personalTier.description": {
+    "message": "免费供个人使用",
+    "description": "Personal tier description"
+  },
+  "subscribe.personalTier.price": {
+    "message": "免费",
+    "description": "Personal tier price"
+  },
+  "subscribe.personalTier.features.feature1": {
+    "message": "1 个用户",
+    "description": "Personal tier feature 1"
+  },
+  "subscribe.personalTier.features.feature2": {
+    "message": "所有核心功能",
+    "description": "Personal tier feature 2"
+  },
+  "subscribe.personalTier.features.feature3": {
+    "message": "SQLite 数据库",
+    "description": "Personal tier feature 3"
+  },
+  "subscribe.personalTier.features.feature4": {
+    "message": "本地文件存储",
+    "description": "Personal tier feature 4"
+  },
+  "subscribe.personalTier.features.feature5": {
+    "message": "社区支持",
+    "description": "Personal tier feature 5"
+  },
+  "subscribe.personalTier.cta": {
+    "message": "开始使用",
+    "description": "Personal tier CTA"
+  },
+  "subscribe.proTier.title": {
+    "message": "专业版",
+    "description": "Pro tier title"
+  },
+  "subscribe.proTier.badge": {
+    "message": "需要许可证",
+    "description": "Pro tier badge"
+  },
+  "subscribe.proTier.description": {
+    "message": "适合小团队和家庭使用",
+    "description": "Pro tier description"
+  },
+  "subscribe.proTier.price": {
+    "message": "联系我们",
+    "description": "Pro tier price"
+  },
+  "subscribe.proTier.features.feature1": {
+    "message": "最多 20 个用户",
+    "description": "Pro tier feature 1"
+  },
+  "subscribe.proTier.features.feature2": {
+    "message": "所有核心功能 + 团队协作",
+    "description": "Pro tier feature 2"
+  },
+  "subscribe.proTier.features.feature3": {
+    "message": "SQLite 或 PostgreSQL",
+    "description": "Pro tier feature 3"
+  },
+  "subscribe.proTier.features.feature4": {
+    "message": "本地或云存储 (S3, R2)",
+    "description": "Pro tier feature 4"
+  },
+  "subscribe.proTier.features.feature5": {
+    "message": "邮件支持",
+    "description": "Pro tier feature 5"
+  },
+  "subscribe.proTier.cta": {
+    "message": "联系销售",
+    "description": "Pro tier CTA"
+  },
+  "subscribe.maxTier.title": {
+    "message": "高级版",
+    "description": "Max tier title"
+  },
+  "subscribe.maxTier.badge": {
+    "message": "赞助许可证",
+    "description": "Max tier badge"
+  },
+  "subscribe.maxTier.description": {
+    "message": "适合需要更多用户的大型团队",
+    "description": "Max tier description"
+  },
+  "subscribe.maxTier.price": {
+    "message": "联系我们",
+    "description": "Max tier price"
+  },
+  "subscribe.maxTier.features.feature1": {
+    "message": "自定义用户数量",
+    "description": "Max tier feature 1"
+  },
+  "subscribe.maxTier.features.feature2": {
+    "message": "所有核心功能 + 团队协作",
+    "description": "Max tier feature 2"
+  },
+  "subscribe.maxTier.features.feature3": {
+    "message": "SQLite 或 PostgreSQL",
+    "description": "Max tier feature 3"
+  },
+  "subscribe.maxTier.features.feature4": {
+    "message": "本地或云存储 (S3, R2)",
+    "description": "Max tier feature 4"
+  },
+  "subscribe.maxTier.features.feature5": {
+    "message": "优先支持",
+    "description": "Max tier feature 5"
+  },
+  "subscribe.maxTier.cta": {
+    "message": "联系销售",
+    "description": "Max tier CTA"
+  },
+  "subscribe.helpText": {
+    "message": "需要帮助开始使用？",
+    "description": "Help text"
+  },
+  "subscribe.docsLink": {
+    "message": "查看部署指南",
+    "description": "Docs link text"
+  },
+  "subscribe.contactLink": {
+    "message": "联系我们",
+    "description": "Contact link text"
+  },
+  "subscribe.donate.title": {
+    "message": "支持我",
+    "description": "Donate title"
+  },
+  "subscribe.donate.description": {
+    "message": "帮助我保持热情并给 AI 伙伴充值",
+    "description": "Donate description"
+  },
+  "subscribe.donate.githubDesc": {
+    "message": "月度赞助",
+    "description": "GitHub sponsors description"
+  },
+  "subscribe.donate.bmcDesc": {
+    "message": "一次性捐赠",
+    "description": "Buy me a coffee description"
+  },
+  "subscribe.donate.thanks": {
+    "message": "每一份贡献都帮助我变得更好！",
+    "description": "Donate thanks"
   }
 }

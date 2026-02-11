@@ -84,6 +84,11 @@ const config: Config = {
           label: 'Docs',
         },
         {
+          to: '/subscribe',
+          label: 'Pricing',
+          position: 'left',
+        },
+        {
           type: 'html',
           position: 'right',
           value: `<span class="navbar__item navbar__link" style="color: var(--ifm-color-primary); font-weight: 500;">v${VERSION}</span>`,
@@ -143,6 +148,10 @@ const config: Config = {
             {
               label: 'Documentation',
               href: 'https://github.com/oatnil-top/ud-docs',
+            },
+            {
+              label: 'Privacy Policy',
+              to: '/privacy',
             },
           ],
         },
