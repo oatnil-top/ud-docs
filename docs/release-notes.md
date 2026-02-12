@@ -18,6 +18,19 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.28.2 (2026-02-12)
+
+### Improvements
+
+- AI chat now sends task notes as context to the AI provider, enabling more informed responses
+
+### Bug Fixes
+
+- Fixed floating action buttons appearing on budget detail page
+- Fixed kanban task preview modal showing stale data
+
+---
+
 ## v0.28.1 (2026-02-12)
 
 ### New Features
