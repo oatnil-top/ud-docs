@@ -18,6 +18,14 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.28.3 (2026-02-12)
+
+### Bug Fixes
+
+- Fixed AI chat causing excessive network requests when tasks were selected as context
+
+---
+
 ## v0.28.2 (2026-02-12)
 
 ### Improvements
