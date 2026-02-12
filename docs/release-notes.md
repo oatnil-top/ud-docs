@@ -18,6 +18,27 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.28.4 (2026-02-12)
+
+### New Features
+
+#### AI Translation
+
+Select any text and translate it using AI directly from the bubble menu.
+
+#### Enhanced AI Bubble Menu
+
+- Added "Ask AI" button for quick AI assistance when editing
+- Added copy button to easily copy AI-generated results
+- Visual checkmark feedback after copying
+
+### Bug Fixes
+
+- Fixed crashes that could occur when using AI text refinement
+- Fixed AI chat input auto-resize behavior
+
+---
+
 ## v0.28.3 (2026-02-12)
 
 ### Bug Fixes
