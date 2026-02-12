@@ -18,6 +18,20 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.28.1 (2026-02-12)
+
+### New Features
+
+#### Queue Tasks Page
+
+A new page for viewing and monitoring background queue tasks. Retry failed tasks with one click.
+
+### Bug Fixes
+
+- Fixed empty state display in the queue page
+
+---
+
 ## v0.28.0 (2026-02-11)
 
 ### New Features
