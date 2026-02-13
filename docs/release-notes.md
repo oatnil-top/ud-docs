@@ -18,6 +18,42 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.29.0 (2026-02-13)
+
+### New Features
+
+#### Budget Projection Ledger
+
+View projected budget balance over time with the new projection ledger.
+
+#### Budget Breakdown Timeline
+
+A new timeline view showing budget plans and one-time adjustments:
+
+- Add plans and adjustments directly from the breakdown timeline
+- Sidebar shows related expenses for a complete budget overview
+
+#### Quick Navigation Links
+
+- Navigate directly from an expense to its linked account
+- Navigate directly from an expense to its linked budget
+- Add expenses directly from the budget detail page
+
+### Improvements
+
+- Account link icon now always visible when an account is set on an expense
+- Currency field shown (read-only) when creating a budget for clarity
+
+### Bug Fixes
+
+- Fixed budget dialogs using hardcoded CNY instead of the budget's own currency
+- Fixed date format issues in plan and adjustment dialogs
+- Fixed timeline alignment issues
+- Fixed redundant top bar in editor source mode
+- Fixed default theme in preference subscription
+
+---
+
 ## v0.28.5 (2026-02-13)
 
 ### New Features
