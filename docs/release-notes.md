@@ -18,6 +18,14 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.29.1 (2026-02-13)
+
+### Improvements
+
+- Saved queries now display a refresh icon for quick re-execution
+
+---
+
 ## v0.29.0 (2026-02-13)
 
 ### New Features
