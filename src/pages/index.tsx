@@ -393,7 +393,7 @@ function AiFeatureSection() {
           <div className={styles.mockupBody}>
             <div className={styles.mockupPlaceholder}>
               <MessageSquare size={48} strokeWidth={1} />
-              <div className={styles.mockupPlaceholderText}>AI Assistant GIF</div>
+              <div className={styles.mockupPlaceholderText}></div>
             </div>
           </div>
         </div>
@@ -545,7 +545,7 @@ function FooterSection() {
     <footer className={styles.footerSection}>
       <div className={styles.footerBrand}>
         <span className={styles.footerLogo}>UnderControl</span>
-        <span className={styles.footerCopyright}>© 2025</span>
+        <span className={styles.footerCopyright}>© {new Date().getFullYear()}</span>
       </div>
       <div className={styles.footerLinks}>
         <Link to="/docs/download" className={styles.footerLink}>
@@ -563,14 +563,13 @@ function FooterSection() {
 }
 
 export default function Home(): ReactNode {
-  const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
       title={translate({
         id: 'homepage.title',
-        message: 'Hello from {title}',
+        message: 'UnderControl',
         description: 'The homepage meta title',
-      }, {title: siteConfig.title})}
+      })}
       description={translate({
         id: 'homepage.description',
         message: 'Built by indie developer + AI. Self-host, work offline, deploy to internal network. Your data stays yours. Personal tier free forever. Zero trust, full control.',

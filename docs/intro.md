@@ -4,35 +4,42 @@ sidebar_position: 1
 
 # Welcome to UnderControl
 
-UnderControl is a self-hosted platform designed to help you manage and control your infrastructure with ease.
+UnderControl is a self-hosted personal finance and task management app. Track your budget, log expenses, manage tasks, and organize files — all in one place, with full ownership of your data.
 
 ## What is UnderControl?
 
-UnderControl provides a comprehensive solution for managing your infrastructure, featuring:
+Built by an indie developer + AI, UnderControl gives you a unified workspace for managing your money and time without relying on third-party services:
 
-- **User Account Management**: Create and manage user accounts with role-based access control
-- **API Integration**: RESTful API for programmatic access
-- **Self-Hosted**: Full control over your data and deployment
-- **Flexible Storage**: Support for local storage, S3-compatible storage, and more
-- **Multiple Database Options**: SQLite for simplicity, PostgreSQL for production
+- **Budget & Expense Tracking**: Create budgets, log expenses, and monitor your spending
+- **Task & Issue Tracker**: A lightweight issue tracker with markdown editing, bi-directional linking, and query syntax for advanced filtering
+- **AI-Driven Workflows**: Snap photos, send text or voice, and let AI log expenses or create tasks automatically. Integrates with Apple Shortcuts for one-click capture
+- **Resource Management**: Upload and attach files to tasks, expenses, or notes. Store locally or on S3-compatible storage
+- **Self-Hosted**: Deploy on your own infrastructure — your data never leaves your control
+- **Multi-Platform**: Access via web app, desktop app (macOS, Windows, Linux), or CLI
 
 ## Key Features
 
-### Account Management
-Manage user accounts, permissions, and access control with a user-friendly interface.
+### Budget & Expenses
+Track spending across multiple accounts and categories. Export your data anytime — no vendor lock-in.
 
-### API Access
-Integrate UnderControl into your existing workflows with a comprehensive RESTful API.
+### Task Management
+A personal issue tracker with full markdown support, bi-directional linking between tasks and notes, and powerful query syntax for filtering.
 
-### Multiple Deployment Options
-Deploy UnderControl using Docker Compose for simplicity or Kubernetes for enterprise-scale deployments.
+### AI Assistant
+Send images, text, or voice to the AI to quickly log expenses and create tasks. Seamlessly integrated with Apple Shortcuts for rapid capturing.
 
-### Security First
-Built-in JWT authentication, CORS support, and secure configuration management.
+### Resource Management
+Upload files via drag-and-drop, paste, or file selection. Attach resources to any task, expense, or note. Choose between local storage or remote S3.
+
+### CLI Tool
+Manage tasks and record progress directly from the terminal with the `ud` command-line tool.
+
+### Flexible Deployment
+Deploy via Docker Compose for simplicity or Kubernetes for larger setups. Supports SQLite for single-user and PostgreSQL for multi-user environments.
 
 ## Getting Started
 
-Ready to deploy UnderControl? Check out our [Self-Deployment Guide](./self-deployment.md) to choose the deployment method that fits your needs.
+Ready to deploy UnderControl? Check out our [Self-Deployment Guide](./self-deployment.md) to get started.
 
 ### Quick Links
 
@@ -46,9 +53,4 @@ Ready to deploy UnderControl? Check out our [Self-Deployment Guide](./self-deplo
 To deploy UnderControl, you'll need:
 
 - Docker and Docker Compose (or Kubernetes)
-- A valid license file
 - Basic understanding of container deployments
-
-## Support
-
-Need help? Check out our documentation or contact the UnderControl team for assistance.
