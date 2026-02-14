@@ -18,6 +18,40 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.30.0 (2026-02-14)
+
+### New Features
+
+#### Filesystem-Style Resource Browsing
+
+The resources page now provides a file system-like browsing experience:
+
+- Create folders to organize files into directories
+- Breadcrumb navigation for quick directory switching
+- Click `..` to navigate to parent directory
+- Both list view and gallery view support folder browsing
+
+#### Drag-and-Drop File Management
+
+- Drag files onto folders to move them
+- Drag files from desktop to upload directly into the current directory
+
+#### Sortable File List
+
+- Click column headers (Name, Size, Created, Updated) to sort files
+- Arrow indicators show current sort direction
+
+#### Quick Task Input in Kanban
+
+- Quickly add tasks with AI creation directly from kanban list view
+
+### Improvements
+
+- AI-recognized expense receipts are automatically filed to `/system/expense-from-vision/`
+- AI-recognized task images are automatically filed to `/system/task-from-vision/`
+
+---
+
 ## v0.29.1 (2026-02-13)
 
 ### Improvements
