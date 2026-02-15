@@ -147,10 +147,6 @@ const config: Config = {
           title: 'Resources',
           items: [
             {
-              label: 'Frontend Repository',
-              href: 'https://github.com/oatnil-top/ud-frontend',
-            },
-            {
               label: 'Documentation',
               href: 'https://github.com/oatnil-top/ud-docs',
             },
