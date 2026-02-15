@@ -151,6 +151,10 @@ const config: Config = {
               href: 'https://github.com/oatnil-top/ud-docs',
             },
             {
+              label: 'Chrome Extension',
+              href: 'https://github.com/oatnil-top/ud-chrome-extension',
+            },
+            {
               label: 'Privacy Policy',
               to: '/privacy',
             },
