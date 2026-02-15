@@ -18,6 +18,23 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.31.1 (2026-02-15)
+
+### Improvements
+
+#### Website Showcase Redesign
+
+- App showcase section redesigned with auto-playing slideshow featuring real product screenshots
+- SaaS subscription section redesigned with improved visual layout
+- Architecture diagram now supports interactive node previews — click nodes to see actual app screens
+- Architecture diagram updated with Desktop App, Apple Shortcuts, and storage option nodes
+
+### Bug Fixes
+
+- Fixed dialog accessibility issues
+
+---
+
 ## v0.31.0 (2026-02-15)
 
 ### New Features
