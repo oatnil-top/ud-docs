@@ -108,7 +108,7 @@ const config: Config = {
           position: 'right',
         },
         {
-          href: 'https://github.com/oatnil-top/ud-frontend',
+          href: 'https://github.com/oatnil-top/ud-docs',
           label: 'GitHub',
           position: 'right',
         },
