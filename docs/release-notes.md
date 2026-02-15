@@ -18,6 +18,29 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.31.0 (2026-02-15)
+
+### New Features
+
+#### Web Clipper (Chrome Extension)
+
+New Chrome browser extension to save web pages as UnderControl tasks:
+
+- Click the extension icon, edit the title, and save the entire page
+- Captures full-page HTML snapshots using SingleFile technology
+- Snapshots are automatically attached as resources to the new task
+- Web Clipper section added to the subscribe page with documentation link
+
+#### CLI Multi-Account Support
+
+New `--context` flag for ad-hoc context switching in the CLI:
+
+- Quickly access different accounts/servers without changing the default context
+- Example: `ud --context work get task` to temporarily use the work context
+- In-app documentation updated with full multi-account usage guide
+
+---
+
 ## v0.30.1 (2026-02-14)
 
 ### Bug Fixes
