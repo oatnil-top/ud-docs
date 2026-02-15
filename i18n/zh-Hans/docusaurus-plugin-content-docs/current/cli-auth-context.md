@@ -139,9 +139,41 @@ ud login --context work --api-url https://ud.company.com
 ud login --context personal
 ```
 
+## 使用 `--context` 临时切换上下文
+
+`--context` 全局参数让你可以在不切换默认上下文的情况下，临时使用其他上下文执行命令：
+
+```bash
+# 列出工作上下文的任务（不改变默认上下文）
+ud --context work get task
+
+# 查看 staging 上下文中的任务
+ud --context staging describe task abc123
+
+# 在不同账户中创建任务
+ud --context personal task create "买菜"
+
+# 使用指定上下文启动 TUI
+ud --context work
+```
+
+这是 **临时覆盖** — 不会修改配置文件中的 `current-context`。命令执行完成后，你的默认上下文保持不变。
+
+:::tip
+`--context` 参数是对其他上下文执行单次命令的推荐方式。只有需要永久切换时才使用 `ud config use-context`。
+:::
+
+### 优先级顺序
+
+CLI 按以下顺序（从高到低）确定使用哪个上下文：
+
+1. `--context` 命令行参数
+2. `UD_CONTEXT` 环境变量
+3. 配置文件中的 `current-context`
+
 ## 环境变量覆盖
 
-你可以使用环境变量覆盖上下文设置：
+你也可以使用环境变量覆盖上下文设置：
 
 | 变量 | 说明 |
 |------|------|
@@ -170,12 +202,13 @@ ud login --context personal --api-url https://api.undercontrol.app
 # 设置工作账户
 ud login --context work --api-url https://ud.company.com
 
-# 在它们之间切换
-ud config use-context personal
-ud task list  # 列出个人任务
+# 使用 --context 参数执行单次命令（推荐）
+ud --context personal get task  # 列出个人任务
+ud --context work get task      # 列出工作任务
 
-ud config use-context work
-ud task list  # 列出工作任务
+# 或永久切换默认上下文
+ud config use-context personal
+ud get task  # 列出个人任务
 ```
 
 ### 开发 + 生产 环境

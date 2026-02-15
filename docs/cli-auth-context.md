@@ -139,9 +139,41 @@ ud login --context work --api-url https://ud.company.com
 ud login --context personal
 ```
 
+## Ad-hoc Context with `--context` Flag
+
+The `--context` global flag lets you run any command against a different context without switching:
+
+```bash
+# List tasks from work context (without changing default)
+ud --context work get task
+
+# View a task in staging
+ud --context staging describe task abc123
+
+# Create a task in a different account
+ud --context personal task create "Buy groceries"
+
+# Launch TUI with a specific context
+ud --context work
+```
+
+This is a **temporary override** — it does not modify your `current-context` in the config file. Your default context remains unchanged after the command completes.
+
+:::tip
+The `--context` flag is the recommended way to run one-off commands against a different context. Use `ud config use-context` only when you want to permanently switch.
+:::
+
+### Priority Order
+
+When determining which context to use, the CLI checks in this order (highest priority first):
+
+1. `--context` flag
+2. `UD_CONTEXT` environment variable
+3. `current-context` in config file
+
 ## Environment Variable Overrides
 
-You can override context settings using environment variables:
+You can also override context settings using environment variables:
 
 | Variable | Description |
 |----------|-------------|
@@ -170,12 +202,13 @@ ud login --context personal --api-url https://api.undercontrol.app
 # Setup work account
 ud login --context work --api-url https://ud.company.com
 
-# Switch between them
-ud config use-context personal
-ud task list  # Lists personal tasks
+# Use --context flag for one-off commands (recommended)
+ud --context personal get task  # Lists personal tasks
+ud --context work get task      # Lists work tasks
 
-ud config use-context work
-ud task list  # Lists work tasks
+# Or switch default context permanently
+ud config use-context personal
+ud get task  # Lists personal tasks
 ```
 
 ### Development + Production
