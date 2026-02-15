@@ -84,6 +84,11 @@ const config: Config = {
           label: 'Docs',
         },
         {
+          to: '/docs/cookbook',
+          label: 'Cookbook',
+          position: 'left',
+        },
+        {
           to: '/subscribe',
           label: 'Pricing',
           position: 'left',
