@@ -18,6 +18,53 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.32.0 (2026-02-18)
+
+### New Features
+
+#### Income Tracking & Unified Transactions Page
+
+A new income tracking feature and unified transactions page to manage all your finances in one place:
+
+- Add and track income with a dedicated detail page and transaction click-through
+- Unified transactions page showing both expenses and income together
+- Auto-fill default title when creating income entries
+
+#### Cash Flow Summary
+
+New cash flow summary on the transactions page:
+
+- View real-time income and expense totals
+- Multi-currency support with separate buckets per currency
+- Automatic refresh when expenses or income are added or deleted
+
+#### Budget Progress Tracking
+
+New budget progress bars in the transactions sidebar for at-a-glance budget monitoring:
+
+- Individual progress bars for each budget
+- Total expense/budget summary progress bar
+
+#### Blind Mode
+
+New blind mode toggle on the transactions page to hide financial amounts for privacy.
+
+#### Task PDF Export
+
+Export tasks with their notes as PDF files for offline sharing and archiving.
+
+### Improvements
+
+- Simplified transaction icons and amount colors for a cleaner look
+- More compact cash flow summary layout
+
+### Bug Fixes
+
+- Fixed expenses not using the budget's currency when created from a budget
+- Fixed queue tasks list page auto-refreshing unnecessarily
+
+---
+
 ## v0.31.1 (2026-02-15)
 
 ### Improvements
