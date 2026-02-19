@@ -18,6 +18,33 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.33.0 (2026-02-19)
+
+### New Features
+
+#### Predefined Saved Queries for New Users
+
+New users automatically receive a set of predefined saved queries upon account creation, making it easier to get started.
+
+#### CLI Kanban Board Commands
+
+New CLI commands for kanban boards: get, describe, and board add.
+
+#### Income Preset Data for Visitors
+
+Visitor accounts now include preset income data for a more complete demo experience.
+
+### Improvements
+
+- Personal tier access tokens now last 7 days, reducing the need for frequent re-login
+- Homepage architecture diagram now includes clear descriptions for each component
+
+### Bug Fixes
+
+- Fixed transaction filters row height and alignment on mobile devices
+
+---
+
 ## v0.32.0 (2026-02-18)
 
 ### New Features
