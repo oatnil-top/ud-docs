@@ -18,6 +18,46 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.33.2 (2026-02-20)
+
+### New Features
+
+#### Account Asset Trend Chart
+
+Multi-line asset trend chart on the accounts homepage for visualizing asset changes:
+
+- Defaults to 3-month view with toggleable time ranges
+- Chart is collapsible (collapsed by default), click to expand
+- Data points marked at actual history dates
+
+#### Account History Comments
+
+Added comment field to account history records for documenting each change.
+
+#### CSV Export
+
+Export account data as CSV files directly from the browser.
+
+#### Resource Metadata
+
+Resource upload flow now supports adding metadata, with a new metadata update endpoint.
+
+#### CLI Folder Sync
+
+New `ud sync resource` command for recursively syncing local folders to the cloud.
+
+### Improvements
+
+- Visitor mode shows enriched account history preset data for better trend visualization
+
+### Bug Fixes
+
+- Fixed trend chart X-axis ticks showing the same date repeatedly
+- Fixed historical dates being lost when generating preset account history
+- Fixed visitor account history not aligned to consistent time points
+
+---
+
 ## v0.33.1 (2026-02-20)
 
 ### New Features
