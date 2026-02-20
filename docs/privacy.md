@@ -1,64 +1,57 @@
 ---
 title: Privacy Policy
-description: UnderControl Web Clipper privacy policy and data usage
+description: An honest take on data privacy from an indie developer
 sidebar_position: 20
 ---
 
 # Privacy Policy
 
-Last updated: 2026-02-20
+*An honest take on data privacy from an indie developer*
 
-This privacy policy describes how the UnderControl Web Clipper Chrome extension handles user data.
+*Last updated: December 2025*
 
-## Single Purpose
+## An Honest Take
 
-This extension captures the current web page as an HTML snapshot and Markdown file, then saves them locally or uploads to an UnderControl server.
+I'm an indie developer, not a big corporation. One of my main motivations for building UnderControl was that I wanted full control over my own sensitive data — tasks, finances, personal notes — instead of handing them to big tech companies. I built this for myself first, and now I'm sharing it with you.
 
-## Data Collection
+I have zero interest, ability, resources, or motivation to do anything with your data. That said, I understand if you don't fully trust me — you shouldn't blindly trust anyone online. Big companies with entire security teams still get breached. So why would you trust a solo developer? You have every right to be skeptical.
 
-### Data We Collect
+## Your Choices
 
-| Data Type | Collected | Purpose |
-|-----------|-----------|---------|
-| Website content | Yes | Page HTML and text are captured when you click "Save". Content is saved to your local disk or uploaded to your own UnderControl server. |
-| Authentication info | Yes | Login credentials (tokens, API key) are stored locally in chrome.storage.local to authenticate with your UnderControl server. Credentials are only sent to the server URL you configure. |
-| Personal identity | No | — |
-| Health info | No | — |
-| Financial info | No | — |
-| Personal communications | No | — |
-| Location | No | — |
-| Browsing history | No | The extension does NOT track or collect browsing history. It only processes the current page when you explicitly initiate a save. |
-| User activity | No | — |
+That's why I give you options. You don't have to use our cloud service. You can use the **Desktop App** — your data stays 100% on your device, never touches any server. Or you can **Self-Host** — run your own instance, full control, your infrastructure.
 
-### How Data Is Used
+The cloud service exists for convenience, not because I want your data. If privacy is your priority, go local or self-host. No hard feelings.
 
-- **Website content** is captured only when you explicitly click "Save Page" or "Save to Local". It is either downloaded to your local disk or sent to the UnderControl server URL you configured. No content is sent to any third party.
-- **Authentication credentials** are stored locally on your device using `chrome.storage.local`. They are only transmitted to the server URL you have configured in the extension settings.
+## What's Saved on the Server
 
-### Data Storage
+If you use our cloud service: account info (email, username) and the data you create — tasks, expenses, budgets, etc. I promise I won't look into your data, but you don't need to trust me.
 
-- All data is stored locally on your device using Chrome's `chrome.storage.local` API.
-- No data is stored on our servers. When using the "Save to UnderControl" feature, data is sent to the server URL you configure — this is typically your own self-hosted instance.
-- You can clear all stored data at any time by clicking "Logout" in the extension.
+> **Choose desktop app or self-host to fully control your data**
 
-## Remote Code
+## Security
 
-This extension does **not** use remote code. All scripts (SingleFile, Readability, Turndown) are bundled locally in the extension package.
+I do my best: HTTPS everywhere, passwords are hashed, database is secured. But I'm not a security expert. If you're handling sensitive data, self-host or use the desktop app.
 
-## Permissions
+For self-hosted users, security is in your hands. Keep your server updated and follow basic security practices.
 
-| Permission | Reason |
-|------------|--------|
-| `activeTab` | Read the content of the current tab when you click "Save" to generate an HTML snapshot and extract Markdown. |
-| `storage` | Persist your preferences and authentication state across browser sessions. |
-| `scripting` | Inject page capture scripts (SingleFile) and content extraction scripts (Readability + Turndown) into the active tab. |
-| `downloads` | Save captured HTML and Markdown files to your local disk. |
-| Host permissions (`<all_urls>`) | Capture any web page you visit. SingleFile needs access to page resources (images, styles, fonts) on any domain to create a complete self-contained HTML snapshot. |
+## Your Options
 
-## Open Source
+| Option | Description |
+|--------|-------------|
+| **Desktop App** | 100% local, your device only |
+| **Self-Host** | Your server, full control |
 
-The extension is open source under the AGPL-3.0 license. You can review the full source code at [github.com/oatnil-top/ud-chrome-extension](https://github.com/oatnil-top/ud-chrome-extension).
+## Web Clipper Chrome Extension
 
-## Contact
+The [Web Clipper](/docs/web-clipper) Chrome extension has additional privacy considerations:
 
-If you have questions about this privacy policy, please open an issue on [GitHub](https://github.com/oatnil-top/ud-chrome-extension/issues).
+- **Website content** is captured only when you explicitly click "Save". It is saved to your local disk or sent to your own UnderControl server. No content is sent to any third party.
+- **Authentication credentials** are stored locally on your device. They are only transmitted to the server URL you configure.
+- The extension does **not** use remote code. All scripts are bundled locally.
+- The extension does **not** track browsing history or user activity.
+
+## Questions?
+
+If you have questions or concerns, just reach out. I'm a real person, not a support ticket system.
+
+[Contact Me](/contact)
