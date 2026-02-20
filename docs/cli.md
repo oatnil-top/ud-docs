@@ -10,7 +10,30 @@ The UnderControl CLI (`ud`) is a command-line tool for managing tasks from the t
 
 ## Installation
 
-### Download
+### npm (Recommended)
+
+```bash
+# Global install
+npm install -g @oatnil/ud
+
+# Or run directly without installing
+npx @oatnil/ud --help
+```
+
+### Homebrew (macOS/Linux)
+
+```bash
+brew tap oatnil-top/ud
+brew install ud
+```
+
+### Install Script
+
+```bash
+curl -fsSL https://get.oatnil.com/ud | bash
+```
+
+### Manual Download
 
 Download the appropriate version for your platform:
 
@@ -21,8 +44,6 @@ Download the appropriate version for your platform:
 | Linux (x64) | `ud_x.x.x_linux_amd64.tar.gz` |
 | Linux (ARM64) | `ud_x.x.x_linux_arm64.tar.gz` |
 | Windows | `ud_x.x.x_windows_amd64.zip` |
-
-### Install
 
 **macOS / Linux:**
 

@@ -10,7 +10,30 @@ UnderControl CLI (`ud`) 是一个用于从终端管理任务的命令行工具�
 
 ## 安装
 
-### 下载
+### npm（推荐）
+
+```bash
+# 全局安装
+npm install -g @oatnil/ud
+
+# 或直接运行（无需安装）
+npx @oatnil/ud --help
+```
+
+### Homebrew（macOS/Linux）
+
+```bash
+brew tap oatnil-top/ud
+brew install ud
+```
+
+### 安装脚本
+
+```bash
+curl -fsSL https://get.oatnil.com/ud | bash
+```
+
+### 手动下载
 
 下载适合你平台的版本：
 
@@ -21,8 +44,6 @@ UnderControl CLI (`ud`) 是一个用于从终端管理任务的命令行工具�
 | Linux (x64) | `ud_x.x.x_linux_amd64.tar.gz` |
 | Linux (ARM64) | `ud_x.x.x_linux_arm64.tar.gz` |
 | Windows | `ud_x.x.x_windows_amd64.zip` |
-
-### 安装步骤
 
 **macOS / Linux：**
 
