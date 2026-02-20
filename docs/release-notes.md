@@ -18,6 +18,27 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.33.1 (2026-02-20)
+
+### New Features
+
+#### Command Palette Hint Bar Enhancements
+
+- Added toggle to hide/show the keyboard shortcut hint bar for a cleaner workspace
+- Added "Open in New Tab" and "Copy Link" shortcuts with clickable hint labels
+- Shortcut hints now display with text labels for better readability
+
+#### npm Distribution for ud CLI
+
+ud CLI is now available via npm: `npm install -g @oatnil/ud`
+
+### Improvements
+
+- Web Clipper now supports both Markdown and SingleFile HTML formats
+- Updated installation documentation with npm and Homebrew methods
+
+---
+
 ## v0.33.0 (2026-02-19)
 
 ### New Features
