@@ -103,6 +103,11 @@ const config: Config = {
           position: 'right',
         },
         {
+          to: '/docs/privacy',
+          label: 'Privacy',
+          position: 'right',
+        },
+        {
           to: '/contact',
           label: 'Contact',
           position: 'right',
@@ -156,7 +161,7 @@ const config: Config = {
             },
             {
               label: 'Privacy Policy',
-              to: '/privacy',
+              to: '/docs/privacy',
             },
           ],
         },
