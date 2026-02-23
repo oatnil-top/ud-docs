@@ -18,6 +18,39 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.34.0 (2026-02-23)
+
+### New Features
+
+#### Flat File Local Sync
+
+Local sync now uses flat `.md` files instead of nested UUID folders, making it easier to browse and edit tasks in your file explorer or Obsidian.
+
+#### Wikilink & Markdown Link Resolution
+
+`[[wikilinks]]` and `[text](./file.md)` links between tasks are automatically resolved during sync, preserving cross-references between your tasks.
+
+#### Full Push to Remote
+
+New button to force-push all local files to the app at once.
+
+#### Task Navigation History
+
+Browser-style back/forward navigation arrows on the task detail page for quickly switching between tasks.
+
+### Improvements
+
+- Push/pull buttons now clearly show direction (Local → App, App → Local)
+- Bare `.md` files with no frontmatter are accepted as tasks with default fields
+- Local Sync promoted to its own section in Settings
+
+### Bug Fixes
+
+- Fixed macOS dock icon sizing and proportions
+- Navigation arrows always visible with cached fallback
+
+---
+
 ## v0.33.2 (2026-02-20)
 
 ### New Features
