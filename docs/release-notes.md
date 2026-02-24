@@ -18,6 +18,19 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.34.1 (2026-02-24)
+
+### New Features
+
+- Command palette: added `/localsync` command to quickly trigger local sync
+
+### Bug Fixes
+
+- Fixed task owner unable to edit task when shared as read-only
+- Fixed local sync failing to parse filenames with spaces
+
+---
+
 ## v0.34.0 (2026-02-23)
 
 ### New Features
