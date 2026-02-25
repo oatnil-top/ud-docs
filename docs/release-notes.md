@@ -18,6 +18,46 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.34.3 (2026-02-25)
+
+### New Features
+
+#### Content Outline (Table of Contents)
+
+A new content outline on the task detail page that automatically detects headings in the visible section:
+
+- Navigate headings in both task descriptions and notes
+- Available in both normal view and zen mode
+- Smooth fade-in/fade-out animation
+
+#### Redesigned Sidebar Toggle
+
+New sidebar toggle with a vertical line and round button on the right edge, providing a cleaner and more elegant design.
+
+#### Zen Mode Improvements
+
+- Added right-edge back button for easy navigation
+- Content outline (TOC) available in zen mode
+
+#### Auto-collapse Sidebar
+
+Left sidebar auto-collapses on task detail pages for more reading space.
+
+### Improvements
+
+- Auto-focus editor and position cursor at double-click location
+- TOC hides automatically when editing content
+- Wider content outline for better readability
+- Removed Export PDF action button for cleaner task detail interface
+
+### Bug Fixes
+
+- Fixed print view to keep page numbers while hiding browser header
+- Fixed sidebar toggle position to avoid scrollbar overlap
+- Fixed content outline repositioning when sidebar state changes
+
+---
+
 ## v0.34.2 (2026-02-25)
 
 ### New Features
