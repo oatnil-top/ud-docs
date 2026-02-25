@@ -18,6 +18,29 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.34.2 (2026-02-25)
+
+### New Features
+
+#### Deadline Display in Kanban View
+
+Tasks with deadlines now display the due date directly in both kanban list view and kanban cards, making it easier to track time-sensitive tasks at a glance.
+
+#### @ Mention Menu in Editor
+
+Type `@` in the rich text editor to bring up a mention menu. Quickly reference tasks, budgets, and other entities by searching and selecting from the popup menu.
+
+### Bug Fixes
+
+- Fixed deadline date format to show year when the deadline is not in the current year
+- Fixed deadline date format to respect locale settings (Chinese/English)
+- Improved deadline positioning inline after task title for better visual alignment
+- Fixed alignment consistency for deadline badges across list rows
+- Fixed arrow key navigation in the @ mention menu
+- Fixed Chrome extension source code link URL
+
+---
+
 ## v0.34.1 (2026-02-24)
 
 ### New Features
