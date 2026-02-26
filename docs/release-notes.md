@@ -18,6 +18,28 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.34.5 (2026-02-26)
+
+### New Features
+
+#### Budget Monthly View
+
+A new monthly budget view with a month picker for viewing and managing budgets by month, making it easier to track spending over time.
+
+#### Budget Concepts Page
+
+New documentation page explaining budget concepts and domain language to help you understand budget management terminology.
+
+### Improvements
+
+- AI "Feel Lucky" feature now includes source task references for better context
+
+### Bug Fixes
+
+- Fixed budget page layout issues on mobile devices
+
+---
+
 ## v0.34.4 (2026-02-26)
 
 ### New Features
