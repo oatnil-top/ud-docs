@@ -18,6 +18,31 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.34.4 (2026-02-26)
+
+### New Features
+
+#### Feel Lucky Dashboard Widget
+
+A new "Feel Lucky" widget on the dashboard for knowledge exploration — randomly discover and explore content from your knowledge base.
+
+#### AI Provider Internationalization
+
+AI provider configuration dialog and settings section now fully support Chinese and English.
+
+### Improvements
+
+- Added how-to guide for configuring AI providers
+
+### Bug Fixes
+
+- Fixed how-to guide navigation redirect
+- Fixed file upload paths for task-from-vision and task-from-image
+- Fixed AI provider startup configuration
+- Improved AI error handling in Feel Lucky feature
+
+---
+
 ## v0.34.3 (2026-02-25)
 
 ### New Features
