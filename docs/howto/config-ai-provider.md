@@ -78,5 +78,4 @@ You now have a fully configured AI provider. You can:
 
 ## Related
 
-- [AI Chat](/docs/features/ai-chat)
-- [AI Providers](/docs/features/ai-providers)
+- [AI Assistant](/docs/features/ai-assistant)

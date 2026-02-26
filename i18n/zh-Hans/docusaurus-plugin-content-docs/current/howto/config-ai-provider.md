@@ -78,5 +78,4 @@ sidebar_position: 1
 
 ## 相关文档
 
-- [AI 聊天](/docs/features/ai-chat)
-- [AI 提供商](/docs/features/ai-providers)
+- [AI 助手](/docs/features/ai-assistant)
