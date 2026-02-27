@@ -18,6 +18,15 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.34.6 (2026-02-27)
+
+### Bug Fixes
+
+- Fixed cross-domain API URL handling for self-hosted deployments
+- Fixed identity config page redirect URL display
+
+---
+
 ## v0.34.5 (2026-02-26)
 
 ### New Features
