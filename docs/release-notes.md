@@ -18,6 +18,24 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.34.7 (2026-02-27)
+
+### New Features
+
+#### Command Palette Preview
+
+The command palette now includes a preview panel with a split layout for viewing task descriptions.
+
+### Improvements
+
+- Identity providers settings page now supports Chinese and English
+
+### Bug Fixes
+
+- Fixed active view not auto-refreshing after localsync pushes tasks
+
+---
+
 ## v0.34.6 (2026-02-27)
 
 ### Bug Fixes
