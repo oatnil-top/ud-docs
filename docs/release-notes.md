@@ -18,6 +18,24 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.35.4 (2026-03-01)
+
+### New Features
+
+#### Task Custom Metadata
+
+View all metadata fields on task details and add custom key-value fields to any task.
+
+#### Saved Query Task Actions
+
+Change task status and share tasks to boards directly from saved query result rows.
+
+### Bug Fixes
+
+- Fixed task session creation failing with non-ASCII titles
+
+---
+
 ## v0.35.3 (2026-02-28)
 
 ### New Features
