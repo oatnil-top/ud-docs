@@ -13,9 +13,9 @@ sidebar_position: 6
 点击任务操作栏中的终端图标后，会打开一个新的工作区窗口：
 
 - **左侧面板**：任务详情，支持自动刷新（检测 ud CLI 添加的备注更新）
-- **右侧面板**：xterm.js 终端，运行 Claude Code 的 `/init-task` 工作流
+- **右侧面板**：xterm.js 终端，运行加载了 ud CLI 技能上下文的 Claude Code
 
-终端启动时自动运行 `claude --dangerously-skip-permissions "/init-task <task-id>"`，Claude Code 会读取任务、细化需求、规划实现，并通过任务备注追踪进度。
+终端通过 `ud prompt` 将 ud CLI 技能指令注入 Claude Code 的系统提示（`--append-system-prompt`），然后传入任务初始化指令作为用户提示。用户无需安装 `/init-task` 技能文件即可使用。
 
 > 此功能仅在 Electron 桌面应用中可用。
 
@@ -44,7 +44,7 @@ sidebar_position: 6
 可选配置。设置后，Claude Code 命令会被包装在指定名称的 tmux 会话中：
 
 ```bash
-tmux new-session -As <会话名> 'claude --dangerously-skip-permissions "/init-task <task-id>"'
+tmux new-session -As <会话名> 'claude --dangerously-skip-permissions --append-system-prompt "$(ud prompt)" "Initialize and implement task <task-id>..."'
 ```
 
 **行为说明**：
@@ -126,13 +126,17 @@ TaskActions（点击）
 
 Claude 命令在第一个提示符出现后发送到 shell（通过检测首次 PTY 数据事件），确保 shell 就绪后再执行：
 
-```javascript
-// 不使用 tmux：
-claude --dangerously-skip-permissions "/init-task <task-id>"
+```bash
+# 不使用 tmux：
+claude --dangerously-skip-permissions --append-system-prompt "$(ud prompt)" \
+  "Initialize and implement task <task-id>. Start by running: ud describe task <task-id>"
 
-// 配置了 tmux 会话时：
-tmux new-session -As <会话名> 'claude --dangerously-skip-permissions "/init-task <task-id>"'
+# 配置了 tmux 会话时：
+tmux new-session -As <会话名> 'claude --dangerously-skip-permissions \
+  --append-system-prompt "$(ud prompt)" "Initialize and implement task <task-id>..."'
 ```
+
+`ud prompt` 命令输出完整的 ud CLI 技能指令，通过 `--append-system-prompt` 追加到 Claude 的系统提示中。用户无需安装 `/init-task` 技能文件。
 
 Claude Code 退出后，shell 保持活跃，可以继续运行其他命令。
 

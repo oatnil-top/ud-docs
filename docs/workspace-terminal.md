@@ -13,9 +13,9 @@ The Workspace Terminal is an Electron desktop feature that opens a dedicated win
 When you click the terminal icon on a task's action bar, a new workspace window opens:
 
 - **Left panel**: Task details with auto-refresh (detects note updates from the ud CLI)
-- **Right panel**: xterm.js terminal running Claude Code's `/init-task` workflow
+- **Right panel**: xterm.js terminal running Claude Code with ud CLI skill context
 
-The terminal automatically runs `claude --dangerously-skip-permissions "/init-task <task-id>"` on startup, which reads the task, refines requirements, plans implementation, and tracks progress through task notes.
+The terminal uses `ud prompt` to inject the ud CLI skill instructions into Claude Code via `--append-system-prompt`, then passes the task initialization instruction as the user prompt. This means users don't need the `/init-task` skill file installed — it works out of the box.
 
 > This feature is only available in the Electron desktop app.
 
@@ -44,7 +44,7 @@ If not set, the terminal defaults to your HOME directory.
 Optional. When configured, the Claude Code command is wrapped in a named tmux session:
 
 ```bash
-tmux new-session -As <session-name> 'claude --dangerously-skip-permissions "/init-task <task-id>"'
+tmux new-session -As <session-name> 'claude --dangerously-skip-permissions --append-system-prompt "$(ud prompt)" "Initialize and implement task <task-id>..."'
 ```
 
 **Behavior**:
@@ -126,13 +126,17 @@ The workspace spawns a non-login shell (fast startup) with an augmented environm
 
 The claude command is sent to the shell after the first prompt appears (detected via first PTY data event), ensuring the shell is ready before executing:
 
-```javascript
-// Without tmux:
-claude --dangerously-skip-permissions "/init-task <task-id>"
+```bash
+# Without tmux:
+claude --dangerously-skip-permissions --append-system-prompt "$(ud prompt)" \
+  "Initialize and implement task <task-id>. Start by running: ud describe task <task-id>"
 
-// With tmux session configured:
-tmux new-session -As <session-name> 'claude --dangerously-skip-permissions "/init-task <task-id>"'
+# With tmux session configured:
+tmux new-session -As <session-name> 'claude --dangerously-skip-permissions \
+  --append-system-prompt "$(ud prompt)" "Initialize and implement task <task-id>..."'
 ```
+
+The `ud prompt` command outputs the full ud CLI skill instructions, which are appended to Claude's system prompt via `--append-system-prompt`. This eliminates the need for users to install the `/init-task` skill file.
 
 After Claude Code exits, the shell remains alive so you can run additional commands.
 
