@@ -18,6 +18,28 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.35.1 (2026-02-28)
+
+### New Features
+
+#### Install CLI from Desktop App
+
+You can now install the ud command-line tool directly from the desktop app — no need to install via Homebrew separately. Go to Settings > Integrations to set it up.
+
+- One-click install with automatic system PATH configuration
+- Shows installation status and path
+- Detects externally installed CLI (e.g., via Homebrew)
+
+#### Task Detail Refresh
+
+Added a refresh button to task detail pages for quickly reloading the latest data.
+
+### Bug Fixes
+
+- Fixed monthly cash flow chart not displaying correctly on mobile
+
+---
+
 ## v0.35.0 (2026-02-28)
 
 ### New Features
