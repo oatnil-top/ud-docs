@@ -18,6 +18,24 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.35.2 (2026-02-28)
+
+### New Features
+
+#### Workspace Window Limit for Personal Tier
+
+Personal tier users can now open up to 2 implementation windows at a time. An upgrade prompt appears when the limit is reached, with a link to get a Pro license.
+
+#### Personal Tier Credentials Display
+
+Personal tier users can now view their default login credentials on the profile page, making it easy to use with the CLI or other clients.
+
+#### CLI Availability Check
+
+The app now checks if the ud CLI is installed when using "Start Implementation" and prompts you to install it if needed.
+
+---
+
 ## v0.35.1 (2026-02-28)
 
 ### New Features
