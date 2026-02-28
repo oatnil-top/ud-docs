@@ -18,6 +18,28 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.35.0 (2026-02-28)
+
+### New Features
+
+#### Workspace: AI-Powered Task Implementation
+
+Start implementing tasks directly from the Kanban board with the new embedded terminal workspace:
+
+- New "Start Implementation" button on the task detail page to kick off implementation
+- Embedded terminal workspace launches Claude Code with your task context
+- Board-level project directory configuration ensures the workspace opens in the right location
+
+#### Monthly Income/Expense Chart
+
+New bar chart on the transactions page showing monthly income vs. expenses at a glance, collapsed by default for a cleaner layout.
+
+### Improvements
+
+- Board edit dialog converted to a drawer layout with project directory configuration
+
+---
+
 ## v0.34.7 (2026-02-27)
 
 ### New Features
