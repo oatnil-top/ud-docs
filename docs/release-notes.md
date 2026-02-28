@@ -18,6 +18,20 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.35.3 (2026-02-28)
+
+### New Features
+
+#### Budget Share-to-Group
+
+Share budgets with groups using Unix-style permission controls (read/write/admin) for collaborative budget management.
+
+### Bug Fixes
+
+- Fixed cash flow summary not rendering on mobile when subcategories exist but data is empty
+
+---
+
 ## v0.35.2 (2026-02-28)
 
 ### New Features
