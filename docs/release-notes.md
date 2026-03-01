@@ -18,6 +18,36 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.35.5 (2026-03-01)
+
+### New Features
+
+#### Break Reminder Widget
+
+A new dashboard widget to help you take regular breaks:
+
+- Countdown timer with customizable intervals (supports hours, minutes, seconds, e.g. "2m3s")
+- In-app popup alerts with editable reminder titles
+- Sound beep fallback when system notifications are suppressed
+
+#### Transaction Widget
+
+The dashboard expense widget has been upgraded to a transaction widget with a donut chart for visual income/expense breakdown.
+
+#### Saved Query Improvements
+
+- Duplicate saved queries with one click
+- Create query dialog upgraded to a sheet drawer with preset query shortcuts
+- Added "AI gen without Kanban" preset query
+
+### Bug Fixes
+
+- Fixed multiple break reminder issues (notification delivery, countdown display, timer stopping)
+- Fixed popup title showing fixed text instead of custom message
+- Fixed toggle not blocked when input has errors
+
+---
+
 ## v0.35.4 (2026-03-01)
 
 ### New Features
