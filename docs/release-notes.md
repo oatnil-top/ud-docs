@@ -18,6 +18,21 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.35.7 (2026-03-01)
+
+### New Features
+
+#### Workspace Experience Improvements
+
+- Workspace window titles now display the task name for easy identification
+- Start implementation directly from the kanban task preview modal
+
+### Improvements
+
+- A confirmation dialog now appears before redirecting to the CLI install page
+
+---
+
 ## v0.35.6 (2026-03-01)
 
 ### New Features
