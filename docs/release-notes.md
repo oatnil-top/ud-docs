@@ -18,6 +18,21 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.35.6 (2026-03-01)
+
+### New Features
+
+#### ud CLI Resource Sync Enhancements
+
+- Added `--concurrent` flag for faster file synchronization
+- Added filtering flags for selective file synchronization
+
+### Bug Fixes
+
+- Fixed scrollbar visibility in kanban columns while keeping scroll functionality
+
+---
+
 ## v0.35.5 (2026-03-01)
 
 ### New Features
