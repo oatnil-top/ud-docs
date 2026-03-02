@@ -18,6 +18,35 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.36.0 (2026-03-02)
+
+### New Features
+
+#### AI Workspace Real-Time Status Detection
+
+- Workspace windows now show real-time AI agent status (working/idle/offline)
+- Status displayed as emoji prefix in window titles for quick recognition
+- Idle status uses amber indicator for better attention
+
+#### Task Pinning
+
+- Pin/unpin button on task detail page to keep important tasks at the top
+
+#### Electron Task Windows
+
+- Open dedicated windows for tasks in the desktop app for parallel workflows
+- Window titles display the task name for easy identification
+
+#### Registration Language Preference
+
+- Language preference selector added to the registration form
+
+### Improvements
+
+- Workspace notes now sorted by creation time (newest first)
+
+---
+
 ## v0.35.7 (2026-03-01)
 
 ### New Features
