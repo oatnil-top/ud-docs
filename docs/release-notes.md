@@ -18,6 +18,19 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.36.1 (2026-03-02)
+
+### Improvements
+
+- Window titles now show WK/Task prefix for easy identification
+
+### Bug Fixes
+
+- Fixed double horizontal scrollbar on kanban page
+- Fixed agent status cross-contamination between workspaces
+
+---
+
 ## v0.36.0 (2026-03-02)
 
 ### New Features
