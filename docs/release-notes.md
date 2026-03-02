@@ -18,6 +18,19 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.36.2 (2026-03-02)
+
+### Improvements
+
+- Desktop app profile page now shows a hint to install the CLI from Integrations
+
+### Bug Fixes
+
+- Fixed workspace limit dialog redirecting to wrong section
+- Fixed vertical scrolling not working on public pages (subscribe, contact, docs)
+
+---
+
 ## v0.36.1 (2026-03-02)
 
 ### Improvements
