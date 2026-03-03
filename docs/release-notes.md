@@ -18,6 +18,37 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.37.0 (2026-03-04)
+
+### New Features
+
+#### Workspace Settings Redesign
+
+- Settings page reorganized into CLI, Workspace, and Integrations sections for clearer navigation
+- Built-in workspace actions and agent CLIs now visible as read-only items in settings
+- Click on built-in actions and agents to view their full details
+
+#### Configurable Agent CLIs & Per-Task Working Directory
+
+- Add custom agent CLIs for workspace automation
+- Configure working directory per task for context-aware CLI commands
+- CLI context configuration available in board & task workspace
+
+#### Quick Custom Action Access
+
+- "Add Custom Action..." link added to workspace dropdown for quick access
+- Custom action form now pre-filled with useful examples instead of empty placeholders
+
+### Improvements
+
+- Board settings and kanban dropdown menus fully localized (i18n)
+
+### Bug Fixes
+
+- Fixed custom action prompts containing unnecessary placeholders
+
+---
+
 ## v0.36.9 (2026-03-03)
 
 ### New Features
