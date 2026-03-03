@@ -18,6 +18,26 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.36.3 (2026-03-03)
+
+### New Features
+
+#### Workspace Monitor
+
+- New workspace monitor page for a bird's-eye view of all active workspaces
+- Quickly accessible from the command palette
+- Workspace task panels include a shortcut to open tasks in the main window for editing
+
+### Improvements
+
+- Status icons displayed alongside task titles in workspace panels
+
+### Bug Fixes
+
+- Fixed status icon alignment in workspace task panels
+
+---
+
 ## v0.36.2 (2026-03-02)
 
 ### Improvements
