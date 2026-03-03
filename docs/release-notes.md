@@ -18,6 +18,22 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.36.5 (2026-03-03)
+
+### New Features
+
+#### Workspace Enhancements
+
+- Added "Open Shell" option to workspace dropdown for quick terminal access
+- Agent now knows the current task ID, enabling more context-aware assistance
+
+### Bug Fixes
+
+- Fixed kanban task creation dialog focusing on description instead of title
+- Fixed workspace agent status not updating during permission and input dialogs
+
+---
+
 ## v0.36.4 (2026-03-03)
 
 ### Improvements
