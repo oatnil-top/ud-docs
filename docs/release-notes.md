@@ -18,6 +18,14 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.36.7 (2026-03-03)
+
+### Bug Fixes
+
+- Fixed workspace status dot showing on kanban cards even when no workspace window is open
+
+---
+
 ## v0.36.6 (2026-03-03)
 
 ### New Features
