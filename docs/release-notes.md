@@ -18,6 +18,24 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.36.6 (2026-03-03)
+
+### New Features
+
+#### Resource Tags
+
+- Resources now support tags for better organization and filtering
+
+#### Kanban Agent Status
+
+- Workspace agent status is now displayed directly on kanban cards
+
+### Bug Fixes
+
+- Unified workspace status colors for a more consistent look
+
+---
+
 ## v0.36.5 (2026-03-03)
 
 ### New Features
