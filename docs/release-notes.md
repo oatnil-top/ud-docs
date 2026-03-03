@@ -18,6 +18,19 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.36.4 (2026-03-03)
+
+### Improvements
+
+- Removed calculator widget from expense and income dialogs for a cleaner interface
+- Idle agent status now uses blue color for better visual distinction from working status
+
+### Bug Fixes
+
+- Fixed vertical scrolling not working on remaining public pages
+
+---
+
 ## v0.36.3 (2026-03-03)
 
 ### New Features
