@@ -18,6 +18,20 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.36.9 (2026-03-03)
+
+### New Features
+
+- Workspace actions now use a template system for better organization
+- Agents show a green "Planning" status when in plan mode
+- New "Check Implementation" action in workspace dropdown
+
+### Bug Fixes
+
+- Removed invalid "shell" option from board implementation tool choices
+
+---
+
 ## v0.36.8 (2026-03-03)
 
 ### Bug Fixes
