@@ -18,6 +18,14 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.36.8 (2026-03-03)
+
+### Bug Fixes
+
+- Adjusted workspace status dot size on kanban cards to match adjacent icons
+
+---
+
 ## v0.36.7 (2026-03-03)
 
 ### Bug Fixes
