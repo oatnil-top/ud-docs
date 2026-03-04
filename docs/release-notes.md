@@ -18,6 +18,15 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.37.6 (2026-03-05)
+
+### New Features
+
+- Added "Download Desktop App" button to the home page for easy access to the desktop client
+- CLI now supports get/describe commands for expenses, budgets, and accounts
+
+---
+
 ## v0.37.5 (2026-03-04)
 
 ### Improvements
