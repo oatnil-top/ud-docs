@@ -18,6 +18,14 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.37.5 (2026-03-04)
+
+### Improvements
+
+- Main window close confirmation dialog now supports Chinese and English
+
+---
+
 ## v0.37.4 (2026-03-04)
 
 ### New Features
