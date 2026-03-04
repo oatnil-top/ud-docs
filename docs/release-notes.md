@@ -18,6 +18,29 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.37.1 (2026-03-04)
+
+### New Features
+
+#### Interactive Feature Showcase
+
+- Home page feature cards now support click interaction with multi-image galleries, auto-rotation, left/right navigation, and click-to-enlarge lightbox
+- Added "Try Now" button for visitors to instantly try the platform from the home page
+- Updated descriptions for tasks, finance, workspace, resources, and localsync features
+
+#### Workspace Window Status Indicator
+
+- Workspace window titles now show status emoji for at-a-glance monitoring
+
+### Bug Fixes
+
+- Fixed infinite request loop when loading kanban columns
+- Fixed infinite loop in agent selector
+- Fixed linked task sorting to use update time consistently
+- Removed non-functional Export PDF button from mobile view
+
+---
+
 ## v0.37.0 (2026-03-04)
 
 ### New Features
