@@ -18,6 +18,14 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.37.2 (2026-03-04)
+
+### Bug Fixes
+
+- Fixed workspace actions causing infinite re-render loop
+
+---
+
 ## v0.37.1 (2026-03-04)
 
 ### New Features
