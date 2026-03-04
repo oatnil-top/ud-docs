@@ -18,6 +18,40 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.37.3 (2026-03-04)
+
+### New Features
+
+#### Epic View
+
+A new subtask tree visualization page showing task hierarchy:
+
+- Navigate from task detail to Epic View for a full subtask tree
+- Expand/collapse all nodes to quickly browse or focus on specific branches
+- Quick-add subtasks directly within the tree
+- Clickable task titles for fast navigation to task details
+
+#### Subtask Progress Indicator
+
+- Task list items and task detail page show subtask completion progress
+- Progress bar displayed in linked tasks section
+
+#### Workspace Event History
+
+- Monitor page now tracks workspace status changes over time
+- Workspaces auto-marked as idle on open for accurate event tracking
+
+### Improvements
+
+- Mobile hero section uses horizontal pill tabs for better browsing
+
+### Bug Fixes
+
+- Fixed kanban cards disappearing on refresh and after creating a new card
+- Fixed workspace event history not always showing on monitor page
+
+---
+
 ## v0.37.2 (2026-03-04)
 
 ### Bug Fixes
