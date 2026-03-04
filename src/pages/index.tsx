@@ -44,6 +44,13 @@ function getDownloadUrl(platform: Platform, version: string = VERSION): string {
 import styles from './index.module.css';
 
 function HeroSection() {
+  const handleDownloadClick = () => {
+    const el = document.getElementById('desktop-download');
+    if (el) {
+      el.scrollIntoView({behavior: 'smooth'});
+    }
+  };
+
   return (
     <section className={styles.heroSection}>
       <span className={styles.versionBadge}>
@@ -68,6 +75,20 @@ function HeroSection() {
           Built by indie developer + AI. No ads, no tracking, no motive to peek at your data.
         </Translate>
       </p>
+      <div className={styles.heroButtons}>
+        <Link
+          className={styles.heroButtonPrimary}
+          to="https://oatnil.top/ud/login">
+          <Translate id="homepage.hero.tryNow">Try Now</Translate>
+        </Link>
+        <button
+          type="button"
+          className={styles.heroButtonOutline}
+          onClick={handleDownloadClick}>
+          <Download size={16} strokeWidth={2} />
+          <Translate id="homepage.hero.downloadDesktop">Download Desktop App</Translate>
+        </button>
+      </div>
     </section>
   );
 }
@@ -130,7 +151,7 @@ function CardsSection() {
         </div>
 
         {/* Download App Card */}
-        <div className={styles.card}>
+        <div id="desktop-download" className={styles.card}>
           <div>
             <div className={styles.cardHeader}>
               <span className={styles.cardLabel}>

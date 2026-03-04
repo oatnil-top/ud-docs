@@ -330,6 +330,14 @@
     "message": "独立开发者 + AI 协作构建。无广告、无追踪，没有动机窥探您的隐私。",
     "description": "The homepage hero subtitle"
   },
+  "homepage.hero.tryNow": {
+    "message": "立即试用",
+    "description": "Try now button text in hero section"
+  },
+  "homepage.hero.downloadDesktop": {
+    "message": "下载桌面应用",
+    "description": "Download desktop app button text in hero section"
+  },
   "homepage.hero.tryOnline": {
     "message": "在线试用",
     "description": "Try online button text"

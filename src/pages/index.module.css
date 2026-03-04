@@ -73,6 +73,66 @@
   font-weight: 400;
 }
 
+.heroButtons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.heroButtonPrimary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 24px;
+  background: var(--ifm-color-emphasis-900);
+  color: var(--ifm-background-color);
+  border: 1px solid var(--ifm-color-emphasis-900);
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.heroButtonPrimary:hover {
+  opacity: 0.85;
+  color: var(--ifm-background-color);
+  text-decoration: none;
+}
+
+[data-theme='dark'] .heroButtonPrimary {
+  background: var(--ifm-color-emphasis-100);
+  color: var(--ifm-color-emphasis-900);
+  border-color: var(--ifm-color-emphasis-100);
+}
+
+[data-theme='dark'] .heroButtonPrimary:hover {
+  color: var(--ifm-color-emphasis-900);
+}
+
+.heroButtonOutline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 24px;
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.heroButtonOutline:hover {
+  background: var(--ifm-color-emphasis-100);
+}
+
 /* Cards Section */
 .cardsSection {
   border-bottom: 1px solid var(--ifm-color-emphasis-200);
@@ -618,6 +678,17 @@
 
   .heroTitle {
     font-size: 40px;
+  }
+
+  .heroButtons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .heroButtonPrimary,
+  .heroButtonOutline {
+    width: 100%;
+    max-width: 280px;
   }
 
   .cardsGrid {
