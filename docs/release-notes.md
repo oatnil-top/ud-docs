@@ -18,6 +18,31 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.37.4 (2026-03-04)
+
+### New Features
+
+#### Board Terminal
+
+- Open AI agent terminals directly from kanban board headers, with support for multiple concurrent terminals
+- Choose specific AI agents for individual actions and launch ad-hoc workspace actions
+
+#### Real-Time Status Updates
+
+- Workspace status now updates in real-time via Server-Sent Events for faster and more reliable updates
+
+#### Close Confirmation
+
+- The app now asks for confirmation before closing the main window when child windows (workspaces) are open, preventing accidental data loss
+
+### Bug Fixes
+
+- Fixed board terminal prompts including unnecessary task context
+- Agents can now be started interactively when no prompt is provided
+- Fixed agent selection dropdown display layering issue
+
+---
+
 ## v0.37.3 (2026-03-04)
 
 ### New Features
