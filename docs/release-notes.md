@@ -18,6 +18,38 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.38.0 (2026-03-05)
+
+### New Features
+
+#### Board Creation Experience
+
+- New visible "Create Board" button in kanban header for easy board creation
+- Create Board dialog now includes advanced settings (description, visibility), expanded by default
+- System boards guide you to create your own custom boards
+
+#### Preset Data for New Users
+
+- New users automatically receive sample data to explore the app
+- Tag-based cleanup lets you remove all preset data with one click when ready
+
+#### Desktop CLI Auto-Configuration
+
+- Desktop app automatically configures CLI personal context on login — no manual setup needed
+
+### Improvements
+
+- Simplified onboarding from 30 to 10 tasks with more accurate content
+- Shared board description better explains collaboration features
+
+### Bug Fixes
+
+- Fixed crash when clicking Create Board button
+- Fixed preset data notice with cleanup link on welcome task
+- Fixed Windows CLI path setup issue
+
+---
+
 ## v0.37.9 (2026-03-05)
 
 ### Improvements
