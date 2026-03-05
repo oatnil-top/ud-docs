@@ -18,6 +18,19 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.37.9 (2026-03-05)
+
+### Improvements
+
+- Desktop app now automatically installs the ud CLI and configures Claude Code hooks on startup — no manual setup needed
+
+### Bug Fixes
+
+- Fixed Windows CLI path mismatch between install and workspace terminal
+- Removed manual CLI install option from profile page (now automatic)
+
+---
+
 ## v0.37.8 (2026-03-05)
 
 ### Bug Fixes
