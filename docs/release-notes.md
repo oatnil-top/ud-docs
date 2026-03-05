@@ -18,6 +18,15 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.37.8 (2026-03-05)
+
+### Bug Fixes
+
+- Fixed Windows CLI compatibility issue
+- Fixed desktop app package identification
+
+---
+
 ## v0.37.7 (2026-03-05)
 
 ### Improvements
