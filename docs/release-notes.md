@@ -18,6 +18,14 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.38.10 (2026-03-06)
+
+### Bug Fixes
+
+- Removed China download option from subscription desktop section
+
+---
+
 ## v0.38.9 (2026-03-06)
 
 ### Bug Fixes
