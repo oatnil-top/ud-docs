@@ -18,6 +18,22 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.38.3 (2026-03-06)
+
+### New Features
+
+- Dashboard account and budget widgets now show recent items
+- Dashboard transaction widget shows 3 most recent transactions
+- CLI: New migrate command for server-to-server data migration
+
+### Bug Fixes
+
+- Fixed dashboard accounts donut chart color inconsistencies
+- Fixed dashboard accounts widget layout misalignment with budget and transactions widgets
+- Fixed CLI saved-query and task-view list response formats
+
+---
+
 ## v0.38.2 (2026-03-06)
 
 ### Improvements
