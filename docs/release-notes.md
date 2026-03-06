@@ -18,6 +18,34 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.38.1 (2026-03-06)
+
+### New Features
+
+#### System Info Viewer
+
+- Admins can view database type, version, and size metadata directly in System Config
+
+#### Dataflow Export as AI Prompt
+
+- Copy dataflow diagrams as structured prompts for use with AI tools
+
+#### Delete Tasks from Saved Queries
+
+- Delete tasks directly from saved query result lists without navigating away
+
+### Improvements
+
+- AI assistant now describes its current task context
+- Predefined saved query names and preset data cleanup jobs translated in Chinese/English
+
+### Bug Fixes
+
+- Fixed dataflow copy prompt to produce importable JSON format
+- Fixed CLI install configuration
+
+---
+
 ## v0.38.0 (2026-03-05)
 
 ### New Features
