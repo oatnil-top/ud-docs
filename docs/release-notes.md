@@ -18,6 +18,16 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.38.7 (2026-03-06)
+
+### Bug Fixes
+
+- Fixed ud CLI skills command compatibility
+- Fixed prompt context for non-Claude AI agents
+- Fixed prompt handling on Windows to prevent argument splitting
+
+---
+
 ## v0.38.6 (2026-03-06)
 
 ### Bug Fixes
