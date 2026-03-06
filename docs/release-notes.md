@@ -18,6 +18,18 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.38.8 (2026-03-06)
+
+### New Features
+
+- Added directory path picker for board project settings
+
+### Bug Fixes
+
+- Fixed context hint ordering for better task workflow
+
+---
+
 ## v0.38.7 (2026-03-06)
 
 ### Bug Fixes
