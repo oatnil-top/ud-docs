@@ -18,6 +18,14 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.38.4 (2026-03-06)
+
+### Bug Fixes
+
+- Fixed workspace launch failing on Windows due to PowerShell command parsing issues
+
+---
+
 ## v0.38.3 (2026-03-06)
 
 ### New Features
