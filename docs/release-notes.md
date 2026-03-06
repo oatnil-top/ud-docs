@@ -18,6 +18,15 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.38.6 (2026-03-06)
+
+### Bug Fixes
+
+- Fixed Codex CLI prompt handling to properly combine system and user prompts
+- Fixed argument splitting issue when passing prompts to Codex
+
+---
+
 ## v0.38.5 (2026-03-06)
 
 ### New Features
