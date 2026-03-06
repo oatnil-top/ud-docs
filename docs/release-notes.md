@@ -18,6 +18,19 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.38.5 (2026-03-06)
+
+### New Features
+
+- CLI: Added login hint to `set-context` command and `--name/-n` flag to `login` for easier authentication
+
+### Bug Fixes
+
+- Fixed workspace terminal not resolving user's full PATH correctly
+- Removed stale /view command from command palette
+
+---
+
 ## v0.38.4 (2026-03-06)
 
 ### Bug Fixes
