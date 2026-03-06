@@ -18,6 +18,15 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.38.9 (2026-03-06)
+
+### Bug Fixes
+
+- Fixed ad-hoc command execution starting agent without a prompt
+- Improved board type selection — shared is now default with clearer descriptions
+
+---
+
 ## v0.38.8 (2026-03-06)
 
 ### New Features
