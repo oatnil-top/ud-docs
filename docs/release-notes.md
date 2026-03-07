@@ -18,6 +18,22 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.39.0 (2026-03-07)
+
+### New Features
+
+- Workspace: Full remote workspace system with daemon registration & discovery, SSE event streaming, session tracking & agent spawning, control signals (stop/read-new-instruction), action blacklist for security, and frontend trigger & viewer UI
+- Real-time task note notifications via SSE for workspace updates
+
+### Bug Fixes
+
+- Fixed CLI unable to run ud commands in spawned Claude Code agent sessions
+- Fixed CLI passing task_id as prompt to Claude Code agent
+- Hardened CLI daemon with safe ID truncation, SSE backoff reset, and consistent error handling
+- Fixed SSE endpoint response interceptor causing connection issues
+
+---
+
 ## v0.38.10 (2026-03-06)
 
 ### Bug Fixes
