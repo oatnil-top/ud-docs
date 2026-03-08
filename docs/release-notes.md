@@ -18,6 +18,20 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.41.2 (2026-03-08)
+
+### Improvements
+
+- CLI now defaults to official server URL (ud.oatnil.top)
+- Workspace desktop actions now show a confirmation dialog instead of a tooltip hint
+
+### Bug Fixes
+
+- Fixed kanban board card ordering not persisting after drag-and-drop
+- Fixed workspace agent command execution reliability
+
+---
+
 ## v0.41.1 (2026-03-08)
 
 ### Bug Fixes
