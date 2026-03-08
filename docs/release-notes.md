@@ -18,6 +18,30 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.40.0 (2026-03-08)
+
+### New Features
+
+- ud vs Obsidian comparison page: full landing page with feature comparison table, familiar features checklist, and pain point solutions
+- Obsidian showcase section on homepage with image gallery
+- Post-login onboarding dialog with language selection
+- Admin workspace management page for system-wide daemon and session monitoring
+- CLI `ud apply` now supports board field for direct board task creation
+- Windows remote workspace agent support via PowerShell hook script
+- Refresh button on workspace monitor page
+- In-app remote workspace setup guide
+
+### Improvements
+
+- /tasks now redirects to kanban board view
+- Pinned task cache uses stale-while-revalidate for faster rendering
+
+### Bug Fixes
+
+- Fixed kanban card floating outside board when dragged beyond the last column
+
+---
+
 ## v0.39.0 (2026-03-07)
 
 ### New Features
