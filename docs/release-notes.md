@@ -18,6 +18,14 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.41.3 (2026-03-08)
+
+### Improvements
+
+- Desktop app workspace agent starts faster — skills prompt is now embedded at build time instead of requiring a runtime CLI call
+
+---
+
 ## v0.41.2 (2026-03-08)
 
 ### Improvements
