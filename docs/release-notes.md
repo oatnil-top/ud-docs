@@ -18,6 +18,14 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.41.1 (2026-03-08)
+
+### Bug Fixes
+
+- Fixed infinite loop in tag condition filtering that could cause the page to freeze
+
+---
+
 ## v0.41.0 (2026-03-08)
 
 ### New Features
