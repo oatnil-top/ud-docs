@@ -18,6 +18,15 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.41.5 (2026-03-09)
+
+### Bug Fixes
+
+- Fixed PowerShell argument mangling on Windows that could cause CLI commands to fail
+- Fixed variable word-splitting in workspace commands on Windows
+
+---
+
 ## v0.41.4 (2026-03-08)
 
 ### Improvements
