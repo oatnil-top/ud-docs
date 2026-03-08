@@ -18,6 +18,26 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.41.0 (2026-03-08)
+
+### New Features
+
+- Multi-account switching: save up to 5 accounts and switch between them without logging out, available in sidebar, login page, and profile page
+- Task board in CLI: `ud task` now shows which board a task belongs to
+- Unified onboarding flow: visitor account creation and sample data generation are now separate steps with clear progress indication
+- Scheduled jobs: Run Now promoted to a direct button for easier access; preset data cleanup defaults to disabled
+
+### Improvements
+
+- Preference store now persists to localStorage for instant rendering on page reload
+
+### Bug Fixes
+
+- Fixed chart rendering warnings in dashboard
+- Fixed stale pinned tasks appearing from cache after updates
+
+---
+
 ## v0.40.0 (2026-03-08)
 
 ### New Features
