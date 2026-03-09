@@ -18,6 +18,31 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.42.0 (2026-03-09)
+
+### New Features
+
+- Board permission system: set boards as read-only, enforce permission ceiling for tasks
+- Permission toggle in board share modal
+- Read-only visual feedback for shared tasks and boards
+- Transfer task ownership when sharing to board's group
+- Click-to-enlarge image preview in rich text editor
+- Kanban: create button moved next to settings for easier access
+- Project-level hook injection with per-board consent toggle
+
+### Improvements
+
+- Cleaner image display in rich text editor (removed border-radius)
+
+### Bug Fixes
+
+- Fixed drag overlay escaping board container bounds
+- Code blocks now scroll horizontally instead of wrapping
+- Fixed white-space handling in code blocks
+- Fixed drag-and-drop error with dynamic sensors
+
+---
+
 ## v0.41.6 (2026-03-09)
 
 ### Improvements
