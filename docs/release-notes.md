@@ -18,6 +18,18 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.42.1 (2026-03-09)
+
+### Improvements
+
+- Added internationalization support for kanban board fields and placeholders
+
+### Bug Fixes
+
+- Fixed hooks toggle requiring correct project directory context
+
+---
+
 ## v0.42.0 (2026-03-09)
 
 ### New Features
