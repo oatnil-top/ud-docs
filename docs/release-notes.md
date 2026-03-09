@@ -18,6 +18,20 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.41.6 (2026-03-09)
+
+### Improvements
+
+- Kanban drag-and-drop order now persists across page reloads
+
+### Bug Fixes
+
+- Fixed kanban column display query
+- Fixed kanban task sorting for consistent drag-and-drop feedback
+- Fixed default query sort order
+
+---
+
 ## v0.41.5 (2026-03-09)
 
 ### Bug Fixes
