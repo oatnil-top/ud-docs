@@ -18,6 +18,35 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.43.0 (2026-03-10)
+
+### New Features
+
+- k9s-style TUI overhaul: 3-section layout, two-column header with branding and context info
+- TUI kanban view: vertical columns with expand/collapse, board drill-down navigation
+- TUI workspace support: launch from task detail, PTY management, action picker
+- Edit tasks in `$EDITOR` from TUI with frontmatter format
+- Create new tasks via editor in TUI
+- k9s-style `/` filter for all TUI resource views
+- `:ctx` command to switch contexts, shows API URL and user info in header
+- Command mode accessible from any view
+- Backend liveness indicator in TUI header
+- Resource shortname and plural aliases for CLI commands
+- "Open Claude (task context)" workspace action
+
+### Improvements
+
+- Arrow up/down navigation in table while in filter mode
+
+### Bug Fixes
+
+- Fixed expenses table padding so DATE column is not truncated
+- Fixed view not restored when leaving workspace picker
+- Fixed goroutine leak on workspace detach and reattach
+- Fixed TUI layout issue on workspace reattach
+
+---
+
 ## v0.42.1 (2026-03-09)
 
 ### Improvements
