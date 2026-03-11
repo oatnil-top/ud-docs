@@ -18,6 +18,20 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.44.2 (2026-03-11)
+
+### New Features
+
+- Workspace switcher dropdown in workspace TaskPanel
+- "Save to UnderControl" button in standalone editor
+
+### Bug Fixes
+
+- Fixed frontmatter block corruption in visual editor
+- Fixed editor instances not properly separated per mode
+
+---
+
 ## v0.44.1 (2026-03-11)
 
 ### New Features
