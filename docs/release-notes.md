@@ -18,6 +18,15 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.44.4 (2026-03-11)
+
+### Bug Fixes
+
+- Hidden history actions (floating button and context menu) for read-only shared tasks
+- Fixed workspace terminal not inheriting the board's configured working directory
+
+---
+
 ## v0.44.3 (2026-03-11)
 
 ### New Features
