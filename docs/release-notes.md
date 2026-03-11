@@ -18,6 +18,20 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.44.3 (2026-03-11)
+
+### New Features
+
+- Workspace now enforces a window limit; unlock more windows with a license key
+- Task ID is now displayed beneath the task title in the Workspace task panel
+
+### Bug Fixes
+
+- Fixed finance data not refreshing after preset data cleanup or logout
+- Hidden the create board button on mobile view
+
+---
+
 ## v0.44.2 (2026-03-11)
 
 ### New Features
