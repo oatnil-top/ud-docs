@@ -18,6 +18,18 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.44.0 (2026-03-10)
+
+### New Features
+
+- Standalone Markdown editor in the desktop app — open and edit .md files directly
+
+### Bug Fixes
+
+- Fixed missing custom protocols in Electron protocol filter
+
+---
+
 ## v0.43.0 (2026-03-10)
 
 ### New Features
