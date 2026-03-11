@@ -18,6 +18,22 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.44.1 (2026-03-11)
+
+### New Features
+
+- Inline workspace bar on kanban board page
+
+### Bug Fixes
+
+- Fixed page-level horizontal scroll during kanban drag
+- Fixed auto-scroll continuing when cursor moves past scroll container edge
+- Fixed kanban drag-to-offscreen columns and right margin
+- Fixed toolbar scrolling away — now sticks below title bar
+- Hidden all write actions for read-only shared tasks
+
+---
+
 ## v0.44.0 (2026-03-10)
 
 ### New Features
