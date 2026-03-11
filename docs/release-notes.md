@@ -18,6 +18,23 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.44.5 (2026-03-11)
+
+### New Features
+
+- Added /windows command to command palette for quick window switching
+- Dataflow nodes now support description fields with edit button and hover tooltip
+
+### Improvements
+
+- Replaced familiar features section with highlights gallery on comparison page
+
+### Bug Fixes
+
+- Fixed kanban window title not showing the selected board name
+
+---
+
 ## v0.44.4 (2026-03-11)
 
 ### Bug Fixes
