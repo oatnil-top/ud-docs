@@ -18,6 +18,15 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.46.0 (2026-03-12)
+
+### Improvements
+
+- Database upgrades now use versioned SQL migrations for more reliable schema management
+- Fixed a startup crash on desktop (SQLite) caused by legacy database column cleanup
+
+---
+
 ## v0.45.2 (2026-03-12)
 
 ### New Features
