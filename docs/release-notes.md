@@ -18,6 +18,20 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.45.2 (2026-03-12)
+
+### New Features
+
+- Command palette now highlights search terms in results and shows note previews
+- Navigation commands consolidated into a single /nav submenu for a cleaner command palette
+
+### Bug Fixes
+
+- Fixed kanban sidebar icon not navigating directly to the selected board
+- Fixed /board command not navigating to the selected board correctly
+
+---
+
 ## v0.45.1 (2026-03-12)
 
 ### Improvements
