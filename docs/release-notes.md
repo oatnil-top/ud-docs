@@ -18,6 +18,14 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.46.1 (2026-03-12)
+
+### Bug Fixes
+
+- Fixed expired login sessions cached in the browser bypassing the login page and showing the onboarding dialog
+
+---
+
 ## v0.46.0 (2026-03-12)
 
 ### Improvements
