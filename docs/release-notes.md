@@ -18,6 +18,17 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.45.0 (2026-03-12)
+
+### New Features
+
+- Command palette now supports grep search mode — press Tab to toggle between title-only and full-text search (title + description + notes)
+- Added "Go to Board" button in workspace TaskPanel
+- Resource preview now supports multiple text formats, markdown preview, and docx/xlsx preview
+- Added text resource support for task attachments
+
+---
+
 ## v0.44.5 (2026-03-11)
 
 ### New Features
