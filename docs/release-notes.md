@@ -18,6 +18,15 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.46.4 (2026-03-13)
+
+### Bug Fixes
+
+- Fixed Linux dock icons displaying in grayscale instead of color (sRGB conversion)
+- Child windows now open much faster (reduced fallback timer from 5s to 500ms)
+
+---
+
 ## v0.46.3 (2026-03-13)
 
 ### Bug Fixes
