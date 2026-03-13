@@ -18,6 +18,14 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.46.6 (2026-03-13)
+
+### Improvements
+
+- Added additional showcase image for the access control feature on the homepage
+
+---
+
 ## v0.46.5 (2026-03-13)
 
 ### Bug Fixes
