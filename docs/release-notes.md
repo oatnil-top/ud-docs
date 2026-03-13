@@ -18,6 +18,15 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.46.3 (2026-03-13)
+
+### Bug Fixes
+
+- Fixed child window display issues on Linux with fallback show timer and error handling
+- Fixed Electron desktop app builds for macOS and Windows by using prebuilt native binaries
+
+---
+
 ## v0.46.2 (2026-03-13)
 
 ### Improvements
