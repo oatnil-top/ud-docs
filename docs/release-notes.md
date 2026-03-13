@@ -18,6 +18,22 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.46.2 (2026-03-13)
+
+### Improvements
+
+- Added mobile board selector and view toggle to kanban list page
+
+### Bug Fixes
+
+- Fixed database migration failing on fresh installs
+- Fixed board metadata (workspace working directory) lost during updates
+- Fixed tags wrapping to multiple lines
+- Fixed mobile sidebar toggle visibility
+- Fixed Linux desktop app terminal not rendering
+
+---
+
 ## v0.46.1 (2026-03-12)
 
 ### Bug Fixes
