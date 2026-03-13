@@ -18,6 +18,16 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.46.5 (2026-03-13)
+
+### Bug Fixes
+
+- Fixed CLI binary auto-update: the desktop app now silently updates the CLI on startup
+- Fixed child window size: new windows now default to a larger size showing desktop view
+- Removed automatic DevTools popup that was interrupting users
+
+---
+
 ## v0.46.4 (2026-03-13)
 
 ### Bug Fixes
