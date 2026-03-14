@@ -18,6 +18,30 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.47.0 (2026-03-14)
+
+### New Features
+
+- Mermaid diagram rendering in TipTap editor with fullscreen pan-zoom preview and SVG download
+- Task relationships restructure: dedicated Parent, Subtasks, and Linked sections with subtask progress bar
+- CLI subtask support with `--parent` and `--subtask` flags, subtask display in task detail
+- Configurable storage quota via admin system config
+- Local sync frontmatter support for parent, subtasks, and linked fields
+
+### Improvements
+
+- Add existing task as subtask dialog for quick subtask creation
+
+### Bug Fixes
+
+- Fixed mermaid SVG sanitization for XML parsing on download
+- Fixed fullscreen preview invisible on light mode
+- Fixed resource detail page preview inconsistency
+- Fixed user role not passed through upload quota validation paths
+- Fixed subtask progress count not using backend data
+
+---
+
 ## v0.46.6 (2026-03-13)
 
 ### Improvements
