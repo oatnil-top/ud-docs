@@ -18,6 +18,28 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.48.0 (2026-03-14)
+
+### New Features
+
+- Subtask ordering with drag-and-drop reordering
+- Show all workspace windows instead of just current board
+- Go-to-parent button in epic view for quick navigation
+- Open-externally buttons now navigate within the current window
+- CLI: `--parent` and `--subtask` flags for `ud task unlink`
+
+### Improvements
+
+- Optimistic updates for subtask drag-and-drop (instant visual feedback)
+
+### Bug Fixes
+
+- Relations graph now shows when task has only subtasks
+- Fixed subtask title alignment and styling
+- Fixed drag handle causing layout shift
+
+---
+
 ## v0.47.1 (2026-03-14)
 
 ### Improvements
