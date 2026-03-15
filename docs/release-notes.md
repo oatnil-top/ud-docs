@@ -18,6 +18,17 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.49.0 (2026-03-15)
+
+### New Features
+
+- Task Status Timeline — new Gantt chart page showing task status changes over time, letting you visualize how tasks flow through statuses
+- Status Changes Feed — dashboard "Recently Updated" widget replaced with a live feed of task status changes
+- Knowledge Graph Tag Filter — filter nodes by tag in the knowledge graph view
+- Kanban Subtask Preview — subtasks now shown directly in the kanban card preview modal
+
+---
+
 ## v0.48.1 (2026-03-15)
 
 ### New Features
