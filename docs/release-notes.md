@@ -18,6 +18,25 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.48.1 (2026-03-15)
+
+### New Features
+
+- Task preview below search results on mobile for quick context
+- Title/Grep segmented control on mobile command palette
+- Section-level add task button in board list view
+- Inline search and tag filter in list view
+
+### Improvements
+
+- Tag suggestions sorted by last used instead of alphabetical
+
+### Bug Fixes
+
+- Fixed focus ring clipping on title input in create task dialog
+
+---
+
 ## v0.48.0 (2026-03-14)
 
 ### New Features
