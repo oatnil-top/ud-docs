@@ -18,6 +18,15 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.49.3 (2026-03-16)
+
+### Bug Fixes
+
+- Fixed ugly scrollbar and layout shift in Gantt charts
+- Fixed Linux binary execute permissions in CI pipeline
+
+---
+
 ## v0.49.2 (2026-03-16)
 
 ### Bug Fixes
