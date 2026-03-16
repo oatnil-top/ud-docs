@@ -18,6 +18,22 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.49.1 (2026-03-16)
+
+### New Features
+
+- Daily spending chart — new per-day summary chart on the transactions page
+
+### Improvements
+
+- Simplified CLI installation to npm only
+
+### Bug Fixes
+
+- Fixed monthly chart hover index type error
+
+---
+
 ## v0.49.0 (2026-03-15)
 
 ### New Features
