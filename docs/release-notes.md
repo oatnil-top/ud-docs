@@ -18,6 +18,20 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.49.4 (2026-03-16)
+
+### New Features
+
+- Added OpenCode as a built-in AI agent option
+- Workspace window limit dialog now shows a thank-you message
+
+### Bug Fixes
+
+- Fixed workspace close events being lost during app shutdown
+- Fixed Safari navigating to custom protocol URLs in markdown links
+
+---
+
 ## v0.49.3 (2026-03-16)
 
 ### Bug Fixes
