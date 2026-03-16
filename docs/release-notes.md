@@ -18,6 +18,14 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.49.2 (2026-03-16)
+
+### Bug Fixes
+
+- Fixed monthly chart click navigation not working after recharts upgrade
+
+---
+
 ## v0.49.1 (2026-03-16)
 
 ### New Features
