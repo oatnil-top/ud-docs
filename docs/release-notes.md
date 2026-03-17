@@ -18,6 +18,14 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.50.1 (2026-03-17)
+
+### Improvements
+
+- Internal maintenance and stability improvements
+
+---
+
 ## v0.50.0 (2026-03-17)
 
 ### Improvements
