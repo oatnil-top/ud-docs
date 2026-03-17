@@ -18,6 +18,18 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.49.5 (2026-03-17)
+
+### New Features
+
+- Board query scoping — Kanban boards can now filter tasks using a board-level query, with a scope indicator badge showing when filtering is active
+
+### Bug Fixes
+
+- Fixed break reminder timer resetting when navigating between pages
+
+---
+
 ## v0.49.4 (2026-03-16)
 
 ### New Features
