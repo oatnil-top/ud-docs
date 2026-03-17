@@ -18,6 +18,18 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.50.0 (2026-03-17)
+
+### Improvements
+
+- Enhanced permission auditing — bulk permission changes now correctly track who made them and emit audit events
+
+### Bug Fixes
+
+- Fixed bulk permission updates not tracking the updater and not emitting audit events
+
+---
+
 ## v0.49.6 (2026-03-17)
 
 ### Improvements
