@@ -18,6 +18,18 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.49.6 (2026-03-17)
+
+### Improvements
+
+- Simplified board filtering — boards now use default tags instead of raw query syntax
+
+### Bug Fixes
+
+- Fixed various UI glitches in board settings panel (scrollbar, borders, focus rings)
+
+---
+
 ## v0.49.5 (2026-03-17)
 
 ### New Features
