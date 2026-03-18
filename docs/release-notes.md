@@ -18,6 +18,14 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.51.3 (2026-03-19)
+
+### New Features
+
+- Added invite code display and referral reward card to the profile page for easy access and copying
+
+---
+
 ## v0.51.2 (2026-03-18)
 
 ### New Features
