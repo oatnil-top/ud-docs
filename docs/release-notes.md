@@ -18,6 +18,20 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.51.1 (2026-03-18)
+
+### Improvements
+
+- Added Configure link to the Implementation Tool dropdown for quick access to AI provider settings
+
+### Bug Fixes
+
+- Fixed entity links not working in Safari browser
+- Fixed kanban board not filtering by default tags in CLI TUI view
+- Fixed missing translation keys for kanban prompt and hooks settings
+
+---
+
 ## v0.51.0 (2026-03-18)
 
 ### New Features
