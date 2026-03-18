@@ -18,6 +18,15 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.51.2 (2026-03-18)
+
+### New Features
+
+- Added referral reward system — earn rewards by sharing invite codes for desktop app downloads
+- New download dialog with Discord community join prompt and invite code entry
+
+---
+
 ## v0.51.1 (2026-03-18)
 
 ### Improvements
