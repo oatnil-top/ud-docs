@@ -18,6 +18,27 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.51.0 (2026-03-18)
+
+### New Features
+
+- Redesigned Add to Board panel — shows all boards with type labels and ownership info, private boards shown as read-only, sharing warning when adding to shared boards
+- Kanban AI prompt setting — configure AI prompts when creating boards
+- Email and linked identity providers now displayed on profile page
+
+### Improvements
+
+- Board removal confirmation now shows group name and tags list
+- Removal confirmation shown for all boards, not just shared ones
+- Refresh buttons now show spin animation for visual feedback
+
+### Bug Fixes
+
+- Fixed profile page crash
+- Improved Chinese translations for more natural phrasing
+
+---
+
 ## v0.50.1 (2026-03-17)
 
 ### Improvements
