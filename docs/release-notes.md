@@ -18,6 +18,26 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.52.0 (2026-03-19)
+
+### New Features
+
+- Configurable query widgets on dashboard with settings icon
+- Customize widget size and display order
+- Widget configurations are persisted server-side via preferences
+
+### Improvements
+
+- Query string always shown in dimmed style for better readability
+
+### Bug Fixes
+
+- Fixed missing group_id columns in accounts table
+- Fixed dashboard store persistence merge strategy
+- Fixed incorrect SQL-like query syntax format
+
+---
+
 ## v0.51.4 (2026-03-19)
 
 ### Improvements
