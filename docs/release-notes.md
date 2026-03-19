@@ -18,6 +18,15 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.51.4 (2026-03-19)
+
+### Improvements
+
+- Refined referral reward card with updated description
+- Improved invite code section to show referral benefits
+
+---
+
 ## v0.51.3 (2026-03-19)
 
 ### New Features
