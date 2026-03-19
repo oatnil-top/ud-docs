@@ -18,6 +18,24 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.53.0 (2026-03-19)
+
+### New Features
+
+- Keyboard shortcuts reference section on profile page
+- Workspace switcher command palette (Ctrl+Q)
+- Fold/unfold all and refresh shortcuts in CLI board view
+
+### Bug Fixes
+
+- Fixed drawio files losing original format when saving
+- Fixed Electron app singleton lock not cleaning up properly on startup
+- Fixed duplicate case handling in column condition builder
+- Adjusted table of contents breakpoint for better viewport compatibility
+- Fixed database migration failure for pre-existing databases missing workspace_sessions table
+
+---
+
 ## v0.52.0 (2026-03-19)
 
 ### New Features
