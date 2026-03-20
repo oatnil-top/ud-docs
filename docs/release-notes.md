@@ -18,6 +18,20 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.53.2 (2026-03-20)
+
+### New Features
+
+- Resource preview: open previewed files in a new window for side-by-side viewing
+- Markdown editor: translate selected text directly from the bubble menu
+- Download dialog: added referral hint with profile link and Discord community link
+
+### Bug Fixes
+
+- Fixed Ctrl+Q keyboard shortcut not working correctly
+
+---
+
 ## v0.53.1 (2026-03-20)
 
 ### Bug Fixes
