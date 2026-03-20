@@ -18,6 +18,14 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.53.1 (2026-03-20)
+
+### Bug Fixes
+
+- Fixed desktop app startup crash caused by SQLite database migration error
+
+---
+
 ## v0.53.0 (2026-03-19)
 
 ### New Features
