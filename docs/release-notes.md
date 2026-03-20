@@ -18,6 +18,18 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.53.3 (2026-03-20)
+
+### Improvements
+
+- Added a dedicated "preview in new window" button for opening detail pages in a separate window
+
+### Bug Fixes
+
+- Fixed detail page to always open in a new window instead of navigating away from the current view
+
+---
+
 ## v0.53.2 (2026-03-20)
 
 ### New Features
