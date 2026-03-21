@@ -18,6 +18,27 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.53.4 (2026-03-21)
+
+### New Features
+
+- Referral hint in workspace limit dialog — invite friends to unlock more workspaces
+- Platform hints integrated into download dialog popup
+- Growth trend line charts on admin dashboard
+
+### Improvements
+
+- Code blocks now scroll horizontally within their container
+- Dialogs are scrollable on small viewports with tighter spacing
+- Workspace limit description updated to mention feedback unlocks
+
+### Bug Fixes
+
+- Fixed ISO date format handling in growth chart X-axis labels
+- Fixed dialog content overflow on small screens
+
+---
+
 ## v0.53.3 (2026-03-20)
 
 ### Improvements
