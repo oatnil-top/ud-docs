@@ -18,6 +18,20 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.54.2 (2026-03-23)
+
+### New Features
+
+- Batch select, delete, and move files to folders in File Storage view
+- Command palette tasks now sorted by most recently updated
+
+### Bug Fixes
+
+- Fixed H4 and H5 heading styles missing in rich text editor
+- Fixed timeline status segment being clipped when too narrow
+
+---
+
 ## v0.54.1 (2026-03-23)
 
 ### New Features
