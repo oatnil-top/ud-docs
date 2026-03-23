@@ -18,6 +18,24 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.54.0 (2026-03-23)
+
+### New Features
+
+- Storage class management — Admin UI for creating, editing, deleting, and testing storage classes with backup replication, user/group/system assignment hierarchy, and resolution overview
+- Fullscreen mode for Kanban board
+- Heading H4 & H5 support and clear formatting in markdown/bubble menu editor
+
+### Improvements
+
+- CLI migration: unified metadata-based idempotent incremental migration for all entity types
+
+### Bug Fixes
+
+- Fixed storage class edit modal overwriting secrets with masked values
+
+---
+
 ## v0.53.4 (2026-03-21)
 
 ### New Features
