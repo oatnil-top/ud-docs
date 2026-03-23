@@ -18,6 +18,19 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.54.1 (2026-03-23)
+
+### New Features
+
+- Edit drawio, dataflow, and text resources directly from the detail page
+
+### Bug Fixes
+
+- Fixed command palette text overflow in title and preview content
+- Fixed workspace working directory resolution from task/board metadata in TUI
+
+---
+
 ## v0.54.0 (2026-03-23)
 
 ### New Features
