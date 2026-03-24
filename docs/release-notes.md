@@ -18,6 +18,20 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.55.1 (2026-03-24)
+
+### New Features
+
+- Task Assignee — assign team members to tasks directly from the task properties panel
+- Audit channel tracking for better change history visibility
+
+### Bug Fixes
+
+- Fixed dialog overflow when displaying long content
+- Fixed edit column dialog layout overflow with long conditions
+
+---
+
 ## v0.55.0 (2026-03-24)
 
 ### New Features
