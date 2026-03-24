@@ -18,6 +18,22 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.55.0 (2026-03-24)
+
+### New Features
+
+- Gantt chart view for task scheduling — visualize tasks on a timeline with start and end dates
+- Drag-to-resize Gantt chart bars to adjust task dates directly
+- Kickoff (start date) field for tasks, enabling calendar and Gantt planning
+- Updated list view icon, gallery view now supports selection
+
+### Bug Fixes
+
+- Fixed metadata not flowing through account/budget/expense creation
+- Fixed kanban board filter being dropped when column has ORDER BY
+
+---
+
 ## v0.54.2 (2026-03-23)
 
 ### New Features
