@@ -18,6 +18,26 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.56.0 (2026-03-25)
+
+### New Features
+
+- Kanban cards show assignee avatars with assignee filter in toolbar
+- Scheduled database backups with configurable backup owner
+- Delete action in scheduled jobs dropdown menu
+- Refresh button on resources page
+- "Run Ad-hoc" moved to first position in workspace menu
+
+### Bug Fixes
+
+- Fixed onboarding dialog blocking existing users, now dismissible via click-outside or Escape
+- Fixed cross-origin file downloads
+- Fixed refresh button not resetting resource cache
+- Fixed audit column migration table names and field widths
+- Hidden backup UI when using PostgreSQL
+
+---
+
 ## v0.55.1 (2026-03-24)
 
 ### New Features
