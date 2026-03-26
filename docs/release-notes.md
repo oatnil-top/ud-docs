@@ -18,6 +18,23 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.57.0 (2026-03-26)
+
+### New Features
+
+- Dataflow multi-field selection — Ctrl+Click to select multiple fields with 7-color highlight palette
+
+### Bug Fixes
+
+- Fixed task attachments not syncing properly with resource store
+- Fixed long task titles overflowing in links section
+
+### Improvements
+
+- Thin scrollbar applied globally for a cleaner interface
+
+---
+
 ## v0.56.0 (2026-03-25)
 
 ### New Features
