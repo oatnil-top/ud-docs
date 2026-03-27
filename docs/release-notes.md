@@ -18,6 +18,29 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.58.0 (2026-03-27)
+
+### New Features
+
+- Dataflow canvas box selection — drag to select multiple nodes at once
+- Merge/append import for dataflow diagrams — import without replacing existing work
+- Topological layout for imported nodes — auto-arranged for readability
+- Accept simplified AI format for dataflow graph import
+- Warning shown on failed dataflow graph import
+- Improved AI prompt for dataflow diagram generation
+- Migrate-from-personal flag for self-hosted Pro/Max tier migration
+
+### Improvements
+
+- Zoom out further in dataflow canvas
+
+### Bug Fixes
+
+- Fixed advanced search not triggering initial search on page load
+- Fixed onboarding dialog unmounting early, leaving empty task list
+
+---
+
 ## v0.57.0 (2026-03-26)
 
 ### New Features
