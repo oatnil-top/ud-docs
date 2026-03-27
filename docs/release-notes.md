@@ -38,6 +38,7 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 - Fixed advanced search not triggering initial search on page load
 - Fixed onboarding dialog unmounting early, leaving empty task list
+- Fixed terminal not auto-focusing when workspace window gains focus
 
 ---
 
