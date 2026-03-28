@@ -18,6 +18,22 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.58.3 (2026-03-28)
+
+### Improvements
+
+- Updated homepage hero copy and marketing tagline
+
+### Upgrade Notes (Self-Hosted)
+
+- Environment variable `ADMIN_USERNAME` has been renamed to `ADMIN_EMAIL`. Please update your deployment configuration accordingly.
+
+### Documentation
+
+- Added Personal → Pro/Max migration guide
+
+---
+
 ## v0.58.2 (2026-03-27)
 
 No end-user facing changes in this release.
