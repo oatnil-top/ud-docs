@@ -18,6 +18,29 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.58.4 (2026-03-29)
+
+### New Features
+
+- Draw.io editor: import and export local .drawio files
+- Export dataflow diagrams as .drawio XML
+- Checklist items link directly to subtasks via task:// protocol
+
+### Improvements
+
+- Onboarding reorganized into 4 top-level categories with how-to subtasks
+- Onboarding defaults to English
+
+### Bug Fixes
+
+- Fixed white screen after Electron app updates (stale cache)
+- Fixed Draw.io export list items with incorrect vertical positioning
+- Fixed resource links opening unnecessarily in new windows
+- Fixed welcome task checklist not mirroring full subtask tree
+- Fixed Level 1 category tasks missing subtask checklists
+
+---
+
 ## v0.58.3 (2026-03-28)
 
 ### Improvements
