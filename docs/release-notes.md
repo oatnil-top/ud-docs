@@ -18,6 +18,25 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.59.0 (2026-03-30)
+
+### New Features
+
+- Share Access Code — securely share content via access codes
+- Dataflow: Group Nodes — visually group related nodes, edit group name & color
+- Dataflow: Note Nodes — add notes with attachments, drag-to-attach to nodes/fields, collapsible
+- Dataflow: Field Editor — inline editing of field name, example, and description
+- Dataflow: Multi-select Delete — bulk delete selected elements
+
+### Bug Fixes
+
+- Fixed command palette Cmd+Enter not opening task in new window
+- Fixed Draw.io editor not using user's language preference
+- Fixed dataflow grouped node export positions
+- Fixed dataflow parent-child relationships lost on save/reload
+
+---
+
 ## v0.58.4 (2026-03-29)
 
 ### New Features
