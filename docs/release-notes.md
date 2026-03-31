@@ -18,6 +18,25 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.59.1 (2026-03-31)
+
+### New Features
+
+- Dataflow: Image Nodes — new image node type with folding, Ctrl+V paste, and Draw.io export
+- Dataflow: Node-level Handles — connection handles on JsonNode and ProcessNode, enlarge on hover
+- Dataflow: Title Links — clickable URL links in node titles
+- Dataflow: Inline Child Fields — expand child fields inline for object/array fields
+
+### Bug Fixes
+
+- Fixed group node border display issues
+- Fixed group title positioning overlapping content
+- Fixed node handles not visible when connected
+- Fixed redundant blue indicator dot on JsonNode header
+- Fixed image node Draw.io export for data URLs
+
+---
+
 ## v0.59.0 (2026-03-30)
 
 ### New Features
