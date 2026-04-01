@@ -18,6 +18,29 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.60.0 (2026-04-01)
+
+### New Features
+
+- Draw.io editor: explicit Save / Save & Close buttons with quit confirmation dialog
+- Ctrl+S triggers save & close in all resource editors
+- Resource editors open in dedicated windows (desktop) or new tabs (browser)
+- Ctrl/Cmd+Enter shortcut for ad-hoc action dialog
+- Dataflow: blue dashed lines for image node connections
+- Dataflow: { } button in field editor to convert fields to objects
+- Dataflow: recursive child field creation
+
+### Bug Fixes
+
+- Fixed resource editor windows unable to close due to iframe beforeunload
+- Fixed copy/paste shortcuts not working in all Electron windows
+- Fixed new Draw.io resources saving in wrong format
+- Fixed Save button in new resource editor unexpectedly closing tab/window
+- Fixed JS replace() corrupting $ patterns in user prompts
+- Fixed Electron startup Service Worker database error
+
+---
+
 ## v0.59.1 (2026-03-31)
 
 ### New Features
