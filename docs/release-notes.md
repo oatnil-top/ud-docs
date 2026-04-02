@@ -18,6 +18,14 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.61.1 (2026-04-02)
+
+### Improvements
+
+- AI: configure AI providers directly from AI-powered panels without navigating to settings
+
+---
+
 ## v0.61.0 (2026-04-02)
 
 ### New Features
