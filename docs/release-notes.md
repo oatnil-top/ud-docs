@@ -18,6 +18,27 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.61.0 (2026-04-02)
+
+### New Features
+
+- Dataflow: raw editor mode for editing node JSON data directly
+- Dataflow: cross-diagram copy/paste for nodes
+- Dataflow: multiple connections for note/image nodes
+- Kanban: open multiple terminal windows from column dropdown
+- CLI: kubectl-style note commands (get notes, apply note, delete note)
+- CLI: board name lookup, get columns, and query board commands
+
+### Bug Fixes
+
+- Fixed command palette navigation always targeting main window in Electron
+- Fixed Ctrl+Q now shows all windows including editors
+- Fixed kanban column search tooltip showing "Batch actions" instead of "Search in column"
+- Removed non-functional column search button
+- Unified startup loading screens to match flat/minimal design
+
+---
+
 ## v0.60.0 (2026-04-01)
 
 ### New Features
