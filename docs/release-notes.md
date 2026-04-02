@@ -18,6 +18,18 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.61.2 (2026-04-02)
+
+### Improvements
+
+- CLI: `ud describe task` output now clarifies it already includes all notes
+
+### Bug Fixes
+
+- AI provider configuration now defaults to OpenAI-compatible type and no longer auto-fills endpoint URLs
+
+---
+
 ## v0.61.1 (2026-04-02)
 
 ### Improvements
