@@ -18,6 +18,14 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.61.3 (2026-04-02)
+
+### Bug Fixes
+
+- Fixed task detail sidebar scrolling — sidebar is now independently scrollable with hidden scrollbar
+
+---
+
 ## v0.61.2 (2026-04-02)
 
 ### Improvements
