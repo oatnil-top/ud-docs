@@ -18,6 +18,18 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.62.1 (2026-04-03)
+
+### Improvements
+
+- CLI: AI work sessions now record notes more frequently and promptly, ensuring knowledge and progress survive session interruptions
+
+### Bug Fixes
+
+- Fixed Windows desktop app icon background transparency
+
+---
+
 ## v0.62.0 (2026-04-03)
 
 ### New Features
