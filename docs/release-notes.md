@@ -18,6 +18,30 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.62.0 (2026-04-03)
+
+### New Features
+
+- Quick Note: Gmail-style popup with Ctrl+N shortcut, full-screen Markdown editor, sidebar entry, mobile FAB collapses on scroll
+- Command Palette: SSE-based real-time cache invalidation, shows both Title/Grep search modes
+- Window Management: Ctrl+Q shortcut to cycle between windows with MRU ordering
+- Dataflow: resizable image/note nodes, "Copy for AI" export
+- Global default AI agent setting
+- "Back to App" button for authenticated users on public pages
+- Updated app icons
+
+### Bug Fixes
+
+- Fixed command palette stale cache, task deletion cleanup
+- Fixed Quick Note editor stability (tiptap lifecycle, mount guards)
+- Fixed dataflow pipe delete button not working
+- Fixed Markdown simplified URL rendering
+- Fixed mobile FAB positioning
+- Fixed Windows Codex launch path resolution
+- Fixed dataflow node viewport placement
+
+---
+
 ## v0.61.3 (2026-04-02)
 
 ### Bug Fixes
