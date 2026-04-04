@@ -12,3 +12,13 @@ guide:
   label: Guide
   permalink: /guide
   description: Guides and tutorials
+
+tutorial:
+  label: Tutorial
+  permalink: /tutorial
+  description: Step-by-step tutorials
+
+self-hosting:
+  label: Self-Hosting
+  permalink: /self-hosting
+  description: Self-hosting and deployment topics

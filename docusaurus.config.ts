@@ -8,7 +8,7 @@ const VERSION = versionConfig.version;
 
 const config: Config = {
   title: 'UnderControl',
-  tagline: 'Personal budget and expense management',
+  tagline: 'Self-hosted Jira + Obsidian + Mint + S3 Browser — AI-powered, in one app',
   favicon: 'img/favicon.svg',
 
   future: {
@@ -88,6 +88,7 @@ const config: Config = {
           label: 'Cookbook',
           position: 'left',
         },
+        {to: '/blog', label: 'Blog', position: 'left'},
         {
           to: '/subscribe',
           label: 'Pricing',
