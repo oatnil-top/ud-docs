@@ -35,16 +35,16 @@ function HeroSection() {
       </span>
       <h1 className={styles.heroTitle}>
         <Translate
-          id="homepage.hero.title"
-          description="The homepage hero title">
-          Manage your money and time in one single app, own 100% of your data
+          id="homepage.hero.tagline"
+          description="The homepage hero tagline">
+          Self-hosted Jira + Obsidian + Mint + S3 Browser — AI-powered, in one app
         </Translate>
       </h1>
       <p className={styles.heroSubtitle}>
         <Translate
           id="homepage.hero.subtitle"
           description="The homepage hero subtitle">
-          Built by indie developer + AI. No ads, no tracking, no motive to peek at your data.
+          A control plane for your tasks, knowledge, budget, and files. Launch AI agents like Claude Code directly from tasks, manage multiple sessions, and never lose track. Self-hosted, fully yours.
         </Translate>
       </p>
       <div className={styles.heroButtons}>
@@ -422,7 +422,7 @@ export default function Home(): ReactNode {
       })}
       description={translate({
         id: 'homepage.description',
-        message: 'Built by indie developer + AI. Self-host, work offline, deploy to internal network. Your data stays yours. Personal tier free forever. Zero trust, full control.',
+        message: 'UnderControl combines project management, a markdown knowledge base, S3-compatible file browser, and budget tracking into a single self-hosted workspace. Configure your own AI provider, sync to local folders as plain Markdown, manage tasks from a k9s-style CLI, and deploy with Docker Compose in minutes. Free for personal use.',
         description: 'The homepage meta description',
       })}>
       <main className={styles.mainContainer}>
