@@ -10,6 +10,8 @@ date: 2026-04-05
 
 UnDercontrol 从一开始就是为了彻底避免这种情况而设计的。它支持自托管，意味着你在自己掌控的基础设施上运行它，数据存放在你指定的地方。
 
+![UnDercontrol dashboard — self-hosted and fully under your control](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/self-hosting/dashboard.png)
+
 ## 用 Docker Compose 几分钟内完成部署
 
 对大多数人来说，Docker Compose 是最快的启动方式。一个 `docker-compose.yml` 文件就能拉取后端和前端镜像，将它们连接起来，几分钟内就能在你的服务器或本地机器上运行 UnDercontrol。
