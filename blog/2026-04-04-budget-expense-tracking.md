@@ -50,6 +50,6 @@ For reporting and data portability, UnDercontrol supports data export so you can
 
 Everything described here runs on your own server. Your financial data doesn't pass through anyone else's infrastructure. You control the backups, the access, and the retention policy. For anyone who's ever felt uncomfortable typing their bank transactions into a third-party app, that matters.
 
-If you want to get started, the [self-deployment guide](/docs/self-hosting/overview) walks through setting up UnDercontrol with Docker. The [budget documentation](/docs/features/budget-management) covers every feature in detail, including how budget totals are calculated and how to use adjustments effectively.
+If you want to get started, the [self-deployment guide](/docs/self-deployment) walks through setting up UnDercontrol with Docker. The [budget documentation](/docs/features/budget) covers every feature in detail, including how budget totals are calculated and how to use adjustments effectively.
 
 Set up your first budget, link a few expenses, and check back in a week. The spending trend chart will tell you more than any spreadsheet ever did.

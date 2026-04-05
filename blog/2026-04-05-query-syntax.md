@@ -112,4 +112,4 @@ Flags for pagination (`--page`, `--limit`) and sorting (`--sort`, `--order`) are
 
 The full query syntax reference is in the [Query Syntax documentation](/docs/query-syntax), including every operator, all datetime expression formats, and a full set of practical examples to copy and adapt.
 
-If you are not running UnDercontrol yet, the [self-hosting guide](/docs/self-hosting) covers deployment with Docker. Your data stays on your own infrastructure — that is the whole point.
+If you are not running UnDercontrol yet, the [self-hosting guide](/docs/self-deployment) covers deployment with Docker. Your data stays on your own infrastructure — that is the whole point.

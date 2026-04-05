@@ -68,6 +68,6 @@ Everything is in one place. No external file hosting, no email threads to dig th
 
 ## Get Started
 
-If you are already running UnDercontrol, the Resources page is available in the main navigation. If you are evaluating whether to self-host, the [deployment guide](https://undercontrol.app/docs/deployment) covers setting up your instance including storage configuration.
+If you are already running UnDercontrol, the Resources page is available in the main navigation. If you are evaluating whether to self-host, the [deployment guide](/docs/self-deployment) covers setting up your instance including storage configuration.
 
-The [Resource Management documentation](/docs/resources) has the full reference for CLI commands, storage configuration, and entity attachment options.
+The [Resource Management documentation](/docs/features/resources) has the full reference for CLI commands, storage configuration, and entity attachment options.

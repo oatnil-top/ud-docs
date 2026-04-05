@@ -68,6 +68,6 @@ ud upload resource ./receipt.png --entity-type expense --entity-id exp-456
 
 ## 开始使用
 
-如果你已经在运行 UnDercontrol，资源页面可以在主导航中找到。如果你正在评估是否自托管，[部署指南](https://undercontrol.app/docs/deployment) 涵盖了实例搭建的全部流程，包括存储配置。
+如果你已经在运行 UnDercontrol，资源页面可以在主导航中找到。如果你正在评估是否自托管，[部署指南](/docs/self-deployment) 涵盖了实例搭建的全部流程，包括存储配置。
 
-[资源管理文档](/docs/resources) 提供了 CLI 命令、存储配置和实体附加选项的完整参考。
+[资源管理文档](/docs/features/resources) 提供了 CLI 命令、存储配置和实体附加选项的完整参考。

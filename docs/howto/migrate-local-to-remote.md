@@ -10,7 +10,7 @@ Learn how to migrate your data from a local UnderControl desktop instance (Perso
 ## Prerequisites
 
 - UnderControl desktop app with local data you want to migrate
-- A remote UnderControl server deployed and accessible (see [Docker Compose deployment](/docs/howto/docker-compose))
+- A remote UnderControl server deployed and accessible (see [Docker Compose deployment](/docs/deployment/docker-compose-local))
 - The `ud` CLI installed on your machine ([CLI documentation](/docs/cli))
 - Accounts on both the local and remote servers
 
@@ -147,4 +147,4 @@ Available entity types: `accounts`, `budgets`, `expenses`, `incomes`, `tasks`, `
 ## Related
 
 - [CLI Tool](/docs/cli)
-- [Docker Compose Deployment](/docs/deployment/docker-compose)
+- [Docker Compose Deployment](/docs/deployment/docker-compose-local)

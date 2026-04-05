@@ -10,7 +10,7 @@ sidebar_position: 2
 ## 前提条件
 
 - 已有数据的 UnderControl 桌面端应用
-- 已部署并可访问的远程 UnderControl 服务器（参见 [Docker Compose 部署](/docs/howto/docker-compose)）
+- 已部署并可访问的远程 UnderControl 服务器（参见 [Docker Compose 部署](/docs/deployment/docker-compose-local)）
 - 本机已安装 `ud` CLI（[CLI 文档](/docs/cli)）
 - 在本地和远程服务器上都已注册账号
 
@@ -147,4 +147,4 @@ ud migrate --from local --to remote --entities accounts,budgets,expenses,incomes
 ## 相关文档
 
 - [CLI 命令行工具](/docs/cli)
-- [Docker Compose 部署](/docs/deployment/docker-compose)
+- [Docker Compose 部署](/docs/deployment/docker-compose-local)

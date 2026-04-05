@@ -112,4 +112,4 @@ ud task query "(status = 'todo' OR status = 'in-progress') AND tags = 'work'"
 
 完整的查询语法参考文档请见[查询语法文档](/docs/query-syntax)，包含所有运算符、日期时间表达式格式，以及一套可直接复用和改写的实用示例。
 
-如果你还没有部署 UnDercontrol，[自托管指南](/docs/self-hosting)介绍了如何通过 Docker 完成部署。你的数据始终保存在自己的基础设施上——这正是它的核心价值所在。
+如果你还没有部署 UnDercontrol，[自托管指南](/docs/self-deployment)介绍了如何通过 Docker 完成部署。你的数据始终保存在自己的基础设施上——这正是它的核心价值所在。
