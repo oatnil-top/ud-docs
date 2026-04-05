@@ -32,9 +32,13 @@ A single resource can be linked to multiple items. If you have a contract PDF th
 
 The inspector panel shows you exactly where a file is attached, so you never lose track of which items reference it.
 
+![Task list view — files attach directly to tasks, expenses, and budgets](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/resource-management/task-with-attachments.png)
+
 ## Find What You Need
 
 The Resources page gives you a full overview of uploaded files with filtering built in. You can narrow down by file type, by which entity type the file is attached to (tasks, expenses, budgets, accounts), or by a date range. For images, the gallery view shows thumbnails so you can visually scan a set of receipts or screenshots without opening each one.
+
+![Resource management page showing uploaded files with thumbnails and metadata](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/resource-management/resources-grid.png)
 
 The inspector also surfaces EXIF metadata for photos — useful if you need to confirm when a photo was taken or where.
 
@@ -59,6 +63,8 @@ For receipts and document scans, the AI integration is worth knowing about. You 
 A practical example: you are tracking a freelance project. There is a task for "Review client contract." You attach the contract PDF to that task. Later, you log an expense for software you purchased for the project. You attach the invoice to the expense. Both files show up in the Resources page, filtered by entity type if you want to see only expense attachments, or together if you want a full file audit for the project.
 
 Everything is in one place. No external file hosting, no email threads to dig through.
+
+![Budget overview — receipts and invoices attach to expenses within budgets](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/resource-management/budget-overview.png)
 
 ## Get Started
 
