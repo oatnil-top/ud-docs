@@ -10,6 +10,8 @@ The part of personal finance and task management that nobody enjoys is the data 
 
 UnDercontrol's AI assistant is built to eliminate that friction. Here is how it actually works in practice.
 
+![UnDercontrol dashboard — AI assistant integrates across all features](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/ai-assistant/dashboard.png)
+
 ## Snap a Receipt, Skip the Form
 
 The most immediately useful AI feature is receipt scanning. When you create a new expense, you can upload a photo — drag and drop, paste from clipboard, or select a file. The AI reads the image and extracts the amount, currency, merchant name, date, and a suggested category.
@@ -33,6 +35,8 @@ The same pattern works for tasks. Instead of filling out a task form, you descri
 - "Follow up with the accountant about Q1 taxes"
 - "Buy a birthday gift for Sarah before Friday"
 - "Research self-hosted backup solutions"
+
+![Task list — AI can create and manage tasks from text or voice input](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/ai-assistant/task-list.png)
 
 UnDercontrol creates a structured task from the description, including a title, any relevant tags it can infer, and a description. You review it, adjust anything that looks off, and save.
 
