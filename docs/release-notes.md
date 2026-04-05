@@ -18,6 +18,19 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.63.3 (2026-04-05)
+
+### Improvements
+
+- Real-time sync connections now auto-refresh every 30 minutes to prevent stale connections
+
+### Bug Fixes
+
+- Fixed real-time sync connections dropping unexpectedly
+- Fixed task updates via real-time sync potentially causing data inconsistency
+
+---
+
 ## v0.63.2 (2026-04-05)
 
 ### Bug Fixes
