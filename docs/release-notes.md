@@ -18,6 +18,24 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.63.1 (2026-04-05)
+
+### Improvements
+
+- Share message now uses code entry page URL with simplified sharing instructions
+- "Open in new tab" replaces remote workspace action for easier multi-window workflow
+- Redesigned login pages with refined flat minimal design and decorative guide lines
+- Share message button is now more prominent and includes both sharing links
+- Real-time updates now work in Electron workspace windows
+
+### Bug Fixes
+
+- Fixed find-in-page in desktop app: input losing focus after first character and stuck matches
+- Fixed group invite links not being reusable (removed count limit)
+- Fixed share message saying "content" instead of "task"
+
+---
+
 ## v0.63.0 (2026-04-05)
 
 ### New Features
