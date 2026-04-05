@@ -18,6 +18,42 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.63.0 (2026-04-05)
+
+### New Features
+
+- Desktop: Find-in-page with Ctrl+F / Cmd+F
+- CLI: New `ud local-sync` command with watch mode for real-time sync
+- CLI: New `api-resources` command, enhanced help text
+- CLI: `/task` alias routes and `X-UD-Channel` audit header
+- CWD input field in ad-hoc execution dialog
+- "Copy Share Message" button in share dialog
+- Cmd+R shortcut to run task
+- Restored Cmd+W close window shortcut
+
+### Documentation
+
+- Rewritten Quick Start page covering all entry points
+- Rewritten Domain Language page with all app domains
+- New Custom Clients doc page
+- New Everything-as-Code doc page
+- Task concept added to onboarding welcome task
+- Reorganized docs sidebar structure
+
+### Bug Fixes
+
+- Fixed task detail sidebar height and scrollbar issues
+- Fixed sidebar bottom items cut off on mobile
+- Fixed docs sidebar not scrollable on mobile
+- Fixed inline editor toolbar scrollable on mobile, removed popup editor
+- Fixed global scrollbar CSS affecting xterm viewport
+- Fixed dashboard charts -1 dimension warning
+- Fixed dataflow node connection handles on fold/collapse
+- Fixed parent sidebar items: click name navigates, chevron toggles fold
+- Renamed "Run Ad-hoc" to "Run"
+
+---
+
 ## v0.62.1 (2026-04-03)
 
 ### Improvements
