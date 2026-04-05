@@ -30,6 +30,8 @@ You can build on that with tags, text search, date ranges, and custom fields:
 
 This is a reliable "needs attention now" query. Pin it as a saved query (more on that below) and you have a one-click urgent task list.
 
+![Task search with query syntax filtering](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/query-syntax/task-query.png)
+
 ## Datetime Expressions
 
 One of the more practical parts of the syntax is the relative date support. Instead of hardcoding dates, you write things like `'-7d'`, `'+1w'`, or just `'today'`.
@@ -90,6 +92,8 @@ A few worth setting up immediately:
 | Due This Week | `deadline BETWEEN 'today' AND '+7d' AND status != 'done'` |
 | Unplanned | `deadline IS NULL AND status = 'todo'` |
 | Recently Active | `updated_at >= '-7d' AND status IN ('todo', 'in-progress')` |
+
+![Saved queries for quick access to filtered views](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/query-syntax/saved-queries.png)
 
 You can pin queries to keep your most-used ones at the top, reorder them by drag and drop, and edit them at any time. When you click a saved query, results expand inline — no navigation required.
 

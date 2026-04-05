@@ -30,6 +30,8 @@ status = 'todo' AND deadline <= 'today'
 
 这是一个可靠的"当前需要处理"查询。将它保存为已保存查询（下文详述），就有了一个一键直达的紧急任务列表。
 
+![Task search with query syntax filtering](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/query-syntax/task-query.png)
+
 ## 日期时间表达式
 
 语法中较为实用的一部分是相对日期支持。你不需要写死具体日期，而是使用 `'-7d'`、`'+1w'` 或直接写 `'today'` 这样的表达式。
@@ -81,6 +83,8 @@ ud task nlquery "high priority engineering items with no deadline"
 ## 已保存查询
 
 这是查询系统真正在日常使用中发挥价值的地方。已保存查询允许你为任意查询命名并存储，之后只需在侧边栏点击一下即可执行。
+
+![Saved queries for quick access to filtered views](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/query-syntax/saved-queries.png)
 
 以下几个查询值得立即配置：
 
