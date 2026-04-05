@@ -18,6 +18,14 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.63.2 (2026-04-05)
+
+### Bug Fixes
+
+- Fixed task not refreshing when description is updated via SSE
+
+---
+
 ## v0.63.1 (2026-04-05)
 
 ### Improvements
