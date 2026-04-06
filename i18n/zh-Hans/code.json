@@ -1333,7 +1333,7 @@
     "message": "工作原理"
   },
   "homepage.howItWorks.subtitle": {
-    "message": "管家运行在你的设备上。智能计算在本地进行，服务器仅做消息中转。"
+    "message": "管家运行在你的设备上。AI 智能计算在本地进行，服务器管理你的数据 - 且支持自部署。"
   },
   "homepage.howItWorks.you.label": {
     "message": "你"
@@ -1345,7 +1345,7 @@
     "message": "服务器"
   },
   "homepage.howItWorks.server.desc": {
-    "message": "仅中转消息。不做智能处理，不碰你的数据。"
+    "message": "管理任务、预算和数据。支持自部署，基础设施完全由你掌控。"
   },
   "homepage.howItWorks.butler.label": {
     "message": "你的管家"

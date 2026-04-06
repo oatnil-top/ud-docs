@@ -214,7 +214,7 @@ function HowItWorksSection() {
       </h2>
       <p className={styles.sectionSubtitle}>
         <Translate id="homepage.howItWorks.subtitle">
-          Your butler lives on your machine. Intelligence runs locally. The server is just a relay.
+          Your butler lives on your machine. AI intelligence runs locally. The server handles your data — and you can self-host it.
         </Translate>
       </p>
       <div className={styles.howItWorksSteps}>
@@ -230,14 +230,14 @@ function HowItWorksSection() {
           </p>
         </div>
         <ArrowRight size={16} className={styles.howItWorksArrow} />
-        <div className={`${styles.howItWorksStep} ${styles.howItWorksStepMuted}`}>
+        <div className={styles.howItWorksStep}>
           <Server size={24} strokeWidth={1.5} />
           <h3>
             <Translate id="homepage.howItWorks.server.label">Server</Translate>
           </h3>
           <p>
             <Translate id="homepage.howItWorks.server.desc">
-              Relays messages only. No intelligence, no data processing.
+              Manages tasks, budgets, and data. Self-hostable — you own the infrastructure.
             </Translate>
           </p>
         </div>
