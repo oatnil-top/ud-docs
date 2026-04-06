@@ -60,7 +60,7 @@
   font-size: 56px;
   line-height: 1.1;
   letter-spacing: -0.03em;
-  font-weight: 700;
+  font-weight: 300;
   margin-bottom: 24px;
   color: var(--ifm-font-color-base);
 }
@@ -92,7 +92,7 @@
   border: 1px solid var(--ifm-color-emphasis-900);
   border-radius: 6px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
   text-decoration: none;
   cursor: pointer;
   transition: opacity 0.2s;
@@ -124,7 +124,7 @@
   border: 1px solid var(--ifm-color-emphasis-300);
   border-radius: 6px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
   text-decoration: none;
   cursor: pointer;
   transition: background 0.2s;
@@ -138,10 +138,10 @@
 
 /* Section Label (consistent across sections) */
 .sectionLabel {
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   color: var(--ifm-color-emphasis-500);
   margin-bottom: 8px;
 }
@@ -208,7 +208,7 @@
 
 .butlerItemLabel {
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
   color: var(--ifm-font-color-base);
 }
 
@@ -342,7 +342,7 @@
 
 .howItWorksStep h3 {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 400;
   margin: 12px 0 8px;
   color: var(--ifm-font-color-base);
 }
@@ -410,7 +410,7 @@
 
 .trustItem h3 {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 400;
   margin: 0 0 4px;
   color: var(--ifm-font-color-base);
 }
