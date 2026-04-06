@@ -1289,5 +1289,125 @@
   "subscribe.donate.thanks": {
     "message": "每一份贡献都帮助我变得更好！",
     "description": "Donate thanks"
+  },
+  "homepage.title": {
+    "message": "UnDercontrol — 你的私人 AI 管家"
+  },
+  "homepage.description": {
+    "message": "运行在你设备上的私人 AI 管家，管理你的任务、知识和财务。随时随地与它对话。下载桌面应用或自托管 — 数据始终由你掌控。"
+  },
+  "homepage.hero.tagline": {
+    "message": "你的私人 AI 管家"
+  },
+  "homepage.hero.subtitle": {
+    "message": "运行在你设备上的 AI 助手 — 管理你的任务、知识和财务。随时随地与它对话，数据始终在你掌控之中。"
+  },
+  "homepage.hero.tryNow": {
+    "message": "立即体验"
+  },
+  "homepage.hero.download": {
+    "message": "下载桌面应用"
+  },
+  "homepage.butler.label": {
+    "message": "管家能为你做什么"
+  },
+  "homepage.butler.knowledge.label": {
+    "message": "记住一切"
+  },
+  "homepage.butler.knowledge.desc": {
+    "message": "Markdown 知识库，支持知识图谱、脑图和双向链接。你的管家从不遗忘。"
+  },
+  "homepage.butler.tasks.label": {
+    "message": "管理你的工作"
+  },
+  "homepage.butler.tasks.desc": {
+    "message": "看板、日历、层级视图。你的管家让项目井井有条。"
+  },
+  "homepage.butler.finance.label": {
+    "message": "追踪你的财务"
+  },
+  "homepage.butler.finance.desc": {
+    "message": "预算、记账、账户管理。拍张票据 — 管家自动帮你记录。"
+  },
+  "homepage.howItWorks.label": {
+    "message": "工作原理"
+  },
+  "homepage.howItWorks.subtitle": {
+    "message": "管家运行在你的设备上。智能计算在本地进行，服务器仅做消息中转。"
+  },
+  "homepage.howItWorks.you.label": {
+    "message": "你"
+  },
+  "homepage.howItWorks.you.desc": {
+    "message": "从任何设备对话 — 网页、桌面、命令行或手机"
+  },
+  "homepage.howItWorks.server.label": {
+    "message": "服务器"
+  },
+  "homepage.howItWorks.server.desc": {
+    "message": "仅中转消息。不做智能处理，不碰你的数据。"
+  },
+  "homepage.howItWorks.butler.label": {
+    "message": "你的管家"
+  },
+  "homepage.howItWorks.butler.desc": {
+    "message": "运行在你设备上的 AI 智能体。调度本地工具，管理你的数据。"
+  },
+  "homepage.developers.label": {
+    "message": "为开发者打造"
+  },
+  "homepage.developers.subtitle": {
+    "message": "你的管家也会写代码。"
+  },
+  "homepage.developers.agents": {
+    "message": "从任务直接启动 Claude Code 或 Codex 智能体"
+  },
+  "homepage.developers.cli": {
+    "message": "kubectl 风格 CLI — 可脚本化，AI Agent 友好"
+  },
+  "homepage.developers.sync": {
+    "message": "双向本地同步 — AI Agent 直接读写你的笔记"
+  },
+  "homepage.developers.api": {
+    "message": "开放 HTTP API — 嵌入任何工作流"
+  },
+  "homepage.developers.workspace": {
+    "message": "Workspace 终端，支持多智能体并行执行"
+  },
+  "homepage.trust.label": {
+    "message": "数据由你做主"
+  },
+  "homepage.trust.private.title": {
+    "message": "完全私密"
+  },
+  "homepage.trust.private.desc": {
+    "message": "管家运行在你的设备上，数据绝不外泄。"
+  },
+  "homepage.trust.offline.title": {
+    "message": "离线可用"
+  },
+  "homepage.trust.offline.desc": {
+    "message": "桌面应用内置后端，无需联网即可使用。"
+  },
+  "homepage.trust.selfhost.title": {
+    "message": "可自托管"
+  },
+  "homepage.trust.selfhost.desc": {
+    "message": "部署在你自己的服务器上，一切由你掌控。"
+  },
+  "homepage.trust.free.title": {
+    "message": "永久免费"
+  },
+  "homepage.trust.free.desc": {
+    "message": "无广告、无追踪，个人使用永远免费。"
+  },
+  "homepage.cta.subtitle": {
+    "message": "下载桌面应用，或试用云端演示。"
+  },
+  "homepage.cta.getStarted": {
+    "message": "开始使用"
+  },
+  "homepage.cta.tryDemo": {
+    "message": "试用演示"
   }
 }

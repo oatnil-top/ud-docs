@@ -7,8 +7,8 @@ const versionConfig = require('./version.json');
 const VERSION = versionConfig.version;
 
 const config: Config = {
-  title: 'UnderControl',
-  tagline: 'Self-hosted Jira + Obsidian + Mint + S3 Browser — AI-powered, in one app',
+  title: 'UnDercontrol',
+  tagline: 'Your Private AI Butler — manages your tasks, knowledge, and finances',
   favicon: 'img/favicon.svg',
 
   future: {
