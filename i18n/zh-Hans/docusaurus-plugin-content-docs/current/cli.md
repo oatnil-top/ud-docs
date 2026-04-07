@@ -163,83 +163,40 @@ Please use a longer prefix
 ### 从文件应用资源
 
 ```bash
-ud apply -f <file>
-ud apply -f -  # 从标准输入读取
+ud apply -f <file>       # .md 用于任务/笔记，.yaml 用于其他资源
+ud apply -f -            # 从标准输入读取（自动检测格式）
 ```
 
-从带有 YAML frontmatter 的 Markdown 文件创建或更新资源。文件是唯一的数据源：
-- 如果 frontmatter 中有 `id` → **更新**现有任务
-- 如果没有 `id` → **创建**新任务
+从文件声明式地创建或更新资源（kubectl 风格）。支持所有资源类型：
 
-目前支持 `.md` 文件。YAML 支持将在未来版本中添加。
+| 格式 | 资源 | 自动识别 |
+|------|------|---------|
+| `.md` | 任务（默认）、笔记（frontmatter 中有 `task_id` 时） | 有 `task_id` → 笔记 |
+| `.yaml` / `.yml` | 看板、预算、账户、支出、收入 | YAML 中的 `kind` 字段 |
 
-**标志：**
-- `-f, --file`：要应用的文件（必需，使用 `-` 从标准输入读取）
-
-**文件格式：**
-```markdown
----
-id: abc123          # 可选 - 如果存在则更新现有任务
-title: 任务标题
-status: in-progress
-tags:
-  - work
-  - urgent
-deadline: 2025-03-15
----
-
-任务描述内容在这里。
-支持多行。
-```
-
-**支持的字段：**
-| 字段 | 类型 | 说明 |
-|------|------|------|
-| `id` | 字符串 | 任务 ID（可选 — 存在则更新，不存在则创建） |
-| `title` | 字符串 | 任务标题（创建新任务时必需） |
-| `status` | 字符串 | 任务状态 |
-| `tags` | 数组 | 标签列表 |
-| `deadline` | 字符串 | 截止日期（YYYY-MM-DD 或 ISO 8601） |
-| (正文) | 字符串 | 成为任务描述 |
-
-**有效的状态值：**
-- `todo` - 未开始
-- `in-progress` - 进行中
-- `pending` - 等待中
-- `stale` - 已停滞
-- `done` - 已完成
-- `archived` - 已归档
-
-**示例：**
+**快速示例：**
 ```bash
-# 创建新任务（文件中无 id）
-ud apply -f task.md
-
-# 更新现有任务（文件中有 id）
-ud apply -f task.md
-
-# 从标准输入
-cat task.md | ud apply -f -
-
-# 快速从标准输入创建
+# 任务
 echo '---
 title: 新任务
 status: todo
 ---
 描述内容。' | ud apply -f -
+
+# 笔记（通过 task_id 自动识别）
+echo '---
+task_id: abc123
+---
+进度更新。' | ud apply -f -
+
+# 看板（YAML）
+ud apply -f board.yaml
+
+# 多文档 YAML（一个文件中包含多个资源）
+ud apply -f setup.yaml
 ```
 
-**截止日期格式：**
-```yaml
-# 仅日期（UTC 午夜）
-deadline: 2025-03-15
-deadline: 2025/03/15
-
-# 带时间
-deadline: 2025-03-15T14:30:00
-deadline: 2025-03-15T14:30:00Z
-deadline: 2025-03-15T14:30:00+08:00
-```
+完整的 schema 参考、所有支持的字段和 YAML 资源格式详情，请参阅 [Apply 与资源 Schema](./cli-apply-schema) 指南。
 
 ### 删除资源
 

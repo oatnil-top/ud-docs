@@ -163,83 +163,40 @@ Please use a longer prefix
 ### Apply Resource from File
 
 ```bash
-ud apply -f <file>
-ud apply -f -  # Read from stdin
+ud apply -f <file>       # .md for tasks/notes, .yaml for other resources
+ud apply -f -            # Read from stdin (auto-detects format)
 ```
 
-Create or update a resource from a Markdown file with YAML frontmatter. The file is the single source of truth:
-- If `id` is present in frontmatter → **update** the existing task
-- If no `id` → **create** a new task
+Create or update resources declaratively from files (kubectl-style). Supports all resource types:
 
-Currently supports `.md` files. YAML support is planned for future releases.
+| Format | Resources | Auto-detection |
+|--------|-----------|----------------|
+| `.md` | Task (default), Note (when `task_id` in frontmatter) | `task_id` present → Note |
+| `.yaml` / `.yml` | Board, Budget, Account, Expense, Income | `kind` field in YAML |
 
-**Flags:**
-- `-f, --file`: File to apply (required, use `-` for stdin)
-
-**File format:**
-```markdown
----
-id: abc123          # optional - if present, updates existing task
-title: Task Title
-status: in-progress
-tags:
-  - work
-  - urgent
-deadline: 2025-03-15
----
-
-Task description content here.
-Multi-line supported.
-```
-
-**Supported fields:**
-| Field | Type | Description |
-|-------|------|-------------|
-| `id` | string | Task ID (optional — present = update, absent = create) |
-| `title` | string | Task title (required for new tasks) |
-| `status` | string | Task status |
-| `tags` | array | List of tags |
-| `deadline` | string | Deadline date (YYYY-MM-DD or ISO 8601) |
-| (body) | string | Becomes the description |
-
-**Valid status values:**
-- `todo` - Not started
-- `in-progress` - Currently working on
-- `pending` - Waiting for something
-- `stale` - Inactive/stagnant
-- `done` - Completed
-- `archived` - Archived
-
-**Examples:**
+**Quick examples:**
 ```bash
-# Create a new task (no id in file)
-ud apply -f task.md
-
-# Update an existing task (id in file)
-ud apply -f task.md
-
-# From stdin
-cat task.md | ud apply -f -
-
-# Quick create from stdin
+# Task
 echo '---
 title: New Task
 status: todo
 ---
 Description here.' | ud apply -f -
+
+# Note (auto-detected by task_id)
+echo '---
+task_id: abc123
+---
+Progress update.' | ud apply -f -
+
+# Board (YAML)
+ud apply -f board.yaml
+
+# Multi-document YAML (multiple resources in one file)
+ud apply -f setup.yaml
 ```
 
-**Deadline formats:**
-```yaml
-# Date only (midnight UTC)
-deadline: 2025-03-15
-deadline: 2025/03/15
-
-# With time
-deadline: 2025-03-15T14:30:00
-deadline: 2025-03-15T14:30:00Z
-deadline: 2025-03-15T14:30:00+08:00
-```
+For the full schema reference, all supported fields, and YAML resource format details, see the [Apply & Resource Schema](./cli-apply-schema) guide.
 
 ### Delete Resource
 
