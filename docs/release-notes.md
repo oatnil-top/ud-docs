@@ -18,6 +18,29 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.64.0 (2026-04-07)
+
+### New Features
+
+- **Anthropic AI Provider**: Configure Anthropic as a backend AI provider alongside OpenAI, with simplified provider type selection
+- **Task Switcher**: Quickly switch between tasks from the workspace window
+- **Workspace Top Bar**: Shows status icon, task ID with copy button for quick reference
+- **Vim Navigation**: Ctrl+D/U for half-page scroll, Ctrl+O/I for task visit history
+- **Mermaid Fullscreen**: View mermaid diagrams in fullscreen mode
+- **CLI Improvements**: `--folder` flag for uploads; `ud get` defaults to 20 results with pagination
+- **Audit Cleanup**: Automatic audit log cleanup based on retention settings
+- **Landing Page Redesign**: New "Private AI Butler" positioning with refreshed design
+
+### Bug Fixes
+
+- Fixed CLI upload folder path handling
+- Fixed Chinese translation for API key expiry option
+- Fixed task loading when not in local cache
+- Fixed Ctrl+O/I to navigate task history instead of browser history
+- Fixed landing page font weights
+
+---
+
 ## v0.63.3 (2026-04-05)
 
 ### Improvements
