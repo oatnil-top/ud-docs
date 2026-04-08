@@ -18,6 +18,38 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.65.0 (2026-04-08)
+
+### New Features
+
+- **Sidebar Outline Highlight**: Auto-track and highlight the active note section based on viewport visibility
+- **Scroll-to-End Button**: Quick scroll-to-bottom button in the floating action bar
+- **Keyboard Edit Shortcut**: Press `i` to enter Markdown edit mode (Vim-style insert)
+- **Kanban in New Window**: Open kanban boards in a new Electron window
+- **Image Size Controls**: S/M/L image size options in the TipTap editor
+- **Dataflow Diagram Interaction**: Click to select/deselect nodes and edges in dataflow diagrams
+- **Timer Commands**: `/timer` commands available in the command palette
+- **Short ID Search**: Search tasks by short ID in the command palette
+- **Mobile Toolbar Toggle**: Collapse/expand mobile editor toolbar with pinned image button
+- **CLI `ud apply`**: Create resources from YAML files with `ud apply -f`, auto-detects notes
+- **User-Defined Skills**: Store custom skills in the config directory
+
+### Improvements
+
+- **Task Detail Performance**: Lazy-loaded heavy components, deferred TipTap editors and note rendering, individual selectors — faster navigation and rendering
+- **Simplified Timer**: Merged into single `/timer` command with toast feedback
+
+### Bug Fixes
+
+- Fixed tag suggestions overlapping the confirm button
+- Fixed `i` shortcut editing the wrong section
+- Fixed Mermaid fullscreen SVG flashing on zoom/scroll
+- Fixed partial UUID search not working in command palette
+- Fixed mobile editor toolbar not sticking to viewport bottom
+- Fixed Ctrl+D/U Vim shortcuts scrolling the wrong container
+
+---
+
 ## v0.64.0 (2026-04-07)
 
 ### New Features
