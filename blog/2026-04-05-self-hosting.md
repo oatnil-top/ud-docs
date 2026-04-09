@@ -52,4 +52,4 @@ The goal was always to build something that earns your continued use because it 
 
 The deployment guide covers Docker Compose setup, Kubernetes manifests, database configuration, and backup strategies in detail. If you have a server or a spare machine running, you can have a working instance today.
 
-Check out the [self-hosting documentation](/docs/deployment) to get started, or open an issue on GitHub if something in the setup does not work the way you expect.
+Check out the [self-hosting documentation](/docs/self-deployment) to get started, or open an issue on GitHub if something in the setup does not work the way you expect.

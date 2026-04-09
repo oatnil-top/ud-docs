@@ -60,6 +60,6 @@ Review your member list occasionally. People change roles, projects end, living 
 
 ## Get Started
 
-If you already have a self-hosted instance running, head to the Groups page and create your first group. If you haven't set up UnDercontrol yet, the [self-deployment guide](/docs/deployment) walks through the full setup — you can be running in under an hour with Docker.
+If you already have a self-hosted instance running, head to the Groups page and create your first group. If you haven't set up UnDercontrol yet, the [self-deployment guide](/docs/self-deployment) walks through the full setup — you can be running in under an hour with Docker.
 
-The [collaboration documentation](/docs/collaboration) covers every feature in detail, including the full permission system and how groups interact with budgets and resources.
+The [collaboration documentation](/docs/features/collaboration) covers every feature in detail, including the full permission system and how groups interact with budgets and resources.
