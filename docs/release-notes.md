@@ -18,6 +18,28 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.65.1 (2026-04-09)
+
+### New Features
+
+- **China Mainland Download**: Added dedicated download button for users in mainland China
+
+### Performance
+
+- Eliminated flash when toggling to edit mode
+- Deferred off-screen note editors for faster task page loading
+- Fixed duplicate queries and N+1 issue for faster task detail loading
+- Fixed 5-second navigation delay on task detail pages
+
+### Bug Fixes
+
+- Fixed mobile editor action bar overlapping with chat button
+- Fixed editor toolbar frozen at left when scrolling horizontally
+- Fixed toggle button not staying pinned when scrolling in editor
+- Removed "Loading images..." indicator that caused layout shift on task navigation
+
+---
+
 ## v0.65.0 (2026-04-08)
 
 ### New Features
