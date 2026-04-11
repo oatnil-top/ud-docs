@@ -18,6 +18,14 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.66.1 (2026-04-11)
+
+### Bug Fixes
+
+- Fix inline editor toolbar and floating action bar to restore correct floating style
+
+---
+
 ## v0.66.0 (2026-04-11)
 
 ### New Features
