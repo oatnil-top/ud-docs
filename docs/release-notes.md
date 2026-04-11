@@ -18,6 +18,35 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.66.0 (2026-04-11)
+
+### New Features
+
+- Inline invite code generation and deploy options on registration page
+- Task status switcher in workspace window top bar
+- Show created_by in task metadata section
+- Links in workspace task panel open in new tab/window
+- Kubernetes Helm deployment doc added to in-app docs
+
+### Improvements
+
+- Collapse metadata section by default on mobile task preview
+- Redesign condition builder to stacked two-row layout
+- Make kanban board selection lists scrollable
+
+### Bug Fixes
+
+- Improved registration UX for invite code flow and login redirect
+- Redirect to dashboard instead of kanban after login
+- Fix editor flash when entering/switching edit mode
+- Fix editor toolbar and floating action bar positioning on mobile
+- Fix onboarding skip button reliability
+- Allow holding Ctrl+D/Ctrl+U for continuous fast scrolling
+- Fix layout shift in kanban column condition editor
+- Fix link routing in workspace task panel
+
+---
+
 ## v0.65.3 (2026-04-10)
 
 ### Improvements
