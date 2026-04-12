@@ -18,6 +18,22 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.67.1 (2026-04-12)
+
+### New Features
+
+- Added `ud explain` command for viewing resource schema documentation directly from the CLI
+
+### Improvements
+
+- CLI skill commands now accept `skill`/`skills` aliases for all kubectl-style operations (get, describe, delete)
+
+### Bug Fixes
+
+- Fixed app crashes caused by localStorage QuotaExceededError on devices with limited storage
+
+---
+
 ## v0.67.0 (2026-04-12)
 
 ### New Features
