@@ -18,6 +18,30 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.67.0 (2026-04-12)
+
+### New Features
+
+- **Skills Management** — New skills page for creating, editing, and managing reusable prompts and instructions with a WYSIWYG rich text editor. System-level built-in skills are visible to all users.
+- **Pinned Tasks Dashboard Widget** — Pin important tasks and view them directly on the dashboard, with empty state guidance.
+- **Agent CLI Command Preview** — See the exact command that will be executed before running an agent, with copy button and skill selector.
+- **Agent CLI "Configure..." Option** — Quick access to agent configuration from all agent tool dropdowns.
+- **Init Skill Support** — Agent CLI commands can now use init skills for workspace setup.
+
+### Improvements
+
+- Skill detail view with inline editing and read-only mode
+- Side-by-side config + execute preview in agent CLI dialog
+- Skill usage guidance shown in task detail view
+- Right sidebar widened for full task ID display
+
+### Bug Fixes
+
+- Remove back/forward navigation buttons from main container
+- Fix skill editor content scrolling and toolbar behavior
+
+---
+
 ## v0.66.1 (2026-04-11)
 
 ### Bug Fixes
