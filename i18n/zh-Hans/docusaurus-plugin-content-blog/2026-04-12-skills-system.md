@@ -16,33 +16,34 @@ date: 2026-04-12
 
 你可以通过 Web 界面创建和编辑技能，通过 CLI 管理技能，也可以通过 YAML 文件以声明式方式应用技能。markdown 内容支持各种提示词结构：指令、变量、多步骤工作流，满足你的任何使用场景。
 
+![Skills page showing system and custom skills with search and tags](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/skills-system/skills-list.png)
+
 ## 创建技能
 
 在 Web 编辑器中，创建技能就像写一篇笔记一样简单。给它起个名字、设定一个 slug，然后在 markdown 编辑器里写好提示词内容。保存之后，群组内的所有人立即可以使用。
 
-通过 CLI，你可以像应用 Kubernetes 清单一样应用技能定义：
+通过 CLI，你可以像应用任务一样应用技能定义——使用带 YAML frontmatter 的 markdown 文件：
 
 ```
-ud apply -f my-skill.yaml
+ud apply skill -f pr-review.md
 ```
 
-YAML 文件的格式大致如下：
+文件格式大致如下：
 
-```yaml
-kind: Skill
-metadata:
-  slug: pr-review
-  name: PR Review Checklist
-spec:
-  content: |
-    Review the following pull request diff and provide feedback on:
-    - Logic correctness
-    - Error handling
-    - Test coverage
-    - Naming and readability
+```markdown
+---
+name: pr-review
+description: PR Review Checklist
+tags:
+  - ai
+  - development
+---
 
-    Diff:
-    {{input}}
+Review the following pull request diff and provide feedback on:
+- Logic correctness
+- Error handling
+- Test coverage
+- Naming and readability
 ```
 
 这让技能具备了可移植性。你可以将它们纳入 dotfiles 仓库，和其他配置一起做版本管理，然后用一条命令部署到新的 UnDercontrol 实例。
@@ -53,32 +54,34 @@ spec:
 
 想把技能传入 Claude Code？
 
-```
-ud prompt pr-review | claude
+```bash
+claude-code $(ud prompt pr-review)
 ```
 
-想在发送给 AI 代理之前，将本地文件内容和技能内容组合起来？
+想在管道中与其他命令组合使用？
 
-```
-cat git.diff | ud prompt pr-review | claude
+```bash
+ud prompt pr-review | pbcopy
 ```
 
 因为输出的就是标准的 stdout，`ud prompt` 可以与任何从 stdin 读取内容的工具配合使用——Claude Code、其他本地 AI 代理、shell 管道，一切都取决于你的工作流。UnDercontrol 不试图掌控 AI 层，它只是帮你管理好提示词，让你不必为此操心。
 
+![Skill detail view with markdown content and CLI usage commands](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/skills-system/skill-detail.png)
+
 ## 内置系统技能
 
-UnDercontrol 内置了一套面向常见开发任务的系统技能。这些技能是只读的（不会被意外覆盖），同时也是理解技能结构的良好参考。你可以像调用自定义技能一样，通过 slug 引用它们。
+UnDercontrol 内置了系统技能，在首次启动时自动创建。这些技能是只读的——不会被意外覆盖——既是实用的默认工具，也是了解技能结构的好范例。例如，`ud-cli` 系统技能提供了 CLI 命令结构的完整参考，使 AI 代理可以直接使用它来操作你的任务。
 
-系统技能涵盖摘要生成、代码解释、变更日志生成等场景——这类实用提示词频繁出现，却不值得每次都重新发明。
+系统技能在 Web 界面中以锁图标标识，与你的自定义技能并列显示。你可以像调用自定义技能一样，通过 slug 引用它们。
 
 ## 长期管理技能
 
 技能是 UnDercontrol 中的一等资源，通过 Web 界面和 CLI 均支持完整的增删改查操作。
 
 - `ud get skills` — 列出群组中的所有技能
-- `ud get skill pr-review` — 查看某个技能的详情
-- `ud delete skill pr-review` — 删除不再需要的技能
-- `ud apply -f skills/` — 一次性应用整个目录下的技能定义
+- `ud describe skill <id>` — 查看某个技能的完整内容
+- `ud delete skill <id>` — 删除不再需要的技能
+- `ud apply skill -f skills/` — 一次性应用整个目录下的技能定义
 
 Web 编辑器适合快速编辑和浏览现有技能，CLI 则更适合自动化、批量更新，以及将提示词库作为代码来管理。
 
@@ -90,6 +93,6 @@ Web 编辑器适合快速编辑和浏览现有技能，CLI 则更适合自动化
 
 ## 立即开始
 
-技能功能今天就可以在 UnDercontrol 中使用。如果你已经在运行实例，请在群组设置中查看技能部分。如果你是首次部署，自托管指南可以帮助你在大约十分钟内完成部署。
+技能功能今天就可以在 UnDercontrol 中使用。如果你已经在运行实例，可以在侧边栏中找到技能页面。如果你是首次部署，自托管指南可以帮助你在大约十分钟内完成部署。
 
 [阅读文档](https://undercontrol.dev/docs)或[部署自己的实例](https://undercontrol.dev/docs/self-hosting)即可开始。

@@ -20,32 +20,33 @@ You can create and edit skills through the web UI, manage them from the CLI, or 
 
 From the web editor, creating a skill is about as straightforward as writing a note. Give it a name, a slug, and write your prompt in the markdown editor. Save it, and it's immediately available to everyone in the group.
 
-From the CLI, you can apply a skill definition the same way you'd apply a Kubernetes manifest:
+From the CLI, you can apply a skill definition the same way you'd apply a task — as a markdown file with YAML frontmatter:
 
 ```
-ud apply -f my-skill.yaml
+ud apply skill -f pr-review.md
 ```
 
-Your YAML file might look like this:
+Your file might look like this:
 
-```yaml
-kind: Skill
-metadata:
-  slug: pr-review
-  name: PR Review Checklist
-spec:
-  content: |
-    Review the following pull request diff and provide feedback on:
-    - Logic correctness
-    - Error handling
-    - Test coverage
-    - Naming and readability
+```markdown
+---
+name: pr-review
+description: PR Review Checklist
+tags:
+  - ai
+  - development
+---
 
-    Diff:
-    {{input}}
+Review the following pull request diff and provide feedback on:
+- Logic correctness
+- Error handling
+- Test coverage
+- Naming and readability
 ```
 
 This makes skills portable. Check them into your dotfiles repo, version them with the rest of your configuration, and deploy them to a new UnDercontrol instance with a single command.
+
+![Skills page showing system and custom skills with search and tags](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/skills-system/skills-list.png)
 
 ## Using a Skill — The `ud prompt` Command
 
@@ -53,32 +54,34 @@ The real payoff is how you consume skills. The `ud prompt` command fetches a ski
 
 Want to feed a skill into Claude Code?
 
-```
-ud prompt pr-review | claude
+```bash
+claude-code $(ud prompt pr-review)
 ```
 
-Want to compose it with some local file content before sending it to an AI agent?
+Want to compose it with other commands in a pipeline?
 
-```
-cat git.diff | ud prompt pr-review | claude
+```bash
+ud prompt pr-review | pbcopy
 ```
 
 Because it's just stdout, `ud prompt` works with any tool that reads from stdin — Claude Code, other local AI agents, shell pipelines, whatever fits your workflow. UnDercontrol doesn't try to own the AI layer; it just manages the prompts so you don't have to.
 
+![Skill detail view with markdown content and CLI usage commands](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/skills-system/skill-detail.png)
+
 ## Built-in System Skills
 
-UnDercontrol ships with a set of built-in system skills for common development tasks. These are read-only (you can't accidentally overwrite them), but they serve as good starting points for understanding how skills are structured. You can reference them by slug just like any custom skill.
+UnDercontrol ships with built-in system skills that are seeded on first startup. These are read-only — you can't accidentally overwrite them — and they serve as both useful defaults and examples of how skills are structured. The `ud-cli` system skill, for instance, provides a comprehensive reference for the CLI's command structure, making it immediately available to AI agents that need to interact with your tasks.
 
-System skills cover things like summarization, code explanation, and changelog generation — the kind of utility prompts that come up constantly but aren't worth reinventing every time.
+System skills are marked with a lock icon in the web UI and appear alongside your custom skills. You can reference them by slug just like any custom skill.
 
 ## Managing Skills Over Time
 
 Skills are first-class resources in UnDercontrol, which means full CRUD support through both the web UI and the CLI.
 
 - `ud get skills` — list all skills in your group
-- `ud get skill pr-review` — inspect a specific skill
-- `ud delete skill pr-review` — remove one you no longer need
-- `ud apply -f skills/` — apply an entire directory of skill definitions at once
+- `ud describe skill <id>` — inspect a specific skill's full content
+- `ud delete skill <id>` — remove one you no longer need
+- `ud apply skill -f skills/` — apply an entire directory of skill definitions at once
 
 The web editor is useful for quick edits and browsing what's available. The CLI is better for automation, bulk updates, and treating your prompt library as code.
 
@@ -90,6 +93,6 @@ It also keeps your prompts private. Because UnDercontrol is self-hosted, your pr
 
 ## Get Started
 
-Skills are available in UnDercontrol today. If you're already running an instance, check the Skills section in your group settings. If you're setting up for the first time, the self-hosting guide walks through deployment in about ten minutes.
+Skills are available in UnDercontrol today. If you're already running an instance, you'll find the Skills page in the sidebar. If you're setting up for the first time, the self-hosting guide walks through deployment in about ten minutes.
 
 [Read the documentation](https://undercontrol.dev/docs) or [deploy your own instance](https://undercontrol.dev/docs/self-hosting) to get started.
