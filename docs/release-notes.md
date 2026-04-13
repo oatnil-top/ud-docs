@@ -18,6 +18,24 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.67.2 (2026-04-13)
+
+### New Features
+
+- **Admin Skills Management** — Admins can now browse, edit, create, and delete system skills from the Admin panel
+- **Built-in PM Skill** — New `ud-pm` system skill for batch PM review and task implementation
+
+### Improvements
+
+- Admin-customized system skills now persist across backend restarts
+
+### Bug Fixes
+
+- Fixed command preview not matching the actual executed command
+- Fixed skill seeding issue on fresh installations
+
+---
+
 ## v0.67.1 (2026-04-12)
 
 ### New Features
