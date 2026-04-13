@@ -18,6 +18,24 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.68.0 (2026-04-13)
+
+### New Features
+
+- **Local Docker Deployment** — Ready-to-use docker-compose setups for self-hosted deployment with built-in `/api` nginx reverse proxy
+
+### Bug Fixes
+
+- Fixed Docker image requiring rebuild when changing API domain (now domain-agnostic)
+- Fixed connection status indicator failing on unexpected server responses
+
+### Upgrade Notes (Self-Hosted)
+
+- New `deployment/docker-local-sqlite/` and `deployment/docker-local-postgres/` directories provide one-command docker-compose setups
+- Docker frontend image no longer needs `VITE_API_URL` at build time — configure the API URL at runtime via nginx
+
+---
+
 ## v0.67.2 (2026-04-13)
 
 ### New Features
