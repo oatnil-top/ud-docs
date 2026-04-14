@@ -39,11 +39,11 @@ For example, a "Sprint 1" board with scope tag `sprint-1` will only show tasks t
 
 This is configured in **Settings → Edit Board Details → Scope Tags**.
 
-{/* TODO: Add screenshot of board settings showing scope tags */}
+![Board settings showing scope tag configuration](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/kanban-board-filters/scope-tags-settings.png)
 
 The key insight: scope tags create a **named, persistent view** over your task pool. You can have a "Frontend" board (scope tag: `frontend`), a "Sprint 2" board (scope tag: `sprint-2`), and they all draw from the same tasks. Change a task's tags and it automatically appears or disappears from the relevant boards.
 
-{/* TODO: Add screenshot of Sprint 1 board */}
+![Sprint 1 board showing only sprint-1 tagged tasks](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/kanban-board-filters/sprint1-board.png)
 
 ## Level 3: Column Query — Sorting Tasks into Lanes
 
@@ -56,7 +56,7 @@ The most common pattern is filtering by status:
 
 But columns can use any field and operator. You could create a column for `tags CONTAINS 'urgent'`, or `cf.priority >= '3'`, or combine multiple conditions with AND/OR logic.
 
-{/* TODO: Add screenshot of column condition editor */}
+![Column condition editor showing Status = todo match condition](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/kanban-board-filters/column-query.png)
 
 The powerful part: columns also have **auto-actions**. When you drag a task into a column, its conditions are applied automatically. Drag a task into "Done" and its status changes to `done`. Drag it into a column filtered by `tags CONTAINS 'reviewed'` and the tag gets added. The board does the bookkeeping.
 
@@ -70,7 +70,7 @@ The top toolbar provides three real-time filters that layer on top of everything
 
 These filters are **ephemeral** — they do not modify the board permanently. Close the tab and they are gone. But they are **URL-persisted**: the filter state is encoded in the URL as query parameters like `?tags=backend&search=API`.
 
-{/* TODO: Add screenshot of ephemeral filter bar */}
+![Ephemeral filter bar with search and tag filter active](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/kanban-board-filters/ephemeral-filter.png)
 
 This means you can bookmark a filtered view, or share the URL with a teammate to show them exactly the subset of tasks you are looking at.
 
