@@ -22,10 +22,12 @@ Let us walk through each one.
 
 This is the implicit layer. When you create a board, you choose between **private** and **shared**.
 
-- **Private boards** show only your own tasks. Nobody else can see this board or the task arrangement on it.
+- **Private boards** show all tasks you have access to — your own tasks plus tasks others have shared with you. This means tasks from multiple people can appear together on one board, giving you a single place to see everything relevant to you. Only you can see this board and its arrangement.
 - **Shared boards** are tied to a group. The board only shows tasks that belong to that group, and everyone in the group can see and interact with it based on their permissions.
 
 You do not configure this as a "filter" — it is baked into the board's identity. But it is the first gate that determines which tasks are even candidates for display.
+
+The private board model is particularly useful when several people share tasks with you individually. Instead of jumping between different sources, you see all of them in one kanban view — your own work alongside tasks shared by teammates, collaborators, or managers.
 
 ## Level 2: Scope Tags — Narrowing the Board's Focus
 
