@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4 Levels of Filtering — UnDercontrol Kanban Board</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:#1a1a2e;color:#e0e0e0;overflow:hidden;height:100vh}
+.deck{position:relative;height:100vh;width:100vw}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:4vw 6vw;opacity:0;pointer-events:none;transition:opacity .45s ease}
+.slide.active{opacity:1;pointer-events:auto}
+.slide-num{position:absolute;top:2rem;right:3rem;font-size:.85rem;color:#555;font-variant-numeric:tabular-nums}
+h1{font-size:clamp(1.6rem,4vw,3rem);font-weight:700;text-align:center;line-height:1.3;margin-bottom:.6em;color:#fff}
+h2{font-size:clamp(1.2rem,3vw,2.2rem);font-weight:600;text-align:center;margin-bottom:1.2em;color:#fff}
+.subtitle{font-size:clamp(.95rem,1.8vw,1.3rem);color:#9a9abf;text-align:center;max-width:42em}
+.icon{font-size:3rem;margin-bottom:.8em}
+.points{list-style:none;max-width:44em;width:100%;margin:0 auto}
+.points li{position:relative;padding:.55em 0 .55em 1.6em;font-size:clamp(.9rem,1.5vw,1.1rem);line-height:1.55;color:#c5c5dd}
+.points li::before{content:'';position:absolute;left:0;top:.95em;width:.45em;height:.45em;border-radius:50%;background:#6c63ff}
+
+/* Diagrams */
+.diagram{margin-top:2em;display:flex;gap:1.2em;justify-content:center;flex-wrap:wrap;width:100%;max-width:52em}
+.box{border:1px solid #333;border-radius:.5em;padding:1.2em 1.6em;text-align:center;flex:1;min-width:10em;max-width:22em}
+.box-private{border-color:#6c63ff;background:rgba(108,99,255,.08)}
+.box-shared{border-color:#00b4d8;background:rgba(0,180,216,.08)}
+.box .label{font-weight:600;font-size:1rem;margin-bottom:.3em;color:#fff}
+.box .desc{font-size:.85rem;color:#9a9abf}
+
+/* Funnel */
+.funnel{display:flex;align-items:center;gap:.8em;margin-top:2em;flex-wrap:wrap;justify-content:center}
+.funnel-step{padding:.7em 1.4em;border-radius:.4em;font-size:clamp(.8rem,1.3vw,1rem);white-space:nowrap}
+.funnel-all{background:#2a2a3e;color:#aaa}
+.funnel-arrow{color:#555;font-size:1.4rem}
+.funnel-filtered{background:rgba(108,99,255,.15);border:1px solid #6c63ff;color:#c5c5ff}
+
+/* Columns */
+.columns{display:flex;gap:1em;margin-top:2em;width:100%;max-width:52em;justify-content:center;flex-wrap:wrap}
+.col{flex:1;min-width:9em;max-width:16em;border:1px solid #333;border-radius:.5em;overflow:hidden}
+.col-header{padding:.7em .9em;font-weight:600;font-size:.9rem;color:#fff;border-bottom:1px solid #333}
+.col-todo .col-header{background:rgba(255,183,77,.12);border-color:rgba(255,183,77,.3)}
+.col-progress .col-header{background:rgba(66,165,245,.12);border-color:rgba(66,165,245,.3)}
+.col-done .col-header{background:rgba(102,187,106,.12);border-color:rgba(102,187,106,.3)}
+.col-query{padding:.5em .9em;font-size:.75rem;color:#777;font-family:'SF Mono',Menlo,monospace}
+.col-cards{padding:.5em .7em}
+.col-card{background:#252540;border-radius:.3em;padding:.45em .6em;margin-bottom:.4em;font-size:.8rem;color:#bbb}
+
+/* Filter bar */
+.filter-bar{display:flex;gap:.6em;align-items:center;background:#16162b;border:1px solid #333;border-radius:.5em;padding:.6em 1em;margin-top:2em;flex-wrap:wrap;max-width:44em;width:100%}
+.filter-bar .search{background:#1e1e38;border:1px solid #444;border-radius:.35em;padding:.4em .7em;color:#ccc;font-size:.85rem;flex:1;min-width:8em}
+.badge{display:inline-flex;align-items:center;gap:.3em;background:rgba(108,99,255,.18);border:1px solid #6c63ff;border-radius:1em;padding:.25em .8em;font-size:.8rem;color:#b8b3ff;white-space:nowrap}
+.badge .x{cursor:pointer;opacity:.6;font-size:.7rem}
+.filter-bar .clear{font-size:.8rem;color:#ff6b6b;cursor:pointer;white-space:nowrap}
+
+/* Pyramid */
+.pyramid{display:flex;flex-direction:column;align-items:center;gap:0;margin-top:1.8em;width:100%;max-width:40em}
+.pyramid-row{display:flex;align-items:center;justify-content:center;width:100%;position:relative}
+.pyramid-bar{text-align:center;padding:.65em 0;font-size:clamp(.7rem,1.2vw,.9rem);font-weight:500;color:#fff;border-radius:.3em;margin:.2em 0}
+.p1{width:100%;background:rgba(108,99,255,.25);border:1px solid rgba(108,99,255,.5)}
+.p2{width:78%;background:rgba(0,180,216,.2);border:1px solid rgba(0,180,216,.45)}
+.p3{width:56%;background:rgba(255,183,77,.18);border:1px solid rgba(255,183,77,.45)}
+.p4{width:38%;background:rgba(102,187,106,.2);border:1px solid rgba(102,187,106,.5)}
+.pyramid-arrow{color:#555;font-size:1.1rem;margin:.1em 0}
+.pyramid-label{font-size:.7rem;color:#777;margin-top:.2em}
+
+/* Nav dots */
+.nav{position:fixed;bottom:1.8rem;left:50%;transform:translateX(-50%);display:flex;gap:.7em;z-index:10}
+.dot{width:.6em;height:.6em;border-radius:50%;background:#333;cursor:pointer;transition:background .25s,transform .25s}
+.dot.active{background:#6c63ff;transform:scale(1.35)}
+.hint{position:fixed;bottom:3.4rem;left:50%;transform:translateX(-50%);font-size:.72rem;color:#444;z-index:10}
+</style>
+</head>
+<body>
+<div class="deck">
+
+<!-- Slide 1: Title -->
+<div class="slide active" data-slide="0">
+  <span class="slide-num">1 / 6</span>
+  <h1>4 Levels of Filtering in<br>UnDercontrol's Kanban Board</h1>
+  <p class="subtitle">From broad scope to laser focus &mdash; layer filters to find exactly what you need</p>
+</div>
+
+<!-- Slide 2: Level 1 -->
+<div class="slide" data-slide="1">
+  <span class="slide-num">2 / 6</span>
+  <div class="icon">&#x1f512; &#x1f465;</div>
+  <h2>Level 1 &mdash; Board Scope</h2>
+  <ul class="points">
+    <li>The implicit access-control layer &mdash; no configuration needed</li>
+    <li><strong>Private boards:</strong> only you see your own tasks</li>
+    <li><strong>Shared boards:</strong> team members in the same group see shared tasks</li>
+    <li>This is the broadest filter &mdash; it defines who can see what</li>
+  </ul>
+  <div class="diagram">
+    <div class="box box-private"><div class="label">&#x1f512; Private Board</div><div class="desc">Your tasks only</div></div>
+    <div class="box box-shared"><div class="label">&#x1f465; Shared Board</div><div class="desc">Team tasks visible to group members</div></div>
+  </div>
+</div>
+
+<!-- Slide 3: Level 2 -->
+<div class="slide" data-slide="2">
+  <span class="slide-num">3 / 6</span>
+  <div class="icon">&#x1f3f7;&#xfe0f;</div>
+  <h2>Level 2 &mdash; Scope Tags</h2>
+  <ul class="points">
+    <li>Configured in <strong>Board Settings &rarr; Scope Tags</strong></li>
+    <li>Only tasks with <em>all</em> specified scope tags appear on the board</li>
+    <li>New tasks created on the board automatically receive these tags</li>
+    <li>Example: Board "Sprint&nbsp;1" with scope tag <code style="color:#b8b3ff">sprint-1</code> shows only sprint-1 tasks</li>
+  </ul>
+  <div class="funnel">
+    <span class="funnel-step funnel-all">All Tasks (40+)</span>
+    <span class="funnel-arrow">&rarr;</span>
+    <span class="funnel-step funnel-filtered">sprint-1 tagged (8)</span>
+  </div>
+</div>
+
+<!-- Slide 4: Level 3 -->
+<div class="slide" data-slide="3">
+  <span class="slide-num">4 / 6</span>
+  <div class="icon">&#x1f4ca;</div>
+  <h2>Level 3 &mdash; Column Query</h2>
+  <ul class="points">
+    <li>Each column defines its own match condition</li>
+    <li>Can combine multiple conditions per column</li>
+    <li>Drag-and-drop auto-applies the target column's condition</li>
+  </ul>
+  <div class="columns">
+    <div class="col col-todo">
+      <div class="col-header">To Do</div>
+      <div class="col-query">status = 'todo'</div>
+      <div class="col-cards">
+        <div class="col-card">Design API schema</div>
+        <div class="col-card">Write tests</div>
+      </div>
+    </div>
+    <div class="col col-progress">
+      <div class="col-header">In Progress</div>
+      <div class="col-query">status = 'in-progress'</div>
+      <div class="col-cards">
+        <div class="col-card">Build filter UI</div>
+      </div>
+    </div>
+    <div class="col col-done">
+      <div class="col-header">Done</div>
+      <div class="col-query">status = 'done'</div>
+      <div class="col-cards">
+        <div class="col-card">Set up project</div>
+        <div class="col-card">Auth flow</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 5: Level 4 -->
+<div class="slide" data-slide="4">
+  <span class="slide-num">5 / 6</span>
+  <div class="icon">&#x1f50d;</div>
+  <h2>Level 4 &mdash; Ephemeral Board Filter</h2>
+  <ul class="points">
+    <li>Real-time filtering via search bar, tag badges, and assignee filter</li>
+    <li>Persisted in URL: <code style="color:#b8b3ff">?tags=backend&amp;search=API</code></li>
+    <li>Shareable &mdash; send the URL to a teammate</li>
+    <li>Temporary &mdash; does not modify the board configuration</li>
+  </ul>
+  <div class="filter-bar">
+    <span class="search">&#x1f50d; API</span>
+    <span class="badge">backend <span class="x">&times;</span></span>
+    <span class="badge">urgent <span class="x">&times;</span></span>
+    <span class="clear">Clear all</span>
+  </div>
+</div>
+
+<!-- Slide 6: Summary -->
+<div class="slide" data-slide="5">
+  <span class="slide-num">6 / 6</span>
+  <h2>How the 4 Levels Combine</h2>
+  <p class="subtitle" style="margin-bottom:1em">Each layer narrows results further &mdash; from all tasks to your exact focus</p>
+  <div class="pyramid">
+    <div class="pyramid-bar p1">Level 1 &mdash; Board Scope (Private / Shared)</div>
+    <div class="pyramid-arrow">&darr;</div>
+    <div class="pyramid-bar p2">Level 2 &mdash; Scope Tags</div>
+    <div class="pyramid-arrow">&darr;</div>
+    <div class="pyramid-bar p3">Level 3 &mdash; Column Query</div>
+    <div class="pyramid-arrow">&darr;</div>
+    <div class="pyramid-bar p4">Level 4 &mdash; Ephemeral Filter</div>
+  </div>
+  <div class="funnel" style="margin-top:1.6em">
+    <span class="funnel-step funnel-all">All Tasks</span>
+    <span class="funnel-arrow">&rarr;</span>
+    <span class="funnel-step" style="background:rgba(108,99,255,.12);border:1px solid rgba(108,99,255,.4);color:#aab;border-radius:.4em">Board-Scoped</span>
+    <span class="funnel-arrow">&rarr;</span>
+    <span class="funnel-step" style="background:rgba(0,180,216,.1);border:1px solid rgba(0,180,216,.35);color:#aab;border-radius:.4em">Tag-Filtered</span>
+    <span class="funnel-arrow">&rarr;</span>
+    <span class="funnel-step" style="background:rgba(255,183,77,.1);border:1px solid rgba(255,183,77,.35);color:#aab;border-radius:.4em">Column-Sorted</span>
+    <span class="funnel-arrow">&rarr;</span>
+    <span class="funnel-step funnel-filtered">Search-Refined</span>
+  </div>
+</div>
+
+</div><!-- /deck -->
+
+<div class="hint">Arrow keys or click dots to navigate</div>
+<div class="nav" id="nav"></div>
+
+<script>
+(function(){
+  var slides=document.querySelectorAll('.slide'),cur=0,
+      nav=document.getElementById('nav');
+  slides.forEach(function(_,i){
+    var d=document.createElement('span');
+    d.className='dot'+(i===0?' active':'');
+    d.onclick=function(){go(i)};
+    nav.appendChild(d);
+  });
+  function go(n){
+    if(n<0||n>=slides.length)return;
+    slides[cur].classList.remove('active');
+    nav.children[cur].classList.remove('active');
+    cur=n;
+    slides[cur].classList.add('active');
+    nav.children[cur].classList.add('active');
+  }
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key==='ArrowDown')go(cur+1);
+    else if(e.key==='ArrowLeft'||e.key==='ArrowUp')go(cur-1);
+  });
+  var t0,x0;
+  document.addEventListener('touchstart',function(e){t0=Date.now();x0=e.touches[0].clientX});
+  document.addEventListener('touchend',function(e){
+    var dx=e.changedTouches[0].clientX-x0;
+    if(Date.now()-t0<400&&Math.abs(dx)>40){dx<0?go(cur+1):go(cur-1)}
+  });
+})();
+</script>
+</body>
+</html>
