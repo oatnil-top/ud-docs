@@ -18,6 +18,30 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.68.1 (2026-04-14)
+
+### New Features
+
+- **AI Chat Quick Action** — Added AI chat shortcut to sidebar for faster access to the AI assistant
+- **AI Language Adaptation** — Built-in AI skills now reply in the user's preferred language
+
+### Improvements
+
+- Redesigned Create Task Dialog with flat/minimal design language, improved tag input and padding alignment
+- Dialog now uses 80% of viewport width and height for more editing space
+- Mobile skill page uses master-detail layout with auto-hidden header bar when viewing details
+- Mobile QuickNote toolbar moved to sticky top position with safe-area bottom padding
+
+### Bug Fixes
+
+- Fixed task creator showing the board owner instead of the actual requester
+- Fixed username not resolving correctly across groups in share tooltips
+- Fixed markdown content being cleared when resource URL resolution fails
+- Fixed share links using incorrect domain in Electron
+- Fixed resource group ownership when creating tasks on shared boards
+
+---
+
 ## v0.68.0 (2026-04-13)
 
 ### New Features
