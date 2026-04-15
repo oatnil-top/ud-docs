@@ -18,6 +18,26 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.69.0 (2026-04-15)
+
+### New Features
+
+- **Admin Storage Management** — New dedicated storage page in admin panel showing per-user storage usage and allowing individual quota overrides
+- **Scope Tags** — Default Tags renamed to Scope Tags with automatic `board:` prefix auto-fill when creating new tags
+
+### Improvements
+
+- Shareable links now use configurable frontend URL, improving link sharing in Electron desktop app
+
+### Bug Fixes
+
+- Fixed dark mode flash on app startup — theme is now applied immediately from cache
+- Fixed dark mode not applying to static loading screen
+- Fixed dark mode theme not syncing across all Electron windows
+- Fixed storage quota config not showing in admin system config page
+
+---
+
 ## v0.68.1 (2026-04-14)
 
 ### New Features
