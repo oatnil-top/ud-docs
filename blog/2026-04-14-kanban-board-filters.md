@@ -16,6 +16,8 @@ Here is the mental model: each filter level narrows what the previous level pass
 
 **Level 1: Board Scope** (private vs shared) → **Level 2: Scope Tags** (board-level tag filter) → **Level 3: Column Query** (per-column conditions) → **Level 4: Ephemeral Filter** (search, tags, assignees in the toolbar)
 
+![How the 4 filter levels combine — from all tasks to your exact focus](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/kanban-board-filters/slide-6.png)
+
 Let us walk through each one.
 
 ## Level 1: Board Scope — Who Sees What
