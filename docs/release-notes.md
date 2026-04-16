@@ -18,6 +18,25 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.69.2 (2026-04-16)
+
+### New Features
+
+- **AI Image to Markdown** — Convert images to markdown text using AI vision
+- **Unified System Config Page** — All config categories in one scrollable view showing runtime values, env var names, and CLI flag names
+
+### Improvements
+
+- Board default columns: removed Draft column, moved Recent Created/Updated to end
+
+### Bug Fixes
+
+- Fixed mermaid diagram elements missing in fullscreen preview
+- Fixed create task dialog size not aligned with task preview modal
+- Fixed CreateBoardDialog default columns not matching backend defaults
+
+---
+
 ## v0.69.1 (2026-04-16)
 
 ### New Features
