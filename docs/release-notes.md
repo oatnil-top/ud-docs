@@ -18,6 +18,27 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.69.1 (2026-04-16)
+
+### New Features
+
+- **Mobile Task Graph & Heatmap** — Calendar heatmap and knowledge graph now available on mobile list page
+- **Default Board Columns** — Added "Recent Created", "Draft", and "Recent Updated" default columns with fold-all toggle
+- **Exec Dialog** — Replaced kanban terminal dropdown with a more intuitive exec dialog
+- **Editor Image Upload** — Added image upload button to markdown editor toolbar
+
+### Improvements
+
+- Renamed "Task Graph" to "Knowledge Graph" for clearer naming
+
+### Bug Fixes
+
+- Fixed white screen crash when using external toolbars
+- Fixed graph fullscreen not working properly on mobile devices
+- Fixed markdown editor toolbar positioning and z-index issues
+
+---
+
 ## v0.69.0 (2026-04-15)
 
 ### New Features
