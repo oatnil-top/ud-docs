@@ -18,6 +18,27 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.70.0 (2026-04-18)
+
+### New Features
+
+- **Notification System** — Subscribe to tasks you care about and get notified when they change status or are updated
+- **Daily Note** — Quickly create a daily note with automatic checkbox carry-over (Alt+D / Option+D shortcut)
+- **Paste-to-Note** — Paste content anywhere on the task panel to append it to notes
+- **"Create & Link" Button** — Create new tasks directly from subtask and linked task dialogs
+- **Copy Resource Markdown Link** — Copy resource ID as a markdown link from all resource views
+- **Outline Improvements** — Renamed outline with description as the first item for quick navigation
+- **Pending Resource Management** — Interactive dialog replaces background cleanup with automatic stale resource removal
+
+### Bug Fixes
+
+- Fixed tag queries using an invalid operator
+- Fixed macOS Alt key producing special characters instead of triggering shortcuts
+- Fixed outline showing when no notes exist
+- Improved paste hint styling with i18n support
+
+---
+
 ## v0.69.2 (2026-04-16)
 
 ### New Features
