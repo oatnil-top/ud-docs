@@ -18,6 +18,24 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.71.0 (2026-04-19)
+
+### New Features
+
+- **Web Workspace Viewer** — View and manage AI agent workspaces directly from the browser
+- **Daily Note Navigation** — Daily notes link to the previous day with auto pin/unpin
+- **Remote Daemon Workspaces** — Desktop app connects to remote daemons for AI workspace orchestration via SSE
+- **Workspace Status CLI** — New `ud workspace status` command to check workspace state
+- **Workspace Input Relay** — Send user input to workspace PTY sessions
+- **Mobile Kanban Menu** — Kanban header actions collapsed into hamburger menu on mobile
+
+### Bug Fixes
+
+- Fixed daemon connector authentication flow
+- Fixed workspace status display for pending/completed/stopped states
+
+---
+
 ## v0.70.0 (2026-04-18)
 
 ### New Features
