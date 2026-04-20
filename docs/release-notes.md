@@ -18,6 +18,25 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.72.0 (2026-04-20)
+
+### New Features
+
+- **Workspace Screenshots** — Capture workspace window screenshots and attach them as task notes
+- **Workspace Session Sidebar** — View workspace session status and duration in the task detail sidebar
+- **Session Interrupt & Status Check** — New interrupt and check-status buttons for workspace sessions
+- **Session Auto-Recovery** — Automatic session reconciliation on daemon reconnect
+- **Daemon Rename** — Inline rename UI for daemon management
+
+### Bug Fixes
+
+- Fixed control character handling in terminal input
+- Fixed daemon SSE stream premature disconnect
+- Fixed incorrect daemon connection error code
+- Fixed "Register this device" button incorrectly showing in web UI
+
+---
+
 ## v0.71.0 (2026-04-19)
 
 ### New Features
