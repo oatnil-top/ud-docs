@@ -18,6 +18,18 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.72.1 (2026-04-20)
+
+### New Features
+
+- **Mobile Workspace Shortcut** — Access workspace sessions directly from the task bottom action bar — quickly scroll to an active session or start a new one
+
+### Bug Fixes
+
+- Fixed daemon SSE connection reliability in desktop app — reconnection now works correctly after network interruptions
+
+---
+
 ## v0.72.0 (2026-04-20)
 
 ### New Features
