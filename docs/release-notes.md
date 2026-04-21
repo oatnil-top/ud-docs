@@ -18,6 +18,18 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.73.1 (2026-04-21)
+
+### Bug Fixes
+
+- Fixed tier detection not working correctly in Electron desktop app and when using custom server URLs
+
+### Improvements
+
+- Server configuration page now displays the current tier name
+
+---
+
 ## v0.73.0 (2026-04-21)
 
 ### New Features
