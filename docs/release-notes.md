@@ -18,6 +18,23 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.73.2 (2026-04-22)
+
+### Improvements
+
+- Workspace screenshots now display in a dedicated scrollable gallery with highlight animation
+- Workspaces moved to the Tasks section in the sidebar for quicker access
+
+### Bug Fixes
+
+- Fixed editor bubble menu appearing when image or code block is selected
+- Fixed images being auto-selected when opening the content viewer
+- Sidebar navigation now preserves the selected board
+- Fixed markdown checkbox toggling
+- Fixed duplicate screenshot uploads in desktop app
+
+---
+
 ## v0.73.1 (2026-04-21)
 
 ### Bug Fixes
