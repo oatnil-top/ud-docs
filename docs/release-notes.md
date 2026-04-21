@@ -18,6 +18,22 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.73.0 (2026-04-21)
+
+### New Features
+
+- **Dashboard Widget Customization** — Hide or show dashboard widgets to personalize your workspace
+- **Poster Name in Task Notes** — Task notes now display the poster's name for better attribution
+
+### Bug Fixes
+
+- Fixed workspace window title not syncing with tracked task name
+- Fixed heartbeat, stale session cleanup, and screenshot upload issues in workspace
+- Fixed missing stop button for pending workspace sessions on mobile
+- Fixed excessive session polling causing unnecessary API calls
+
+---
+
 ## v0.72.1 (2026-04-20)
 
 ### New Features
