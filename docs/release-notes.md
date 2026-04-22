@@ -18,6 +18,22 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.73.4 (2026-04-22)
+
+### New Features
+
+- Share daemons with groups for workspace collaboration
+- Show task title instead of raw ID in workspace sessions
+- Multi-skill selection in exec dialogs
+
+### Bug Fixes
+
+- Fixed hooks ordering crash on task detail page
+- Show empty state placeholder in workspace task panel when no content
+- Copy full share message for existing links instead of just URL
+
+---
+
 ## v0.73.3 (2026-04-22)
 
 ### Bug Fixes
