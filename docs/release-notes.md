@@ -18,6 +18,16 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.73.3 (2026-04-22)
+
+### Bug Fixes
+
+- Fixed workspace screenshots appearing in attachment lists
+- Screenshot button now shows a spinner while capturing
+- Improved performance by reducing redundant API calls for resources
+
+---
+
 ## v0.73.2 (2026-04-22)
 
 ### Improvements
