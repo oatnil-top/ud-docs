@@ -18,6 +18,29 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.75.0 (2026-04-24)
+
+### New Features
+
+- **Dataflow pipe relationship markers** — pipes now support description labels and endpoint markers (arrow, one, many/crow's foot) for ER-diagram-style relationships
+- **Terminal button creates task** — kanban terminal button auto-creates a task and initiates a workspace session
+- **Session prompt history** — prompts can be saved to workspace prompt library for reuse
+- **Workspace settings drawer** — workspace configuration moved from profile page to a settings drawer on the workspaces page
+
+### Improvements
+
+- Monitor icon now visible on kanban page for all clients (not just Electron)
+- Board name shown in selector with resolved path displayed separately in CWD section
+- Pipe markers refined: subtler sizes, better defaults, improved crow's foot direction
+
+### Bug Fixes
+
+- Fixed NoteNode drag during text selection
+- Fixed reconciliation overriding awaiting_input status back to running
+- Fixed CWD resolution for multi-board tasks in exec dialog
+
+---
+
 ## v0.74.0 (2026-04-24)
 
 ### New Features
