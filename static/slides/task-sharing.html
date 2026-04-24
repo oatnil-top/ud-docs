@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Task Sharing — UnDercontrol</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0a; color: #e5e5e5; overflow: hidden; }
+  .deck { width: 100vw; height: 100vh; position: relative; }
+  .slide { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 60px 80px; opacity: 0; transition: opacity 0.5s ease; pointer-events: none; }
+  .slide.active { opacity: 1; pointer-events: auto; }
+
+  h1 { font-size: 48px; font-weight: 700; margin-bottom: 16px; text-align: center; }
+  h2 { font-size: 36px; font-weight: 600; margin-bottom: 24px; text-align: center; }
+  .subtitle { font-size: 20px; color: #a3a3a3; text-align: center; max-width: 600px; }
+  .accent { color: #60a5fa; }
+
+  /* Flow diagram */
+  .flow { display: flex; align-items: center; gap: 24px; margin-top: 40px; }
+  .flow-step { background: #1a1a2e; border: 1px solid #333; border-radius: 12px; padding: 24px 32px; text-align: center; min-width: 180px; }
+  .flow-step .icon { font-size: 32px; margin-bottom: 8px; }
+  .flow-step .label { font-size: 16px; font-weight: 500; }
+  .flow-step .detail { font-size: 13px; color: #a3a3a3; margin-top: 4px; }
+  .flow-arrow { font-size: 24px; color: #60a5fa; }
+
+  /* Feature grid */
+  .features { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px; max-width: 700px; }
+  .feature-card { background: #1a1a2e; border: 1px solid #333; border-radius: 12px; padding: 24px; }
+  .feature-card .icon { font-size: 28px; margin-bottom: 8px; }
+  .feature-card .title { font-size: 18px; font-weight: 600; margin-bottom: 6px; }
+  .feature-card .desc { font-size: 14px; color: #a3a3a3; line-height: 1.5; }
+
+  /* Code display */
+  .code-box { background: #1a1a2e; border: 1px solid #333; border-radius: 12px; padding: 32px 48px; margin-top: 32px; text-align: center; }
+  .code-display { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 56px; font-weight: 700; letter-spacing: 0.3em; color: #60a5fa; }
+  .code-label { font-size: 14px; color: #a3a3a3; margin-top: 12px; }
+
+  /* Scenario list */
+  .scenarios { display: flex; flex-direction: column; gap: 16px; margin-top: 32px; max-width: 600px; }
+  .scenario { display: flex; align-items: center; gap: 16px; background: #1a1a2e; border: 1px solid #333; border-radius: 12px; padding: 16px 24px; }
+  .scenario .icon { font-size: 28px; flex-shrink: 0; }
+  .scenario .text { font-size: 16px; }
+  .scenario .text strong { color: #60a5fa; }
+
+  /* Dots nav */
+  .dots { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 100; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #444; cursor: pointer; transition: background 0.3s; }
+  .dot.active { background: #60a5fa; }
+</style>
+</head>
+<body>
+<div class="deck">
+
+  <!-- Slide 1: Title -->
+  <div class="slide active" data-index="0">
+    <h1>Share a Task<br><span class="accent">Without Sharing Your Password</span></h1>
+    <p class="subtitle">Generate public links with access codes, expiration controls, and QR codes. No login required for viewers.</p>
+  </div>
+
+  <!-- Slide 2: How it works -->
+  <div class="slide" data-index="1">
+    <h2>How It Works</h2>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="icon">📝</div>
+        <div class="label">Your Task</div>
+        <div class="detail">Description, notes, files</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="icon">🔗</div>
+        <div class="label">Generate Link</div>
+        <div class="detail">Set expiry & permissions</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="icon">📤</div>
+        <div class="label">Share</div>
+        <div class="detail">Link, code, or QR</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="icon">👀</div>
+        <div class="label">Anyone Views</div>
+        <div class="detail">No login needed</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 3: Access Code -->
+  <div class="slide" data-index="2">
+    <h2>The Access Code</h2>
+    <p class="subtitle">A short code for when links aren't practical</p>
+    <div class="code-box">
+      <div class="code-display">QJVOFL</div>
+      <div class="code-label">6-character alphanumeric · case-insensitive · type it anywhere</div>
+    </div>
+  </div>
+
+  <!-- Slide 4: Controls -->
+  <div class="slide" data-index="3">
+    <h2>You Control Everything</h2>
+    <div class="features">
+      <div class="feature-card">
+        <div class="icon">⏱️</div>
+        <div class="title">Expiration</div>
+        <div class="desc">1 hour, 1 day, 7 days, or never. Match the link lifetime to your use case.</div>
+      </div>
+      <div class="feature-card">
+        <div class="icon">📎</div>
+        <div class="title">Attachments</div>
+        <div class="desc">Toggle whether viewers can download attached files or just see their names.</div>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🗑️</div>
+        <div class="title">Revocation</div>
+        <div class="desc">One click to kill any link. Access is denied immediately.</div>
+      </div>
+      <div class="feature-card">
+        <div class="icon">📱</div>
+        <div class="title">QR Code</div>
+        <div class="desc">Every shared page includes a QR code for instant mobile access.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 5: Use Cases -->
+  <div class="slide" data-index="4">
+    <h2>When to Use It</h2>
+    <div class="scenarios">
+      <div class="scenario">
+        <div class="icon">🤝</div>
+        <div class="text"><strong>Cross-team handoffs</strong> — share docs with people outside your org</div>
+      </div>
+      <div class="scenario">
+        <div class="icon">💼</div>
+        <div class="text"><strong>Client updates</strong> — send status without giving app access</div>
+      </div>
+      <div class="scenario">
+        <div class="icon">🎤</div>
+        <div class="text"><strong>Presentations</strong> — put the code on a slide for reference material</div>
+      </div>
+      <div class="scenario">
+        <div class="icon">📖</div>
+        <div class="text"><strong>Knowledge sharing</strong> — permanent links to runbooks and docs</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="dots"></div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const dotsContainer = document.querySelector('.dots');
+  let current = 0;
+
+  slides.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => goTo(i);
+    dotsContainer.appendChild(dot);
+  });
+
+  function goTo(i) {
+    slides[current].classList.remove('active');
+    dotsContainer.children[current].classList.remove('active');
+    current = Math.max(0, Math.min(i, slides.length - 1));
+    slides[current].classList.add('active');
+    dotsContainer.children[current].classList.add('active');
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') goTo(current + 1);
+    if (e.key === 'ArrowLeft') goTo(current - 1);
+  });
+</script>
+</body>
+</html>
