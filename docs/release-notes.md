@@ -18,6 +18,33 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.74.0 (2026-04-24)
+
+### New Features
+
+- **AI Chat tool calling** — the AI assistant can now search your tasks semantically during conversations
+- **Multi-board tasks** — tasks can belong to multiple boards; board selector dropdown when opening workspaces
+- **Workspace actions** — screenshot, interrupt, and check status directly from the workspaces page
+- **File attachments in kanban preview** — view attached files without opening the full task detail
+- **Dashboard edit mode** — cleaner interface for customizing your dashboard layout
+- **Kanban list actions** — "Add to Board" and "Delete" buttons in the expanded list view
+
+### Improvements
+
+- Hooks now install automatically on all boards (no more per-board toggle)
+- Workspace sessions transition optimistically from pending to running
+- Custom field labels display with `cf.` prefix for clarity
+- Resolved working directory shown in workspace dialog with copy support
+
+### Bug Fixes
+
+- Fixed checkbox toggle creating duplicate history entries
+- Fixed CWD resolution fallback when no project directory is configured
+- Fixed AI search tool query building for keyword searches
+- Fixed migration error message to include environment variable instructions
+
+---
+
 ## v0.73.4 (2026-04-22)
 
 ### New Features
