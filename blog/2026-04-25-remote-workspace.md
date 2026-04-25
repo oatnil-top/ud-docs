@@ -142,4 +142,4 @@ The architecture also means you're not locked into any particular AI tool. Today
 3. Open the Workspaces page and click **Register this device**
 4. Open any task, click the globe icon, and select your daemon
 
-Check the [documentation](/docs/remote-workspace) for the full setup guide, including security configuration and troubleshooting.
+Check the [documentation](/docs/workspace-terminal) for the full setup guide, including security configuration and troubleshooting.
