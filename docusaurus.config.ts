@@ -8,7 +8,7 @@ const VERSION = versionConfig.version;
 
 const config: Config = {
   title: 'UnDercontrol',
-  tagline: 'Your Private AI Butler — manages your tasks, knowledge, and finances',
+  tagline: 'One workspace for tasks, knowledge, and AI agents — private, portable, yours.',
   favicon: 'img/favicon.svg',
 
   future: {

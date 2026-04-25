@@ -43,14 +43,14 @@ function HeroSection() {
         <Translate
           id="homepage.hero.tagline"
           description="The homepage hero tagline">
-          Your Private AI Butler
+          One workspace for tasks, knowledge, and AI agents — private, portable, yours.
         </Translate>
       </h1>
       <p className={styles.heroSubtitle}>
         <Translate
           id="homepage.hero.subtitle"
           description="The homepage hero subtitle">
-          An AI assistant that lives on your machine — manages your tasks, knowledge, and finances. Talk to it from any device. Your data never leaves your control.
+          Orchestrate any AI coding agent from your browser. Manage projects like Jira. Build knowledge like Obsidian. Self-hosted, access from any device.
         </Translate>
       </p>
       <div className={styles.heroButtons}>
@@ -69,20 +69,20 @@ function HeroSection() {
   );
 }
 
-// --- What Your Butler Does ---
-const BUTLER_ITEMS = [
+// --- What You Can Do ---
+const PILLAR_ITEMS = [
   {key: 'knowledge', Icon: Brain},
   {key: 'tasks', Icon: CheckSquare},
   {key: 'finance', Icon: Wallet},
 ] as const;
 
-const BUTLER_IMAGES: Record<string, string[]> = {
+const PILLAR_IMAGES: Record<string, string[]> = {
   knowledge: ['tasks-show-en.png', 'tasks-details-markdown-en.png'],
   tasks: ['tasks-details-en.png'],
   finance: ['resources-main.en.png'],
 };
 
-function ButlerSection() {
+function PillarsSection() {
   const {i18n} = useDocusaurusContext();
   const locale = i18n.currentLocale;
   const imgSuffix = locale === 'zh-Hans' ? 'zh' : 'en';
@@ -91,8 +91,8 @@ function ButlerSection() {
   const [imageIndex, setImageIndex] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
-  const currentKey = BUTLER_ITEMS[activeItem].key;
-  const images = BUTLER_IMAGES[currentKey] || [];
+  const currentKey = PILLAR_ITEMS[activeItem].key;
+  const images = PILLAR_IMAGES[currentKey] || [];
   const currentImageSrc = useBaseUrl(`/img/${images[imageIndex] || 'tasks-show-en.png'}`);
 
   useEffect(() => {
@@ -111,46 +111,46 @@ function ButlerSection() {
     <section className={styles.featureSection}>
       <div className={styles.featureContent}>
         <h2 className={styles.sectionLabel}>
-          <Translate id="homepage.butler.label">What Your Butler Does</Translate>
+          <Translate id="homepage.pillars.label">What You Can Do</Translate>
         </h2>
-        <div className={styles.butlerItems}>
-          {BUTLER_ITEMS.map((item, index) => {
+        <div className={styles.pillarItems}>
+          {PILLAR_ITEMS.map((item, index) => {
             const isActive = index === activeItem;
             const {Icon} = item;
             return (
               <div
                 key={item.key}
                 onClick={() => setActiveItem(index)}
-                className={`${styles.butlerItem} ${isActive ? styles.butlerItemActive : ''}`}>
-                <div className={styles.butlerItemHeader}>
+                className={`${styles.pillarItem} ${isActive ? styles.pillarItemActive : ''}`}>
+                <div className={styles.pillarItemHeader}>
                   <Icon size={16} strokeWidth={2} />
-                  <span className={styles.butlerItemLabel}>
+                  <span className={styles.pillarItemLabel}>
                     {item.key === 'knowledge' && (
-                      <Translate id="homepage.butler.knowledge.label">Remembers Everything</Translate>
+                      <Translate id="homepage.pillars.knowledge.label">Build Knowledge</Translate>
                     )}
                     {item.key === 'tasks' && (
-                      <Translate id="homepage.butler.tasks.label">Manages Your Work</Translate>
+                      <Translate id="homepage.pillars.tasks.label">Manage Projects</Translate>
                     )}
                     {item.key === 'finance' && (
-                      <Translate id="homepage.butler.finance.label">Tracks Your Money</Translate>
+                      <Translate id="homepage.pillars.finance.label">Track Finances</Translate>
                     )}
                   </span>
                 </div>
                 {isActive && (
-                  <p className={styles.butlerItemDesc}>
+                  <p className={styles.pillarItemDesc}>
                     {item.key === 'knowledge' && (
-                      <Translate id="homepage.butler.knowledge.desc">
-                        Markdown knowledge base with graphs, mind maps, and bi-directional links. Your butler never forgets.
+                      <Translate id="homepage.pillars.knowledge.desc">
+                        Markdown knowledge base with graphs, mind maps, and bi-directional links. Your notes, synced as plain files.
                       </Translate>
                     )}
                     {item.key === 'tasks' && (
-                      <Translate id="homepage.butler.tasks.desc">
-                        Kanban boards, calendars, hierarchy views. Your butler keeps your projects on track.
+                      <Translate id="homepage.pillars.tasks.desc">
+                        Kanban boards, calendars, hierarchy views. Lightweight project management for small teams.
                       </Translate>
                     )}
                     {item.key === 'finance' && (
-                      <Translate id="homepage.butler.finance.desc">
-                        Budgets, expenses, accounts. Snap a receipt — your butler logs it automatically.
+                      <Translate id="homepage.pillars.finance.desc">
+                        Budgets, expenses, accounts. Snap a receipt — AI logs it automatically.
                       </Translate>
                     )}
                   </p>
@@ -214,7 +214,7 @@ function HowItWorksSection() {
       </h2>
       <p className={styles.sectionSubtitle}>
         <Translate id="homepage.howItWorks.subtitle">
-          Your butler lives on your machine. AI intelligence runs locally. The server handles your data — and you can self-host it.
+          Write a task. Dispatch an AI agent. Watch it work. Your data and your AI stay on your machine.
         </Translate>
       </p>
       <div className={styles.howItWorksSteps}>
@@ -225,7 +225,7 @@ function HowItWorksSection() {
           </h3>
           <p>
             <Translate id="homepage.howItWorks.you.desc">
-              Talk from any device — web, desktop, CLI, or mobile
+              Access from any device — web, desktop, CLI, or mobile
             </Translate>
           </p>
         </div>
@@ -245,11 +245,11 @@ function HowItWorksSection() {
         <div className={styles.howItWorksStep}>
           <Brain size={24} strokeWidth={1.5} />
           <h3>
-            <Translate id="homepage.howItWorks.butler.label">Your Butler</Translate>
+            <Translate id="homepage.howItWorks.agent.label">AI Agent</Translate>
           </h3>
           <p>
-            <Translate id="homepage.howItWorks.butler.desc">
-              AI agent on your machine. Orchestrates local tools, manages your data.
+            <Translate id="homepage.howItWorks.agent.desc">
+              Runs on your machine. Reads your task, writes code, reports progress — any agent, your choice.
             </Translate>
           </p>
         </div>
@@ -275,7 +275,7 @@ function DevelopersSection() {
           <Translate id="homepage.developers.label">Built for Developers</Translate>
         </h2>
         <p className={styles.sectionSubtitle}>
-          <Translate id="homepage.developers.subtitle">Your butler can code, too.</Translate>
+          <Translate id="homepage.developers.subtitle">Orchestrate AI agents directly from your tasks.</Translate>
         </p>
       </div>
       <div className={styles.developersList}>
@@ -357,7 +357,7 @@ function TrustSection() {
                 <p>
                   {item.key === 'private' && (
                     <Translate id="homepage.trust.private.desc">
-                      Your butler runs on your machine. Data never leaves your device.
+                      AI runs on your machine. Data never leaves your device.
                     </Translate>
                   )}
                   {item.key === 'offline' && (
@@ -437,17 +437,17 @@ export default function Home(): ReactNode {
     <Layout
       title={translate({
         id: 'homepage.title',
-        message: 'UnDercontrol — Your Private AI Butler',
+        message: 'UnDercontrol — Tasks, Knowledge & AI Agent Orchestration',
         description: 'The homepage meta title',
       })}
       description={translate({
         id: 'homepage.description',
-        message: 'A private AI butler that manages your tasks, knowledge, and finances. Runs on your machine, talks to you from anywhere. Download the desktop app or self-host — your data never leaves your control.',
+        message: 'One workspace for tasks, knowledge, and AI agents. Orchestrate any AI coding agent from your browser. Self-hosted, access from any device — your data never leaves your control.',
         description: 'The homepage meta description',
       })}>
       <main className={styles.mainContainer}>
         <HeroSection />
-        <ButlerSection />
+        <PillarsSection />
         <HowItWorksSection />
         <DevelopersSection />
         <TrustSection />

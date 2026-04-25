@@ -1291,16 +1291,16 @@
     "description": "Donate thanks"
   },
   "homepage.title": {
-    "message": "UnDercontrol — 你的私人 AI 管家"
+    "message": "UnDercontrol — 任务、知识与 AI 代理编排"
   },
   "homepage.description": {
-    "message": "运行在你设备上的私人 AI 管家，管理你的任务、知识和财务。随时随地与它对话。下载桌面应用或自托管 — 数据始终由你掌控。"
+    "message": "任务、知识与 AI 代理的统一工作空间。从浏览器编排任何 AI 编程代理。自部署，随时随地访问 — 数据始终由你掌控。"
   },
   "homepage.hero.tagline": {
-    "message": "你的私人 AI 管家"
+    "message": "任务、知识与 AI 代理的统一工作空间 — 私有、便携、由你掌控。"
   },
   "homepage.hero.subtitle": {
-    "message": "运行在你设备上的 AI 助手 — 管理你的任务、知识和财务。随时随地与它对话，数据始终在你掌控之中。"
+    "message": "从浏览器编排任何 AI 编程代理。像 Jira 一样管理项目，像 Obsidian 一样构建知识库。自部署，随时随地访问。"
   },
   "homepage.hero.tryNow": {
     "message": "立即体验"
@@ -1308,38 +1308,38 @@
   "homepage.hero.download": {
     "message": "下载桌面应用"
   },
-  "homepage.butler.label": {
-    "message": "管家能为你做什么"
+  "homepage.pillars.label": {
+    "message": "你能做什么"
   },
-  "homepage.butler.knowledge.label": {
-    "message": "记住一切"
+  "homepage.pillars.knowledge.label": {
+    "message": "构建知识库"
   },
-  "homepage.butler.knowledge.desc": {
-    "message": "Markdown 知识库，支持知识图谱、脑图和双向链接。你的管家从不遗忘。"
+  "homepage.pillars.knowledge.desc": {
+    "message": "Markdown 知识库，支持知识图谱、脑图和双向链接。笔记同步为本地纯文件。"
   },
-  "homepage.butler.tasks.label": {
-    "message": "管理你的工作"
+  "homepage.pillars.tasks.label": {
+    "message": "管理项目"
   },
-  "homepage.butler.tasks.desc": {
-    "message": "看板、日历、层级视图。你的管家让项目井井有条。"
+  "homepage.pillars.tasks.desc": {
+    "message": "看板、日历、层级视图。为小团队打造的轻量项目管理。"
   },
-  "homepage.butler.finance.label": {
-    "message": "追踪你的财务"
+  "homepage.pillars.finance.label": {
+    "message": "追踪财务"
   },
-  "homepage.butler.finance.desc": {
-    "message": "预算、记账、账户管理。拍张票据 — 管家自动帮你记录。"
+  "homepage.pillars.finance.desc": {
+    "message": "预算、记账、账户管理。拍张票据 — AI 自动帮你记录。"
   },
   "homepage.howItWorks.label": {
     "message": "工作原理"
   },
   "homepage.howItWorks.subtitle": {
-    "message": "管家运行在你的设备上。AI 智能计算在本地进行，服务器管理你的数据 - 且支持自部署。"
+    "message": "写一个任务，分派 AI 代理，实时观察执行。你的数据和 AI 始终在你的设备上。"
   },
   "homepage.howItWorks.you.label": {
     "message": "你"
   },
   "homepage.howItWorks.you.desc": {
-    "message": "从任何设备对话 — 网页、桌面、命令行或手机"
+    "message": "从任何设备访问 — 网页、桌面、命令行或手机"
   },
   "homepage.howItWorks.server.label": {
     "message": "服务器"
@@ -1347,17 +1347,17 @@
   "homepage.howItWorks.server.desc": {
     "message": "管理任务、预算和数据。支持自部署，基础设施完全由你掌控。"
   },
-  "homepage.howItWorks.butler.label": {
-    "message": "你的管家"
+  "homepage.howItWorks.agent.label": {
+    "message": "AI 代理"
   },
-  "homepage.howItWorks.butler.desc": {
-    "message": "运行在你设备上的 AI 智能体。调度本地工具，管理你的数据。"
+  "homepage.howItWorks.agent.desc": {
+    "message": "运行在你的设备上。读取任务、编写代码、报告进度 — 任何代理，你来选择。"
   },
   "homepage.developers.label": {
     "message": "为开发者打造"
   },
   "homepage.developers.subtitle": {
-    "message": "你的管家也会写代码。"
+    "message": "从任务直接编排 AI 代理。"
   },
   "homepage.developers.agents": {
     "message": "从任务直接启动 Claude Code 或 Codex 智能体"
@@ -1381,7 +1381,7 @@
     "message": "完全私密"
   },
   "homepage.trust.private.desc": {
-    "message": "管家运行在你的设备上，数据绝不外泄。"
+    "message": "AI 运行在你的设备上，数据绝不外泄。"
   },
   "homepage.trust.offline.title": {
     "message": "离线可用"
