@@ -18,6 +18,21 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.76.0 (2026-04-25)
+
+### New Features
+
+- **Folder sharing** — share resource folders with groups, with cascading file access. Resource list now shows Group and Permission columns
+- **Session skill selector** — reorganized session controls with a skill selector for quick access
+- **Auto-expanding input** — session input area grows automatically with content, plus a clear (X) button
+
+### Improvements
+
+- Image sizes now persist correctly across markdown round-trips using Obsidian-compatible pipe format (`![alt|size](src)`)
+- Cleaner session UI: shorter prompt/history labels, hidden scrollbar for single-line content
+
+---
+
 ## v0.75.0 (2026-04-24)
 
 ### New Features
