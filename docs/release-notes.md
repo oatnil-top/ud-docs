@@ -18,6 +18,19 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.76.1 (2026-04-25)
+
+### Bug Fixes
+
+- Fixed custom field values being lost when dragging cards between kanban columns
+- Fixed column removal dialog translation
+
+### Improvements
+
+- Replaced browser native confirm dialog with styled dialog for kanban column removal
+
+---
+
 ## v0.76.0 (2026-04-25)
 
 ### New Features
