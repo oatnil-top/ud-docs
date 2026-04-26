@@ -18,6 +18,15 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.77.1 (2026-04-26)
+
+### Bug Fixes
+
+- Fixed a crash that could occur when SQLite encountered malformed JSON in task metadata
+- Fixed shareable links incorrectly using the browser's URL instead of the configured frontend URL
+
+---
+
 ## v0.77.0 (2026-04-26)
 
 ### New Features
