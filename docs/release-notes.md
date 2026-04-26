@@ -18,6 +18,32 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.77.0 (2026-04-26)
+
+### New Features
+
+- **Board name editing** — rename boards directly in board settings
+- **Mobile workspace switcher** — floating trigger for quick workspace switching
+- **Kanban advanced filters** — IS NULL / IS NOT NULL operators for custom fields
+- **PowerShell preview** — human-readable script display in command preview
+- **Audit log TTL** — per-event-type retention for self-hosted deployments
+
+### Improvements
+
+- Redesigned landing page with orchestration diagram and Three Pillars section
+- Better mobile experience with enhanced sidebar trigger transparency
+- Faster note sync — skips unchanged writes using timestamp comparison
+
+### Bug Fixes
+
+- Checkbox toggle in view mode now properly saves to backend
+- Workspace switcher no longer overlaps sidebar trigger on mobile
+- Save-as-prompt button visible on mobile in history popover
+- Fixed clipboard handling in workspace dropdown
+- Command preview sections now scroll when content overflows
+
+---
+
 ## v0.76.1 (2026-04-25)
 
 ### Bug Fixes
