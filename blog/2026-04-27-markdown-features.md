@@ -10,17 +10,19 @@ date: 2026-04-27
 
 In UnDercontrol, a Task is the core unit of information. If you've used Jira, think of it as an Issue; if you've used Obsidian, think of it as a Note. A Task is essentially a piece of content bound to a status, with first-class attributes (title, tags, link relationships, etc.) and support for unlimited custom metadata fields (key-value pairs), so you can attach any information to it. Through the Notes mechanism, a Task can continuously evolve — recording progress, discussions, and decisions, accumulating into a complete knowledge context over time.
 
-This post focuses on the Task's main body — the Description — and the rich-text capabilities it supports.
+This post covers the rich-text capabilities shared across all text input surfaces in UnDercontrol — whether it's a task description, a note, an expense memo, or an account annotation, they all use the same Markdown editor.
 
 <!-- truncate -->
 
-### Rich-Text Markdown Editor
+### WYSIWYG — A Markdown Editor Built on Tiptap 3
 
-UnDercontrol's markdown editor is built on [Tiptap 3](https://tiptap.dev/), providing a WYSIWYG rich-text editing experience with full markdown support. Write in markdown or use the visual editor — the content renders beautifully either way.
+UnDercontrol's editor is built on [Tiptap 3](https://tiptap.dev/). You can write directly in Markdown syntax or use the visual toolbar — the editor renders in real time, what you write is what you see. No switching between "edit mode" and "preview mode" — the input is the final output.
+
+The editor also supports switching to Source Mode to view and edit the raw Markdown directly — for users who prefer plain text editing or need precise format control, you can freely toggle between WYSIWYG and raw Markdown at any time.
 
 ### Slash Commands — Format Without Leaving the Keyboard
 
-Type `/` anywhere in a task description to open the command menu. Insert headings, code blocks, tables, Mermaid diagrams, checklists, and more — all without touching the mouse.
+Type `/` anywhere to open the command menu. Insert headings, code blocks, tables, Mermaid diagrams, checklists, and more — all without touching the mouse.
 
 ![Slash command menu in the editor](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/markdown-features/slide-2.png)
 
@@ -68,9 +70,35 @@ Task lists render as interactive checkboxes. Check items off directly in the ren
 
 ![Interactive checklist in task description](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/markdown-features/slide-5.png)
 
+### Images & Attachments — No More Obsidian-Style Resource Management Headaches
+
+If you've managed notes with images in Obsidian, you've probably experienced the pain: images scattered across local folders, paths break when you move things, attachments disappear on another device, multi-device sync creates endless conflicts. The root cause — Obsidian delegates resource management to the filesystem, and filesystems are inherently bad at cross-device sync.
+
+UnDercontrol solves this at the foundation. All images and attachments are managed through the `resource://` protocol — upload once, stored in the database, no dependency on local paths. Whether you view content on the web, desktop, or via a shared link, images are always available — because resources follow the database, not the filesystem.
+
+UnDercontrol also provides bidirectional local folder sync, keeping files in a local directory synchronized with the server resource library. We'll cover this feature in detail in a future post.
+
+**Image Size Control**
+
+Inserted images support three size presets — hover in edit mode to switch:
+
+- **Small (25%)** — thumbnail, suitable for inline display
+- **Medium (50%)** — moderate size
+- **Large (100%)** — full width
+
+Size information is stored in Obsidian-compatible format (`![description|s](resource://id)`). Click any image for fullscreen preview.
+
+![Image size controls — S, M, L presets](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/markdown-features/image-size-controls.png)
+
+### Draw.io Diagrams — Built-in Visual Drawing
+
+UnDercontrol includes a built-in Draw.io editor, supporting `.drawio` and `.drawio.png` formats. Upload or create a Draw.io file, then edit it directly in the app — no desktop software needed. Saved as PNG with embedded XML source data, so it renders as a preview and can be re-edited at any time.
+
+Thanks to the `resource://` protocol, Draw.io diagrams are managed as unified resources — no local path dependencies or sync issues.
+
 ### AI-Powered Text Actions
 
-Select any text in your task description to reveal the bubble menu. Beyond standard formatting (bold, italic, strikethrough), you get AI-powered actions:
+Select any text to reveal the bubble menu. Beyond standard formatting (bold, italic, strikethrough), you get AI-powered actions:
 
 - **Refine** — rewrite selected text for clarity
 - **Translate** — translate to another language instantly
@@ -80,7 +108,7 @@ Select any text in your task description to reveal the bubble menu. Beyond stand
 
 ### Entity Links — Connect Tasks Like a Wiki
 
-Link to other tasks, notes, expenses, budgets, and accounts directly in your descriptions using custom protocols like `task://`, `note://`, and more. The links render as clickable references — click one to jump straight to the referenced entity.
+Link to other tasks, notes, expenses, budgets, and accounts directly in your descriptions using custom protocols like `task://`, `note://`, and more. The links render as clickable references — click to jump straight to the referenced entity.
 
 ![Rendered entity links in a task description](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/markdown-features/entity-links-rendered.png)
 
@@ -90,9 +118,33 @@ Switch to source mode to see the raw markdown — each link uses a custom protoc
 
 This turns your task descriptions into a connected wiki, where context flows naturally between related items.
 
-### Everything Works in the CLI Too
+### CLI + AI Agent — Let AI Write Your Content
 
-Write your markdown content locally and apply it through the `ud` CLI. The markdown renders identically in the web app, desktop app, and shared views. Your content stays portable and version-controllable.
+Because Markdown is plain text, it's a natural fit for AI agent collaboration. Through the `ud` CLI, you can let Claude Code, Codex, OpenCode, or any terminal-based AI tool read, write, and update task content directly:
+
+- **Summarize** — have AI read a set of tasks and generate a weekly report or sprint review
+- **Refine & restructure** — turn scattered notes into structured documentation
+- **Classify & tag** — automatically add tags and categories based on content
+- **Batch create** — generate multiple tasks from meeting notes or requirement docs
+
+Content pipes directly in:
+
+```bash
+cat <<'EOF' | ud apply -f -
+---
+title: API Integration Guide
+status: in-progress
+tags: [api, backend]
+---
+## Authentication Flow
+
+1. Client sends credentials to `/auth/login`
+2. Server returns JWT token
+3. Include in `Authorization: Bearer <token>` header
+EOF
+```
+
+AI-generated Markdown renders identically to hand-written Markdown across web, desktop, and shared views. Your content stays portable and version-controllable.
 
 ---
 
