@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Markdown Features — UnDercontrol</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0a; color: #e5e5e5; overflow: hidden; }
+  .deck { width: 100vw; height: 100vh; position: relative; }
+  .slide { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 60px 80px; opacity: 0; transition: opacity 0.5s ease; pointer-events: none; }
+  .slide.active { opacity: 1; pointer-events: auto; }
+
+  h1 { font-size: 48px; font-weight: 700; margin-bottom: 16px; text-align: center; }
+  h2 { font-size: 36px; font-weight: 600; margin-bottom: 24px; text-align: center; }
+  .subtitle { font-size: 20px; color: #a3a3a3; text-align: center; max-width: 700px; line-height: 1.6; }
+  .accent { color: #60a5fa; }
+
+  /* Feature grid */
+  .features { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 32px; max-width: 900px; }
+  .feature-card { background: #1a1a2e; border: 1px solid #333; border-radius: 12px; padding: 24px; text-align: center; }
+  .feature-card .icon { font-size: 32px; margin-bottom: 10px; }
+  .feature-card .title { font-size: 17px; font-weight: 600; margin-bottom: 6px; }
+  .feature-card .desc { font-size: 13px; color: #a3a3a3; line-height: 1.5; }
+
+  /* Slash menu mock */
+  .editor-mock { background: #111; border: 1px solid #333; border-radius: 12px; padding: 32px 40px; max-width: 600px; width: 100%; margin-top: 32px; position: relative; }
+  .editor-line { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 15px; color: #888; margin-bottom: 12px; }
+  .editor-line .cursor { display: inline-block; width: 2px; height: 18px; background: #60a5fa; animation: blink 1s infinite; vertical-align: text-bottom; }
+  @keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
+  .slash-menu { background: #1a1a2e; border: 1px solid #444; border-radius: 8px; padding: 8px 0; margin-top: 8px; width: 220px; }
+  .slash-item { padding: 8px 16px; display: flex; align-items: center; gap: 10px; font-size: 14px; }
+  .slash-item.highlighted { background: #2a2a4e; }
+  .slash-item .si-icon { font-size: 16px; width: 24px; text-align: center; }
+
+  /* Code block mock */
+  .code-mock { background: #111; border: 1px solid #333; border-radius: 12px; padding: 24px 32px; max-width: 700px; width: 100%; margin-top: 32px; }
+  .code-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid #333; }
+  .code-lang { font-size: 13px; color: #60a5fa; background: #1a1a3e; padding: 4px 12px; border-radius: 6px; }
+  .code-copy { font-size: 12px; color: #666; }
+  .code-line { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 14px; line-height: 1.8; }
+  .kw { color: #c792ea; }
+  .fn { color: #82aaff; }
+  .str { color: #c3e88d; }
+  .cm { color: #546e7a; }
+  .tp { color: #ffcb6b; }
+  .op { color: #89ddff; }
+
+  /* Diagram mock */
+  .diagram-area { background: #111; border: 1px solid #333; border-radius: 12px; padding: 40px; margin-top: 32px; max-width: 800px; width: 100%; display: flex; justify-content: center; }
+  .diagram-flow { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .diagram-row { display: flex; align-items: center; gap: 16px; }
+  .diagram-node { background: #1a1a2e; border: 2px solid #60a5fa; border-radius: 8px; padding: 12px 24px; font-size: 14px; font-weight: 500; min-width: 140px; text-align: center; }
+  .diagram-node.db { border-radius: 50%; width: 100px; height: 60px; display: flex; align-items: center; justify-content: center; border-color: #4ade80; }
+  .diagram-arrow { color: #60a5fa; font-size: 18px; }
+  .diagram-arrow-down { color: #60a5fa; font-size: 18px; }
+  .diagram-label { font-size: 11px; color: #666; position: absolute; }
+  .mermaid-badge { position: absolute; top: 12px; right: 16px; font-size: 12px; color: #666; background: #1a1a2e; padding: 4px 10px; border-radius: 6px; }
+
+  /* Table mock */
+  .table-mock { margin-top: 32px; border: 1px solid #333; border-radius: 12px; overflow: hidden; max-width: 700px; width: 100%; }
+  .table-mock table { width: 100%; border-collapse: collapse; }
+  .table-mock th { background: #1a1a2e; padding: 12px 20px; text-align: left; font-size: 14px; font-weight: 600; border-bottom: 2px solid #333; }
+  .table-mock td { padding: 10px 20px; font-size: 14px; border-bottom: 1px solid #222; }
+  .table-mock tr:last-child td { border-bottom: none; }
+  .badge-green { color: #4ade80; }
+  .badge-red { color: #f87171; }
+
+  /* Checklist mock */
+  .checklist { margin-top: 32px; max-width: 500px; width: 100%; }
+  .check-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #1a1a1a; font-size: 16px; }
+  .check-item:last-child { border-bottom: none; }
+  .checkbox { width: 20px; height: 20px; border-radius: 4px; border: 2px solid #444; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .checkbox.checked { background: #60a5fa; border-color: #60a5fa; }
+  .checkbox.checked::after { content: '✓'; color: white; font-size: 13px; }
+  .check-item.done .text { text-decoration: line-through; color: #666; }
+
+  /* Mention badges */
+  .mention-row { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; justify-content: center; }
+  .mention { padding: 6px 14px; border-radius: 6px; font-size: 14px; font-weight: 500; }
+  .mention-task { background: #1e3a5f; color: #60a5fa; }
+  .mention-note { background: #3b1f4e; color: #c084fc; }
+  .mention-expense { background: #1f3d1f; color: #4ade80; }
+  .mention-budget { background: #3d2f1a; color: #fbbf24; }
+  .mention-account { background: #1a3d3d; color: #22d3ee; }
+
+  /* Dots nav */
+  .dots { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 100; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #444; cursor: pointer; transition: background 0.3s; }
+  .dot.active { background: #60a5fa; }
+</style>
+</head>
+<body>
+<div class="deck">
+
+  <!-- Slide 1: Title -->
+  <div class="slide active" data-index="0">
+    <h1>Rich Markdown<br><span class="accent">Inside Your Tasks</span></h1>
+    <p class="subtitle">Code blocks, Mermaid diagrams, tables, checklists, and entity mentions — all rendered beautifully in your task descriptions.</p>
+  </div>
+
+  <!-- Slide 2: Slash Command Menu -->
+  <div class="slide" data-index="1">
+    <h2>Type <span class="accent">/</span> to Insert Anything</h2>
+    <div class="editor-mock">
+      <div class="editor-line">## Project Setup</div>
+      <div class="editor-line" style="color:#e5e5e5">The backend uses a microservice architecture with...<span class="cursor"></span></div>
+      <div class="slash-menu">
+        <div class="slash-item highlighted"><span class="si-icon">☐</span> Task List</div>
+        <div class="slash-item"><span class="si-icon">H1</span> Heading 1</div>
+        <div class="slash-item"><span class="si-icon">&lt;/&gt;</span> Code Block</div>
+        <div class="slash-item"><span class="si-icon">◈</span> Mermaid Diagram</div>
+        <div class="slash-item"><span class="si-icon">▤</span> Table</div>
+        <div class="slash-item"><span class="si-icon">—</span> Divider</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 3: Code Blocks -->
+  <div class="slide" data-index="2">
+    <h2>Syntax-Highlighted <span class="accent">Code Blocks</span></h2>
+    <p class="subtitle" style="margin-bottom:8px">100+ languages with one-click copy</p>
+    <div class="code-mock">
+      <div class="code-header">
+        <span class="code-lang">TypeScript</span>
+        <span class="code-copy">📋 Copy</span>
+      </div>
+      <div class="code-line"><span class="kw">async function</span> <span class="fn">fetchPayments</span>(<span class="tp">token</span>: <span class="tp">string</span>) {</div>
+      <div class="code-line">&nbsp;&nbsp;<span class="kw">const</span> response <span class="op">=</span> <span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">"/api/payments"</span>, {</div>
+      <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;headers: {</div>
+      <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Authorization: <span class="str">`Bearer ${</span><span class="tp">token</span><span class="str">}`</span>,</div>
+      <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;},</div>
+      <div class="code-line">&nbsp;&nbsp;});</div>
+      <div class="code-line">&nbsp;&nbsp;<span class="kw">return</span> response.<span class="fn">json</span>();</div>
+      <div class="code-line">}</div>
+    </div>
+  </div>
+
+  <!-- Slide 4: Mermaid Diagrams -->
+  <div class="slide" data-index="3">
+    <h2>Mermaid <span class="accent">Diagrams</span> — Live Rendered</h2>
+    <p class="subtitle" style="margin-bottom:8px">Flowcharts, sequence diagrams, class diagrams, and more</p>
+    <div class="diagram-area" style="position:relative">
+      <span class="mermaid-badge">mermaid</span>
+      <div class="diagram-flow">
+        <div class="diagram-row">
+          <div class="diagram-node">Web App</div>
+        </div>
+        <div class="diagram-arrow-down">↓</div>
+        <div class="diagram-row">
+          <div class="diagram-node">API Gateway</div>
+        </div>
+        <div class="diagram-arrow-down">↓</div>
+        <div class="diagram-row">
+          <div class="diagram-node" style="border-color:#c084fc">Auth Service</div>
+          <div class="diagram-node" style="border-color:#fbbf24">Task Service</div>
+          <div class="diagram-node" style="border-color:#4ade80">Payment Service</div>
+        </div>
+        <div class="diagram-arrow-down">↓</div>
+        <div class="diagram-row">
+          <div class="diagram-node db">PostgreSQL</div>
+          <div class="diagram-node db" style="border-color:#f87171">Redis</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 5: Tables & Checklists -->
+  <div class="slide" data-index="4">
+    <h2>Tables & <span class="accent">Checklists</span></h2>
+    <div style="display:flex;gap:32px;margin-top:24px;align-items:flex-start;max-width:900px">
+      <div class="table-mock" style="flex:1">
+        <table>
+          <tr><th>Metric</th><th>Before</th><th>After</th></tr>
+          <tr><td>Page Load</td><td>2.4s</td><td class="badge-green">1.4s</td></tr>
+          <tr><td>API Latency</td><td>180ms</td><td class="badge-green">95ms</td></tr>
+          <tr><td>Error Rate</td><td>0.8%</td><td class="badge-green">0.2%</td></tr>
+        </table>
+      </div>
+      <div class="checklist" style="flex:1">
+        <div class="check-item done"><div class="checkbox checked"></div><span class="text">Token refresh logic</span></div>
+        <div class="check-item done"><div class="checkbox checked"></div><span class="text">Exponential backoff</span></div>
+        <div class="check-item"><div class="checkbox"></div><span class="text">Error monitoring</span></div>
+        <div class="check-item"><div class="checkbox"></div><span class="text">Integration tests</span></div>
+        <div class="check-item"><div class="checkbox"></div><span class="text">API documentation</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 6: Entity Mentions -->
+  <div class="slide" data-index="5">
+    <h2><span class="accent">@Mention</span> Anything</h2>
+    <p class="subtitle">Link to tasks, notes, expenses, budgets, and accounts inline. Click to navigate.</p>
+    <div class="mention-row">
+      <span class="mention mention-task">📋 API Integration Guide</span>
+      <span class="mention mention-note">📝 Sprint 24 Notes</span>
+      <span class="mention mention-expense">💰 AWS Invoice March</span>
+      <span class="mention mention-budget">📊 Q2 Engineering</span>
+      <span class="mention mention-account">🏦 Company Card</span>
+    </div>
+    <p class="subtitle" style="margin-top:32px;font-size:16px">Type <span class="accent">@</span> in the editor to search and insert entity references</p>
+  </div>
+
+  <!-- Slide 7: Feature Grid -->
+  <div class="slide" data-index="6">
+    <h2>Everything You Need to <span class="accent">Document</span></h2>
+    <div class="features">
+      <div class="feature-card">
+        <div class="icon">&lt;/&gt;</div>
+        <div class="title">Code Blocks</div>
+        <div class="desc">100+ languages, syntax highlighting, one-click copy</div>
+      </div>
+      <div class="feature-card">
+        <div class="icon">◈</div>
+        <div class="title">Mermaid Diagrams</div>
+        <div class="desc">Flowcharts, sequence, class, state diagrams</div>
+      </div>
+      <div class="feature-card">
+        <div class="icon">▤</div>
+        <div class="title">Tables</div>
+        <div class="desc">Full editing, row/column controls, headers</div>
+      </div>
+      <div class="feature-card">
+        <div class="icon">☐</div>
+        <div class="title">Checklists</div>
+        <div class="desc">Interactive checkboxes, click to toggle</div>
+      </div>
+      <div class="feature-card">
+        <div class="icon">@</div>
+        <div class="title">Entity Mentions</div>
+        <div class="desc">Cross-reference tasks, notes, expenses</div>
+      </div>
+      <div class="feature-card">
+        <div class="icon">✨</div>
+        <div class="title">AI Actions</div>
+        <div class="desc">Refine, translate, chat from bubble menu</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Dots -->
+<div class="dots" id="dots"></div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const dotsContainer = document.getElementById('dots');
+  let current = 0;
+
+  slides.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => goTo(i);
+    dotsContainer.appendChild(dot);
+  });
+
+  function goTo(index) {
+    slides[current].classList.remove('active');
+    dotsContainer.children[current].classList.remove('active');
+    current = index;
+    slides[current].classList.add('active');
+    dotsContainer.children[current].classList.add('active');
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') goTo(Math.min(current + 1, slides.length - 1));
+    if (e.key === 'ArrowLeft') goTo(Math.max(current - 1, 0));
+  });
+</script>
+</body>
+</html>
