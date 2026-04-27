@@ -18,6 +18,36 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.78.0 (2026-04-27)
+
+### New Features
+
+- **Three-column layout** — desktop task list now supports a three-column view with sidebar, list, and detail panes side by side
+- **Tree panel quick create** — create tasks directly from tree panel column headers with inline editing
+- **Inline navigation** — back/forward navigation within the task detail panel without leaving the page
+
+### Performance
+
+- Zero-lag task switching — cache-first rendering with progressive background refresh
+- Optimized large list rendering with useDeferredValue and memo
+
+### Bug Fixes
+
+- Fixed token refresh race condition causing request failures after long sessions
+- Fixed CLI upload failing on Windows with "Incorrect function" error
+- Fixed storage usage endpoint crash when owner_id is short
+- Fixed login page tier-info request blocking indefinitely (added 3s timeout)
+- Fixed CLI section not showing install info on web (was desktop-only)
+- Fixed trailing slash in API base URL causing CLI request errors
+- Fixed columns not scrolling independently in three-column layout
+- Fixed data migration tool compatibility for v0.55.0 → v0.77.1 upgrades
+
+### CLI Improvements
+
+- Added kubectl-style usage examples and --context flag documentation to all commands
+
+---
+
 ## v0.77.1 (2026-04-26)
 
 ### Bug Fixes
