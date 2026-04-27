@@ -10,7 +10,7 @@ date: 2026-04-27
 
 In UnDercontrol, a Task is the core unit of information. If you've used Jira, think of it as an Issue; if you've used Obsidian, think of it as a Note. A Task is essentially a piece of content bound to a status, with first-class attributes (title, tags, link relationships, etc.) and support for unlimited custom metadata fields (key-value pairs), so you can attach any information to it. Through the Notes mechanism, a Task can continuously evolve — recording progress, discussions, and decisions, accumulating into a complete knowledge context over time.
 
-This post covers the rich-text capabilities shared across all text input surfaces in UnDercontrol — whether it's a task description, a note, an expense memo, or an account annotation, they all use the same Markdown editor.
+This post covers the rich-text capabilities shared across all text input surfaces in UnDercontrol. We say "tasks", but it's not just tasks — whether it's a task description, a note, an expense memo, or an account annotation, they all use the same Markdown editor. The code blocks, Mermaid diagrams, tables, and checklists you use in tasks work identically in notes and every other context.
 
 <!-- truncate -->
 
