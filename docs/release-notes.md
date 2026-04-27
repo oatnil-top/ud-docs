@@ -18,6 +18,24 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.78.1 (2026-04-27)
+
+### New Features
+
+- **View mode switcher** — switch between tree, list, and kanban views on board pages
+
+### Improvements
+
+- Minimal view mode switcher design — icon-only, no border
+
+### Bug Fixes
+
+- Fixed status icon alignment with task title in saved query rows
+- Fixed status icon not vertically centered in tree view
+- Fixed layout rendering issues in conditional view modes
+
+---
+
 ## v0.78.0 (2026-04-27)
 
 ### New Features
