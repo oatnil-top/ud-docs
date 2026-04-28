@@ -18,6 +18,24 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.79.0 (2026-04-28)
+
+### New Features
+
+- **Remote terminal streaming** — view workspace terminal output in the browser in real-time; late-joining viewers automatically receive recent output history
+- **Terminal output caching** — terminal output is cached server-side, so refreshing the page restores your terminal view
+
+### Improvements
+
+- Clearer error message when uploading empty (0-byte) files
+
+### Bug Fixes
+
+- Fixed duplicate API calls on the skills page
+- Fixed terminal display issues (column width, font size, horizontal scrolling, background color)
+
+---
+
 ## v0.78.1 (2026-04-27)
 
 ### New Features
