@@ -18,6 +18,34 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.80.0 (2026-04-29)
+
+### New Features
+
+- **Knowledge graph enhancements** — toggle tag nodes on/off, clearer parent-subtask relationship visualization
+- **Task navigation history** — Obsidian-style back/forward navigation for seamless jumping between tasks
+- **Sidebar "More" section** — collapsible area housing Calendar, Graph, and Timeline views
+- **AI chat improvements** — multi-keyword OR search, create_task and list_boards tools
+- **Admin onboarding config** — configure the default landing page for new users after onboarding
+- **Default user groups** — admins can auto-assign default groups to newly registered users
+- **Global workspace shortcut** — Cmd+E to launch workspace from any page
+- **Floating prompt picker** — prompt picker button pinned to workspace TaskPanel viewport
+
+### Improvements
+
+- Cleaner sidebar: Tags and Advanced Search moved to Cmd+K command palette
+- Quick Actions replaced with a 2×2 shortcut grid
+- Admin page consolidation: Users/Roles/Groups/Onboarding in one view
+- Minimal icon badge styling
+- Actionable suggestion buttons in empty AI chat state
+
+### Bug Fixes
+
+- Fixed invisible legend line color for parent/subtask links in graph view
+- Fixed sidebar "More" section not foldable on secondary routes
+
+---
+
 ## v0.79.0 (2026-04-28)
 
 ### New Features
