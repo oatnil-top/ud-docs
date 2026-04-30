@@ -18,6 +18,35 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.81.0 (2026-04-30)
+
+### New Features
+
+- **Projects management** — create, edit, and delete projects; link them to boards and workspaces as working directories
+- **Project selector** — choose a project in board settings, execution dialog, and global workspace launcher (Cmd+E)
+- **Project CLI support** — manage projects via `ud project get/describe/apply/delete` commands
+- **Skills section** — workspace page now includes a Skills area with sidebar navigation link
+- **Workspace page redesign** — sidebar navigation layout, consistent with the profile page
+- **Auto daemon registration** — idempotent registration on startup, no manual action needed
+
+### Improvements
+
+- Board selector always visible with "None" option, easily resettable
+- Explicit CWD input in execution dialog with auto-preselection from board's linked project
+- Default agent dropdown shows resolved name (e.g., "Default (Claude Code)")
+- Project dropdown shows only project name, not full path
+- Hide Register button when device already has a daemon, show short ID
+- "This device" badge and reconnect button on daemon list
+- Configure links navigate to /workspaces instead of /profile
+
+### Bug Fixes
+
+- Fixed daemon SSE connecting to wrong machine
+- Fixed stale daemon ID not cleared when daemon deleted externally
+- Fixed reconnect button not triggering SSE stream reconnect
+
+---
+
 ## v0.80.0 (2026-04-29)
 
 ### New Features
