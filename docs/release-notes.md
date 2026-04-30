@@ -18,6 +18,14 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.81.1 (2026-05-01)
+
+### Improvements
+
+- Improved real-time sync stability — daemon SSE connections now properly handle duplicates and prevent reconnect loops
+
+---
+
 ## v0.81.0 (2026-04-30)
 
 ### New Features
