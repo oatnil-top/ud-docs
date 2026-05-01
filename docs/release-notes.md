@@ -18,6 +18,24 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.82.0 (2026-05-01)
+
+### New Features
+
+- **Monitor Page** — New multi-session TTY dashboard with 3×3 grid layout and full-viewport focus mode
+- **Grid Navigation** — Arrow keys and Enter for navigating between session tiles, click-to-select with session controls
+- **Session Controls** — Collapsible screenshot, arrow key, and Enter signal buttons; hidden in focus mode for more terminal space
+- **Quick Actions** — New session buttons on monitor and workspaces pages, settings button for quick navigation
+- **Local Daemon** — Added local daemon execution option in execution dialogs
+
+### Bug Fixes
+
+- Fixed task creation with selected text — now uses selected text as description, first characters as title
+- Fixed click propagation on controls causing unintended tile deselection
+- Fixed i18n key for create task button label and toast
+
+---
+
 ## v0.81.1 (2026-05-01)
 
 ### Improvements
