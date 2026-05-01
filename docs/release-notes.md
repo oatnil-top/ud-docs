@@ -18,6 +18,14 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.82.2 (2026-05-01)
+
+### Bug Fixes
+
+- Fixed workspace monitor terminal display — tiles now properly fit their container with horizontal scrolling support for wide content
+
+---
+
 ## v0.82.1 (2026-05-01)
 
 ### Bug Fixes
