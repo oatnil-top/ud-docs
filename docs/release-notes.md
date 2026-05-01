@@ -18,6 +18,15 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.82.1 (2026-05-01)
+
+### Bug Fixes
+
+- Fixed register/reconnect button not always showing for local daemon connections
+- Fixed command encoding using incorrect platform when no remote daemon is selected
+
+---
+
 ## v0.82.0 (2026-05-01)
 
 ### New Features
