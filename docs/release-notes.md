@@ -18,6 +18,30 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.83.0 (2026-05-02)
+
+### New Features
+
+- **AI Quick Create** — Create tasks using voice recording with audio transcription, accessible from the sidebar
+- **Inline audio player** — Play audio files directly in the resource preview dialog
+- **AI Provider capabilities** — Configure chat/vision/transcription capabilities per provider; system automatically selects provider based on capabilities
+- **Real-time task sync** — Other tabs/clients instantly see newly created tasks via SSE
+- **Daemon selection preference** — Prefers online daemons and remembers your last selection
+
+### Improvements
+
+- Collapsed sidebar quick actions use a more compact 2-column grid layout
+
+### Bug Fixes
+
+- Fixed board view not updating correctly on SSE task_created events
+- Fixed transcription using wrong model/language settings
+- Fixed AI provider form losing draft when accidentally dismissed
+- Fixed test connection using wrong endpoint for transcription-only providers
+- Fixed vision-to-task status format producing invalid status values
+
+---
+
 ## v0.82.2 (2026-05-01)
 
 ### Bug Fixes
