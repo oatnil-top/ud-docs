@@ -18,6 +18,21 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.84.0 (2026-05-03)
+
+### New Features
+
+- **Floating content window** — Pin document content as an always-on-top window in the desktop app for easy reference
+- **Workspace prompts sync** — Prompts are now stored on the server and synced across devices (migrated from local storage)
+- Task sharing now includes the task title in the share message
+
+### Bug Fixes
+
+- Fixed floating viewer button placement — moved from bubble menu to the floating actions toolbar
+- Fixed input method (IME) state preservation when viewing content in TiptapViewer
+
+---
+
 ## v0.83.0 (2026-05-02)
 
 ### New Features
