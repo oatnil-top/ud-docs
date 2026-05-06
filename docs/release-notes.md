@@ -18,6 +18,25 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.85.1 (2026-05-06)
+
+### Improvements
+
+- Refined dashboard layout with 6-pillar grid homepage restructure
+- Save button on floating toolbar now highlighted in primary color for better visibility
+- Improved mobile voice recording UI
+- Remembered password now encoded in base64 for better security
+
+### Bug Fixes
+
+- Fixed nested scroll container breaking editor height
+- Fixed dashboard editor not filling available height in Electron
+- Fixed focus not returning to terminal after prompt picker closes
+- Fixed incorrect audio hint text about combined audio+text support
+- Fixed legacy plaintext remembered password handling
+
+---
+
 ## v0.85.0 (2026-05-06)
 
 ### New Features
