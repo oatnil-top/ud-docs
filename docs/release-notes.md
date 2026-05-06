@@ -18,6 +18,32 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.85.0 (2026-05-06)
+
+### New Features
+
+- **Dashboard AI chat** — AI chat integrated into the dashboard with AI provider selector
+- **Dashboard view switching** — Simplified dashboard with workspace-style switching between editor and chat, with floating save toolbar
+- **All-in-One Docker deployment** — Single Docker image for easier self-hosted deployment
+- **Delete budget/account** — Delete buttons with confirmation dialogs on budget and account pages
+- **Global Error Boundary** — React Error Boundary prevents white-out page crashes
+
+### Improvements
+
+- Error boundary navigates to dashboard instead of full page reload
+- Contact link added to error boundary page for easier support
+
+### Bug Fixes
+
+- Fixed AI provider selector not showing with a single provider
+- Fixed AI providers loading without needing to open floating chat window
+- Fixed keyboard shortcut hint visibility in dashboard chat view
+- Fixed editor/chat flicker on view switch
+- Fixed dashboard view switching height issues
+- Fixed terminal losing focus after selecting a prompt
+
+---
+
 ## v0.84.0 (2026-05-03)
 
 ### New Features
