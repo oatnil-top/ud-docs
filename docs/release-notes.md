@@ -18,6 +18,28 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.86.0 (2026-05-08)
+
+### New Features
+
+- **Dashboard editor action bar** — Action bar defaults to expanded for better editing experience
+- **Custom scrollbars** — Dashboard editor uses OverlayScrollbars for a smoother look
+- **Welcome guide** — New users get a welcome guide seeded in the dashboard editor after onboarding
+
+### Improvements
+
+- Dashboard editor uploads images to server instead of base64 inline
+- Auth system upgraded to stateless OIDC-aligned architecture with zero DB queries per request
+
+### Bug Fixes
+
+- Fixed clear button confirmation dialog styling and interaction
+- Fixed mobile editor viewport height and scroll issues
+- Fixed dashboard switcher visibility on mobile browsers
+- Fixed dashboard view switcher being pushed by content instead of staying fixed at bottom
+
+---
+
 ## v0.85.2 (2026-05-08)
 
 ### Bug Fixes
