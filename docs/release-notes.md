@@ -18,6 +18,16 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.85.2 (2026-05-08)
+
+### Bug Fixes
+
+- Fixed duplicate SSE connection in workspace windows
+- Improved token refresh stability
+- Fixed UserCreated event retention to persist indefinitely
+
+---
+
 ## v0.85.1 (2026-05-06)
 
 ### Improvements
