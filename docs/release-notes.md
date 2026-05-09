@@ -18,6 +18,26 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.87.0 (2026-05-09)
+
+### New Features
+
+- **Workspace launcher board selector** — Board selector added to the global workspace launcher with cross-window shortcut
+- **Cross-window sync** — Workspace windows now sync state in real-time via BroadcastChannel
+- **AI assistant board integration** — AI assistant automatically adds tasks to the board when board context is provided
+
+### Improvements
+
+- AI chat can now correctly find tasks by ID
+- Updated AI chat suggestion hints for better task tool discovery
+- Run dialog now fetches latest skills when opened
+
+### Bug Fixes
+
+- Fixed skills not refreshing in the Run dialog
+
+---
+
 ## v0.86.0 (2026-05-08)
 
 ### New Features
