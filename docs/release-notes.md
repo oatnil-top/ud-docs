@@ -18,6 +18,31 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.88.0 (2026-05-10)
+
+### New Features
+
+- **Task Comments** — Add threaded comments to tasks with replies, resolve/unresolve, and real-time sync. Quote text from description or notes to create anchored comments that highlight the referenced content.
+- **@User Mentions** — Mention teammates in comments with `@username`. Mentioned users receive notifications.
+- **Keyboard Shortcut** — Press Cmd/Ctrl+Enter to quickly submit comments, replies, and edits.
+- **Notification Badge** — See unread notification count on the user icon when the sidebar is collapsed.
+- **AI Assistant Tools** — Chat with the AI assistant to update tasks, create notes, update descriptions, and link tasks directly from the conversation.
+- **Welcome Board** — New users get a starter board with a sample task to help them get started.
+- **Group Budgets & Expenses** — Budgets and expenses now support group ownership for team collaboration.
+
+### Improvements
+
+- Skills list refreshes automatically after external changes in the workspace prompt picker.
+- Dark mode highlights use brighter colors for better readability.
+- Stale anchor indicator shown when quoted comment text is no longer found in content.
+
+### Bug Fixes
+
+- Fixed docs page header being hidden behind iOS Safari chrome after navigation.
+- Fixed board membership check for shared boards with scope tags.
+
+---
+
 ## v0.87.0 (2026-05-09)
 
 ### New Features
