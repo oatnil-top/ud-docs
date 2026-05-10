@@ -18,6 +18,14 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.88.1 (2026-05-10)
+
+### Bug Fixes
+
+- Fixed SQLite database migration errors that could occur during upgrades for self-hosted users.
+
+---
+
 ## v0.88.0 (2026-05-10)
 
 ### New Features
