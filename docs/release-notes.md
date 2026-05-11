@@ -18,6 +18,14 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.88.3 (2026-05-11)
+
+### Bug Fixes
+
+- Fixed workspace terminal window occasionally crashing on launch.
+
+---
+
 ## v0.88.2 (2026-05-11)
 
 ### Improvements
