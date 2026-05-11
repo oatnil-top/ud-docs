@@ -18,6 +18,23 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.88.2 (2026-05-11)
+
+### Improvements
+
+- Workspace dialog board selector now shows all boards with grouped display.
+
+### Bug Fixes
+
+- Kanban search now supports short ID prefix matching.
+- Sidebar elements are properly dimmed when dialog overlay is open.
+- Fixed skills page scroll on mobile.
+- Fixed missing /v1 in localfs presigned URL paths for self-hosted file access.
+- Fixed @mention background styling in comments.
+- Fixed comment anchors incorrectly marked as missing due to highlight timing race.
+
+---
+
 ## v0.88.1 (2026-05-10)
 
 ### Bug Fixes
