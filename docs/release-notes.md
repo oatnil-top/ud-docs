@@ -18,6 +18,20 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.88.4 (2026-05-12)
+
+### New Features
+
+- @workspace mention now works in task descriptions and notes (previously comments only).
+- Quick notes can now be saved empty with an automatic datetime title.
+
+### Bug Fixes
+
+- Fixed anchored comments from notes showing wrong section and color.
+- Fixed @workspace replies in descriptions/notes incorrectly appearing as anchored comments.
+
+---
+
 ## v0.88.3 (2026-05-11)
 
 ### Bug Fixes
