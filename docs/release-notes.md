@@ -18,6 +18,21 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.89.0 (2026-05-13)
+
+### New Features
+
+- **Agent workspace sessions** — @ud mention on tasks now auto-initializes a workspace session running Claude Code, enabling AI-assisted task execution.
+- Admin user management page now shows user types (human vs agent).
+
+### Bug Fixes
+
+- @ud agent is now always mentionable on private tasks (no longer requires group membership).
+- Daily note carry-over no longer adds an unwanted "Carried Over" heading.
+- Daily note carry-over now preserves original indentation of items.
+
+---
+
 ## v0.88.4 (2026-05-12)
 
 ### New Features
