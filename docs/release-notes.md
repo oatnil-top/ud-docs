@@ -18,6 +18,26 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.90.0 (2026-05-14)
+
+### New Features
+
+- **Comments feed page** — New cross-task comment feed with threaded discussions and inline replies.
+- **Projects page** — Standalone projects page with list-detail layout, showing linked tasks per project.
+- **Task-project linking** — Project picker in task detail view to link tasks to projects.
+- **Local directory project linking** — Link local directories to projects via `ud.projects` file.
+- **Collapsed sidebar menu** — Collapsed sidebar shows expandable chevron for hidden navigation items.
+- **License info in admin** — License expiry warning banner and license info section in System Config.
+- **Tag length increase** — Tags can now be up to 50 characters (previously 20).
+
+### Bug Fixes
+
+- Thread replies reset properly when switching between comments.
+- Comment feed shows individual threads instead of grouping by task.
+- Replies filtered from comment feed — only top-level threads shown.
+
+---
+
 ## v0.89.0 (2026-05-13)
 
 ### New Features
