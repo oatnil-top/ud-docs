@@ -18,6 +18,32 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.91.0 (2026-05-16)
+
+### New Features
+
+- **Built-in @ud agent** — Workspace sessions now use a built-in soul prompt for smarter AI-assisted task execution.
+- **Multi-session list** — New multi-session list UI in task detail sidebar, showing all linked workspace sessions.
+- **Comment resolve/unresolve** — Resolve and unresolve buttons added to comment thread view.
+- **Window type color coding** — Color-coded left border for different window types in workspace picker.
+- **Session creator indicator** — Bot/User icon shown across all session views to identify who created each session.
+- **`ud whoami` command** — New CLI command for auth diagnostics and troubleshooting.
+
+### Improvements
+
+- Main window title now shows "Main Window: <page name>" for better clarity.
+- Agent sessions now properly inject auth tokens and API URL.
+
+### Bug Fixes
+
+- Agent reply templates no longer show "wk:" prefix.
+- Comment creator correctly shows agent identity instead of delegated human user.
+- Agent prompts correctly placed in user prompt position.
+- Fixed infinite re-render from Zustand selectors returning new object refs.
+- Fixed agent session initialization with empty commands.
+
+---
+
 ## v0.90.0 (2026-05-14)
 
 ### New Features
