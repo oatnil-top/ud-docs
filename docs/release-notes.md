@@ -18,6 +18,19 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.93.0 (2026-05-16)
+
+### New Features
+
+- **@workspace session mentions** — Mention active workspace sessions directly in comments to send input to the running session, without targeting a specific user. The mention menu shows both members and active sessions.
+- **Daemon injects backend URL** — Workspace PTY environment now has the backend URL auto-injected by the daemon, ensuring CLI commands within sessions connect to the correct server.
+
+### Bug Fixes
+
+- CLI `--context` flag now takes priority over `UD_*` environment variables, allowing you to target a different server from inside a workspace session.
+
+---
+
 ## v0.92.0 (2026-05-16)
 
 ### New Features
