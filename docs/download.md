@@ -30,3 +30,7 @@ Download the Windows version:
 Download the Linux version:
 
 - [Download for Linux (AppImage)](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/releases/0.1.26/undercontrol-desktop-0.1.26.AppImage)
+
+## Browser Extension {#browser-extension}
+
+- [UnderControl Web Clipper](https://chromewebstore.google.com/detail/undercontrol-web-clipper/mckkbigikfkoeddpcbhdmpncoljoagog) — Save web pages as tasks with full-page snapshots. Available on the Chrome Web Store.

@@ -18,13 +18,11 @@ The UnderControl Web Clipper is a Chrome browser extension that saves web pages 
 
 ## Installation
 
-The extension is not yet published on the Chrome Web Store. Install from source:
+Install directly from the [Chrome Web Store](https://chromewebstore.google.com/detail/undercontrol-web-clipper/mckkbigikfkoeddpcbhdmpncoljoagog):
 
-1. Download or clone the [`ud-chrome-extension`](https://github.com/user/ud-chrome-extension) repository
-2. Open Chrome and navigate to `chrome://extensions`
-3. Enable **Developer mode** (toggle in the top right)
-4. Click **Load unpacked**
-5. Select the `ud-chrome-extension` folder
+1. Visit the [UnderControl Web Clipper](https://chromewebstore.google.com/detail/undercontrol-web-clipper/mckkbigikfkoeddpcbhdmpncoljoagog) page on the Chrome Web Store
+2. Click **Add to Chrome**
+3. Confirm by clicking **Add extension**
 
 The extension icon will appear in the Chrome toolbar.
 
