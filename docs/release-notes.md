@@ -31,7 +31,7 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ### Improvements
 
-- Main window title now shows "Main Window: <page name>" for better clarity.
+- Main window title now shows "Main Window: \<page name\>" for better clarity.
 - Agent sessions now properly inject auth tokens and API URL.
 
 ### Bug Fixes
