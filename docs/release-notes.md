@@ -18,6 +18,26 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.92.0 (2026-05-16)
+
+### New Features
+
+- **Knowledge graph exploration** — New `ud graph` command for visualizing task connections and knowledge base relationships.
+- **Auto-updater CDN source switching** — Desktop client can now switch between R2 and Bitiful CDN for updates (Settings > About).
+- **Manual update checking** — Check for desktop app updates manually from the Electron client.
+
+### Improvements
+
+- Workspace terminal output cache now uses a memory-capped ring buffer, evicting the oldest session first when the cap is reached.
+
+### Bug Fixes
+
+- CLI `--context` flag now correctly overrides workspace environment variables, allowing you to target a different server from inside a workspace session.
+- Auto-updater now has a 15-second timeout to prevent infinite spinning when the update server is unreachable.
+- Workspace init simplified — daemon uses its own backend URL instead of receiving it from the frontend.
+
+---
+
 ## v0.91.0 (2026-05-16)
 
 ### New Features
