@@ -18,6 +18,15 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.93.1 (2026-05-17)
+
+### Bug Fixes
+
+- CLI `whoami` command now correctly respects the `--context` flag priority over environment variables.
+- Desktop: Fixed PTY spawn failure by auto-rebuilding node-pty after npm install.
+
+---
+
 ## v0.93.0 (2026-05-16)
 
 ### New Features
