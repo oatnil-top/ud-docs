@@ -18,6 +18,18 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.93.3 (2026-05-17)
+
+### Improvements
+
+- **Session mention labels** — @mentioning a workspace session in comments now shows the user name and task title (e.g., `alice · Fix auth bug`) instead of a cryptic session ID. Session mentions now work in all comment inputs, not just the rich text editor.
+
+### Bug Fixes
+
+- Workspace session tokens now last 7 days instead of 1 hour, preventing authentication loss during long work sessions.
+
+---
+
 ## v0.93.2 (2026-05-17)
 
 ### Bug Fixes
