@@ -18,6 +18,14 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.93.2 (2026-05-17)
+
+### Bug Fixes
+
+- Fixed workspace terminal authentication failure when the desktop app connects to a remote server. CLI commands in workspace sessions now work without needing a `--context` flag workaround.
+
+---
+
 ## v0.93.1 (2026-05-17)
 
 ### Bug Fixes
