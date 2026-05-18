@@ -18,6 +18,25 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.94.0 (2026-05-18)
+
+### New Features
+
+- **AI Agents** — Create custom AI agents with prompts, skills, and triggers. Agents run workspace sessions with delegated access — select them in the "Run as" dropdown when starting a workspace.
+- **Agent @mentions** — @mention custom agents in private tasks (not just group tasks). The mention dropdown shows built-in @ud and all owned agents.
+- **Agent management page** — New "AI Agents" section in Workspaces settings for creating, editing, and deleting custom agents.
+- **CLI agent management** — Manage agents via `ud get agents`, `ud describe agent`, `ud apply agent`, `ud delete agent`.
+
+### Improvements
+
+- Default Agent CLI selector moved into Custom Agent CLIs section for a cleaner layout.
+
+### Bug Fixes
+
+- Fixed mobile scroll in Skills/Prompts/History popovers.
+
+---
+
 ## v0.93.3 (2026-05-17)
 
 ### Improvements
