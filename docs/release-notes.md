@@ -18,6 +18,27 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.95.0 (2026-05-18)
+
+### New Features
+
+- **Quick Note @mention agents** — Type @agent in Quick Note to send commands to AI agents.
+- **Dedicated Agents page** — New "AI Agents" navigation entry for managing agent configurations.
+- **Agent config enhancements** — Skills picker (badge-chip UI) and workspace defaults (daemon, tags, board, project).
+- **Comment deletion** — Delete button in comments thread view.
+- **CLI verb-first commands** — New `bind`, `unbind`, `link`, `unlink`, `grep` commands replacing old resource-first syntax.
+
+### Improvements
+
+- Renamed "Agent" to "Agent CLI" in workspace run dialog for clarity.
+
+### Bug Fixes
+
+- Fixed agents page navigation i18n key.
+- Fixed deprecated CLI command references in docs and frontend.
+
+---
+
 ## v0.94.0 (2026-05-18)
 
 ### New Features
