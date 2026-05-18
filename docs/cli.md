@@ -283,7 +283,7 @@ Opens the task in your `$EDITOR` (defaults to `vi`). The file format is:
 ### Query Tasks
 
 ```bash
-ud task query "<query>" [flags]
+ud query "<query>" [flags]
 ```
 
 Query tasks using SQL-like syntax.
@@ -297,36 +297,19 @@ Query tasks using SQL-like syntax.
 **Examples:**
 ```bash
 # Find todo tasks
-ud task query "status = 'todo'"
+ud query "status = 'todo'"
 
 # Search by title
-ud task query "title ILIKE '%api%'"
+ud query "title ILIKE '%api%'"
 
 # Find tasks due this week
-ud task query "deadline BETWEEN 'today' AND '+7d'"
+ud query "deadline BETWEEN 'today' AND '+7d'"
 
 # Find tagged tasks
-ud task query "tags = 'urgent'"
+ud query "tags = 'urgent'"
 
 # Complex query
-ud task query "(status = 'todo' OR status = 'in-progress') AND deadline <= 'today'"
-```
-
-### Natural Language Query
-
-```bash
-ud task nlquery "<natural language>"
-ud task nl "<natural language>"  # Alias
-```
-
-Query tasks using natural language, which is translated to structured queries by AI.
-
-**Examples:**
-```bash
-ud task nlquery "show me overdue tasks"
-ud task nlquery "tasks tagged with work that are not done"
-ud task nlquery "find tasks with report in the title"
-ud task nlquery "tasks created in the last week"
+ud query "(status = 'todo' OR status = 'in-progress') AND deadline <= 'today'"
 ```
 
 ---

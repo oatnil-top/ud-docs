@@ -16,11 +16,11 @@ The query syntax is available across the entire application:
 - **Custom Views** — Define a Root Query for views to filter which tasks are displayed
 - **Kanban Filtering** — Filter tasks within kanban board columns
 - **Saved Queries** — Save frequently used queries for one-click access
-- **CLI** — Run queries from the terminal with `ud task query`
+- **CLI** — Run queries from the terminal with `ud query`
 - **AI Chat** — Describe what you want in natural language and let AI generate the query
 
 :::tip Don't want to write queries manually?
-Use the **AI Chat** feature on the task page — just describe what you're looking for in plain language, and the AI will generate the query for you. This works in both the web UI and the CLI (`ud task nlquery`).
+Use the **AI Chat** feature on the task page — just describe what you're looking for in plain language, and the AI will generate the query for you. This works in both the web UI and the CLI (`ud query`).
 :::
 
 ---
@@ -348,12 +348,12 @@ Saved Queries let you store frequently used queries for quick access. Instead of
 
 The UnderControl CLI supports running queries directly from the terminal. This is useful for scripting, automation, and quick lookups without leaving your terminal workflow.
 
-### `ud task query`
+### `ud query`
 
 Run a structured query using the same syntax documented above:
 
 ```bash
-ud task query "<query>" [flags]
+ud query "<query>" [flags]
 ```
 
 **Flags:**
@@ -366,46 +366,23 @@ ud task query "<query>" [flags]
 
 ```bash
 # Find all todo tasks
-ud task query "status = 'todo'"
+ud query "status = 'todo'"
 
 # Search by title
-ud task query "title ILIKE '%api%'"
+ud query "title ILIKE '%api%'"
 
 # Tasks due this week
-ud task query "deadline BETWEEN 'today' AND '+7d'"
+ud query "deadline BETWEEN 'today' AND '+7d'"
 
 # Tagged tasks
-ud task query "tags = 'urgent'"
+ud query "tags = 'urgent'"
 
 # Complex query with sorting
-ud task query "(status = 'todo' OR status = 'in-progress') AND deadline <= 'today'" --sort deadline --order asc
+ud query "(status = 'todo' OR status = 'in-progress') AND deadline <= 'today'" --sort deadline --order asc
 
 # Paginated results
-ud task query "status != 'archived'" --page 2 --limit 20
+ud query "status != 'archived'" --page 2 --limit 20
 ```
-
-### `ud task nlquery`
-
-Query tasks using natural language — the AI translates your request into a structured query:
-
-```bash
-ud task nlquery "<natural language>"
-ud task nl "<natural language>"  # Short alias
-```
-
-**Examples:**
-
-```bash
-ud task nlquery "show me overdue tasks"
-ud task nlquery "tasks tagged with work that are not done"
-ud task nlquery "find tasks with report in the title"
-ud task nlquery "tasks created in the last week"
-ud task nlquery "high priority items due this month"
-```
-
-:::info
-The natural language query feature requires an AI provider to be configured. The AI interprets your request and generates the corresponding structured query, then executes it.
-:::
 
 For full CLI documentation, see the [CLI Reference](./cli).
 
@@ -427,13 +404,13 @@ UnderControl integrates AI to make querying more accessible. Instead of learning
 
 ### In the CLI
 
-Use `ud task nlquery` (or its alias `ud task nl`):
+Use `ud query` to run structured queries from the terminal:
 
 ```bash
-ud task nlquery "tasks I need to do this week"
+ud query "deadline BETWEEN 'today' AND '+7d' AND status != 'done'"
 ```
 
-The AI understands context and intent, so you can use conversational language. It translates your request into the structured query syntax and returns matching tasks.
+See the [CLI Reference](./cli) for the full list of query flags and options.
 
 ---
 

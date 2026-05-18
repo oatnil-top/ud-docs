@@ -12,13 +12,13 @@ Create relationships between tasks — link related work, dependencies, or subta
 ### Link two tasks
 
 ```bash
-ud task link a1b2c3d4 e5f6g7h8
+ud link task a1b2c3d4 e5f6g7h8
 ```
 
 ### Unlink tasks
 
 ```bash
-ud task unlink a1b2c3d4 e5f6g7h8
+ud unlink task a1b2c3d4 e5f6g7h8
 ```
 
 ### View linked tasks

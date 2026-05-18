@@ -112,11 +112,10 @@ ud task note add <id> "Note"    # Add a note
 ud task note list <id>          # List notes
 
 # Relationships
-ud task link <id> <other-id>    # Link two tasks
+ud link task <id> <other-id>    # Link two tasks
 
 # Advanced
-ud task query "status = 'todo'" # Structured query
-ud task nlquery "overdue tasks" # Natural language query
+ud query "status = 'todo'"      # Structured query
 ud task apply -f task.md        # Create/update from markdown file
 ```
 
