@@ -139,4 +139,4 @@ title ILIKE '%report%' AND status != 'done'
 ## 相关内容
 
 - [查询语法](./query-syntax) — 查询语言完整参考
-- [CLI 参考](./cli) — 使用 `ud task query` 从终端运行查询
+- [CLI 参考](./cli) — 使用 `ud query` 从终端运行查询

@@ -283,7 +283,7 @@ ud task edit <id>
 ### 查询任务
 
 ```bash
-ud task query "<query>" [flags]
+ud query "<query>" [flags]
 ```
 
 使用类 SQL 语法查询任务。
@@ -297,36 +297,19 @@ ud task query "<query>" [flags]
 **示例：**
 ```bash
 # 查找待办任务
-ud task query "status = 'todo'"
+ud query "status = 'todo'"
 
 # 按标题搜索
-ud task query "title ILIKE '%api%'"
+ud query "title ILIKE '%api%'"
 
 # 查找本周到期的任务
-ud task query "deadline BETWEEN 'today' AND '+7d'"
+ud query "deadline BETWEEN 'today' AND '+7d'"
 
 # 查找带标签的任务
-ud task query "tags = 'urgent'"
+ud query "tags = 'urgent'"
 
 # 复杂查询
-ud task query "(status = 'todo' OR status = 'in-progress') AND deadline <= 'today'"
-```
-
-### 自然语言查询
-
-```bash
-ud task nlquery "<自然语言>"
-ud task nl "<自然语言>"  # 别名
-```
-
-使用自然语言查询任务，由 AI 翻译为结构化查询。
-
-**示例：**
-```bash
-ud task nlquery "显示逾期的任务"
-ud task nlquery "标记为 work 但未完成的任务"
-ud task nlquery "查找标题包含报告的任务"
-ud task nlquery "上周创建的任务"
+ud query "(status = 'todo' OR status = 'in-progress') AND deadline <= 'today'"
 ```
 
 ---
