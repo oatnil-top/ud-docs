@@ -139,4 +139,4 @@ Here are some practical examples of saved queries:
 ## Related
 
 - [Query Syntax](./query-syntax) — Full reference for the query language
-- [CLI Reference](./cli) — Use `ud task query` to run queries from the terminal
+- [CLI Reference](./cli) — Use `ud query` to run queries from the terminal

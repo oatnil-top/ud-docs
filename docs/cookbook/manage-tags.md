@@ -28,13 +28,13 @@ EOF
 
 ```bash
 # Single tag
-ud task query "tags = 'work'"
+ud query "tags = 'work'"
 
 # Any of multiple tags
-ud task query "tags IN ('work', 'personal')"
+ud query "tags IN ('work', 'personal')"
 
 # Must have ALL tags
-ud task query "tags CONTAINS_ALL ('work', 'urgent')"
+ud query "tags CONTAINS_ALL ('work', 'urgent')"
 ```
 
 ## curl

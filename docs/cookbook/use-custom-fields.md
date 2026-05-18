@@ -47,7 +47,7 @@ curl -X PATCH https://your-server.com/todolist/{taskId}/metadata \
 
 ```bash
 # CLI
-ud task query "cf.priority = 'High' AND status != 'done'"
+ud query "cf.priority = 'High' AND status != 'done'"
 
 # curl
 curl -X POST https://your-server.com/todolist/query \

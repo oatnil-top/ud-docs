@@ -45,12 +45,3 @@ ud task note add a1b2 "All steps completed. Summary: added user auth with JWT to
 ud task done a1b2
 ```
 
-## Natural language queries
-
-Let the agent search tasks with plain language:
-
-```bash
-ud task nl "what tasks are blocked?"
-
-ud task nl "show me tasks tagged backend that are in progress"
-```

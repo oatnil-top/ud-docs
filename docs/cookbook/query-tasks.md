@@ -5,7 +5,7 @@ sidebar_position: 2
 
 # Query and Filter Tasks
 
-Find tasks using the SQL-like query syntax or natural language.
+Find tasks using the SQL-like query syntax.
 
 ## CLI
 
@@ -25,25 +25,16 @@ ud get task --status todo
 
 ```bash
 # Overdue tasks
-ud task query "deadline < 'today' AND status != 'done'"
+ud query "deadline < 'today' AND status != 'done'"
 
 # Tasks tagged "work" created this week
-ud task query "tags HAS 'work' AND created_at >= '-7d'"
+ud query "tags HAS 'work' AND created_at >= '-7d'"
 
 # Search by title keyword
-ud task query "title ILIKE '%report%'"
+ud query "title ILIKE '%report%'"
 
 # Sort by deadline, upcoming first
-ud task query "status = 'todo' ORDER BY deadline ASC"
-```
-
-### Natural language query
-
-```bash
-# Let AI translate your question into a query
-ud task nl "what tasks are due this week?"
-
-ud task nl "show me all high-priority work tasks"
+ud query "status = 'todo' ORDER BY deadline ASC"
 ```
 
 ## curl

@@ -56,7 +56,7 @@ done < tasks.txt
 ### Script: export overdue tasks
 
 ```bash
-ud task query "deadline < 'today' AND status != 'done'" \
+ud query "deadline < 'today' AND status != 'done'" \
   --limit 100
 ```
 
@@ -65,11 +65,11 @@ ud task query "deadline < 'today' AND status != 'done'" \
 ```bash
 #!/bin/bash
 echo "=== Updated yesterday ==="
-ud task query "updated_at >= '-1d' AND status = 'in-progress'"
+ud query "updated_at >= '-1d' AND status = 'in-progress'"
 
 echo "=== Due today ==="
-ud task query "deadline BETWEEN 'today' AND 'tomorrow' AND status != 'done'"
+ud query "deadline BETWEEN 'today' AND 'tomorrow' AND status != 'done'"
 
 echo "=== Blocked ==="
-ud task query "status = 'pending'"
+ud query "status = 'pending'"
 ```
