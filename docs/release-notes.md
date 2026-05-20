@@ -18,6 +18,28 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.96.0 (2026-05-20)
+
+### New Features
+
+- **Agent Workspace Sessions** — Launch AI agent workspace sessions directly from the CLI with `ud apply workspace`, or from the UI via any workspace launcher.
+- **Built-in Agents** — Two built-in agents (`@ud` for task management with skill discovery, `@agent-creator` for creating new agents) are auto-seeded on startup.
+- **Prompt Preview** — Preview the fully assembled prompt before launching a workspace — see exactly what the AI agent will receive.
+- **Spawn Workspace Skill** — New built-in skill enables agents to spawn additional workspace sessions.
+
+### Improvements
+
+- Workspace daemon selection is now optional — simpler startup flow.
+- Agent configuration UI redesigned with a clearer two-column layout.
+- Agent sessions reuse existing terminal windows instead of creating duplicates.
+
+### Bug Fixes
+
+- Fixed workspace project resolution for prefix/name matching and CWD overrides.
+- Entity ID validation now correctly requires full UUIDs for project and daemon IDs.
+
+---
+
 ## v0.95.0 (2026-05-18)
 
 ### New Features
