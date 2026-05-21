@@ -18,6 +18,18 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.96.1 (2026-05-21)
+
+### Improvements
+
+- Desktop app now identifies each device by hardware UUID, enabling accurate per-device daemon management.
+
+### Bug Fixes
+
+- Fixed daemon connection incorrectly targeting the first registered device instead of the current one.
+
+---
+
 ## v0.96.0 (2026-05-20)
 
 ### New Features
