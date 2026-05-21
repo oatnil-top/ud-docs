@@ -18,6 +18,15 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.96.2 (2026-05-21)
+
+### Improvements
+
+- Workspace arguments are now resolved server-side for improved reliability
+- Fixed agent CLI command resolution in local Electron desktop app
+
+---
+
 ## v0.96.1 (2026-05-21)
 
 ### Improvements
