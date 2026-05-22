@@ -18,6 +18,31 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.97.0 (2026-05-22)
+
+### New Features
+
+- New Workspace and Send Instructions shortcuts in sidebar
+- Send Instructions button on agent detail page
+- Agent Creator is now a builtin skill, available out of the box
+- CLI: `-o apply` flag on `describe` commands for round-trip YAML export
+- CLI: grouped command help output for better discoverability
+- CLI: Daemon and AgentCLI are now managed resources with get/describe/delete
+
+### Bug Fixes
+
+- Default to Unresolved tab in comments page
+- YAML parser now handles `---` inside block scalars correctly
+
+### Upgrade Notes
+
+- `ud entity get` renamed to `ud get entity` (old command removed)
+- `ud daemon` renamed to `ud run-as-daemon`
+- `ud apply note` subcommand removed
+- Markdown-based apply for Skills, Prompts, AgentCLI removed (YAML only)
+
+---
+
 ## v0.96.2 (2026-05-21)
 
 ### Improvements
