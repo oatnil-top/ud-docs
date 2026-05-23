@@ -18,6 +18,24 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.97.1 (2026-05-23)
+
+### New Features
+
+- Workspace Run Dialog now shows the source of the resolved working directory (board, project, task, or default)
+
+### Bug Fixes
+
+- Comment SSE notifications now reach the task owner, not just the commenter
+- Agent display names resolve correctly in comments and UI
+- Workspace CWD correctly falls back to `~/.undercontrol/workspace` instead of showing broken paths
+- Agent sessions with AgentCLI now properly deliver the initial prompt
+- Workspace prompt delivery is more reliable (pattern-based detection replaces fragile debounce)
+- Mentions in task descriptions are now parsed on creation
+- Board and project selection are properly decoupled in workspace launcher
+
+---
+
 ## v0.97.0 (2026-05-22)
 
 ### New Features
