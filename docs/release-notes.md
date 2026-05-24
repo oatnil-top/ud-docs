@@ -18,6 +18,15 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.97.2 (2026-05-24)
+
+### New Features
+
+- Added duplicate button on the agent detail page to quickly create a copy of an existing agent
+- Comment threads now use thread-level session routing for more accurate and contextual AI responses
+
+---
+
 ## v0.97.1 (2026-05-23)
 
 ### New Features
