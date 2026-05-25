@@ -18,6 +18,20 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.97.3 (2026-05-25)
+
+### Improvements
+
+- Added inline resolve button to comment feed sidebar for quicker resolution
+- Added "Resolved" filter tab to comments page to view resolved threads
+- Added reply button alongside resolve in comment thread footer
+
+### Bug Fixes
+
+- Fixed error toast import path
+
+---
+
 ## v0.97.2 (2026-05-24)
 
 ### New Features
