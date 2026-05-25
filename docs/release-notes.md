@@ -18,6 +18,23 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.97.4 (2026-05-26)
+
+### Improvements
+
+- Image paste in canvas now shows a placeholder immediately with upload loading state
+- After sending agent instructions, automatically navigates to the new task
+- Agent session status now visible in comment thread feed
+- "No daemon available" hint shown in send instructions dialog
+
+### Bug Fixes
+
+- Fixed legacy 'image' type canvas nodes not rendering correctly
+- Fixed duplicate agent instruction requests when clicking send button rapidly
+- Fixed agent list not refreshing when opening send instructions dialog
+
+---
+
 ## v0.97.3 (2026-05-25)
 
 ### Improvements
