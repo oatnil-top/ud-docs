@@ -18,6 +18,18 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.98.1 (2026-05-26)
+
+### Improvements
+
+- Comment status upgraded to three states: open/resolved/annotated for finer discussion management
+- Comments page now updates in real-time via SSE — no manual refresh needed
+- Selected comment thread persists in URL — page refresh preserves your position
+- Thread-linked workspace session status badges are now more reliable (backed by server-side binding data)
+- Workspace dialog CWD display aligned with backend resolution
+
+---
+
 ## v0.98.0 (2026-05-26)
 
 ### New Features
