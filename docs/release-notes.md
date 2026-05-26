@@ -18,6 +18,28 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.98.0 (2026-05-26)
+
+### New Features
+
+- User avatars: set and display profile pictures across the app
+- Dashboard focus view: quickly resume your last visited task
+- Dataflow diagram: undo/redo support with toolbar buttons
+- Dataflow diagram: paste plain text to create note nodes
+- Drag-to-reorder fields in JSON nodes
+
+### Improvements
+
+- Agent mentions now include comment content for better context
+
+### Bug Fixes
+
+- Fixed workspace monitor tile rendering with correct session keys
+- Removed artificial 9-session limit from workspace monitor
+- Agent users no longer count toward loginable user limit
+
+---
+
 ## v0.97.4 (2026-05-26)
 
 ### Improvements
