@@ -18,6 +18,33 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.99.0 (2026-05-27)
+
+### New Features
+
+- Explorer view: new 3-column layout with virtual folder tree, drag-to-move, and context menus
+- Task paths: tasks now support hierarchical paths for folder-based organization
+- AI Talk landing page: AI Talk replaces the dashboard, unified with /commands and @agent mentions
+- Conversations: comments page upgraded to conversations with chat bubble UI
+- Image paste in conversations: paste images directly to upload as a resource
+- Inline resource images: resource:// images render inline in conversation messages
+
+### Improvements
+
+- Task detail page: full-width layout with actions consolidated into overflow dropdown
+- Auto-switch to comments sidebar when adding a comment
+- Description editor fills full container height
+- Login page loads instantly using cached tier info
+
+### Bug Fixes
+
+- Fixed explorer path handling, command autocomplete, and prefix matching
+- Fixed chat hint display with /commands and @agent
+- Fixed comment count badge clipping
+- Fixed first-visit tier detection
+
+---
+
 ## v0.98.1 (2026-05-26)
 
 ### Improvements
