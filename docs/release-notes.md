@@ -18,6 +18,28 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.99.1 (2026-05-28)
+
+### New Features
+
+- Star threads: Gmail-style star to bookmark important conversations
+- Prompt & skill picker added to conversation thread input
+- Optimistic update for conversation resolve toggle
+- Workspace control strip in conversation thread view
+- Mobile sidebar toggle for explorer page
+
+### Improvements
+
+- Conversation filter bar is now horizontally scrollable
+- Conversation threads auto-refresh on new comment events (SSE)
+
+### Bug Fixes
+
+- Fixed infinite loop in CommentFeed from preference store selector
+- Fixed explorer sidebar toggle overlapping with main sidebar toggle
+
+---
+
 ## v0.99.0 (2026-05-27)
 
 ### New Features
