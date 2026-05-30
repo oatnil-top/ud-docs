@@ -6,3 +6,5 @@ Try it online: https://ud.oatnil.top
 
 Documentation: https://ud-docs.lintao-amons.workers.dev
 
+JSON Schemas: https://github.com/oatnil-top/ud-schemas
+
