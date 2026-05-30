@@ -18,6 +18,28 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.99.3 (2026-05-30)
+
+### New Features
+
+- AI chat pop-out window with Ctrl+J shortcut
+- Pop-out button for conversation thread view
+- Ctrl+K shortcut to focus main window
+- Markdown Embeds documentation page
+
+### Improvements
+
+- Task detail right sidebar stays sticky on scroll
+- Outline navigation targets visible elements correctly
+
+### Bug Fixes
+
+- Fixed todolist item path field not persisting on update
+- Fixed tooltip display on AI talk page
+- Updated pop-out icon to ExternalLink for clarity
+
+---
+
 ## v0.99.2 (2026-05-30)
 
 ### New Features
