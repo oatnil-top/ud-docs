@@ -18,6 +18,30 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.99.2 (2026-05-30)
+
+### New Features
+
+- Mobile collapsible layout: Task detail and explorer pages now have collapsible sections (Session, Comments, Description, Notes, Details) with a Comments button in the bottom action bar
+- AI chat suggestions: Onboarding prompts with randomized topic pool for AI assistant conversations
+- Agent comment threads: Agent conversations now use comment threads instead of task description
+- Scheduled jobs: Schedule agent tasks with new CLI commands and builtin skill
+- Dataflow set operations: JSON field set operations (union, intersection, difference, complement)
+
+### Improvements
+
+- Comment status model: "Annotated" is now a final state (same level as "Resolved") for notes that don't need resolution
+- Conversation page defaults to showing unresolved threads
+
+### Bug Fixes
+
+- Fixed AI chat message overflow on mobile screens
+- Fixed workspace session reappearing after stop due to SSE race condition
+- Removed duplicate Reply button in comment threads
+- Fixed divider lines showing for hidden sections on mobile
+
+---
+
 ## v0.99.1 (2026-05-28)
 
 ### New Features
