@@ -18,6 +18,18 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.99.5 (2026-05-31)
+
+### New Features
+
+- Added `ud get income` command for querying income records from the CLI
+
+### Bug Fixes
+
+- Fixed agent-to-agent @mention delegation not working correctly in workspace sessions
+
+---
+
 ## v0.99.4 (2026-05-31)
 
 ### New Features
