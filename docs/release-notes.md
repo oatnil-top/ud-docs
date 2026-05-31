@@ -18,6 +18,23 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.99.4 (2026-05-31)
+
+### New Features
+
+- Community Skill Registry: browse, install, and share skills via `ud market` commands
+
+### Improvements
+
+- Mobile task detail: simplified bottom bar by moving pin and check-in into the More menu
+
+### Bug Fixes
+
+- AI chat input now auto-focuses when opened via Ctrl+J for immediate typing
+- Fixed conversation popup displaying sidebar and extra UI instead of just the chat window
+
+---
+
 ## v0.99.3 (2026-05-30)
 
 ### New Features
