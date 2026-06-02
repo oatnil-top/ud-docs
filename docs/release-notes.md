@@ -18,6 +18,26 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.99.6 (2026-06-02)
+
+### New Features
+
+- AI chat now supports file attachments and voice recording input
+- AI chat messages persist across page navigation — no more lost conversations
+
+### Improvements
+
+- Improved HTML resource preview with sandboxed rendering
+- Cleaner AI chat interface with more space for conversations
+
+### Bug Fixes
+
+- Fixed resource preview being cut off by parent containers
+- Fixed divider buttons overlapping with modals
+- Fixed misaligned icons in chat input area
+
+---
+
 ## v0.99.5 (2026-05-31)
 
 ### New Features
