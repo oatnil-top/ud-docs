@@ -18,6 +18,29 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.99.7 (2026-06-03)
+
+### New Features
+
+- Elements Panel: new architecture diagram capabilities
+  - Icon nodes with built-in AWS, Azure, and Lucide icon libraries in a 2-level sidebar
+  - Icon style customization: SVG stroke, fill, and border colors
+  - Enhanced group nodes with icons, style presets, and nested group support
+  - Architecture import format (Format A+) with nested groups
+- Admin toggle for public task sharing
+- Inline HTML resource rendering via resource:// protocol in markdown with auto-sizing, download button
+- Task selector in workspace run dialog
+- Exec button on task detail page
+
+### Bug Fixes
+
+- Fixed group z-index and drag behavior in dataflow
+- Fixed icon SVG stroke color rendering
+- Fixed mouse wheel scrolling in task selector dropdown
+- Fixed HTML embed height issues
+
+---
+
 ## v0.99.6 (2026-06-02)
 
 ### New Features
