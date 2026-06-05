@@ -18,6 +18,24 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.99.8 (2026-06-05)
+
+### New Features
+
+- File upload support in conversation reply and compose windows
+- Conversation links: render conversation:// links and copy comment IDs for cross-referencing
+- Task status selector in conversation thread header
+- @mention support in conversation reply window
+- Paste resource:// URI to create resource nodes in dataflow diagrams
+
+### Bug Fixes
+
+- Fixed mention dropdown opening direction in conversation reply
+- Fixed resource node missing default dimensions preventing image rendering
+- Fixed feature toggle not appearing in admin system config page
+
+---
+
 ## v0.99.7 (2026-06-03)
 
 ### New Features
