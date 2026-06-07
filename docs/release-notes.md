@@ -18,6 +18,28 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.99.9 (2026-06-07)
+
+### New Features
+
+- Resource preview now supports .dataflow.json file format
+- Double-click to edit task title (single-click on mobile)
+- Paste image and file upload in task comment sidebar
+- New builtin dataflow-creator agent
+
+### Improvements
+
+- Mobile conversations page UX: wider chat bubbles, hidden tags and external link button
+- Mobile resource detail: nav buttons in separate row, single-click title editing
+- Admin config nav pills scrollable on mobile
+- Conversation header shows only status icon for cleaner look
+
+### Bug Fixes
+
+- Fixed taskId reference error in task comments
+
+---
+
 ## v0.99.8 (2026-06-05)
 
 ### New Features
