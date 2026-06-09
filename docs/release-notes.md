@@ -18,6 +18,20 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.99.12 (2026-06-09)
+
+### New Features
+
+- Conversations now appear next to AI Assistant in sidebar, with a new "AI vs Conversations" doc page
+- CLI: New `ud get resource` and `ud describe resource` commands with date filtering (`--since`, `--before`)
+- CLI: Local-sync is now a built-in agent, with `--create-dir` and `--create-project` flags
+
+### Bug Fixes
+
+- CLI: Resource table now shows full UUIDs instead of partial IDs
+
+---
+
 ## v0.99.11 (2026-06-09)
 
 ### New Features
