@@ -18,6 +18,19 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.99.10 (2026-06-09)
+
+### New Features
+
+- Notes can now be accessed by note ID alone — no need to specify the parent task ID for read, update, or delete operations
+- New `ud describe note` command to view note details and export in apply-compatible format
+
+### Improvements
+
+- Simplified `ud delete note` to accept just a note ID instead of requiring both task ID and note ID
+
+---
+
 ## v0.99.9 (2026-06-07)
 
 ### New Features
