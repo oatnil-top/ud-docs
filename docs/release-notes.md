@@ -18,6 +18,18 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.99.11 (2026-06-09)
+
+### New Features
+
+- Added `-o apply` flag to all `ud get` commands and `ud describe comment/income` for direct apply-compatible output, enabling easier piping and automation
+
+### Bug Fixes
+
+- Fixed agent mention dropdown not refreshing properly due to stale-while-revalidate caching
+
+---
+
 ## v0.99.10 (2026-06-09)
 
 ### New Features
