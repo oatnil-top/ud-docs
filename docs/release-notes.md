@@ -18,6 +18,21 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.99.13 (2026-06-12)
+
+### New Features
+
+- Entity protocol links (e.g. `task://`) in comments and conversations are now clickable
+- Pinned tasks now appear in the conversation sidebar
+- CLI: New `ud cook` command (cookbook recipes for all 15 API resources) and `ud patch` command (with comment `--status` support)
+
+### Bug Fixes
+
+- Fixed comment anchor highlight not working (clicking a comment link now correctly scrolls and highlights the referenced comment)
+- Fixed CLI `bind task --project` sending wrong JSON field name
+
+---
+
 ## v0.99.12 (2026-06-09)
 
 ### New Features
