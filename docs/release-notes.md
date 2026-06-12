@@ -18,6 +18,19 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.99.14 (2026-06-12)
+
+### New Features
+
+- Explorer sidebar now loads all tasks, showing the complete folder tree regardless of task count
+- CLI: New `ud patch task --path` command to quickly move tasks into virtual folders (e.g. `ud patch task abc123 --path docs/design`)
+
+### Improvements
+
+- CLI auto-prepends leading `/` to path arguments, making the command more forgiving
+
+---
+
 ## v0.99.13 (2026-06-12)
 
 ### New Features
