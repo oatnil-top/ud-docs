@@ -18,6 +18,22 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.99.15 (2026-06-13)
+
+### New Features
+
+- Support updating resource metadata via `ud apply`
+- Workspace sessions now available as CLI resource type (`ud get workspace-session`, `ud describe workspace-session`)
+- File-based sync lock to prevent concurrent access conflicts
+
+### Bug Fixes
+
+- Fixed resource preview not rendering on full-screen resource page
+- Fixed folder move action not working in file browser
+- Fixed comment change notifications not being delivered
+
+---
+
 ## v0.99.14 (2026-06-12)
 
 ### New Features
