@@ -18,6 +18,21 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.99.17 (2026-06-14)
+
+### New Features
+
+- Recycle bin: view deleted task details and permanently delete
+- `ud tree` command for visualizing task hierarchies as a tree
+- `ud get task -l <tag>` tag filtering and `ud get tags` aggregation view
+- CLI access to soft-deleted tasks
+
+### Bug Fixes
+
+- Pagination footer now more prominent with --page/--all hints
+
+---
+
 ## v0.99.16 (2026-06-14)
 
 ### New Features
