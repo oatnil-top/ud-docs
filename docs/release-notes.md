@@ -18,6 +18,26 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.99.16 (2026-06-14)
+
+### New Features
+
+- Table editor overhaul: Google Sheets-like UX with cell selection, keyboard navigation, drag select
+- Multi-sheet workbook support
+- Boolean checkbox and date column types
+- Column width drag resize
+- Excel paste, Markdown copy/export, and clipboard support
+- Right-click context menu and row height adjustment
+- Selection enhancements: Ctrl+A, column select, range perimeter border
+
+### Bug Fixes
+
+- Fixed row height jumping when entering edit mode
+- Fixed cell outline color and cursor visibility issues
+- Eliminated double border artifacts in cell selection
+
+---
+
 ## v0.99.15 (2026-06-13)
 
 ### New Features
