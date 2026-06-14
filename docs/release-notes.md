@@ -18,6 +18,21 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.99.18 (2026-06-14)
+
+### New Features
+
+- Mobile floating conversation switcher: slide-in panel with filters, session status badges, and quick thread switching
+- Conversation popup mode: view and reply to threads in a floating panel without leaving the current page
+- Conversation threads sorted by last activity time (including reply timestamps)
+
+### Improvements
+
+- Workspace toggle button stays visible when popover is open
+- Floating edge buttons unified into a shared component with automatic stacking and consistent sizing
+
+---
+
 ## v0.99.17 (2026-06-14)
 
 ### New Features
