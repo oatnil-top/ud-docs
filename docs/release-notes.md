@@ -18,6 +18,20 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.99.19 (2026-06-14)
+
+### New Features
+
+- Added new conversation button (+) in the conversation sidebar — start new conversations with agents or self without leaving the panel
+- Added skill & prompt picker in compose view — quickly insert skill references when talking to agents
+
+### Improvements
+
+- Collapsed navigation sidebar now opens the conversation panel directly instead of navigating to the full page
+- Conversation sidebar loads instantly from cache with background refresh
+
+---
+
 ## v0.99.18 (2026-06-14)
 
 ### New Features
