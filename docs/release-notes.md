@@ -18,6 +18,29 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.99.20 (2026-06-15)
+
+### New Features
+
+- **Dataflow Shape Nodes**: Added shape node with 8 geometric variants — rectangle, rounded rectangle, circle, diamond, parallelogram, hexagon, triangle, and cylinder
+- **Dataflow Pipe Styling**: Customize pipe/connection colors, width, dash patterns, and animated flow effects
+- **Unsaved Changes Warning**: Dataflow editor now warns before navigating away with unsaved changes
+- **Resource Preview**: Click resources to preview inline instead of downloading
+- **Explorer Sidebar**: Explorer is now a toggleable sidebar for quick access
+- **Workspace Thread Binding**: @mention-triggered workspace sessions now bind to threads immediately
+
+### Improvements
+
+- Resource nodes accept all file types, not limited to images
+
+### Bug Fixes
+
+- Fixed style panel clicks causing node deselection in dataflow editor
+- Fixed mobile keyboard dismissing buttons and popovers
+- Fixed missing back button in desktop sidebar conversation view
+
+---
+
 ## v0.99.19 (2026-06-14)
 
 ### New Features
