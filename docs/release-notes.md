@@ -18,6 +18,28 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.99.21 (2026-06-16)
+
+### New Features
+
+- **Dataflow Kubernetes Icons**: Added 22 K8s resource icons (Pod, Deployment, Service, Ingress, CRD, etc.) with group presets for Cluster, Namespace, and Node
+- **Dataflow Sequence Icons**: New numbered circle icons (1–20) for indicating steps and ordering in diagrams
+- **AI Chat Comment Management**: AI assistant can now create, edit, and delete task comments directly
+- **Floating AI Chat Popup**: Open AI chat as a floating window when the sidebar is collapsed
+
+### Improvements
+
+- Monospace font for Note nodes in the dataflow editor for better readability
+- Faster page rendering with optimistic updates and stale-while-revalidate caching
+
+### Bug Fixes
+
+- Fixed style panels not following nodes/edges during drag in the dataflow editor
+- Fixed skill/prompt picker being hidden behind the floating conversation panel
+- Fixed race condition in terminal session output restore
+
+---
+
 ## v0.99.20 (2026-06-15)
 
 ### New Features
