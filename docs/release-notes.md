@@ -18,6 +18,19 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.99.23 (2026-06-18)
+
+### New Features
+
+- Task status icon in conversation sidebar is now clickable for quick status changes
+
+### Bug Fixes
+
+- Fixed conversation detail header buttons showing redundant text labels
+- Fixed status dropdown in conversations being obscured by overlapping elements
+
+---
+
 ## v0.99.22 (2026-06-18)
 
 ### New Features
