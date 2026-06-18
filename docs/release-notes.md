@@ -18,6 +18,29 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.99.22 (2026-06-18)
+
+### New Features
+
+- **Unified Explorer**: Tasks and resources merged into a single tree with drag-and-drop and folder operations for all node types
+- **Incremental Sync**: Explorer uses IndexedDB cache and syncs only changes for faster loading
+- **Unfiled Section**: Items without a folder path are grouped in a dedicated "Unfiled" area
+- **Explorer Context Menu**: Right-click to create new Diagrams, Dataflows, and Sheets directly
+- **Code File Preview**: Inline preview for JSON, JS, CSS, XML, and other code/data files
+- **Reveal in Explorer**: Quickly locate both tasks and resources in the explorer tree
+- **Task Status Icons**: Tasks in the explorer tree display their status icons
+- **Note Node Styling**: Style panel for dataflow Note nodes with color presets and font size
+- **Focus Window Button**: Workspace session controls include a focus window button
+- **Resend Init Button**: Resend the initialization prompt in workspace sessions
+
+### Bug Fixes
+
+- Fixed explorer not auto-syncing when tab regains focus
+- Fixed right-click inside folder content using the wrong path
+- Fixed explorer context menu hidden behind panels
+
+---
+
 ## v0.99.21 (2026-06-16)
 
 ### New Features
