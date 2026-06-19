@@ -18,6 +18,27 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.99.24 (2026-06-19)
+
+### New Features
+
+- CLI: Added `ud share` and `ud unshare` commands for managing group sharing on tasks, budgets, expenses, incomes, and accounts
+- CLI: Added `ud patch resource` subcommand for updating resource properties
+- Mobile: Search button added to floating action group
+- Explorer: Manual refresh button in header
+- Task navigation: Auto-navigate to previous task after deleting current
+
+### Improvements
+
+- Agent-to-agent comment thread reply routing with rate limiting
+
+### Bug Fixes
+
+- Improved comment reply notification readability
+- Fixed explorer live refresh not handling path field changes correctly
+
+---
+
 ## v0.99.23 (2026-06-18)
 
 ### New Features
