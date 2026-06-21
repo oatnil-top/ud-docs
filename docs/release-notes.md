@@ -18,6 +18,22 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.99.25 (2026-06-21)
+
+### New Features
+
+- Explorer: Highlight active task in sidebar
+- CLI: Added `path` as a queryable built-in field in `ud query`
+- Skills now browsable in explorer API
+
+### Bug Fixes
+
+- Fixed large file (MP4) upload timeout in `ud sync resources`
+- Fixed infinite loop when agent reply contains self-mention in comment threads
+- Fixed empty state flash during task detail page reload
+
+---
+
 ## v0.99.24 (2026-06-19)
 
 ### New Features
