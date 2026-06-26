@@ -18,6 +18,18 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.99.26 (2026-06-26)
+
+### Bug Fixes
+
+- Fixed a startup issue where the desktop app could fail to launch with "Backend failed to start within 30s"; the backend now starts reliably
+
+### Improvements
+
+- The desktop app now asks your permission before adding Claude Code hooks to your projects (for real-time workspace status). Choose during onboarding, or toggle anytime in Profile → CLI. Nothing is written to your Claude Code config unless you allow it
+
+---
+
 ## v0.99.25 (2026-06-21)
 
 ### New Features
