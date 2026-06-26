@@ -18,6 +18,19 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.99.27 (2026-06-27)
+
+### New Features
+
+- Video files now play directly on the resource detail page with full playback controls (play, timeline, volume, fullscreen) — videos no longer show "preview not available"
+
+### Improvements
+
+- Simplified the desktop app's update check to a single "Check for Updates" button: it tells you whether you're up to date or offers a Download button for a new version. The best download mirror is now chosen automatically, and a startup crash tied to the updater has been fixed
+- Clearer error messages when a file can't be previewed or downloaded — you now see the specific reason (file missing, link expired, storage unavailable) instead of a generic "file not found"
+
+---
+
 ## v0.99.26 (2026-06-26)
 
 ### Bug Fixes
