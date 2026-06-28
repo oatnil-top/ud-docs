@@ -18,6 +18,31 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.99.28 (2026-06-28)
+
+### New Features
+
+- Workspaces, redesigned — Active Sessions now use a full-height master–detail layout at /workspaces, with sub-navigation showing live session-count pills and a more inviting empty state with a clear "New Session" action
+- Smoother onboarding — after you pick a language, UnDercontrol seeds a welcome board and opens a maximized Quick Note so you can start right away
+- System-wide storage limit — admins can now set a total storage volume cap across all users from Admin → Storage, alongside the per-file and per-user limits
+- Desktop apps now offer to install the ud CLI for you when you launch a local workspace without it
+
+### Improvements
+
+- Refined the sidebar app rail with a lighter, more consistent line style
+- The homepage "Try Now" button now jumps straight to a full-screen loading page with clear feedback
+
+### Bug Fixes
+
+- The admin Max File Size setting now takes effect immediately for all users
+- Workspace session controls (stop, screenshot, send input) now reliably target the exact session instead of the whole task
+- Follow-up mention prompts now submit correctly in desktop workspaces
+- Task detail now shows a skeleton placeholder instead of a brief "Invalid Date"
+- Opening the explorer no longer clobbers loaded task content
+- Removed a redundant "Run" button from the empty session list
+
+---
+
 ## v0.99.27 (2026-06-27)
 
 ### New Features
