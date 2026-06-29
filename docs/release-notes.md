@@ -18,6 +18,25 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.99.29 (2026-06-29)
+
+### Improvements
+
+- Workspace session detail now shows a read-only live terminal view instead of notes
+- Faster task lists — notes and share links are now batch-loaded, removing redundant lookups
+- Faster CLI task browsing — `ud tree` and hierarchy views now use dedicated, lighter endpoints
+
+### Bug Fixes
+
+- Workspace terminal: initial output is now buffered until the view is ready, so you no longer miss the first lines
+- Fixed access to task tree and hierarchy views that were previously blocked
+
+### Upgrade Notes (self-hosted)
+
+- `HOST_DOMAIN` is now required at startup — set it in your deployment configuration or the backend will not start
+
+---
+
 ## v0.99.28 (2026-06-28)
 
 ### New Features
