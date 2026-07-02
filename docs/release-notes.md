@@ -18,6 +18,19 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.100.0 (2026-07-02)
+
+### New Features
+
+- New `ud pull`, `ud push`, and `ud status` CLI commands — sync tasks, notes, and resources between local files and the server, git-style: pull server content into a folder, edit locally, check changes with `ud status`, then push them back
+- Comment conversations now have a Resolve & Delete Task button in the header — close a discussion and remove its comment task in one click
+
+### Improvements
+
+- Workspace sessions that fail to start now show the actual error from the daemon instead of failing silently
+
+---
+
 ## v0.99.29 (2026-06-29)
 
 ### Improvements
