@@ -18,6 +18,14 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.101.1 (2026-07-03)
+
+### Bug Fixes
+
+- Fixed the backend failing to start when applying the v0.101.0 database migrations (affected self-hosted Docker images and binaries; desktop apps and the CLI were not affected)
+
+---
+
 ## v0.101.0 (2026-07-03)
 
 ### New Features
