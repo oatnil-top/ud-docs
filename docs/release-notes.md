@@ -18,6 +18,35 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.101.0 (2026-07-03)
+
+### New Features
+
+- New `ud init` command — bind an existing local folder to a virtual path and publish it with `ud push`; tracking folders are now bound to the path they were pulled from (git-clone style), so `ud pull` with no arguments incrementally syncs everything tracked
+- Start a workspace session without picking an existing task — the redesigned prompt-first Run dialog puts your prompt first and collapses settings into a summary line
+- Workspace sessions are now grouped by working directory, and the concurrent-workspace limit has been removed entirely
+- Gemini, GitHub Copilot, and Qwen are now available as built-in agents for local workspace sessions
+- Dataflow is now fully translated into Chinese and English
+
+### Improvements
+
+- Much faster resource lists — download links are now cached and included in list responses, removing a request per resource
+- Dataflow visual refresh — flat nodes, orthogonal edges, outlined groups, and smoother dragging without canvas-wide re-renders
+- Conversations now live in the sidebar panel; the separate full-page view has been removed
+
+### Bug Fixes
+
+- Explorer: the drag-and-drop target highlight is now visible and stays steady while dragging over folders
+- Dataflow: fixed undo tracking and data corruption on rename/duplicate/delete, jumping icon-node anchors, and pipe rendering from any handle direction
+- Workspace: terminal history no longer renders twice, and the Run dialog no longer clips input focus rings
+- Fixed duplicate folders appearing when pulling or pushing paths with inconsistent formatting
+
+### Upgrade Notes
+
+- The old local-sync feature has been removed from the app, desktop, CLI, and backend — use the new tracking-folder workflow instead (`ud pull` a path into a folder, edit, `ud push`). Old v1 `tracking.json` folders are no longer recognized; re-pull them with the current CLI
+
+---
+
 ## v0.100.0 (2026-07-02)
 
 ### New Features
