@@ -18,6 +18,25 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.103.0 (2026-07-04)
+
+### New Features
+
+- Workspace session windows now open in the background — click the status indicator to bring a window into focus
+- Click a workspace session title to preview its associated task in a popup
+
+### Improvements
+
+- The workspace group-by toggle now uses icons with tooltip hints
+- The compose agent picker supports keyboard navigation, and your draft is kept when switching recipients
+- Read-only terminals are now scrollable and support text copying
+
+### Bug Fixes
+
+- Quick-note mention tasks no longer duplicate content across the title, description, and comment
+
+---
+
 ## v0.102.0 (2026-07-04)
 
 ### New Features
