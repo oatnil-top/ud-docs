@@ -18,6 +18,30 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.102.0 (2026-07-04)
+
+### New Features
+
+- Responsive mobile layout for the workspaces page — drill down from the session list into the detail view on small screens
+- Group workspace sessions by agent or daemon — your group-by choice is remembered
+- Stop a session directly from the workspaces sidebar — a stop button appears when hovering a session
+- Read-only terminal viewing now scales to fit your window, and the terminal resizes to match the viewer
+- The workspace sidebar remembers its collapsed state across sessions
+- CLI: `ud apply --dry-run` previews board changes before applying, and board columns round-trip losslessly through export and apply
+
+### Improvements
+
+- Sending input to a remote workspace session now requires Cmd/Ctrl+Enter, preventing accidental sends
+- The conversation and explorer sidebars are now mutually exclusive — opening one closes the other
+
+### Bug Fixes
+
+- The workspace working directory is validated before the terminal spawns — an invalid path now shows a clear error instead of a black terminal
+- Options chosen in the Run dialog are now honored when generating the workspace session prompt
+- Removed a stale keyboard-shortcut hint from the workspace session input placeholder
+
+---
+
 ## v0.101.1 (2026-07-03)
 
 ### Bug Fixes
