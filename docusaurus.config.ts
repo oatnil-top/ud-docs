@@ -15,7 +15,7 @@ const config: Config = {
     v4: true,
   },
 
-  url: 'https://docs.oatnil.com',
+  url: 'https://oatnil.com',
   baseUrl: '/',
 
   organizationName: 'oatnil-top',
