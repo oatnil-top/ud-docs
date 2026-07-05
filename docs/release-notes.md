@@ -18,6 +18,25 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.105.0 (2026-07-05)
+
+### New Features
+
+- CLI: new `stop-workspace-session` command to actually terminate a running agent session (not just mark its status)
+
+### Improvements
+
+- Agent sessions now fall back to a default workspace project — when no working directory is configured, sessions run in a dedicated "Default" project so every session gets a real, listed working directory
+- When an @agent mention can't start a session (e.g. no agent daemon is online), you now get a clear error reply in the thread instead of the mention silently doing nothing
+
+### Bug Fixes
+
+- Fixed garbled text in read-only terminal views when a workspace session was resized — all viewers now re-apply the new size immediately
+- Fixed the task explorer not reflecting status, path, or tag changes after a refresh
+- Fixed the Claude Code status indicator showing "idle" while background subagents were still running
+
+---
+
 ## v0.104.0 (2026-07-05)
 
 ### Improvements
