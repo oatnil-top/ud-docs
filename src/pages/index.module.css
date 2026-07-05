@@ -479,8 +479,122 @@
   text-decoration: none;
 }
 
+/* Hero preview images */
+.heroImageWrap {
+  position: relative;
+  max-width: 860px;
+  margin: 56px auto 0;
+}
+
+.heroDesktopImg {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  box-shadow: 0 24px 48px -16px rgba(0, 0, 0, 0.18);
+  display: block;
+}
+
+.heroMobileImg {
+  position: absolute;
+  bottom: -24px;
+  right: -12px;
+  width: 26%;
+  border-radius: 10px;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  box-shadow: 0 16px 32px -12px rgba(0, 0, 0, 0.22);
+}
+
+/* Why UnDercontrol — 6-pillar grid */
+.pillarsGridSection {
+  padding: 64px;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.pillarsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 960px;
+}
+
+.pillarCard {
+  padding: 24px;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 8px;
+  background: var(--ifm-background-color);
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.pillarCard:hover {
+  border-color: var(--ifm-color-emphasis-400);
+  background: var(--ifm-color-emphasis-100);
+}
+
+.pillarCardIcon {
+  color: var(--ifm-color-emphasis-600);
+  margin-bottom: 12px;
+}
+
+.pillarCardTitle {
+  font-size: 15px;
+  font-weight: 500;
+  margin: 0 0 8px;
+  color: var(--ifm-font-color-base);
+}
+
+.pillarCardDesc {
+  font-size: 13px;
+  color: var(--ifm-color-emphasis-600);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* Showcase fallback when a CDN image fails */
+.showcaseFallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 48px 24px;
+  font-size: 14px;
+  color: var(--ifm-color-emphasis-500);
+  min-height: 240px;
+}
+
+/* Agent Orchestrator diagram */
+.orchestrationSection {
+  padding: 64px;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.orchestrationWrap {
+  max-width: 820px;
+  margin: 8px auto 0;
+  color: var(--ifm-font-color-base);
+}
+
+.orchestrationSvg {
+  width: 100%;
+  height: auto;
+}
+
 /* Responsive */
 @media screen and (max-width: 996px) {
+  .pillarsGridSection {
+    padding: 40px 24px;
+  }
+
+  .pillarsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .orchestrationSection {
+    padding: 40px 16px;
+  }
+
+  .heroImageWrap {
+    margin-top: 40px;
+  }
   .heroSection {
     padding: 60px 24px 48px;
   }

@@ -77,18 +77,18 @@ function HeroSection() {
         </span>
       </Link>
       <h1 className={styles.heroTitle}>
-        <Translate id="subscribe.titleLine1">Your Tasks, Wiki, and Wealth.</Translate>
+        <Translate id="subscribe.titleLine1">Tasks, Knowledge & AI Agents.</Translate>
         <br />
-        <Translate id="subscribe.titleLine2">All UnderControl.</Translate>
+        <Translate id="subscribe.titleLine2">Private, Portable, Yours — All UnDercontrol.</Translate>
       </h1>
       <p className={styles.heroSlogan}>
         <Translate id="subscribe.slogan">
-          The power of Jira, the flexibility of Obsidian, and the tracking of Expensify—unified for personal and team use.
+          Orchestrate AI coding agents from your browser. Manage projects and knowledge in one workspace. Self-hosted, access from any device.
         </Translate>
       </p>
       <span className={styles.heroPrivacyNote}>
         <Translate id="subscribe.privacyNote">
-          Free forever for personal use. Use offline desktop or self-host—your data stays yours, shared with no one.
+          Free forever for personal use. Use offline desktop or self-host — your data stays yours, shared with no one.
         </Translate>
       </span>
     </section>

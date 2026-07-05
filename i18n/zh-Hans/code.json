@@ -323,16 +323,13 @@
     "description": "The title of the tag list page"
   },
   "homepage.hero.tagline": {
-    "message": "自托管 Jira + Obsidian + Mint + S3 Browser — AI 驱动，合而为一",
-    "description": "The homepage hero tagline"
+    "message": "一个私有空间，承载你所有重要信息。"
   },
   "homepage.hero.subtitle": {
-    "message": "任务、知识、预算、文件的统一管控平台。从任务直接启动 Claude Code 等 AI 智能体，多任务并行，全程掌控。自托管，数据完全属于你。",
-    "description": "The homepage hero subtitle"
+    "message": "知识库如 Obsidian，项目管理如 Jira，个人财务如 Mint，文件存储如 Google Drive — 一个私有空间，为你和你的 AI 代理而生。"
   },
   "homepage.hero.tryNow": {
-    "message": "立即试用",
-    "description": "Try now button text in hero section"
+    "message": "立即体验"
   },
   "homepage.hero.downloadDesktop": {
     "message": "下载桌面应用",
@@ -363,12 +360,10 @@
     "description": "Self-deploy description"
   },
   "homepage.title": {
-    "message": "欢迎使用 {title}",
-    "description": "The homepage meta title"
+    "message": "UnDercontrol — 任务、知识与 AI 代理编排"
   },
   "homepage.description": {
-    "message": "UnderControl 将项目管理、Markdown 知识库、S3 兼容文件浏览器和预算追踪整合到一个自托管工作空间。自选 AI 提供商，双向同步到本地 Markdown 文件，通过 k9s 风格的 CLI 管理任务，Docker Compose 一键部署。个人使用永久免费。",
-    "description": "The homepage meta description"
+    "message": "任务、知识与 AI 代理的统一工作空间。从浏览器编排任何 AI 编程代理。自部署，随时随地访问 — 数据始终由你掌控。"
   },
   "homepage.features.encryption.title": {
     "message": "端到端加密",
@@ -731,20 +726,16 @@
     "description": "What's new badge text"
   },
   "subscribe.titleLine1": {
-    "message": "任务 · 知识 · 财富",
-    "description": "Subscribe hero title line 1"
+    "message": "任务 · 知识 · AI 代理"
   },
   "subscribe.titleLine2": {
-    "message": "一切尽在「掌控」",
-    "description": "Subscribe hero title line 2"
+    "message": "私有、便携、由你掌控 — 一切尽在 UnDercontrol。"
   },
   "subscribe.slogan": {
-    "message": "兼具 Jira 的强大、Obsidian 的灵活与 Expensify 的财务追踪——专为个人与团队打造的统一工作台。",
-    "description": "Subscribe slogan"
+    "message": "从浏览器编排 AI 编程代理。在一个工作空间管理项目和知识。自部署，随时随地访问。"
   },
   "subscribe.privacyNote": {
-    "message": "个人永久免费。使用离线桌面版本或自部署，数据完全自控，不分享给任何人。",
-    "description": "Subscribe privacy note"
+    "message": "个人永久免费。使用离线桌面版本或自部署，数据完全自控，不分享给任何人。"
   },
   "subscribe.cards.web.label": {
     "message": "网页版",
@@ -1290,21 +1281,6 @@
     "message": "每一份贡献都帮助我变得更好！",
     "description": "Donate thanks"
   },
-  "homepage.title": {
-    "message": "UnDercontrol — 任务、知识与 AI 代理编排"
-  },
-  "homepage.description": {
-    "message": "任务、知识与 AI 代理的统一工作空间。从浏览器编排任何 AI 编程代理。自部署，随时随地访问 — 数据始终由你掌控。"
-  },
-  "homepage.hero.tagline": {
-    "message": "任务、知识与 AI 代理的统一工作空间 — 私有、便携、由你掌控。"
-  },
-  "homepage.hero.subtitle": {
-    "message": "从浏览器编排任何 AI 编程代理。像 Jira 一样管理项目，像 Obsidian 一样构建知识库。自部署，随时随地访问。"
-  },
-  "homepage.hero.tryNow": {
-    "message": "立即体验"
-  },
   "homepage.hero.download": {
     "message": "下载桌面应用"
   },
@@ -1330,10 +1306,10 @@
     "message": "预算、记账、账户管理。拍张票据 — AI 自动帮你记录。"
   },
   "homepage.howItWorks.label": {
-    "message": "工作原理"
+    "message": "Agent 编排器"
   },
   "homepage.howItWorks.subtitle": {
-    "message": "写一个任务，分派 AI 代理，实时观察执行。你的数据和 AI 始终在你的设备上。"
+    "message": "随时随地编排 AI 代理。启动远程会话，分配任务，让它们自主工作 — 即使你离线。"
   },
   "homepage.howItWorks.you.label": {
     "message": "你"
@@ -1354,10 +1330,10 @@
     "message": "运行在你的设备上。读取任务、编写代码、报告进度 — 任何代理，你来选择。"
   },
   "homepage.developers.label": {
-    "message": "为开发者打造"
+    "message": "AI 原生"
   },
   "homepage.developers.subtitle": {
-    "message": "从任务直接编排 AI 代理。"
+    "message": "一切以结构化 Schema 定义 — Kubernetes 风格，as-code。AI 代理原生消费你的数据。"
   },
   "homepage.developers.agents": {
     "message": "从任务直接启动 Claude Code 或 Codex 智能体"
@@ -1375,7 +1351,7 @@
     "message": "Workspace 终端，支持多智能体并行执行"
   },
   "homepage.trust.label": {
-    "message": "数据由你做主"
+    "message": "私有设计 & 无供应商锁定"
   },
   "homepage.trust.private.title": {
     "message": "完全私密"
@@ -1409,5 +1385,98 @@
   },
   "homepage.cta.tryDemo": {
     "message": "试用演示"
+  },
+  "homepage.pillarsGrid.label": {
+    "message": "为什么选择 UnDercontrol"
+  },
+  "homepage.pillarsGrid.allinone.title": {
+    "message": "All-in-One"
+  },
+  "homepage.pillarsGrid.allinone.desc": {
+    "message": "知识库如 Obsidian、Notion。项目管理如 Jira、Trello。个人财务如 Mint、YNAB。文件存储如 Google Drive、Dropbox — 一个私有空间。"
+  },
+  "homepage.pillarsGrid.private.title": {
+    "message": "私有设计 & 无供应商锁定"
+  },
+  "homepage.pillarsGrid.private.desc": {
+    "message": "自托管，本地优先。Everything-as-code — 任务、笔记和数据均可用 Markdown 和 YAML 声明，用 Git 做版本控制，完全可迁移。无私有格式，无锁定。"
+  },
+  "homepage.pillarsGrid.ainative.title": {
+    "message": "AI 原生"
+  },
+  "homepage.pillarsGrid.ainative.desc": {
+    "message": "一切以结构化 Schema 定义 — Kubernetes 风格，as-code。AI 代理通过 CLI 和 API 读写你的任务、笔记和资源，如同 kubectl apply。"
+  },
+  "homepage.pillarsGrid.orchestrator.title": {
+    "message": "Agent 编排器"
+  },
+  "homepage.pillarsGrid.orchestrator.desc": {
+    "message": "随时随地编排 AI 代理。启动远程会话，分配任务给代理，让它们自主工作 — 即使你离线。"
+  },
+  "homepage.pillarsGrid.open.title": {
+    "message": "开放可扩展 — 单一数据源"
+  },
+  "homepage.pillarsGrid.open.desc": {
+    "message": "开放 API，开放 Schema。Hermes、OpenClaw 或任何自定义客户端均可通过 API Key 和 CLI 读写你的信息。共享可复用的 Skills — 任何代理都能消费的 Prompt 模板。"
+  },
+  "homepage.pillarsGrid.access.title": {
+    "message": "随时随地"
+  },
+  "homepage.pillarsGrid.access.desc": {
+    "message": "从任何设备读写，随时可用。网页、桌面、手机、CLI、Chrome 扩展和 Apple 快捷指令。"
+  },
+  "homepage.showcase.label": {
+    "message": "All-in-One"
+  },
+  "homepage.showcase.tasks.label": {
+    "message": "任务与知识"
+  },
+  "homepage.showcase.tasks.desc": {
+    "message": "看板、Markdown、知识图谱与脑图。"
+  },
+  "homepage.showcase.finance.label": {
+    "message": "财务管理"
+  },
+  "homepage.showcase.finance.desc": {
+    "message": "记账、预算、AI 票据识别。"
+  },
+  "homepage.showcase.resources.label": {
+    "message": "资源管理"
+  },
+  "homepage.showcase.resources.desc": {
+    "message": "附加图片、绘制图表、CLI 同步。"
+  },
+  "homepage.showcase.workspace.label": {
+    "message": "AI 工作区"
+  },
+  "homepage.showcase.workspace.desc": {
+    "message": "智能体启动、并行执行、工作区大屏。"
+  },
+  "homepage.showcase.access.label": {
+    "message": "随时随地"
+  },
+  "homepage.showcase.access.desc": {
+    "message": "网页、桌面、CLI、Chrome 扩展、快捷指令、API。"
+  },
+  "homepage.openExtensible.label": {
+    "message": "开放可扩展 — 单一数据源"
+  },
+  "homepage.openExtensible.subtitle": {
+    "message": "你的数据在这里。所有工具和代理从同一个中心读写。"
+  },
+  "homepage.openExtensible.api": {
+    "message": "开放 API 和开放 Schema — 任何客户端均可集成"
+  },
+  "homepage.openExtensible.hermes": {
+    "message": "Hermes、OpenClaw 或任何自定义客户端均可通过 API Key 读写数据"
+  },
+  "homepage.openExtensible.cli": {
+    "message": "CLI 访问，支持脚本化和自动化工作流"
+  },
+  "homepage.openExtensible.skills": {
+    "message": "共享可复用 Skills — 任何代理都能消费的 Prompt 模板"
+  },
+  "homepage.cta.signIn": {
+    "message": "登录"
   }
 }

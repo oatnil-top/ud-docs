@@ -1,99 +1,205 @@
 import {useState, useEffect, type ReactNode} from 'react';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import useBaseUrl from '@docusaurus/useBaseUrl';
 import Layout from '@theme/Layout';
 import Translate, {translate} from '@docusaurus/Translate';
 import {
-  Brain,
-  CheckSquare,
-  Wallet,
-  Monitor,
-  Server,
-  ArrowRight,
+  Package,
+  Lock,
+  Bot,
+  Radio,
+  Puzzle,
+  Smartphone,
   Shield,
   WifiOff,
-  HardDrive,
-  Heart,
+  Server,
+  Wifi,
   Code,
   Terminal,
-  FolderSync,
   Globe,
-  LayoutDashboard,
+  Monitor,
 } from 'lucide-react';
-
-// Centralized version - update version.json when releasing
-import versionConfig from '../../version.json';
-const VERSION = versionConfig.version;
 
 import styles from './index.module.css';
 
+const APP_URL = 'https://ud.oatnil.top';
+
+// Mirror of ud-vite-app/src/lib/cdn.ts — pick R2 (global) or Bitiful (China) by locale.
+const CDN_BASE = {
+  en: 'https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev',
+  zh: 'https://oatnil-public.s3.bitiful.net',
+} as const;
+
+function useCdnImg() {
+  const {i18n} = useDocusaurusContext();
+  const base = i18n.currentLocale === 'zh-Hans' ? CDN_BASE.zh : CDN_BASE.en;
+  return (filename: string) => `${base}/features/${filename}`;
+}
+
+// --- Hero ---
 function HeroSection() {
+  const cdnImg = useCdnImg();
   return (
     <section className={styles.heroSection}>
-      <span className={styles.versionBadge}>
-        <Translate
-          id="homepage.hero.version"
-          description="Version badge text"
-          values={{version: VERSION}}>
-          {'v{version} Available Now'}
-        </Translate>
-      </span>
       <h1 className={styles.heroTitle}>
-        <Translate
-          id="homepage.hero.tagline"
-          description="The homepage hero tagline">
-          One workspace for tasks, knowledge, and AI agents — private, portable, yours.
+        <Translate id="homepage.hero.tagline">
+          One private place for all your valuable information.
         </Translate>
       </h1>
       <p className={styles.heroSubtitle}>
-        <Translate
-          id="homepage.hero.subtitle"
-          description="The homepage hero subtitle">
-          Orchestrate any AI coding agent from your browser. Manage projects like Jira. Build knowledge like Obsidian. Self-hosted, access from any device.
+        <Translate id="homepage.hero.subtitle">
+          Knowledge base like Obsidian. Project management like Jira. Personal finance like Mint. File storage like Google Drive — one private workspace, ready for your AI agents.
         </Translate>
       </p>
       <div className={styles.heroButtons}>
-        <Link
-          className={styles.heroButtonPrimary}
-          to="https://ud.oatnil.top">
+        <Link className={styles.heroButtonPrimary} to={APP_URL}>
           <Translate id="homepage.hero.tryNow">Try Now</Translate>
         </Link>
-        <Link
-          className={styles.heroButtonSecondary}
-          to="/subscribe">
+        <Link className={styles.heroButtonSecondary} to="/subscribe">
           <Translate id="homepage.hero.download">Download Desktop App</Translate>
         </Link>
+      </div>
+      <div className={styles.heroImageWrap}>
+        <img
+          className={styles.heroDesktopImg}
+          src={cdnImg('desktop.jpg')}
+          alt="UnDercontrol desktop"
+          loading="lazy"
+        />
+        <img
+          className={styles.heroMobileImg}
+          src={cdnImg('mobile.jpg')}
+          alt="UnDercontrol mobile"
+          loading="lazy"
+        />
       </div>
     </section>
   );
 }
 
-// --- What You Can Do ---
-const PILLAR_ITEMS = [
-  {key: 'knowledge', Icon: Brain},
-  {key: 'tasks', Icon: CheckSquare},
-  {key: 'finance', Icon: Wallet},
+// --- Why UnDercontrol: 6-pillar grid ---
+const PILLARS = [
+  {key: 'allinone', Icon: Package},
+  {key: 'private', Icon: Lock},
+  {key: 'ainative', Icon: Bot},
+  {key: 'orchestrator', Icon: Radio},
+  {key: 'open', Icon: Puzzle},
+  {key: 'access', Icon: Smartphone},
 ] as const;
 
-const PILLAR_IMAGES: Record<string, string[]> = {
-  knowledge: ['tasks-show-en.png', 'tasks-details-markdown-en.png'],
-  tasks: ['tasks-details-en.png'],
-  finance: ['resources-main.en.png'],
+const PILLAR_TEXT: Record<string, {title: ReactNode; desc: ReactNode}> = {
+  allinone: {
+    title: <Translate id="homepage.pillarsGrid.allinone.title">All-in-One</Translate>,
+    desc: (
+      <Translate id="homepage.pillarsGrid.allinone.desc">
+        Knowledge base like Obsidian and Notion. Project management like Jira and Trello. Personal finance like Mint and YNAB. File storage like Google Drive and Dropbox — one private workspace.
+      </Translate>
+    ),
+  },
+  private: {
+    title: <Translate id="homepage.pillarsGrid.private.title">Private by Design & No Vendor Lock-in</Translate>,
+    desc: (
+      <Translate id="homepage.pillarsGrid.private.desc">
+        Self-hosted, local-first. Everything-as-code — your tasks, notes, and data are declarable in Markdown and YAML, versionable with Git, and fully portable. No proprietary formats, no lock-in.
+      </Translate>
+    ),
+  },
+  ainative: {
+    title: <Translate id="homepage.pillarsGrid.ainative.title">AI-Native</Translate>,
+    desc: (
+      <Translate id="homepage.pillarsGrid.ainative.desc">
+        Everything is defined as structured schemas — Kubernetes-style, as-code. AI agents read and write your tasks, notes, and resources through CLI and API, just like kubectl apply.
+      </Translate>
+    ),
+  },
+  orchestrator: {
+    title: <Translate id="homepage.pillarsGrid.orchestrator.title">Agent Orchestrator</Translate>,
+    desc: (
+      <Translate id="homepage.pillarsGrid.orchestrator.desc">
+        Orchestrate AI agents from anywhere. Launch remote sessions, assign tasks to agents, and let them work autonomously — even when you're offline.
+      </Translate>
+    ),
+  },
+  open: {
+    title: <Translate id="homepage.pillarsGrid.open.title">Open & Extensible — Single Source of Truth</Translate>,
+    desc: (
+      <Translate id="homepage.pillarsGrid.open.desc">
+        Open API, open schema. Hermes, OpenClaw, or any custom client can CRUD your information via API key and CLI. Share reusable skills — prompt templates that any agent can consume.
+      </Translate>
+    ),
+  },
+  access: {
+    title: <Translate id="homepage.pillarsGrid.access.title">Access Everywhere</Translate>,
+    desc: (
+      <Translate id="homepage.pillarsGrid.access.desc">
+        Read and write from any device, anytime. Web, desktop, mobile, CLI, Chrome extension, and Apple Shortcuts.
+      </Translate>
+    ),
+  },
 };
 
-function PillarsSection() {
-  const {i18n} = useDocusaurusContext();
-  const locale = i18n.currentLocale;
-  const imgSuffix = locale === 'zh-Hans' ? 'zh' : 'en';
+function PillarsGridSection() {
+  return (
+    <section className={styles.pillarsGridSection}>
+      <h2 className={styles.sectionLabel}>
+        <Translate id="homepage.pillarsGrid.label">Why UnDercontrol</Translate>
+      </h2>
+      <div className={styles.pillarsGrid}>
+        {PILLARS.map(({key, Icon}) => (
+          <div key={key} className={styles.pillarCard}>
+            <Icon size={18} strokeWidth={2} className={styles.pillarCardIcon} />
+            <h3 className={styles.pillarCardTitle}>{PILLAR_TEXT[key].title}</h3>
+            <p className={styles.pillarCardDesc}>{PILLAR_TEXT[key].desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
 
+// --- All-in-One image showcase ---
+const SHOWCASE = [
+  {key: 'tasks', images: ['home-page/tasks/1.jpg', 'home-page/tasks/2.jpg', 'home-page/tasks/3.jpg', 'home-page/tasks/4.jpg', 'home-page/tasks/5.jpg', 'home-page/tasks/6.jpg', 'home-page/tasks/7.jpg']},
+  {key: 'finance', images: ['home-page/finance/1.jpg', 'home-page/finance/2.jpg', 'home-page/finance/3.jpg', 'home-page/finance/4.jpg']},
+  {key: 'resources', images: ['home-page/resources/1.jpg', 'home-page/resources/2.jpg', 'home-page/resources/3.jpg']},
+  {key: 'workspace', images: ['home-page/workspace/1.jpg']},
+  {key: 'access', images: ['home-page/access/1.jpg', 'home-page/access/2.jpg']},
+] as const;
+
+const SHOWCASE_TEXT: Record<string, {label: ReactNode; desc: ReactNode}> = {
+  tasks: {
+    label: <Translate id="homepage.showcase.tasks.label">Tasks & Knowledge</Translate>,
+    desc: <Translate id="homepage.showcase.tasks.desc">Kanban, Markdown, knowledge graphs and mind maps.</Translate>,
+  },
+  finance: {
+    label: <Translate id="homepage.showcase.finance.label">Finance</Translate>,
+    desc: <Translate id="homepage.showcase.finance.desc">Expense tracking, budgets, AI receipt scanning.</Translate>,
+  },
+  resources: {
+    label: <Translate id="homepage.showcase.resources.label">Resources</Translate>,
+    desc: <Translate id="homepage.showcase.resources.desc">Attach images, draw diagrams, sync via CLI.</Translate>,
+  },
+  workspace: {
+    label: <Translate id="homepage.showcase.workspace.label">AI Workspace</Translate>,
+    desc: <Translate id="homepage.showcase.workspace.desc">Agent launch, parallel execution, workspace dashboard.</Translate>,
+  },
+  access: {
+    label: <Translate id="homepage.showcase.access.label">Works Everywhere</Translate>,
+    desc: <Translate id="homepage.showcase.access.desc">Web, desktop, CLI, Chrome extension, Shortcuts, API.</Translate>,
+  },
+};
+
+function ShowcaseSection() {
+  const cdnImg = useCdnImg();
   const [activeItem, setActiveItem] = useState(0);
   const [imageIndex, setImageIndex] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [failed, setFailed] = useState<Record<string, boolean>>({});
 
-  const currentKey = PILLAR_ITEMS[activeItem].key;
-  const images = PILLAR_IMAGES[currentKey] || [];
-  const currentImageSrc = useBaseUrl(`/img/${images[imageIndex] || 'tasks-show-en.png'}`);
+  const current = SHOWCASE[activeItem];
+  const images = current.images;
+  const currentSrc = cdnImg(images[imageIndex] || images[0]);
+  const isFailed = failed[currentSrc];
 
   useEffect(() => {
     setImageIndex(0);
@@ -111,50 +217,20 @@ function PillarsSection() {
     <section className={styles.featureSection}>
       <div className={styles.featureContent}>
         <h2 className={styles.sectionLabel}>
-          <Translate id="homepage.pillars.label">What You Can Do</Translate>
+          <Translate id="homepage.showcase.label">All-in-One</Translate>
         </h2>
         <div className={styles.pillarItems}>
-          {PILLAR_ITEMS.map((item, index) => {
+          {SHOWCASE.map((item, index) => {
             const isActive = index === activeItem;
-            const {Icon} = item;
             return (
               <div
                 key={item.key}
                 onClick={() => setActiveItem(index)}
                 className={`${styles.pillarItem} ${isActive ? styles.pillarItemActive : ''}`}>
                 <div className={styles.pillarItemHeader}>
-                  <Icon size={16} strokeWidth={2} />
-                  <span className={styles.pillarItemLabel}>
-                    {item.key === 'knowledge' && (
-                      <Translate id="homepage.pillars.knowledge.label">Build Knowledge</Translate>
-                    )}
-                    {item.key === 'tasks' && (
-                      <Translate id="homepage.pillars.tasks.label">Manage Projects</Translate>
-                    )}
-                    {item.key === 'finance' && (
-                      <Translate id="homepage.pillars.finance.label">Track Finances</Translate>
-                    )}
-                  </span>
+                  <span className={styles.pillarItemLabel}>{SHOWCASE_TEXT[item.key].label}</span>
                 </div>
-                {isActive && (
-                  <p className={styles.pillarItemDesc}>
-                    {item.key === 'knowledge' && (
-                      <Translate id="homepage.pillars.knowledge.desc">
-                        Markdown knowledge base with graphs, mind maps, and bi-directional links. Your notes, synced as plain files.
-                      </Translate>
-                    )}
-                    {item.key === 'tasks' && (
-                      <Translate id="homepage.pillars.tasks.desc">
-                        Kanban boards, calendars, hierarchy views. Lightweight project management for small teams.
-                      </Translate>
-                    )}
-                    {item.key === 'finance' && (
-                      <Translate id="homepage.pillars.finance.desc">
-                        Budgets, expenses, accounts. Snap a receipt — AI logs it automatically.
-                      </Translate>
-                    )}
-                  </p>
-                )}
+                {isActive && <p className={styles.pillarItemDesc}>{SHOWCASE_TEXT[item.key].desc}</p>}
               </div>
             );
           })}
@@ -162,12 +238,18 @@ function PillarsSection() {
       </div>
       <div className={styles.featureMedia}>
         <div className={styles.carousel}>
-          <img
-            src={currentImageSrc}
-            alt={currentKey}
-            className={styles.showcaseImage}
-            onClick={() => setIsLightboxOpen(true)}
-          />
+          {isFailed ? (
+            <div className={styles.showcaseFallback}>{SHOWCASE_TEXT[current.key].desc}</div>
+          ) : (
+            <img
+              src={currentSrc}
+              alt={current.key}
+              className={styles.showcaseImage}
+              loading="lazy"
+              onClick={() => setIsLightboxOpen(true)}
+              onError={() => setFailed((prev) => ({...prev, [currentSrc]: true}))}
+            />
+          )}
           {images.length > 1 && (
             <div className={styles.carouselDots}>
               {images.map((_, index) => (
@@ -184,7 +266,7 @@ function PillarsSection() {
         </div>
       </div>
 
-      {isLightboxOpen && (
+      {isLightboxOpen && !isFailed && (
         <div className={styles.lightbox} onClick={() => setIsLightboxOpen(false)}>
           <button
             type="button"
@@ -193,78 +275,67 @@ function PillarsSection() {
             aria-label="Close lightbox">
             ×
           </button>
-          <img
-            src={currentImageSrc}
-            alt={currentKey}
-            className={styles.lightboxImage}
-            onClick={(e) => e.stopPropagation()}
-          />
+          <img src={currentSrc} alt={current.key} className={styles.lightboxImage} onClick={(e) => e.stopPropagation()} />
         </div>
       )}
     </section>
   );
 }
 
-// --- How It Works ---
-function HowItWorksSection() {
+// --- Trust ---
+const TRUST_ITEMS = [
+  {key: 'private', Icon: Shield},
+  {key: 'offline', Icon: WifiOff},
+  {key: 'selfhost', Icon: Server},
+  {key: 'free', Icon: Wifi},
+] as const;
+
+const TRUST_TEXT: Record<string, {title: ReactNode; desc: ReactNode}> = {
+  private: {
+    title: <Translate id="homepage.trust.private.title">Fully Private</Translate>,
+    desc: <Translate id="homepage.trust.private.desc">AI runs on your machine. Data never leaves your device.</Translate>,
+  },
+  offline: {
+    title: <Translate id="homepage.trust.offline.title">Works Offline</Translate>,
+    desc: <Translate id="homepage.trust.offline.desc">Desktop app with built-in backend. No internet required.</Translate>,
+  },
+  selfhost: {
+    title: <Translate id="homepage.trust.selfhost.title">Self-Hostable</Translate>,
+    desc: <Translate id="homepage.trust.selfhost.desc">Deploy on your own infrastructure. Your server, your rules.</Translate>,
+  },
+  free: {
+    title: <Translate id="homepage.trust.free.title">Free Forever</Translate>,
+    desc: <Translate id="homepage.trust.free.desc">No ads, no tracking. Personal use is free, always.</Translate>,
+  },
+};
+
+function TrustSection() {
   return (
-    <section className={styles.howItWorksSection}>
+    <section className={styles.trustSection}>
       <h2 className={styles.sectionLabel}>
-        <Translate id="homepage.howItWorks.label">How It Works</Translate>
+        <Translate id="homepage.trust.label">Private by Design & No Vendor Lock-in</Translate>
       </h2>
-      <p className={styles.sectionSubtitle}>
-        <Translate id="homepage.howItWorks.subtitle">
-          Write a task. Dispatch an AI agent. Watch it work. Your data and your AI stay on your machine.
-        </Translate>
-      </p>
-      <div className={styles.howItWorksSteps}>
-        <div className={styles.howItWorksStep}>
-          <Monitor size={24} strokeWidth={1.5} />
-          <h3>
-            <Translate id="homepage.howItWorks.you.label">You</Translate>
-          </h3>
-          <p>
-            <Translate id="homepage.howItWorks.you.desc">
-              Access from any device — web, desktop, CLI, or mobile
-            </Translate>
-          </p>
-        </div>
-        <ArrowRight size={16} className={styles.howItWorksArrow} />
-        <div className={styles.howItWorksStep}>
-          <Server size={24} strokeWidth={1.5} />
-          <h3>
-            <Translate id="homepage.howItWorks.server.label">Server</Translate>
-          </h3>
-          <p>
-            <Translate id="homepage.howItWorks.server.desc">
-              Manages tasks, budgets, and data. Self-hostable — you own the infrastructure.
-            </Translate>
-          </p>
-        </div>
-        <ArrowRight size={16} className={styles.howItWorksArrow} />
-        <div className={styles.howItWorksStep}>
-          <Brain size={24} strokeWidth={1.5} />
-          <h3>
-            <Translate id="homepage.howItWorks.agent.label">AI Agent</Translate>
-          </h3>
-          <p>
-            <Translate id="homepage.howItWorks.agent.desc">
-              Runs on your machine. Reads your task, writes code, reports progress — any agent, your choice.
-            </Translate>
-          </p>
-        </div>
+      <div className={styles.trustGrid}>
+        {TRUST_ITEMS.map(({key, Icon}) => (
+          <div key={key} className={styles.trustItem}>
+            <Icon size={16} strokeWidth={2} />
+            <div>
+              <h3>{TRUST_TEXT[key].title}</h3>
+              <p>{TRUST_TEXT[key].desc}</p>
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );
 }
 
-// --- For Developers ---
+// --- Developers (AI-Native) ---
 const DEV_ITEMS = [
-  {key: 'agents', Icon: Code},
-  {key: 'cli', Icon: Terminal},
-  {key: 'sync', Icon: FolderSync},
-  {key: 'api', Icon: Globe},
-  {key: 'workspace', Icon: LayoutDashboard},
+  {key: 'agents', Icon: Code, text: <Translate id="homepage.developers.agents">Launch Claude Code or Codex agents directly from tasks</Translate>},
+  {key: 'cli', Icon: Terminal, text: <Translate id="homepage.developers.cli">kubectl-style CLI — scriptable, AI-agent-friendly</Translate>},
+  {key: 'api', Icon: Globe, text: <Translate id="homepage.developers.api">Open HTTP API — embed in any workflow</Translate>},
+  {key: 'workspace', Icon: Monitor, text: <Translate id="homepage.developers.workspace">Workspace terminal with parallel agent execution</Translate>},
 ] as const;
 
 function DevelopersSection() {
@@ -272,163 +343,176 @@ function DevelopersSection() {
     <section className={styles.developersSection}>
       <div className={styles.developersHeader}>
         <h2 className={styles.sectionLabel}>
-          <Translate id="homepage.developers.label">Built for Developers</Translate>
+          <Translate id="homepage.developers.label">AI-Native</Translate>
         </h2>
         <p className={styles.sectionSubtitle}>
-          <Translate id="homepage.developers.subtitle">Orchestrate AI agents directly from your tasks.</Translate>
+          <Translate id="homepage.developers.subtitle">
+            Everything is defined as structured schemas — Kubernetes-style, as-code. AI agents consume your data natively.
+          </Translate>
         </p>
       </div>
       <div className={styles.developersList}>
-        {DEV_ITEMS.map((item) => {
-          const {Icon} = item;
-          return (
-            <div key={item.key} className={styles.developerItem}>
-              <Icon size={16} strokeWidth={2} />
-              <span>
-                {item.key === 'agents' && (
-                  <Translate id="homepage.developers.agents">
-                    Launch Claude Code or Codex agents directly from tasks
-                  </Translate>
-                )}
-                {item.key === 'cli' && (
-                  <Translate id="homepage.developers.cli">
-                    kubectl-style CLI — scriptable, AI-agent-friendly
-                  </Translate>
-                )}
-                {item.key === 'sync' && (
-                  <Translate id="homepage.developers.sync">
-                    Two-way local sync — AI agents read and write your notes directly
-                  </Translate>
-                )}
-                {item.key === 'api' && (
-                  <Translate id="homepage.developers.api">
-                    Open HTTP API — embed in any workflow
-                  </Translate>
-                )}
-                {item.key === 'workspace' && (
-                  <Translate id="homepage.developers.workspace">
-                    Workspace terminal with parallel agent execution
-                  </Translate>
-                )}
-              </span>
-            </div>
-          );
-        })}
+        {DEV_ITEMS.map(({key, Icon, text}) => (
+          <div key={key} className={styles.developerItem}>
+            <Icon size={16} strokeWidth={2} />
+            <span>{text}</span>
+          </div>
+        ))}
       </div>
     </section>
   );
 }
 
-// --- Trust Section ---
-const TRUST_ITEMS = [
-  {key: 'private', Icon: Shield},
-  {key: 'offline', Icon: WifiOff},
-  {key: 'selfhost', Icon: HardDrive},
-  {key: 'free', Icon: Heart},
+// --- How It Works: Agent Orchestrator diagram ---
+function OrchestrationDiagram() {
+  // Monochrome, thin lines. Uses currentColor + opacity so it adapts to theme.
+  const bg = 'var(--ifm-background-color)';
+  const conn = {stroke: 'currentColor', strokeOpacity: 0.18, strokeWidth: 1};
+  const connThin = {stroke: 'currentColor', strokeOpacity: 0.12, strokeWidth: 0.75};
+  const label = {fill: 'currentColor', fillOpacity: 0.8};
+  const sub = {fill: 'currentColor', fillOpacity: 0.4};
+  const agentText = {fill: 'currentColor', fillOpacity: 0.5};
+  const colLabel = {fill: 'currentColor', fillOpacity: 0.32};
+  const arrowFill = {fill: 'currentColor', fillOpacity: 0.18};
+
+  return (
+    <div className={styles.orchestrationWrap}>
+      <svg viewBox="0 0 820 420" className={styles.orchestrationSvg} fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="ah" markerWidth="6" markerHeight="5" refX="6" refY="2.5" orient="auto">
+            <path d="M0,0.5 L5,2.5 L0,4.5" style={arrowFill} />
+          </marker>
+        </defs>
+
+        {/* Clients -> Server */}
+        <line x1="120" y1="85" x2="325" y2="188" style={conn} markerEnd="url(#ah)" />
+        <line x1="120" y1="205" x2="325" y2="205" style={conn} markerEnd="url(#ah)" />
+        <line x1="120" y1="325" x2="325" y2="222" style={conn} markerEnd="url(#ah)" />
+        {/* Server -> Daemons */}
+        <line x1="470" y1="182" x2="575" y2="88" style={conn} markerEnd="url(#ah)" />
+        <line x1="470" y1="205" x2="575" y2="205" style={conn} markerEnd="url(#ah)" />
+        <line x1="470" y1="228" x2="575" y2="322" style={conn} markerEnd="url(#ah)" />
+        {/* Daemons -> Agents */}
+        <line x1="660" y1="68" x2="712" y2="55" style={connThin} />
+        <line x1="660" y1="102" x2="712" y2="115" style={connThin} />
+        <line x1="660" y1="188" x2="712" y2="175" style={connThin} />
+        <line x1="660" y1="222" x2="712" y2="235" style={connThin} />
+        <line x1="660" y1="308" x2="712" y2="295" style={connThin} />
+        <line x1="660" y1="342" x2="712" y2="355" style={connThin} />
+
+        {/* Clients */}
+        <circle cx="80" cy="85" r="30" style={{stroke: 'currentColor', strokeOpacity: 0.5, strokeWidth: 1, fill: bg}} />
+        <text x="80" y="89" textAnchor="middle" fontSize="11" style={label}>Web</text>
+        <circle cx="80" cy="205" r="30" style={{stroke: 'currentColor', strokeOpacity: 0.5, strokeWidth: 1, fill: bg}} />
+        <text x="80" y="209" textAnchor="middle" fontSize="11" style={label}>Desktop</text>
+        <circle cx="80" cy="325" r="30" style={{stroke: 'currentColor', strokeOpacity: 0.5, strokeWidth: 1, fill: bg}} />
+        <text x="80" y="329" textAnchor="middle" fontSize="11" style={label}>Mobile</text>
+
+        {/* Server hub */}
+        <circle cx="400" cy="205" r="58" style={{stroke: 'currentColor', strokeOpacity: 0.7, strokeWidth: 1.5, fill: bg}} />
+        <text x="400" y="202" textAnchor="middle" fontSize="14" fontWeight="500" style={label}>Server</text>
+        <text x="400" y="219" textAnchor="middle" fontSize="9" style={sub}>relay (self-hostable)</text>
+
+        {/* Daemons */}
+        <circle cx="625" cy="85" r="40" style={{stroke: 'currentColor', strokeOpacity: 0.35, strokeWidth: 1, fill: bg}} strokeDasharray="5 4" />
+        <text x="625" y="81" textAnchor="middle" fontSize="10" style={label}>Daemon 1</text>
+        <text x="625" y="96" textAnchor="middle" fontSize="8" style={sub}>MacBook</text>
+        <circle cx="625" cy="205" r="40" style={{stroke: 'currentColor', strokeOpacity: 0.35, strokeWidth: 1, fill: bg}} strokeDasharray="5 4" />
+        <text x="625" y="201" textAnchor="middle" fontSize="10" style={label}>Daemon 2</text>
+        <text x="625" y="216" textAnchor="middle" fontSize="8" style={sub}>Linux Server</text>
+        <circle cx="625" cy="325" r="40" style={{stroke: 'currentColor', strokeOpacity: 0.35, strokeWidth: 1, fill: bg}} strokeDasharray="5 4" />
+        <text x="625" y="321" textAnchor="middle" fontSize="10" style={label}>Daemon 3</text>
+        <text x="625" y="336" textAnchor="middle" fontSize="8" style={sub}>Windows PC</text>
+
+        {/* Agents */}
+        <circle cx="745" cy="50" r="20" style={{stroke: 'currentColor', strokeOpacity: 0.25, strokeWidth: 0.75, fill: bg}} />
+        <text x="745" y="54" textAnchor="middle" fontSize="8" style={agentText}>Claude</text>
+        <circle cx="745" cy="120" r="20" style={{stroke: 'currentColor', strokeOpacity: 0.25, strokeWidth: 0.75, fill: bg}} />
+        <text x="745" y="124" textAnchor="middle" fontSize="8" style={agentText}>Codex</text>
+        <circle cx="745" cy="170" r="20" style={{stroke: 'currentColor', strokeOpacity: 0.25, strokeWidth: 0.75, fill: bg}} />
+        <text x="745" y="174" textAnchor="middle" fontSize="8" style={agentText}>Claude</text>
+        <circle cx="745" cy="240" r="20" style={{stroke: 'currentColor', strokeOpacity: 0.25, strokeWidth: 0.75, fill: bg}} />
+        <text x="745" y="244" textAnchor="middle" fontSize="8" style={agentText}>OpenCode</text>
+        <circle cx="745" cy="290" r="20" style={{stroke: 'currentColor', strokeOpacity: 0.25, strokeWidth: 0.75, fill: bg}} />
+        <text x="745" y="294" textAnchor="middle" fontSize="8" style={agentText}>Codex</text>
+        <circle cx="745" cy="360" r="20" style={{stroke: 'currentColor', strokeOpacity: 0.25, strokeWidth: 0.75, fill: bg}} />
+        <text x="745" y="364" textAnchor="middle" fontSize="8" style={agentText}>Claude</text>
+
+        {/* Column labels */}
+        <text x="80" y="405" textAnchor="middle" fontSize="9" letterSpacing="1" style={colLabel}>CLIENTS</text>
+        <text x="400" y="405" textAnchor="middle" fontSize="9" letterSpacing="1" style={colLabel}>SERVER</text>
+        <text x="625" y="405" textAnchor="middle" fontSize="9" letterSpacing="1" style={colLabel}>DAEMONS</text>
+        <text x="745" y="405" textAnchor="middle" fontSize="9" letterSpacing="1" style={colLabel}>AGENTS</text>
+      </svg>
+    </div>
+  );
+}
+
+function HowItWorksSection() {
+  return (
+    <section className={styles.orchestrationSection}>
+      <h2 className={styles.sectionLabel}>
+        <Translate id="homepage.howItWorks.label">Agent Orchestrator</Translate>
+      </h2>
+      <p className={styles.sectionSubtitle}>
+        <Translate id="homepage.howItWorks.subtitle">
+          Orchestrate AI agents from anywhere. Launch remote sessions, assign tasks, and let them work autonomously — even when you're offline.
+        </Translate>
+      </p>
+      <OrchestrationDiagram />
+    </section>
+  );
+}
+
+// --- Open & Extensible ---
+const OPEN_ITEMS = [
+  {key: 'api', Icon: Globe, text: <Translate id="homepage.openExtensible.api">Open API and open schema — any client can integrate</Translate>},
+  {key: 'hermes', Icon: Puzzle, text: <Translate id="homepage.openExtensible.hermes">Hermes, OpenClaw, or any custom client can CRUD your data via API key</Translate>},
+  {key: 'cli', Icon: Terminal, text: <Translate id="homepage.openExtensible.cli">CLI access for scripting and automation workflows</Translate>},
+  {key: 'skills', Icon: Code, text: <Translate id="homepage.openExtensible.skills">Share reusable skills — prompt templates that any agent can consume</Translate>},
 ] as const;
 
-function TrustSection() {
+function OpenExtensibleSection() {
   return (
-    <section className={styles.trustSection}>
-      <h2 className={styles.sectionLabel}>
-        <Translate id="homepage.trust.label">Your Data, Your Rules</Translate>
-      </h2>
-      <div className={styles.trustGrid}>
-        {TRUST_ITEMS.map((item) => {
-          const {Icon} = item;
-          return (
-            <div key={item.key} className={styles.trustItem}>
-              <Icon size={16} strokeWidth={2} />
-              <div>
-                <h3>
-                  {item.key === 'private' && (
-                    <Translate id="homepage.trust.private.title">Fully Private</Translate>
-                  )}
-                  {item.key === 'offline' && (
-                    <Translate id="homepage.trust.offline.title">Works Offline</Translate>
-                  )}
-                  {item.key === 'selfhost' && (
-                    <Translate id="homepage.trust.selfhost.title">Self-Hostable</Translate>
-                  )}
-                  {item.key === 'free' && (
-                    <Translate id="homepage.trust.free.title">Free Forever</Translate>
-                  )}
-                </h3>
-                <p>
-                  {item.key === 'private' && (
-                    <Translate id="homepage.trust.private.desc">
-                      AI runs on your machine. Data never leaves your device.
-                    </Translate>
-                  )}
-                  {item.key === 'offline' && (
-                    <Translate id="homepage.trust.offline.desc">
-                      Desktop app with built-in backend. No internet required.
-                    </Translate>
-                  )}
-                  {item.key === 'selfhost' && (
-                    <Translate id="homepage.trust.selfhost.desc">
-                      Deploy on your own infrastructure. Your server, your rules.
-                    </Translate>
-                  )}
-                  {item.key === 'free' && (
-                    <Translate id="homepage.trust.free.desc">
-                      No ads, no tracking. Personal use is free, always.
-                    </Translate>
-                  )}
-                </p>
-              </div>
-            </div>
-          );
-        })}
+    <section className={styles.developersSection}>
+      <div className={styles.developersHeader}>
+        <h2 className={styles.sectionLabel}>
+          <Translate id="homepage.openExtensible.label">Open & Extensible — Single Source of Truth</Translate>
+        </h2>
+        <p className={styles.sectionSubtitle}>
+          <Translate id="homepage.openExtensible.subtitle">
+            Your data lives here. Every tool and agent reads from and writes to one central place.
+          </Translate>
+        </p>
+      </div>
+      <div className={styles.developersList}>
+        {OPEN_ITEMS.map(({key, Icon, text}) => (
+          <div key={key} className={styles.developerItem}>
+            <Icon size={16} strokeWidth={2} />
+            <span>{text}</span>
+          </div>
+        ))}
       </div>
     </section>
   );
 }
 
-// --- CTA Section ---
+// --- CTA ---
 function CTASection() {
   return (
     <section className={styles.ctaSection}>
       <p className={styles.ctaSubtitle}>
-        <Translate id="homepage.cta.subtitle">
-          Download the desktop app or try the cloud demo.
-        </Translate>
+        <Translate id="homepage.cta.subtitle">Download the desktop app or try the cloud demo.</Translate>
       </p>
       <div className={styles.heroButtons}>
-        <Link
-          className={styles.heroButtonPrimary}
-          to="/subscribe">
+        <Link className={styles.heroButtonPrimary} to="/subscribe">
           <Translate id="homepage.cta.getStarted">Get Started</Translate>
         </Link>
-        <Link
-          className={styles.heroButtonSecondary}
-          to="https://ud.oatnil.top">
-          <Translate id="homepage.cta.tryDemo">Try Demo</Translate>
+        <Link className={styles.heroButtonSecondary} to={APP_URL}>
+          <Translate id="homepage.cta.signIn">Sign In</Translate>
         </Link>
       </div>
     </section>
-  );
-}
-
-function FooterSection() {
-  return (
-    <footer className={styles.footerSection}>
-      <div className={styles.footerBrand}>
-        <span className={styles.footerLogo}>UnDercontrol</span>
-        <span className={styles.footerCopyright}>© {new Date().getFullYear()}</span>
-      </div>
-      <div className={styles.footerLinks}>
-        <Link to="https://ud.oatnil.top" className={styles.footerLink}>
-          <Translate id="homepage.footer.home">Home</Translate>
-        </Link>
-        <Link to="/docs/intro" className={styles.footerLink}>
-          <Translate id="homepage.footer.documentation">Documentation</Translate>
-        </Link>
-        <Link to="/docs/pricing" className={styles.footerLink}>
-          <Translate id="homepage.footer.pricing">Pricing</Translate>
-        </Link>
-      </div>
-    </footer>
   );
 }
 
@@ -442,17 +526,18 @@ export default function Home(): ReactNode {
       })}
       description={translate({
         id: 'homepage.description',
-        message: 'One workspace for tasks, knowledge, and AI agents. Orchestrate any AI coding agent from your browser. Self-hosted, access from any device — your data never leaves your control.',
+        message: 'One private workspace for tasks, knowledge, and AI agents. Knowledge base like Obsidian, project management like Jira, finance like Mint — self-hosted, your data never leaves your control.',
         description: 'The homepage meta description',
       })}>
       <main className={styles.mainContainer}>
         <HeroSection />
-        <PillarsSection />
-        <HowItWorksSection />
-        <DevelopersSection />
+        <PillarsGridSection />
+        <ShowcaseSection />
         <TrustSection />
+        <DevelopersSection />
+        <HowItWorksSection />
+        <OpenExtensibleSection />
         <CTASection />
-        <FooterSection />
       </main>
     </Layout>
   );
