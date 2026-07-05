@@ -15,7 +15,7 @@ const config: Config = {
     v4: true,
   },
 
-  url: 'https://ud-docs.lintao-amons.workers.dev',
+  url: 'https://docs.oatnil.com',
   baseUrl: '/',
 
   organizationName: 'oatnil-top',

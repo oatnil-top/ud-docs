@@ -4,7 +4,7 @@ A private space for everything that matters — knowledge base, project manageme
 
 Try it online: https://ud.oatnil.top
 
-Documentation: https://ud-docs.lintao-amons.workers.dev
+Documentation: https://docs.oatnil.com
 
 JSON Schemas: https://github.com/oatnil-top/ud-schemas
 
