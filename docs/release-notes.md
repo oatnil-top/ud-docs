@@ -18,6 +18,24 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.104.0 (2026-07-05)
+
+### Improvements
+
+- The markdown editor's popup edit mode has been removed — zen mode (full-screen editing) is now the only way to edit
+- Task detail page: better edit-mode affordances, onboarding no longer blocks usage on failure, and the outline now supports grouping
+- Task detail page: error states support retry, empty fields can be edited with a single click, and dialogs are more accessible
+- Previously hardcoded text in the editor is now properly localized
+
+### Bug Fixes
+
+- Fixed some screens showing raw translation keys instead of proper text
+- Fixed the markdown editor sometimes losing unsaved content
+- Fixed unsafe link protocols not being filtered in editor links
+- Fixed new workspace session windows covering the currently focused window
+
+---
+
 ## v0.103.0 (2026-07-04)
 
 ### New Features
