@@ -95,7 +95,7 @@ const config: Config = {
         {to: '/blog', label: 'Blog', position: 'left'},
         {
           to: '/subscribe',
-          label: 'Pricing',
+          label: 'Download',
           position: 'left',
         },
         {
