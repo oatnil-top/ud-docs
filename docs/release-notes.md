@@ -18,6 +18,20 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.107.0 (2026-07-06)
+
+### New Features
+
+- **Agent Teams** — organize your AI agents into teams with a lead and specialist members. Each member gets a "when to delegate here" note, and that roster is injected into the lead's session so it automatically knows who to hand work off to. Teams nest to form a delegation hierarchy. Manage them in the new **Agents** hub (Agents · Teams · Skills tabs), or from the `ud` CLI (`ud apply` / `ud get agent-team`).
+- **Copy as Rich Text** — right-click a task, or its description, to copy it as rich text for pasting into other apps.
+
+### Improvements
+
+- Comment threads: resolving a thread now offers **resolve + mark done + terminate** in place of the old resolve + delete.
+- File explorer: a resource attached to a task now appears co-located with that task.
+
+---
+
 ## v0.106.0 (2026-07-06)
 
 ### New Features
