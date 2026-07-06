@@ -18,6 +18,21 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.106.0 (2026-07-06)
+
+### New Features
+
+- Pasted images stay tidy — pasting or inserting an image now routes it to a dedicated `/system/pasted-image/` folder instead of cluttering your file explorer root
+- Smarter workspace daemon selection — workspace sessions now prefer and reuse your last-used daemon instead of always grabbing the first online one
+
+### Bug Fixes
+
+- AI chat: failed tool steps now clearly show an error state instead of incorrectly rendering as a green "done"; a clear notice appears when a tool loop reaches its iteration limit
+- AI chat: long messages in enlarged mode are now centered at a comfortable line width for easier reading
+- Workspace: session control buttons no longer get clipped in short or narrow panes
+
+---
+
 ## v0.105.0 (2026-07-05)
 
 ### New Features
