@@ -33,7 +33,7 @@ ud --version
 If not installed, you can install it via any of these methods:
 
 - **Desktop app**: Open the **Settings** page and click the **Install** button in the CLI configuration section
-- **Other install methods**: See the [CLI download page](https://undercontrol.oatnil.top/subscribe#cli-section)
+- **Other install methods**: See the [CLI download page](https://oatnil.com/subscribe#cli-section)
 
 For full CLI documentation, see the [CLI Tool](/docs/cli) page.
 

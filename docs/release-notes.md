@@ -3014,7 +3014,7 @@ This release contains internal build and release workflow updates only.
 
 ### Improvements
 
-- CLI now defaults to official server URL (ud.oatnil.top)
+- CLI now defaults to official server URL (ud.oatnil.com)
 - Workspace desktop actions now show a confirmation dialog instead of a tooltip hint
 
 ### Bug Fixes

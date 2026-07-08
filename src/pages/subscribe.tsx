@@ -120,7 +120,7 @@ function QuickStartSection() {
             </p>
           </div>
           <div className={styles.quickStartCardButton}>
-            <Link className={styles.buttonOutline} to="https://oatnil.top/ud/login">
+            <Link className={styles.buttonOutline} to="https://ud.oatnil.com/#/login">
               <Translate id="subscribe.cards.web.button">Launch Web App</Translate>
             </Link>
           </div>
@@ -274,7 +274,7 @@ function SaasSection() {
             <Translate key="f5" id="subscribe.saasBasic.features.feature5">Community support</Translate>,
           ]}
           cta={<Translate id="subscribe.saasBasic.cta">Get Invite Code</Translate>}
-          ctaLink="https://oatnil.top/ud/login"
+          ctaLink="https://ud.oatnil.com/#/login"
           ctaExternal
         />
         <TierCard

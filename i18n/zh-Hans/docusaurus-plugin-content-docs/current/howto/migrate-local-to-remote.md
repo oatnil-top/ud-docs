@@ -33,7 +33,7 @@ ud --version
 如果未安装，可以通过以下方式安装：
 
 - **桌面端应用**：打开 **设置** 页面，在 CLI 配置区域点击 **安装** 按钮
-- **其他安装方式**：参见 [CLI 下载页面](https://undercontrol.oatnil.top/subscribe#cli-section)
+- **其他安装方式**：参见 [CLI 下载页面](https://oatnil.com/subscribe#cli-section)
 
 完整 CLI 文档请参见 [CLI 命令行工具](/docs/cli) 页面。
 
