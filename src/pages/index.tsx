@@ -22,7 +22,7 @@ import {
 
 import styles from './index.module.css';
 
-const APP_URL = 'https://ud.oatnil.top';
+const APP_URL = 'https://ud.oatnil.com';
 
 // Mirror of ud-vite-app/src/lib/cdn.ts — pick R2 (global) or Bitiful (China) by locale.
 const CDN_BASE = {
