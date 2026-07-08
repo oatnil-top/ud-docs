@@ -18,6 +18,27 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.108.0 (2026-07-08)
+
+### Security
+
+- Fixed a SQL-injection vulnerability in Advanced Search where a specially crafted custom-field name could be injected into the underlying query.
+
+### New Features
+
+- **Unified search bar** — Advanced Search is now a single query bar with three modes: **Filters** (visual chips), **Query** (SQL-like), and **Ask AI** (describe what you want). Filters apply instantly as you add or remove them, switching between Filters and Query keeps your work intact, and a live validity indicator shows when your query is ready.
+- **Filter Kanban columns by more fields** — board columns can now match on **Title**, **Description**, and other fields (not just Status and Tags), including a new "contains all tags" option. The column editor shows a live preview of the generated query plus a wildcard hint for pattern matching.
+
+### Improvements
+
+- Kanban: filtering a column by a read-only field (like Title) no longer risks overwriting that field when a card is dropped into the column.
+
+### Bug Fixes
+
+- Fixed terminal (tty) alignment and resizing on the task detail page.
+
+---
+
 ## v0.107.0 (2026-07-06)
 
 ### New Features
