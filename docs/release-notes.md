@@ -18,6 +18,16 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.109.0 (2026-07-08)
+
+### Improvements
+
+- **Copy commands everywhere in Markdown** — Copy as rich text, copy as Markdown, and copy Markdown link are now available in every Markdown editor — task and note descriptions, expense/income/account notes, and the kanban preview — not just the task detail view.
+- **Cleaner Kanban toolbar** — The board header is now a minimal, unified toolbar: quick icon actions stay visible while everything else folds into an overflow menu, with a single responsive layout for mobile and desktop.
+- **Smarter built-in `@ud` agent** — The default `@ud` AI agent now acts as an orchestrator: it understands the full agent roster, clarifies with you, then delegates work to specialist agents instead of doing everything itself.
+
+---
+
 ## v0.108.0 (2026-07-08)
 
 ### Security
