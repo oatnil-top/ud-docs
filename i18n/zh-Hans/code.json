@@ -1479,38 +1479,62 @@
   "homepage.cta.signIn": {
     "message": "登录"
   },
-  "selfhosting.title": {
-    "message": "自部署 UnDercontrol — 你的服务器，你的数据，你说了算"
+  "selfhosting.copied": {
+    "message": "已复制"
   },
-  "selfhosting.description": {
-    "message": "在你自己的基础设施上自部署 UnDercontrol——Docker Compose 或 Kubernetes，PostgreSQL 或 SQLite，本地或 S3 存储。你的数据永不离开你的网络。"
+  "selfhosting.copy": {
+    "message": "复制"
   },
-  "selfhosting.hero.title": {
-    "message": "自部署 UnDercontrol。你的服务器，你的数据，你说了算。"
+  "selfhosting.hero.eyebrow": {
+    "message": "自部署"
   },
-  "selfhosting.hero.subtitle": {
-    "message": "在你自己的基础设施上运行整套系统——从一行 Docker Compose 命令到完整的 Kubernetes 集群。没有厂商锁定，数据不出你的网络。"
+  "selfhosting.hero.title.a": {
+    "message": "一个镜像。"
   },
-  "selfhosting.hero.guide": {
+  "selfhosting.hero.title.b": {
+    "message": "一条命令。"
+  },
+  "selfhosting.hero.title.c": {
+    "message": "承载你的整个工作空间。"
+  },
+  "selfhosting.hero.lede": {
+    "message": "UnDercontrol 以单个 all-in-one 容器交付——前端和后端打包在一起。用一条命令部署到你自己的基础设施。没有厂商锁定，数据永不离开你的网络。"
+  },
+  "selfhosting.hero.pill1": {
+    "message": "个容器"
+  },
+  "selfhosting.hero.pill2": {
+    "message": "分钟即可运行"
+  },
+  "selfhosting.hero.pill3a": {
+    "message": "免费"
+  },
+  "selfhosting.hero.pill3b": {
+    "message": "3 个月 Pro 许可证"
+  },
+  "selfhosting.hero.cta1": {
+    "message": "查看所有部署方式 →"
+  },
+  "selfhosting.hero.cta2": {
     "message": "阅读部署指南"
-  },
-  "selfhosting.hero.options": {
-    "message": "查看部署方式"
   },
   "selfhosting.why.label": {
     "message": "为什么自部署"
+  },
+  "selfhosting.why.title": {
+    "message": "你的基础设施，你的规则。"
   },
   "selfhosting.why.ownership.title": {
     "message": "完全掌控数据"
   },
   "selfhosting.why.ownership.desc": {
-    "message": "你的任务、笔记、文件和财务数据都保存在你掌控的硬件上。任何数据都不会发送给第三方——连 AI 都可以对接你自己的模型服务。"
+    "message": "任务、笔记、文件和财务数据都保存在你掌控的硬件上。任何数据都不会发送给第三方——连 AI 都可以对接你自己的模型服务。"
   },
   "selfhosting.why.nolockin.title": {
     "message": "没有厂商锁定"
   },
   "selfhosting.why.nolockin.desc": {
-    "message": "一切皆代码。你的数据以 Markdown 和 YAML 声明，可用 Git 版本管理，随时可导出。没有需要逃离的私有格式。"
+    "message": "一切皆代码。你的数据以 Markdown 和 YAML 声明，可用 Git 版本管理，随时可导出。没有需要逃离的专有格式。"
   },
   "selfhosting.why.offline.title": {
     "message": "离线与内网隔离"
@@ -1519,87 +1543,156 @@
     "message": "可部署在私有网络甚至完全隔离的内网环境。UnDercontrol 无需任何外网访问也能正常运行。"
   },
   "selfhosting.why.control.title": {
-    "message": "你的基础设施，你的规则"
+    "message": "自由选择方案"
   },
   "selfhosting.why.control.desc": {
-    "message": "自由选择数据库、存储、备份与扩展方式。跑在树莓派、家用服务器、VPS 还是 Kubernetes 集群，全凭你决定。"
+    "message": "自由选择数据库、存储、备份与扩展方式。树莓派、家用服务器、VPS 还是 Kubernetes 集群，全凭你决定。"
   },
-  "selfhosting.quickstart.label": {
-    "message": "快速开始"
+  "selfhosting.grow.label": {
+    "message": "渐进式部署"
   },
-  "selfhosting.quickstart.subtitle": {
-    "message": "一行命令即可搭建基于 Docker Compose 的本地存储 + SQLite 环境，几分钟内即可运行。"
+  "selfhosting.grow.title": {
+    "message": "从小起步，就地成长。"
   },
-  "selfhosting.quickstart.copy": {
-    "message": "复制"
+  "selfhosting.grow.lede": {
+    "message": "先在自己的电脑上用桌面应用起步——不用 Docker、不用服务器。当你需要多设备访问时，升级到自部署容器，再扩展到 PostgreSQL、云存储或完整集群。全程数据模型不变——你只是改环境变量，从不重构。"
   },
-  "selfhosting.quickstart.copied": {
-    "message": "已复制"
+  "selfhosting.grow.s1.title": {
+    "message": "本地桌面应用"
   },
-  "selfhosting.quickstart.note": {
-    "message": "想先审查脚本，或在 Windows 上部署？请查看"
+  "selfhosting.grow.s1.desc": {
+    "message": "下载即用。内置后端，完全离线。不用 Docker，不用服务器。"
   },
-  "selfhosting.quickstart.noteLink": {
-    "message": "分步指南"
+  "selfhosting.grow.add.selfhost": {
+    "message": "自部署"
   },
-  "selfhosting.options.label": {
+  "selfhosting.grow.s2.title": {
+    "message": "All-in-one · SQLite"
+  },
+  "selfhosting.grow.s2.desc": {
+    "message": "自己服务器上的单个容器。任意设备均可访问。"
+  },
+  "selfhosting.grow.add.postgres": {
+    "message": "+ postgres"
+  },
+  "selfhosting.grow.s3.title": {
+    "message": "独立 PostgreSQL"
+  },
+  "selfhosting.grow.s3.desc": {
+    "message": "并发访问，生产级可靠性。"
+  },
+  "selfhosting.grow.add.s3": {
+    "message": "+ s3 / r2"
+  },
+  "selfhosting.grow.s4.title": {
+    "message": "云端文件存储"
+  },
+  "selfhosting.grow.s4.desc": {
+    "message": "将附件卸载到 S3、R2 或 MinIO。"
+  },
+  "selfhosting.grow.add.k8s": {
+    "message": "+ k8s"
+  },
+  "selfhosting.grow.s5.title": {
+    "message": "Kubernetes 集群"
+  },
+  "selfhosting.grow.s5.desc": {
+    "message": "高可用、自动扩缩容、滚动更新。"
+  },
+  "selfhosting.portable.title": {
+    "message": "单一根目录——完全可移植"
+  },
+  "selfhosting.portable.desc.a": {
+    "message": "你拥有的一切都存放在单一根数据目录下。迁移整个工作空间——从桌面应用到自部署服务器，或从一台服务器到另一台——只需拷贝一份"
+  },
+  "selfhosting.portable.desc.b": {
+    "message": "无需专有导出，无需重新导入。备份、迁移、恢复，就这么简单。"
+  },
+  "selfhosting.license.label": {
+    "message": "免费试用许可证"
+  },
+  "selfhosting.license.title": {
+    "message": "免费用上 Pro——我们请客，3 个月。"
+  },
+  "selfhosting.license.lede": {
+    "message": "我们正处于活跃开发阶段，所以这个 Pro 许可证对所有人免费开放。它已经预置在下面每种部署方式里——复制即用。"
+  },
+  "selfhosting.license.tag": {
+    "message": "免费 · Pro 版"
+  },
+  "selfhosting.license.cardTitle": {
+    "message": "UnDercontrol Pro — 自部署试用"
+  },
+  "selfhosting.license.cardDesc": {
+    "message": "解锁 PostgreSQL、S3/R2 存储、多用户及角色权限，以及管理员控制台。"
+  },
+  "selfhosting.license.tier": {
+    "message": "版本"
+  },
+  "selfhosting.license.validUntil": {
+    "message": "有效期至"
+  },
+  "selfhosting.license.maxUsers": {
+    "message": "最大用户数"
+  },
+  "selfhosting.deploy.label": {
     "message": "部署方式"
   },
-  "selfhosting.options.subtitle": {
-    "message": "选择适合你基础设施的方案。每个选项都链接到详细的分步指南。"
+  "selfhosting.deploy.title": {
+    "message": "复制一份 compose 文件，即可运行。"
   },
-  "selfhosting.options.readGuide": {
-    "message": "查看指南"
+  "selfhosting.deploy.lede": {
+    "message": "下面每种方式都内嵌了试用许可证。all-in-one 镜像是最快的路径；其他方式则适合你需要独立数据库或集群时。"
   },
-  "selfhosting.options.sqlite.title": {
-    "message": "Docker Compose + SQLite"
+  "selfhosting.deploy.access.allinone": {
+    "message": "然后打开 http://localhost:3000 —— 单个容器，SQLite 存储在 ./data。"
   },
-  "selfhosting.options.sqlite.desc": {
-    "message": "最简单的方式。本地文件存储 + 单文件 SQLite 数据库。适合试用或小型个人部署。"
+  "selfhosting.deploy.access.aiopg": {
+    "message": "然后打开 http://localhost:3000 —— 同一个应用镜像，背后是独立的 PostgreSQL。"
   },
-  "selfhosting.options.postgres.title": {
-    "message": "Docker Compose + PostgreSQL"
+  "selfhosting.deploy.access.split": {
+    "message": "然后打开 http://localhost:3000 —— 前端将 /api 代理到后端。"
   },
-  "selfhosting.options.postgres.desc": {
-    "message": "更适合生产环境。PostgreSQL 支持并发访问，提供更强的可靠性和性能。"
+  "selfhosting.deploy.access.k8s": {
+    "message": "部署后端 + 前端，使用 SQLite、ClusterIP 和一个 PVC。Chart："
   },
-  "selfhosting.options.s3.title": {
-    "message": "Docker Compose + S3 / R2"
+  "selfhosting.s3.title": {
+    "message": "想用 S3 / R2 存储？"
   },
-  "selfhosting.options.s3.desc": {
-    "message": "云端就绪的文件存储。将附件卸载到 AWS S3、Cloudflare R2 或 MinIO，同时让数据库就近部署。"
+  "selfhosting.s3.desc": {
+    "message": "在以上任意方式中加入 S3_ENABLED=true、S3_ENDPOINT、S3_BUCKET、S3_ACCESS_KEY_ID 和 S3_SECRET_ACCESS_KEY —— 支持 AWS S3、Cloudflare R2 或 MinIO。"
   },
-  "selfhosting.options.k8s.title": {
-    "message": "Kubernetes + Helm"
+  "selfhosting.run.title": {
+    "message": "启动它"
   },
-  "selfhosting.options.k8s.desc": {
-    "message": "企业级规模。通过 Helm Chart 在你自己的集群上实现高可用、自动扩缩容和滚动更新。"
+  "selfhosting.run.desc": {
+    "message": "保存文件，然后运行 docker compose up -d。首次启动会自动拉取镜像并执行数据库迁移。"
   },
   "selfhosting.arch.label": {
     "message": "架构"
   },
+  "selfhosting.arch.title": {
+    "message": "默认单镜像——需要时再拆分。"
+  },
   "selfhosting.arch.caption": {
-    "message": "一个 Go 后端和一个静态 Web 前端，搭配你选择的 PostgreSQL 或 SQLite。可选的外部服务——兼容 OpenAI 的 AI 服务、兼容 S3 的存储和 OpenTelemetry——均可插拔并完全由你掌控。"
+    "message": "all-in-one 镜像用一个容器同时提供 Web 应用和 Go API。自带 PostgreSQL 或 SQLite，并可插入兼容 OpenAI 的 AI 服务、兼容 S3 的存储或 OpenTelemetry —— 均为可选，全部由你掌控。"
   },
-  "selfhosting.req.label": {
-    "message": "你需要准备"
+  "selfhosting.cta.title": {
+    "message": "准备好拥有你的工作空间了吗？"
   },
-  "selfhosting.req.docker": {
-    "message": "Docker 或兼容的容器运行时"
-  },
-  "selfhosting.req.jwt": {
-    "message": "一个安全的 JWT 密钥（安装脚本会自动生成）"
-  },
-  "selfhosting.req.license": {
-    "message": "一份许可证文件——个人使用免费，联系我们即可获取"
-  },
-  "selfhosting.cta.subtitle": {
-    "message": "准备好拥有你自己的工作空间了吗？跟随指南，几分钟内完成部署。"
+  "selfhosting.cta.desc": {
+    "message": "复制上面的 compose 文件，或跟随完整指南完成 PostgreSQL、S3 和 Kubernetes 部署。"
   },
   "selfhosting.cta.guide": {
     "message": "部署指南"
   },
   "selfhosting.cta.contact": {
     "message": "联系我们"
+  },
+  "selfhosting.title": {
+    "message": "自部署 UnDercontrol — 你的服务器，你的数据，你说了算"
+  },
+  "selfhosting.description": {
+    "message": "在你自己的基础设施上自部署 UnDercontrol —— 单个 all-in-one 镜像，或 Docker Compose 与 Kubernetes。PostgreSQL 或 SQLite，本地或 S3 存储。你的数据永不离开你的网络。"
   }
 }

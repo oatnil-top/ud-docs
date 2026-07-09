@@ -1,4 +1,4 @@
-import {useState, type ReactNode} from 'react';
+import {Fragment, useState, type ReactNode} from 'react';
 import Link from '@docusaurus/Link';
 import Layout from '@theme/Layout';
 import Translate, {translate} from '@docusaurus/Translate';
@@ -7,51 +7,268 @@ import {
   Code,
   WifiOff,
   Server,
-  Database,
-  Boxes,
-  Cloud,
-  Ship,
-  KeyRound,
-  FileKey,
-  Container,
   Copy,
   Check,
-  ArrowRight,
+  FolderInput,
 } from 'lucide-react';
 
-import styles from './index.module.css';
-import s from './self-hosting.module.css';
+import styles from './self-hosting.module.css';
 
-const INSTALL_CMD =
-  'curl -fsSL https://raw.githubusercontent.com/oatnil-top/ud-docs/main/scripts/install.sh | sh';
+// --- Free 3-month Pro trial license (dev-phase, shared publicly on purpose) ---
+const LICENSE_TOKEN =
+  'eyJjcmVhdGVkX2F0IjoxNzgzNjAwMzY4LCJ2YWxpZF91bnRpbCI6MTc5MTM3NjM2OCwidGllciI6InBybyIsInVzZXJfbmFtZSI6IlNlbGYtSG9zdCBUcmlhbCIsInVzZXJfc2VjcmV0X2hhc2giOiJlZDJiYTE3OGM2NzBlYzdmZjA0NzdlZTc1MTAyNjVkM2M4NWUzN2QyNWI2NDcxNDc3OTBmZDJmZDJlMTI1YmQ4Iiwibm9uY2UiOiJiMjAzYmFkNS1mYTQ4LTQwOWMtYmU1OC0yYTc0YWJkNjNiM2YiLCJtYXhfdXNlcnMiOjV9.Nf81OrehjlpXGDP7ppap5C8GYt0eXBh5wP0y62_-mz37SHd5-3iSMmGzGZ0P4Bz9z0E1cXs1F4IwDbad2s3BAQ';
+const LICENSE_SECRET = 'undercontrol-selfhost-trial';
+const LICENSE_VALID_UNTIL = '2026-10-07';
+
+// --- Copy-paste-ready snippets (code is not translated) ---
+const HERO_RUN = `# the all-in-one image: frontend + backend in one container
+docker run -d -p 3000:8080 \\
+  -e HOST_DOMAIN=http://localhost:3000 \\
+  -e JWT_SECRET=change-me-to-a-random-string \\
+  -e LICENSE_TOKEN=${LICENSE_TOKEN} \\
+  -e LICENSE_HOST_SECRET=${LICENSE_SECRET} \\
+  -v undercontrol-data:/app/data \\
+  lintao0o0/undercontrol:latest`;
+
+const ENV_FILE = `# UnDercontrol - free 3-month Pro trial license
+LICENSE_TOKEN=${LICENSE_TOKEN}
+LICENSE_HOST_SECRET=${LICENSE_SECRET}`;
+
+const COMPOSE_ALLINONE = `services:
+  undercontrol:
+    image: lintao0o0/undercontrol:latest
+    container_name: undercontrol
+    ports:
+      - "3000:8080"
+    environment:
+      - GIN_MODE=release
+      - HOST_DOMAIN=http://localhost:3000
+      - JWT_SECRET=change-me-to-a-random-string
+      - ADMIN_EMAIL=admin@example.com
+      - ADMIN_PASSWORD=changeme
+      # free 3-month Pro trial license
+      - LICENSE_TOKEN=${LICENSE_TOKEN}
+      - LICENSE_HOST_SECRET=${LICENSE_SECRET}
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped`;
+
+const COMPOSE_AIOPG = `services:
+  postgres:
+    image: postgres:18.1-alpine3.23
+    environment:
+      POSTGRES_DB: undercontrol
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+
+  undercontrol:
+    image: lintao0o0/undercontrol:latest
+    ports:
+      - "3000:8080"
+    environment:
+      - GIN_MODE=release
+      - HOST_DOMAIN=http://localhost:3000
+      - JWT_SECRET=change-me-to-a-random-string
+      - DATABASE_TYPE=postgres
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DATABASE=undercontrol
+      - ADMIN_EMAIL=admin@example.com
+      - ADMIN_PASSWORD=changeme
+      - LICENSE_TOKEN=${LICENSE_TOKEN}
+      - LICENSE_HOST_SECRET=${LICENSE_SECRET}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  pg_data:`;
+
+const COMPOSE_SPLIT = `services:
+  postgres:
+    image: postgres:18.1-alpine3.23
+    environment:
+      POSTGRES_DB: undercontrol
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+  backend:
+    image: lintao0o0/undercontrol-backend:latest
+    environment:
+      - GIN_MODE=release
+      - DATABASE_TYPE=postgres
+      - POSTGRES_HOST=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DATABASE=undercontrol
+      - CORS_ALLOWED_ORIGINS=http://localhost:3000
+      - HOST_DOMAIN=http://localhost:3000
+      - LICENSE_TOKEN=${LICENSE_TOKEN}
+      - LICENSE_HOST_SECRET=${LICENSE_SECRET}
+    depends_on:
+      - postgres
+
+  frontend:
+    image: lintao0o0/undercontrol-vite-app:latest
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+volumes:
+  pg_data:`;
+
+const HELM_INSTALL = `# production-grade: HA, autoscaling, rolling updates
+helm repo add undercontrol https://oatnil-top.github.io/undercontrol-helm
+helm repo update
+helm install undercontrol undercontrol/undercontrol \\
+  --create-namespace --namespace undercontrol \\
+  --set backend.jwt.secret=change-me-to-a-random-string \\
+  --set backend.licenseToken=${LICENSE_TOKEN} \\
+  --set backend.licenseHostSecret=${LICENSE_SECRET}`;
+
+// Render code with two functional tints: dimmed comments, gold license lines.
+function renderCode(code: string): ReactNode {
+  return code.split('\n').map((line, i) => {
+    const trimmed = line.trimStart();
+    let cls: string | undefined;
+    if (trimmed.startsWith('#')) cls = styles.cmt;
+    else if (/LICENSE_TOKEN|LICENSE_HOST_SECRET|licenseToken|licenseHostSecret/.test(line)) cls = styles.gold;
+    return (
+      <span key={i} className={cls}>
+        {line + '\n'}
+      </span>
+    );
+  });
+}
+
+function CodeBlock({name, code, wrap}: {name: string; code: string; wrap?: boolean}) {
+  const [copied, setCopied] = useState(false);
+  const onCopy = () => {
+    if (navigator.clipboard?.writeText) {
+      navigator.clipboard.writeText(code).then(
+        () => {
+          setCopied(true);
+          setTimeout(() => setCopied(false), 1600);
+        },
+        () => undefined,
+      );
+    }
+  };
+  return (
+    <div className={styles.term}>
+      <div className={styles.termBar}>
+        <span className={styles.dots}>
+          <i />
+          <i />
+          <i />
+        </span>
+        <span className={styles.termName}>{name}</span>
+        <button type="button" className={`${styles.copybtn} ${copied ? styles.ok : ''}`} onClick={onCopy}>
+          {copied ? <Check size={13} /> : <Copy size={13} />}
+          {copied ? (
+            <Translate id="selfhosting.copied">Copied</Translate>
+          ) : (
+            <Translate id="selfhosting.copy">Copy</Translate>
+          )}
+        </button>
+      </div>
+      <div className={`${styles.termBody} ${wrap ? styles.wrap : ''}`}>
+        <pre>{renderCode(code)}</pre>
+      </div>
+    </div>
+  );
+}
 
 // --- Hero ---
 function HeroSection() {
   return (
-    <section className={styles.heroSection}>
+    <header className={styles.hero}>
+      <p className={styles.eyebrow}>
+        <Translate id="selfhosting.hero.eyebrow">Self-Hosting</Translate>
+      </p>
       <h1 className={styles.heroTitle}>
-        <Translate id="selfhosting.hero.title">
-          Self-host UnDercontrol. Your server, your data, your rules.
-        </Translate>
+        <Translate id="selfhosting.hero.title.a">One image. </Translate>
+        <em>
+          <Translate id="selfhosting.hero.title.b">One command.</Translate>
+        </em>
+        <br />
+        <Translate id="selfhosting.hero.title.c">Your whole workspace.</Translate>
       </h1>
-      <p className={styles.heroSubtitle}>
-        <Translate id="selfhosting.hero.subtitle">
-          Run the entire stack on your own infrastructure — from a single Docker Compose command to a full Kubernetes cluster. No vendor lock-in, nothing leaves your network.
+      <p className={`${styles.lede} ${styles.heroLede}`}>
+        <Translate id="selfhosting.hero.lede">
+          UnDercontrol ships as a single all-in-one container — frontend and backend baked together. Run it on your own infrastructure with one command. No vendor lock-in, and nothing ever leaves your network.
         </Translate>
       </p>
-      <div className={styles.heroButtons}>
-        <Link className={styles.heroButtonPrimary} to="/docs/self-deployment">
-          <Translate id="selfhosting.hero.guide">Read the Deployment Guide</Translate>
+      <div className={styles.pillrow}>
+        <span className={styles.pill}>
+          <b>1</b> <Translate id="selfhosting.hero.pill1">container</Translate>
+        </span>
+        <span className={styles.pill}>
+          <b>~2</b> <Translate id="selfhosting.hero.pill2">min to running</Translate>
+        </span>
+        <span className={styles.pill}>
+          <b><Translate id="selfhosting.hero.pill3a">Free</Translate></b> <Translate id="selfhosting.hero.pill3b">3-month Pro license</Translate>
+        </span>
+      </div>
+      <div className={styles.term} style={{marginTop: 26}}>
+        <div className={styles.termBar}>
+          <span className={styles.dots}>
+            <i />
+            <i />
+            <i />
+          </span>
+          <span className={styles.termName}>bash — docker run</span>
+          <HeroCopy />
+        </div>
+        <div className={`${styles.termBody} ${styles.wrap}`}>
+          <pre>{renderCode(HERO_RUN)}</pre>
+        </div>
+      </div>
+      <div className={styles.btnrow}>
+        <Link className={styles.btnPrimary} to="#deploy">
+          <Translate id="selfhosting.hero.cta1">All deployment methods →</Translate>
         </Link>
-        <Link className={styles.heroButtonSecondary} to="#options">
-          <Translate id="selfhosting.hero.options">Browse Options</Translate>
+        <Link className={styles.btnGhost} to="/docs/self-deployment">
+          <Translate id="selfhosting.hero.cta2">Read the guide</Translate>
         </Link>
       </div>
-    </section>
+    </header>
   );
 }
 
-// --- Why self-host ---
+function HeroCopy() {
+  const [copied, setCopied] = useState(false);
+  const onCopy = () => {
+    if (navigator.clipboard?.writeText) {
+      navigator.clipboard.writeText(HERO_RUN).then(
+        () => {
+          setCopied(true);
+          setTimeout(() => setCopied(false), 1600);
+        },
+        () => undefined,
+      );
+    }
+  };
+  return (
+    <button type="button" className={`${styles.copybtn} ${copied ? styles.ok : ''}`} onClick={onCopy}>
+      {copied ? <Check size={13} /> : <Copy size={13} />}
+      {copied ? <Translate id="selfhosting.copied">Copied</Translate> : <Translate id="selfhosting.copy">Copy</Translate>}
+    </button>
+  );
+}
+
+// --- Why ---
 const WHY = [
   {key: 'ownership', Icon: Lock},
   {key: 'nolockin', Icon: Code},
@@ -61,34 +278,34 @@ const WHY = [
 
 const WHY_TEXT: Record<string, {title: ReactNode; desc: ReactNode}> = {
   ownership: {
-    title: <Translate id="selfhosting.why.ownership.title">Full Data Ownership</Translate>,
+    title: <Translate id="selfhosting.why.ownership.title">Full data ownership</Translate>,
     desc: (
       <Translate id="selfhosting.why.ownership.desc">
-        Your tasks, notes, files, and finances live on hardware you control. Nothing is sent to a third party — not even for AI, which can run against your own provider.
+        Tasks, notes, files, and finances live on hardware you control. Nothing is sent to a third party — not even for AI, which runs against your own provider.
       </Translate>
     ),
   },
   nolockin: {
-    title: <Translate id="selfhosting.why.nolockin.title">No Vendor Lock-in</Translate>,
+    title: <Translate id="selfhosting.why.nolockin.title">No vendor lock-in</Translate>,
     desc: (
       <Translate id="selfhosting.why.nolockin.desc">
-        Everything-as-code. Your data is declarable in Markdown and YAML, versionable with Git, and exportable at any time. No proprietary formats to escape from.
+        Everything-as-code. Your data is declarable in Markdown and YAML, versionable with Git, and exportable any time. No proprietary formats to escape.
       </Translate>
     ),
   },
   offline: {
-    title: <Translate id="selfhosting.why.offline.title">Offline & Air-gapped</Translate>,
+    title: <Translate id="selfhosting.why.offline.title">Offline & air-gapped</Translate>,
     desc: (
       <Translate id="selfhosting.why.offline.desc">
-        Deploy inside a private network or a fully air-gapped environment. UnDercontrol keeps working without any outbound internet access.
+        Run inside a private network or a fully air-gapped environment. UnDercontrol keeps working without any outbound internet access.
       </Translate>
     ),
   },
   control: {
-    title: <Translate id="selfhosting.why.control.title">Your Infrastructure, Your Rules</Translate>,
+    title: <Translate id="selfhosting.why.control.title">Pick your setup</Translate>,
     desc: (
       <Translate id="selfhosting.why.control.desc">
-        Pick your database, storage, backups, and scaling. Run it on a Raspberry Pi, a home server, a VPS, or a Kubernetes cluster — the choice is yours.
+        Choose your database, storage, backups, and scaling. A Raspberry Pi, a home server, a VPS, or a Kubernetes cluster — the choice is entirely yours.
       </Translate>
     ),
   },
@@ -96,16 +313,19 @@ const WHY_TEXT: Record<string, {title: ReactNode; desc: ReactNode}> = {
 
 function WhySection() {
   return (
-    <section className={styles.pillarsGridSection}>
-      <h2 className={styles.sectionLabel}>
-        <Translate id="selfhosting.why.label">Why Self-Host</Translate>
+    <section className={styles.section}>
+      <p className={styles.eyebrow}>
+        <Translate id="selfhosting.why.label">Why self-host</Translate>
+      </p>
+      <h2 className={styles.h2}>
+        <Translate id="selfhosting.why.title">Your infrastructure, your rules.</Translate>
       </h2>
-      <div className={styles.pillarsGrid}>
+      <div className={styles.why}>
         {WHY.map(({key, Icon}) => (
-          <div key={key} className={styles.pillarCard}>
-            <Icon size={18} strokeWidth={2} className={styles.pillarCardIcon} />
-            <h3 className={styles.pillarCardTitle}>{WHY_TEXT[key].title}</h3>
-            <p className={styles.pillarCardDesc}>{WHY_TEXT[key].desc}</p>
+          <div key={key} className={styles.whyItem}>
+            <Icon size={22} strokeWidth={1.7} className={styles.whyIcon} />
+            <h3>{WHY_TEXT[key].title}</h3>
+            <p>{WHY_TEXT[key].desc}</p>
           </div>
         ))}
       </div>
@@ -113,118 +333,250 @@ function WhySection() {
   );
 }
 
-// --- Quick start ---
-function QuickStartSection() {
-  const [copied, setCopied] = useState(false);
-  const onCopy = () => {
-    navigator.clipboard?.writeText(INSTALL_CMD).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    });
-  };
+// --- Progressive deployment ---
+const STAGES = [
+  {
+    key: 'local',
+    title: <Translate id="selfhosting.grow.s1.title">Local desktop app</Translate>,
+    desc: <Translate id="selfhosting.grow.s1.desc">Download & run. Built-in backend, fully offline. No Docker, no server.</Translate>,
+    add: <Translate id="selfhosting.grow.add.selfhost">self-host</Translate>,
+    first: true,
+  },
+  {
+    key: 'aio',
+    title: <Translate id="selfhosting.grow.s2.title">All-in-one · SQLite</Translate>,
+    desc: <Translate id="selfhosting.grow.s2.desc">One container on your own server. Reach it from any device.</Translate>,
+    add: <Translate id="selfhosting.grow.add.postgres">+ postgres</Translate>,
+  },
+  {
+    key: 'pg',
+    title: <Translate id="selfhosting.grow.s3.title">Dedicated PostgreSQL</Translate>,
+    desc: <Translate id="selfhosting.grow.s3.desc">Concurrent access and production-grade reliability.</Translate>,
+    add: <Translate id="selfhosting.grow.add.s3">+ s3 / r2</Translate>,
+  },
+  {
+    key: 's3',
+    title: <Translate id="selfhosting.grow.s4.title">Cloud file storage</Translate>,
+    desc: <Translate id="selfhosting.grow.s4.desc">Offload attachments to S3, R2, or MinIO.</Translate>,
+    add: <Translate id="selfhosting.grow.add.k8s">+ k8s</Translate>,
+  },
+  {
+    key: 'k8s',
+    title: <Translate id="selfhosting.grow.s5.title">Kubernetes cluster</Translate>,
+    desc: <Translate id="selfhosting.grow.s5.desc">High availability, autoscaling, rolling updates.</Translate>,
+  },
+] as const;
+
+function GrowSection() {
   return (
-    <section className={s.quickstartSection}>
-      <h2 className={styles.sectionLabel}>
-        <Translate id="selfhosting.quickstart.label">Quick Start</Translate>
+    <section className={styles.section}>
+      <p className={styles.eyebrow}>
+        <Translate id="selfhosting.grow.label">Progressive deployment</Translate>
+      </p>
+      <h2 className={styles.h2}>
+        <Translate id="selfhosting.grow.title">Start small. Grow in place.</Translate>
       </h2>
-      <p className={styles.sectionSubtitle}>
-        <Translate id="selfhosting.quickstart.subtitle">
-          One command sets up Docker Compose with local storage and SQLite — running in minutes.
+      <p className={`${styles.lede} ${styles.sub}`}>
+        <Translate id="selfhosting.grow.lede">
+          Start right on your own laptop with the desktop app — no Docker, no server. Graduate to a self-hosted container when you want multi-device access, then scale to PostgreSQL, cloud storage, or a full cluster. Same data model the whole way — you flip environment variables, never re-architect.
         </Translate>
       </p>
-      <div className={s.codeBlock}>
-        <code>{INSTALL_CMD}</code>
-        <button type="button" className={s.copyButton} onClick={onCopy}>
-          {copied ? <Check size={13} /> : <Copy size={13} />}
-          {copied ? (
-            <Translate id="selfhosting.quickstart.copied">Copied</Translate>
-          ) : (
-            <Translate id="selfhosting.quickstart.copy">Copy</Translate>
-          )}
-        </button>
+      <div className={styles.growrow}>
+        {STAGES.map((stage, i) => (
+          <Fragment key={stage.key}>
+            <div className={`${styles.stage} ${'first' in stage && stage.first ? styles.first : ''}`}>
+              <span className={styles.sn}>{String(i + 1).padStart(2, '0')}</span>
+              <h4>{stage.title}</h4>
+              <p>{stage.desc}</p>
+            </div>
+            {'add' in stage && stage.add ? (
+              <div className={styles.growarrow}>
+                →<b>{stage.add}</b>
+              </div>
+            ) : null}
+          </Fragment>
+        ))}
       </div>
-      <p className={s.quickstartNote}>
-        <Translate id="selfhosting.quickstart.note">
-          Prefer to review the script first, or deploy on Windows? See the
-        </Translate>{' '}
-        <Link to="/docs/deployment/docker-compose-local">
-          <Translate id="selfhosting.quickstart.noteLink">step-by-step guide</Translate>
-        </Link>
-        .
-      </p>
+      <div className={styles.portableNote}>
+        <FolderInput size={22} strokeWidth={1.7} />
+        <div>
+          <h3>
+            <Translate id="selfhosting.portable.title">One root directory — fully portable</Translate>
+          </h3>
+          <p>
+            <Translate id="selfhosting.portable.desc.a">
+              Everything you own lives under a single root data directory. Moving your entire workspace — from your desktop app to a self-hosted server, or from one server to another — is a single copy of
+            </Translate>{' '}
+            <code>./data</code>.{' '}
+            <Translate id="selfhosting.portable.desc.b">
+              No proprietary export, no re-import. Back it up, move it, restore it, done.
+            </Translate>
+          </p>
+        </div>
+      </div>
     </section>
   );
 }
 
-// --- Deployment options ---
-const OPTIONS = [
-  {key: 'sqlite', Icon: Database, to: '/docs/deployment/docker-compose-local', tag: 'start'},
-  {key: 'postgres', Icon: Boxes, to: '/docs/deployment/docker-compose-postgres', tag: 'prod'},
-  {key: 's3', Icon: Cloud, to: '/docs/deployment/docker-compose-s3', tag: 'cloud'},
-  {key: 'k8s', Icon: Ship, to: '/docs/deployment/kubernetes-helm', tag: 'scale'},
-] as const;
-
-const OPTION_TEXT: Record<string, {title: ReactNode; desc: ReactNode}> = {
-  sqlite: {
-    title: <Translate id="selfhosting.options.sqlite.title">Docker Compose + SQLite</Translate>,
-    desc: (
-      <Translate id="selfhosting.options.sqlite.desc">
-        The simplest path. Local filesystem storage and a single-file SQLite database. Perfect for trying it out or small personal deployments.
-      </Translate>
-    ),
-  },
-  postgres: {
-    title: <Translate id="selfhosting.options.postgres.title">Docker Compose + PostgreSQL</Translate>,
-    desc: (
-      <Translate id="selfhosting.options.postgres.desc">
-        Better for production. PostgreSQL handles concurrent access and gives you stronger reliability and performance.
-      </Translate>
-    ),
-  },
-  s3: {
-    title: <Translate id="selfhosting.options.s3.title">Docker Compose + S3 / R2</Translate>,
-    desc: (
-      <Translate id="selfhosting.options.s3.desc">
-        Cloud-ready file storage. Offload attachments to AWS S3, Cloudflare R2, or MinIO while keeping the database close.
-      </Translate>
-    ),
-  },
-  k8s: {
-    title: <Translate id="selfhosting.options.k8s.title">Kubernetes + Helm</Translate>,
-    desc: (
-      <Translate id="selfhosting.options.k8s.desc">
-        Enterprise scale. A Helm chart for high availability, auto-scaling, and rolling updates on your own cluster.
-      </Translate>
-    ),
-  },
-};
-
-function OptionsSection() {
+// --- License ---
+function LicenseSection() {
   return (
-    <section className={s.optionsSection} id="options">
-      <h2 className={styles.sectionLabel}>
-        <Translate id="selfhosting.options.label">Deployment Options</Translate>
+    <section className={styles.section}>
+      <p className={styles.eyebrow}>
+        <Translate id="selfhosting.license.label">Free trial license</Translate>
+      </p>
+      <h2 className={styles.h2}>
+        <Translate id="selfhosting.license.title">Start on Pro — on us, for 3 months.</Translate>
       </h2>
-      <p className={styles.sectionSubtitle}>
-        <Translate id="selfhosting.options.subtitle">
-          Pick the setup that fits your infrastructure. Every option links to a detailed, step-by-step guide.
+      <p className={`${styles.lede} ${styles.sub}`}>
+        <Translate id="selfhosting.license.lede">
+          We're in active development, so this Pro license is free for everyone to use. It's already wired into every deployment below — just paste and go.
         </Translate>
       </p>
-      <div className={s.optionsGrid}>
-        {OPTIONS.map(({key, Icon, to, tag}) => (
-          <Link key={key} to={to} className={s.optionCard}>
-            <div className={s.optionHeader}>
-              <Icon size={18} strokeWidth={2} className={s.optionIcon} />
-              <h3 className={s.optionTitle}>{OPTION_TEXT[key].title}</h3>
-              <span className={s.optionTag}>{tag}</span>
-            </div>
-            <p className={s.optionDesc}>{OPTION_TEXT[key].desc}</p>
-            <span className={s.optionLink}>
-              <Translate id="selfhosting.options.readGuide">Read guide</Translate>
-              <ArrowRight size={13} />
-            </span>
-          </Link>
+      <div className={styles.licenseCard}>
+        <span className={styles.licenseTag}>
+          ◆ <Translate id="selfhosting.license.tag">Free · Pro tier</Translate>
+        </span>
+        <h3>
+          <Translate id="selfhosting.license.cardTitle">UnDercontrol Pro — Self-Host Trial</Translate>
+        </h3>
+        <p>
+          <Translate id="selfhosting.license.cardDesc">
+            Unlocks PostgreSQL, S3/R2 storage, multi-user with roles, and the admin dashboard.
+          </Translate>
+        </p>
+        <div className={styles.licMeta}>
+          <div>
+            <Translate id="selfhosting.license.tier">Tier</Translate>
+            <b>Pro</b>
+          </div>
+          <div>
+            <Translate id="selfhosting.license.validUntil">Valid until</Translate>
+            <b>{LICENSE_VALID_UNTIL}</b>
+          </div>
+          <div>
+            <Translate id="selfhosting.license.maxUsers">Max users</Translate>
+            <b>5</b>
+          </div>
+        </div>
+        <div style={{marginTop: 16}}>
+          <CodeBlock name=".env" code={ENV_FILE} wrap />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// --- Deployment tabs ---
+const METHODS = [
+  {
+    key: 'allinone',
+    tab: 'all-in-one · sqlite',
+    rec: true,
+    name: 'docker-compose.yml — all-in-one (SQLite)',
+    code: COMPOSE_ALLINONE,
+    access: (
+      <Translate id="selfhosting.deploy.access.allinone">
+        Then open http://localhost:3000 — one container, SQLite stored in ./data.
+      </Translate>
+    ),
+  },
+  {
+    key: 'aiopg',
+    tab: 'all-in-one · postgres',
+    name: 'docker-compose.yml — all-in-one + PostgreSQL',
+    code: COMPOSE_AIOPG,
+    access: (
+      <Translate id="selfhosting.deploy.access.aiopg">
+        Then open http://localhost:3000 — same single app image, backed by a dedicated PostgreSQL.
+      </Translate>
+    ),
+  },
+  {
+    key: 'split',
+    tab: 'separate fe + be · postgres',
+    name: 'docker-compose.yml — separate frontend + backend + PostgreSQL',
+    code: COMPOSE_SPLIT,
+    access: (
+      <Translate id="selfhosting.deploy.access.split">
+        Then open http://localhost:3000 — the frontend proxies /api to the backend.
+      </Translate>
+    ),
+  },
+  {
+    key: 'k8s',
+    tab: 'kubernetes · helm',
+    name: 'bash — Helm',
+    code: HELM_INSTALL,
+    access: (
+      <>
+        <Translate id="selfhosting.deploy.access.k8s">
+          Deploys backend + frontend with SQLite, ClusterIP, and a PVC. Chart:
+        </Translate>{' '}
+        <a href="https://github.com/oatnil-top/undercontrol-helm" target="_blank" rel="noreferrer">
+          github.com/oatnil-top/undercontrol-helm
+        </a>
+      </>
+    ),
+  },
+] as const;
+
+function DeploySection() {
+  const [active, setActive] = useState<string>('allinone');
+  const current = METHODS.find((m) => m.key === active) ?? METHODS[0];
+  return (
+    <section className={styles.section} id="deploy">
+      <p className={styles.eyebrow}>
+        <Translate id="selfhosting.deploy.label">Deployment methods</Translate>
+      </p>
+      <h2 className={styles.h2}>
+        <Translate id="selfhosting.deploy.title">Copy a compose file, and you're running.</Translate>
+      </h2>
+      <p className={`${styles.lede} ${styles.sub}`}>
+        <Translate id="selfhosting.deploy.lede">
+          Every method below has the trial license baked in. The all-in-one image is the fastest path; the others are there when you want a dedicated database or a cluster.
+        </Translate>
+      </p>
+
+      <div className={styles.tabs} role="tablist">
+        {METHODS.map((m) => (
+          <button
+            key={m.key}
+            type="button"
+            role="tab"
+            aria-selected={m.key === active}
+            className={`${styles.tab} ${m.key === active ? styles.tabActive : ''}`}
+            onClick={() => setActive(m.key)}>
+            {m.tab}
+            {'rec' in m && m.rec ? <span className={styles.rec}>REC</span> : null}
+          </button>
         ))}
+      </div>
+
+      <CodeBlock key={current.key} name={current.name} code={current.code} wrap />
+      <div className={styles.accessline}>{current.access}</div>
+
+      <div className={styles.s3note}>
+        <b>
+          <Translate id="selfhosting.s3.title">Want S3 / R2 storage?</Translate>
+        </b>{' '}
+        <Translate id="selfhosting.s3.desc">
+          Add S3_ENABLED=true, S3_ENDPOINT, S3_BUCKET, S3_ACCESS_KEY_ID, and S3_SECRET_ACCESS_KEY to any method above — works with AWS S3, Cloudflare R2, or MinIO.
+        </Translate>
+      </div>
+
+      <div className={styles.runrow}>
+        <div className={styles.runNum}>↑</div>
+        <div>
+          <h3>
+            <Translate id="selfhosting.run.title">Bring it up</Translate>
+          </h3>
+          <p>
+            <Translate id="selfhosting.run.desc">
+              Save the file, then run docker compose up -d. First boot pulls the image and runs migrations automatically.
+            </Translate>
+          </p>
+        </div>
       </div>
     </section>
   );
@@ -233,41 +585,46 @@ function OptionsSection() {
 // --- Architecture ---
 function ArchSection() {
   return (
-    <section className={s.archSection}>
-      <h2 className={styles.sectionLabel}>
+    <section className={styles.section}>
+      <p className={`${styles.eyebrow} ${styles.plain}`}>
         <Translate id="selfhosting.arch.label">Architecture</Translate>
+      </p>
+      <h2 className={styles.h2} style={{fontSize: 24}}>
+        <Translate id="selfhosting.arch.title">One image by default — split it out when you need to.</Translate>
       </h2>
-      <img className={s.archImage} src="/img/Arch.png" alt="UnDercontrol self-hosting architecture" loading="lazy" />
-      <p className={s.archCaption}>
+      <div className={styles.archwrap}>
+        <div className={styles.archrow}>
+          <div className={styles.node}>
+            <div className={styles.nt}>Browser</div>
+            <div className={styles.ns}>web · desktop · mobile</div>
+          </div>
+          <span className={styles.arrow}>→</span>
+          <div className={`${styles.node} ${styles.hl}`}>
+            <div className={styles.nt}>undercontrol</div>
+            <div className={styles.ns}>all-in-one · :3000</div>
+          </div>
+          <span className={styles.arrow}>→</span>
+          <div className={styles.archcol}>
+            <div className={styles.node}>
+              <div className={styles.nt}>Database</div>
+              <div className={styles.ns}>sqlite / postgres</div>
+            </div>
+            <div className={`${styles.node} ${styles.opt2}`}>
+              <div className={styles.nt}>AI provider</div>
+              <div className={styles.ns}>optional</div>
+            </div>
+            <div className={`${styles.node} ${styles.opt2}`}>
+              <div className={styles.nt}>S3 storage</div>
+              <div className={styles.ns}>optional</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p className={styles.archCap}>
         <Translate id="selfhosting.arch.caption">
-          A Go backend and a static web frontend, backed by your choice of PostgreSQL or SQLite. Optional external services — an OpenAI-compatible AI provider, S3-compatible storage, and OpenTelemetry — are all pluggable and fully under your control.
+          The all-in-one image serves the web app and the Go API from one container. Bring your own PostgreSQL or SQLite, and plug in an OpenAI-compatible AI provider, S3-compatible storage, or OpenTelemetry — all optional, all under your control.
         </Translate>
       </p>
-    </section>
-  );
-}
-
-// --- Requirements ---
-const REQUIREMENTS = [
-  {key: 'docker', Icon: Container, text: <Translate id="selfhosting.req.docker">Docker or a compatible container runtime</Translate>},
-  {key: 'jwt', Icon: KeyRound, text: <Translate id="selfhosting.req.jwt">A secure JWT secret (auto-generated by the install script)</Translate>},
-  {key: 'license', Icon: FileKey, text: <Translate id="selfhosting.req.license">A license file — free for personal use, contact us to obtain one</Translate>},
-] as const;
-
-function RequirementsSection() {
-  return (
-    <section className={s.requirementsSection}>
-      <h2 className={styles.sectionLabel}>
-        <Translate id="selfhosting.req.label">What You'll Need</Translate>
-      </h2>
-      <div className={styles.developersList}>
-        {REQUIREMENTS.map(({key, Icon, text}) => (
-          <div key={key} className={styles.developerItem}>
-            <Icon size={16} strokeWidth={2} />
-            <span>{text}</span>
-          </div>
-        ))}
-      </div>
     </section>
   );
 }
@@ -275,18 +632,21 @@ function RequirementsSection() {
 // --- CTA ---
 function CTASection() {
   return (
-    <section className={styles.ctaSection}>
-      <p className={styles.ctaSubtitle}>
-        <Translate id="selfhosting.cta.subtitle">
-          Ready to own your workspace? Follow the guide and deploy in minutes.
+    <section className={`${styles.section} ${styles.cta}`}>
+      <h2 className={styles.ctaTitle}>
+        <Translate id="selfhosting.cta.title">Ready to own your workspace?</Translate>
+      </h2>
+      <p>
+        <Translate id="selfhosting.cta.desc">
+          Paste the compose file above, or follow the full guide for PostgreSQL, S3, and Kubernetes setups.
         </Translate>
       </p>
-      <div className={styles.heroButtons}>
-        <Link className={styles.heroButtonPrimary} to="/docs/self-deployment">
-          <Translate id="selfhosting.cta.guide">Deployment Guide</Translate>
+      <div className={styles.btnrow}>
+        <Link className={styles.btnPrimary} to="/docs/self-deployment">
+          <Translate id="selfhosting.cta.guide">Deployment guide</Translate>
         </Link>
-        <Link className={styles.heroButtonSecondary} to="/contact">
-          <Translate id="selfhosting.cta.contact">Contact Us</Translate>
+        <Link className={styles.btnGhost} to="/contact">
+          <Translate id="selfhosting.cta.contact">Contact us</Translate>
         </Link>
       </div>
     </section>
@@ -303,16 +663,16 @@ export default function SelfHosting(): ReactNode {
       })}
       description={translate({
         id: 'selfhosting.description',
-        message: 'Self-host UnDercontrol on your own infrastructure — Docker Compose or Kubernetes, PostgreSQL or SQLite, local or S3 storage. Your data never leaves your network.',
+        message: 'Self-host UnDercontrol on your own infrastructure — one all-in-one image, or Docker Compose and Kubernetes. PostgreSQL or SQLite, local or S3 storage. Your data never leaves your network.',
         description: 'The self-hosting page meta description',
       })}>
-      <main className={styles.mainContainer}>
+      <main className={styles.page}>
         <HeroSection />
         <WhySection />
-        <QuickStartSection />
-        <OptionsSection />
+        <GrowSection />
+        <LicenseSection />
+        <DeploySection />
         <ArchSection />
-        <RequirementsSection />
         <CTASection />
       </main>
     </Layout>
