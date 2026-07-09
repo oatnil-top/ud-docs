@@ -11,6 +11,10 @@
     "message": "博客",
     "description": "Navbar item with label Blog"
   },
+  "item.label.Self-Host": {
+    "message": "自部署",
+    "description": "Navbar item with label Self-Host"
+  },
   "item.label.Download": {
     "message": "下载",
     "description": "Navbar item with label Download"

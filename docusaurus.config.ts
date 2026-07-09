@@ -94,6 +94,11 @@ const config: Config = {
         },
         {to: '/blog', label: 'Blog', position: 'left'},
         {
+          to: '/self-hosting',
+          label: 'Self-Host',
+          position: 'left',
+        },
+        {
           to: '/subscribe',
           label: 'Download',
           position: 'left',
