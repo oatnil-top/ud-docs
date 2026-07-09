@@ -25,10 +25,10 @@ UnDercontrol consists of two main components and several optional external servi
   - Connects to database and external services
   - Supports both PostgreSQL and SQLite databases
 
-- **Frontend (ud-frontend)**: Next.js web application
+- **Frontend (ud-frontend)**: Vite + React single-page application
   - User interface for web and mobile browsers
   - Communicates with backend via CORS or reverse proxy
-  - Server-side rendering for optimal performance
+  - Served as static assets — also bundled with the backend in the all-in-one image
 
 ### External Services (Optional)
 

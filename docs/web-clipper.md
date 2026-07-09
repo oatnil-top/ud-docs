@@ -104,7 +104,7 @@ The saved page appears as a new task in your UnDercontrol task list. The full-pa
 
 ## Open Source
 
-The Web Clipper is open source under the **AGPL-3.0** license, as it incorporates the [SingleFile](https://github.com/gildas-lormeau/SingleFile) library.
+The Web Clipper **browser extension** is open source under the **AGPL-3.0** license, as it incorporates the [SingleFile](https://github.com/gildas-lormeau/SingleFile) library. This applies to the extension only — the UnDercontrol platform itself is proprietary.
 
 - Source code: [github.com/oatnil-top/ud-chrome-extension](https://github.com/oatnil-top/ud-chrome-extension)
-- License: AGPL-3.0
+- License: AGPL-3.0 (extension only)

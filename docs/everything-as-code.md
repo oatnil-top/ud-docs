@@ -212,10 +212,9 @@ Most editors with YAML/JSON Schema support can use these schemas for autocomplet
 
 ## Schema Repository
 
-The schemas are published as an open-source repository:
+The schema definitions are openly published so any client or agent can build against them:
 
 - **Repository**: [`ud-schemas`](https://github.com/oatnil-top/ud-schemas)
-- **License**: MIT
 - **Versioning**: Schemas use a `v{N}` suffix. Breaking changes bump the version number.
 
 The repository includes example files and usage instructions.

@@ -20,7 +20,7 @@ Practical recipes with CLI commands and curl examples. Pick a use case and copy-
 - [Delete a Task](/docs/cookbook/delete-a-task) — Remove tasks and restore from trash
 - [Query and Filter Tasks](/docs/cookbook/query-tasks) — Find tasks with SQL-like syntax or natural language
 - [Query Cheat Sheet](/docs/cookbook/query-examples) — Copy-paste queries for common scenarios
-- [Save and Reuse Queries](/docs/cookbook/saved-queries) — Save frequently-used queries for one-click access
+- [Save and Reuse Queries](/docs/saved-queries) — Save frequently-used queries for one-click access
 - [Add Notes to a Task](/docs/cookbook/add-notes-to-a-task) — Track progress and decisions with task notes
 - [Batch Update Tasks](/docs/cookbook/batch-update-tasks) — Bulk status changes and cleanup
 - [Link Tasks Together](/docs/cookbook/link-tasks-together) — Create relationships between tasks
@@ -47,7 +47,7 @@ Practical recipes with CLI commands and curl examples. Pick a use case and copy-
 
 ## Administration
 
-- [Backup and Export Data](/docs/cookbook/backup-and-export) — Trigger backups and download your data
+- [Backup and Export Data](/docs/advanced/backup-and-export) — Trigger backups and download your data
 - [Set Up Scheduled Jobs](/docs/cookbook/scheduled-jobs) — Automate recurring actions
 
 ## Integrations
