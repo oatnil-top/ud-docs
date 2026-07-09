@@ -6,7 +6,7 @@ sidebar_position: 11
 
 ## What is the AI Assistant?
 
-UnderControl's AI Assistant helps you work faster by understanding images and text. Snap a photo of a receipt and AI extracts the expense details. Describe a task in plain English and AI creates it for you. It's like having a smart helper that handles the tedious data entry.
+UnDercontrol's AI Assistant helps you work faster by understanding images and text. Snap a photo of a receipt and AI extracts the expense details. Describe a task in plain English and AI creates it for you. It's like having a smart helper that handles the tedious data entry.
 
 ## Key AI Features
 
@@ -47,7 +47,7 @@ Ask questions about your tasks in plain English:
 
 ## Supported AI Providers
 
-UnderControl works with a wide range of AI providers:
+UnDercontrol works with a wide range of AI providers:
 
 ### Premium Providers
 - **OpenAI** - GPT-4o and other OpenAI models
@@ -73,14 +73,14 @@ UnderControl works with a wide range of AI providers:
 6. Toggle backend and/or frontend availability
 7. Test the configuration to make sure it works
 
-You can add multiple providers and reorder them by priority. UnderControl uses the first available provider.
+You can add multiple providers and reorder them by priority. UnDercontrol uses the first available provider.
 
 ### System-Level Providers
 If your administrator has configured system-level AI providers, those are available to all users who haven't set up their own. Your personal providers always take priority over system providers.
 
 ## How AI Configuration Works
 
-UnderControl uses a three-tier priority system:
+UnDercontrol uses a three-tier priority system:
 1. **Your personal provider** (highest priority) - API key you configure yourself
 2. **Admin provider** - System-wide provider set by your administrator
 3. **Startup provider** (lowest priority) - Server-level default configuration

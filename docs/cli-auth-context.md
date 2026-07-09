@@ -6,7 +6,7 @@ sidebar_position: 5
 
 # CLI Multi-Context Authentication
 
-The UnderControl CLI supports managing multiple accounts and API endpoints using a kubectl-style context system. This allows you to easily switch between different servers, accounts, or environments.
+The UnDercontrol CLI supports managing multiple accounts and API endpoints using a kubectl-style context system. This allows you to easily switch between different servers, accounts, or environments.
 
 ## Overview
 
@@ -26,7 +26,7 @@ current-context: personal
 contexts:
 - name: personal
   context:
-    api_url: https://api.undercontrol.app
+    api_url: https://ud.oatnil.com
     token: eyJhbGciOi...
     user: john@example.com
 - name: work
@@ -51,7 +51,7 @@ ud config get-contexts
 Output:
 ```
 CURRENT  NAME      API URL                      USER
-*        personal  https://api.undercontrol.app john@example.com
+*        personal  https://ud.oatnil.com john@example.com
          work      https://ud.company.com       john@company.com
          staging   http://localhost:4000        (api-key)
 ```
@@ -117,7 +117,7 @@ current-context: personal
 contexts:
 - name: personal
   context:
-    api_url: https://api.undercontrol.app
+    api_url: https://ud.oatnil.com
     user: john@example.com
     token: eyJhbGciOi...xyz
 - name: work
@@ -197,7 +197,7 @@ UD_API_URL=http://localhost:4000 ud task list
 
 ```bash
 # Setup personal account
-ud login --context personal --api-url https://api.undercontrol.app
+ud login --context personal --api-url https://ud.oatnil.com
 
 # Setup work account
 ud login --context work --api-url https://ud.company.com
@@ -219,7 +219,7 @@ ud config set-context dev --api-url http://localhost:4000
 ud login --context dev
 
 # Production
-ud login --context prod --api-url https://api.undercontrol.app
+ud login --context prod --api-url https://ud.oatnil.com
 
 # Quick switching
 ud config use-context dev
@@ -231,7 +231,7 @@ ud config use-context prod
 ```bash
 # Create context with API key (no interactive login needed)
 ud config set-context ci \
-  --api-url https://api.undercontrol.app \
+  --api-url https://ud.oatnil.com \
   --api-key ak_your_api_key
 
 # Use in CI/CD scripts
@@ -241,7 +241,7 @@ ud task create "Deployment completed" -d "Version 1.2.3"
 
 Or use environment variables:
 ```bash
-export UD_API_URL=https://api.undercontrol.app
+export UD_API_URL=https://ud.oatnil.com
 export UD_API_KEY=ak_your_api_key
 ud task list
 ```
@@ -252,7 +252,7 @@ If you have an existing config file with the old single-context format:
 
 ```yaml
 # Old format
-api_url: https://api.undercontrol.app
+api_url: https://ud.oatnil.com
 token: eyJhbGciOi...
 ```
 
@@ -264,7 +264,7 @@ current-context: default
 contexts:
 - name: default
   context:
-    api_url: https://api.undercontrol.app
+    api_url: https://ud.oatnil.com
     token: eyJhbGciOi...
 ```
 

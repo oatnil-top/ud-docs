@@ -6,7 +6,7 @@ sidebar_position: 8
 
 ## What is Expense Tracking?
 
-Expense Tracking in UnderControl lets you record and analyze your spending. You can add expenses manually, snap a photo of a receipt and let AI extract the details, or simply type what you spent in plain language. Every expense can be linked to a budget and payment account, giving you a complete picture of where your money goes.
+Expense Tracking in UnDercontrol lets you record and analyze your spending. You can add expenses manually, snap a photo of a receipt and let AI extract the details, or simply type what you spent in plain language. Every expense can be linked to a budget and payment account, giving you a complete picture of where your money goes.
 
 ## Three Ways to Add Expenses
 
@@ -85,7 +85,7 @@ When you link an expense to a budget, it counts toward that budget's "spent" tot
 Select which payment account you used for each expense. This helps you understand spending patterns across different accounts - like how much goes on your credit card vs. checking account.
 
 ### With Resources
-Receipt images are stored as resources in UnderControl. AI-scanned receipts are automatically linked to the expense, so you always have the original receipt attached.
+Receipt images are stored as resources in UnDercontrol. AI-scanned receipts are automatically linked to the expense, so you always have the original receipt attached.
 
 ### With AI Features
 The AI assistant can:

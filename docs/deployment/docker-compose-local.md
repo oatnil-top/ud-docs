@@ -35,7 +35,7 @@ docker compose version
 
 ### Option 1: Automated Installation (Recommended)
 
-Set up UnderControl with a single command. The installation script will automatically handle all configuration and setup.
+Set up UnDercontrol with a single command. The installation script will automatically handle all configuration and setup.
 
 #### Linux / macOS / WSL
 
@@ -175,7 +175,7 @@ openssl rand -base64 32
 :::
 
 :::info Free Personal Tier
-UnderControl starts with a **free Personal tier** - no license required! Perfect for individual use with 1 user and all core features included (SQLite database, local storage).
+UnDercontrol starts with a **free Personal tier** - no license required! Perfect for individual use with 1 user and all core features included (SQLite database, local storage).
 
 Want team features, cloud storage, or PostgreSQL? Upgrade to [Pro or Max](/docs/subscription-tiers) and add your license key using `--license-token=your-key`.
 :::

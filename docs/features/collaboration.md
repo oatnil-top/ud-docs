@@ -6,7 +6,7 @@ sidebar_position: 12
 
 ## What is Collaboration?
 
-Collaboration in UnderControl lets you work together with others by creating groups, sharing tasks, and managing permissions. Whether you're coordinating with a team at work or sharing finances with a partner, groups keep everyone on the same page.
+Collaboration in UnDercontrol lets you work together with others by creating groups, sharing tasks, and managing permissions. Whether you're coordinating with a team at work or sharing finances with a partner, groups keep everyone on the same page.
 
 ## Main Features
 
@@ -67,7 +67,7 @@ Group admins can:
 
 ## Permission System
 
-UnderControl uses role-based access control (RBAC) to manage what users can do:
+UnDercontrol uses role-based access control (RBAC) to manage what users can do:
 
 ### System Roles
 - **Admin** - Full system access including admin panel

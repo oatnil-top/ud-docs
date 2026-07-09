@@ -6,7 +6,7 @@ sidebar_position: 3
 
 ## What are API Keys?
 
-API keys give you programmatic access to the UnderControl API. Use them to connect the CLI, build integrations, or automate workflows - all without sharing your password. Each key has its own set of permissions and expiration, so you stay in control.
+API keys give you programmatic access to the UnDercontrol API. Use them to connect the CLI, build integrations, or automate workflows - all without sharing your password. Each key has its own set of permissions and expiration, so you stay in control.
 
 :::info
 API keys are available on **Pro and Max tiers** only. Personal tier users can upgrade to access this feature.

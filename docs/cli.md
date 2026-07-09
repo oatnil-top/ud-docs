@@ -1,12 +1,12 @@
 ---
 title: CLI Reference
-description: Complete command reference for the UnderControl CLI tool
+description: Complete command reference for the UnDercontrol CLI tool
 sidebar_position: 4
 ---
 
 # CLI Reference
 
-The UnderControl CLI (`ud`) is a command-line tool for managing tasks from the terminal. It supports both direct commands and an interactive TUI mode with vim-style keybindings.
+The UnDercontrol CLI (`ud`) is a command-line tool for managing tasks from the terminal. It supports both direct commands and an interactive TUI mode with vim-style keybindings.
 
 ## Installation
 
@@ -75,7 +75,7 @@ ud login
 ```
 
 You'll be prompted for:
-- **Server URL**: Your UnderControl server (e.g., `https://api.undercontrol.app`)
+- **Server URL**: Your UnDercontrol server (e.g., `https://ud.oatnil.com`)
 - **Username**: Your account email
 - **Password**: Your account password
 
@@ -478,11 +478,11 @@ ud attach resource 2a2e542e -t expense -e def456
 
 ### Download a Resource
 
-To download a resource, use `ud entity get` to retrieve the presigned download URL, then download with `curl`:
+To download a resource, use `ud get entity` to retrieve the presigned download URL, then download with `curl`:
 
 ```bash
 # Get resource details (includes presigned download URL)
-ud entity get 2a2e542e-0711-4e7f-aafb-09a432e71860
+ud get entity 2a2e542e-0711-4e7f-aafb-09a432e71860
 
 # Download using the presigned URL from the response
 curl -o receipt.png "https://storage.example.com/...?signature=..."
@@ -504,7 +504,7 @@ ud describe task 3de9f82b
 # Shows: [2a2e542e] screenshot.png (image/png, 102.4 KB)
 
 # 4. Later, download the file
-ud entity get 2a2e542e
+ud get entity 2a2e542e
 # Copy the presignedUrl from the output
 curl -o screenshot.png "<presigned-url>"
 ```
@@ -639,7 +639,7 @@ Create `.claude/instructions.md` or `.cursorrules` in your project:
 ```markdown
 # Task Management
 
-Use UnderControl CLI to manage project tasks:
+Use UnDercontrol CLI to manage project tasks:
 
 - List tasks: `ud get task`
 - View task details: `ud describe task <id>`

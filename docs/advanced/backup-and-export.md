@@ -6,7 +6,7 @@ sidebar_position: 2
 
 ## What is Backup and Export?
 
-UnderControl's backup system protects your data by creating compressed copies of your database that are stored securely in the cloud. You can trigger backups manually or let them run automatically on a schedule. When you need your data, download a backup anytime.
+UnDercontrol's backup system protects your data by creating compressed copies of your database that are stored securely in the cloud. You can trigger backups manually or let them run automatically on a schedule. When you need your data, download a backup anytime.
 
 :::info
 The backup system works with **SQLite deployments only**. If you're using PostgreSQL, use PostgreSQL's native backup tools (pg_dump, etc.) instead.

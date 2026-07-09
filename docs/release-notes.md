@@ -1,16 +1,16 @@
 ---
 title: Release Notes
-description: Complete version history and changelog for UnderControl
+description: Complete version history and changelog for UnDercontrol
 sidebar_position: 1
 ---
 
 # Release Notes
 
-Complete version history and new features for UnderControl.
+Complete version history and new features for UnDercontrol.
 
 ## Version Numbering
 
-UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., `v0.19.0`:
+UnDercontrol follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., `v0.19.0`:
 
 - **MAJOR version 0**: Indicates development version, API and features may change significantly
 - **MINOR version** (e.g., 0.**19**.0): Incremented for new features, major improvements, or breaking changes
@@ -859,7 +859,7 @@ UnderControl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ### Upgrade Notes
 
-- `ud entity get` renamed to `ud get entity` (old command removed)
+- `ud get entity` renamed to `ud get entity` (old command removed)
 - `ud daemon` renamed to `ud run-as-daemon`
 - `ud apply note` subcommand removed
 - Markdown-based apply for Skills, Prompts, AgentCLI removed (YAML only)
@@ -2878,7 +2878,7 @@ This release contains internal build and release workflow updates only.
 ### New Features
 
 - Workspace switcher dropdown in workspace TaskPanel
-- "Save to UnderControl" button in standalone editor
+- "Save to UnDercontrol" button in standalone editor
 
 ### Bug Fixes
 
@@ -4070,7 +4070,7 @@ Export tasks with their notes as PDF files for offline sharing and archiving.
 
 #### Web Clipper (Chrome Extension)
 
-New Chrome browser extension to save web pages as UnderControl tasks:
+New Chrome browser extension to save web pages as UnDercontrol tasks:
 
 - Click the extension icon, edit the title, and save the entire page
 - Captures full-page HTML snapshots using SingleFile technology

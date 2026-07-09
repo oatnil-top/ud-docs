@@ -1,6 +1,6 @@
 ---
 title: Download
-description: Download UnderControl for your platform
+description: Download UnDercontrol for your platform
 # SYNC: When updating version, also update LATEST_VERSION in src/pages/index.tsx
 # Current version: 0.1.26
 # R2 URL pattern: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/releases/{version}/{filename}
@@ -8,7 +8,7 @@ description: Download UnderControl for your platform
 
 # Download
 
-Choose your platform to download UnderControl.
+Choose your platform to download UnDercontrol.
 
 ## macOS {#macos}
 
@@ -33,4 +33,4 @@ Download the Linux version:
 
 ## Browser Extension {#browser-extension}
 
-- [UnderControl Web Clipper](https://chromewebstore.google.com/detail/undercontrol-web-clipper/mckkbigikfkoeddpcbhdmpncoljoagog) — Save web pages as tasks with full-page snapshots. Available on the Chrome Web Store.
+- [UnDercontrol Web Clipper](https://chromewebstore.google.com/detail/undercontrol-web-clipper/mckkbigikfkoeddpcbhdmpncoljoagog) — Save web pages as tasks with full-page snapshots. Available on the Chrome Web Store.

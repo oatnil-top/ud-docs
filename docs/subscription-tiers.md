@@ -4,15 +4,15 @@ sidebar_position: 3
 
 # License Activation Guide
 
-Learn how to activate your Pro or Max license and unlock team features in UnderControl.
+Learn how to activate your Pro or Max license and unlock team features in UnDercontrol.
 
 :::tip Already have a license?
 Jump to the [Quick Activation](#quick-activation) section to get started immediately.
 :::
 
-## Understanding UnderControl Tiers
+## Understanding UnDercontrol Tiers
 
-UnderControl offers three tiers to fit your needs:
+UnDercontrol offers three tiers to fit your needs:
 
 | Tier | Price | Users | Best For |
 |------|-------|-------|----------|
@@ -47,7 +47,7 @@ Choose the method that works best for your setup:
 
 #### Option 1: During Installation (Easiest)
 
-When installing UnderControl, add your license key to the command:
+When installing UnDercontrol, add your license key to the command:
 
 **Mac/Linux:**
 ```bash
@@ -63,7 +63,7 @@ irm https://raw.githubusercontent.com/oatnil-top/ud-docs/main/scripts/install.ps
 
 #### Option 2: After Installation
 
-If UnderControl is already installed, add your license to the configuration file:
+If UnDercontrol is already installed, add your license to the configuration file:
 
 **Using Docker Compose:**
 
@@ -79,7 +79,7 @@ services:
     # ... rest of your configuration
 ```
 
-3. Restart UnderControl:
+3. Restart UnDercontrol:
 ```bash
 docker compose restart
 ```
@@ -98,11 +98,11 @@ export LICENSE_TOKEN="your-license-key-here"
 $env:LICENSE_TOKEN="your-license-key-here"
 ```
 
-2. Restart UnderControl
+2. Restart UnDercontrol
 
 ### Step 3: Verify Activation
 
-1. Open UnderControl in your browser (`http://localhost:3000`)
+1. Open UnDercontrol in your browser (`http://localhost:3000`)
 2. Log in to your account
 3. Check your account settings to confirm your tier shows as **Pro** or **Max**
 
@@ -127,7 +127,7 @@ Once your license is activated:
 ### Viewing License Information
 
 To check your current license status:
-1. Open UnderControl
+1. Open UnDercontrol
 2. Go to **Settings** → **License**
 3. View your:
    - Current tier (Personal, Pro, or Max)
@@ -140,7 +140,7 @@ To check your current license status:
 To change or update your license:
 
 1. Replace the old license key with your new one (use the same method you used for initial activation)
-2. Restart UnderControl
+2. Restart UnDercontrol
 3. Your new license is now active
 
 ### Removing Your License
@@ -148,8 +148,8 @@ To change or update your license:
 To switch back to Personal tier:
 
 1. Remove the `LICENSE_TOKEN` from your configuration
-2. Restart UnderControl
-3. UnderControl will automatically switch to Personal tier
+2. Restart UnDercontrol
+3. UnDercontrol will automatically switch to Personal tier
 
 :::warning Data Safety
 Removing your license doesn't delete your data. Your budgets, expenses, and records remain safe. However, advanced features will be disabled and only one user will be able to access the system.
@@ -166,7 +166,7 @@ Removing your license doesn't delete your data. Your budgets, expenses, and reco
 **Solutions:**
 1. **Check for typos** - License keys are long and easy to mistype. Copy and paste to avoid errors.
 2. **Remove quotes** - Don't include quote marks around your license key
-3. **Restart UnderControl** - Changes require a restart to take effect
+3. **Restart UnDercontrol** - Changes require a restart to take effect
 4. **Check expiration** - Verify your license hasn't expired
 
 ### "Invalid License" Error
@@ -188,7 +188,7 @@ Removing your license doesn't delete your data. Your budgets, expenses, and reco
 1. Verify license shows correctly in Settings
 2. Log out and log back in
 3. Clear your browser cache
-4. Restart UnderControl completely
+4. Restart UnDercontrol completely
 
 If issues persist, contact support@undercontrol.io
 
@@ -206,11 +206,11 @@ Already using the Personal tier? Here's how to upgrade:
 
 2. **Add your license key**
    - Use any of the activation methods above
-   - No need to reinstall UnderControl!
+   - No need to reinstall UnDercontrol!
 
-3. **Restart UnderControl**
+3. **Restart UnDercontrol**
    - `docker compose restart` (if using Docker)
-   - Or restart your UnderControl service
+   - Or restart your UnDercontrol service
 
 4. **Your data stays intact**
    - All your budgets, expenses, and records remain unchanged
@@ -246,10 +246,10 @@ A: Yes, each installation requires its own license.
 A: Yes! Simply remove the license from the old server and add it to the new one.
 
 **Q: What happens when my license expires?**  
-A: UnderControl automatically switches back to Personal tier. Your data remains safe and you can renew anytime.
+A: UnDercontrol automatically switches back to Personal tier. Your data remains safe and you can renew anytime.
 
 **Q: Can I get a trial license?**  
-A: The Personal tier is free and includes all core features. This serves as a full-featured trial of UnderControl.
+A: The Personal tier is free and includes all core features. This serves as a full-featured trial of UnDercontrol.
 
 ---
 

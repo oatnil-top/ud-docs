@@ -6,7 +6,7 @@ sidebar_position: 4
 
 ## Overview
 
-The Accounts API provides RESTful endpoints for managing financial accounts in UnderControl. All endpoints require authentication via Bearer token.
+The Accounts API provides RESTful endpoints for managing financial accounts in UnDercontrol. All endpoints require authentication via Bearer token.
 
 ## Authentication
 
@@ -19,7 +19,7 @@ Authorization: Bearer <access_token>
 ## Base URL
 
 ```
-https://api.undercontrol.app
+https://ud.oatnil.com
 ```
 
 For local development:
@@ -451,13 +451,13 @@ X-RateLimit-Reset: 1706186400
 
 **List all accounts:**
 ```bash
-curl -X GET https://api.undercontrol.app/account \
+curl -X GET https://ud.oatnil.com/account \
   -H "Authorization: Bearer YOUR_TOKEN"
 ```
 
 **Create a new account:**
 ```bash
-curl -X POST https://api.undercontrol.app/account \
+curl -X POST https://ud.oatnil.com/account \
   -H "Authorization: Bearer YOUR_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
@@ -472,7 +472,7 @@ curl -X POST https://api.undercontrol.app/account \
 
 **Update an account:**
 ```bash
-curl -X PUT https://api.undercontrol.app/account/ACCOUNT_ID \
+curl -X PUT https://ud.oatnil.com/account/ACCOUNT_ID \
   -H "Authorization: Bearer YOUR_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{

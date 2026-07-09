@@ -6,7 +6,7 @@ sidebar_position: 7
 
 ## What are Budgets?
 
-Budgets in UnderControl help you plan and track your spending over time. You set a budget amount, choose how often it recurs (weekly, monthly, quarterly, or yearly), and UnderControl automatically calculates your total budget and compares it against actual spending - giving you a clear picture of where your money is going.
+Budgets in UnDercontrol help you plan and track your spending over time. You set a budget amount, choose how often it recurs (weekly, monthly, quarterly, or yearly), and UnDercontrol automatically calculates your total budget and compares it against actual spending - giving you a clear picture of where your money is going.
 
 ## Main Features
 
@@ -36,7 +36,7 @@ A budget plan defines how much money is allocated and how often. You can have mu
 - **Yearly** - Annual budget allocation
 
 ### Changing Your Budget
-Need to adjust your budget mid-period? Add a new plan with the updated amount. UnderControl handles the transition automatically, so your totals stay accurate even when allocations change.
+Need to adjust your budget mid-period? Add a new plan with the updated amount. UnDercontrol handles the transition automatically, so your totals stay accurate even when allocations change.
 
 ## One-Time Adjustments
 
@@ -49,7 +49,7 @@ Each adjustment includes an amount, date, and optional reason for your records.
 
 ## How Budget Totals Work
 
-UnderControl dynamically calculates your total budget based on:
+UnDercontrol dynamically calculates your total budget based on:
 
 1. **Initial amount** - Your starting balance
 2. **Plan allocations** - Recurring amounts multiplied by the number of periods elapsed

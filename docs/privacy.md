@@ -12,7 +12,7 @@ sidebar_position: 20
 
 ## An Honest Take
 
-I'm an indie developer, not a big corporation. One of my main motivations for building UnderControl was that I wanted full control over my own sensitive data — tasks, finances, personal notes — instead of handing them to big tech companies. I built this for myself first, and now I'm sharing it with you.
+I'm an indie developer, not a big corporation. One of my main motivations for building UnDercontrol was that I wanted full control over my own sensitive data — tasks, finances, personal notes — instead of handing them to big tech companies. I built this for myself first, and now I'm sharing it with you.
 
 I have zero interest, ability, resources, or motivation to do anything with your data. That said, I understand if you don't fully trust me — you shouldn't blindly trust anyone online. Big companies with entire security teams still get breached. So why would you trust a solo developer? You have every right to be skeptical.
 
@@ -45,7 +45,7 @@ For self-hosted users, security is in your hands. Keep your server updated and f
 
 The [Web Clipper](/docs/web-clipper) Chrome extension has additional privacy considerations:
 
-- **Website content** is captured only when you explicitly click "Save". It is saved to your local disk or sent to your own UnderControl server. No content is sent to any third party.
+- **Website content** is captured only when you explicitly click "Save". It is saved to your local disk or sent to your own UnDercontrol server. No content is sent to any third party.
 - **Authentication credentials** are stored locally on your device. They are only transmitted to the server URL you configure.
 - The extension does **not** use remote code. All scripts are bundled locally.
 - The extension does **not** track browsing history or user activity.

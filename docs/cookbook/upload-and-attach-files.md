@@ -38,7 +38,7 @@ ud describe task a1b2c3d4
 
 ```bash
 # Get the presigned URL
-ud entity get {resourceId}
+ud get entity {resourceId}
 
 # Download it
 curl -o screenshot.png "<presigned-url>"

@@ -10,13 +10,13 @@ Want to get started immediately? Jump to [Docker Compose with Local Storage + SQ
 
 Choose your deployment method based on your infrastructure and requirements.
 
-![UnderControl Architecture](/img/Arch.png)
+![UnDercontrol Architecture](/img/Arch.png)
 
 The architecture diagram shows how users interact with the system through their browser, which connects to the frontend. The frontend and backend communicate via CORS or reverse proxy. The backend orchestrates connections to the database and optional external services (AI, S3 storage, and OTEL monitoring).
 
 ## Architecture
 
-UnderControl consists of two main components and several optional external services:
+UnDercontrol consists of two main components and several optional external services:
 
 ### Core Components
 
@@ -87,7 +87,7 @@ Enterprise-grade deployments for production environments:
 ### For Development or Testing
 → **[Docker Compose with Local Storage + SQLite](/docs/deployment/docker-compose-local)**
 
-Simple setup, minimal dependencies, perfect for trying out UnderControl.
+Simple setup, minimal dependencies, perfect for trying out UnDercontrol.
 
 ### For Small Production Deployments
 → **[Docker Compose with Local Storage + PostgreSQL](/docs/deployment/docker-compose-postgres)**
@@ -108,7 +108,7 @@ Full orchestration, auto-scaling, rolling updates, and production-grade reliabil
 
 All deployment methods require:
 
-- **License File**: Contact the UnderControl team for a license file
+- **License File**: Contact the UnDercontrol team for a license file
 - **JWT Secret**: A secure random string for authentication
 - **Container Runtime**: Docker or compatible container runtime
 
@@ -117,7 +117,7 @@ All deployment methods require:
 1. Choose a deployment method above
 2. Follow the detailed guide for your chosen method
 3. Configure your environment variables
-4. Deploy and access your UnderControl instance
+4. Deploy and access your UnDercontrol instance
 
 ## Getting Help
 

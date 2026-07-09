@@ -6,7 +6,7 @@ sidebar_position: 4
 
 ## What is the Admin Panel?
 
-The Admin Panel is your control center for managing the entire UnderControl instance. From here, administrators can manage users, configure system settings, monitor background tasks, and set up integrations. It's designed for self-hosted deployments where you need full control over your system.
+The Admin Panel is your control center for managing the entire UnDercontrol instance. From here, administrators can manage users, configure system settings, monitor background tasks, and set up integrations. It's designed for self-hosted deployments where you need full control over your system.
 
 ## Dashboard
 
@@ -48,7 +48,7 @@ Oversee all groups across the system:
 - **Create and delete groups** - Set up or remove groups as needed
 
 ### System Configuration
-Configure your UnderControl instance across multiple categories:
+Configure your UnDercontrol instance across multiple categories:
 
 #### Storage (S3/R2)
 - Enable S3-compatible storage
@@ -121,7 +121,7 @@ Manage database backups from the admin panel:
 ## How the Admin Panel Works with Other Features
 
 ### With User Authentication
-The admin panel manages users and roles that power the entire authentication and authorization system across UnderControl.
+The admin panel manages users and roles that power the entire authentication and authorization system across UnDercontrol.
 
 ### With AI Features
 System-level AI providers configured here serve as the default for users who haven't set up their own providers.

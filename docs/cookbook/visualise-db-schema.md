@@ -1,6 +1,6 @@
 ---
 title: Visualise a Database Schema
-sidebar_position: 20
+sidebar_position: 25
 ---
 
 # Visualise a Database Schema with Dataflow Diagrams

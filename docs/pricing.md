@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Pricing
 
-UnderControl is **100% self-hosted** with flexible pricing tiers to match your needs. All tiers run on your own infrastructure, ensuring complete data privacy and control.
+UnDercontrol is **100% self-hosted** with flexible pricing tiers to match your needs. All tiers run on your own infrastructure, ensuring complete data privacy and control.
 
 ## Subscription Tiers
 
@@ -32,7 +32,7 @@ Perfect for individual users managing their own finances.
 **Perfect for:**
 - Personal finance management
 - Individual budget tracking
-- Getting started with UnderControl
+- Getting started with UnDercontrol
 - Testing before upgrading
 
 ---
@@ -76,7 +76,7 @@ Support the project while enjoying Pro features.
 **Features:** Identical to Pro tier
 
 **Why choose Max?**
-- 🎁 Support continued development of UnderControl
+- 🎁 Support continued development of UnDercontrol
 - 🚀 Help fund new features and improvements
 - ⭐ Show your appreciation for open-source software
 - 💪 Enable faster updates and better support
@@ -87,7 +87,7 @@ Support the project while enjoying Pro features.
 - Users who value open-source sustainability
 
 :::info Supporter Tier
-Max tier has the same features as Pro. The higher price directly supports UnderControl's development and helps keep the project thriving. Thank you for your support!
+Max tier has the same features as Pro. The higher price directly supports UnDercontrol's development and helps keep the project thriving. Thank you for your support!
 :::
 
 ---
@@ -117,14 +117,14 @@ Max tier has the same features as Pro. The higher price directly supports UnderC
 ## How Licensing Works
 
 ### Personal Tier (Free)
-- **No license needed** - Just install and start using UnderControl
+- **No license needed** - Just install and start using UnDercontrol
 - Perfect for personal use
 - Get started in minutes
 
 ### Pro/Max Tiers (Paid)
 1. Purchase your license
 2. Receive a license key via email
-3. Add the license key when installing UnderControl
+3. Add the license key when installing UnDercontrol
 4. All Pro/Max features unlock automatically
 
 :::tip Simple Setup
@@ -135,7 +135,7 @@ After purchasing, you'll receive detailed instructions on how to activate your l
 
 ## Installation
 
-UnderControl works on any platform:
+UnDercontrol works on any platform:
 
 - **Windows** - One-click installation
 - **Mac** - Simple setup via Terminal
@@ -179,23 +179,23 @@ Simply replace your Pro license with a Max license. All features remain the same
 
 ## Frequently Asked Questions
 
-### Is UnderControl cloud-hosted?
+### Is UnDercontrol cloud-hosted?
 
-No. UnderControl is **100% self-hosted**. You run it on your own infrastructure (server, VPS, or local machine). We never host your data.
+No. UnDercontrol is **100% self-hosted**. You run it on your own infrastructure (server, VPS, or local machine). We never host your data.
 
 ### Do I need technical knowledge to self-host?
 
-**Personal tier:** No! Our one-line installation script handles everything. If you can copy and paste a command, you can run UnderControl.
+**Personal tier:** No! Our one-line installation script handles everything. If you can copy and paste a command, you can run UnDercontrol.
 
 **Pro/Max tiers:** Basic computer skills are enough. Advanced features like cloud storage are optional and come with step-by-step guides.
 
 ### Can I try Pro features before purchasing?
 
-Yes! The Personal tier includes all core features. You can evaluate UnderControl thoroughly before upgrading. Pro/Max mainly adds multi-user support and storage flexibility.
+Yes! The Personal tier includes all core features. You can evaluate UnDercontrol thoroughly before upgrading. Pro/Max mainly adds multi-user support and storage flexibility.
 
 ### What happens if my Pro/Max license expires?
 
-Don't worry - your data is safe! Your UnderControl installation automatically switches back to Personal tier (free version):
+Don't worry - your data is safe! Your UnDercontrol installation automatically switches back to Personal tier (free version):
 - Only one user can access the system (the admin)
 - Advanced features like team management become unavailable
 - Cloud storage switches to local storage
@@ -216,13 +216,13 @@ You can also use local storage (files saved on your server) with any tier.
 
 ### Is the license per server or per user?
 
-**One license per installation.** If you install UnderControl on one server, you need one license - no matter how many people use it (up to your license's user limit).
+**One license per installation.** If you install UnDercontrol on one server, you need one license - no matter how many people use it (up to your license's user limit).
 
 Example: If you have a Pro license for 10 users, all 10 people can use the same installation with one license.
 
 ### Can I get a refund?
 
-Yes! We offer a **30-day money-back guarantee**. If UnderControl doesn't work for you, just let us know and we'll refund your purchase - no questions asked.
+Yes! We offer a **30-day money-back guarantee**. If UnDercontrol doesn't work for you, just let us know and we'll refund your purchase - no questions asked.
 
 ### How do I purchase a license?
 
@@ -245,7 +245,7 @@ We're here to help!
 
 ### Try Personal Tier (Free)
 
-Start using UnderControl in minutes with our Personal tier:
+Start using UnDercontrol in minutes with our Personal tier:
 
 **Mac/Linux:**
 ```bash

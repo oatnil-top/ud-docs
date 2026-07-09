@@ -5,18 +5,18 @@ sidebar_position: 2
 
 # Migrate Local Data to Remote Server
 
-Learn how to migrate your data from a local UnderControl desktop instance (Personal tier with SQLite) to a remote server, enabling cross-device access and sync.
+Learn how to migrate your data from a local UnDercontrol desktop instance (Personal tier with SQLite) to a remote server, enabling cross-device access and sync.
 
 ## Prerequisites
 
-- UnderControl desktop app with local data you want to migrate
-- A remote UnderControl server deployed and accessible (see [Docker Compose deployment](/docs/deployment/docker-compose-local))
+- UnDercontrol desktop app with local data you want to migrate
+- A remote UnDercontrol server deployed and accessible (see [Docker Compose deployment](/docs/deployment/docker-compose-local))
 - The `ud` CLI installed on your machine ([CLI documentation](/docs/cli))
 - Accounts on both the local and remote servers
 
 ## Overview
 
-When using UnderControl desktop with the Personal tier, your data is stored in a local SQLite database. If you want to access your data from multiple devices (e.g., laptop and phone), you need to migrate your data to a remote server.
+When using UnDercontrol desktop with the Personal tier, your data is stored in a local SQLite database. If you want to access your data from multiple devices (e.g., laptop and phone), you need to migrate your data to a remote server.
 
 The `ud migrate` command fetches data from one server (source) and creates it in another (target), automatically handling ID remapping for cross-references like expense-to-budget links.
 

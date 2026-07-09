@@ -4,11 +4,11 @@ sidebar_position: 6
 
 # Configuration Guide
 
-This document describes all configuration methods available for the UnderControl Go backend and provides a complete reference of all configuration options.
+This document describes all configuration methods available for the UnDercontrol Go backend and provides a complete reference of all configuration options.
 
 ## Configuration Methods
 
-UnderControl supports four methods for configuration, allowing flexibility for different deployment scenarios:
+UnDercontrol supports four methods for configuration, allowing flexibility for different deployment scenarios:
 
 ### 1. Command-Line Flags (Highest Priority)
 

@@ -1,12 +1,12 @@
 ---
 title: Everything as Code
-description: Open file format specifications for UnderControl tasks and notes
+description: Open file format specifications for UnDercontrol tasks and notes
 sidebar_position: 3
 ---
 
 # Everything as Code
 
-UnderControl stores tasks and notes as **plain markdown files with YAML frontmatter**. The file formats are defined by open JSON Schemas published in the [`ud-schemas`](https://github.com/user/ud-schemas) repository.
+UnDercontrol stores tasks and notes as **plain markdown files with YAML frontmatter**. The file formats are defined by open JSON Schemas published in the [`ud-schemas`](https://github.com/oatnil-top/ud-schemas) repository.
 
 This approach means your data is always:
 - **Human-readable** — edit with any text editor
@@ -214,7 +214,7 @@ Most editors with YAML/JSON Schema support can use these schemas for autocomplet
 
 The schemas are published as an open-source repository:
 
-- **Repository**: [`ud-schemas`](https://github.com/user/ud-schemas)
+- **Repository**: [`ud-schemas`](https://github.com/oatnil-top/ud-schemas)
 - **License**: MIT
 - **Versioning**: Schemas use a `v{N}` suffix. Breaking changes bump the version number.
 

@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Docker Compose: Local Storage + PostgreSQL
 
-Deploy UnderControl with local filesystem storage and PostgreSQL database for better performance and reliability in small production environments.
+Deploy UnDercontrol with local filesystem storage and PostgreSQL database for better performance and reliability in small production environments.
 
 ## Coming Soon
 

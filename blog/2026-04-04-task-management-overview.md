@@ -1,24 +1,24 @@
 ---
-title: "How UnderControl Handles Task Management: Views, Links, and the CLI"
-description: A practical look at UnderControl's task system — multiple views, bidirectional linking, markdown notes, and a kubectl-style CLI for power users.
+title: "How UnDercontrol Handles Task Management: Views, Links, and the CLI"
+description: A practical look at UnDercontrol's task system — multiple views, bidirectional linking, markdown notes, and a kubectl-style CLI for power users.
 authors: [lintao]
 tags: [feature]
 date: 2026-04-04
 ---
 
-Most task managers give you a list. Maybe a kanban board if you're lucky. UnderControl takes a different approach: your tasks are a data structure you can view, query, and manipulate from multiple angles — whether you're in the browser, the desktop app, or a terminal.
+Most task managers give you a list. Maybe a kanban board if you're lucky. UnDercontrol takes a different approach: your tasks are a data structure you can view, query, and manipulate from multiple angles — whether you're in the browser, the desktop app, or a terminal.
 
 Here's a practical walkthrough of how the task system works.
 
 ## Six Statuses That Actually Mean Something
 
-Tasks in UnderControl move through six statuses: **Todo**, **In Progress**, **Pending**, **Done**, **Stale**, and **Archived**.
+Tasks in UnDercontrol move through six statuses: **Todo**, **In Progress**, **Pending**, **Done**, **Stale**, and **Archived**.
 
 The distinction between Pending and Stale is one I find genuinely useful. Pending means you're deliberately waiting — on a reply, a dependency, a decision. Stale means the task just hasn't been touched in a while. That difference matters when you're doing a weekly review and trying to figure out what to act on versus what to clean up.
 
 ## Pick the View That Matches Your Mental Model
 
-Different work calls for different views. UnderControl gives you seven:
+Different work calls for different views. UnDercontrol gives you seven:
 
 - **List** — The default. Fast, filterable, keyboard-friendly.
 - **Kanban** — Drag cards between status columns. Good for sprint-style work.
@@ -70,7 +70,7 @@ ud task query "status = 'todo' AND deadline < '2026-05-01'"
 ud task apply -f task.md
 ```
 
-The `apply` command is particularly useful — you can write a task in a markdown file and push it to UnderControl, which fits nicely into scripting and automation workflows. The CLI follows kubectl-style conventions, so if you spend time in Kubernetes or similar tools, the patterns feel familiar.
+The `apply` command is particularly useful — you can write a task in a markdown file and push it to UnDercontrol, which fits nicely into scripting and automation workflows. The CLI follows kubectl-style conventions, so if you spend time in Kubernetes or similar tools, the patterns feel familiar.
 
 ## Recurring Tasks and Check-ins
 

@@ -6,11 +6,11 @@ sidebar_position: 10
 
 ## What are Resources?
 
-Resources in UnderControl are files you upload and attach to your tasks, expenses, budgets, and accounts. Whether it's a receipt photo, a project document, or a design diagram, resources keep all your important files organized alongside the items they belong to.
+Resources in UnDercontrol are files you upload and attach to your tasks, expenses, budgets, and accounts. Whether it's a receipt photo, a project document, or a design diagram, resources keep all your important files organized alongside the items they belong to.
 
 ## What You Can Upload
 
-UnderControl accepts all file types. Common examples include:
+UnDercontrol accepts all file types. Common examples include:
 - **Images** - Photos, screenshots, receipts (JPEG, PNG, etc.)
 - **Documents** - PDFs, spreadsheets, presentations
 - **Diagrams** - Drawio diagrams with in-app editing support
@@ -52,7 +52,7 @@ A single file can be linked to multiple items:
 - Unlink files when they're no longer relevant
 
 ### Diagram Editing
-UnderControl includes built-in support for drawio diagrams. You can create and edit diagrams directly in the app without needing external tools.
+UnDercontrol includes built-in support for drawio diagrams. You can create and edit diagrams directly in the app without needing external tools.
 
 ### AI Integration
 For image resources, you can interact with AI to analyze the content - useful for extracting text from receipts or understanding document contents.

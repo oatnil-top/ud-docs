@@ -6,7 +6,7 @@ sidebar_position: 6
 
 # Query Syntax
 
-UnderControl provides a powerful SQL-like query syntax for filtering and searching tasks. You can write queries manually or let AI generate them from natural language.
+UnDercontrol provides a powerful SQL-like query syntax for filtering and searching tasks. You can write queries manually or let AI generate them from natural language.
 
 ## Where Queries Are Used
 
@@ -346,7 +346,7 @@ Saved Queries let you store frequently used queries for quick access. Instead of
 
 ## Using Queries in the CLI
 
-The UnderControl CLI supports running queries directly from the terminal. This is useful for scripting, automation, and quick lookups without leaving your terminal workflow.
+The UnDercontrol CLI supports running queries directly from the terminal. This is useful for scripting, automation, and quick lookups without leaving your terminal workflow.
 
 ### `ud query`
 
@@ -390,7 +390,7 @@ For full CLI documentation, see the [CLI Reference](./cli).
 
 ## AI-Powered Queries
 
-UnderControl integrates AI to make querying more accessible. Instead of learning the query syntax, you can describe what you want in plain language.
+UnDercontrol integrates AI to make querying more accessible. Instead of learning the query syntax, you can describe what you want in plain language.
 
 ### In the Web UI
 

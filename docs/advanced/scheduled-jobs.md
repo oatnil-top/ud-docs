@@ -6,7 +6,7 @@ sidebar_position: 1
 
 ## What are Scheduled Jobs?
 
-Scheduled Jobs let you automate recurring work in UnderControl. Instead of manually creating the same tasks every day or week, you set up a job once and it runs automatically on your chosen schedule. You can also use AI-powered summary jobs that analyze your tasks and generate digest reports.
+Scheduled Jobs let you automate recurring work in UnDercontrol. Instead of manually creating the same tasks every day or week, you set up a job once and it runs automatically on your chosen schedule. You can also use AI-powered summary jobs that analyze your tasks and generate digest reports.
 
 ## Job Types
 

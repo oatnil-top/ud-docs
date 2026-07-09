@@ -1,16 +1,16 @@
 ---
-title: Visual Project Management with Kanban Boards in UnderControl
-description: Learn how UnderControl's kanban boards bring drag-and-drop task management with auto status updates, custom columns, and team sharing to your self-hosted setup.
+title: Visual Project Management with Kanban Boards in UnDercontrol
+description: Learn how UnDercontrol's kanban boards bring drag-and-drop task management with auto status updates, custom columns, and team sharing to your self-hosted setup.
 authors: [lintao]
 tags: [feature]
 date: 2026-04-04
 ---
 
-If you have been managing tasks through a flat list and wondering when things started feeling unwieldy, kanban boards are probably the answer. UnderControl's kanban view gives you a column-based layout over your existing tasks — no separate system to maintain, no data duplication, just a better way to see what is actually happening.
+If you have been managing tasks through a flat list and wondering when things started feeling unwieldy, kanban boards are probably the answer. UnDercontrol's kanban view gives you a column-based layout over your existing tasks — no separate system to maintain, no data duplication, just a better way to see what is actually happening.
 
 ## The Board is a View, Not a Silo
 
-This is the part worth understanding before anything else. In UnderControl, a kanban board is a visual layer on top of your task system. When you drag a card from "Todo" to "In Progress," you are not just moving a card on a board — you are updating the task's status. That change shows up immediately in your task list, your CLI queries, everywhere. There is no synchronization problem because there is only one source of truth.
+This is the part worth understanding before anything else. In UnDercontrol, a kanban board is a visual layer on top of your task system. When you drag a card from "Todo" to "In Progress," you are not just moving a card on a board — you are updating the task's status. That change shows up immediately in your task list, your CLI queries, everywhere. There is no synchronization problem because there is only one source of truth.
 
 This means you can switch between kanban and list views freely without worrying about things getting out of sync.
 
@@ -48,6 +48,6 @@ A **project board** with shared access uses the group feature to scope tasks to 
 
 ## Everything Stays Connected
 
-Because boards are built on top of the same task and tag system as the rest of UnderControl, they compose naturally with other features. Tags you use in task filters work as column conditions. Custom fields you create for a project can drive column membership and be updated by column actions. The board is not a separate module — it is the task system made visual.
+Because boards are built on top of the same task and tag system as the rest of UnDercontrol, they compose naturally with other features. Tags you use in task filters work as column conditions. Custom fields you create for a project can drive column membership and be updated by column actions. The board is not a separate module — it is the task system made visual.
 
-If you want to see how this fits into the broader setup, the [Kanban Boards documentation](/docs/features/kanban) covers column configuration, automatic actions, and sharing in detail. And if you are not running UnderControl yet, the [self-hosting guide](/docs/self-deployment) will get you up and running in under an hour — your data stays on your infrastructure, always.
+If you want to see how this fits into the broader setup, the [Kanban Boards documentation](/docs/features/kanban) covers column configuration, automatic actions, and sharing in detail. And if you are not running UnDercontrol yet, the [self-hosting guide](/docs/self-deployment) will get you up and running in under an hour — your data stays on your infrastructure, always.

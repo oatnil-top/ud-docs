@@ -1,12 +1,12 @@
 ---
 title: CLI AI Agent Integration
-description: Use ud prompt to integrate UnderControl with AI coding assistants like Claude Code, Cursor, and Codex
+description: Use ud prompt to integrate UnDercontrol with AI coding assistants like Claude Code, Cursor, and Codex
 sidebar_position: 6
 ---
 
 # CLI AI Agent Integration
 
-The `ud prompt` command generates a skill prompt that teaches AI coding assistants how to use the UnderControl CLI. This enables AI agents to manage your tasks, record progress, upload files, and track work — all through natural conversation.
+The `ud prompt` command generates a skill prompt that teaches AI coding assistants how to use the UnDercontrol CLI. This enables AI agents to manage your tasks, record progress, upload files, and track work — all through natural conversation.
 
 ## Why AI Integration?
 
@@ -104,7 +104,7 @@ The generated prompt includes instructions for:
 - Parsing `resource://` URIs from task descriptions
 
 ### Entity Lookup
-- Retrieving any entity by UUID with `ud entity get`
+- Retrieving any entity by UUID with `ud get entity`
 - Auto-detecting entity types (task, budget, expense, file)
 - Accessing presigned download URLs for file resources
 

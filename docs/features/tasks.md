@@ -6,7 +6,7 @@ sidebar_position: 6
 
 ## What are Tasks?
 
-Tasks are the core of UnderControl - your command center for tracking everything you need to do. Whether it's a quick to-do, a long-running project, or a recurring habit, tasks help you stay organized with multiple views, smart filtering, notes, file attachments, and collaboration tools.
+Tasks are the core of UnDercontrol - your command center for tracking everything you need to do. Whether it's a quick to-do, a long-running project, or a recurring habit, tasks help you stay organized with multiple views, smart filtering, notes, file attachments, and collaboration tools.
 
 ## Task Statuses
 
@@ -21,7 +21,7 @@ Every task has one of six statuses to reflect where it stands:
 
 ## Multiple Views
 
-UnderControl gives you several ways to look at your tasks:
+UnDercontrol gives you several ways to look at your tasks:
 
 - **List View** - A traditional, organized task list with customizable sections
 - **Kanban Board** - Visual columns you can drag tasks between (see [Kanban Boards](./kanban.md))

@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # Docker Compose: S3/R2 Storage + PostgreSQL
 
-Deploy UnderControl with cloud storage (S3/R2) and PostgreSQL for scalable, cloud-ready production deployments.
+Deploy UnDercontrol with cloud storage (S3/R2) and PostgreSQL for scalable, cloud-ready production deployments.
 
 ## Coming Soon
 

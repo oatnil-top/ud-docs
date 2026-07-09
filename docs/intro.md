@@ -2,13 +2,13 @@
 sidebar_position: 1
 ---
 
-# Welcome to UnderControl
+# Welcome to UnDercontrol
 
-UnderControl is a self-hosted personal finance and task management app. Track your budget, log expenses, manage tasks, and organize files — all in one place, with full ownership of your data.
+UnDercontrol is a self-hosted personal finance and task management app. Track your budget, log expenses, manage tasks, and organize files — all in one place, with full ownership of your data.
 
-## What is UnderControl?
+## What is UnDercontrol?
 
-Built by an indie developer + AI, UnderControl gives you a unified workspace for managing your money and time without relying on third-party services:
+Built by an indie developer + AI, UnDercontrol gives you a unified workspace for managing your money and time without relying on third-party services:
 
 - **Budget & Expense Tracking**: Create budgets, log expenses, and monitor your spending
 - **Task & Issue Tracker**: A lightweight issue tracker with markdown editing, bi-directional linking, and query syntax for advanced filtering
@@ -39,7 +39,7 @@ Deploy via Docker Compose for simplicity or Kubernetes for larger setups. Suppor
 
 ## Getting Started
 
-Ready to deploy UnderControl? Check out our [Self-Deployment Guide](./self-deployment.md) to get started.
+Ready to deploy UnDercontrol? Check out our [Self-Deployment Guide](./self-deployment.md) to get started.
 
 ### Quick Links
 
@@ -50,7 +50,7 @@ Ready to deploy UnderControl? Check out our [Self-Deployment Guide](./self-deplo
 
 ## Requirements
 
-To deploy UnderControl, you'll need:
+To deploy UnDercontrol, you'll need:
 
 - Docker and Docker Compose (or Kubernetes)
 - Basic understanding of container deployments
