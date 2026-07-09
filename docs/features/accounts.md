@@ -30,6 +30,7 @@ For each account, you can record:
 - **Current balance**
 - **Notes** for any important details
 - **Account type** (budget or off-budget)
+- **Tags** for grouping and filtering accounts
 
 ## Main Features
 

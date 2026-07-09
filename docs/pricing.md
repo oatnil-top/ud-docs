@@ -219,13 +219,9 @@ You can also use local storage (files saved on your server) with any tier.
 
 Example: If you have a Pro license for 10 users, all 10 people can use the same installation with one license.
 
-### Can I get a refund?
-
-Yes! We offer a **30-day money-back guarantee**. If UnDercontrol doesn't work for you, just let us know and we'll refund your purchase - no questions asked.
-
 ### How do I purchase a license?
 
-To purchase a license or for any questions, [contact us](/contact).
+Paid Pro and Max tiers are not on sale yet — pricing is still being finalized. In the meantime the Personal tier is free and fully functional. For early access or any questions, [contact us](/contact).
 
 ---
 
