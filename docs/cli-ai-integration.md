@@ -1,12 +1,12 @@
 ---
 title: CLI AI Agent Integration
-description: Use ud prompt to integrate UnDercontrol with AI coding assistants like Claude Code, Cursor, and Codex
+description: Teach AI coding assistants like Claude Code, Cursor, and Codex to use the UnDercontrol CLI via its built-in skills
 sidebar_position: 6
 ---
 
 # CLI AI Agent Integration
 
-The `ud prompt` command generates a skill prompt that teaches AI coding assistants how to use the UnDercontrol CLI. This enables AI agents to manage your tasks, record progress, upload files, and track work — all through natural conversation.
+The `ud` CLI is designed to be driven by AI coding assistants. It ships with **built-in skills** — self-describing command references that an agent can load on demand — so you don't have to hand-maintain a prompt file. This lets AI agents manage your tasks, record progress, upload files, and track work through natural conversation.
 
 ## Why AI Integration?
 
@@ -18,84 +18,96 @@ When AI coding assistants like Claude Code or Cursor can access your task system
 - **Create follow-up tasks** — capture new issues discovered during implementation
 - **Parse file attachments** — download and analyze files attached to tasks
 
+## How Agents Learn the CLI
+
+The CLI carries its own agent-facing reference as a built-in skill named `ud-cli`. An agent loads the full command reference and usage patterns by running:
+
+```bash
+ud describe skill ud-cli
+```
+
+This is the mechanism `ud --help` points agents to — its footer reads:
+
+```
+AI Agents: run "ud describe skill ud-cli" to load full command reference and usage patterns.
+```
+
+Because the skill is served by the CLI/backend, it always matches your installed version — there is nothing to regenerate when you update.
+
+### Discovering Skills
+
+Skills are group-scoped capability definitions. List them and read any one:
+
+```bash
+# List all available skills
+ud get skills
+
+# Show a skill's full content (the prompt an agent consumes)
+ud describe skill ud-cli
+ud describe skill ud-pm
+```
+
+Beyond `ud-cli`, other built-in skills teach specific workflows (e.g. `ud-pm` for kanban review, `ud-common` for everyday task queries, `spawn-workspace` for launching agent sessions).
+
+### Discovering Recipes
+
+For per-resource, copy-pasteable command recipes, use `ud cook`:
+
+```bash
+ud cook task
+ud cook note
+ud cook board
+```
+
 ## Quick Setup
+
+The goal is simply to tell your AI assistant to load the `ud-cli` skill before it works with tasks. Add a short instruction to your assistant's config.
 
 ### Claude Code
 
-```bash
-# Create the skill directory
-mkdir -p .claude/skills/ud-cli
+Add to your project's `.claude/instructions.md` (or a `CLAUDE.md`):
 
-# Generate the skill file
-ud prompt --frontmatter > .claude/skills/ud-cli/SKILL.md
+```markdown
+This project uses the UnDercontrol CLI (`ud`) for task management.
+Before working with tasks, run `ud describe skill ud-cli` to load the
+full command reference, then use `ud get`, `ud describe`, `ud apply`,
+and `ud delete` to read and update tasks and notes.
 ```
 
-That's it. Claude Code will now automatically use the ud CLI when working on tasks.
+If you prefer a persistent skill file, capture the reference content into one:
+
+```bash
+mkdir -p .claude/skills/ud-cli
+ud describe skill ud-cli > .claude/skills/ud-cli/SKILL.md
+```
+
+Regenerate it after upgrading the CLI to pick up new commands.
 
 ### Cursor / Other AI Assistants
 
-```bash
-# Output the prompt and copy it into your AI instructions file
-ud prompt > .cursorrules
-# or
-ud prompt >> .claude/instructions.md
+Add the same instruction to your assistant's rules file:
+
+```markdown
+Use the UnDercontrol CLI for tasks. Run `ud describe skill ud-cli`
+to load the command reference, then manage tasks with
+`ud get task`, `ud describe task <id>`, and `ud apply -f -`.
 ```
 
-## The `ud prompt` Command
+## What the Skill Teaches
 
-```bash
-ud prompt [flags]
-```
-
-Outputs a comprehensive skill prompt that covers all CLI commands, best practices, and workflows for AI agents.
-
-**Flags:**
-
-| Flag | Default | Description |
-|------|---------|-------------|
-| `--frontmatter` | `false` | Include YAML frontmatter for Claude Code skills |
-| `--name` | `ud-cli` | Skill name in frontmatter |
-| `--description` | *(auto)* | Skill description in frontmatter |
-
-**Examples:**
-
-```bash
-# Preview the prompt
-ud prompt
-
-# Save as Claude Code skill (recommended)
-ud prompt --frontmatter > .claude/skills/ud-cli/SKILL.md
-
-# Custom skill name
-ud prompt --frontmatter --name my-tasks > .claude/skills/my-tasks/SKILL.md
-
-# Append to existing instructions
-ud prompt >> .cursor/instructions.md
-```
-
-:::tip Self-Updating
-The prompt is generated from the CLI binary itself, so it always matches your installed version. When you update the CLI, regenerate the skill file to get the latest commands:
-
-```bash
-ud prompt --frontmatter > .claude/skills/ud-cli/SKILL.md
-```
-:::
-
-## What the Prompt Teaches
-
-The generated prompt includes instructions for:
+The `ud-cli` skill covers everything an agent needs:
 
 ### Task Management
-- Creating tasks with `ud apply` (kubectl-style)
-- Viewing and querying tasks
-- Marking tasks as done
-- Creating subtasks with links
+- Creating and updating tasks with `ud apply -f -` (no `id` = create, `id` = update)
+- Viewing and querying tasks (`ud describe task`, `ud get task`, `ud query`)
+- Marking tasks done by applying `status: done`
+- Linking tasks and subtasks with `ud link task`
 
 ### Progress Tracking
-- Adding notes to record implementation progress
+- Adding notes by applying a document with `task_id` in the frontmatter
 - Including commit hashes for traceability
 - Documenting decisions and blockers
-- Session-based task tracking (remembering task IDs)
+- Remembering task IDs across a session
 
 ### File Operations
 - Uploading files with `ud upload resource`
@@ -105,7 +117,6 @@ The generated prompt includes instructions for:
 
 ### Entity Lookup
 - Retrieving any entity by UUID with `ud get entity`
-- Auto-detecting entity types (task, budget, expense, file)
 - Accessing presigned download URLs for file resources
 
 ## Example AI Workflow
@@ -120,13 +131,22 @@ AI:     [runs: ud describe task abc-123]
 
 You:    "Implement it"
 AI:     [implements the feature]
-        [runs: ud task note add abc-123 "Implemented JWT auth middleware.
-         Commit: def456"]
+        [runs: cat <<'EOF' | ud apply -f -
+                ---
+                task_id: abc-123
+                ---
+                Implemented JWT auth middleware. Commit: def456
+                EOF]
         "Done. I've added auth middleware and recorded progress.
          Should I mark this task as done?"
 
 You:    "Yes, and attach the architecture diagram"
-AI:     [runs: ud task done abc-123]
+AI:     [runs: cat <<'EOF' | ud apply -f -
+                ---
+                id: abc-123
+                status: done
+                ---
+                EOF]
         [runs: ud upload resource ./auth-flow.png -t todolist -e abc-123]
         "Task completed and diagram attached."
 ```
@@ -135,75 +155,48 @@ AI:     [runs: ud task done abc-123]
 
 ### Per-Project vs Global Setup
 
-**Per-project** (recommended): Place the skill file in your project's `.claude/skills/` directory. This way the AI agent only uses the CLI when working in that project.
+**Per-project** (recommended): Put the instruction (or skill file) in your project's `.claude/` directory so the agent only manages tasks when working in that project.
 
-```bash
-cd your-project
-mkdir -p .claude/skills/ud-cli
-ud prompt --frontmatter > .claude/skills/ud-cli/SKILL.md
-```
-
-**Global**: Place it in your home directory for all projects.
-
-```bash
-mkdir -p ~/.claude/skills/ud-cli
-ud prompt --frontmatter > ~/.claude/skills/ud-cli/SKILL.md
-```
-
-### Version Control
-
-You can commit the skill file to your repository so team members automatically get AI integration:
-
-```bash
-git add .claude/skills/ud-cli/SKILL.md
-git commit -m "Add ud CLI skill for AI assistants"
-```
+**Global**: Put it in your home directory (`~/.claude/`) to apply across all projects.
 
 ### Multi-Context Setup
 
-If you use multiple ud contexts (personal/work), the AI agent uses whichever context is currently active:
+If you use multiple ud contexts (personal/work), the agent operates on whichever context is currently active:
 
 ```bash
-# Set work context before AI session
+# Set the work context before an AI session
 ud config use-context work
 
-# The AI agent will now operate on your work tasks
+# The agent now operates on your work tasks
 ```
 
-## Supported AI Assistants
-
-| Assistant | Setup Method |
-|-----------|-------------|
-| Claude Code | `ud prompt --frontmatter > .claude/skills/ud-cli/SKILL.md` |
-| Cursor | `ud prompt > .cursorrules` |
-| GitHub Copilot | `ud prompt > .github/copilot-instructions.md` |
-| Other | Copy `ud prompt` output into your AI's instruction file |
+You can also pin a single command to a context with the global `--context` flag, e.g. `ud --context work get task`.
 
 ## Troubleshooting
 
 ### AI Not Using the CLI
 
-**Problem:** AI doesn't use ud commands even with the skill file present.
+**Problem:** The agent doesn't use `ud` commands.
 
 **Solutions:**
-1. Verify the skill file exists: `cat .claude/skills/ud-cli/SKILL.md`
-2. Ensure you're logged in: `ud config current-context`
-3. Regenerate the skill file: `ud prompt --frontmatter > .claude/skills/ud-cli/SKILL.md`
+1. Confirm the instruction is present in your assistant's config and mentions `ud describe skill ud-cli`.
+2. Ensure you're logged in: `ud config current-context` and `ud whoami`.
+3. Verify the skill loads: `ud describe skill ud-cli`.
 
 ### AI Using Wrong Context
 
-**Problem:** AI operates on the wrong account/server.
+**Problem:** The agent operates on the wrong account/server.
 
-**Solution:** Switch context before starting the AI session:
+**Solution:** Switch context before starting the session:
 ```bash
 ud config use-context <correct-context>
 ```
 
 ### Outdated Skill File
 
-**Problem:** AI doesn't know about new commands (e.g., `upload resource`).
+**Problem:** You saved the skill to a file and it's missing newer commands.
 
-**Solution:** Regenerate after CLI updates:
+**Solution:** Prefer loading the skill live with `ud describe skill ud-cli`. If you keep a file, regenerate it after CLI updates:
 ```bash
-ud prompt --frontmatter > .claude/skills/ud-cli/SKILL.md
+ud describe skill ud-cli > .claude/skills/ud-cli/SKILL.md
 ```

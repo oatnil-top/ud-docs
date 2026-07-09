@@ -100,23 +100,34 @@ Attach images, documents, diagrams, or any file to your tasks. Attachments are a
 Manage tasks directly from your terminal:
 
 ```bash
-ud task list                    # List your tasks
-ud task create "My new task"    # Create a task
-ud task view <id>               # View task details
-ud task edit <id>               # Edit in your $EDITOR
-ud task done <id>               # Mark as done
-ud task delete <id>             # Delete a task
+ud get task                     # List your tasks
+ud describe task <id>           # View task details
+ud delete task <id>             # Delete a task
 
-# Notes
-ud task note add <id> "Note"    # Add a note
-ud task note list <id>          # List notes
+# Create / update (no id = create, id = update; status: done to complete)
+cat <<'EOF' | ud apply -f -
+---
+title: My new task
+status: todo
+---
+Description here.
+EOF
+ud apply -f task.md             # Create/update from a markdown file
+
+# Notes (task_id in frontmatter = note)
+cat <<'EOF' | ud apply -f -
+---
+task_id: <id>
+---
+A progress note.
+EOF
+ud get notes --task <id>        # List notes
 
 # Relationships
 ud link task <id> <other-id>    # Link two tasks
 
 # Advanced
 ud query "status = 'todo'"      # Structured query
-ud task apply -f task.md        # Create/update from markdown file
 ```
 
 ## Tips for Success

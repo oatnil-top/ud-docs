@@ -99,7 +99,7 @@ task_id: a1b2c3d4
 | *(body)* | string | no | Note content in markdown. |
 
 :::tip Auto-detection
-You don't need `ud apply note -f` anymore. Plain `ud apply -f note.md` detects the Note format automatically by checking for `task_id` in frontmatter. The `ud apply note` subcommand still works as a backward-compatible alias.
+There is no separate note subcommand. Plain `ud apply -f note.md` detects the Note format automatically by checking for `task_id` in the frontmatter.
 :::
 
 ---
@@ -349,19 +349,30 @@ title: Updated title
 
 ## Supported Resources
 
-Run `ud api-resources` to see all resource types and their available verbs:
+Run `ud api-resources` to see all resource types and their available actions:
 
 ```
-NAME       SHORTNAMES   VERBS
-task       tasks,t      get,describe,apply,delete,annotate
-note       -            get,apply,delete
-board      boards       get,describe,apply,query
-budget     budgets,b    get,describe,apply
-expense    expenses,e   get,describe,apply
-account    accounts,a   get,describe,apply
-income     incomes,i    get,describe,apply
-resource   -            upload
-column     columns      get
+NAME                SHORTNAMES                  ACTIONS
+task                tasks,t                     get,describe,apply,delete,annotate,bind,unbind,link,unlink,share,unshare,grep
+note                -                           get,apply,delete
+comment             comments                    get,describe,apply,delete,patch
+board               boards                      get,describe,apply,query,delete
+budget              budgets,b                   get,describe,apply,share,unshare
+expense             expenses,e                  get,describe,apply,share,unshare
+account             accounts,a                  get,describe,apply,share,unshare
+income              incomes,i                   get,describe,apply,share,unshare
+resource            -                           upload,attach,sync
+skill               skills                      get,describe,apply,delete
+prompt              prompts                     get,describe,apply,delete
+agent               agents                      get,describe,apply,delete
+agent-cli           agent-clis                  get,describe,apply,delete
+agent-team          agent-teams                 get,describe,apply,delete
+project             projects,p                  get,describe,apply,delete
+scheduled-job       scheduled-jobs,sjob,sjobs   get,describe,apply,delete,trigger
+daemon              daemons                     get,describe,delete
+tags                tag                         get
+workspace-context   wctx                        describe
+workspace-session   session,sessions,ws         get,describe
 ```
 
 ---

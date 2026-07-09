@@ -52,13 +52,18 @@ ud apply -f update.md
 
 ### Quick status change
 
-```bash
-# Mark as done
-ud task done a1b2c3d4
+Apply just the `id` and the fields you want to change — mark a task done by setting `status: done`:
 
-# Edit in your $EDITOR
-ud task edit a1b2c3d4
+```bash
+cat <<'EOF' | ud apply -f -
+---
+id: a1b2c3d4
+status: done
+---
+EOF
 ```
+
+You can also edit a task interactively in the TUI (`ud` or `ud tui`).
 
 ## curl
 

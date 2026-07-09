@@ -9,16 +9,23 @@ Track progress, decisions, or context by adding notes to a task.
 
 ## CLI
 
-### Add a quick note
+### Add a note via `apply`
+
+A markdown document with `task_id` in its frontmatter is applied as a note:
 
 ```bash
-ud task note add <task-id> "Discussed with team, moving deadline to next Friday"
+cat <<'EOF' | ud apply -f -
+---
+task_id: a1b2c3d4
+---
+Discussed with team, moving deadline to next Friday
+EOF
 ```
 
-### Add a note with markdown via `apply`
+### Add a longer note with markdown
 
 ```bash
-cat <<'EOF' | ud task note apply -f -
+cat <<'EOF' | ud apply -f -
 ---
 task_id: a1b2c3d4
 ---
@@ -31,16 +38,18 @@ task_id: a1b2c3d4
 EOF
 ```
 
+To update an existing note, include its `note_id` in the frontmatter.
+
 ### List all notes on a task
 
 ```bash
-ud task note list <task-id>
+ud get notes --task <task-id>
 ```
 
 ### Delete a note
 
 ```bash
-ud task note delete <task-id> <note-id>
+ud delete note <note-id>
 ```
 
 ## curl

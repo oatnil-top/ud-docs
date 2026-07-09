@@ -75,11 +75,16 @@ ud login
 ```
 
 You'll be prompted for:
-- **Server URL**: Your UnDercontrol server (e.g., `https://ud.oatnil.com`)
 - **Username**: Your account email
 - **Password**: Your account password
 
-Credentials are saved to `~/.config/ud/config.yaml`.
+The server URL comes from the active context (or the `--api-url` flag). To log in to a specific server and save it as a named context in one step, use `--api-url` with `--name/-n`:
+
+```bash
+ud login --api-url https://ud.oatnil.com -n personal
+```
+
+You can also pass credentials non-interactively with `-u/--username` and `-p/--password`. Credentials are saved to `~/.config/ud/config.yaml`.
 
 ### Multi-Context Support
 
@@ -214,71 +219,72 @@ ud delete task 3de9f82b
 
 ---
 
-## Task Commands
+## Working with Tasks
 
-:::caution Deprecated Commands
-The following `ud task` subcommands are **deprecated** and will be removed in a future release. They still work but print a deprecation warning. Use the kubectl-style commands instead:
+The `ud` CLI is kubectl-style: there is no `ud task create/done/edit` subcommand. Instead, you create, update, and change task state declaratively with `ud apply`.
 
-| Deprecated | Use instead |
-|------------|-------------|
-| `ud task list` | `ud get task` |
-| `ud task view <id>` | `ud describe task <id>` |
-| `ud task apply -f <file>` | `ud apply -f <file>` |
-| `ud task delete <id>` | `ud delete task <id>` |
-:::
+### Create a Task
 
-### Create Task
+Pipe a markdown document (YAML frontmatter + body) to `ud apply -f -`. With **no `id`** in the frontmatter, this creates a new task:
 
 ```bash
-ud task create <title> [flags]
-ud task create -f <file>
+cat <<'EOF' | ud apply -f -
+---
+title: Fix login bug
+status: todo
+tags: [backend, urgent]
+---
+Update the auth middleware to handle expired refresh tokens.
+EOF
 ```
 
-**Flags:**
-- `-d, --description`: Task description
-- `-s, --status`: Initial status (default: `todo`)
-- `-f, --file`: Create from file (first line = title, rest = description)
-
-**Examples:**
-```bash
-# Simple task
-ud task create "Fix login bug"
-
-# With description
-ud task create "Refactor API" -d "Update to v2 endpoints"
-
-# With initial status
-ud task create "Review PR" -s in-progress
-
-# From file
-ud task create -f requirements.md
-```
-
-**File format for `-f`:**
-```markdown
-Task title goes here
-The rest of the file
-becomes the description.
-```
-
-### Mark Task Done
+You can also apply a file directly:
 
 ```bash
-ud task done <id>
+ud apply -f task.md
 ```
 
-Shortcut to set task status to `done`.
+If `title` is omitted, it's derived from the first line of the body (or the filename). See the [Apply & Resource Schema](./cli-apply-schema) guide for all fields.
 
-### Edit Task
+### Update a Task / Change Status
+
+To update an existing task — including marking it done — apply the same document **with the `id`** present. Set `status: done` to complete it:
 
 ```bash
-ud task edit <id>
+cat <<'EOF' | ud apply -f -
+---
+id: abc123
+status: done
+---
+EOF
 ```
 
-Opens the task in your `$EDITOR` (defaults to `vi`). The file format is:
-- First line: title
-- Blank line
-- Rest: description
+A convenient round-trip is to export a task, edit it, and re-apply it:
+
+```bash
+# Export the task in apply-compatible format
+ud describe task abc123 -o apply > task.md
+
+# ...edit task.md in your editor...
+
+# Re-apply the changes
+ud apply -f task.md
+```
+
+You can also edit tasks interactively in the [TUI](#tui-mode) (`ud` or `ud tui`).
+
+### Link Tasks
+
+```bash
+# Bidirectional peer link
+ud link task abc123 def456
+
+# Make one a subtask of another
+ud link task parent123 child456 --subtask
+
+# Set the parent of a task
+ud link task child123 parent456 --parent
+```
 
 ### Query Tasks
 
@@ -314,62 +320,45 @@ ud query "(status = 'todo' OR status = 'in-progress') AND deadline <= 'today'"
 
 ---
 
-## Note Commands
+## Notes
 
-Notes allow you to add comments, progress updates, and context to tasks. They're useful for tracking work history and AI agent collaboration.
+Notes let you add comments, progress updates, and context to tasks. They're useful for tracking work history and AI agent collaboration. Like tasks, notes are managed with `ud apply` — a markdown document is detected as a **note** when its frontmatter contains a `task_id`.
 
-### Add Note
+### Add a Note
 
 ```bash
-ud task note add <task-id> "<content>"
-ud task note add <task-id> -f <file>
-echo "content" | ud task note add <task-id> -
+cat <<'EOF' | ud apply -f -
+---
+task_id: abc123
+---
+✓ Auth middleware done
+EOF
 ```
 
-**Flags:**
-- `-f, --file`: Read note content from file
+Or apply a file that has `task_id` in its frontmatter:
 
-**Examples:**
 ```bash
-# Add inline note
-ud task note add abc123 "Started implementation"
-
-# Add progress update
-ud task note add abc123 "✓ Auth middleware done"
-
-# From file
-ud task note add abc123 -f progress.md
-
-# From stdin
-echo "Completed review" | ud task note add abc123 -
+ud apply -f progress.md
 ```
+
+To update an existing note, include its `note_id` in the frontmatter alongside `task_id`.
 
 ### List Notes
 
 ```bash
-ud task note list <task-id>
-ud task note ls <task-id>  # Alias
+ud get notes --task <task-id>
+ud get notes -t <task-id>   # short flag
 ```
 
-**Output format:**
-```
-[4223db11] 2025-01-31 11:08
-✓ Auth middleware done
----
-[3150c5ce] 2025-01-31 10:45
-Started implementation
-```
-
-### Delete Note
+### Delete a Note
 
 ```bash
-ud task note delete <task-id> <note-id>
-ud task note rm <task-id> <note-id>  # Alias
+ud delete note <note-id>
 ```
 
 **Example:**
 ```bash
-ud task note delete abc123 4223db11
+ud delete note 4223db11
 ```
 
 ### AI Agent Workflow
@@ -377,23 +366,42 @@ ud task note delete abc123 4223db11
 Notes enable seamless collaboration between humans and AI agents:
 
 ```bash
-# AI creates task from plan
-ud task create -f plan.md
+# AI creates a task from a plan (no id = create)
+cat <<'EOF' | ud apply -f -
+---
+title: Add user authentication
+status: in-progress
+---
+JWT-based auth with refresh tokens.
+EOF
 # Created task: abc12345
 
-# Human reviews in UI, adds context via notes
+# AI reads the task for context
+ud describe task abc123
 
-# AI fetches task and logs progress
-ud task view abc123
-ud task note add abc123 "✓ Completed step 1: Database schema"
-ud task note add abc123 "✓ Completed step 2: API endpoints"
-ud task note add abc123 "⚠️ Blocked: Need API key for external service"
+# AI logs progress via notes (task_id = note)
+cat <<'EOF' | ud apply -f -
+---
+task_id: abc123
+---
+✓ Completed step 1: Database schema
+EOF
 
-# Human sees progress, unblocks AI
+# AI reports a blocker
+cat <<'EOF' | ud apply -f -
+---
+task_id: abc123
+---
+⚠️ Blocked: Need API key for external service
+EOF
 
-# AI continues and completes
-ud task note add abc123 "✓ All steps completed"
-ud task done abc123
+# Once unblocked, AI completes the task (id + status = update)
+cat <<'EOF' | ud apply -f -
+---
+id: abc123
+status: done
+---
+EOF
 ```
 
 ---
@@ -614,15 +622,15 @@ ud config rename-context <old-name> <new-name>
 | `UD_API_URL` | Override API URL |
 | `UD_API_KEY` | Override API key |
 | `UD_TOKEN` | Override auth token |
-| `EDITOR` | Editor for `task edit` command |
+| `EDITOR` | Editor used by the TUI when editing a task |
 
 **Examples:**
 ```bash
 # Use different context for one command
-UD_CONTEXT=staging ud task list
+UD_CONTEXT=staging ud get task
 
 # Override API URL
-UD_API_URL=http://localhost:4000 ud task list
+UD_API_URL=http://localhost:4000 ud get task
 
 # Set editor
 export EDITOR=vim
@@ -643,10 +651,10 @@ Use UnDercontrol CLI to manage project tasks:
 
 - List tasks: `ud get task`
 - View task details: `ud describe task <id>`
-- Create task: `ud task create "title" -d "description"`
-- Complete task: `ud task done <id>`
-- Update task: `ud apply -f task.md`
-- Delete task: `ud delete task <id>`
+- Create or update a task: `ud apply -f -` (no `id` = create, `id` = update)
+- Complete a task: apply the task with `status: done`
+- Add a progress note: `ud apply -f -` with `task_id` in the frontmatter
+- Delete a task: `ud delete task <id>`
 
 Before implementing features, check related tasks for context.
 ```
@@ -719,7 +727,7 @@ ud apply -f update.md
 
 ### Editor Not Working
 
-**Problem:** `task edit` has no effect
+**Problem:** Editing a task in the TUI has no effect
 
 **Solution:** Set the `EDITOR` environment variable:
 ```bash

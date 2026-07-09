@@ -15,7 +15,7 @@ Override CLI settings per-command for scripting and CI/CD.
 | `UD_API_URL` | Override API URL |
 | `UD_API_KEY` | Override API key |
 | `UD_TOKEN` | Override auth token |
-| `EDITOR` | Editor for `task edit` |
+| `EDITOR` | Editor used by the TUI when editing a task |
 
 ## Examples
 
@@ -38,10 +38,18 @@ export UD_API_URL=https://ud.company.com
 export UD_API_KEY=your-api-key
 
 # Create a task from CI
-ud task create "Deploy v2.1.0" -d "Automated release from CI pipeline"
+cat <<'EOF' | ud apply -f -
+---
+title: Deploy v2.1.0
+---
+Automated release from CI pipeline
+EOF
 
 # Mark deploy task done
-ud task done $TASK_ID
+echo "---
+id: $TASK_ID
+status: done
+---" | ud apply -f -
 ```
 
 ### Script: create tasks from a file list
@@ -49,7 +57,10 @@ ud task done $TASK_ID
 ```bash
 #!/bin/bash
 while IFS= read -r line; do
-  ud task create "$line" -s todo
+  echo "---
+title: $line
+status: todo
+---" | ud apply -f -
 done < tasks.txt
 ```
 

@@ -13,7 +13,10 @@ Update multiple tasks at once — useful for bulk status changes or cleanup.
 
 ```bash
 for id in a1b2c3d4 e5f6g7h8 i9j0k1l2; do
-  ud task done $id
+  echo "---
+id: $id
+status: done
+---" | ud apply -f -
 done
 ```
 

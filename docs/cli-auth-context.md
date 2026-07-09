@@ -151,7 +151,7 @@ ud --context work get task
 ud --context staging describe task abc123
 
 # Create a task in a different account
-ud --context personal task create "Buy groceries"
+echo 'Buy groceries' | ud --context personal apply -f -
 
 # Launch TUI with a specific context
 ud --context work
@@ -185,10 +185,10 @@ You can also override context settings using environment variables:
 Example:
 ```bash
 # Use different context for one command
-UD_CONTEXT=staging ud task list
+UD_CONTEXT=staging ud get task
 
 # Override API URL temporarily
-UD_API_URL=http://localhost:4000 ud task list
+UD_API_URL=http://localhost:4000 ud get task
 ```
 
 ## Common Workflows
@@ -236,14 +236,19 @@ ud config set-context ci \
 
 # Use in CI/CD scripts
 ud config use-context ci
-ud task create "Deployment completed" -d "Version 1.2.3"
+cat <<'EOF' | ud apply -f -
+---
+title: Deployment completed
+---
+Version 1.2.3
+EOF
 ```
 
 Or use environment variables:
 ```bash
 export UD_API_URL=https://ud.oatnil.com
 export UD_API_KEY=ak_your_api_key
-ud task list
+ud get task
 ```
 
 ## Migration from Single Context

@@ -11,8 +11,10 @@ Create a new task with a title, description, status, tags, and deadline.
 
 ### Quick create
 
+A one-line title piped to `ud apply` becomes the task title:
+
 ```bash
-ud task create "Buy groceries"
+echo 'Buy groceries' | ud apply -f -
 ```
 
 ### Create with full details using `apply`
