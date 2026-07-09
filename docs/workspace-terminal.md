@@ -1,72 +1,82 @@
 ---
 title: Workspace Terminal
-description: Launch Claude Code from task details to implement tasks in the Electron desktop app
+description: Start a workspace session from a task; a desktop daemon launches an agent to implement it
 sidebar_position: 6
 ---
 
 # Workspace Terminal
 
-The Workspace Terminal is an Electron desktop feature that opens a dedicated window for implementing tasks with Claude Code. It provides a side-by-side view of task details and an embedded terminal, connected to a real PTY process.
+The Workspace Terminal is a desktop feature that opens a dedicated window for implementing tasks with a terminal-based agent (Claude Code, Codex, OpenCode, …). It provides a side-by-side view of task details and an embedded terminal, connected to a real PTY process.
 
 ## Overview
 
-When you click the terminal icon on a task's action bar, a new workspace window opens:
+You start a **workspace session** from a task. The session runs on a **daemon** — your desktop app (Electron) registered as a daemon — which opens a new workspace window:
 
 - **Left panel**: Task details with auto-refresh (detects note updates from the ud CLI)
-- **Right panel**: xterm.js terminal running Claude Code with ud CLI skill context
+- **Right panel**: xterm.js terminal running the agent with ud CLI skill context
 
-The terminal uses `ud prompt` to inject the ud CLI skill instructions into Claude Code via `--append-system-prompt`, then passes the task initialization instruction as the user prompt. This means users don't need the `/init-task` skill file installed — it works out of the box.
+The terminal uses `ud prompt` to inject the ud CLI skill instructions into the agent (via `--append-system-prompt`), then passes the task instruction as the user prompt. Users don't need the `/init-task` skill file installed — it works out of the box.
 
-> This feature is only available in the Electron desktop app.
+> This feature relies on the desktop app (Electron) running as a daemon; the web app itself does not provide a local terminal.
 
 ## Quick Start
 
-1. Open the Electron desktop app
-2. Navigate to a board's settings (gear icon) and set the **Project Directory**
-3. Open any task on that board
-4. Click the **terminal icon** in the task actions bar
-5. A workspace window opens with Claude Code ready to implement the task
+1. On the **Workspaces** page, register this device as a daemon (the app detects your machine name and platform and connects to the backend over SSE)
+2. Set a **Project Directory** in the board settings (gear icon) — optional but recommended
+3. Open any task, pick an online daemon in the workspace session area, and **start a session**
+4. The desktop app on that daemon opens a workspace window with the agent ready to implement the task
+
+## How a session is launched
+
+A workspace session is **not** a local "click a terminal icon and a window opens" action — it goes through a daemon pipeline, even when the target daemon is this same machine:
+
+```
+start a session from a task
+  → backend POST /workspace/init   (the backend resolves cwd/tmux — it is the single
+                                     source of truth, SST)
+  → an SSE workspace_init event is pushed to the target daemon
+  → the daemon (desktop app main process) calls createWorkspaceWindow + spawns the PTY
+```
+
+- **Register the device as a daemon**: after registering on the Workspaces page, the desktop app connects to the backend over SSE and waits for instructions.
+- **Backend resolves cwd / tmux (SST)**: cwd, tmux session name, and the launch command are resolved by the backend and delivered with the `workspace_init` event — the daemon does **not** read board metadata locally.
 
 ## Board Configuration
 
-Each kanban board stores workspace settings in its metadata. Configure these in the board settings drawer (click the gear icon on the board header).
+Each kanban board stores workspace settings in its metadata (configure them in the board settings drawer — gear icon on the board header). The backend reads these when resolving session parameters.
 
 ### Project Directory
 
-The working directory for workspace terminals. When set, all workspace terminals for tasks on this board will start in this directory.
+The working directory for workspace sessions. When set, sessions for tasks on this board start in this directory.
 
-**Example**: Set to `/Users/me/projects/my-app` and Claude Code will run with that as its working directory, giving it access to your project files.
+**Example**: Set to `/Users/me/projects/my-app` and the agent runs with that as its working directory, giving it access to your project files.
 
-If not set, the terminal defaults to your HOME directory.
+If not set, the session falls back to `~/.undercontrol/workspace` (a dedicated sandbox).
 
 ### Tmux Session
 
-Optional. When configured, the Claude Code command is wrapped in a named tmux session:
+Optional. When configured, the launch command is wrapped in a named tmux session. The actual session name is `<name>-<task-slug>` (a task slug is appended so different tasks don't share a session):
 
 ```bash
-tmux new-session -As <session-name> 'claude --dangerously-skip-permissions --append-system-prompt "$(ud prompt)" "Initialize and implement task <task-id>..."'
+tmux new-session -As <name>-<task-slug> '<agent launch command>'
 ```
 
 **Behavior**:
 - If the session already exists: attaches to it
-- If the session doesn't exist: creates it and runs Claude Code
+- If the session doesn't exist: creates it and runs the agent
 - Closing the workspace window does NOT kill the tmux session — it continues in the background
 - Reopening the workspace reattaches to the running session
 
-This is useful for long-running implementations where you want the Claude Code session to persist even if you close the window.
+This is useful for long-running implementations where you want the agent session to persist even if you close the window.
 
-## Configuration Resolution Chain
+## CWD Resolution
 
-Workspace options are resolved from the board that a task belongs to:
+The cwd is resolved by the **backend** (single source of truth) and delivered with the `workspace_init` event. The daemon only expands `~` and applies the fallback when it's empty:
 
 ```
-task → findTaskCurrentBoard(task, boards) → board.metadata.projectDir → terminal cwd
-task → findTaskCurrentBoard(task, boards) → board.metadata.tmuxSession → tmux session name
+explicit cwd → task metadata.cwd → board metadata.projectDir
+fallback: ~/.undercontrol/workspace   (a dedicated sandbox that limits the agent's access scope)
 ```
-
-**Fallback**: If no board configuration is found, the terminal uses HOME as the working directory and runs without tmux.
-
-The task-to-board mapping uses `findTaskCurrentBoard()`, which checks which board's column queries match the task.
 
 ## Architecture
 
@@ -74,21 +84,22 @@ The task-to-board mapping uses `findTaskCurrentBoard()`, which checks which boar
 
 | Component | Location | Role |
 |-----------|----------|------|
-| `workspace-manager.js` | Electron main process | Spawns BrowserWindow + PTY per task |
-| `preload/index.js` | Electron preload | Exposes `workspaceApi` via contextBridge |
-| `workspace.ts` | Vite app | Typed API wrapper for renderer |
-| `TaskActions.tsx` | Vite app | Button + board config resolution |
+| Workspaces page / session controls | Vite app | Register daemons; start a session on a task (`POST /workspace/init`) |
+| Backend workspace handler | Go backend | Resolves cwd/tmux/command (SST); pushes `workspace_init` over SSE |
+| `daemon-connector.js` | Electron main | Receives `workspace_init` over SSE; calls `createWorkspaceWindow` |
+| `workspace-manager.js` | Electron main | Spawns the BrowserWindow + PTY per session |
+| `preload/index.js` | Electron preload | Exposes `workspaceApi` (PTY I/O, window control) via contextBridge |
 | Workspace page | Vite app | Split layout with xterm.js terminal |
 
 ### Data Flow
 
 ```
-TaskActions (click)
-  → resolve board metadata (projectDir, tmuxSession)
-  → openWorkspace(taskId, { cwd, tmuxSession })
-  → IPC invoke 'workspace:open'
-  → workspace-manager creates BrowserWindow + spawns PTY
-  → PTY sends claude command on first shell prompt
+Start session (Vite app)
+  → POST /workspace/init { task_id, daemon_id }
+  → backend resolves cwd / tmux / launch command (SST)
+  → SSE 'workspace_init' → target daemon (Electron main)
+  → daemon-connector → workspace-manager.createWorkspaceWindow
+  → BrowserWindow + PTY spawned; agent launched with the delivered command
   → PTY output → IPC → xterm.js renderer
   → User keyboard input → IPC → PTY stdin
 ```
@@ -97,8 +108,6 @@ TaskActions (click)
 
 | Channel | Direction | Purpose |
 |---------|-----------|---------|
-| `workspace:open` | renderer → main | Open workspace window |
-| `workspace:close` | renderer → main | Close workspace window |
 | `workspace:pty-data` | main → renderer | PTY stdout data |
 | `workspace:pty-input` | renderer → main | User keyboard input |
 | `workspace:pty-resize` | renderer → main | Terminal resize events |
@@ -107,16 +116,16 @@ TaskActions (click)
 
 ### Window Management
 
-- **One window per task**: Opening the same task again focuses the existing window
+- **One window per task** (manual sessions): starting the same task again focuses the existing window; agent-spawned sessions each get their own window
 - **Position persistence**: Window bounds saved to `~/.undercontrol/workspace-positions.json`
 - **Cascade positioning**: New windows are offset by 30px from the last one
-- **Cleanup on close**: PTY process is killed when window closes
+- **Cleanup on close**: PTY process is killed when the window closes
 
 ## Terminal Details
 
 ### Shell Startup
 
-The workspace spawns a non-login shell (fast startup) with an augmented environment:
+The workspace spawns a login+interactive shell with an augmented environment:
 
 - `TERM=xterm-256color` for full color support
 - `COLORTERM=truecolor` for 24-bit color
@@ -124,29 +133,17 @@ The workspace spawns a non-login shell (fast startup) with an augmented environm
 
 ### Command Execution
 
-The claude command is sent to the shell after the first prompt appears (detected via first PTY data event), ensuring the shell is ready before executing:
+The launch command is assembled in the frontend/backend (the old main-process `buildAgentCommand` was removed) and delivered to the daemon with the `workspace_init` event. The agent is launched with the ud CLI skill context appended to its system prompt (via `ud prompt` → `--append-system-prompt`), so users don't need the `/init-task` skill file installed.
 
-```bash
-# Without tmux:
-claude --dangerously-skip-permissions --append-system-prompt "$(ud prompt)" \
-  "Initialize and implement task <task-id>. Start by running: ud describe task <task-id>"
-
-# With tmux session configured:
-tmux new-session -As <session-name> 'claude --dangerously-skip-permissions \
-  --append-system-prompt "$(ud prompt)" "Initialize and implement task <task-id>..."'
-```
-
-The `ud prompt` command outputs the full ud CLI skill instructions, which are appended to Claude's system prompt via `--append-system-prompt`. This eliminates the need for users to install the `/init-task` skill file.
-
-After Claude Code exits, the shell remains alive so you can run additional commands.
+After the agent exits, the shell remains alive so you can run additional commands.
 
 ## Troubleshooting
 
 ### Terminal shows wrong directory
 
-**Problem**: The terminal starts in HOME instead of the project directory.
+**Problem**: The session starts in the sandbox (`~/.undercontrol/workspace`) instead of the project directory.
 
-**Solution**: Check that the board has a Project Directory configured in its settings. The task must be on the board (matched by column queries). After changing board settings, you may need to restart the Electron app for main process changes to take effect.
+**Solution**: Check that the board has a Project Directory configured in its settings, and that the task is on that board (matched by column queries). The backend resolves the cwd from board/task metadata, so the setting must be saved before you start the session.
 
 ### node-pty errors on startup
 
@@ -156,9 +153,9 @@ After Claude Code exits, the shell remains alive so you can run additional comma
 
 ### Tmux session not persisting
 
-**Problem**: Closing the workspace window kills the Claude Code session.
+**Problem**: Closing the workspace window kills the agent session.
 
-**Solution**: Make sure you have the **Tmux Session** field configured in the board settings. Without it, the PTY process is killed directly when the window closes. With tmux, only the tmux client detaches — the session continues in the background.
+**Solution**: Make sure the **Tmux Session** field is configured in the board settings. Without it, the PTY process is killed directly when the window closes. With tmux, only the tmux client detaches — the session continues in the background.
 
 ### Window opens but terminal is blank
 
