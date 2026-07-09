@@ -1694,5 +1694,20 @@
   },
   "selfhosting.description": {
     "message": "在你自己的基础设施上自部署 UnDercontrol —— 单个 all-in-one 镜像，或 Docker Compose 与 Kubernetes。PostgreSQL 或 SQLite，本地或 S3 存储。你的数据永不离开你的网络。"
+  },
+  "homepage.hero.pill.selfhosted": {
+    "message": "自部署"
+  },
+  "homepage.hero.pill.localfirst": {
+    "message": "本地优先"
+  },
+  "homepage.hero.pill.ainative": {
+    "message": "AI 原生"
+  },
+  "homepage.hero.pill.openapi": {
+    "message": "开放 API"
+  },
+  "homepage.hero.pill.allinone": {
+    "message": "All-in-one"
   }
 }

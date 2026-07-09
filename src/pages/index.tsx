@@ -51,6 +51,13 @@ function HeroSection() {
           Knowledge base like Obsidian. Project management like Jira. Personal finance like Mint. File storage like Google Drive — one private workspace, ready for your AI agents.
         </Translate>
       </p>
+      <div className={styles.heroPills}>
+        <span className={styles.heroPill}><Translate id="homepage.hero.pill.selfhosted">Self-hosted</Translate></span>
+        <span className={styles.heroPill}><Translate id="homepage.hero.pill.localfirst">Local-first</Translate></span>
+        <span className={styles.heroPill}><Translate id="homepage.hero.pill.ainative">AI-native</Translate></span>
+        <span className={styles.heroPill}><Translate id="homepage.hero.pill.openapi">Open API</Translate></span>
+        <span className={styles.heroPill}><Translate id="homepage.hero.pill.allinone">All-in-one</Translate></span>
+      </div>
       <div className={styles.heroButtons}>
         <Link className={styles.heroButtonPrimary} to={APP_URL}>
           <Translate id="homepage.hero.tryNow">Try Now</Translate>
@@ -358,6 +365,20 @@ function DevelopersSection() {
             <span>{text}</span>
           </div>
         ))}
+      </div>
+      <div className={styles.cliTerm}>
+        <div className={styles.cliBar}>
+          <span className={styles.cliDots}><i /><i /><i /></span>
+          <span className={styles.cliName}>bash — ud CLI</span>
+        </div>
+        <div className={styles.cliBody}>
+          <pre>
+            <span className={styles.c}># everything-as-code: tasks are markdown, agents speak CLI{'\n'}</span>
+            <span className={styles.p}>$</span> ud apply -f task.md          <span className={styles.c}># create or update from a file</span>{'\n'}
+            <span className={styles.p}>$</span> ud get task <span className={styles.f}>--status</span> todo     <span className={styles.c}># kubectl-style queries</span>{'\n'}
+            <span className={styles.p}>$</span> ud describe task 49322857     <span className={styles.c}># full context for an agent</span>
+          </pre>
+        </div>
       </div>
     </section>
   );
