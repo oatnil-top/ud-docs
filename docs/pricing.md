@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Pricing
 
-UnDercontrol is **100% self-hosted** with flexible pricing tiers to match your needs. All tiers run on your own infrastructure, ensuring complete data privacy and control.
+UnDercontrol is **self-hostable** — run any tier on your own infrastructure for complete data control, or use our hosted app at [ud.oatnil.com](https://ud.oatnil.com). Flexible pricing to match your needs.
 
 ## Subscription Tiers
 
@@ -41,7 +41,7 @@ Perfect for individual users managing their own finances.
 
 Professional features for teams and advanced use cases.
 
-**Price:** Coming soon
+**Price:** [Contact us](/contact) for pricing
 
 **Everything in Personal, plus:**
 - ✓ **Multiple users** with role management
@@ -71,20 +71,20 @@ Professional features for teams and advanced use cases.
 
 Support the project while enjoying Pro features.
 
-**Price:** Coming soon (higher than Pro)
+**Price:** [Contact us](/contact) for pricing (higher than Pro)
 
 **Features:** Identical to Pro tier
 
 **Why choose Max?**
 - 🎁 Support continued development of UnDercontrol
 - 🚀 Help fund new features and improvements
-- ⭐ Show your appreciation for open-source software
+- ⭐ Show your appreciation for the project
 - 💪 Enable faster updates and better support
 
 **Perfect for:**
 - Enthusiasts who love the project
 - Organizations wanting to give back
-- Users who value open-source sustainability
+- Users who value the project's sustainability
 
 :::info Supporter Tier
 Max tier has the same features as Pro. The higher price directly supports UnDercontrol's development and helps keep the project thriving. Thank you for your support!
@@ -108,9 +108,8 @@ Max tier has the same features as Pro. The higher price directly supports UnDerc
 | **Account History**       | ✓        | ✓   | ✓   |
 | **User Roles**            | N/A      | Admin, User | Admin, User |
 | **Team Collaboration**    | ✗        | ✓   | ✓   |
-| **Self-Hosted**           | ✓        | ✓   | ✓   |
-| **Data Privacy**          | 100%     | 100% | 100% |
-| **Open Source**           | ✓        | ✓   | ✓   |
+| **Self-Hostable**         | ✓        | ✓   | ✓   |
+| **Your Data, Your Infra** | ✓        | ✓   | ✓   |
 
 ---
 
@@ -179,9 +178,9 @@ Simply replace your Pro license with a Max license. All features remain the same
 
 ## Frequently Asked Questions
 
-### Is UnDercontrol cloud-hosted?
+### Where does UnDercontrol run?
 
-No. UnDercontrol is **100% self-hosted**. You run it on your own infrastructure (server, VPS, or local machine). We never host your data.
+You choose. Self-host it on your own infrastructure (server, VPS, or local machine) for complete control of your data — or use our hosted app at [ud.oatnil.com](https://ud.oatnil.com) if you'd rather not run your own server. For maximum privacy, self-hosting keeps everything on hardware you control.
 
 ### Do I need technical knowledge to self-host?
 
@@ -226,7 +225,7 @@ Yes! We offer a **30-day money-back guarantee**. If UnDercontrol doesn't work fo
 
 ### How do I purchase a license?
 
-License purchasing will be available soon. For early access or questions, contact us at: support@undercontrol.io
+To purchase a license or for any questions, [contact us](/contact).
 
 ---
 
@@ -234,7 +233,7 @@ License purchasing will be available soon. For early access or questions, contac
 
 We're here to help!
 
-- 📧 **Email Support**: support@undercontrol.io
+- 📧 **Contact**: [Get in touch](/contact)
 - 📚 **Read the Docs**: [Getting Started Guide](/docs/intro)
 - 🚀 **Installation Help**: [Step-by-Step Setup](/docs/deployment/docker-compose-local)
 - 💬 **Need to talk?**: Contact us for a demo or consultation
@@ -261,4 +260,4 @@ After installation, open your browser to `http://localhost:3000` and you're read
 
 ### Upgrade to Pro/Max
 
-Already using Personal tier? [Contact us](mailto:support@undercontrol.io) to upgrade and unlock team features.
+Already using Personal tier? [Contact us](/contact) to upgrade and unlock team features.

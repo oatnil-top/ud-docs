@@ -178,7 +178,7 @@ Removing your license doesn't delete your data. Your budgets, expenses, and reco
 - License key was copied incorrectly
 - License is for a different product
 
-**Solution:** Contact support at support@undercontrol.io with your license details
+**Solution:** Contact us via the [contact page](/contact) with your license details
 
 ### Features Not Unlocking
 
@@ -190,7 +190,7 @@ Removing your license doesn't delete your data. Your budgets, expenses, and reco
 3. Clear your browser cache
 4. Restart UnDercontrol completely
 
-If issues persist, contact support@undercontrol.io
+If issues persist, reach us via the [contact page](/contact)
 
 ---
 
@@ -201,7 +201,7 @@ Already using the Personal tier? Here's how to upgrade:
 ### Step-by-Step Upgrade Process
 
 1. **Purchase a Pro or Max license**
-   - Contact us at support@undercontrol.io
+   - Contact us via the [contact page](/contact)
    - Receive your license key via email
 
 2. **Add your license key**
@@ -233,7 +233,7 @@ Upgrading from Personal to Pro/Max doesn't require reinstallation or data migrat
 
 Having trouble with license activation? We're here to help!
 
-- 📧 **Email**: support@undercontrol.io
+- 📧 **Contact**: [Get in touch](/contact)
 - 📚 **Documentation**: [Installation Guide](/docs/deployment/docker-compose-local)
 - 💰 **Pricing Questions**: [Pricing Page](/docs/pricing)
 
