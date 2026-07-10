@@ -391,8 +391,21 @@ function GrowSection() {
             </div>
             {'add' in stage && stage.add ? (
               <div className={styles.growarrow}>
-                <span className={styles.garrow}>→</span>
-                <b>{stage.add}</b>
+                <span className={styles.growLabel}>{stage.add}</span>
+                <svg
+                  className={styles.garrow}
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true">
+                  <path d="M5 12h13" />
+                  <path d="m12 5 7 7-7 7" />
+                </svg>
               </div>
             ) : null}
           </Fragment>

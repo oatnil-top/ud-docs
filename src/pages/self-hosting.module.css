@@ -98,9 +98,9 @@
 .stage h4 { font-size: 14.5px; font-weight: 640; margin: 8px 0 5px; }
 .stage p { margin: 0; font-size: 12.5px; color: var(--muted); line-height: 1.5; }
 .stage.first { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-wash); }
-.growarrow { align-self: center; flex: none; padding: 0 6px; color: var(--accent); font-family: var(--mono); font-size: 12px; white-space: nowrap; }
-.growarrow b { display: block; font-size: 10.5px; color: var(--faint); text-align: center; }
-.garrow { display: inline-block; }
+.growarrow { align-self: center; flex: none; padding: 0 10px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.growLabel { font-family: var(--mono); font-size: 10px; letter-spacing: 0.02em; color: var(--muted); background: var(--accent-wash); border: 1px solid var(--border-2); border-radius: 100px; padding: 3px 10px; white-space: nowrap; }
+.garrow { color: var(--faint); display: block; }
 .portableNote { margin-top: 28px; display: flex; gap: 16px; align-items: flex-start; border: 1px solid var(--border); border-left: 2px solid var(--accent); border-radius: var(--radius); background: var(--inset); padding: 20px 22px; }
 .portableNote svg { color: var(--accent); flex: none; margin-top: 2px; }
 .portableNote h3 { font-size: 15.5px; font-weight: 640; margin: 0 0 5px; }
@@ -160,6 +160,6 @@
      the nowrap strip's min-content otherwise widens the whole page on mobile. */
   .growrow { flex-direction: column; overflow-x: visible; }
   .stage { min-width: 0; }
-  .growarrow { padding: 8px 0; align-self: center; }
+  .growarrow { padding: 12px 0; align-self: center; }
   .garrow { transform: rotate(90deg); }
 }
