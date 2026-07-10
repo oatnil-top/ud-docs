@@ -391,7 +391,8 @@ function GrowSection() {
             </div>
             {'add' in stage && stage.add ? (
               <div className={styles.growarrow}>
-                →<b>{stage.add}</b>
+                <span className={styles.garrow}>→</span>
+                <b>{stage.add}</b>
               </div>
             ) : null}
           </Fragment>

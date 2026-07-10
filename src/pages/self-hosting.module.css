@@ -26,7 +26,7 @@
   --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Menlo", "Consolas", monospace;
 }
 
-.page { max-width: 1080px; margin: 0 auto; border-left: 1px solid var(--border); border-right: 1px solid var(--border); background: var(--surface); }
+.page { max-width: 1080px; margin: 0 auto; border-left: 1px solid var(--border); border-right: 1px solid var(--border); background: var(--surface); overflow-x: clip; }
 
 .section { padding: 72px 32px; border-bottom: 1px solid var(--border); }
 .eyebrow { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin: 0 0 14px; }
@@ -100,6 +100,7 @@
 .stage.first { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-wash); }
 .growarrow { align-self: center; flex: none; padding: 0 6px; color: var(--accent); font-family: var(--mono); font-size: 12px; white-space: nowrap; }
 .growarrow b { display: block; font-size: 10.5px; color: var(--faint); text-align: center; }
+.garrow { display: inline-block; }
 .portableNote { margin-top: 28px; display: flex; gap: 16px; align-items: flex-start; border: 1px solid var(--border); border-left: 2px solid var(--accent); border-radius: var(--radius); background: var(--inset); padding: 20px 22px; }
 .portableNote svg { color: var(--accent); flex: none; margin-top: 2px; }
 .portableNote h3 { font-size: 15.5px; font-weight: 640; margin: 0 0 5px; }
@@ -155,4 +156,10 @@
   .runrow { grid-template-columns: 36px 1fr; gap: 14px; }
   .archrow { flex-direction: column; align-items: center; }
   .arrow { transform: rotate(90deg); padding: 6px 0; }
+  /* Stack the progressive ladder vertically instead of horizontal scroll —
+     the nowrap strip's min-content otherwise widens the whole page on mobile. */
+  .growrow { flex-direction: column; overflow-x: visible; }
+  .stage { min-width: 0; }
+  .growarrow { padding: 8px 0; align-self: center; }
+  .garrow { transform: rotate(90deg); }
 }
