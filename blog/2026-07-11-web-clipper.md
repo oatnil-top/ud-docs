@@ -4,6 +4,7 @@ description: The Web Clipper Chrome extension copies any page as clean Markdown 
 authors: [lintao]
 tags: [feature, guide]
 date: 2026-07-11
+image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/web-clipper/concept-copy-markdown.png
 ---
 
 You want to hand a web article to an AI — to summarize it, translate it, or ask questions about it. How do you do that today?

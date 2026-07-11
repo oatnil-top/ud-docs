@@ -4,6 +4,7 @@ description: Web Clipper Chrome 扩展无需登录即可把任意网页一键复
 authors: [lintao]
 tags: [feature, guide]
 date: 2026-07-11
+image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/web-clipper/concept-copy-markdown.png
 ---
 
 想把一篇网页文章丢给 AI 总结、翻译、提问,你现在是怎么做的?
