@@ -18,6 +18,26 @@ UnDercontrol follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.110.0 (2026-07-11)
+
+### New Features
+
+- **Running badge focuses its window** — Clicking a workspace's Running badge now brings the already-open workspace window to the front when it's on the same computer, instead of doing nothing.
+- **Stuck workspace launches are detected** — Workspace sessions that never start are now failed automatically after a timeout, with a notification posted back into the task thread — no more sessions silently stuck on "starting".
+
+### Improvements
+
+- **Faster terminal reconnects** — Reopening a workspace terminal now restores the screen from a snapshot instead of replaying the entire output history, making reconnects faster and cleaner.
+- **Sharper terminal rendering** — The terminal now uses WebGL rendering with more accurate font-size fitting and correct raw output display.
+
+### Bug Fixes
+
+- **Workspace launches without a project folder** — When no working directory is configured, a dedicated sandbox folder is now created automatically instead of the session failing to start.
+- **Stray "~" folder** — Fixed the desktop app creating a literal `~` folder inside the project directory when setting up workspace hooks.
+- **Conversation previews** — The conversations sidebar now previews the latest reply in a thread, not an older message.
+
+---
+
 ## v0.109.0 (2026-07-08)
 
 ### Improvements
