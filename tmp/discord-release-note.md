@@ -1,0 +1,3 @@
+### Improvements
+
+- **Smarter agent team delegation** — Team leads now delegate to specialists through their AI tool's built-in subagent capability by default: run `ud describe agent <name> -o prompt` to get a ready-to-inject identity prompt (persona, skills, working constraints) and spawn the specialist as a subagent, with results reported right back in the thread. @mention delegation remains for specialists on other machines and long-running background work, and members that can only be reached remotely are now clearly marked in the team roster. Leads are also guided to delegate rather than do everything themselves, staying focused on coordination and review.
