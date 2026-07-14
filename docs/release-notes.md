@@ -18,6 +18,19 @@ UnDercontrol follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.112.0 (2026-07-14)
+
+### New Features
+
+- **Fullscreen image lightbox in conversations** — Click any image in a conversation to open it in a fullscreen viewer, then pan and zoom to inspect the details.
+
+### Improvements
+
+- **The ud assistant now orchestrates your whole team** — Your default ud agent now acts as a root manager over all top-level team leads, coordinating work across teams instead of operating in isolation.
+- **Clearer CLI daemon feedback** — `ud` daemon start now reports real success or failure from the captured output instead of silently swallowing errors.
+
+---
+
 ## v0.111.0 (2026-07-12)
 
 ### Improvements
