@@ -3,22 +3,6 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import Translate, {translate} from '@docusaurus/Translate';
-import {
-  Package,
-  Lock,
-  Bot,
-  Radio,
-  Puzzle,
-  Smartphone,
-  Shield,
-  WifiOff,
-  Server,
-  Wifi,
-  Code,
-  Terminal,
-  Globe,
-  Monitor,
-} from 'lucide-react';
 
 import styles from './index.module.css';
 
@@ -36,11 +20,23 @@ function useCdnImg() {
   return (filename: string) => `${base}/features/${filename}`;
 }
 
+/**
+ * Page structure: one claim, one band, one proof.
+ *
+ * Every band states a single claim on the left and shows the evidence for it on the
+ * right, split by a continuous hairline. Do not reintroduce a summary/pillar grid that
+ * restates the bands — that duplication is what this page was rebuilt to remove.
+ */
+
 // --- Hero ---
 function HeroSection() {
   const cdnImg = useCdnImg();
   return (
     <section className={styles.heroSection}>
+      <span className={styles.eyebrow}>
+        <span className={styles.dot} />
+        <Translate id="homepage.hero.eyebrow">Self-hosted · Free for personal use</Translate>
+      </span>
       <h1 className={styles.heroTitle}>
         <Translate id="homepage.hero.tagline">
           One private place for all your valuable information.
@@ -60,23 +56,20 @@ function HeroSection() {
       </div>
       <div className={styles.heroButtons}>
         <Link className={styles.heroButtonPrimary} to={APP_URL}>
-          <Translate id="homepage.hero.tryNow">Try Now</Translate>
+          <Translate id="homepage.hero.tryOnlineCta">Try it online</Translate>
         </Link>
         <Link className={styles.heroButtonSecondary} to="/subscribe">
           <Translate id="homepage.hero.download">Download Desktop App</Translate>
+        </Link>
+        <Link className={styles.heroButtonText} to="#run">
+          <Translate id="homepage.hero.waysLink">Or self-host it — three ways to run ↓</Translate>
         </Link>
       </div>
       <div className={styles.heroImageWrap}>
         <img
           className={styles.heroDesktopImg}
-          src={cdnImg('desktop.jpg')}
-          alt="UnDercontrol desktop"
-          loading="lazy"
-        />
-        <img
-          className={styles.heroMobileImg}
-          src={cdnImg('mobile.jpg')}
-          alt="UnDercontrol mobile"
+          src={cdnImg('home-page/v2/hero.jpg')}
+          alt={translate({id: 'homepage.hero.imageAlt', message: 'A UnDercontrol kanban board tracking a software release'})}
           loading="lazy"
         />
       </div>
@@ -84,99 +77,121 @@ function HeroSection() {
   );
 }
 
-// --- Why UnDercontrol: 6-pillar grid ---
-const PILLARS = [
-  {key: 'allinone', Icon: Package},
-  {key: 'private', Icon: Lock},
-  {key: 'ainative', Icon: Bot},
-  {key: 'orchestrator', Icon: Radio},
-  {key: 'open', Icon: Puzzle},
-  {key: 'access', Icon: Smartphone},
+// --- Three ways to run it ---
+// Each column carries a spec table so the trade-off is scannable rather than prose.
+// Download is the primary action: local-with-no-server is the option people don't expect.
+const WAYS = [
+  {
+    key: 'online',
+    primary: false,
+    to: APP_URL,
+    label: <Translate id="homepage.ways.online.label">Try it online</Translate>,
+    title: <Translate id="homepage.ways.online.title">Nothing to install.</Translate>,
+    desc: (
+      <Translate id="homepage.ways.online.desc">
+        Open the cloud demo and file your first task in about a minute. Bring your data over later, or don&apos;t.
+      </Translate>
+    ),
+    where: <Translate id="homepage.ways.online.where">our server</Translate>,
+    setup: <Translate id="homepage.ways.online.setup">~1 min</Translate>,
+    offline: <Translate id="homepage.ways.online.offline">no</Translate>,
+    cta: <Translate id="homepage.ways.online.cta">Open the demo</Translate>,
+  },
+  {
+    key: 'desktop',
+    primary: true,
+    to: '/subscribe',
+    label: <Translate id="homepage.ways.desktop.label">Download the app</Translate>,
+    title: <Translate id="homepage.ways.desktop.title">Local, with no server at all.</Translate>,
+    desc: (
+      <Translate id="homepage.ways.desktop.desc">
+        The desktop app ships its own backend. No account, no network, no Docker — your workspace is a folder on your disk.
+      </Translate>
+    ),
+    where: <Translate id="homepage.ways.desktop.where">your machine</Translate>,
+    setup: <Translate id="homepage.ways.desktop.setup">~2 min</Translate>,
+    offline: <Translate id="homepage.ways.desktop.offline">yes</Translate>,
+    cta: <Translate id="homepage.ways.desktop.cta">Download the app</Translate>,
+  },
+  {
+    key: 'selfhost',
+    primary: false,
+    to: '/self-hosting',
+    label: <Translate id="homepage.ways.selfhost.label">Self-host it</Translate>,
+    title: <Translate id="homepage.ways.selfhost.title">Your box, reachable everywhere.</Translate>,
+    desc: (
+      <Translate id="homepage.ways.selfhost.desc">
+        One Docker Compose file on a machine you control. Web, mobile, and CLI all point at it — and nothing in the middle is ours.
+      </Translate>
+    ),
+    where: <Translate id="homepage.ways.selfhost.where">your server</Translate>,
+    setup: <Translate id="homepage.ways.selfhost.setup">~15 min</Translate>,
+    offline: <Translate id="homepage.ways.selfhost.offline">on your LAN</Translate>,
+    cta: <Translate id="homepage.ways.selfhost.cta">Self-hosting guide</Translate>,
+  },
 ] as const;
 
-const PILLAR_TEXT: Record<string, {title: ReactNode; desc: ReactNode}> = {
-  allinone: {
-    title: <Translate id="homepage.pillarsGrid.allinone.title">All-in-One</Translate>,
-    desc: (
-      <Translate id="homepage.pillarsGrid.allinone.desc">
-        Knowledge base like Obsidian and Notion. Project management like Jira and Trello. Personal finance like Mint and YNAB. File storage like Google Drive and Dropbox — one private workspace.
-      </Translate>
-    ),
-  },
-  private: {
-    title: <Translate id="homepage.pillarsGrid.private.title">Private by Design & No Vendor Lock-in</Translate>,
-    desc: (
-      <Translate id="homepage.pillarsGrid.private.desc">
-        Self-hosted, local-first. Everything-as-code — your tasks, notes, and data are declarable in Markdown and YAML, versionable with Git, and fully portable. No proprietary formats, no lock-in.
-      </Translate>
-    ),
-  },
-  ainative: {
-    title: <Translate id="homepage.pillarsGrid.ainative.title">AI-Native</Translate>,
-    desc: (
-      <Translate id="homepage.pillarsGrid.ainative.desc">
-        Everything is defined as structured schemas — Kubernetes-style, as-code. AI agents read and write your tasks, notes, and resources through CLI and API, just like kubectl apply.
-      </Translate>
-    ),
-  },
-  orchestrator: {
-    title: <Translate id="homepage.pillarsGrid.orchestrator.title">Agent Orchestrator</Translate>,
-    desc: (
-      <Translate id="homepage.pillarsGrid.orchestrator.desc">
-        Orchestrate AI agents from anywhere. Launch remote sessions, assign tasks to agents, and let them work autonomously — even when you're offline.
-      </Translate>
-    ),
-  },
-  open: {
-    title: <Translate id="homepage.pillarsGrid.open.title">Open & Extensible — Single Source of Truth</Translate>,
-    desc: (
-      <Translate id="homepage.pillarsGrid.open.desc">
-        Open API, open schema. Hermes, OpenClaw, or any custom client can CRUD your information via API key and CLI. Share reusable skills — prompt templates that any agent can consume.
-      </Translate>
-    ),
-  },
-  access: {
-    title: <Translate id="homepage.pillarsGrid.access.title">Access Everywhere</Translate>,
-    desc: (
-      <Translate id="homepage.pillarsGrid.access.desc">
-        Read and write from any device, anytime. Web, desktop, mobile, CLI, Chrome extension, and Apple Shortcuts.
-      </Translate>
-    ),
-  },
-};
-
-function PillarsGridSection() {
+function WaysSection() {
   return (
-    <section className={styles.pillarsGridSection}>
-      <h2 className={styles.sectionLabel}>
-        <Translate id="homepage.pillarsGrid.label">Why UnDercontrol</Translate>
-      </h2>
-      <div className={styles.pillarsGrid}>
-        {PILLARS.map(({key, Icon}) => (
-          <div key={key} className={styles.pillarCard}>
-            <Icon size={18} strokeWidth={2} className={styles.pillarCardIcon} />
-            <h3 className={styles.pillarCardTitle}>{PILLAR_TEXT[key].title}</h3>
-            <p className={styles.pillarCardDesc}>{PILLAR_TEXT[key].desc}</p>
+    <>
+      <section className={styles.ways} id="run">
+        {WAYS.map((way) => (
+          <div key={way.key} className={styles.way}>
+            <p className={styles.sectionLabel}>{way.label}</p>
+            <h3 className={styles.wayTitle}>{way.title}</h3>
+            <p className={styles.wayDesc}>{way.desc}</p>
+            <div className={styles.spec}>
+              <div>
+                <span><Translate id="homepage.ways.spec.where">Data lives</Translate></span>
+                <b>{way.where}</b>
+              </div>
+              <div>
+                <span><Translate id="homepage.ways.spec.setup">Setup</Translate></span>
+                <b>{way.setup}</b>
+              </div>
+              <div>
+                <span><Translate id="homepage.ways.spec.offline">Offline</Translate></span>
+                <b>{way.offline}</b>
+              </div>
+              <div>
+                <span><Translate id="homepage.ways.spec.cost">Cost</Translate></span>
+                <b><Translate id="homepage.ways.spec.free">free</Translate></b>
+              </div>
+            </div>
+            <Link
+              className={way.primary ? styles.heroButtonPrimary : styles.heroButtonSecondary}
+              to={way.to}>
+              {way.cta}
+            </Link>
           </div>
         ))}
-      </div>
-    </section>
+      </section>
+      <p className={styles.waysNote}>
+        <Translate id="homepage.ways.note">
+          Same app, same data model, same CLI in all three. Start on the demo, move to your laptop, graduate to your own server — nothing to migrate but the folder.
+        </Translate>
+      </p>
+    </>
   );
 }
 
 // --- All-in-One image showcase ---
 const SHOWCASE = [
-  {key: 'tasks', images: ['home-page/tasks/1.jpg', 'home-page/tasks/2.jpg', 'home-page/tasks/3.jpg', 'home-page/tasks/4.jpg', 'home-page/tasks/5.jpg', 'home-page/tasks/6.jpg', 'home-page/tasks/7.jpg']},
-  {key: 'finance', images: ['home-page/finance/1.jpg', 'home-page/finance/2.jpg', 'home-page/finance/3.jpg', 'home-page/finance/4.jpg']},
-  {key: 'resources', images: ['home-page/resources/1.jpg', 'home-page/resources/2.jpg', 'home-page/resources/3.jpg']},
-  {key: 'workspace', images: ['home-page/workspace/1.jpg']},
-  {key: 'access', images: ['home-page/access/1.jpg', 'home-page/access/2.jpg']},
+  {key: 'tasks', images: ['home-page/v2/tasks/1.jpg', 'home-page/v2/tasks/2.jpg', 'home-page/v2/tasks/3.jpg']},
+  {key: 'graph', images: ['home-page/v2/graph/1.jpg', 'home-page/v2/graph/2.jpg']},
+  {key: 'finance', images: ['home-page/v2/finance/1.jpg', 'home-page/v2/finance/2.jpg']},
+  {key: 'resources', images: ['home-page/v2/resources/1.jpg']},
+  {key: 'workspace', images: ['home-page/v2/workspace/1.jpg']},
 ] as const;
 
 const SHOWCASE_TEXT: Record<string, {label: ReactNode; desc: ReactNode}> = {
   tasks: {
     label: <Translate id="homepage.showcase.tasks.label">Tasks & Knowledge</Translate>,
-    desc: <Translate id="homepage.showcase.tasks.desc">Kanban, Markdown, knowledge graphs and mind maps.</Translate>,
+    desc: <Translate id="homepage.showcase.tasks.desc2">Kanban boards, Markdown docs, threaded comments.</Translate>,
+  },
+  graph: {
+    label: <Translate id="homepage.showcase.graph.label">Knowledge Graph</Translate>,
+    desc: <Translate id="homepage.showcase.graph.desc">Links and hierarchy, drawn. Plus per-task mindmaps.</Translate>,
   },
   finance: {
     label: <Translate id="homepage.showcase.finance.label">Finance</Translate>,
@@ -188,11 +203,7 @@ const SHOWCASE_TEXT: Record<string, {label: ReactNode; desc: ReactNode}> = {
   },
   workspace: {
     label: <Translate id="homepage.showcase.workspace.label">AI Workspace</Translate>,
-    desc: <Translate id="homepage.showcase.workspace.desc">Agent launch, parallel execution, workspace dashboard.</Translate>,
-  },
-  access: {
-    label: <Translate id="homepage.showcase.access.label">Works Everywhere</Translate>,
-    desc: <Translate id="homepage.showcase.access.desc">Web, desktop, CLI, Chrome extension, Shortcuts, API.</Translate>,
+    desc: <Translate id="homepage.showcase.workspace.desc2">Sessions grouped by agent, running in parallel.</Translate>,
   },
 };
 
@@ -221,30 +232,41 @@ function ShowcaseSection() {
   }, [images.length, activeItem]);
 
   return (
-    <section className={styles.featureSection}>
-      <div className={styles.featureContent}>
-        <h2 className={styles.sectionLabel}>
+    <section className={styles.band}>
+      <div className={styles.claim}>
+        <p className={styles.sectionLabel}>
           <Translate id="homepage.showcase.label">All-in-One</Translate>
+        </p>
+        <h2 className={styles.claimTitle}>
+          <Translate id="homepage.showcase.title">Four tools&apos; worth of your life, in one workspace.</Translate>
         </h2>
-        <div className={styles.pillarItems}>
+        <p className={styles.claimBody}>
+          <Translate id="homepage.showcase.body">
+            Tasks, notes, money, and files stop living in four silos that never talk to each other. One data model, one search, one place your agents can reach.
+          </Translate>
+        </p>
+        <div className={styles.tabs} role="tablist">
           {SHOWCASE.map((item, index) => {
             const isActive = index === activeItem;
             return (
-              <div
-                key={item.key}
-                onClick={() => setActiveItem(index)}
-                className={`${styles.pillarItem} ${isActive ? styles.pillarItemActive : ''}`}>
-                <div className={styles.pillarItemHeader}>
-                  <span className={styles.pillarItemLabel}>{SHOWCASE_TEXT[item.key].label}</span>
-                </div>
-                {isActive && <p className={styles.pillarItemDesc}>{SHOWCASE_TEXT[item.key].desc}</p>}
+              <div key={item.key}>
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  onClick={() => setActiveItem(index)}
+                  className={`${styles.tab} ${isActive ? styles.tabActive : ''}`}>
+                  <span className={styles.tabMark}>{isActive ? '●' : '○'}</span>
+                  {SHOWCASE_TEXT[item.key].label}
+                </button>
+                {isActive && <p className={styles.tabDesc}>{SHOWCASE_TEXT[item.key].desc}</p>}
               </div>
             );
           })}
         </div>
       </div>
-      <div className={styles.featureMedia}>
-        <div className={styles.carousel}>
+      <div className={styles.proof}>
+        <div className={styles.shotFrame}>
           {isFailed ? (
             <div className={styles.showcaseFallback}>{SHOWCASE_TEXT[current.key].desc}</div>
           ) : (
@@ -257,8 +279,11 @@ function ShowcaseSection() {
               onError={() => setFailed((prev) => ({...prev, [currentSrc]: true}))}
             />
           )}
+        </div>
+        <div className={styles.shotMeta}>
+          <span>{`${current.key}/${imageIndex + 1} of ${images.length}`}</span>
           {images.length > 1 && (
-            <div className={styles.carouselDots}>
+            <span className={styles.carouselDots}>
               {images.map((_, index) => (
                 <button
                   key={index}
@@ -268,7 +293,7 @@ function ShowcaseSection() {
                   aria-label={`Go to image ${index + 1}`}
                 />
               ))}
-            </div>
+            </span>
           )}
         </div>
       </div>
@@ -289,102 +314,141 @@ function ShowcaseSection() {
   );
 }
 
-// --- Trust ---
-const TRUST_ITEMS = [
-  {key: 'private', Icon: Shield},
-  {key: 'offline', Icon: WifiOff},
-  {key: 'selfhost', Icon: Server},
-  {key: 'free', Icon: Wifi},
+// --- Private & Portable ---
+const TRUST_ROWS = [
+  {
+    key: 'private',
+    k: <Translate id="homepage.trust.private.title">Fully Private</Translate>,
+    v: <Translate id="homepage.trust.private.desc">AI runs on your machine. Data never leaves your device.</Translate>,
+  },
+  {
+    key: 'offline',
+    k: <Translate id="homepage.trust.offline.title">Works Offline</Translate>,
+    v: <Translate id="homepage.trust.offline.desc">Desktop app with built-in backend. No internet required.</Translate>,
+  },
+  {
+    key: 'selfhost',
+    k: <Translate id="homepage.trust.selfhost.title">Self-Hostable</Translate>,
+    v: <Translate id="homepage.trust.selfhost.desc">Deploy on your own infrastructure. Your server, your rules.</Translate>,
+  },
+  {
+    key: 'free',
+    k: <Translate id="homepage.trust.free.title">Free Forever</Translate>,
+    v: <Translate id="homepage.trust.free.desc">No ads, no tracking. Personal use is free, always.</Translate>,
+  },
 ] as const;
 
-const TRUST_TEXT: Record<string, {title: ReactNode; desc: ReactNode}> = {
-  private: {
-    title: <Translate id="homepage.trust.private.title">Fully Private</Translate>,
-    desc: <Translate id="homepage.trust.private.desc">AI runs on your machine. Data never leaves your device.</Translate>,
-  },
-  offline: {
-    title: <Translate id="homepage.trust.offline.title">Works Offline</Translate>,
-    desc: <Translate id="homepage.trust.offline.desc">Desktop app with built-in backend. No internet required.</Translate>,
-  },
-  selfhost: {
-    title: <Translate id="homepage.trust.selfhost.title">Self-Hostable</Translate>,
-    desc: <Translate id="homepage.trust.selfhost.desc">Deploy on your own infrastructure. Your server, your rules.</Translate>,
-  },
-  free: {
-    title: <Translate id="homepage.trust.free.title">Free Forever</Translate>,
-    desc: <Translate id="homepage.trust.free.desc">No ads, no tracking. Personal use is free, always.</Translate>,
-  },
-};
-
-function TrustSection() {
+function PrivateSection() {
   return (
-    <section className={styles.trustSection}>
-      <h2 className={styles.sectionLabel}>
-        <Translate id="homepage.trust.label">Private by Design & No Vendor Lock-in</Translate>
-      </h2>
-      <div className={styles.trustGrid}>
-        {TRUST_ITEMS.map(({key, Icon}) => (
-          <div key={key} className={styles.trustItem}>
-            <Icon size={16} strokeWidth={2} />
-            <div>
-              <h3>{TRUST_TEXT[key].title}</h3>
-              <p>{TRUST_TEXT[key].desc}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-// --- Developers (AI-Native) ---
-const DEV_ITEMS = [
-  {key: 'agents', Icon: Code, text: <Translate id="homepage.developers.agents">Launch Claude Code or Codex agents directly from tasks</Translate>},
-  {key: 'cli', Icon: Terminal, text: <Translate id="homepage.developers.cli">kubectl-style CLI — scriptable, AI-agent-friendly</Translate>},
-  {key: 'api', Icon: Globe, text: <Translate id="homepage.developers.api">Open HTTP API — embed in any workflow</Translate>},
-  {key: 'workspace', Icon: Monitor, text: <Translate id="homepage.developers.workspace">Workspace terminal with parallel agent execution</Translate>},
-] as const;
-
-function DevelopersSection() {
-  return (
-    <section className={styles.developersSection}>
-      <div className={styles.developersHeader}>
-        <h2 className={styles.sectionLabel}>
-          <Translate id="homepage.developers.label">AI-Native</Translate>
+    <section className={styles.band}>
+      <div className={styles.claim}>
+        <p className={styles.sectionLabel}>
+          <Translate id="homepage.private.label">Private &amp; Portable</Translate>
+        </p>
+        <h2 className={styles.claimTitle}>
+          <Translate id="homepage.private.title">Your data is Markdown in a folder, not a hostage.</Translate>
         </h2>
-        <p className={styles.sectionSubtitle}>
-          <Translate id="homepage.developers.subtitle">
-            Everything is defined as structured schemas — Kubernetes-style, as-code. AI agents consume your data natively.
+        <p className={styles.claimBody}>
+          <Translate id="homepage.private.body">
+            Self-hosted and local-first. Every task, note, and board is declarable as Markdown with YAML frontmatter — diff it, commit it, grep it, take it. There is no export button because there is nothing to export from.
           </Translate>
         </p>
       </div>
-      <div className={styles.developersList}>
-        {DEV_ITEMS.map(({key, Icon, text}) => (
-          <div key={key} className={styles.developerItem}>
-            <Icon size={16} strokeWidth={2} />
-            <span>{text}</span>
+      <div className={styles.proof}>
+        <div className={styles.code}>
+          <div className={styles.codeBar}>task.md</div>
+          <div className={styles.codeBody}>
+            <pre>
+              <span className={styles.c}>---{'\n'}</span>
+              <span className={styles.k}>title:</span> Ship the v0.113 release{'\n'}
+              <span className={styles.k}>status:</span> in-progress{'\n'}
+              <span className={styles.k}>tags:</span> [release, backend]{'\n'}
+              <span className={styles.k}>deadline:</span> 2026-07-21{'\n'}
+              <span className={styles.c}>---{'\n'}</span>
+              Cut the tag, build the Electron artifacts, verify{'\n'}
+              the uploaded DMG on a clean machine.
+            </pre>
           </div>
-        ))}
-      </div>
-      <div className={styles.cliTerm}>
-        <div className={styles.cliBar}>
-          <span className={styles.cliDots}><i /><i /><i /></span>
-          <span className={styles.cliName}>bash — ud CLI</span>
         </div>
-        <div className={styles.cliBody}>
-          <pre>
-            <span className={styles.c}># everything-as-code: tasks are markdown, agents speak CLI{'\n'}</span>
-            <span className={styles.p}>$</span> ud apply -f task.md          <span className={styles.c}># create or update from a file</span>{'\n'}
-            <span className={styles.p}>$</span> ud get task <span className={styles.f}>--status</span> todo     <span className={styles.c}># kubectl-style queries</span>{'\n'}
-            <span className={styles.p}>$</span> ud describe task 49322857     <span className={styles.c}># full context for an agent</span>
-          </pre>
+        <div className={styles.rows}>
+          {TRUST_ROWS.map((row) => (
+            <div key={row.key} className={styles.row}>
+              <div className={styles.rowK}>{row.k}</div>
+              <div className={styles.rowV}>{row.v}</div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
   );
 }
 
-// --- How It Works: Agent Orchestrator diagram ---
+// --- AI-Native & Open ---
+const OPEN_ROWS = [
+  {
+    key: 'api',
+    k: <Translate id="homepage.ainative.api.title">Open HTTP API</Translate>,
+    v: <Translate id="homepage.ainative.api.desc">Embed your workspace in any workflow, with an API key.</Translate>,
+  },
+  {
+    key: 'schema',
+    k: <Translate id="homepage.ainative.schema.title">Open schema</Translate>,
+    v: <Translate id="homepage.ainative.schema.desc">Hermes, OpenClaw, or a client you write yourself can CRUD your data.</Translate>,
+  },
+  {
+    key: 'skills',
+    k: <Translate id="homepage.ainative.skills.title">Shareable skills</Translate>,
+    v: <Translate id="homepage.ainative.skills.desc">Prompt templates any agent can pull and consume.</Translate>,
+  },
+  {
+    key: 'sst',
+    k: <Translate id="homepage.ainative.sst.title">Single source of truth</Translate>,
+    v: <Translate id="homepage.ainative.sst.desc">Every tool reads and writes the same place. Nothing drifts.</Translate>,
+  },
+] as const;
+
+function AiNativeSection() {
+  return (
+    <section className={styles.band}>
+      <div className={styles.claim}>
+        <p className={styles.sectionLabel}>
+          <Translate id="homepage.ainative.label">AI-Native &amp; Open</Translate>
+        </p>
+        <h2 className={styles.claimTitle}>
+          <Translate id="homepage.ainative.title">Agents already know how to use it.</Translate>
+        </h2>
+        <p className={styles.claimBody}>
+          <Translate id="homepage.ainative.body">
+            Everything is a structured schema, kubectl-style. An agent that can run a command can read and write your workspace — no plugin, no scraping, no bespoke integration to maintain.
+          </Translate>
+        </p>
+      </div>
+      <div className={styles.proof}>
+        <div className={`${styles.code} ${styles.term}`}>
+          <div className={styles.codeBar}>bash — ud CLI</div>
+          <div className={styles.codeBody}>
+            <pre>
+              <span className={styles.c}># everything-as-code: tasks are markdown, agents speak CLI{'\n'}</span>
+              <span className={styles.p}>$</span> ud apply -f task.md          <span className={styles.c}># create or update from a file</span>{'\n'}
+              <span className={styles.p}>$</span> ud get task <span className={styles.f}>--status</span> todo     <span className={styles.c}># kubectl-style queries</span>{'\n'}
+              <span className={styles.p}>$</span> ud describe task 49322857     <span className={styles.c}># full context for an agent</span>
+            </pre>
+          </div>
+        </div>
+        <div className={styles.rows}>
+          {OPEN_ROWS.map((row) => (
+            <div key={row.key} className={styles.row}>
+              <div className={styles.rowK}>{row.k}</div>
+              <div className={styles.rowV}>{row.v}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// --- Agent Orchestrator diagram ---
 function OrchestrationDiagram() {
   // Monochrome, thin lines. Uses currentColor + opacity so it adapts to theme.
   const bg = 'var(--ifm-background-color)';
@@ -469,50 +533,158 @@ function OrchestrationDiagram() {
   );
 }
 
-function HowItWorksSection() {
+function OrchestratorSection() {
   return (
-    <section className={styles.orchestrationSection}>
-      <h2 className={styles.sectionLabel}>
-        <Translate id="homepage.howItWorks.label">Agent Orchestrator</Translate>
-      </h2>
-      <p className={styles.sectionSubtitle}>
-        <Translate id="homepage.howItWorks.subtitle">
-          Orchestrate AI agents from anywhere. Launch remote sessions, assign tasks, and let them work autonomously — even when you're offline.
-        </Translate>
-      </p>
-      <OrchestrationDiagram />
+    <section className={styles.band}>
+      <div className={styles.claim}>
+        <p className={styles.sectionLabel}>
+          <Translate id="homepage.howItWorks.label">Agent Orchestrator</Translate>
+        </p>
+        <h2 className={styles.claimTitle}>
+          <Translate id="homepage.orchestrator.title">Run agents on every machine you own.</Translate>
+        </h2>
+        <p className={styles.claimBody}>
+          <Translate id="homepage.orchestrator.body">
+            Launch a session on your MacBook from your phone. Hand a task to the Linux box and close the laptop. The relay in the middle is self-hostable, so the only thing between you and your agents is yours.
+          </Translate>
+        </p>
+      </div>
+      <div className={styles.proof}>
+        <OrchestrationDiagram />
+      </div>
     </section>
   );
 }
 
-// --- Open & Extensible ---
-const OPEN_ITEMS = [
-  {key: 'api', Icon: Globe, text: <Translate id="homepage.openExtensible.api">Open API and open schema — any client can integrate</Translate>},
-  {key: 'hermes', Icon: Puzzle, text: <Translate id="homepage.openExtensible.hermes">Hermes, OpenClaw, or any custom client can CRUD your data via API key</Translate>},
-  {key: 'cli', Icon: Terminal, text: <Translate id="homepage.openExtensible.cli">CLI access for scripting and automation workflows</Translate>},
-  {key: 'skills', Icon: Code, text: <Translate id="homepage.openExtensible.skills">Share reusable skills — prompt templates that any agent can consume</Translate>},
+// --- Access Everywhere ---
+const ACCESS_ROWS = [
+  {
+    key: 'web',
+    k: <Translate id="homepage.access.web.title">Web &amp; Desktop</Translate>,
+    v: <Translate id="homepage.access.web.desc">Browser, or a native app for macOS, Windows and Linux.</Translate>,
+  },
+  {
+    key: 'mobile',
+    k: <Translate id="homepage.access.mobile.title">Mobile</Translate>,
+    v: <Translate id="homepage.access.mobile.desc">iOS and Android — read, capture, and steer agents.</Translate>,
+  },
+  {
+    key: 'terminal',
+    k: <Translate id="homepage.access.terminal.title">Terminal</Translate>,
+    v: <Translate id="homepage.access.terminal.desc">The ud CLI, wherever you already live.</Translate>,
+  },
+  {
+    key: 'clipper',
+    k: <Translate id="homepage.access.clipper.title">Chrome &amp; Shortcuts</Translate>,
+    v: <Translate id="homepage.access.clipper.desc">Clip a page, or fire a capture from an Apple Shortcut.</Translate>,
+  },
 ] as const;
 
-function OpenExtensibleSection() {
+function AccessSection() {
   return (
-    <section className={styles.developersSection}>
-      <div className={styles.developersHeader}>
-        <h2 className={styles.sectionLabel}>
-          <Translate id="homepage.openExtensible.label">Open & Extensible — Single Source of Truth</Translate>
+    <section className={styles.band}>
+      <div className={styles.claim}>
+        <p className={styles.sectionLabel}>
+          <Translate id="homepage.pillarsGrid.access.title">Access Everywhere</Translate>
+        </p>
+        <h2 className={styles.claimTitle}>
+          <Translate id="homepage.access.title">Capture wherever the thought happens.</Translate>
         </h2>
-        <p className={styles.sectionSubtitle}>
-          <Translate id="homepage.openExtensible.subtitle">
-            Your data lives here. Every tool and agent reads from and writes to one central place.
+        <p className={styles.claimBody}>
+          <Translate id="homepage.access.body">
+            A link on your laptop, a receipt photo in a queue, a note dictated to your watch. Six ways in, one workspace out — same data, same second.
           </Translate>
         </p>
       </div>
-      <div className={styles.developersList}>
-        {OPEN_ITEMS.map(({key, Icon, text}) => (
-          <div key={key} className={styles.developerItem}>
-            <Icon size={16} strokeWidth={2} />
-            <span>{text}</span>
-          </div>
-        ))}
+      <div className={styles.proof}>
+        <div className={styles.rows}>
+          {ACCESS_ROWS.map((row) => (
+            <div key={row.key} className={styles.row}>
+              <div className={styles.rowK}>{row.k}</div>
+              <div className={styles.rowV}>{row.v}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// --- Start here (docs) ---
+const DOCS = [
+  {
+    key: 'intro',
+    to: '/docs/intro',
+    path: '/docs/intro',
+    title: <Translate id="homepage.docs.intro.title">Quickstart</Translate>,
+    desc: <Translate id="homepage.docs.intro.desc">Install, sign in, and file your first task.</Translate>,
+  },
+  {
+    key: 'eac',
+    to: '/docs/everything-as-code',
+    path: '/docs/everything-as-code',
+    title: <Translate id="homepage.docs.eac.title">Everything-as-Code</Translate>,
+    desc: <Translate id="homepage.docs.eac.desc">The Markdown + YAML model your data actually is.</Translate>,
+  },
+  {
+    key: 'cli',
+    to: '/docs/cli',
+    path: '/docs/cli',
+    title: <Translate id="homepage.docs.cli.title">CLI reference</Translate>,
+    desc: <Translate id="homepage.docs.cli.desc">get, apply, describe — and how agents use them.</Translate>,
+  },
+  {
+    key: 'selfhost',
+    to: '/docs/self-deployment',
+    path: '/docs/self-deployment',
+    title: <Translate id="homepage.docs.selfhost.title">Self-hosting</Translate>,
+    desc: <Translate id="homepage.docs.selfhost.desc">Docker Compose on a box you control.</Translate>,
+  },
+  {
+    key: 'workspace',
+    to: '/docs/workspace-terminal',
+    path: '/docs/workspace-terminal',
+    title: <Translate id="homepage.docs.workspace.title">Workspace &amp; agents</Translate>,
+    desc: <Translate id="homepage.docs.workspace.desc">Launch Claude Code or Codex straight from a task.</Translate>,
+  },
+  {
+    key: 'cookbook',
+    to: '/docs/cookbook',
+    path: '/docs/cookbook',
+    title: <Translate id="homepage.docs.cookbook.title">Cookbook</Translate>,
+    desc: <Translate id="homepage.docs.cookbook.desc">Recipes people actually run day to day.</Translate>,
+  },
+] as const;
+
+function DocsSection() {
+  return (
+    <section className={styles.band} id="docs">
+      <div className={styles.claim}>
+        <p className={styles.sectionLabel}>
+          <Translate id="homepage.docs.label">Start Here</Translate>
+        </p>
+        <h2 className={styles.claimTitle}>
+          <Translate id="homepage.docs.title">Pick the path you came for.</Translate>
+        </h2>
+        <p className={styles.claimBody}>
+          <Translate id="homepage.docs.body">
+            Fifteen minutes to a workspace of your own — running on someone else&apos;s machine or entirely on yours.
+          </Translate>
+        </p>
+      </div>
+      <div className={styles.proof}>
+        <div className={styles.docList}>
+          {DOCS.map((doc) => (
+            <Link key={doc.key} className={styles.doc} to={doc.to}>
+              <span>
+                <span className={styles.docTitle}>{doc.title}</span>
+                <br />
+                <span className={styles.docDesc}>{doc.desc}</span>
+              </span>
+              <span className={styles.docPath}>{doc.path}</span>
+            </Link>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -522,6 +694,9 @@ function OpenExtensibleSection() {
 function CTASection() {
   return (
     <section className={styles.ctaSection}>
+      <h2 className={styles.ctaTitle}>
+        <Translate id="homepage.cta.title">Get your information under control.</Translate>
+      </h2>
       <p className={styles.ctaSubtitle}>
         <Translate id="homepage.cta.subtitle">Download the desktop app or try the cloud demo.</Translate>
       </p>
@@ -552,12 +727,13 @@ export default function Home(): ReactNode {
       })}>
       <main className={styles.mainContainer}>
         <HeroSection />
-        <PillarsGridSection />
+        <WaysSection />
         <ShowcaseSection />
-        <TrustSection />
-        <DevelopersSection />
-        <HowItWorksSection />
-        <OpenExtensibleSection />
+        <PrivateSection />
+        <AiNativeSection />
+        <OrchestratorSection />
+        <AccessSection />
+        <DocsSection />
         <CTASection />
       </main>
     </Layout>

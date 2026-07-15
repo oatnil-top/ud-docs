@@ -1,9 +1,15 @@
 /**
- * Flat and Minimal design - Swiss Style inspired
- * Based on UnDercontrol reference design
+ * Flat and Minimal — Swiss Style inspired.
+ *
+ * Structure is carried by 1px hairlines, never by cards, shadows or fills.
+ * Colours come from Infima's --ifm-* tokens so light and dark both work
+ * without maintaining a second palette here.
+ *
+ * Layout: every section is a `.band` — `.claim` (left) | `.proof` (right),
+ * split by one continuous vertical hairline running the length of the page.
+ * One claim per band, stated once, next to its evidence.
  */
 
-/* Main Container */
 .mainContainer {
   max-width: 1200px;
   margin: 0 auto;
@@ -14,91 +20,113 @@
   overflow-x: clip;
 }
 
-/* Hero Section */
+/* ---------- Shared ---------- */
+.sectionLabel {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ifm-color-emphasis-500);
+  margin: 0;
+}
+
+/* ---------- Hero ---------- */
 .heroSection {
-  padding: 100px 48px 80px;
+  padding: 84px 48px 0;
   text-align: center;
   background: var(--ifm-background-color);
   border-bottom: 1px solid var(--ifm-color-emphasis-200);
-  position: relative;
-  overflow: hidden;
 }
 
-.heroSection::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: url('/img/showcase.png');
-  background-size: cover;
-  background-position: center;
-  filter: blur(1px);
-  opacity: 0.1;
-  z-index: 0;
-}
-
-.heroSection > * {
-  position: relative;
-  z-index: 1;
-}
-
-.versionBadge {
+.eyebrow {
   display: inline-flex;
   align-items: center;
+  gap: 8px;
   padding: 4px 12px;
-  border: 1px solid var(--ifm-color-emphasis-300);
+  border: 1px solid var(--ifm-color-emphasis-200);
   border-radius: 100px;
-  font-size: 12px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11.5px;
   color: var(--ifm-color-emphasis-600);
-  margin-bottom: 24px;
-  background: var(--ifm-background-color);
-  font-family: 'JetBrains Mono', monospace;
-  letter-spacing: -0.02em;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #16a34a;
+  flex: none;
+}
+
+[data-theme='dark'] .dot {
+  background: #4ade80;
 }
 
 .heroTitle {
-  font-size: clamp(30px, 8vw, 56px);
-  line-height: 1.1;
-  letter-spacing: -0.03em;
+  font-size: clamp(30px, 5.6vw, 54px);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
   font-weight: 300;
-  margin-bottom: 24px;
+  margin: 26px auto 0;
+  max-width: 15ch;
   color: var(--ifm-font-color-base);
+  text-wrap: balance;
   overflow-wrap: break-word;
 }
 
 .heroSubtitle {
-  font-size: 18px;
+  font-size: 17px;
   color: var(--ifm-color-emphasis-600);
-  max-width: 600px;
-  margin: 0 auto;
-  font-weight: 400;
+  max-width: 62ch;
+  margin: 22px auto 0;
   line-height: 1.6;
+}
+
+.heroPills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 26px;
+}
+
+.heroPill {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11.5px;
+  color: var(--ifm-color-emphasis-600);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 100px;
+  padding: 3px 11px;
+  letter-spacing: -0.02em;
 }
 
 .heroButtons {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: 12px;
-  margin-top: 32px;
+  margin-top: 30px;
 }
 
-.heroButtonPrimary {
+.heroButtonPrimary,
+.heroButtonSecondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 24px;
-  background: var(--ifm-color-emphasis-900);
-  color: var(--ifm-background-color);
-  border: 1px solid var(--ifm-color-emphasis-900);
-  border-radius: 6px;
+  padding: 9px 22px;
+  border-radius: 4px;
   font-size: 14px;
   font-weight: 400;
   text-decoration: none;
   cursor: pointer;
-  transition: opacity 0.2s;
+  transition: opacity 0.15s, background 0.15s;
+}
+
+.heroButtonPrimary {
+  background: var(--ifm-color-emphasis-900);
+  color: var(--ifm-background-color);
+  border: 1px solid var(--ifm-color-emphasis-900);
 }
 
 .heroButtonPrimary:hover {
@@ -118,19 +146,9 @@
 }
 
 .heroButtonSecondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 24px;
-  background: transparent;
+  background: var(--ifm-background-color);
   color: var(--ifm-font-color-base);
   border: 1px solid var(--ifm-color-emphasis-300);
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 400;
-  text-decoration: none;
-  cursor: pointer;
-  transition: background 0.2s;
 }
 
 .heroButtonSecondary:hover {
@@ -139,623 +157,505 @@
   text-decoration: none;
 }
 
-/* Section Label (consistent across sections) */
-.sectionLabel {
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 11.5px;
-  font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: var(--ifm-color-emphasis-800);
-  margin-bottom: 10px;
-}
-
-.sectionSubtitle {
+.heroButtonText {
   font-size: 14px;
-  color: var(--ifm-color-emphasis-500);
-  margin-bottom: 32px;
-  margin-top: 0;
+  color: var(--ifm-color-emphasis-600);
+  text-decoration: none;
+  padding: 9px 4px;
 }
 
-/* Feature Section (Pillars) */
-.featureSection {
+.heroButtonText:hover {
+  color: var(--ifm-font-color-base);
+  text-decoration: none;
+}
+
+.heroImageWrap {
+  margin: 56px auto 0;
+  max-width: 900px;
+}
+
+.heroDesktopImg {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+}
+
+/* ---------- Three ways to run ---------- */
+/* A spec table per column so the trade-off is scannable, not prose. */
+.ways {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   border-bottom: 1px solid var(--ifm-color-emphasis-200);
 }
 
-.featureContent {
-  padding: 64px;
+.way {
+  padding: 40px 44px;
+  border-left: 1px solid var(--ifm-color-emphasis-200);
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  border-right: 1px solid var(--ifm-color-emphasis-200);
+  align-items: flex-start;
 }
 
-.featureMedia {
-  background: var(--ifm-color-emphasis-100);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 40px;
-  overflow: hidden;
+.way:first-child {
+  border-left: none;
 }
 
-/* Pillar Items */
-.pillarItems {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.pillarItem {
-  padding: 16px;
-  cursor: pointer;
-  border-left: 2px solid transparent;
-  transition: all 0.2s;
-}
-
-.pillarItem:hover {
-  background: var(--ifm-color-emphasis-100);
-}
-
-.pillarItemActive {
-  border-left-color: var(--ifm-font-color-base);
-  background: var(--ifm-color-emphasis-100);
-}
-
-.pillarItemHeader {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.pillarItemLabel {
-  font-size: 14px;
+.wayTitle {
+  font-size: 19px;
   font-weight: 400;
+  letter-spacing: -0.02em;
+  margin: 12px 0 0;
   color: var(--ifm-font-color-base);
 }
 
-.pillarItemDesc {
-  font-size: 13px;
+.wayDesc {
   color: var(--ifm-color-emphasis-600);
-  margin: 8px 0 0;
-  line-height: 1.5;
+  font-size: 13.5px;
+  line-height: 1.6;
+  margin: 10px 0 0;
 }
 
-/* Carousel & Showcase */
-.carousel {
+.spec {
+  width: 100%;
+  margin-top: 18px;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11.5px;
+}
+
+.spec > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  color: var(--ifm-color-emphasis-500);
+}
+
+.spec b {
+  font-weight: 400;
+  color: var(--ifm-font-color-base);
+  text-align: right;
+}
+
+.way .heroButtonPrimary,
+.way .heroButtonSecondary {
+  margin-top: 20px;
+}
+
+.waysNote {
+  padding: 16px 44px;
+  margin: 0;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  font-size: 13px;
+  color: var(--ifm-color-emphasis-600);
+  text-align: center;
+}
+
+/* ---------- Band: claim | proof ---------- */
+.band {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.claim {
+  padding: 56px 32px 56px 44px;
+  align-self: start;
+  position: sticky;
+  top: 70px;
+}
+
+.proof {
+  border-left: 1px solid var(--ifm-color-emphasis-200);
+  padding: 56px 44px;
+  min-width: 0;
+}
+
+.claimTitle {
+  font-size: 27px;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  font-weight: 400;
+  margin: 14px 0 0;
+  color: var(--ifm-font-color-base);
+  text-wrap: balance;
+}
+
+.claimBody {
+  color: var(--ifm-color-emphasis-600);
+  font-size: 14.5px;
+  line-height: 1.65;
+  margin: 14px 0 0;
+}
+
+/* ---------- Showcase tabs ---------- */
+.tabs {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  margin-top: 22px;
+}
+
+.tab {
   width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+  padding: 11px 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--ifm-color-emphasis-600);
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.tab:hover,
+.tabActive {
+  color: var(--ifm-font-color-base);
+}
+
+.tabs > div:last-child .tab:not(.tabActive) {
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.tabMark {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+  color: var(--ifm-color-emphasis-500);
+  width: 10px;
+  flex: none;
+}
+
+.tabActive .tabMark {
+  color: var(--ifm-font-color-base);
+}
+
+.tabDesc {
+  color: var(--ifm-color-emphasis-500);
+  font-size: 12.5px;
+  padding: 0 0 12px 20px;
+  margin: -4px 0 0;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.shotFrame {
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 5px;
+  overflow: hidden;
+  background: var(--ifm-color-emphasis-100);
 }
 
 .showcaseImage {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  border-radius: 8px;
-  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: transform 0.2s;
+  display: block;
+  width: 100%;
+  cursor: zoom-in;
 }
 
-.showcaseImage:hover {
-  transform: scale(1.02);
+.showcaseFallback {
+  padding: 60px 24px;
+  text-align: center;
+  color: var(--ifm-color-emphasis-500);
+  font-size: 14px;
+}
+
+.shotMeta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+  color: var(--ifm-color-emphasis-500);
 }
 
 .carouselDots {
+  margin-left: auto;
   display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 16px;
+  gap: 5px;
 }
 
 .carouselDot {
-  width: 8px;
-  height: 8px;
+  width: 5px;
+  height: 5px;
+  padding: 0;
   border-radius: 50%;
   border: none;
   background: var(--ifm-color-emphasis-300);
   cursor: pointer;
-  padding: 0;
-  transition: background 0.2s, transform 0.2s;
-}
-
-.carouselDot:hover {
-  background: var(--ifm-color-emphasis-500);
 }
 
 .carouselDotActive {
-  background: var(--ifm-color-emphasis-700);
-  transform: scale(1.2);
+  background: var(--ifm-color-emphasis-600);
 }
 
-/* Lightbox */
-.lightbox {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.9);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  cursor: pointer;
+/* ---------- Code / terminal ---------- */
+.code {
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 5px;
+  overflow: hidden;
 }
 
-.lightboxImage {
-  max-width: 90%;
-  max-height: 90%;
-  object-fit: contain;
-  border-radius: 8px;
-  cursor: default;
-}
-
-.lightboxClose {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 44px;
-  height: 44px;
-  border: none;
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-  font-size: 32px;
-  cursor: pointer;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s;
-}
-
-.lightboxClose:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-/* How It Works Section */
-.howItWorksSection {
-  padding: 64px;
+.codeBar {
+  padding: 8px 12px;
   border-bottom: 1px solid var(--ifm-color-emphasis-200);
-}
-
-.howItWorksSteps {
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
-  gap: 0;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.howItWorksStep {
-  flex: 1;
-  padding: 32px 24px;
-  text-align: center;
-  border: 1px solid var(--ifm-color-emphasis-300);
-}
-
-.howItWorksStepMuted {
-  border-style: dashed;
-  opacity: 0.6;
-}
-
-.howItWorksStep h3 {
-  font-size: 14px;
-  font-weight: 400;
-  margin: 12px 0 8px;
-  color: var(--ifm-font-color-base);
-}
-
-.howItWorksStep p {
-  font-size: 12px;
-  color: var(--ifm-color-emphasis-600);
-  margin: 0;
-  line-height: 1.5;
-}
-
-.howItWorksArrow {
-  align-self: center;
-  color: var(--ifm-color-emphasis-400);
-  flex-shrink: 0;
-  margin: 0 8px;
-}
-
-/* Developers Section */
-.developersSection {
-  padding: 64px;
-  border-bottom: 1px solid var(--ifm-color-emphasis-200);
-}
-
-.developersHeader {
-  margin-bottom: 0;
-}
-
-.developersList {
-  max-width: 600px;
-}
-
-.developerItem {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--ifm-color-emphasis-200);
-  font-size: 14px;
-  color: var(--ifm-font-color-base);
-}
-
-.developerItem:last-child {
-  border-bottom: none;
-}
-
-/* Trust Section */
-.trustSection {
-  padding: 64px;
-  border-bottom: 1px solid var(--ifm-color-emphasis-200);
-}
-
-.trustGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
-  max-width: 700px;
-}
-
-.trustItem {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-}
-
-.trustItem h3 {
-  font-size: 14px;
-  font-weight: 400;
-  margin: 0 0 4px;
-  color: var(--ifm-font-color-base);
-}
-
-.trustItem p {
-  font-size: 13px;
-  color: var(--ifm-color-emphasis-600);
-  margin: 0;
-  line-height: 1.5;
-}
-
-/* CTA Section */
-.ctaSection {
-  padding: 64px;
-  text-align: center;
-}
-
-.ctaSubtitle {
-  font-size: 15px;
-  color: var(--ifm-color-emphasis-600);
-  margin-bottom: 24px;
-}
-
-/* Footer */
-.footerSection {
-  padding: 48px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  background: var(--ifm-background-color);
-  border-top: 1px solid var(--ifm-color-emphasis-200);
-}
-
-.footerBrand {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.footerLogo {
-  font-weight: 600;
-  font-size: 15px;
-  letter-spacing: -0.02em;
-  color: var(--ifm-font-color-base);
-}
-
-.footerCopyright {
+  background: var(--ifm-color-emphasis-100);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-size: 11px;
   color: var(--ifm-color-emphasis-500);
-  font-family: 'JetBrains Mono', monospace;
 }
 
-.footerLinks {
-  display: flex;
-  gap: 32px;
-}
-
-.footerLink {
-  font-size: 13px;
-  color: var(--ifm-color-emphasis-600);
-  text-decoration: none;
-}
-
-.footerLink:hover {
-  color: var(--ifm-font-color-base);
-  text-decoration: none;
-}
-
-/* Hero preview images */
-.heroImageWrap {
-  position: relative;
-  max-width: 860px;
-  margin: 56px auto 0;
-}
-
-.heroDesktopImg {
-  width: 100%;
-  border-radius: 10px;
-  border: 1px solid var(--ifm-color-emphasis-200);
-  box-shadow: 0 24px 48px -16px rgba(0, 0, 0, 0.18);
-  display: block;
-}
-
-.heroMobileImg {
-  position: absolute;
-  bottom: -24px;
-  right: -12px;
-  width: 26%;
-  border-radius: 10px;
-  border: 1px solid var(--ifm-color-emphasis-200);
-  box-shadow: 0 16px 32px -12px rgba(0, 0, 0, 0.22);
-}
-
-/* Why UnDercontrol — 6-pillar grid */
-.pillarsGridSection {
-  padding: 64px;
-  border-bottom: 1px solid var(--ifm-color-emphasis-200);
-}
-
-.pillarsGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  max-width: 960px;
-}
-
-.pillarCard {
-  padding: 24px;
-  border: 1px solid var(--ifm-color-emphasis-200);
-  border-radius: 8px;
-  background: var(--ifm-background-color);
-  transition: border-color 0.2s, background 0.2s;
-}
-
-.pillarCard:hover {
-  border-color: var(--ifm-color-emphasis-400);
-  background: var(--ifm-color-emphasis-100);
-}
-
-.pillarCardIcon {
-  color: var(--ifm-color-emphasis-600);
-  margin-bottom: 12px;
-}
-
-.pillarCardTitle {
-  font-size: 15px;
-  font-weight: 500;
-  margin: 0 0 8px;
-  color: var(--ifm-font-color-base);
-}
-
-.pillarCardDesc {
-  font-size: 13px;
-  color: var(--ifm-color-emphasis-600);
-  line-height: 1.55;
-  margin: 0;
-}
-
-/* Showcase fallback when a CDN image fails */
-.showcaseFallback {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 48px 24px;
-  font-size: 14px;
-  color: var(--ifm-color-emphasis-500);
-  min-height: 240px;
-}
-
-/* Agent Orchestrator diagram */
-.orchestrationSection {
-  padding: 64px;
-  border-bottom: 1px solid var(--ifm-color-emphasis-200);
-}
-
-.orchestrationWrap {
-  max-width: 820px;
-  margin: 8px auto 0;
-  color: var(--ifm-font-color-base);
-}
-
-.orchestrationSvg {
-  width: 100%;
-  height: auto;
-}
-
-/* Responsive */
-@media screen and (max-width: 996px) {
-  .pillarsGridSection {
-    padding: 40px 24px;
-  }
-
-  .pillarsGrid {
-    grid-template-columns: 1fr;
-  }
-
-  .orchestrationSection {
-    padding: 40px 16px;
-  }
-
-  .heroImageWrap {
-    margin-top: 40px;
-  }
-  .heroSection {
-    padding: 60px 24px 48px;
-  }
-
-  .heroButtons {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .heroButtonPrimary,
-  .heroButtonSecondary {
-    width: 100%;
-    max-width: 280px;
-  }
-
-  .featureSection {
-    grid-template-columns: 1fr;
-  }
-
-  .featureContent {
-    padding: 40px 24px;
-    border-right: none;
-    border-bottom: 1px solid var(--ifm-color-emphasis-200);
-  }
-
-  .featureMedia {
-    padding: 40px 20px;
-    border-right: none;
-    min-height: 300px;
-  }
-
-  .howItWorksSection {
-    padding: 40px 24px;
-  }
-
-  .howItWorksSteps {
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .howItWorksArrow {
-    transform: rotate(90deg);
-    align-self: center;
-    margin: 0;
-  }
-
-  .developersSection {
-    padding: 40px 24px;
-  }
-
-  .trustSection {
-    padding: 40px 24px;
-  }
-
-  .trustGrid {
-    grid-template-columns: 1fr;
-  }
-
-  .ctaSection {
-    padding: 40px 24px;
-  }
-
-  .footerSection {
-    flex-direction: column;
-    gap: 32px;
-    padding: 32px 24px;
-  }
-
-  .footerLinks {
-    flex-wrap: wrap;
-    gap: 16px 32px;
-  }
-}
-
-/* Hero pills — mono chips echoing the self-hosting page */
-.heroPills {
-  display: flex;
-  gap: 8px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 22px;
-}
-
-.heroPill {
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 11.5px;
-  color: var(--ifm-color-emphasis-600);
-  border: 1px solid var(--ifm-color-emphasis-300);
-  border-radius: 100px;
-  padding: 5px 13px;
-}
-
-/* CLI terminal card — deliberately dark in both themes (its own "screen") */
-.cliTerm {
-  max-width: 720px;
-  margin: 28px auto 0;
-  background: #10131a;
-  border: 1px solid #262b36;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 24px 50px -24px rgba(0, 0, 0, 0.5);
-  text-align: left;
-}
-
-.cliBar {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 11px 14px;
-  background: #191d27;
-}
-
-.cliDots {
-  display: flex;
-  gap: 7px;
-}
-
-.cliDots i {
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
-  display: block;
-}
-
-.cliDots i:nth-child(1) { background: #ff5f57; }
-.cliDots i:nth-child(2) { background: #febc2e; }
-.cliDots i:nth-child(3) { background: #28c840; }
-
-.cliName {
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 12px;
-  color: #6b7488;
-  margin-left: 4px;
-}
-
-.cliBody {
-  padding: 16px 18px;
+.codeBody {
+  padding: 16px;
   overflow-x: auto;
+  background: var(--ifm-background-color);
 }
 
-/* Override Infima's global <pre> so the terminal stays dark.
-   pre-wrap (not pre) keeps long lines from establishing a min-content
-   width that would widen the whole page on mobile. */
-.cliBody pre {
+/* Override Infima's global <pre>. pre-wrap (not pre) keeps long lines from
+   establishing a min-content width that would widen the whole page on mobile. */
+.codeBody pre {
   margin: 0;
   padding: 0;
   border: 0;
   border-radius: 0;
   background: transparent;
   font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 13px;
+  font-size: 12.5px;
   line-height: 1.75;
-  color: #cdd3e0;
+  color: var(--ifm-font-color-base);
   white-space: pre-wrap;
   overflow-wrap: anywhere;
 }
 
-.cliBody .c { color: #6b7488; }
-.cliBody .p { color: #4ec776; }
-.cliBody .f { color: #6ea8ff; }
+/* The CLI block is a terminal, so it stays dark in both themes. */
+.term {
+  border-color: #111113;
+}
+
+.term .codeBar {
+  background: #111113;
+  border-color: rgba(255, 255, 255, 0.09);
+  color: #77777e;
+}
+
+.term .codeBody {
+  background: #111113;
+}
+
+.term .codeBody pre {
+  color: #e8e8ea;
+}
+
+[data-theme='dark'] .term {
+  border-color: #26262a;
+}
+
+[data-theme='dark'] .term .codeBar,
+[data-theme='dark'] .term .codeBody {
+  background: #17171a;
+}
+
+.c { color: #6e6e76; }
+.p { color: #4ec776; }
+.f { color: #9b9ba3; }
+.k { color: var(--ifm-color-emphasis-500); }
+
+/* ---------- Hairline rows ---------- */
+.rows {
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+  margin-top: 22px;
+}
+
+/* A rows block that is the only proof (no code above it) needs no top gap. */
+.proof > .rows:first-child {
+  margin-top: 0;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 16px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  align-items: baseline;
+}
+
+.rowK {
+  font-size: 13.5px;
+  color: var(--ifm-font-color-base);
+}
+
+.rowV {
+  color: var(--ifm-color-emphasis-600);
+  font-size: 13.5px;
+}
+
+/* ---------- Docs list ---------- */
+.docList {
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.doc {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  align-items: center;
+  padding: 15px 8px 15px 0;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  text-decoration: none;
+  color: var(--ifm-font-color-base);
+}
+
+.doc:hover {
+  background: var(--ifm-color-emphasis-100);
+  text-decoration: none;
+  color: var(--ifm-font-color-base);
+}
+
+.doc:hover .docPath {
+  color: var(--ifm-font-color-base);
+}
+
+.docTitle {
+  font-size: 14.5px;
+}
+
+.docDesc {
+  color: var(--ifm-color-emphasis-600);
+  font-size: 13px;
+}
+
+.docPath {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11.5px;
+  color: var(--ifm-color-emphasis-500);
+  white-space: nowrap;
+}
+
+/* ---------- Orchestration diagram ---------- */
+.orchestrationWrap {
+  width: 100%;
+  color: var(--ifm-font-color-base);
+}
+
+.orchestrationSvg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ---------- CTA ---------- */
+.ctaSection {
+  padding: 76px 48px;
+  text-align: center;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.ctaTitle {
+  font-size: 32px;
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  color: var(--ifm-font-color-base);
+  margin: 0;
+  text-wrap: balance;
+}
+
+.ctaSubtitle {
+  color: var(--ifm-color-emphasis-600);
+  margin: 12px 0 0;
+}
+
+/* ---------- Lightbox ---------- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.82);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  z-index: 1000;
+  cursor: zoom-out;
+}
+
+.lightboxImage {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 4px;
+}
+
+.lightboxClose {
+  position: absolute;
+  top: 20px;
+  right: 28px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 32px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroButtonPrimary,
+  .heroButtonSecondary {
+    transition: none;
+  }
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 996px) {
+  .heroSection {
+    padding: 52px 20px 0;
+  }
+
+  .ways {
+    grid-template-columns: 1fr;
+  }
+
+  .way {
+    padding: 32px 20px;
+    border-left: none;
+    border-top: 1px solid var(--ifm-color-emphasis-200);
+  }
+
+  .way:first-child {
+    border-top: none;
+  }
+
+  .waysNote {
+    padding: 16px 20px;
+  }
+
+  .band {
+    grid-template-columns: 1fr;
+  }
+
+  .claim {
+    position: static;
+    padding: 40px 20px 8px;
+  }
+
+  .proof {
+    border-left: none;
+    padding: 20px 20px 44px;
+  }
+
+  .row {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  .doc {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .ctaSection {
+    padding: 56px 20px;
+  }
+}
