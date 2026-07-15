@@ -75,9 +75,9 @@ const config: Config = {
 
   themeConfig: {
     navbar: {
-      title: 'UnderControl',
+      title: 'UnDercontrol',
       logo: {
-        alt: 'UnderControl Logo',
+        alt: 'UnDercontrol Logo',
         src: 'img/favicon.svg',
       },
       items: [
@@ -176,7 +176,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} UnderControl Project.`,
+      copyright: `Copyright © ${new Date().getFullYear()} UnDercontrol Project.`,
     },
     prism: {
       theme: prismThemes.github,

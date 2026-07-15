@@ -667,7 +667,7 @@ function SelfHostedSection() {
         </div>
         <p className={styles.sectionHeaderDescription}>
           <Translate id="subscribe.selfHostedSection.description">
-            Deploy UnderControl on your own infrastructure. You control your data and hosting.
+            Deploy UnDercontrol on your own infrastructure. You control your data and hosting.
           </Translate>
         </p>
       </div>
@@ -803,7 +803,7 @@ function FooterSection() {
   return (
     <footer className={styles.footerSection}>
       <div className={styles.footerBrand}>
-        <span className={styles.footerLogo}>UnderControl</span>
+        <span className={styles.footerLogo}>UnDercontrol</span>
         <span className={styles.footerCopyright}>© {new Date().getFullYear()}</span>
       </div>
       <div className={styles.footerLinks}>
@@ -831,7 +831,7 @@ export default function SubscribePage(): ReactNode {
       })}
       description={translate({
         id: 'subscribe.meta.description',
-        message: 'Download UnderControl desktop app, subscribe to cloud service, or self-host on your own infrastructure.',
+        message: 'Download UnDercontrol desktop app, subscribe to cloud service, or self-host on your own infrastructure.',
         description: 'The subscribe page meta description',
       })}>
       <main className={styles.mainContainer}>

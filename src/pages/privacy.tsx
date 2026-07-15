@@ -70,7 +70,7 @@ function PolicyContent() {
         titleDefault="An Honest Take"
         paragraphs={[
           <Translate key="p1" id="privacy.sections.honestTake.p1">
-            {"I'm an indie developer, not a big corporation. One of my main motivations for building UnderControl was that I wanted full control over my own sensitive data — tasks, finances, personal notes — instead of handing them to big tech companies. I built this for myself first, and now I'm sharing it with you."}
+            {"I'm an indie developer, not a big corporation. One of my main motivations for building UnDercontrol was that I wanted full control over my own sensitive data — tasks, finances, personal notes — instead of handing them to big tech companies. I built this for myself first, and now I'm sharing it with you."}
           </Translate>,
           <Translate key="p2" id="privacy.sections.honestTake.p2">
             {"I have zero interest, ability, resources, or motivation to do anything with your data. That said, I understand if you don't fully trust me — you shouldn't blindly trust anyone online. Big companies with entire security teams still get breached. So why would you trust a solo developer? You have every right to be skeptical."}
@@ -187,7 +187,7 @@ function FooterSection() {
   return (
     <footer className={styles.footerSection}>
       <div className={styles.footerBrand}>
-        <span className={styles.footerLogo}>UnderControl</span>
+        <span className={styles.footerLogo}>UnDercontrol</span>
         <span className={styles.footerCopyright}>© {new Date().getFullYear()}</span>
       </div>
       <div className={styles.footerLinks}>

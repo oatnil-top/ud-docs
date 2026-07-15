@@ -47,7 +47,7 @@ export default function ContactPage(): ReactNode {
       })}
       description={translate({
         id: 'contact.meta.description',
-        message: 'Get in touch with the UnderControl team. Email, GitHub, Discord, or WeChat.',
+        message: 'Get in touch with the UnDercontrol team. Email, GitHub, Discord, or WeChat.',
         description: 'The contact page meta description',
       })}>
       <main className={styles.mainContainer}>
@@ -139,7 +139,7 @@ export default function ContactPage(): ReactNode {
         {/* Footer */}
         <footer className={styles.footerSection}>
           <div className={styles.footerBrand}>
-            <span className={styles.footerLogo}>UnderControl</span>
+            <span className={styles.footerLogo}>UnDercontrol</span>
             <span className={styles.footerCopyright}>© {new Date().getFullYear()}</span>
           </div>
           <div className={styles.footerLinks}>
