@@ -144,7 +144,68 @@ a:hover {
   text-decoration: none;
 }
 
-/* Hide Docusaurus default footer */
+/* Navbar CTA — the one emphasized action in the header. Scoped to the desktop
+   bar so the collapsed mobile menu keeps .menu__link's own layout and the item
+   reads as a plain link like every other one. */
+.navbar__inner .navbar__cta {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  border-radius: 4px;
+  padding: 0.35rem 0.75rem;
+  margin-left: 0.5rem;
+}
+
+.navbar__inner .navbar__cta:hover {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+[data-theme='dark'] .navbar__inner .navbar__cta {
+  background-color: #e5e7eb;
+  color: #0f0f0f;
+}
+
+[data-theme='dark'] .navbar__inner .navbar__cta:hover {
+  background-color: #f3f4f6;
+  color: #0f0f0f;
+}
+
+/* Footer — carries the secondary nav the header sheds (Contact, Privacy,
+   GitHub), so it stays visible. Flat, hairline-separated, no dark slab. */
 .footer {
-  display: none;
+  background-color: transparent;
+  border-top: 1px solid #e5e7eb;
+  font-size: 0.875rem;
+  padding: 3rem 0;
+}
+
+[data-theme='dark'] .footer {
+  background-color: transparent;
+  border-top: 1px solid #262626;
+}
+
+.footer__title {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #999999;
+}
+
+.footer__link-item {
+  color: #666666;
+}
+
+.footer__link-item:hover {
+  color: var(--ifm-color-primary);
+}
+
+[data-theme='dark'] .footer__link-item {
+  color: #9ca3af;
+}
+
+.footer__copyright {
+  margin-top: 2rem;
+  font-size: 0.75rem;
+  color: #999999;
 }
