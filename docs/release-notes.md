@@ -18,6 +18,20 @@ UnDercontrol follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.112.1 (2026-07-15)
+
+### Improvements
+
+- **AI agent sessions no longer stall on interactive prompts** — Agent sessions now run to completion autonomously instead of pausing to wait for user input.
+
+### Bug Fixes
+
+- **Budgets and expenses display in their own currency** — Budgets and expenses now render in their own currency instead of a single global currency.
+- **In-app markdown links navigate correctly** — Markdown links inside the app now route through the in-app router everywhere instead of breaking navigation.
+- **AI chat settings link goes to AI settings** — The settings link in AI chat now navigates directly to the AI settings section.
+
+---
+
 ## v0.112.0 (2026-07-14)
 
 ### New Features
