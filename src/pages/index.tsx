@@ -28,9 +28,141 @@ function useCdnImg() {
  * restates the bands — that duplication is what this page was rebuilt to remove.
  */
 
+// --- Shared carousel primitives ---
+// The hero reel and the All-in-One showcase are the same object: an auto-advancing
+// image strip with dots and click-to-zoom. Behaviour lives here so they cannot drift.
+
+/** Auto-advance an index over `length` images. Pass `resetKey` to jump back to 0 when
+ *  the underlying set changes (the showcase swaps sets when you pick a tab). */
+function useAutoRotate(length: number, intervalMs: number, resetKey?: unknown) {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    setIndex(0);
+  }, [resetKey]);
+
+  // `index` is a dependency so the timer restarts whenever the slide changes. Without it
+  // the interval keeps its own schedule and a dot you just clicked can be advanced past
+  // almost immediately; this way every slide — picked or automatic — gets its full dwell.
+  useEffect(() => {
+    if (length <= 1) return undefined;
+    const id = setTimeout(() => setIndex((prev) => (prev + 1) % length), intervalMs);
+    return () => clearTimeout(id);
+  }, [length, intervalMs, resetKey, index]);
+
+  return [index, setIndex] as const;
+}
+
+function CarouselDots({count, index, onSelect}: {count: number; index: number; onSelect: (i: number) => void}) {
+  if (count <= 1) return null;
+  return (
+    <span className={styles.carouselDots}>
+      {Array.from({length: count}, (_, i) => (
+        <button
+          key={i}
+          type="button"
+          className={`${styles.carouselDot} ${i === index ? styles.carouselDotActive : ''}`}
+          onClick={() => onSelect(i)}
+          aria-label={`Go to image ${i + 1}`}
+        />
+      ))}
+    </span>
+  );
+}
+
+function Lightbox({src, alt, onClose}: {src: string; alt: string; onClose: () => void}) {
+  return (
+    <div className={styles.lightbox} onClick={onClose}>
+      <button type="button" className={styles.lightboxClose} onClick={onClose} aria-label="Close lightbox">
+        ×
+      </button>
+      <img src={src} alt={alt} className={styles.lightboxImage} onClick={(e) => e.stopPropagation()} />
+    </div>
+  );
+}
+
 // --- Hero ---
-function HeroSection() {
+// The reel answers the subtitle in its own order — Jira, Obsidian, AI agents, Mint —
+// so the first screen shows the evidence for the claim it just made. Built inside a
+// hook, not at module scope, so the Translate/translate ids stay statically extractable.
+function useHeroShots() {
+  return [
+    {
+      file: 'home-page/v2/hero/1.jpg',
+      caption: <Translate id="homepage.hero.shot.board">Agile boards — every column is a saved query</Translate>,
+      alt: translate({
+        id: 'homepage.hero.shot.board.alt',
+        message: 'A UnDercontrol agile board with Backlog, Sprint, In Progress, Blocked, In Review and Done columns',
+      }),
+    },
+    {
+      file: 'home-page/v2/hero/2.jpg',
+      caption: <Translate id="homepage.hero.shot.explorer">Markdown docs and tasks in one tree</Translate>,
+      alt: translate({
+        id: 'homepage.hero.shot.explorer.alt',
+        message: 'The UnDercontrol explorer showing a folder tree beside a Markdown task',
+      }),
+    },
+    {
+      file: 'home-page/v2/hero/3.jpg',
+      caption: <Translate id="homepage.hero.shot.workspace">AI agents at work, grouped by agent</Translate>,
+      alt: translate({
+        id: 'homepage.hero.shot.workspace.alt',
+        message: 'UnDercontrol workspace sessions running AI agents across several machines',
+      }),
+    },
+    {
+      file: 'home-page/v2/hero/4.jpg',
+      caption: <Translate id="homepage.hero.shot.finance">Expenses and budgets, same workspace</Translate>,
+      alt: translate({
+        id: 'homepage.hero.shot.finance.alt',
+        message: 'UnDercontrol expense tracking with a monthly total and top categories',
+      }),
+    },
+  ];
+}
+
+function HeroGallery() {
   const cdnImg = useCdnImg();
+  const shots = useHeroShots();
+  const [index, setIndex] = useAutoRotate(shots.length, 5000);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+
+  const current = shots[index];
+  const src = cdnImg(current.file);
+  const srcs = shots.map((s) => cdnImg(s.file)).join(',');
+
+  // Warm every shot up front. Rotation swaps the src, so an uncached slide would
+  // render as a blank gap until it downloaded.
+  useEffect(() => {
+    srcs.split(',').forEach((url) => {
+      const img = new Image();
+      img.src = url;
+    });
+  }, [srcs]);
+
+  return (
+    <div className={styles.heroImageWrap}>
+      {/* Caption and dots sit above the shot: heroDesktopImg deliberately bleeds off the
+          bottom of the hero, so there is no edge underneath to hang controls on. */}
+      <div className={styles.heroShotMeta}>
+        <span>{current.caption}</span>
+        <CarouselDots count={shots.length} index={index} onSelect={setIndex} />
+      </div>
+      {/* Not lazy: this is above the fold and is the page's LCP element. */}
+      <img
+        className={styles.heroDesktopImg}
+        src={src}
+        alt={current.alt}
+        fetchPriority="high"
+        onClick={() => setIsLightboxOpen(true)}
+      />
+      {isLightboxOpen && <Lightbox src={src} alt={current.alt} onClose={() => setIsLightboxOpen(false)} />}
+    </div>
+  );
+}
+
+function HeroSection() {
   return (
     <section className={styles.heroSection}>
       <span className={styles.eyebrow}>
@@ -65,14 +197,7 @@ function HeroSection() {
           <Translate id="homepage.hero.waysLink">Or self-host it — three ways to run ↓</Translate>
         </Link>
       </div>
-      <div className={styles.heroImageWrap}>
-        <img
-          className={styles.heroDesktopImg}
-          src={cdnImg('home-page/v2/hero.jpg')}
-          alt={translate({id: 'homepage.hero.imageAlt', message: 'A UnDercontrol kanban board tracking a software release'})}
-          loading="lazy"
-        />
-      </div>
+      <HeroGallery />
     </section>
   );
 }
@@ -210,26 +335,15 @@ const SHOWCASE_TEXT: Record<string, {label: ReactNode; desc: ReactNode}> = {
 function ShowcaseSection() {
   const cdnImg = useCdnImg();
   const [activeItem, setActiveItem] = useState(0);
-  const [imageIndex, setImageIndex] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [failed, setFailed] = useState<Record<string, boolean>>({});
 
   const current = SHOWCASE[activeItem];
   const images = current.images;
+  // activeItem as the reset key: picking a tab swaps the image set, so restart at its first shot.
+  const [imageIndex, setImageIndex] = useAutoRotate(images.length, 4000, activeItem);
   const currentSrc = cdnImg(images[imageIndex] || images[0]);
   const isFailed = failed[currentSrc];
-
-  useEffect(() => {
-    setImageIndex(0);
-  }, [activeItem]);
-
-  useEffect(() => {
-    if (images.length <= 1) return;
-    const interval = setInterval(() => {
-      setImageIndex((prev) => (prev + 1) % images.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [images.length, activeItem]);
 
   return (
     <section className={styles.band}>
@@ -282,33 +396,12 @@ function ShowcaseSection() {
         </div>
         <div className={styles.shotMeta}>
           <span>{`${current.key}/${imageIndex + 1} of ${images.length}`}</span>
-          {images.length > 1 && (
-            <span className={styles.carouselDots}>
-              {images.map((_, index) => (
-                <button
-                  key={index}
-                  type="button"
-                  className={`${styles.carouselDot} ${index === imageIndex ? styles.carouselDotActive : ''}`}
-                  onClick={() => setImageIndex(index)}
-                  aria-label={`Go to image ${index + 1}`}
-                />
-              ))}
-            </span>
-          )}
+          <CarouselDots count={images.length} index={imageIndex} onSelect={setImageIndex} />
         </div>
       </div>
 
       {isLightboxOpen && !isFailed && (
-        <div className={styles.lightbox} onClick={() => setIsLightboxOpen(false)}>
-          <button
-            type="button"
-            className={styles.lightboxClose}
-            onClick={() => setIsLightboxOpen(false)}
-            aria-label="Close lightbox">
-            ×
-          </button>
-          <img src={currentSrc} alt={current.key} className={styles.lightboxImage} onClick={(e) => e.stopPropagation()} />
-        </div>
+        <Lightbox src={currentSrc} alt={current.key} onClose={() => setIsLightboxOpen(false)} />
       )}
     </section>
   );

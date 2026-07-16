@@ -174,12 +174,28 @@
   max-width: 900px;
 }
 
+/* Caption + dots for the hero reel. Sits above the shot because heroDesktopImg has no
+   bottom edge — it bleeds off the end of the hero on purpose. */
+.heroShotMeta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+  color: var(--ifm-color-emphasis-500);
+}
+
 .heroDesktopImg {
   display: block;
   width: 100%;
+  /* Every hero shot is captured at 2:1 — pin the box so swapping slides cannot shift
+     the page while the next one decodes. */
+  aspect-ratio: 2 / 1;
   border: 1px solid var(--ifm-color-emphasis-200);
   border-bottom: none;
   border-radius: 6px 6px 0 0;
+  cursor: zoom-in;
 }
 
 /* ---------- Three ways to run ---------- */
