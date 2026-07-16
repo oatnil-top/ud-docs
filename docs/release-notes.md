@@ -18,6 +18,21 @@ UnDercontrol follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.113.0 (2026-07-16)
+
+### New Features
+
+- **LaTeX math in the editor and viewer** — Write math formulas anywhere: use inline math or insert a math block from the slash menu, and see them rendered beautifully with KaTeX in both edit and view modes — including AI chat responses.
+- **Personal global instructions for AI agents** — Define your own global instructions once, and every AI agent session you start will follow them automatically.
+
+### Improvements
+
+- **Zoom controls in the terminal viewer** — The read-only terminal view now has +/- zoom buttons, making long output readable on small and mobile screens.
+- **Terminal output keeps its original layout** — Long lines in the read-only terminal no longer wrap unexpectedly; the view sizes itself to the content.
+- **Cleaner site header** — The public site header navigation has been simplified.
+
+---
+
 ## v0.112.1 (2026-07-15)
 
 ### Improvements
