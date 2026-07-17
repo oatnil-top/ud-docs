@@ -22,3 +22,8 @@ self-hosting:
   label: Self-Hosting
   permalink: /self-hosting
   description: Self-hosting and deployment topics
+
+story:
+  label: Story
+  permalink: /story
+  description: Stories behind UnDercontrol
