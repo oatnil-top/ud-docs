@@ -18,6 +18,24 @@ UnDercontrol follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.114.0 (2026-07-18)
+
+### New Features
+
+- **Obsidian-style vault layout for CLI sync** — `ud init` now creates a vault layout by default: tasks live as plain Markdown files and notes materialize into a visible `notes/` folder, so your whole checkout works directly as an Obsidian vault.
+- **Wikilink translation** — `[[wikilinks]]` in your vault files are converted to ud task links on push and back to wikilinks on pull, so links keep working on both sides.
+- **File names with spaces and special characters** — Synced paths now allow spaces and most special characters; only characters your filesystem itself forbids are rejected.
+- **Fetch attachments on pull** — `ud pull --fetch-attachments` downloads task attachments into your vault.
+- **Migrate existing checkouts** — `ud migrate-layout` converts an existing ud-layout checkout to the new vault layout in place.
+
+### Bug Fixes
+
+- **Your own edits are no longer flagged as conflicts** — Sync no longer reports conflicts for changes you just pushed, and timestamp comparison now uses full nanosecond precision.
+- **Dotfiles sync correctly** — Dotfile resources (e.g. `.gitignore`) are materialized verbatim on pull, with sensible names when deduplication is needed.
+- **Pull reconciles identical untracked files** — Pulling over an untracked local file with identical content now adopts it into tracking instead of failing.
+
+---
+
 ## v0.113.0 (2026-07-16)
 
 ### New Features
