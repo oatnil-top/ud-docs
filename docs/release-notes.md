@@ -18,6 +18,35 @@ UnDercontrol follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.115.0 (2026-07-18)
+
+### New Features
+
+- **Zero-config agile sprints** — Boards now support Scrum-style sprints with no setup: create your first sprint from the new Backlog page and sprint tooling lights up automatically.
+- **Backlog page** — Plan work in a dedicated backlog: sprint sections, drag tasks into a sprint, and quick-create tasks in place.
+- **Sprint scope bar on the board** — A scope bar on the kanban board focuses the view on the active sprint with one click.
+- **Reports: burndown & velocity** — A new Reports tab charts sprint burndown and team velocity, powered by daily automatic snapshots.
+- **Sprint ceremonies** — Start a sprint with date presets; complete it with a closing dialog that rolls unfinished tasks into the next sprint and produces an itemized retro summary.
+- **Risk alerts & WIP warnings** — The board warns when a column exceeds its WIP limit, and at-risk sprint tasks automatically receive a risk-alert comment.
+- **Jira-style named views** — Board / Backlog / Gantt view tabs are unified across board pages, with a shared header and a board switcher everywhere.
+- **Agile fields on tasks** — Tasks gain built-in agile fields (like their sprint), editable in the task detail and usable in board queries.
+- **CLI sprint management** — `ud sprint close` completes a sprint with rollover from the terminal; `ud patch task --set` patches task metadata (including JSON arrays/objects); plus a built-in agile skill and cook recipes.
+
+### Improvements
+
+- **More compact board layout** — Tabs move inline with the header, sprint scope merges into the filter bar, and the Gantt header collapses to a single row — more room for your tasks.
+- **Flexible dates when creating tasks** — Task creation (API and CLI) now accepts relaxed date formats.
+- **Sprint title links to its task** — Sprint section titles open the sprint's task detail, where its dates can be edited.
+
+### Bug Fixes
+
+- **Directed agent replies stay in their thread** — Replies addressed to a specific session no longer broadcast to other bound sessions.
+- **Agent startup failures are reported** — When an agent session fails to initialize, the error is now replied into the comment thread that triggered it.
+- **Custom field types display correctly** — Field types and option sources now show proper labels.
+- **Reports & backlog respect the board scope** — Backlog, sprint lists, and progress queries follow the board's scope, and Reports resets the selected sprint when you switch boards.
+
+---
+
 ## v0.114.0 (2026-07-18)
 
 ### New Features
