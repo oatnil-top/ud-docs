@@ -18,6 +18,29 @@ UnDercontrol follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.116.0 (2026-07-20)
+
+### New Features
+
+- **Spreadsheet-style paste in tables** — Paste multi-cell data from Google Sheets, Excel, or CSV directly at any cell: rows and columns expand from where you point, and multi-line values are parsed correctly.
+- **Full-page Conversations view** — Browse all your comment threads in a dedicated page with the thread list on the left and the conversation on the right.
+- **Pop-out conversation windows** — Open any conversation thread in its own standalone window with the new pop-out icon.
+
+### Improvements
+
+- **Terminal zoom controls** — Workspace terminal zoom controls are now a translucent floating overlay, leaving the whole pane for your output.
+- **Read-only terminals fill the pane** — Read-only terminals now scale to fill the pane and follow external terminal resizes.
+- **Conversation filters wrap** — Filter chips wrap onto multiple lines instead of hiding in a horizontal scroll.
+- **Conversations open faster** — Expanding conversations auto-opens the top thread and preloads the next page of threads.
+
+### Bug Fixes
+
+- **Table editing** — Typing to edit a cell no longer loses the first character; cutting or deleting a selection is now a single undo step; CSV delimiter detection and markdown escaping are more robust.
+- **AI Chat layout** — Long message content no longer overflows the chat panel.
+- **Resource deletion** — Deleting an uploaded file now removes it from your configured storage provider.
+
+---
+
 ## v0.115.0 (2026-07-18)
 
 ### New Features
