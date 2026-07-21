@@ -18,6 +18,21 @@ UnDercontrol follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.117.1 (2026-07-21)
+
+### Bug Fixes
+
+**Possession dates were saved one day off outside UTC**
+- Acquisition and disposal dates were stored as the previous day (east of UTC) or the next day (west of UTC).
+- That made holding days and daily cost wrong — at UTC+8 the daily cost showed as roughly half the real figure, and the error was silent because a halved number still looks plausible.
+- The date you pick is now recorded exactly as picked.
+
+### Upgrade Notes
+
+- Possessions created before this fix keep the date they were saved with; holding periods are not recomputed automatically. If a possession's daily cost looks wrong, re-pick its acquisition date to correct it.
+
+---
+
 ## v0.117.0 (2026-07-21)
 
 ### New Features
