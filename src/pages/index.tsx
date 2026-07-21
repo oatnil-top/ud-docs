@@ -167,9 +167,11 @@ function HeroSection() {
     <section className={styles.heroSection}>
       <span className={styles.eyebrow}>
         <span className={styles.dot} />
-        {/* "Since July 2025" is a trust signal: the date is the repo's first commit
-            (2025-07-03), so it stays verifiable rather than marketing copy. */}
-        <Translate id="homepage.hero.eyebrow">Self-hosted · Free for personal use · Built since July 2025</Translate>
+        {/* "Since September 2024" is a trust signal, and the date is verifiable: the
+            first ud-next-web commit is 2024-09-22 (ud-server 2024-09-23). NOT the
+            current monorepo's 2025-07-03 — that is only the Go+Vite rewrite. See the
+            competitor timeline in ud task e95c1469, note d6f1e6b1. */}
+        <Translate id="homepage.hero.eyebrow">Self-hosted · Free for personal use · Built since September 2024</Translate>
       </span>
       <h1 className={styles.heroTitle}>
         <Translate id="homepage.hero.tagline">
