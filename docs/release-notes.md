@@ -18,6 +18,47 @@ UnDercontrol follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.117.0 (2026-07-21)
+
+### New Features
+
+**Possessions — track the things you own and what they cost you per day**
+- New Possessions module for physical items: record what you paid, when you got it, and see the running daily cost of ownership.
+- Full lifecycle: wish -> in service -> retired / sold / lost. Costs are derived live, so the daily figure is always current without any bookkeeping.
+- Disposing of an item as "sold" can book the proceeds straight into Income.
+- Outliving its expected lifespan reads as "Target reached", not an overspend warning — more days than you planned for is the good outcome.
+- Possessions appear in the Explorer tree and in the sidebar's finance group.
+- A cost too small to show at two decimals is stated as a monthly figure rather than displayed as "0.00 a day".
+
+**Multi-currency accounts**
+- Account totals are now reported exactly, per currency. Balances in different currencies are no longer added together into a meaningless number.
+- Optionally roll everything up into one display currency of your choice, using the exchange rates configured in system settings.
+- The dashboard, trend chart and account list show a single combined figure only when that figure is honest — otherwise they show a per-currency breakdown.
+- When a roll-up can't include everything, the app names the currencies it left out instead of quietly understating your total.
+- Currency is chosen from a picker when creating an account, not typed.
+
+### Improvements
+- The Income module is complete: dedicated list page, route and summary.
+- Summaries and cash-flow figures are currency-aware throughout.
+- The currency breakdown is ordered by what each holding is actually worth when rates are available, instead of by raw amount.
+- Clearer messaging when a conversion isn't available, naming the specific currency that lacks a rate rather than giving one generic message.
+- Fewer redundant success toasts on actions that already update instantly.
+
+### Bug Fixes
+- Expenses inside a budget shared with a group are now visible to group members. Previously only per-user shares worked, so members saw the budget but none of its expenses.
+- Fixed authorization gaps in group-shared expenses and income.
+- Opening an account with a balance of 0 works. It was rejected as "Invalid format" while editing an existing account to 0 succeeded.
+- Amounts too small to store are now refused instead of being silently saved as 0.
+- The budget and off-budget parts of a converted total now add up to the total.
+- Holdings worth something but less than 0.01 show "< 0.01" instead of 0.
+- A malformed currency code in a request is rejected rather than ignored.
+
+### Upgrade Notes
+- Account currency is now restricted to active ISO-4217 codes at creation time. Existing accounts are unaffected and no migration is needed. Self-hosted users who tracked points, tokens or local scrip as an account currency can no longer create accounts with custom codes.
+- Rolling everything up into a single currency relies on exchange rates in system settings, which is a Pro feature. Personal tier continues to get the exact per-currency breakdown.
+
+---
+
 ## v0.116.0 (2026-07-20)
 
 ### New Features
