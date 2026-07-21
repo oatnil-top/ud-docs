@@ -167,7 +167,9 @@ function HeroSection() {
     <section className={styles.heroSection}>
       <span className={styles.eyebrow}>
         <span className={styles.dot} />
-        <Translate id="homepage.hero.eyebrow">Self-hosted · Free for personal use</Translate>
+        {/* "Since July 2025" is a trust signal: the date is the repo's first commit
+            (2025-07-03), so it stays verifiable rather than marketing copy. */}
+        <Translate id="homepage.hero.eyebrow">Self-hosted · Free for personal use · Built since July 2025</Translate>
       </span>
       <h1 className={styles.heroTitle}>
         <Translate id="homepage.hero.tagline">
