@@ -18,6 +18,41 @@ UnDercontrol follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.118.0 (2026-07-23)
+
+### New Features
+
+**Create a possession straight from an expense**
+- The expense detail view has a new "Create possession" action.
+- It opens the possession form pre-filled from that expense, so a purchase becomes a tracked possession in one step.
+- The expense itself is never modified — a new possession is created and linked back to it.
+
+**"Onboard your agent to UnDercontrol" button on the homepage**
+- One click copies a single line you can paste into any AI agent.
+- The agent reads the setup instructions itself, installs the CLI, and connects to your workspace.
+
+**`ud describe skill <name> -o content`**
+- Prints a skill's body with no metadata header.
+- Redirect it into a `SKILL.md` file, or pipe it straight to an agent.
+
+### Improvements
+
+**Agent sessions can recover their own identity**
+- When a first mention's setup message failed to land, the session ran on with no identity at all.
+- Every follow-up mention and reply now tells the session to load its agent settings.
+
+### Bug Fixes
+
+**The Skills page copy buttons handed out a dead command**
+- They copied `ud prompt <name>`, which was removed from the CLI, so pasting it just errored.
+- Every copy command and in-app doc now points at `ud describe skill`.
+
+**The web app was stuck on an old build**
+- The frontend build had been failing on out-of-memory since 0.117.1, leaving ud.oatnil.com serving the 0.117.0 bundle.
+- Fixed, so the web app updates again.
+
+---
+
 ## v0.117.1 (2026-07-21)
 
 ### Bug Fixes
