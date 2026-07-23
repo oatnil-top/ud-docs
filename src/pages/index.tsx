@@ -162,6 +162,75 @@ function HeroGallery() {
   );
 }
 
+/**
+ * Agent onboarding pill.
+ *
+ * The whole onboarding contract is one line of text an agent can act on:
+ * `Fetch <AGENT_SETUP_PROMPT_URL>`. The prompt itself lives in this repo at
+ * static/agent-setup/prompt.md, so the docs site serves it and GitHub carries the
+ * source — edit it there, never here. Mirrored on the app landing page
+ * (ud-vite-app/src/pages/home-page/index.tsx); keep the copied text identical.
+ */
+const AGENT_SETUP_PROMPT_URL = 'https://oatnil.com/agent-setup/prompt.md';
+const AGENT_SETUP_COMMAND = `Fetch ${AGENT_SETUP_PROMPT_URL}`;
+
+/** The Clipboard API needs a secure context; keep the button working over plain http. */
+function copyViaTextarea() {
+  const el = document.createElement('textarea');
+  el.value = AGENT_SETUP_COMMAND;
+  document.body.appendChild(el);
+  el.select();
+  document.execCommand('copy');
+  el.remove();
+}
+
+function AgentSetupButton() {
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    if (!copied) return undefined;
+    const id = setTimeout(() => setCopied(false), 2200);
+    return () => clearTimeout(id);
+  }, [copied]);
+
+  const copy = () => {
+    // Flip the label first: Chrome can leave writeText pending until the document
+    // regains focus, so awaiting it would swallow the feedback entirely.
+    setCopied(true);
+    try {
+      const pending = navigator.clipboard?.writeText(AGENT_SETUP_COMMAND);
+      if (pending) {
+        pending.catch(copyViaTextarea);
+        return;
+      }
+    } catch {
+      // Fall through — no Clipboard API here.
+    }
+    copyViaTextarea();
+  };
+
+  return (
+    <button
+      type="button"
+      className={styles.agentSetupButton}
+      onClick={copy}
+      title={AGENT_SETUP_COMMAND}
+      aria-label={translate({
+        id: 'homepage.hero.agentSetup.aria',
+        message: 'Copy the agent setup prompt',
+      })}>
+      <span className={styles.agentSetupLabel}>
+        {copied ? (
+          <Translate id="homepage.hero.agentSetup.copied">Copied — paste it into your agent</Translate>
+        ) : (
+          <Translate id="homepage.hero.agentSetup.label">Onboard your agent to UnDercontrol</Translate>
+        )}
+      </span>
+      <code className={styles.agentSetupCode}>{copied ? '✓' : AGENT_SETUP_COMMAND}</code>
+    </button>
+  );
+}
+
 function HeroSection() {
   return (
     <section className={styles.heroSection}>
@@ -200,6 +269,9 @@ function HeroSection() {
         <Link className={styles.heroButtonText} to="#run">
           <Translate id="homepage.hero.waysLink">Or self-host it — three ways to run ↓</Translate>
         </Link>
+      </div>
+      <div className={styles.heroAgentRow}>
+        <AgentSetupButton />
       </div>
       <HeroGallery />
     </section>

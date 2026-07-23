@@ -238,6 +238,15 @@
   "homepage.hero.download": {
     "message": "下载桌面应用"
   },
+  "homepage.hero.agentSetup.aria": {
+    "message": "复制 AI 代理接入提示词"
+  },
+  "homepage.hero.agentSetup.copied": {
+    "message": "已复制 — 粘贴给你的 AI 代理"
+  },
+  "homepage.hero.agentSetup.label": {
+    "message": "让你的 AI 代理接入 UnDercontrol"
+  },
   "homepage.hero.eyebrow": {
     "description": "Homepage: hero.eyebrow",
     "message": "自主部署 · 个人使用永久免费 · 自 2024 年 9 月持续开发"

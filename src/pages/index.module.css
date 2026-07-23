@@ -169,6 +169,67 @@
   text-decoration: none;
 }
 
+/* Agent onboarding pill: label on the left, the literal command to copy on the right,
+   split by a hairline so the two halves read as prompt + payload. */
+.heroAgentRow {
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+}
+
+.agentSetupButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 100%;
+  padding: 6px 8px 6px 14px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 100px;
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.agentSetupButton:hover {
+  background: var(--ifm-color-emphasis-100);
+  border-color: var(--ifm-color-emphasis-400);
+}
+
+.agentSetupLabel {
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.agentSetupCode {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+  color: var(--ifm-color-emphasis-600);
+  background: var(--ifm-color-emphasis-100);
+  border: none;
+  border-radius: 100px;
+  padding: 3px 10px;
+  max-width: 52ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* The command is the least important half — drop it first when space runs out. */
+@media (max-width: 640px) {
+  .agentSetupCode {
+    display: none;
+  }
+
+  .agentSetupButton {
+    padding: 6px 14px;
+  }
+
+  .agentSetupLabel {
+    white-space: normal;
+  }
+}
+
 .heroImageWrap {
   margin: 56px auto 0;
   max-width: 900px;
