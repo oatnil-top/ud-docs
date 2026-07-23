@@ -18,6 +18,16 @@ UnDercontrol follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.118.1 (2026-07-23)
+
+### Improvements
+
+**Agents now know who is talking to them**
+- When an agent is triggered by a mention, session message, or broadcast, its trigger prompt now names the sender (shown as `User @name` / `Agent @name`).
+- The agent's reply is addressed to the right person instead of a generic "a user", so multi-agent and mention conversations stay clear about who said what.
+
+---
+
 ## v0.118.0 (2026-07-23)
 
 ### New Features
