@@ -239,8 +239,11 @@ function HeroSection() {
         {/* "Since September 2024" is a trust signal, and the date is verifiable: the
             first ud-next-web commit is 2024-09-22 (ud-server 2024-09-23). NOT the
             current monorepo's 2025-07-03 — that is only the Go+Vite rewrite. See the
-            competitor timeline in ud task e95c1469, note d6f1e6b1. */}
-        <Translate id="homepage.hero.eyebrow">Self-hosted · Free for personal use · Built since September 2024</Translate>
+            competitor timeline in ud task e95c1469, note d6f1e6b1.
+            "Self-hosted" was dropped from this line: it pushed the eyebrow onto two
+            rows on a phone, and the nav, the CTA row and the whole "three ways to run"
+            band already say it. Keep this line short enough to stay on one row. */}
+        <Translate id="homepage.hero.eyebrow">Free for personal use · Built since September 2024</Translate>
       </span>
       <h1 className={styles.heroTitle}>
         <Translate id="homepage.hero.tagline">
@@ -252,13 +255,11 @@ function HeroSection() {
           Knowledge base like Obsidian. Project management like Jira. Personal finance like Mint. File storage like Google Drive — one private workspace, ready for your AI agents.
         </Translate>
       </p>
-      <div className={styles.heroPills}>
-        <span className={styles.heroPill}><Translate id="homepage.hero.pill.selfhosted">Self-hosted</Translate></span>
-        <span className={styles.heroPill}><Translate id="homepage.hero.pill.localfirst">Local-first</Translate></span>
-        <span className={styles.heroPill}><Translate id="homepage.hero.pill.ainative">AI-native</Translate></span>
-        <span className={styles.heroPill}><Translate id="homepage.hero.pill.openapi">Open API</Translate></span>
-        <span className={styles.heroPill}><Translate id="homepage.hero.pill.allinone">All-in-one</Translate></span>
-      </div>
+      {/* No keyword-pill row here. Self-hosted / local-first / AI-native / open API /
+          all-in-one were five badges restating the eyebrow and the subtitle in single
+          words — on a phone they wrapped into a second row of noise above the CTAs.
+          The hero carries at most two pill-shaped things: the eyebrow (trust) and the
+          agent onboarding action. Claims belong in the bands below, next to evidence. */}
       <div className={styles.heroButtons}>
         <Link className={styles.heroButtonPrimary} to={APP_URL}>
           <Translate id="homepage.hero.tryOnlineCta">Try it online</Translate>

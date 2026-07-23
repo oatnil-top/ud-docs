@@ -82,24 +82,6 @@
   line-height: 1.6;
 }
 
-.heroPills {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 7px;
-  margin-top: 26px;
-}
-
-.heroPill {
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 11.5px;
-  color: var(--ifm-color-emphasis-600);
-  border: 1px solid var(--ifm-color-emphasis-200);
-  border-radius: 100px;
-  padding: 3px 11px;
-  letter-spacing: -0.02em;
-}
-
 .heroButtons {
   display: flex;
   flex-wrap: wrap;
@@ -215,7 +197,9 @@
   white-space: nowrap;
 }
 
-/* The command is the least important half — drop it first when space runs out. */
+/* The command is the least important half — drop it first when space runs out.
+   Both pill-shaped elements in the hero must stay on ONE row at phone width; a wrapped
+   pill is what made this hero read as a wall of badges. */
 @media (max-width: 640px) {
   .agentSetupCode {
     display: none;
@@ -226,7 +210,13 @@
   }
 
   .agentSetupLabel {
-    white-space: normal;
+    white-space: nowrap;
+  }
+
+  .eyebrow {
+    font-size: 10.5px;
+    padding: 4px 10px;
+    letter-spacing: -0.02em;
   }
 }
 

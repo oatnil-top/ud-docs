@@ -249,26 +249,11 @@
   },
   "homepage.hero.eyebrow": {
     "description": "Homepage: hero.eyebrow",
-    "message": "自主部署 · 个人使用永久免费 · 自 2024 年 9 月持续开发"
+    "message": "个人使用永久免费 · 自 2024 年 9 月持续开发"
   },
   "homepage.hero.imageAlt": {
     "description": "Homepage: hero.imageAlt",
     "message": "UnDercontrol 看板：追踪一次版本发布"
-  },
-  "homepage.hero.pill.ainative": {
-    "message": "AI 原生"
-  },
-  "homepage.hero.pill.allinone": {
-    "message": "All-in-one"
-  },
-  "homepage.hero.pill.localfirst": {
-    "message": "本地优先"
-  },
-  "homepage.hero.pill.openapi": {
-    "message": "开放 API"
-  },
-  "homepage.hero.pill.selfhosted": {
-    "message": "自部署"
   },
   "homepage.hero.subtitle": {
     "message": "知识库如 Obsidian，项目管理如 Jira，个人财务如 Mint，文件存储如 Google Drive — 一个私有空间，为你和你的 AI 代理而生。"
