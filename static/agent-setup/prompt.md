@@ -43,8 +43,14 @@ If a global install is not possible, every `ud` command below also works as
 
 ## Sign in to the user's workspace
 
-**This is the one command the user must run themselves.** Ask them to run it, then
-continue once they confirm.
+**First, check whether they're already signed in** — run `ud whoami`. If it prints a user,
+skip the rest of this step. This is common when the user runs the UnDercontrol desktop app:
+logging in there automatically writes a CLI context named `personal` to
+`~/.config/ud/config.yaml`, so the CLI is already authenticated and no login command is
+needed. (Download the desktop app from `https://oatnil.com` if they'd prefer the GUI route.)
+
+Otherwise sign in from the CLI. **This is the one command the user must run themselves** —
+it prompts for a password. Ask them to run it, then continue once they confirm.
 
 Cloud workspace:
 
