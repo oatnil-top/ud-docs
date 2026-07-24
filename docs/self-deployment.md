@@ -110,7 +110,7 @@ docker compose up -d
 
 The table below covers the variables most deployments touch. For every setting the
 server reads — with an interactive config builder and boot preview — see the
-[Configuration Reference](/docs/configuration).
+[Configuration Reference](/configuration).
 
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
