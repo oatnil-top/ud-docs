@@ -167,11 +167,13 @@ function HeroGallery() {
  *
  * The whole onboarding contract is one line of text an agent can act on:
  * `Fetch <AGENT_SETUP_PROMPT_URL>`. The prompt itself lives in this repo at
- * static/agent-setup/prompt.md, so the docs site serves it and GitHub carries the
- * source — edit it there, never here. Mirrored on the app landing page
+ * static/agent-setup/prompt.md; we point at the GitHub raw URL rather than the
+ * docs domain because oatnil.com's bot protection blocks some agents' fetchers,
+ * whereas raw.githubusercontent.com is reliably reachable. Edit the file in this
+ * repo, never here. Mirrored on the app landing page
  * (ud-vite-app/src/pages/home-page/index.tsx); keep the copied text identical.
  */
-const AGENT_SETUP_PROMPT_URL = 'https://oatnil.com/agent-setup/prompt.md';
+const AGENT_SETUP_PROMPT_URL = 'https://raw.githubusercontent.com/oatnil-top/ud-docs/main/static/agent-setup/prompt.md';
 const AGENT_SETUP_COMMAND = `Fetch ${AGENT_SETUP_PROMPT_URL}`;
 
 /** The Clipboard API needs a secure context; keep the button working over plain http. */
