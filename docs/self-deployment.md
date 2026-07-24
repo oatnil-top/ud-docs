@@ -41,7 +41,7 @@ and how to log in:
   --> Open http://localhost:3000 to get started
 
       Login as:  personal@undercontrol.local
-                 default password: personal123 — change it after first login
+                 default password: personal123 (set PERSONAL_TIER_PASSWORD to change it)
       Tier:      Personal (max users: 1)
       Database:  SQLITE
       Storage:   LocalFS
@@ -116,7 +116,7 @@ docker compose up -d
 | `ADMIN_PASSWORD` | Pro/Max | `admin123` | Initial admin password. Change it. |
 | `LICENSE_TOKEN` | Pro/Max | — | License token that unlocks Pro/Max features. |
 | `LICENSE_HOST_SECRET` | Pro/Max | — | Host secret paired with your license token. |
-| `PERSONAL_TIER_PASSWORD` | No | `personal123` | Password of the single Personal-tier user (`personal@undercontrol.local`). Change it. |
+| `PERSONAL_TIER_PASSWORD` | No | `personal123` | Password of the single Personal-tier user (`personal@undercontrol.local`). Set it **before first boot**: the **Start** auto-login always uses this variable, so changing only the env var after the user exists — or changing only the password in-app — breaks auto-login (the two must match; the login name itself cannot be changed). |
 | `PORT` | No | `8080` | Port the server listens on inside the container. |
 
 ### Optional: PostgreSQL, S3 and AI

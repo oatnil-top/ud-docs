@@ -38,7 +38,7 @@ ready banner，直接告诉你去哪打开、用什么账号登录：
   --> Open http://localhost:3000 to get started
 
       Login as:  personal@undercontrol.local
-                 default password: personal123 — change it after first login
+                 default password: personal123 (set PERSONAL_TIER_PASSWORD to change it)
       Tier:      Personal (max users: 1)
       Database:  SQLITE
       Storage:   LocalFS
@@ -109,7 +109,7 @@ docker compose up -d
 | `ADMIN_PASSWORD` | Pro/Max | `admin123` | 初始管理员密码，请务必修改。 |
 | `LICENSE_TOKEN` | Pro/Max | — | 解锁 Pro/Max 功能的许可证 token。 |
 | `LICENSE_HOST_SECRET` | Pro/Max | — | 与许可证 token 配套的 host secret。 |
-| `PERSONAL_TIER_PASSWORD` | 否 | `personal123` | Personal tier 唯一用户（`personal@undercontrol.local`）的密码，请务必修改。 |
+| `PERSONAL_TIER_PASSWORD` | 否 | `personal123` | Personal tier 唯一用户（`personal@undercontrol.local`）的密码。请在**首次启动前**设置：**Start** 自动登录始终读取该变量，用户创建后只改环境变量、或只在应用内改密码，都会导致自动登录失效（两者必须一致；登录名本身不可修改）。 |
 | `PORT` | 否 | `8080` | 服务在容器内监听的端口。 |
 
 ### 可选：PostgreSQL、S3 与 AI
