@@ -659,6 +659,9 @@ function CTASection() {
         <Link className={styles.btnPrimary} to="/docs/self-deployment">
           <Translate id="selfhosting.cta.guide">Deployment guide</Translate>
         </Link>
+        <Link className={styles.btnGhost} to="/configuration">
+          <Translate id="selfhosting.cta.config">Configuration reference</Translate>
+        </Link>
         <Link className={styles.btnGhost} to="/contact">
           <Translate id="selfhosting.cta.contact">Contact us</Translate>
         </Link>

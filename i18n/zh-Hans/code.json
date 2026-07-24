@@ -590,6 +590,9 @@
   "selfhosting.copy": {
     "message": "复制"
   },
+  "selfhosting.cta.config": {
+    "message": "配置参考"
+  },
   "selfhosting.cta.contact": {
     "message": "联系我们"
   },
