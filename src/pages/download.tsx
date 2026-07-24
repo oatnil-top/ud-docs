@@ -10,8 +10,9 @@
  * Distribution facts encoded here (keep them true):
  * - Desktop binaries live on R2 under releases/{version}/; only recent
  *   versions are retained, which is why links must derive from version.json.
- * - macOS builds are Developer ID signed + notarized — no Gatekeeper
- *   workarounds; never re-add xattr/right-click instructions.
+ * - macOS builds are Developer ID signed + notarized, but the owner prefers
+ *   not to advertise it (2026-07-25): no "signed/notarized" badges or copy on
+ *   the page. It also means never re-add xattr/right-click instructions.
  * - The CLI ships through npm only (@oatnil/ud). The Homebrew tap is dead.
  * - iOS is in TestFlight preparation — keep the slot, add no link until live.
  *
@@ -52,7 +53,6 @@ interface PlatformDl {
   os: L;
   arch: string;
   file: string;
-  notarized?: boolean;
 }
 
 const PLATFORMS: PlatformDl[] = [
@@ -60,13 +60,11 @@ const PLATFORMS: PlatformDl[] = [
     os: {en: 'macOS', zh: 'macOS'},
     arch: 'Apple Silicon · .dmg',
     file: `undercontrol-desktop-${VERSION}-arm64.dmg`,
-    notarized: true,
   },
   {
     os: {en: 'macOS', zh: 'macOS'},
     arch: 'Intel · .dmg',
     file: `undercontrol-desktop-${VERSION}-x64.dmg`,
-    notarized: true,
   },
   {
     os: {en: 'Windows', zh: 'Windows'},
@@ -153,8 +151,8 @@ function Hero() {
       </h1>
       <p className={`${styles.lede} ${styles.heroLede}`}>
         {t({
-          en: 'UnDercontrol runs where you do — a signed desktop app, a zero-install web app, a CLI built for AI agents, and a browser clipper. Free to start, and every client can point at our cloud or a server you run yourself.',
-          zh: 'UnDercontrol 跟随你的工作方式——已签名的桌面应用、免安装的网页版、为 AI Agent 而生的 CLI、浏览器剪藏扩展。免费起步，每个客户端都可以连接我们的云端，或你自己部署的服务器。',
+          en: 'UnDercontrol runs where you do — a desktop app, a zero-install web app, a CLI built for AI agents, and a browser clipper. Free to start, and every client can point at our cloud or a server you run yourself.',
+          zh: 'UnDercontrol 跟随你的工作方式——桌面应用、免安装的网页版、为 AI Agent 而生的 CLI、浏览器剪藏扩展。免费起步，每个客户端都可以连接我们的云端，或你自己部署的服务器。',
         })}
       </p>
       <div className={styles.jumprow}>
@@ -187,12 +185,6 @@ function DesktopSection() {
           <div key={p.file} className={styles.plat}>
             <h3 className={styles.platOs}>{t(p.os)}</h3>
             <div className={styles.platArch}>{p.arch}</div>
-            {p.notarized ? (
-              <span className={styles.platBadge}>
-                <Check size={11} strokeWidth={2.5} />
-                {t({en: 'Signed & notarized', zh: '已签名 · 已公证'})}
-              </span>
-            ) : null}
             <div className={styles.platSpacer} />
             <a className={styles.platBtn} href={`${R2_RELEASES}/${VERSION}/${p.file}`}>
               <DownloadIcon size={14} strokeWidth={2} />
@@ -203,13 +195,6 @@ function DesktopSection() {
         ))}
       </div>
       <div className={styles.footnotes}>
-        <p className={styles.footnote}>
-          <b>macOS:</b>{' '}
-          {t({
-            en: 'builds are signed and notarized with an Apple Developer ID — the app opens straight from the DMG, no Gatekeeper warnings, no Terminal workarounds.',
-            zh: '构建已使用 Apple Developer ID 签名并公证——从 DMG 直接打开即可，没有 Gatekeeper 警告，无需任何终端命令绕过。',
-          })}
-        </p>
         <p className={styles.footnote}>
           <b>Linux:</b>{' '}
           {t({en: 'make the AppImage executable first: ', zh: '先给 AppImage 加执行权限：'})}

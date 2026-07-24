@@ -44,8 +44,6 @@ version first instead of hardcoding one.
 
 Platform notes:
 
-- **macOS**: builds are signed and notarized with an Apple Developer ID. The app
-  opens directly from the DMG — no Gatekeeper warnings and no `xattr` workarounds.
 - **Linux**: make the AppImage executable: `chmod +x undercontrol-desktop-{VERSION}.AppImage`.
 
 ## CLI (`ud`)

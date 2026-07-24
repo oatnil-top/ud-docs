@@ -436,13 +436,6 @@ function DesktopAppSection() {
             {"China download may be unavailable due to limited hosting budget. Please contact me if needed. Thanks to Cloudflare R2 for providing free global downloads!"}
           </Translate>
         </p>
-        <div className={styles.noteMuted}>
-          <p>
-            <Translate id="subscribe.desktopSection.macosSignedNote">
-              macOS builds are signed and notarized with an Apple Developer ID — the app opens straight from the DMG, no warnings.
-            </Translate>
-          </p>
-        </div>
       </div>
     </section>
   );

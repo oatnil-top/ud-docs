@@ -945,10 +945,6 @@
     "description": "Desktop hint",
     "message": "免注册登录，单人本地立即使用"
   },
-  "subscribe.desktopSection.macosSignedNote": {
-    "description": "Desktop macOS signed note",
-    "message": "macOS 构建已使用 Apple Developer ID 签名并公证——从 DMG 直接打开即可，没有任何警告。"
-  },
   "subscribe.desktopSection.selectPlatform": {
     "description": "Desktop select platform",
     "message": "选择您的平台"
