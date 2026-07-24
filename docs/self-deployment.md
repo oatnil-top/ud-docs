@@ -108,6 +108,10 @@ docker compose up -d
 
 ## Environment Variables
 
+The table below covers the variables most deployments touch. For every setting the
+server reads — with an interactive config builder and boot preview — see the
+[Configuration Reference](/docs/configuration).
+
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
 | `HOST_DOMAIN` | **Yes** | — | Public URL clients use to reach this instance. Used to build file download/upload links, so it must be reachable (e.g. `http://localhost:3000` or `https://ud.example.com`). |

@@ -1,0 +1,336 @@
+---
+sidebar_position: 3
+title: Configuration Reference
+---
+
+import ConfigBuilder from '@site/src/components/ConfigBuilder';
+
+# Configuration Reference
+
+Every setting the UnDercontrol server reads, with its default and what it does.
+Each one can be given three ways, in order of precedence:
+**CLI flag › environment variable › built-in default**.
+A `.env` file in the working directory is loaded automatically.
+
+Source of truth: `go-backend/internal/config/config.go` — this page tracks it.
+
+:::info The minimum to boot
+- `HOST_DOMAIN` — `http://localhost:3000` or your public URL
+- `JWT_SECRET` — any random string (the default is a known value)
+- `ADMIN_EMAIL` — Pro/Max only; Personal tier needs nothing more
+
+Get these wrong and the server won't limp along — it exits with a `STARTUP FAILED`
+block naming the variable to fix. Get them right and the log ends with
+`--> Open <url> to get started`.
+:::
+
+## Build your config
+
+<ConfigBuilder />
+
+## Core server
+
+### HOST_DOMAIN
+
+**Required.** External base URL clients use to reach this instance — scheme + host, no
+trailing slash (e.g. `https://ud.example.com`, or `http://localhost:3000` when mapping
+`-p 3000:8080`). Used to build file download/upload links, so it must be the address
+browsers actually use. Missing or malformed → the server refuses to boot.
+
+Default: — · Flag: `--host-domain`
+
+### PORT
+
+Port the server listens on. In the all-in-one image, this is the port *inside* the
+container — map it with `-p <host>:8080`. If the port is already taken, boot fails fast
+with a clear error.
+
+Default: `8080` · Flag: `--port`
+
+### ENVIRONMENT
+
+`development` or `production`. Production switches the HTTP framework to release mode
+(less request logging). The all-in-one image ships with `production` preset.
+
+Default: `development` · Flag: `--environment`
+
+### LOG_LEVEL
+
+Log verbosity: `debug`, `info`, `warn`, `error`. Logs are structured JSON; the
+human-readable boot banner prints regardless of level.
+
+Default: `info` · Flag: `--log-level`
+
+### SQL_LOG_LEVEL
+
+SQL statement logging: `silent`, `error`, `warn`, or `info` (logs every query —
+debugging only).
+
+Default: `silent` · Flag: `--sql-log-level`
+
+### UD_DATA_PATH
+
+Directory holding all local state: the SQLite database and locally-stored uploads. In
+Docker this is `/app/data` — mount a volume there; backing up this directory backs up
+the instance.
+
+Default: `./data` · Flag: `--data-path`
+
+## Accounts & authentication
+
+### JWT_SECRET
+
+Secret used to sign login tokens.
+
+:::warning Set it — the default is public
+The default is a publicly known placeholder — anyone who knows it can forge sessions.
+Always set a long random value on any instance that isn't throwaway.
+:::
+
+Default: `your-secret-key` · Flag: `--jwt-secret`
+
+### JWT_EXPIRATION_MINUTES
+
+Access-token lifetime in minutes. Sessions refresh automatically, so the practical
+effect is how long a stolen token stays valid.
+
+Default: `60` · Flag: `--jwt-expiration-minutes`
+
+### ADMIN_EMAIL
+
+**Required on Pro/Max.** Login username of the initial admin account, created at first
+boot. On Pro/Max the server refuses to boot without it — Personal tier ignores it.
+
+Default: — · Flag: `--admin-email`
+
+### ADMIN_PASSWORD
+
+*Pro/Max.* Initial admin password, applied only when the admin account is first
+created. Change it after first login (the boot banner reminds you while the default is
+in use).
+
+Default: `admin123` · Flag: `--admin-password`
+
+### PERSONAL_TIER_PASSWORD
+
+*Personal tier.* Password of the single Personal-tier user,
+`personal@undercontrol.local` (the login name itself cannot be changed).
+
+:::warning Set it before first boot
+The **Start** auto-login always uses this variable, but the stored password is only
+written at first boot — changing one side without the other breaks auto-login. Set it
+before the first start, or keep both in sync.
+:::
+
+Default: `personal123` · Flag: `--personal-tier-password`
+
+### MIGRATE_FROM_PERSONAL
+
+*Pro/Max.* One-shot migration switch. Starting a Pro/Max server against a database
+created by Personal tier is refused as a safety check; set this to `true` (together
+with `ADMIN_EMAIL` / `ADMIN_PASSWORD`) to transfer all data to the new admin account
+and remove the personal user.
+
+Default: `false` · Flag: `--migrate-from-personal`
+
+## License
+
+Personal tier needs none of these.
+
+### LICENSE_TOKEN
+
+*Pro/Max.* License token that unlocks Pro/Max features (multi-user, PostgreSQL, S3,
+admin dashboard). Also read from `UNDERCONTROL_LICENSE`, a `license.txt` in the working
+directory, or `/etc/undercontrol/license.txt` — first match wins.
+
+Default: — · Flag: `--license-token`
+
+### LICENSE_HOST_SECRET
+
+*Pro/Max.* Host secret paired with your license token; both are issued together.
+
+Default: — · Flag: `--license-host-secret`
+
+### LICENSE_PRIVATE_KEY
+
+Used for issuing licenses. Leave unset on self-hosted instances.
+
+Default: — · Flag: `--license-private-key`
+
+## Database
+
+SQLite by default — PostgreSQL is Pro/Max.
+
+### DATABASE_TYPE
+
+`sqlite` or `postgres`. SQLite lives inside `UD_DATA_PATH` and is enough for most
+single-household instances; PostgreSQL requires a Pro/Max license.
+
+Default: `sqlite` · Flag: `--database-type`
+
+### DATABASE_URL
+
+Full PostgreSQL connection string. When set, it overrides all the individual
+`POSTGRES_*` variables below.
+
+Default: — · Flag: `--database-url`
+
+### POSTGRES_* connection parts
+
+Individual connection parts, for when you prefer them over one URL: `POSTGRES_HOST`
+(`localhost`), `POSTGRES_PORT` (`5432`), `POSTGRES_USER`, `POSTGRES_PASSWORD`,
+`POSTGRES_DATABASE` (`undercontrol`), `POSTGRES_SSL_MODE` (`disable`).
+
+Flags: `--postgres-host`, `--postgres-port`, …
+
+### POSTGRES_* pool tuning
+
+Connection-pool tuning; the defaults suit a small instance:
+`POSTGRES_MAX_OPEN_CONNS` (`25`), `POSTGRES_MAX_IDLE_CONNS` (`5`),
+`POSTGRES_CONN_MAX_LIFETIME` (`300` s), `POSTGRES_CONN_MAX_IDLE_TIME` (`60` s).
+
+Flags: `--postgres-max-open-conns`, …
+
+## Files & storage
+
+Local disk by default — S3 is Pro/Max.
+
+### MAX_FILE_SIZE
+
+Upload size limit in bytes.
+
+Default: `10485760` (10 MB) · Flag: `--max-file-size`
+
+### S3_ENABLED
+
+*Pro/Max.* Store uploads in S3-compatible object storage (AWS S3, Cloudflare R2,
+MinIO) instead of the local data directory. The boot banner shows which mode is active.
+
+Default: `false` · Flag: `--s3-enabled`
+
+### S3_* connection details
+
+All required once `S3_ENABLED=true`: `S3_ENDPOINT` (endpoint URL), `S3_REGION`
+(`auto` works for R2), `S3_BUCKET`, `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY`.
+`S3_FORCE_PATH_STYLE` (default `true`) suits MinIO and most non-AWS providers.
+
+Flags: `--s3-endpoint`, `--s3-bucket`, …
+
+## AI & vision
+
+All optional — AI features stay off without a key.
+
+### OPENAI_API_KEY
+
+API key that enables the AI features (task-from-image, receipt extraction, chat).
+Works with any OpenAI-compatible endpoint — pair with `OPENAI_BASE_URL` for Azure,
+GitHub Models, or a local model server.
+
+Default: — · Flag: `--openai-api-key`
+
+### OPENAI_* tuning
+
+Model and endpoint tuning: `OPENAI_MODEL` (`gpt-3.5-turbo`), `OPENAI_BASE_URL`
+(`https://api.openai.com/v1`), `OPENAI_MAX_TOKENS` (`1000`), `OPENAI_TEMPERATURE`
+(`0.7`), optional `OPENAI_ORG_ID`.
+
+Flags: `--openai-model`, `--openai-base-url`, …
+
+### AI_STARTUP_BACKEND_ACTIVE / AI_STARTUP_FRONTEND_ACTIVE
+
+Whether the system AI provider configured above starts out active on the backend /
+offered to the frontend. Users can still bring their own provider in-app.
+
+Default: `false` / `false` · Flags: `--ai-startup-backend-active`, …
+
+### AZURE_VISION_KEY / AZURE_VISION_URL
+
+Azure computer-vision credentials for image analysis, if you use Azure instead of an
+OpenAI-compatible vision model.
+
+Default: — · Flags: `--azure-vision-key`, `--azure-vision-url`
+
+### OCR_ENDPOINT / OCR_AUTHORIZATION / OCR_TIMEOUT
+
+External OCR service for receipt/document text extraction: endpoint
+(`http://127.0.0.1:8000/ocr`), auth token, timeout in seconds (`30`).
+
+Flags: `--ocr-endpoint`, …
+
+## Network & frontend
+
+### CORS_ALLOWED_ORIGINS
+
+Comma-separated list of origins allowed to call the API from a browser. Only needed
+when the frontend is served from a different origin than the backend — the all-in-one
+image serves both from one origin, so the default is fine there.
+
+Default: `http://localhost:3000,http://localhost:12000,http://localhost:8080` ·
+Flag: `--cors-allowed-origins`
+
+### FRONTEND_URL
+
+Where shareable links point when generated outside a browser (e.g. from the desktop
+app). Set it to the same public URL as `HOST_DOMAIN` for all-in-one deployments.
+
+Default: `http://localhost:12000` · Flag: `--frontend-url`
+
+### SLACK_WEBHOOK_URL
+
+Slack incoming-webhook for server notifications such as backup results.
+
+Default: — · Flag: `--slack-webhook-url`
+
+## Background jobs
+
+### CRON_ENABLED
+
+Master switch for scheduled jobs (cleanup, backups, scheduled-task processing). Leave
+on unless you run a separate worker instance.
+
+Default: `true` · Flag: `--cron-enabled`
+
+### VISITOR_CLEANUP_* settings
+
+Automatic removal of expired visitor (demo) accounts and their data:
+`VISITOR_CLEANUP_ENABLED` (`true`), `VISITOR_RETENTION_DAYS` (`3`),
+`VISITOR_CLEANUP_SCHEDULE` (`0 0 * * *`, cron syntax — daily at midnight).
+
+Flags: `--visitor-cleanup-enabled`, …
+
+## Observability
+
+For operators who ship logs/traces elsewhere.
+
+### OTEL_ENABLED
+
+Export traces, metrics and logs via OpenTelemetry (OTLP). Off by default; logs still
+go to stdout either way.
+
+Default: `false` · Flag: `--otel-enabled`
+
+### OTEL_* exporter settings
+
+Standard OTLP exporter settings: `OTEL_EXPORTER_OTLP_ENDPOINT` (one shared endpoint),
+`OTEL_EXPORTER_OTLP_HEADERS` (auth headers), per-signal overrides
+`OTEL_TRACES_ENDPOINT` / `OTEL_METRICS_ENDPOINT` / `OTEL_LOGS_ENDPOINT`, and
+`OTEL_SERVICE_NAME` (reported service name).
+
+Flags: `--otel-endpoint`, …
+
+## Advanced
+
+Rarely needed.
+
+### EVENT_BUS_WORKERS / EVENT_BUS_QUEUE_SIZE
+
+Internal event-bus sizing: background workers (`4`) and queue capacity (`1000`). Only
+worth touching on unusually busy instances.
+
+Flags: `--event-bus-workers`, `--event-bus-queue-size`
+
+---
+
+*Maintained by the Onboarding Experience Owner. When a variable is added, renamed, or
+its default changes in `config.go`, this page changes in the same task — if you find
+drift, that's a bug worth reporting. See also the [Self-Deployment Guide](/docs/self-deployment).*
