@@ -25,6 +25,8 @@ const HERO_RUN = `# the all-in-one image: frontend + backend in one container
 docker run -d -p 3000:8080 \\
   -e HOST_DOMAIN=http://localhost:3000 \\
   -e JWT_SECRET=change-me-to-a-random-string \\
+  -e ADMIN_EMAIL=admin@example.com \\
+  -e ADMIN_PASSWORD=changeme \\
   -e LICENSE_TOKEN=${LICENSE_TOKEN} \\
   -e LICENSE_HOST_SECRET=${LICENSE_SECRET} \\
   -v undercontrol-data:/app/data \\
@@ -101,6 +103,9 @@ const COMPOSE_SPLIT = `services:
       POSTGRES_PASSWORD: postgres
     volumes:
       - pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
 
   backend:
     image: lintao0o0/undercontrol-backend:latest
@@ -113,10 +118,15 @@ const COMPOSE_SPLIT = `services:
       - POSTGRES_DATABASE=undercontrol
       - CORS_ALLOWED_ORIGINS=http://localhost:3000
       - HOST_DOMAIN=http://localhost:3000
+      - JWT_SECRET=change-me-to-a-random-string
+      - ADMIN_EMAIL=admin@example.com
+      - ADMIN_PASSWORD=changeme
       - LICENSE_TOKEN=${LICENSE_TOKEN}
       - LICENSE_HOST_SECRET=${LICENSE_SECRET}
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
 
   frontend:
     image: lintao0o0/undercontrol-vite-app:latest
