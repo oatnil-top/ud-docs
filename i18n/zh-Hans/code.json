@@ -680,6 +680,9 @@
   "selfhosting.grow.title": {
     "message": "从小起步，就地成长。"
   },
+  "selfhosting.hero.config": {
+    "message": "全量配置参考"
+  },
   "selfhosting.hero.cta1": {
     "message": "查看所有部署方式 →"
   },

@@ -239,6 +239,9 @@ function HeroSection() {
         <Link className={styles.btnPrimary} to="#deploy">
           <Translate id="selfhosting.hero.cta1">All deployment methods →</Translate>
         </Link>
+        <Link className={styles.btnGhost} to="/configuration">
+          <Translate id="selfhosting.hero.config">Full configuration reference</Translate>
+        </Link>
         <Link className={styles.btnGhost} to="/docs/self-deployment">
           <Translate id="selfhosting.hero.cta2">Read the guide</Translate>
         </Link>
