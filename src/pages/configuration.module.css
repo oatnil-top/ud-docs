@@ -1,0 +1,263 @@
+/* Configuration Reference page — flat, thin-line styling on infima tokens.
+   Mirrors the app's Swiss/minimal design language: hairline separators, no cards. */
+
+.shell {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 48px 24px 96px;
+}
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ifm-color-content-secondary);
+  margin: 0 0 10px;
+}
+.title {
+  font-size: 33px;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  margin: 0 0 12px;
+  font-weight: 650;
+}
+.lede {
+  color: var(--ifm-color-content-secondary);
+  max-width: 64ch;
+  margin: 0 0 6px;
+}
+.sourceNote {
+  font-size: 13px;
+  color: var(--ifm-color-content-secondary);
+  margin: 0 0 36px;
+}
+.mono {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.92em;
+}
+
+/* minimum callout: thin left rule, no card */
+.minimum {
+  border-left: 2px solid var(--ifm-color-primary);
+  padding: 4px 0 4px 20px;
+  margin: 0 0 40px;
+}
+.minimum h2 {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ifm-color-primary);
+  margin: 0 0 10px;
+  font-weight: 600;
+}
+.minimum ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.minimum li {
+  color: var(--ifm-color-content-secondary);
+}
+.minimum li > code:first-child {
+  color: var(--ifm-font-color-base);
+  font-weight: 600;
+  background: none;
+  padding-left: 0;
+}
+.bannerNote {
+  margin: 12px 0 0;
+  font-size: 13.5px;
+  color: var(--ifm-color-content-secondary);
+}
+
+.sectionTitle {
+  font-size: 20px;
+  font-weight: 650;
+  margin: 0 0 4px;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+  padding-top: 24px;
+}
+
+/* filter + category nav */
+.controls {
+  margin: 8px 0 0;
+}
+.filter {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--ifm-color-emphasis-300);
+  background: none;
+  color: var(--ifm-font-color-base);
+  font: inherit;
+  padding: 8px 0;
+}
+.filter:focus {
+  outline: none;
+  border-bottom-color: var(--ifm-color-primary);
+}
+.filterMeta {
+  font-size: 12.5px;
+  color: var(--ifm-color-content-secondary);
+  min-height: 20px;
+  padding: 6px 0 0;
+}
+.catNav {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 18px;
+  row-gap: 4px;
+  padding: 14px 0 0;
+  margin: 0 0 8px;
+  font-size: 13.5px;
+}
+.catNav a {
+  color: var(--ifm-color-content-secondary);
+  text-decoration: none;
+}
+.catNav a:hover {
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+}
+.catCount {
+  color: var(--ifm-color-content-secondary);
+  opacity: 0.7;
+  font-size: 11.5px;
+}
+
+/* category sections */
+.cat {
+  margin: 0 0 8px;
+}
+.catTitle {
+  font-size: 16px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  margin: 34px 0 2px;
+  padding: 0 0 10px;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  scroll-margin-top: 80px;
+}
+.catNote {
+  font-size: 12.5px;
+  font-weight: 400;
+  color: var(--ifm-color-content-secondary);
+  text-align: right;
+}
+
+/* variable rows — the app's border-b list idiom */
+.row {
+  padding: 15px 0 13px;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  scroll-margin-top: 80px;
+}
+.row:last-child {
+  border-bottom: none;
+}
+.rowHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px;
+  margin: 0 0 4px;
+}
+.rowName {
+  font-family: var(--ifm-font-family-monospace);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--ifm-font-color-base);
+  cursor: copy;
+  background: none;
+  border: none;
+  padding: 0;
+}
+.rowName:hover {
+  color: var(--ifm-color-primary);
+}
+.badge {
+  font-size: 10.5px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  padding: 1.5px 7px;
+  border-radius: 2px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+.badgeReq {
+  background: var(--ifm-color-primary-contrast-background, var(--ifm-color-emphasis-100));
+  color: var(--ifm-color-primary);
+}
+.badgeTier {
+  border: 1px solid var(--ifm-color-emphasis-300);
+  color: var(--ifm-color-content-secondary);
+}
+.badgeWarn {
+  background: var(--ifm-color-warning-contrast-background, var(--ifm-color-emphasis-100));
+  color: var(--ifm-color-warning-darkest);
+}
+[data-theme='dark'] .badgeWarn {
+  color: var(--ifm-color-warning);
+}
+.rowDesc {
+  color: var(--ifm-color-content-secondary);
+  margin: 0;
+  max-width: 70ch;
+}
+.rowDesc code {
+  font-size: 0.9em;
+}
+.rowMeta {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 18px;
+  row-gap: 2px;
+  margin: 7px 0 0;
+  font-size: 12.5px;
+  color: var(--ifm-color-content-secondary);
+  opacity: 0.85;
+  font-variant-numeric: tabular-nums;
+}
+.metaKey {
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 10.5px;
+  margin-right: 5px;
+}
+.rowMeta code {
+  background: none;
+  padding: 0;
+  border: none;
+  color: inherit;
+}
+
+.footnote {
+  margin-top: 56px;
+  padding-top: 18px;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+  font-size: 13px;
+  color: var(--ifm-color-content-secondary);
+  max-width: 70ch;
+}
+
+.toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ifm-color-emphasis-900);
+  color: var(--ifm-background-color);
+  font-size: 13px;
+  padding: 7px 16px;
+  border-radius: 3px;
+  z-index: 300;
+}
+
+.hidden {
+  display: none;
+}
