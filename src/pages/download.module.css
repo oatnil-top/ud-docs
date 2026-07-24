@@ -1,0 +1,125 @@
+/**
+ * Download page — same Swiss/monochrome treatment as /self-hosting.
+ * Tokens come from Infima so light/dark theming is native; terminal cards
+ * stay dark in both themes ("their own screen").
+ */
+
+.page {
+  --accent: var(--ifm-color-emphasis-900);
+  --accent-ink: var(--ifm-font-color-base);
+  --accent-wash: var(--ifm-color-emphasis-100);
+  --ink: var(--ifm-font-color-base);
+  --muted: var(--ifm-color-emphasis-600);
+  --faint: var(--ifm-color-emphasis-500);
+  --border: var(--ifm-color-emphasis-200);
+  --border-2: var(--ifm-color-emphasis-300);
+  --surface: var(--ifm-background-color);
+  --inset: var(--ifm-color-emphasis-100);
+  --term-bg: #10131a;
+  --term-bar: #191d27;
+  --term-ink: #cdd3e0;
+  --term-dim: #6b7488;
+  --radius: 12px;
+  --read: 680px;
+  --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Menlo", "Consolas", monospace;
+}
+
+.page { max-width: 1080px; margin: 0 auto; border-left: 1px solid var(--border); border-right: 1px solid var(--border); background: var(--surface); overflow-x: clip; }
+
+.section { padding: 64px 32px; border-bottom: 1px solid var(--border); }
+.eyebrow { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin: 0 0 14px; }
+.h2 { font-size: 26px; font-weight: 680; letter-spacing: -0.025em; margin: 0; text-wrap: balance; }
+.lede { color: var(--muted); font-size: 17px; max-width: var(--read); line-height: 1.6; margin: 12px 0 0; }
+.lede code, .inlineCode { font-family: var(--mono); font-size: .88em; color: var(--accent-ink); background: var(--accent-wash); border: 0; border-radius: 5px; padding: 2px 7px; }
+
+/* hero */
+.hero { padding: 80px 32px 56px; position: relative; overflow: hidden; border-bottom: 1px solid var(--border); }
+.hero::before {
+  content: ""; position: absolute; inset: 0; z-index: 0; opacity: 0.5;
+  background-image: radial-gradient(var(--border-2) 1px, transparent 1px); background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(120% 90% at 30% 0%, #000 30%, transparent 72%);
+          mask-image: radial-gradient(120% 90% at 30% 0%, #000 30%, transparent 72%);
+}
+.hero > * { position: relative; z-index: 1; }
+.versionBadge { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 12px; color: var(--muted); border: 1px solid var(--border-2); border-radius: 100px; padding: 5px 14px; text-decoration: none; margin-bottom: 22px; transition: border-color .12s, color .12s; }
+.versionBadge:hover { color: var(--ink); border-color: var(--faint); text-decoration: none; }
+.versionBadge b { color: var(--accent-ink); font-weight: 600; }
+.heroTitle { font-size: clamp(36px, 5.5vw, 58px); font-weight: 700; line-height: 1.04; letter-spacing: -0.03em; margin: 0; text-wrap: balance; }
+.heroTitle em { font-style: normal; color: var(--ink); box-shadow: inset 0 -0.1em 0 0 var(--accent); }
+.heroLede { font-size: 18px; margin-top: 20px; }
+.jumprow { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 26px; }
+.jump { font-family: var(--mono); font-size: 12px; color: var(--muted); border: 1px solid var(--border-2); border-radius: 100px; padding: 6px 14px; text-decoration: none; transition: border-color .12s, color .12s, background .12s; }
+.jump:hover { color: var(--ink); border-color: var(--faint); background: var(--accent-wash); text-decoration: none; }
+
+/* buttons */
+.btnrow { display: flex; gap: 12px; margin-top: 26px; flex-wrap: wrap; }
+.btnPrimary, .btnGhost {
+  display: inline-flex; align-items: center; gap: 8px; padding: 11px 20px; border-radius: 8px;
+  font-size: 14px; font-weight: 550; text-decoration: none; cursor: pointer; border: 1px solid transparent;
+  transition: opacity .12s, background .12s, border-color .12s;
+}
+.btnPrimary { background: var(--accent); color: var(--surface); border-color: var(--accent); }
+.btnPrimary:hover { opacity: .88; color: var(--surface); text-decoration: none; }
+.btnGhost { background: transparent; color: var(--ink); border-color: var(--border-2); }
+.btnGhost:hover { border-color: var(--faint); color: var(--ink); text-decoration: none; }
+
+/* platform cards */
+.plats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 26px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.plat { display: flex; flex-direction: column; padding: 22px 22px 20px; border-right: 1px solid var(--border); background: var(--surface); }
+.plat:last-child { border-right: none; }
+.platOs { font-size: 15.5px; font-weight: 640; margin: 0; }
+.platArch { font-family: var(--mono); font-size: 11.5px; color: var(--faint); margin-top: 3px; }
+.platBadge { display: inline-flex; align-items: center; gap: 5px; font-family: var(--mono); font-size: 10.5px; letter-spacing: .03em; color: var(--accent-ink); background: var(--accent-wash); border: 1px solid var(--border-2); border-radius: 100px; padding: 3px 10px; margin-top: 10px; align-self: flex-start; }
+.platSpacer { flex: 1; min-height: 14px; }
+.platBtn { display: inline-flex; align-items: center; justify-content: center; gap: 7px; padding: 9px 14px; border-radius: 8px; font-size: 13.5px; font-weight: 550; background: var(--accent); color: var(--surface); text-decoration: none; transition: opacity .12s; }
+.platBtn:hover { opacity: .88; color: var(--surface); text-decoration: none; }
+.platFile { font-family: var(--mono); font-size: 10.5px; color: var(--faint); margin-top: 9px; overflow-wrap: anywhere; }
+.footnotes { margin-top: 22px; display: grid; gap: 8px; }
+.footnote { border-left: 2px solid var(--accent); padding: 2px 0 2px 16px; color: var(--muted); font-size: 13.5px; max-width: var(--read); }
+.footnote b { color: var(--ink); }
+.footnote code { font-family: var(--mono); font-size: .88em; color: var(--accent-ink); background: var(--accent-wash); border: 0; border-radius: 5px; padding: 1px 6px; }
+
+/* terminal / code card */
+.term { background: var(--term-bg); border-radius: var(--radius); overflow: hidden; border: 1px solid #262b36; box-shadow: 0 24px 50px -24px rgba(0,0,0,.5); font-family: var(--mono); margin-top: 26px; max-width: 760px; }
+.termBar { display: flex; align-items: center; gap: 10px; padding: 11px 14px; background: var(--term-bar); border-bottom: 1px solid rgba(35,40,51,.5); }
+.dots { display: flex; gap: 7px; }
+.dots i { width: 11px; height: 11px; border-radius: 50%; display: block; }
+.dots i:nth-child(1){ background:#ff5f57; } .dots i:nth-child(2){ background:#febc2e; } .dots i:nth-child(3){ background:#28c840; }
+.termName { font-size: 12px; color: var(--term-dim); margin-left: 4px; }
+.copybtn { margin-left: auto; font-family: var(--mono); font-size: 11.5px; color: var(--term-ink); background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 6px; padding: 4px 11px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: background .12s; }
+.copybtn:hover { background: rgba(255,255,255,.11); }
+.copybtn.ok { color: #4ec776; border-color: rgba(78,199,118,.28); }
+.termBody { padding: 16px 18px; overflow-x: auto; background: var(--term-bg); }
+/* Override Infima's global <pre> styling (light bg) so the terminal stays dark in both themes. */
+.termBody pre { margin: 0; padding: 0; border: 0; border-radius: 0; background: transparent; font-size: 13px; line-height: 1.7; color: var(--term-ink); white-space: pre-wrap; overflow-wrap: anywhere; font-family: var(--mono); }
+.cmt { color: var(--term-dim); }
+
+/* split band: text left, action right */
+.band { display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center; }
+.bandAction { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+
+/* coming-soon pill (mobile) */
+.soon { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 12px; letter-spacing: .04em; color: var(--faint); border: 1px dashed var(--border-2); border-radius: 100px; padding: 8px 16px; }
+
+/* self-host closing band */
+.selfhost { border-bottom: none; }
+
+@media screen and (max-width: 996px) {
+  .plats { grid-template-columns: repeat(2, 1fr); }
+  .plat { border-bottom: 1px solid var(--border); }
+  .plat:nth-child(2n) { border-right: none; }
+  .plat:nth-child(n+3) { border-bottom: none; }
+}
+
+@media screen and (max-width: 860px) {
+  .section { padding: 48px 22px; }
+  .hero { padding: 56px 22px 44px; }
+  .band { grid-template-columns: 1fr; gap: 18px; }
+}
+
+@media screen and (max-width: 560px) {
+  .plats { grid-template-columns: 1fr; }
+  .plat { border-right: none; border-bottom: 1px solid var(--border); }
+  .plat:nth-child(n+3) { border-bottom: 1px solid var(--border); }
+  .plat:last-child { border-bottom: none; }
+}

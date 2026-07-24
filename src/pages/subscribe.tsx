@@ -438,13 +438,10 @@ function DesktopAppSection() {
         </p>
         <div className={styles.noteMuted}>
           <p>
-            <Translate id="subscribe.desktopSection.macosNote">
-              {"macOS users: The app isn't code-signed (Apple Developer Program costs $99/year, and we're an indie project). After downloading, run this command in Terminal:"}
+            <Translate id="subscribe.desktopSection.macosSignedNote">
+              macOS builds are signed and notarized with an Apple Developer ID — the app opens straight from the DMG, no warnings.
             </Translate>
           </p>
-          <code className={styles.codeBlock}>
-            sudo xattr -r -d com.apple.quarantine /Applications/UnderControl.app
-          </code>
         </div>
       </div>
     </section>
@@ -614,19 +611,19 @@ function CLISection() {
           </div>
         </div>
 
-        {/* Homebrew Install */}
+        {/* npm install — the only supported CLI channel */}
         <div className={styles.installSection}>
           <div className={styles.installHeader}>
             <p className={styles.installTitle}>
-              <Translate id="subscribe.cliSection.homebrewInstall">Install via Homebrew (macOS)</Translate>
+              <Translate id="subscribe.cliSection.npmInstall">Install via npm (all platforms)</Translate>
             </p>
             <span className={styles.installNote}>
-              <Translate id="subscribe.cliSection.homebrewNote">Recommended for macOS users</Translate>
+              <Translate id="subscribe.cliSection.npmNote">Recommended — requires Node.js 18+</Translate>
             </span>
           </div>
           <div className={styles.installCommand}>
             <code className={styles.installCommandCode}>
-              brew tap oatnil-top/ud && brew install ud
+              npm install -g @oatnil/ud
             </code>
           </div>
         </div>
@@ -807,7 +804,7 @@ function FooterSection() {
         <span className={styles.footerCopyright}>© {new Date().getFullYear()}</span>
       </div>
       <div className={styles.footerLinks}>
-        <Link to="/docs/download" className={styles.footerLink}>
+        <Link to="/download" className={styles.footerLink}>
           <Translate id="homepage.footer.download">Download</Translate>
         </Link>
         <Link to="/docs/intro" className={styles.footerLink}>

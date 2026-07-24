@@ -191,7 +191,7 @@ function FooterSection() {
         <span className={styles.footerCopyright}>© {new Date().getFullYear()}</span>
       </div>
       <div className={styles.footerLinks}>
-        <Link to="/docs/download" className={styles.footerLink}>
+        <Link to="/download" className={styles.footerLink}>
           <Translate id="homepage.footer.download">Download</Translate>
         </Link>
         <Link to="/docs/intro" className={styles.footerLink}>

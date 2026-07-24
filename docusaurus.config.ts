@@ -101,7 +101,7 @@ const config: Config = {
           position: 'right',
         },
         {
-          to: '/subscribe',
+          to: '/download',
           label: 'Download',
           position: 'right',
           className: 'navbar__cta',
@@ -118,6 +118,10 @@ const config: Config = {
           items: [
             {
               label: 'Download',
+              to: '/download',
+            },
+            {
+              label: 'Pricing',
               to: '/subscribe',
             },
             {

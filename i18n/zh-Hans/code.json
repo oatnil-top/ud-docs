@@ -877,13 +877,13 @@
     "description": "CLI free label",
     "message": "免费"
   },
-  "subscribe.cliSection.homebrewInstall": {
-    "description": "CLI homebrew install",
-    "message": "通过 Homebrew 安装 (macOS)"
+  "subscribe.cliSection.npmInstall": {
+    "description": "CLI npm install",
+    "message": "通过 npm 安装（所有平台）"
   },
-  "subscribe.cliSection.homebrewNote": {
-    "description": "CLI homebrew note",
-    "message": "推荐 macOS 用户使用"
+  "subscribe.cliSection.npmNote": {
+    "description": "CLI npm note",
+    "message": "推荐方式——需要 Node.js 18+"
   },
   "subscribe.cliSection.manualInstall": {
     "description": "CLI manual install",
@@ -945,9 +945,9 @@
     "description": "Desktop hint",
     "message": "免注册登录，单人本地立即使用"
   },
-  "subscribe.desktopSection.macosNote": {
-    "description": "Desktop macOS note",
-    "message": "macOS 用户：应用未进行代码签名（苹果开发者账号年费 $99，作为独立项目实在囊中羞涩）。下载后，请在终端中运行以下命令："
+  "subscribe.desktopSection.macosSignedNote": {
+    "description": "Desktop macOS signed note",
+    "message": "macOS 构建已使用 Apple Developer ID 签名并公证——从 DMG 直接打开即可，没有任何警告。"
   },
   "subscribe.desktopSection.selectPlatform": {
     "description": "Desktop select platform",
