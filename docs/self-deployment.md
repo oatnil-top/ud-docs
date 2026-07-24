@@ -4,126 +4,129 @@ sidebar_position: 2
 
 # Self-Deployment Guide
 
-:::info Quick Start
-Want to get started immediately? Jump to [Docker Compose with Local Storage + SQLite](/docs/deployment/docker-compose-local) - the simplest self-deployment option.
+Self-host UnDercontrol with a single Docker command. The **all-in-one image** bundles
+the frontend and backend in one container, so there is nothing to wire together — just
+run it and open your browser.
+
+The images are published for both **linux/amd64** and **linux/arm64** (Apple Silicon,
+ARM servers), so the same command works on any machine.
+
+## Quick Start (Free / Personal)
+
+No license required. Single user, SQLite, local file storage.
+
+```bash
+docker run -d --name undercontrol \
+  -p 3000:8080 \
+  -e HOST_DOMAIN=http://localhost:3000 \
+  -e JWT_SECRET=change-me-to-a-random-string \
+  -v undercontrol-data:/app/data \
+  lintao0o0/undercontrol:latest
+```
+
+Then open `http://localhost:3000` and click **Start**. The frontend and backend are in
+the same container and connect automatically via `/api/v1` — no server URL to configure.
+
+## Pro / Max (Multi-user)
+
+Add a license token and an admin account to unlock multi-user, PostgreSQL, S3 storage and
+the admin dashboard. Contact the UnDercontrol team for a license token.
+
+```bash
+docker run -d --name undercontrol \
+  -p 3000:8080 \
+  -e HOST_DOMAIN=http://localhost:3000 \
+  -e JWT_SECRET=change-me-to-a-random-string \
+  -e ADMIN_EMAIL=admin@example.com \
+  -e ADMIN_PASSWORD=your-secure-password \
+  -e LICENSE_TOKEN=your-license-token \
+  -e LICENSE_HOST_SECRET=your-license-host-secret \
+  -v undercontrol-data:/app/data \
+  lintao0o0/undercontrol:latest
+```
+
+Log in with the `ADMIN_EMAIL` / `ADMIN_PASSWORD` you set.
+
+:::warning ADMIN_EMAIL is required for Pro/Max
+On Pro/Max tier the initial admin user is created from `ADMIN_EMAIL` at startup. If it is
+missing the server **refuses to boot** with a clear error — set it (and `ADMIN_PASSWORD`)
+before starting.
 :::
 
-Choose your deployment method based on your infrastructure and requirements.
+## docker-compose
 
-![UnDercontrol Architecture](/img/Arch.png)
+For persistent data and easier configuration, use docker-compose:
 
-The architecture diagram shows how users interact with the system through their browser, which connects to the frontend. The frontend and backend communicate via CORS or reverse proxy. The backend orchestrates connections to the database and optional external services (AI, S3 storage, and OTEL monitoring).
+```yaml
+services:
+  undercontrol:
+    image: lintao0o0/undercontrol:latest
+    ports:
+      - "3000:8080"
+    volumes:
+      - ./data:/app/data
+    environment:
+      - HOST_DOMAIN=http://localhost:3000
+      - JWT_SECRET=change-me-to-a-random-string
+      # Pro/Max only:
+      # - ADMIN_EMAIL=admin@example.com
+      # - ADMIN_PASSWORD=your-secure-password
+      # - LICENSE_TOKEN=your-license-token
+      # - LICENSE_HOST_SECRET=your-license-host-secret
+```
 
-## Architecture
+```bash
+docker compose up -d
+```
 
-UnDercontrol consists of two main components and several optional external services:
+## Environment Variables
 
-### Core Components
+| Variable | Required | Default | Description |
+|----------|----------|---------|-------------|
+| `HOST_DOMAIN` | **Yes** | — | Public URL clients use to reach this instance. Used to build file download/upload links, so it must be reachable (e.g. `http://localhost:3000` or `https://ud.example.com`). |
+| `JWT_SECRET` | **Yes** | — | Random secret used to sign auth tokens. |
+| `ADMIN_EMAIL` | Pro/Max | — | Login username of the initial admin user. Required on Pro/Max tier. |
+| `ADMIN_PASSWORD` | Pro/Max | `admin123` | Initial admin password. Change it. |
+| `LICENSE_TOKEN` | Pro/Max | — | License token that unlocks Pro/Max features. |
+| `LICENSE_HOST_SECRET` | Pro/Max | — | Host secret paired with your license token. |
+| `PORT` | No | `8080` | Port the server listens on inside the container. |
 
-- **Backend (ud-backend)**: Go-based API server with CORS support
-  - Handles all API requests and business logic
-  - Connects to database and external services
-  - Supports both PostgreSQL and SQLite databases
+### Optional: PostgreSQL, S3 and AI
 
-- **Frontend (ud-frontend)**: Vite + React single-page application
-  - User interface for web and mobile browsers
-  - Communicates with backend via CORS or reverse proxy
-  - Served as static assets — also bundled with the backend in the all-in-one image
+The all-in-one image defaults to SQLite + local file storage, which is enough for most
+self-hosted instances. On Pro/Max you can point it at external services with additional
+environment variables:
 
-### External Services (Optional)
+- **PostgreSQL** — set `DATABASE_URL` (or the individual `DB_*` variables) to a Postgres
+  connection instead of the bundled SQLite.
+- **S3 / R2 storage** — set the `S3_*` variables to store uploaded files in
+  S3-compatible object storage (AWS S3, Cloudflare R2, MinIO) instead of the local volume.
+- **AI provider** — set the OpenAI-compatible `AI_*` variables to enable AI features.
 
-- **AI Provider**: OpenAI-compatible API for AI-powered features
-  - Configurable base URL and API key
-  - Supports models like GPT-4o-mini
-  - Can use OpenAI or compatible alternatives
+## Separate frontend / backend images (advanced)
 
-- **S3 Provider**: S3-compatible object storage for file attachments
-  - Works with AWS S3, Cloudflare R2, MinIO, etc.
-  - Stores uploaded files and resources
-  - Can fallback to local filesystem storage
+If you need to scale the frontend and backend independently, or put them behind different
+proxies, they are also published as separate multi-arch images:
 
-- **OTEL Backend (Optional)**: OpenTelemetry for observability
-  - Monitoring and tracing
-  - Works with OneUptime and other OTEL-compatible platforms
-  - Disabled by default
+- Backend — `lintao0o0/undercontrol-backend:latest`
+- Frontend — `lintao0o0/undercontrol-vite-app:latest`
 
-- **Database**: Data persistence layer
-  - **PostgreSQL**: Recommended for production (concurrent access, better performance)
-  - **SQLite**: Suitable for development/testing (simpler setup, single-file database)
+The backend takes the same environment variables as above; the frontend serves the static
+assets via nginx and proxies `/api` to the backend.
 
+## Data & Backup
 
-## Deployment Options
+All state lives under `/app/data` (mounted as a volume above): the SQLite database and, by
+default, uploaded files. Back up that volume to back up your instance. If you use external
+PostgreSQL and S3, back those up instead.
 
-### Docker Compose Deployments
+## Troubleshooting
 
-Simple, straightforward deployments using Docker Compose:
-
-- **[Local Storage + SQLite](/docs/deployment/docker-compose-local)** - Recommended for getting started
-  - Local filesystem storage
-  - SQLite database
-  - Minimal configuration required
-
-- **[Local Storage + PostgreSQL](/docs/deployment/docker-compose-postgres)** - Better for production
-  - Local filesystem storage
-  - PostgreSQL database
-  - Improved performance and reliability
-
-- **[S3/R2 Storage + PostgreSQL](/docs/deployment/docker-compose-s3)** - Cloud-ready
-  - S3-compatible cloud storage
-  - PostgreSQL database
-  - Scalable file storage
-
-### Kubernetes Deployments
-
-Enterprise-grade deployments for production environments:
-
-- **[Kubernetes with Helm](/docs/deployment/kubernetes-helm)** - Production-ready
-  - Helm chart deployment
-  - Scalable and highly available
-  - Advanced configuration options
-
-## Which Deployment Should I Choose?
-
-### For Development or Testing
-→ **[Docker Compose with Local Storage + SQLite](/docs/deployment/docker-compose-local)**
-
-Simple setup, minimal dependencies, perfect for trying out UnDercontrol.
-
-### For Small Production Deployments
-→ **[Docker Compose with Local Storage + PostgreSQL](/docs/deployment/docker-compose-postgres)**
-
-More reliable than SQLite for concurrent access, still easy to manage.
-
-### For Production with Cloud Storage
-→ **[Docker Compose with S3/R2 + PostgreSQL](/docs/deployment/docker-compose-s3)**
-
-Offload file storage to cloud, keep database local or use managed PostgreSQL.
-
-### For Enterprise or High Availability
-→ **[Kubernetes with Helm](/docs/deployment/kubernetes-helm)**
-
-Full orchestration, auto-scaling, rolling updates, and production-grade reliability.
-
-## Common Requirements
-
-All deployment methods require:
-
-- **License File**: Contact the UnDercontrol team for a license file
-- **JWT Secret**: A secure random string for authentication
-- **Container Runtime**: Docker or compatible container runtime
-
-## Next Steps
-
-1. Choose a deployment method above
-2. Follow the detailed guide for your chosen method
-3. Configure your environment variables
-4. Deploy and access your UnDercontrol instance
-
-## Getting Help
-
-If you encounter issues during deployment:
-
-1. Check the troubleshooting section in your deployment guide
-2. Review the logs for error messages
-3. Visit the [documentation](/) for additional help
-4. Contact support with your configuration (remove sensitive data)
+- **`no matching manifest for linux/arm64/v8`** — update to the latest image; it is now
+  published for both amd64 and arm64.
+- **Starts but you can't log in (Pro/Max)** — you likely didn't set `ADMIN_EMAIL`. Check the
+  logs for `ADMIN_EMAIL is required` and add it.
+- **File links are unreachable** — `HOST_DOMAIN` must be the URL clients actually use to
+  reach the instance, including scheme and port.
+- Review the container logs (`docker logs undercontrol`) for the exact error, and contact
+  support with your configuration (remove sensitive data).

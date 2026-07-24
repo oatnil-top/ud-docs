@@ -4,126 +4,114 @@ sidebar_position: 2
 
 # 自部署指南
 
-**快速开始**：想要立即开始？跳转到 [Docker Compose 本地存储 + SQLite](/docs/deployment/docker-compose-local) - 最简单的自部署选项。
+用一条 Docker 命令即可自部署 UnDercontrol。**all-in-one 镜像**把前端和后端打包在同一个容器里，
+无需自己拼装——运行即可打开浏览器使用。
 
----
+镜像同时发布 **linux/amd64** 和 **linux/arm64**（Apple 芯片、ARM 服务器），同一条命令在任何机器上都能用。
 
-根据您的基础设施和需求选择部署方法。
+## 快速开始（免费 / Personal）
 
-![UnderControl Architecture](/img/Arch.png)
+无需许可证。单用户，SQLite，本地文件存储。
 
-该架构图展示了用户如何通过浏览器与系统交互，浏览器连接到前端。前端和后端通过 CORS 或反向代理进行通信。后端协调与数据库和可选外部服务（AI、S3 存储和 OTEL 监控）的连接。
+```bash
+docker run -d --name undercontrol \
+  -p 3000:8080 \
+  -e HOST_DOMAIN=http://localhost:3000 \
+  -e JWT_SECRET=change-me-to-a-random-string \
+  -v undercontrol-data:/app/data \
+  lintao0o0/undercontrol:latest
+```
 
-## 架构
+然后打开 `http://localhost:3000`，点击 **Start** 即可使用。前端和后端在同一容器中，
+自动通过 `/api/v1` 连接——无需配置服务器地址。
 
-UnderControl 由两个主要组件和几个可选的外部服务组成：
+## Pro / Max（多用户）
 
-### 核心组件
+加上许可证和管理员账号即可启用多用户、PostgreSQL、S3 存储和管理后台。许可证请联系 UnDercontrol 团队获取。
 
-- **后端 (ud-backend)**：基于 Go 的 API 服务器，支持 CORS
-  - 处理所有 API 请求和业务逻辑
-  - 连接到数据库和外部服务
-  - 支持 PostgreSQL 和 SQLite 数据库
+```bash
+docker run -d --name undercontrol \
+  -p 3000:8080 \
+  -e HOST_DOMAIN=http://localhost:3000 \
+  -e JWT_SECRET=change-me-to-a-random-string \
+  -e ADMIN_EMAIL=admin@example.com \
+  -e ADMIN_PASSWORD=your-secure-password \
+  -e LICENSE_TOKEN=your-license-token \
+  -e LICENSE_HOST_SECRET=your-license-host-secret \
+  -v undercontrol-data:/app/data \
+  lintao0o0/undercontrol:latest
+```
 
-- **前端 (ud-frontend)**：Next.js Web 应用程序
-  - 用于 Web 和移动浏览器的用户界面
-  - 通过 CORS 或反向代理与后端通信
-  - 服务器端渲染以实现最佳性能
+用你设置的 `ADMIN_EMAIL` / `ADMIN_PASSWORD` 登录。
 
-### 外部服务（可选）
+:::warning Pro/Max 必须设置 ADMIN_EMAIL
+Pro/Max tier 启动时会用 `ADMIN_EMAIL` 创建初始管理员账号。如果缺失，服务会**直接拒绝启动**并给出明确报错——
+启动前请先设置它（以及 `ADMIN_PASSWORD`）。
+:::
 
-- **AI 提供商**：OpenAI 兼容的 API，用于 AI 驱动的功能
-  - 可配置的基础 URL 和 API 密钥
-  - 支持 GPT-4o-mini 等模型
-  - 可以使用 OpenAI 或兼容的替代方案
+## docker-compose
 
-- **S3 提供商**：S3 兼容的对象存储，用于文件附件
-  - 支持 AWS S3、Cloudflare R2、MinIO 等
-  - 存储上传的文件和资源
-  - 可以回退到本地文件系统存储
+如需持久化数据和更方便的配置，推荐使用 docker-compose：
 
-- **OTEL 后端（可选）**：OpenTelemetry 用于可观测性
-  - 监控和追踪
-  - 支持 OneUptime 和其他 OTEL 兼容平台
-  - 默认禁用
+```yaml
+services:
+  undercontrol:
+    image: lintao0o0/undercontrol:latest
+    ports:
+      - "3000:8080"
+    volumes:
+      - ./data:/app/data
+    environment:
+      - HOST_DOMAIN=http://localhost:3000
+      - JWT_SECRET=change-me-to-a-random-string
+      # 仅 Pro/Max：
+      # - ADMIN_EMAIL=admin@example.com
+      # - ADMIN_PASSWORD=your-secure-password
+      # - LICENSE_TOKEN=your-license-token
+      # - LICENSE_HOST_SECRET=your-license-host-secret
+```
 
-- **数据库**：数据持久化层
-  - **PostgreSQL**：推荐用于生产环境（并发访问，更好的性能）
-  - **SQLite**：适用于开发/测试（设置更简单，单文件数据库）
+```bash
+docker compose up -d
+```
 
+## 环境变量
 
-## 部署选项
+| 变量 | 是否必填 | 默认值 | 说明 |
+|------|----------|--------|------|
+| `HOST_DOMAIN` | **是** | — | 客户端访问本实例的公开 URL，用于生成文件下载/上传链接，必须可达（如 `http://localhost:3000` 或 `https://ud.example.com`）。 |
+| `JWT_SECRET` | **是** | — | 用于签发认证 token 的随机密钥。 |
+| `ADMIN_EMAIL` | Pro/Max | — | 初始管理员的登录用户名。Pro/Max tier 必填。 |
+| `ADMIN_PASSWORD` | Pro/Max | `admin123` | 初始管理员密码，请务必修改。 |
+| `LICENSE_TOKEN` | Pro/Max | — | 解锁 Pro/Max 功能的许可证 token。 |
+| `LICENSE_HOST_SECRET` | Pro/Max | — | 与许可证 token 配套的 host secret。 |
+| `PORT` | 否 | `8080` | 服务在容器内监听的端口。 |
 
-### Docker Compose 部署
+### 可选：PostgreSQL、S3 与 AI
 
-使用 Docker Compose 进行简单直接的部署：
+all-in-one 镜像默认使用 SQLite + 本地文件存储，对大多数自部署实例已经足够。Pro/Max 下可通过额外环境变量接入外部服务：
 
-- **[本地存储 + SQLite](/docs/deployment/docker-compose-local)** - 推荐用于入门
-  - 本地文件系统存储
-  - SQLite 数据库
-  - 所需配置最少
+- **PostgreSQL** — 设置 `DATABASE_URL`（或单独的 `DB_*` 变量）以替代内置 SQLite。
+- **S3 / R2 存储** — 设置 `S3_*` 变量，把上传文件存到 S3 兼容对象存储（AWS S3、Cloudflare R2、MinIO），替代本地卷。
+- **AI 服务** — 设置 OpenAI 兼容的 `AI_*` 变量以启用 AI 功能。
 
-- **[本地存储 + PostgreSQL](/docs/deployment/docker-compose-postgres)** - 更适合生产环境
-  - 本地文件系统存储
-  - PostgreSQL 数据库
-  - 提高性能和可靠性
+## 前后端分离镜像（进阶）
 
-- **[S3/R2 存储 + PostgreSQL](/docs/deployment/docker-compose-s3)** - 云就绪
-  - S3 兼容的云存储
-  - PostgreSQL 数据库
-  - 可扩展的文件存储
+如果需要前端和后端独立扩缩容，或分别放在不同代理后面，它们也各自发布为多架构镜像：
 
-### Kubernetes 部署
+- 后端 — `lintao0o0/undercontrol-backend:latest`
+- 前端 — `lintao0o0/undercontrol-vite-app:latest`
 
-适用于生产环境的企业级部署：
+后端使用与上面相同的环境变量；前端通过 nginx 提供静态资源并把 `/api` 反代到后端。
 
-- **[Kubernetes 使用 Helm](/docs/deployment/kubernetes-helm)** - 生产就绪
-  - Helm chart 部署
-  - 可扩展且高可用
-  - 高级配置选项
+## 数据与备份
 
-## 我应该选择哪种部署方式？
+所有状态都在 `/app/data`（上面挂载的卷）下：SQLite 数据库，以及默认情况下的上传文件。备份该卷即可备份整个实例。
+如果使用外部 PostgreSQL 和 S3，则改为备份它们。
 
-### 用于开发或测试
-→ **[Docker Compose 本地存储 + SQLite](/docs/deployment/docker-compose-local)**
+## 故障排查
 
-设置简单，依赖项最少，非常适合试用 UnderControl。
-
-### 用于小型生产部署
-→ **[Docker Compose 本地存储 + PostgreSQL](/docs/deployment/docker-compose-postgres)**
-
-对于并发访问比 SQLite 更可靠，仍然易于管理。
-
-### 用于使用云存储的生产环境
-→ **[Docker Compose S3/R2 + PostgreSQL](/docs/deployment/docker-compose-s3)**
-
-将文件存储卸载到云端，数据库保持本地或使用托管 PostgreSQL。
-
-### 用于企业或高可用性
-→ **[Kubernetes 使用 Helm](/docs/deployment/kubernetes-helm)**
-
-完整的编排、自动扩展、滚动更新和生产级可靠性。
-
-## 通用要求
-
-所有部署方法都需要：
-
-- **许可证文件**：联系 UnderControl 团队获取许可证文件
-- **JWT 密钥**：用于身份验证的安全随机字符串
-- **容器运行时**：Docker 或兼容的容器运行时
-
-## 下一步
-
-1. 从上面选择一种部署方法
-2. 按照所选方法的详细指南进行操作
-3. 配置您的环境变量
-4. 部署并访问您的 UnderControl 实例
-
-## 获取帮助
-
-如果您在部署过程中遇到问题：
-
-1. 检查部署指南中的故障排除部分
-2. 查看日志以获取错误消息
-3. 访问[文档](/)获取更多帮助
-4. 联系支持并提供您的配置（删除敏感数据）
+- **`no matching manifest for linux/arm64/v8`** — 更新到最新镜像，现已同时发布 amd64 和 arm64。
+- **服务起来了但登录不进去（Pro/Max）** — 多半是没设置 `ADMIN_EMAIL`。检查日志里的 `ADMIN_EMAIL is required` 并补上。
+- **文件链接无法访问** — `HOST_DOMAIN` 必须是客户端实际访问实例的 URL，包含协议和端口。
+- 查看容器日志（`docker logs undercontrol`）获取具体报错，并携带配置联系支持（去除敏感信息）。

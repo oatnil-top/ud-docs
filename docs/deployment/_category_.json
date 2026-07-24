@@ -1,8 +1,0 @@
-{
-  "label": "Deployment",
-  "position": 6,
-  "link": {
-    "type": "generated-index",
-    "description": "Learn how to deploy UnDercontrol in various environments."
-  }
-}

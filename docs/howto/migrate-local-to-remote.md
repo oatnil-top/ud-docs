@@ -10,7 +10,7 @@ Learn how to migrate your data from a local UnDercontrol desktop instance (Perso
 ## Prerequisites
 
 - UnDercontrol desktop app with local data you want to migrate
-- A remote UnDercontrol server deployed and accessible (see [Docker Compose deployment](/docs/deployment/docker-compose-local))
+- A remote UnDercontrol server deployed and accessible (see [Docker Compose deployment](/docs/self-deployment))
 - The `ud` CLI installed on your machine ([CLI documentation](/docs/cli))
 - Accounts on both the local and remote servers
 
@@ -147,4 +147,4 @@ Available entity types: `accounts`, `budgets`, `expenses`, `incomes`, `tasks`, `
 ## Related
 
 - [CLI Tool](/docs/cli)
-- [Docker Compose Deployment](/docs/deployment/docker-compose-local)
+- [Docker Compose Deployment](/docs/self-deployment)

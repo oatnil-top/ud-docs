@@ -153,7 +153,7 @@ curl -fsSL https://raw.githubusercontent.com/oatnil-top/ud-docs/main/scripts/ins
 irm https://raw.githubusercontent.com/oatnil-top/ud-docs/main/scripts/install.ps1 | iex
 ```
 
-See the [Installation Guide](/docs/deployment/docker-compose-local) for detailed instructions.
+See the [Installation Guide](/docs/self-deployment) for detailed instructions.
 
 ---
 
@@ -231,7 +231,7 @@ We're here to help!
 
 - 📧 **Contact**: [Get in touch](/contact)
 - 📚 **Read the Docs**: [Getting Started Guide](/docs/intro)
-- 🚀 **Installation Help**: [Step-by-Step Setup](/docs/deployment/docker-compose-local)
+- 🚀 **Installation Help**: [Step-by-Step Setup](/docs/self-deployment)
 - 💬 **Need to talk?**: Contact us for a demo or consultation
 
 ---

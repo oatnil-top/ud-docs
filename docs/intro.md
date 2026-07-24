@@ -44,7 +44,7 @@ Ready to deploy UnDercontrol? Check out our [Self-Deployment Guide](./self-deplo
 ### Quick Links
 
 - [Self-Deployment Guide](./self-deployment.md) - Choose your deployment method
-- [Docker Compose: Local Storage + SQLite](./deployment/docker-compose-local.md) - Quick start guide
+- [Docker Compose: Local Storage + SQLite](./self-deployment.md) - Quick start guide
 - [Account Management](./features/accounts.md) - Learn about user accounts
 - [API Documentation](./features/accounts-api.md) - Integrate with your applications
 

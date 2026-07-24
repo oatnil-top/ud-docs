@@ -234,7 +234,7 @@ Upgrading from Personal to Pro/Max doesn't require reinstallation or data migrat
 Having trouble with license activation? We're here to help!
 
 - 📧 **Contact**: [Get in touch](/contact)
-- 📚 **Documentation**: [Installation Guide](/docs/deployment/docker-compose-local)
+- 📚 **Documentation**: [Installation Guide](/docs/self-deployment)
 - 💰 **Pricing Questions**: [Pricing Page](/docs/pricing)
 
 ### Common Questions
@@ -262,4 +262,4 @@ After activating your license:
 3. **Set Up PostgreSQL** (optional) - Switch to PostgreSQL for better performance
 4. **Explore Team Features** - Set up roles and permissions
 
-See the [Deployment Guide](/docs/deployment/docker-compose-local) for more configuration options.
+See the [Deployment Guide](/docs/self-deployment) for more configuration options.
