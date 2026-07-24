@@ -3,16 +3,31 @@ UnDercontrol workspace — tasks, documents, files and personal finance, driven 
 terminal by the `ud` CLI. Once connected you can read the user's tasks, record progress
 as notes, attach files, and open follow-up work without leaving the terminal.
 
-Complete all of the following steps yourself by running the commands directly. The only
-exception is Step 2 — `ud login` prompts for a password, so hand that one command to the
-user and wait for them to report back. Never invent credentials.
+Start by orienting the user, then complete the rest of the steps yourself by running the
+commands directly. The only command you hand to the user is `ud login` — it prompts for a
+password — so wait for them to report back on that one. Never invent credentials.
 
+- Orient the user and confirm cloud vs self-hosted
 - Install the ud CLI
 - Sign in to the user's workspace
 - Install the UnDercontrol skill for your agent
 - Verify the connection
 
 ---
+
+## Orient the user
+
+Before running anything, tell the user in a sentence or two what UnDercontrol is and what
+you're about to set up — connecting their agent to a UnDercontrol workspace so you can read
+and update their tasks, notes, files and finance from the terminal. Then ask the two
+questions that decide how the rest goes, and wait for the answers:
+
+1. **Cloud or self-hosted?** Cloud is `https://ud.oatnil.com`. Self-hosted means they run
+   their own server, and you'll use that server's URL everywhere below instead.
+2. **Do they already have an account?** If not, point them to sign up first — cloud users at
+   `https://ud.oatnil.com`, self-hosters at `https://oatnil.com/self-hosting`.
+
+Once you have both answers, work through the steps below.
 
 ## Install the ud CLI
 
