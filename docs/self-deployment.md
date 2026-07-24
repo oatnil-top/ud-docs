@@ -27,6 +27,33 @@ docker run -d --name undercontrol \
 Then open `http://localhost:3000` and click **Start**. The frontend and backend are in
 the same container and connect automatically via `/api/v1` — no server URL to configure.
 
+### First-boot banner
+
+The container logs make success and failure obvious. On a successful boot,
+`docker logs undercontrol` ends with a ready banner telling you exactly where to go
+and how to log in:
+
+```text
+==============================================================================
+
+  UnDercontrol v1.x.x is ready
+
+  --> Open http://localhost:3000 to get started
+
+      Login as:  personal@undercontrol.local
+                 default password: personal123 — change it after first login
+      Tier:      Personal (max users: 1)
+      Database:  SQLITE
+      Storage:   LocalFS
+
+==============================================================================
+```
+
+If the configuration is broken, the container exits immediately and the same logs show
+a `STARTUP FAILED` block explaining exactly what to fix — a missing `HOST_DOMAIN`, a
+missing `ADMIN_EMAIL` on Pro/Max, or a port already in use. The password hint only
+appears while the account is still on the shipped default password.
+
 ## Pro / Max (Multi-user)
 
 Add a license token and an admin account to unlock multi-user, PostgreSQL, S3 storage and
@@ -89,6 +116,7 @@ docker compose up -d
 | `ADMIN_PASSWORD` | Pro/Max | `admin123` | Initial admin password. Change it. |
 | `LICENSE_TOKEN` | Pro/Max | — | License token that unlocks Pro/Max features. |
 | `LICENSE_HOST_SECRET` | Pro/Max | — | Host secret paired with your license token. |
+| `PERSONAL_TIER_PASSWORD` | No | `personal123` | Password of the single Personal-tier user (`personal@undercontrol.local`). Change it. |
 | `PORT` | No | `8080` | Port the server listens on inside the container. |
 
 ### Optional: PostgreSQL, S3 and AI
@@ -122,11 +150,18 @@ PostgreSQL and S3, back those up instead.
 
 ## Troubleshooting
 
+Start with `docker logs undercontrol`: a healthy boot ends with the ready banner shown
+above, and a misconfigured one ends with a `STARTUP FAILED` block naming the exact
+variable to fix.
+
+- **Container exits immediately** — read the `STARTUP FAILED` block in the logs. The
+  common causes are a missing `HOST_DOMAIN`, a missing `ADMIN_EMAIL` on Pro/Max, or the
+  port already being in use.
 - **`no matching manifest for linux/arm64/v8`** — update to the latest image; it is now
   published for both amd64 and arm64.
-- **Starts but you can't log in (Pro/Max)** — you likely didn't set `ADMIN_EMAIL`. Check the
-  logs for `ADMIN_EMAIL is required` and add it.
+- **Don't know where to log in** — the ready banner prints the URL and the login account
+  for your tier.
 - **File links are unreachable** — `HOST_DOMAIN` must be the URL clients actually use to
   reach the instance, including scheme and port.
-- Review the container logs (`docker logs undercontrol`) for the exact error, and contact
-  support with your configuration (remove sensitive data).
+- If you're still stuck, contact support with the logs and your configuration (remove
+  sensitive data).
