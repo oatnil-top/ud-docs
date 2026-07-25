@@ -131,7 +131,7 @@ function PolicyContent() {
 
       {/* Options */}
       <div className={styles.optionsGrid}>
-        <Link to="/subscribe#desktop-section" className={styles.optionCard}>
+        <Link to="/download#desktop" className={styles.optionCard}>
           <Monitor size={20} strokeWidth={2} className={styles.optionCardIcon} />
           <div>
             <div className={styles.optionCardTitle}>
@@ -144,7 +144,7 @@ function PolicyContent() {
             </div>
           </div>
         </Link>
-        <Link to="/subscribe#selfhosted-section" className={styles.optionCard}>
+        <Link to="/self-hosting" className={styles.optionCard}>
           <Server size={20} strokeWidth={2} className={styles.optionCardIcon} />
           <div>
             <div className={styles.optionCardTitle}>

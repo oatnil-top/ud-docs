@@ -266,7 +266,7 @@ function HeroSection() {
         <Link className={styles.heroButtonPrimary} to={APP_URL}>
           <Translate id="homepage.hero.tryOnlineCta">Try it online</Translate>
         </Link>
-        <Link className={styles.heroButtonSecondary} to="/subscribe">
+        <Link className={styles.heroButtonSecondary} to="/download#desktop">
           <Translate id="homepage.hero.download">Download Desktop App</Translate>
         </Link>
         <Link className={styles.heroButtonText} to="#run">
@@ -304,7 +304,7 @@ const WAYS = [
   {
     key: 'desktop',
     primary: true,
-    to: '/subscribe',
+    to: '/download#desktop',
     label: <Translate id="homepage.ways.desktop.label">Download the app</Translate>,
     title: <Translate id="homepage.ways.desktop.title">Local, with no server at all.</Translate>,
     desc: (
@@ -873,7 +873,7 @@ function CTASection() {
         <Translate id="homepage.cta.subtitle">Download the desktop app or try the cloud demo.</Translate>
       </p>
       <div className={styles.heroButtons}>
-        <Link className={styles.heroButtonPrimary} to="/subscribe">
+        <Link className={styles.heroButtonPrimary} to="/download">
           <Translate id="homepage.cta.getStarted">Get Started</Translate>
         </Link>
         <Link className={styles.heroButtonSecondary} to={APP_URL}>
