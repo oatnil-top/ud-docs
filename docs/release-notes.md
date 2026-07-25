@@ -18,6 +18,36 @@ UnDercontrol follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.120.0 (2026-07-25)
+
+### New Features
+
+**Meet Alfred — a built-in butler agent for every workspace**
+- Every workspace now comes with Alfred, a butler who dispatches work to the right agents and keeps track of it, remembers your preferences, and files the quick notes you toss at him.
+- Talk to him by mentioning `@alfred` in any comment. He supports scheduled wake-ups (a morning brief, for example) and survives daemon reconnects.
+
+**Chat with Alfred from Telegram**
+- New Telegram messenger channel: bind your account in Profile → Messenger (generate a one-time code, then send `/link CODE` to the bot) and talk to Alfred from your phone.
+- Agent replies mirror back to Telegram, so a conversation started in the app continues in chat.
+- Self-host operators enable it with the `TELEGRAM_BOT_TOKEN` env var — see the configuration reference.
+
+**Redesigned first-run onboarding**
+- A 4-step wizard walks you through language, workspace status, registering this machine as a daemon, and meeting Alfred with optional Telegram binding.
+- Daemon registration is one click in the desktop app — which also detects installed agent CLIs like Claude Code and Codex — and guided commands in the browser. Every step is skippable.
+
+### Improvements
+
+- Profile has a new Messenger section for managing IM bindings — generate a code, list them, unlink — and tells you whether the server has a bot configured.
+- The Conversations tab now uses the Inbox icon, matching iOS.
+- Download links now point to oatnil.com/download; the /subscribe page is retired.
+
+### Bug Fixes
+
+- Fixed a request storm on the Kanban page for fresh accounts with zero boards.
+- Admin system config now surfaces the finance category (base currency and exchange rates).
+
+---
+
 ## v0.119.0 (2026-07-25)
 
 ### New Features
