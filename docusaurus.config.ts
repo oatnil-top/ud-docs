@@ -121,6 +121,10 @@ const config: Config = {
               to: '/download',
             },
             {
+              label: 'Pricing',
+              to: '/subscribe',
+            },
+            {
               label: 'Self-Host',
               to: '/self-hosting',
             },
