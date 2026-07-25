@@ -49,6 +49,28 @@ ready banner，直接告诉你去哪打开、用什么账号登录：
 如果配置有误，容器会立即退出，同一份日志里会出现 `STARTUP FAILED` 块，明确指出要修什么——
 缺 `HOST_DOMAIN`、Pro/Max 下缺 `ADMIN_EMAIL`，或端口被占用。密码提示只在账号仍使用出厂默认密码时才会出现。
 
+## 裸机部署（npm，无需 Docker）
+
+服务端也以 npm 包发布，Web UI 直接编译进二进制——除了 Node.js 18+ 什么都不用装。
+支持 macOS（Intel 和 Apple Silicon）、Linux（x64 和 ARM64）、Windows（x64）。
+
+```bash
+npm install -g @oatnil/ud-server @oatnil/ud   # 服务端 + CLI
+
+ud-server -host-domain http://localhost:8080 -data-path ./data
+```
+
+然后打开 `http://localhost:8080`——终端里会打印与 Docker 相同的 ready banner，
+包含登录凭据。所有数据都在 `./data` 下（SQLite 数据库和上传文件），备份或迁移
+实例就是复制这个目录。
+
+- 配置与 Docker 完全一致：[配置参考](/configuration) 里的每个环境变量都同时是
+  CLI 参数（`ud-server -help` 可查看全部）。`HOST_DOMAIN` 是唯一必填项。
+- 许可证同理：启动前 export `LICENSE_TOKEN` / `LICENSE_HOST_SECRET` 即可解锁 Pro 功能。
+- 升级：`npm update -g @oatnil/ud-server`；卸载：`npm uninstall -g @oatnil/ud-server`
+  （`./data` 目录不受影响）。
+- 想以服务方式常驻,用 systemd / launchd 包一层即可,和任何单二进制程序一样。
+
 ## Pro / Max（多用户）
 
 加上许可证和管理员账号即可启用多用户、PostgreSQL、S3 存储和管理后台。许可证请联系 UnDercontrol 团队获取。

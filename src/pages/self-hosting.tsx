@@ -138,6 +138,15 @@ const COMPOSE_SPLIT = `services:
 volumes:
   pg_data:`;
 
+const BAREMETAL_NPM = `# no Docker needed — one binary with the web UI built in (requires Node.js 18+)
+npm install -g @oatnil/ud-server @oatnil/ud
+
+# free 3-month Pro trial license
+export LICENSE_TOKEN=${LICENSE_TOKEN}
+export LICENSE_HOST_SECRET=${LICENSE_SECRET}
+
+ud-server -host-domain http://localhost:8080 -data-path ./data`;
+
 const HELM_INSTALL = `# production-grade: HA, autoscaling, rolling updates
 helm repo add undercontrol https://oatnil-top.github.io/undercontrol-helm
 helm repo update
@@ -505,6 +514,17 @@ const METHODS = [
     access: (
       <Translate id="selfhosting.deploy.access.allinone">
         Then open http://localhost:3000 — one container, SQLite stored in ./data.
+      </Translate>
+    ),
+  },
+  {
+    key: 'baremetal',
+    tab: 'bare-metal · npm',
+    name: 'bash — npm install',
+    code: BAREMETAL_NPM,
+    access: (
+      <Translate id="selfhosting.deploy.access.baremetal">
+        Then open http://localhost:8080 and you are logged in — no Docker, the binary serves the web UI itself. Data lives in ./data; upgrade with npm update -g @oatnil/ud-server.
       </Translate>
     ),
   },

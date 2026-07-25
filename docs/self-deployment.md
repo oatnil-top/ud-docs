@@ -54,6 +54,32 @@ a `STARTUP FAILED` block explaining exactly what to fix — a missing `HOST_DOMA
 missing `ADMIN_EMAIL` on Pro/Max, or a port already in use. The password hint only
 appears while the account is still on the shipped default password.
 
+## Bare-metal (npm, no Docker)
+
+The server is also published as an npm package with the web UI compiled into the
+binary — nothing else to install. Requires Node.js 18+. Available for macOS
+(Intel & Apple Silicon), Linux (x64 & ARM64), and Windows (x64).
+
+```bash
+npm install -g @oatnil/ud-server @oatnil/ud   # server + CLI
+
+ud-server -host-domain http://localhost:8080 -data-path ./data
+```
+
+Then open `http://localhost:8080` — the same ready banner as Docker prints in the
+terminal with the login credentials. Everything lives under `./data` (SQLite database
+and uploads), so backing up or moving the instance is copying that directory.
+
+- Configuration is identical to Docker: every environment variable in the
+  [Configuration reference](/configuration) also works as a CLI flag
+  (`ud-server -help` lists them). `HOST_DOMAIN` is the only required setting.
+- Licenses work the same way: export `LICENSE_TOKEN` / `LICENSE_HOST_SECRET`
+  before starting to unlock Pro features.
+- Upgrade with `npm update -g @oatnil/ud-server`; uninstall with
+  `npm uninstall -g @oatnil/ud-server` (your `./data` directory is untouched).
+- To run it as a service, wrap the command in systemd / launchd like any other
+  single binary.
+
 ## Pro / Max (Multi-user)
 
 Add a license token and an admin account to unlock multi-user, PostgreSQL, S3 storage and

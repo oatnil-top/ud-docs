@@ -73,8 +73,14 @@ for one-tap capture, and the web app in a mobile browser.
 
 ## Self-host
 
-The all-in-one Docker image `lintao0o0/undercontrol:latest` (linux/amd64 and
-linux/arm64) bundles the web app and backend in one container. See the
-[Self-Deployment guide](/docs/self-deployment) for `docker run` / compose /
-Kubernetes setups and the [Configuration reference](/configuration) for all
-environment variables.
+Two paths, same configuration surface:
+
+- **Docker (all-in-one)**: image `lintao0o0/undercontrol:latest` (linux/amd64 and
+  linux/arm64) bundles the web app and backend in one container.
+- **Bare-metal (npm)**: `npm install -g @oatnil/ud-server` — a single binary with
+  the web UI compiled in (Node.js 18+; macOS/Linux/Windows). Start with
+  `ud-server -host-domain http://localhost:8080 -data-path ./data`.
+
+See the [Self-Deployment guide](/docs/self-deployment) for `docker run` / compose /
+Kubernetes / bare-metal setups and the [Configuration reference](/configuration)
+for all environment variables.
