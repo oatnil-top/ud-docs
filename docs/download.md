@@ -65,9 +65,11 @@ Docs: [CLI guide](/docs/cli) · [AI agent integration](/docs/cli-ai-integration)
 
 ## Mobile (iOS)
 
-The native iOS app is in TestFlight preparation — not yet available. Interim
-options: the [Apple Shortcut](https://www.icloud.com/shortcuts/4e0becebe3cd48a180940ccbd04d6fa7)
-for one-tap capture, or the web app in a mobile browser.
+The native iOS app is in public beta. Join via the TestFlight link:
+https://testflight.apple.com/join/st2TnaBF (requires the TestFlight app from
+the App Store). Also available: the
+[Apple Shortcut](https://www.icloud.com/shortcuts/4e0becebe3cd48a180940ccbd04d6fa7)
+for one-tap capture, and the web app in a mobile browser.
 
 ## Self-host
 

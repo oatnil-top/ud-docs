@@ -14,7 +14,8 @@
  *   not to advertise it (2026-07-25): no "signed/notarized" badges or copy on
  *   the page. It also means never re-add xattr/right-click instructions.
  * - The CLI ships through npm only (@oatnil/ud). The Homebrew tap is dead.
- * - iOS is in TestFlight preparation — keep the slot, add no link until live.
+ * - iOS is in public beta via the TestFlight link below (Beta group, cap 1000
+ *   testers). Builds expire after 90 days, so keep TestFlight uploads flowing.
  *
  * Owned by the Onboarding Experience Owner.
  */
@@ -34,6 +35,7 @@ const R2_RELEASES = 'https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/release
 const CHROME_STORE_URL =
   'https://chromewebstore.google.com/detail/undercontrol-web-clipper/mckkbigikfkoeddpcbhdmpncoljoagog';
 const SHORTCUT_URL = 'https://www.icloud.com/shortcuts/4e0becebe3cd48a180940ccbd04d6fa7';
+const TESTFLIGHT_URL = 'https://testflight.apple.com/join/st2TnaBF';
 
 const CLI_INSTALL = `# requires Node.js 18+
 npm install -g @oatnil/ud
@@ -296,16 +298,19 @@ function MobileSection() {
       <div className={styles.band}>
         <div>
           <p className={styles.eyebrow}>{t({en: 'Mobile', zh: '移动端'})}</p>
-          <h2 className={styles.h2}>{t({en: 'iOS app — on its way.', zh: 'iOS 应用——在路上了。'})}</h2>
+          <h2 className={styles.h2}>{t({en: 'iOS app — now in beta.', zh: 'iOS 应用——公测中。'})}</h2>
           <p className={styles.lede}>
             {t({
-              en: 'The native iOS app is being prepared for TestFlight. Until it lands, the Apple Shortcut gives you one-tap task capture from iPhone, iPad, and Mac, and the web app works great on mobile browsers.',
-              zh: '原生 iOS 应用正在准备上架 TestFlight。在此之前，Apple 快捷指令支持在 iPhone、iPad 和 Mac 上一键创建任务，网页版在手机浏览器上也表现出色。',
+              en: 'The native iOS app is in public beta — join on TestFlight and it installs like any app, updates included. The Apple Shortcut still gives you one-tap task capture, and the web app works great on mobile browsers.',
+              zh: '原生 iOS 应用已开启公测——通过 TestFlight 加入即可像普通 App 一样安装并自动更新。Apple 快捷指令依旧支持一键创建任务，网页版在手机浏览器上也表现出色。',
             })}
           </p>
         </div>
         <div className={styles.bandAction}>
-          <span className={styles.soon}>{t({en: 'TestFlight — coming soon', zh: 'TestFlight——即将推出'})}</span>
+          <a className={styles.btnPrimary} href={TESTFLIGHT_URL} target="_blank" rel="noopener noreferrer">
+            {t({en: 'Join the beta on TestFlight', zh: '通过 TestFlight 加入公测'})}
+            <ExternalLink size={14} strokeWidth={2} />
+          </a>
           <a className={styles.btnGhost} href={SHORTCUT_URL} target="_blank" rel="noopener noreferrer">
             {t({en: 'Get the Apple Shortcut', zh: '获取 Apple 快捷指令'})}
             <ExternalLink size={14} strokeWidth={2} />

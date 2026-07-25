@@ -97,8 +97,6 @@
 .band { display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center; }
 .bandAction { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
 
-/* coming-soon pill (mobile) */
-.soon { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 12px; letter-spacing: .04em; color: var(--faint); border: 1px dashed var(--border-2); border-radius: 100px; padding: 8px 16px; }
 
 /* self-host closing band */
 .selfhost { border-bottom: none; }
