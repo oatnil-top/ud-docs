@@ -362,7 +362,7 @@ const REFERENCE: Category[] = [
   },
   {
     id: 'network',
-    title: {en: 'Network & frontend', zh: '网络与前端'},
+    title: {en: 'Network & integrations', zh: '网络与集成'},
     rows: [
       {
         id: 'cors_allowed_origins',
@@ -393,6 +393,16 @@ const REFERENCE: Category[] = [
         },
         metaDefault: '—',
         metaFlags: '--slack-webhook-url',
+      },
+      {
+        id: 'telegram_bot_token',
+        names: ['TELEGRAM_BOT_TOKEN'],
+        desc: {
+          en: 'Bot token that switches on the Telegram channel for Alfred, the built-in butler agent — get one from @BotFather (`/newbot`). Read once at startup, so restart the server after setting it; with no token the messenger gateway is never constructed. Once set, `GET /app/info` lists the messenger and users can link their own account from first-run onboarding or Profile → Messenger (generate a one-time code, send `/link CODE` to the bot within 10 minutes). Entirely optional: mentioning `@alfred` in web comments works without it. `DISCORD_BOT_TOKEN` is accepted too, but no Discord provider is implemented yet.',
+          zh: '为内置管家 Agent Alfred 开启 Telegram 通道的 bot token——在 Telegram 里找 @BotFather 发送 `/newbot` 获取。只在启动时读取一次，设置后需重启服务；未配置时 IM 网关根本不会构建。配置后 `GET /app/info` 会列出该通道，用户可在首启引导或 Profile → Messenger 中绑定自己的账号（生成一次性验证码，10 分钟内向 bot 发送 `/link CODE`）。完全可选：不配置也能在网页评论里 @alfred 对话。`DISCORD_BOT_TOKEN` 同样可读取，但 Discord provider 尚未实现。',
+        },
+        metaDefault: '—',
+        metaFlags: '--telegram-bot-token',
       },
     ],
   },

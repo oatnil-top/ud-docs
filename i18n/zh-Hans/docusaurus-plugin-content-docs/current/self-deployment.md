@@ -136,6 +136,7 @@ docker compose up -d
 | `LICENSE_HOST_SECRET` | Pro/Max | — | 与许可证 token 配套的 host secret。 |
 | `PERSONAL_TIER_PASSWORD` | 否 | `personal123` | Personal tier 唯一用户（`personal@undercontrol.local`）的密码。请在**首次启动前**设置：**Start** 自动登录始终读取该变量，用户创建后只改环境变量、或只在应用内改密码，都会导致自动登录失效（两者必须一致；登录名本身不可修改）。 |
 | `PORT` | 否 | `8080` | 服务在容器内监听的端口。 |
+| `TELEGRAM_BOT_TOKEN` | 否 | — | 为内置管家 Agent Alfred 开启 Telegram 消息通道的 bot token。不设置则不会启动任何 IM 通道——其余功能完全不受影响。 |
 
 ### 可选：PostgreSQL、S3 与 AI
 
@@ -144,6 +145,43 @@ all-in-one 镜像默认使用 SQLite + 本地文件存储，对大多数自部�
 - **PostgreSQL** — 设置 `DATABASE_URL`（或单独的 `DB_*` 变量）以替代内置 SQLite。
 - **S3 / R2 存储** — 设置 `S3_*` 变量，把上传文件存到 S3 兼容对象存储（AWS S3、Cloudflare R2、MinIO），替代本地卷。
 - **AI 服务** — 设置 OpenAI 兼容的 `AI_*` 变量以启用 AI 功能。
+
+### 可选：Alfred 的 Telegram 通道
+
+Alfred 是内置的管家 Agent。用户在网页端任意评论里 @alfred 即可与他对话，这在任何实例上都开箱可用、
+无需任何配置。设置 `TELEGRAM_BOT_TOKEN` 之后，用户还可以额外绑定自己的 Telegram 账号，在手机上直接找 Alfred。
+
+- **获取 token** —— 在 Telegram 里找 [@BotFather](https://t.me/BotFather)，发送 `/newbot`，
+  它会返回形如 `123456:ABC-DEF...` 的 token。
+- **设置** —— 环境变量 `TELEGRAM_BOT_TOKEN`，或 CLI 参数 `--telegram-bot-token`。默认为空。
+- **重启服务** —— token 只在启动时读取一次。未配置 token 时，IM 网关根本不会构建，也不会有任何 IM 协程运行。
+- **应用内的变化** —— `GET /app/info` 会在 `im_providers` 中报告该通道，应用正是据此决定是否展示
+  Telegram 选项（首启引导第 4 步、以及 Profile → Messenger）。`im_providers` 为空时应用会说明该通道未开启：
+  管理员会看到指向[配置参考](/configuration#telegram_bot_token)的链接，普通成员则被提示联系管理员。
+- **由用户自己绑定** —— 每位用户在应用内生成一次性验证码，向 bot 发送 `/link CODE` 即可。
+  验证码 10 分钟后过期。运维方无需接触任何用户级凭据。
+- `DISCORD_BOT_TOKEN` / `--discord-bot-token` 配置层面已可读取，但 Discord provider 尚未实现——
+  只设置它不会启动任何东西。
+
+## 首次启动引导
+
+用户首次打开一个全新实例时，会看到一个四步引导。每一步都可跳过；已经配置好的内容会直接显示为完成状态，
+而不会再次询问。这里没有任何一项是服务运行的前提——一个什么都没配的实例同样能顺利走完引导。
+
+1. **语言** —— 界面使用英文还是中文。
+2. **工作区状态 hooks** —— 询问是否允许向工作区项目的 `.claude/settings.local.json` 添加 Claude Code
+   hooks，桌面端正是靠它展示实时的 Agent 状态（运行中 / 等待中 / 空闲）。未获许可不会写入任何内容。
+3. **把本机注册为 daemon** —— daemon 是实际运行 Agent 会话的机器。在 UnDercontrol 桌面应用里这是一键完成的，
+   同时会扫描本机已安装的 Agent CLI（Claude Code、Codex 等）。在浏览器里，该步骤会推荐安装桌面应用，
+   或给出适用于服务器/远程机器的无界面方案：`npm install -g @oatnil/ud`、`ud login`、`ud daemon start`。
+   两种方式都一样：只要服务端看到有 daemon 在线，该步骤即完成。
+4. **认识 Alfred** —— 介绍这位内置管家（把活派给合适的 Agent、记住你的偏好与决策、随手记下临时想法），
+   并告诉用户在网页评论里 @alfred 就能找他。若已设置 `TELEGRAM_BOT_TOKEN`，该步骤还会提供上文所述的
+   可选 Telegram 绑定；若未设置，则说明该通道未开启，并为管理员给出指向配置参考的链接。
+
+**运维方需要做什么：** 只有第 4 步的 Telegram 选项依赖服务端配置。如果希望它在引导中出现，
+请在用户走引导之前设置 `TELEGRAM_BOT_TOKEN` 并重启；否则用户也可以在你开启之后，
+到 Profile → Messenger 里再绑定。
 
 ## 前后端分离镜像（进阶）
 

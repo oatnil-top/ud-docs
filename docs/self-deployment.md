@@ -148,6 +148,7 @@ server reads — with an interactive config builder and boot preview — see the
 | `LICENSE_HOST_SECRET` | Pro/Max | — | Host secret paired with your license token. |
 | `PERSONAL_TIER_PASSWORD` | No | `personal123` | Password of the single Personal-tier user (`personal@undercontrol.local`). Set it **before first boot**: the **Start** auto-login always uses this variable, so changing only the env var after the user exists — or changing only the password in-app — breaks auto-login (the two must match; the login name itself cannot be changed). |
 | `PORT` | No | `8080` | Port the server listens on inside the container. |
+| `TELEGRAM_BOT_TOKEN` | No | — | Bot token that switches on the Telegram messenger channel for Alfred, the built-in butler agent. Leave it unset and no messenger is started — everything else works unchanged. |
 
 ### Optional: PostgreSQL, S3 and AI
 
@@ -160,6 +161,56 @@ environment variables:
 - **S3 / R2 storage** — set the `S3_*` variables to store uploaded files in
   S3-compatible object storage (AWS S3, Cloudflare R2, MinIO) instead of the local volume.
 - **AI provider** — set the OpenAI-compatible `AI_*` variables to enable AI features.
+
+### Optional: Telegram messenger for Alfred
+
+Alfred is the built-in butler agent. Users talk to him by mentioning `@alfred` in any comment
+on the web, and that works on every instance with no configuration at all. Setting
+`TELEGRAM_BOT_TOKEN` additionally lets each user link a personal Telegram account and message
+Alfred from their phone.
+
+- **Get a token** — talk to [@BotFather](https://t.me/BotFather) on Telegram, send `/newbot`,
+  and it hands you a token that looks like `123456:ABC-DEF...`.
+- **Set it** — `TELEGRAM_BOT_TOKEN` as an environment variable, or `--telegram-bot-token` as a
+  CLI flag. The default is empty.
+- **Restart the server** — the token is read once at startup. With no token the messenger
+  gateway is never constructed and no messenger goroutines run.
+- **What it changes in the app** — `GET /app/info` reports the messenger under `im_providers`,
+  and that is what makes the Telegram option appear in the app (first-run onboarding step 4 and
+  Profile → Messenger). While `im_providers` is empty the app says the channel is off: admins
+  get a link to the [Configuration Reference](/configuration#telegram_bot_token), other members
+  are told to ask their administrator.
+- **Users link themselves** — each user generates a one-time code in the app and sends
+  `/link CODE` to the bot. Codes expire after 10 minutes. The operator never handles
+  per-user credentials.
+- `DISCORD_BOT_TOKEN` / `--discord-bot-token` is accepted by the configuration, but no Discord
+  provider is implemented yet — setting it alone starts nothing.
+
+## First-run onboarding
+
+The first time a user opens a fresh instance they get a four-step wizard. Every step is
+skippable, and anything already configured shows up as completed instead of asking again.
+Nothing here is required for the server to run — a bare instance completes onboarding fine.
+
+1. **Language** — English or Chinese for the interface.
+2. **Workspace status hooks** — asks permission to add Claude Code hooks to the workspace
+   project's `.claude/settings.local.json`, which is what lets the desktop app show live agent
+   status (running / waiting / idle). Nothing is written unless the user allows it.
+3. **Register this machine as a daemon** — a daemon is the machine that runs agent sessions.
+   In the UnDercontrol desktop app this is one click, plus a scan of the agent CLIs installed
+   locally (Claude Code, Codex, …). In a browser the step recommends the desktop app, or gives
+   the headless path for a server or remote box: `npm install -g @oatnil/ud`, `ud login`,
+   `ud daemon start`. Either way the step completes as soon as the server reports an online
+   daemon.
+4. **Meet Alfred** — introduces the built-in butler agent (dispatching work to the right agent,
+   remembering preferences and decisions, filing quick captures) and points users at
+   `@alfred` mentions in web comments. If `TELEGRAM_BOT_TOKEN` is set, this step also offers the
+   optional Telegram link described above; if it is not set, the step explains that the channel
+   is off and links admins to the configuration reference.
+
+**What the operator must do:** only step 4's Telegram option depends on server configuration.
+Set `TELEGRAM_BOT_TOKEN` and restart before your users go through onboarding if you want it to
+appear there; otherwise they can link Telegram later from Profile → Messenger once you enable it.
 
 ## Separate frontend / backend images (advanced)
 

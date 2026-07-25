@@ -39,6 +39,11 @@ Workers Builds on push to `main`. i18n: `en` (default) + `zh-Hans`.
 - The product name is **UnDercontrol** (capital U and D). It is proprietary —
   never describe it as open-source.
 - Verify changes with `npm run build` (builds both locales; broken links fail
-  the build). Pre-existing broken-anchor warnings on `/zh-Hans/privacy`,
-  `/zh-Hans/self-hosting` and `/zh-Hans/` are known.
+  the build). Pre-existing broken-anchor warnings on `/privacy`,
+  `/self-hosting`, `/subscribe`, `/` and their `/zh-Hans/` twins are known.
+  Docusaurus cannot enumerate anchors on TSX pages, so **any** link into
+  `/configuration#<id>` or `/self-hosting#<id>` is reported broken even when the
+  `id` really is in the emitted HTML (check with
+  `grep 'id="<id>"' build/configuration/index.html` before believing the
+  warning). `docs/self-deployment.md` deep-links `#telegram_bot_token` this way.
 - Commit messages: `[<task-id-prefix>] <type>(<scope>): <message>`.
