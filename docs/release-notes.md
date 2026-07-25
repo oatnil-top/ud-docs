@@ -18,6 +18,38 @@ UnDercontrol follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.119.0 (2026-07-25)
+
+### New Features
+
+**Self-host without Docker — npm bare-metal install**
+- `npm install -g @oatnil/ud-server @oatnil/ud` now gives you the complete UnDercontrol stack: the server binary ships with the web UI built in.
+- One command starts the full site: `ud-server -host-domain http://localhost:8080 -data-path ./data` — then log in from the browser. No Docker required.
+
+**Clear startup banner for self-hosted servers**
+- On boot the server prints a ready banner with the login URL and the initial account credentials, so first-run setup no longer requires digging through logs.
+- Configuration problems (like a missing `ADMIN_EMAIL` on Pro/Max tier) now stop the server at startup with a prominent error banner instead of booting into a broken state.
+
+**Manage possessions from the CLI**
+- New `ud` possession commands: get/describe/apply/delete plus `acquire`, `dispose`, and `share`.
+
+### Improvements
+
+- All Docker images (all-in-one and split backend/frontend) are now published for arm64 as well as amd64 — Apple Silicon and ARM servers can pull natively.
+
+### Bug Fixes
+
+- Expense and income timestamps are now stored as UTC instants, fixing entries that could shift a day across timezones.
+- Receipt scanning now rejects images that aren't receipts and reads the date printed on the receipt instead of assuming today.
+- AI tasks abandoned mid-processing are now marked failed instead of silently disappearing.
+- The homepage "onboard your agent" flow now copies the correct GitHub raw URL.
+
+### Upgrade Notes (self-hosted)
+
+- Personal tier: the account password is now controlled by the `PERSONAL_TIER_PASSWORD` env var and can no longer be changed in-app — this keeps the desktop Start auto-login in sync. Set the env var to change it.
+
+---
+
 ## v0.118.1 (2026-07-23)
 
 ### Improvements

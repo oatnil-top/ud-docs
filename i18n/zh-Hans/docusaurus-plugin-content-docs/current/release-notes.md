@@ -18,6 +18,38 @@ UnderControl 采用**语义化版本号**（格式：主版本号.次版本号.�
 
 ---
 
+## v0.119.0 (2026-07-25)
+
+### 新功能
+
+**无需 Docker 的私有部署——npm 裸机安装**
+- `npm install -g @oatnil/ud-server @oatnil/ud` 即可获得完整的 UnDercontrol:server 二进制自带 Web UI。
+- 一条命令启动完整站点:`ud-server -host-domain http://localhost:8080 -data-path ./data`,浏览器直接登录,全程无需 Docker。
+
+**自部署服务器的清晰启动横幅**
+- 服务器启动时会打印就绪横幅,包含登录地址和初始账号凭据,首次部署不再需要翻日志。
+- 配置错误(如 Pro/Max 档缺少 `ADMIN_EMAIL`)会在启动时以醒目横幅报错并停止,而不是带病运行。
+
+**CLI 管理资产(possession)**
+- 新增 `ud` possession 命令:get/describe/apply/delete,以及 `acquire`、`dispose`、`share`。
+
+### 改进
+
+- 所有 Docker 镜像(all-in-one 与前后端分离版)现同时发布 arm64 与 amd64——Apple Silicon 和 ARM 服务器可原生拉取。
+
+### 问题修复
+
+- 支出/收入时间戳改为按 UTC 瞬时存储,修复跨时区可能差一天的问题。
+- 小票识别现在会拒绝非小票图片,并读取票面打印日期而不是默认当天。
+- 处理中被中断的 AI 任务现在会标记为失败,不再静默丢失。
+- 首页"接入你的 Agent"流程现在复制正确的 GitHub raw 链接。
+
+### 升级说明(自部署)
+
+- Personal 档:账号密码现在由 `PERSONAL_TIER_PASSWORD` 环境变量控制,应用内改密已禁用——以保证桌面端 Start 自动登录一致。如需改密,修改该环境变量即可。
+
+---
+
 ## v0.118.1 (2026-07-23)
 
 ### 改进
