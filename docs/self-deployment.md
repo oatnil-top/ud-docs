@@ -148,7 +148,7 @@ server reads — with an interactive config builder and boot preview — see the
 | `LICENSE_HOST_SECRET` | Pro/Max | — | Host secret paired with your license token. |
 | `PERSONAL_TIER_PASSWORD` | No | `personal123` | Password of the single Personal-tier user (`personal@undercontrol.local`). Set it **before first boot**: the **Start** auto-login always uses this variable, so changing only the env var after the user exists — or changing only the password in-app — breaks auto-login (the two must match; the login name itself cannot be changed). |
 | `PORT` | No | `8080` | Port the server listens on inside the container. |
-| `TELEGRAM_BOT_TOKEN` | No | — | Bot token that switches on the Telegram messenger channel for Alfred, the built-in butler agent. Leave it unset and no messenger is started — everything else works unchanged. |
+| `TELEGRAM_BOT_TOKEN` | No | — | Bot token that switches on the Telegram messenger channel for Alfred, the built-in butler agent. Optional even as a variable: an admin can also set, change or clear the token at runtime in **Admin → System Config → Integration**, no restart needed. Leave both unset and no messenger is started — everything else works unchanged. |
 
 ### Optional: PostgreSQL, S3 and AI
 
@@ -171,15 +171,18 @@ Alfred from their phone.
 
 - **Get a token** — talk to [@BotFather](https://t.me/BotFather) on Telegram, send `/newbot`,
   and it hands you a token that looks like `123456:ABC-DEF...`.
-- **Set it** — `TELEGRAM_BOT_TOKEN` as an environment variable, or `--telegram-bot-token` as a
-  CLI flag. The default is empty.
-- **Restart the server** — the token is read once at startup. With no token the messenger
-  gateway is never constructed and no messenger goroutines run.
+- **Set it** — the simplest way is in the app: **Admin → System Config → Integration**, paste the
+  token, save. It applies immediately — the messenger gateway starts, restarts or stops as the
+  token is set, changed or cleared, with no server restart. Alternatively set the
+  `TELEGRAM_BOT_TOKEN` environment variable (or `--telegram-bot-token` flag), which seeds the same
+  setting at boot; while the env var stays set it wins on every boot and the field shows as locked
+  in the admin UI, so remove the variable if you prefer to manage the token in-app.
+- **Bad token?** — a token Telegram rejects is reported right on the System Config page
+  (and in onboarding, to admins) instead of hiding in the server log.
 - **What it changes in the app** — `GET /app/info` reports the messenger under `im_providers`,
   and that is what makes the Telegram option appear in the app (first-run onboarding step 4 and
   Profile → Messenger). While `im_providers` is empty the app says the channel is off: admins
-  get a link to the [Configuration Reference](/configuration#telegram_bot_token), other members
-  are told to ask their administrator.
+  get a link to System Config, other members are told to ask their administrator.
 - **Users link themselves** — each user generates a one-time code in the app and sends
   `/link CODE` to the bot. Codes expire after 10 minutes. The operator never handles
   per-user credentials.
@@ -204,13 +207,14 @@ Nothing here is required for the server to run — a bare instance completes onb
    daemon.
 4. **Meet Alfred** — introduces the built-in butler agent (dispatching work to the right agent,
    remembering preferences and decisions, filing quick captures) and points users at
-   `@alfred` mentions in web comments. If `TELEGRAM_BOT_TOKEN` is set, this step also offers the
-   optional Telegram link described above; if it is not set, the step explains that the channel
-   is off and links admins to the configuration reference.
+   `@alfred` mentions in web comments. If a Telegram bot token is configured, this step also
+   offers the optional Telegram link described above; if not, the step explains that the channel
+   is off and links admins straight to System Config, where the token applies without a restart.
 
 **What the operator must do:** only step 4's Telegram option depends on server configuration.
-Set `TELEGRAM_BOT_TOKEN` and restart before your users go through onboarding if you want it to
-appear there; otherwise they can link Telegram later from Profile → Messenger once you enable it.
+Add the bot token in **Admin → System Config → Integration** (takes effect immediately) or via
+`TELEGRAM_BOT_TOKEN` before your users go through onboarding if you want it to appear there;
+otherwise they can link Telegram later from Profile → Messenger once you enable it.
 
 ## Separate frontend / backend images (advanced)
 

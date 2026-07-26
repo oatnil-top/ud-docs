@@ -136,7 +136,7 @@ docker compose up -d
 | `LICENSE_HOST_SECRET` | Pro/Max | — | 与许可证 token 配套的 host secret。 |
 | `PERSONAL_TIER_PASSWORD` | 否 | `personal123` | Personal tier 唯一用户（`personal@undercontrol.local`）的密码。请在**首次启动前**设置：**Start** 自动登录始终读取该变量，用户创建后只改环境变量、或只在应用内改密码，都会导致自动登录失效（两者必须一致；登录名本身不可修改）。 |
 | `PORT` | 否 | `8080` | 服务在容器内监听的端口。 |
-| `TELEGRAM_BOT_TOKEN` | 否 | — | 为内置管家 Agent Alfred 开启 Telegram 消息通道的 bot token。不设置则不会启动任何 IM 通道——其余功能完全不受影响。 |
+| `TELEGRAM_BOT_TOKEN` | 否 | — | 为内置管家 Agent Alfred 开启 Telegram 消息通道的 bot token。即使不设环境变量也可以：管理员可在**管理后台 → 系统配置 → Integration** 中随时设置、更换或清除，运行时即刻生效，无需重启。两处都不设置则不会启动任何 IM 通道——其余功能完全不受影响。 |
 
 ### 可选：PostgreSQL、S3 与 AI
 
@@ -153,11 +153,15 @@ Alfred 是内置的管家 Agent。用户在网页端任意评论里 @alfred 即�
 
 - **获取 token** —— 在 Telegram 里找 [@BotFather](https://t.me/BotFather)，发送 `/newbot`，
   它会返回形如 `123456:ABC-DEF...` 的 token。
-- **设置** —— 环境变量 `TELEGRAM_BOT_TOKEN`，或 CLI 参数 `--telegram-bot-token`。默认为空。
-- **重启服务** —— token 只在启动时读取一次。未配置 token 时，IM 网关根本不会构建，也不会有任何 IM 协程运行。
+- **设置** —— 最简单的方式是在应用内：**管理后台 → 系统配置 → Integration**，粘贴 token 并保存，
+  即刻生效——设置、更换、清除 token 时，IM 网关会相应地启动、重启或停止，全程无需重启服务。
+  也可以用环境变量 `TELEGRAM_BOT_TOKEN`（或 CLI 参数 `--telegram-bot-token`）在启动时注入同一配置；
+  注意只要环境变量还在，每次启动都会以它为准、后台界面中该字段显示为锁定——想改用界面管理请先移除环境变量。
+- **token 无效？** —— 被 Telegram 拒绝的 token 会直接显示在系统配置页上（管理员在引导第 4 步也能看到），
+  不再只是埋在服务端日志里。
 - **应用内的变化** —— `GET /app/info` 会在 `im_providers` 中报告该通道，应用正是据此决定是否展示
   Telegram 选项（首启引导第 4 步、以及 Profile → Messenger）。`im_providers` 为空时应用会说明该通道未开启：
-  管理员会看到指向[配置参考](/configuration#telegram_bot_token)的链接，普通成员则被提示联系管理员。
+  管理员会看到指向系统配置的链接，普通成员则被提示联系管理员。
 - **由用户自己绑定** —— 每位用户在应用内生成一次性验证码，向 bot 发送 `/link CODE` 即可。
   验证码 10 分钟后过期。运维方无需接触任何用户级凭据。
 - `DISCORD_BOT_TOKEN` / `--discord-bot-token` 配置层面已可读取，但 Discord provider 尚未实现——
@@ -176,12 +180,13 @@ Alfred 是内置的管家 Agent。用户在网页端任意评论里 @alfred 即�
    或给出适用于服务器/远程机器的无界面方案：`npm install -g @oatnil/ud`、`ud login`、`ud daemon start`。
    两种方式都一样：只要服务端看到有 daemon 在线，该步骤即完成。
 4. **认识 Alfred** —— 介绍这位内置管家（把活派给合适的 Agent、记住你的偏好与决策、随手记下临时想法），
-   并告诉用户在网页评论里 @alfred 就能找他。若已设置 `TELEGRAM_BOT_TOKEN`，该步骤还会提供上文所述的
-   可选 Telegram 绑定；若未设置，则说明该通道未开启，并为管理员给出指向配置参考的链接。
+   并告诉用户在网页评论里 @alfred 就能找他。若已配置 Telegram bot token，该步骤还会提供上文所述的
+   可选 Telegram 绑定；若未配置，则说明该通道未开启，并为管理员给出直达系统配置的链接——在那里
+   设置 token 无需重启即可生效。
 
 **运维方需要做什么：** 只有第 4 步的 Telegram 选项依赖服务端配置。如果希望它在引导中出现，
-请在用户走引导之前设置 `TELEGRAM_BOT_TOKEN` 并重启；否则用户也可以在你开启之后，
-到 Profile → Messenger 里再绑定。
+请在用户走引导之前于**管理后台 → 系统配置 → Integration** 填入 bot token（即刻生效），
+或设置 `TELEGRAM_BOT_TOKEN` 环境变量；否则用户也可以在你开启之后，到 Profile → Messenger 里再绑定。
 
 ## 前后端分离镜像（进阶）
 
