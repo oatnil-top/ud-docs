@@ -2055,5 +2055,68 @@
   },
   "alfredp.cta.fine": {
     "message": "个人免费 · 可自托管 · 五分钟跑起来"
+  },
+  "home4.arch.eyebrow": {
+    "message": "架构"
+  },
+  "home4.arch.title": {
+    "message": "UnDercontrol 是怎么搭起来的"
+  },
+  "home4.arch.lede": {
+    "message": "对你，它是一场对话；往下看，是记忆、调度、定时三个系统，压在一个真正干活的执行层上。"
+  },
+  "home4.arch.aria": {
+    "message": "UnDercontrol 架构图"
+  },
+  "home4.arch.you": {
+    "message": "💬 你"
+  },
+  "home4.arch.step1": {
+    "message": "① 发一条消息"
+  },
+  "home4.arch.im": {
+    "message": "IM 入口"
+  },
+  "home4.arch.alfredSub": {
+    "message": "私人管家"
+  },
+  "home4.arch.step2": {
+    "message": "② 理解并记住"
+  },
+  "home4.arch.memory": {
+    "message": "记忆系统"
+  },
+  "home4.arch.step3": {
+    "message": "③ 派活"
+  },
+  "home4.arch.orch": {
+    "message": "调度系统"
+  },
+  "home4.arch.orchSub": {
+    "message": "agent 团队 + 常驻 daemon"
+  },
+  "home4.arch.sched": {
+    "message": "定时任务"
+  },
+  "home4.arch.fires": {
+    "message": "到点触发"
+  },
+  "home4.arch.configSub": {
+    "message": "agent 定义 · project"
+  },
+  "home4.arch.configures": {
+    "message": "配置"
+  },
+  "home4.arch.step4": {
+    "message": "④ 执行"
+  },
+  "home4.arch.cli": {
+    "message": "CLI 执行层 — 真正干活的"
+  },
+  "home4.arch.writesBack": {
+    "message": "写回记录"
+  },
+  "home4.arch.step5": {
+    "message": "⑤ 结果回到聊天"
   }
 }

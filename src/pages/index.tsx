@@ -554,6 +554,175 @@ function EngineSection() {
   );
 }
 
+// --- Architecture (design v6): box-and-arrow SVG between engine row and CTA ---
+// Main line 你 → IM entry → Alfred → orchestration → CLI execution layer, with
+// memory (bidirectional), scheduling and the prompt/cwd config plane as side
+// inputs, and the green dashed ⑤ edge returning results to the chat. Colors go
+// through the .scope tokens so light/dark adapt; narrow screens scroll the
+// diagram horizontally. Mirrored in the Vite app's ArchitectureSection — keep
+// the two SVGs identical.
+function ArchitectureSection() {
+  const s = styles;
+  return (
+    <section className={s.section}>
+      <div className={s.wrap}>
+        <div className={s.eyebrow}>
+          <Translate id="home4.arch.eyebrow">Architecture</Translate>
+        </div>
+        <h2>
+          <Translate id="home4.arch.title">How UnDercontrol is put together</Translate>
+        </h2>
+        <p className={s.lede}>
+          <Translate id="home4.arch.lede">
+            To you, it's a conversation. Underneath: memory, orchestration, and scheduling — three systems resting on
+            an execution layer that does the real work.
+          </Translate>
+        </p>
+
+        <div className={s.archScroll}>
+          <svg
+            className={s.archsvg}
+            viewBox="0 0 880 530"
+            role="img"
+            aria-label={translate({id: 'home4.arch.aria', message: 'UnDercontrol architecture diagram'})}>
+            <defs>
+              <marker id="arch-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0,0 L10,5 L0,10 z" className={s.aMk} />
+              </marker>
+              <marker id="arch-arrM" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0,0 L10,5 L0,10 z" className={s.aMkM} />
+              </marker>
+              <marker id="arch-arrA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0,0 L10,5 L0,10 z" className={s.aMkA} />
+              </marker>
+            </defs>
+
+            {/* you */}
+            <rect x="375" y="12" width="130" height="36" rx="18" className={s.aBox} />
+            <text x="440" y="35" textAnchor="middle" className={s.aTt}>
+              <Translate id="home4.arch.you">💬 You</Translate>
+            </text>
+
+            {/* ① you -> IM */}
+            <line x1="440" y1="48" x2="440" y2="84" className={s.aEdge} markerEnd="url(#arch-arr)" />
+            <text x="452" y="70" className={s.aEstep}>
+              <Translate id="home4.arch.step1">① Send a message</Translate>
+            </text>
+
+            {/* IM entry */}
+            <rect x="290" y="88" width="300" height="52" rx="10" className={s.aBox} />
+            <text x="440" y="109" textAnchor="middle" className={s.aTt}>
+              <Translate id="home4.arch.im">IM entry</Translate>
+            </text>
+            <text x="440" y="128" textAnchor="middle" className={s.aSub}>
+              Telegram · Discord · Web
+            </text>
+
+            {/* IM -> Alfred */}
+            <line x1="440" y1="140" x2="440" y2="176" className={s.aEdge} markerEnd="url(#arch-arr)" />
+
+            {/* Alfred */}
+            <rect x="340" y="180" width="200" height="56" rx="12" className={s.aBoxAccent} />
+            <text x="440" y="203" textAnchor="middle" className={`${s.aTt} ${s.aOnAccent}`}>
+              🎩 Alfred
+            </text>
+            <text x="440" y="222" textAnchor="middle" className={`${s.aSub} ${s.aOnAccent}`}>
+              <Translate id="home4.arch.alfredSub">Private butler</Translate>
+            </text>
+
+            {/* ② Alfred <-> Memory (read/write) */}
+            <path d="M 380,236 L 380,264 L 190,264 L 190,296" className={s.aEdge} markerStart="url(#arch-arr)" markerEnd="url(#arch-arr)" />
+            <text x="285" y="257" textAnchor="middle" className={s.aEstep}>
+              <Translate id="home4.arch.step2">② Understand &amp; remember</Translate>
+            </text>
+
+            {/* memory */}
+            <rect x="90" y="300" width="200" height="66" rx="10" className={s.aBox} />
+            <text x="190" y="326" textAnchor="middle" className={s.aTt}>
+              <Translate id="home4.arch.memory">Memory</Translate>
+            </text>
+            <text x="190" y="346" textAnchor="middle" className={s.aSub}>
+              tasks · notes · boards — markdown
+            </text>
+
+            {/* ③ Alfred -> Orchestration */}
+            <line x1="440" y1="236" x2="440" y2="296" className={s.aEdge} markerEnd="url(#arch-arr)" />
+            <text x="452" y="270" className={s.aEstep}>
+              <Translate id="home4.arch.step3">③ Delegate</Translate>
+            </text>
+
+            {/* orchestration */}
+            <rect x="330" y="300" width="220" height="66" rx="10" className={s.aBox} />
+            <text x="440" y="326" textAnchor="middle" className={s.aTt}>
+              <Translate id="home4.arch.orch">Orchestration</Translate>
+            </text>
+            <text x="440" y="346" textAnchor="middle" className={s.aSub}>
+              <Translate id="home4.arch.orchSub">agent team + resident daemons</Translate>
+            </text>
+
+            {/* scheduling */}
+            <rect x="640" y="238" width="180" height="52" rx="10" className={s.aBox} />
+            <text x="730" y="259" textAnchor="middle" className={s.aTt}>
+              <Translate id="home4.arch.sched">Scheduling</Translate>
+            </text>
+            <text x="730" y="277" textAnchor="middle" className={s.aSub}>
+              scheduled jobs &amp; agents
+            </text>
+
+            {/* scheduling -> orchestration */}
+            <path d="M 640,264 L 540,264 L 540,296" className={s.aEdgeM} markerEnd="url(#arch-arrM)" />
+            <text x="588" y="256" textAnchor="middle" className={s.aElabel}>
+              <Translate id="home4.arch.fires">fires on schedule</Translate>
+            </text>
+
+            {/* prompt/cwd config plane */}
+            <rect x="640" y="330" width="180" height="66" rx="10" className={s.aBoxDash} />
+            <text x="730" y="356" textAnchor="middle" className={s.aTt}>
+              prompt · cwd
+            </text>
+            <text x="730" y="376" textAnchor="middle" className={s.aSub}>
+              <Translate id="home4.arch.configSub">agent definition · project</Translate>
+            </text>
+
+            {/* config -> orchestration */}
+            <line x1="640" y1="352" x2="554" y2="352" className={s.aEdgeM} markerEnd="url(#arch-arrM)" />
+            <text x="597" y="344" textAnchor="middle" className={s.aElabel}>
+              <Translate id="home4.arch.configures">configures</Translate>
+            </text>
+
+            {/* ④ orchestration -> CLI */}
+            <line x1="440" y1="366" x2="440" y2="428" className={s.aEdge} markerEnd="url(#arch-arr)" />
+            <text x="452" y="400" className={s.aEstep}>
+              <Translate id="home4.arch.step4">④ Execute</Translate>
+            </text>
+
+            {/* CLI layer */}
+            <rect x="270" y="432" width="340" height="66" rx="10" className={s.aBox} />
+            <text x="440" y="458" textAnchor="middle" className={s.aTt}>
+              <Translate id="home4.arch.cli">Execution — the real CLIs</Translate>
+            </text>
+            <text x="440" y="478" textAnchor="middle" className={s.aSub}>
+              Claude Code · Codex · OpenCode · …
+            </text>
+
+            {/* CLI writes back to memory */}
+            <path d="M 270,465 L 190,465 L 190,370" className={s.aEdgeM} markerEnd="url(#arch-arrM)" />
+            <text x="230" y="457" textAnchor="middle" className={s.aElabel}>
+              <Translate id="home4.arch.writesBack">writes back</Translate>
+            </text>
+
+            {/* ⑤ results return to chat */}
+            <path d="M 610,465 L 848,465 L 848,114 L 594,114" className={s.aEdgeA} markerEnd="url(#arch-arrA)" />
+            <text x="721" y="104" textAnchor="middle" className={s.aEstep}>
+              <Translate id="home4.arch.step5">⑤ Results return to chat</Translate>
+            </text>
+          </svg>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // --- CTA ---
 function CtaSection() {
   return (
@@ -591,6 +760,7 @@ export default function Home(): ReactNode {
         <HeroSection />
         <MeetAlfredSection />
         <EngineSection />
+        <ArchitectureSection />
         <CtaSection />
       </main>
     </Layout>
