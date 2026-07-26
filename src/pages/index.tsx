@@ -22,8 +22,9 @@ import styles from './butler.module.css';
  * slide has an identical footprint. Below: the "start with Alfred" funnel to
  * /alfred, the engine row, the architecture diagram, and the CTA. Structure
  * and copy were previously mirrored on the Vite app's /home — that mirror
- * still shows v7 screenshots; align it when it is next touched. Per the
- * design sign-off every CTA points at the quickstart.
+ * still shows v7 screenshots; align it when it is next touched. Get-started
+ * CTAs point at /download (boss decision 2026-07-26): everything rests on a
+ * locally installed daemon, so the download IS the first step.
  */
 
 /**
@@ -505,7 +506,7 @@ function CtaSection() {
         <h2>
           <Translate id="home4.cta.title">Starting today, hand it to Alfred.</Translate>
         </h2>
-        <Link className={styles.btnPrimary} to="/docs/intro">
+        <Link className={styles.btnPrimary} to="/download">
           <Translate id="home4.cta.primary">Get started with Alfred</Translate>
         </Link>
         <p className={styles.fine}>

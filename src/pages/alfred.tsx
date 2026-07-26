@@ -13,8 +13,9 @@ import styles from './butler.module.css';
  * hero stage — src/components/HeroDemos/) → four verbs (understand / remember /
  * delegate / track) → the journey of one message → the engine behind him → CTA.
  * Mirrored as /alfred in the Vite app — keep structure and copy aligned when
- * editing either. Per the design sign-off every CTA points at the docs
- * quickstart; the ghost CTA goes to the Telegram/Discord configuration
+ * editing either. Get-started CTAs point at /download (boss decision
+ * 2026-07-26): Alfred needs a locally installed daemon, so the download IS
+ * the first step. The ghost CTA goes to the Telegram/Discord configuration
  * reference.
  */
 
@@ -37,7 +38,7 @@ function AlfredHero() {
           </Translate>
         </p>
         <div className={styles.ctas}>
-          <Link className={styles.btnPrimary} to="/docs/intro">
+          <Link className={styles.btnPrimary} to="/download">
             <Translate id="alfredp.hero.ctaPrimary">Get started with Alfred</Translate>
           </Link>
           <Link className={styles.btnGhost} to="/configuration">
@@ -197,7 +198,7 @@ function CtaSection() {
         <h2>
           <Translate id="alfredp.cta.title">Starting today, hand it to Alfred.</Translate>
         </h2>
-        <Link className={styles.btnPrimary} to="/docs/intro">
+        <Link className={styles.btnPrimary} to="/download">
           <Translate id="alfredp.cta.primary">Get started with Alfred</Translate>
         </Link>
         <p className={styles.fine}>
