@@ -1762,6 +1762,12 @@
   "home4.hero.ctaMeet": {
     "message": "认识 Alfred →"
   },
+  "home4.hero.ctaDownload": {
+    "message": "下载"
+  },
+  "home4.hero.ctaSelfhost": {
+    "message": "自部署"
+  },
   "home4.hero.fine": {
     "message": "个人免费 · 可自托管 · 也支持 Discord"
   },
