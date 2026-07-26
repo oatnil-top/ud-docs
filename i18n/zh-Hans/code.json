@@ -1747,6 +1747,15 @@
   "home4.tab.agents": {
     "message": "Agents"
   },
+  "demo.kanban.hint": {
+    "message": "拖动卡片试试"
+  },
+  "demo.graph.hint": {
+    "message": "拖动节点试试"
+  },
+  "demo.agents.hint": {
+    "message": "点击任一 Agent"
+  },
   "home4.hero.ctaPrimary": {
     "message": "开始使用 Alfred"
   },

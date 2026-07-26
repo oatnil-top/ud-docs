@@ -1,0 +1,44 @@
+/**
+ * Shared chrome for the hero-stage demos (task b00f9e8f): every demo fills the
+ * homepage stage frame (fixed height, ink border provided by the stage itself)
+ * and opens with the same head bar — title left, interaction hint right — so
+ * the four slides read as one consistent frame. Color goes through the .scope
+ * tokens from butler.module.css (the demos always render inside .scope).
+ */
+
+.fill {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--line);
+  flex: none;
+}
+
+.title {
+  font-weight: 750;
+  font-size: 0.85rem;
+  line-height: 1.3;
+}
+
+.hint {
+  margin-left: auto;
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--faint);
+  text-align: right;
+}
+
+.body {
+  flex: 1;
+  min-height: 0;
+}

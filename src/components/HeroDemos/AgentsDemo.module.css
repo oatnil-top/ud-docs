@@ -1,0 +1,131 @@
+/** AgentsDemo — clickable roster + detail panel, frame in demos.module.css. */
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 12px;
+  padding: 12px;
+  overflow: hidden;
+}
+
+.roster {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  padding: 8px 10px;
+  cursor: pointer;
+  min-width: 0;
+}
+.item:hover {
+  border-color: var(--ink);
+}
+.itemOn {
+  border: 1.5px solid var(--ink);
+}
+.itemOn .itemName {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.emoji {
+  flex: none;
+  font-size: 0.95rem;
+}
+.itemText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.3;
+}
+.itemName {
+  font-size: 0.78rem;
+  font-weight: 750;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.itemRole {
+  font-size: 0.64rem;
+  color: var(--muted);
+}
+.online {
+  margin-left: auto;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex: none;
+}
+
+.detail {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 14px;
+  min-width: 0;
+  animation: detailIn 0.25s ease;
+}
+@keyframes detailIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.detailName {
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+.detailRole {
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.detailBlurb {
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.55;
+  margin: 10px 0 14px;
+}
+.detailActivityLabel {
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.detailActivity {
+  font-size: 0.76rem;
+  font-weight: 600;
+  margin-top: 4px;
+  border-left: 3px solid var(--ink);
+  padding-left: 9px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .detail {
+    animation: none;
+  }
+}

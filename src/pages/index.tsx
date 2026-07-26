@@ -2,21 +2,28 @@ import {useEffect, useState, type ReactNode} from 'react';
 import Link from '@docusaurus/Link';
 import Layout from '@theme/Layout';
 import Translate, {translate} from '@docusaurus/Translate';
-import useBaseUrl from '@docusaurus/useBaseUrl';
+
+import PhoneDemo from '@site/src/components/HeroDemos/PhoneDemo';
+import KanbanDemo from '@site/src/components/HeroDemos/KanbanDemo';
+import GraphDemo from '@site/src/components/HeroDemos/GraphDemo';
+import AgentsDemo from '@site/src/components/HeroDemos/AgentsDemo';
 
 import styles from './butler.module.css';
 
 /**
- * Homepage, design v7 (task 4bd20228, boss-approved 2026-07-26): structure and
- * copy unchanged from v6 — the hero rotates through five product angles —
- * Alfred chat (lead) → boards → knowledge graph → finance → agent orchestration
- * — headline and stage in sync, 5s autoplay, hover pauses, tabs jump directly,
- * no autoplay under prefers-reduced-motion. Below: the "start with Alfred"
- * funnel to /alfred, the engine row, the architecture diagram, and the CTA.
- * v7 changes visuals only: pure monochrome + bold type, and the stage shows
- * REAL product screenshots (light theme, demo data, static/img/landing/).
- * Mirrored on the Vite app's /home — keep structure and copy aligned when
- * editing either. Per the design sign-off every CTA points at the quickstart.
+ * Homepage, design v7.1 (task b00f9e8f, boss feedback 2026-07-26): the hero
+ * rotates through four product angles — Alfred chat (lead) → boards →
+ * knowledge graph → agent orchestration (Finance dropped per feedback) —
+ * headline and stage in sync, 5s autoplay, hover pauses, tabs jump directly,
+ * no autoplay under prefers-reduced-motion. The stage no longer shows
+ * screenshots: each angle is a live INTERACTIVE simulation from
+ * src/components/HeroDemos/ (chat playback, drag-drop kanban, draggable
+ * graph, clickable agent roster), all sharing one fixed stage frame so every
+ * slide has an identical footprint. Below: the "start with Alfred" funnel to
+ * /alfred, the engine row, the architecture diagram, and the CTA. Structure
+ * and copy were previously mirrored on the Vite app's /home — that mirror
+ * still shows v7 screenshots; align it when it is next touched. Per the
+ * design sign-off every CTA points at the quickstart.
  */
 
 /**
@@ -68,6 +75,9 @@ function AgentSetupButton() {
     copyViaTextarea();
   };
 
+  // Boss feedback 2026-07-26 (task b00f9e8f): the pill stays compact — never
+  // print the Fetch command itself, only a copy glyph; the command lives in
+  // the title tooltip and the clipboard.
   return (
     <button
       type="button"
@@ -85,19 +95,19 @@ function AgentSetupButton() {
           <Translate id="homepage.hero.agentSetup.label">Onboard your agent to UnDercontrol</Translate>
         )}
       </span>
-      <code className={styles.agentSetupCode}>{copied ? '✓' : AGENT_SETUP_COMMAND}</code>
+      <code className={styles.agentSetupCode}>{copied ? '✓' : '⧉'}</code>
     </button>
   );
 }
 
 // --- Hero: five rotating angles, copy and stage in sync ---
 
-type Slide = {key: string; t1: ReactNode; t2: ReactNode; sub: ReactNode; tab: ReactNode; img: string};
+type Slide = {key: string; t1: ReactNode; t2: ReactNode; sub: ReactNode; tab: ReactNode; demo: ReactNode};
 
-// Each slide's img is a real product screenshot (light theme, demo data, no
-// private content) cropped to the stage's 1.15:1 frame; files live in
-// static/img/landing/. Built inside a hook, not at module scope, so the
-// Translate ids stay statically extractable.
+// Each slide's demo is an interactive simulation (src/components/HeroDemos/)
+// rendered inside the fixed stage frame — same footprint for every slide.
+// Built inside a hook, not at module scope, so the Translate ids stay
+// statically extractable.
 function useSlides(): Slide[] {
   return [
     {
@@ -111,7 +121,7 @@ function useSlides(): Slide[] {
         </Translate>
       ),
       tab: <Translate id="home4.tab.alfred">Chat with Alfred</Translate>,
-      img: 'alfred.jpg',
+      demo: <PhoneDemo frameless />,
     },
     {
       key: 'boards',
@@ -123,7 +133,7 @@ function useSlides(): Slide[] {
         </Translate>
       ),
       tab: <Translate id="home4.tab.boards">Boards</Translate>,
-      img: 'boards.jpg',
+      demo: <KanbanDemo />,
     },
     {
       key: 'knowledge',
@@ -136,19 +146,7 @@ function useSlides(): Slide[] {
         </Translate>
       ),
       tab: <Translate id="home4.tab.knowledge">Knowledge</Translate>,
-      img: 'knowledge.jpg',
-    },
-    {
-      key: 'finance',
-      t1: <Translate id="home4.slide.finance.t1">Say it once,</Translate>,
-      t2: <Translate id="home4.slide.finance.t2">and it's booked.</Translate>,
-      sub: (
-        <Translate id="home4.slide.finance.sub">
-          "Taxi, $6" — categorized, booked, rolled into your monthly summary. Alfred does it in passing.
-        </Translate>
-      ),
-      tab: <Translate id="home4.tab.finance">Finance</Translate>,
-      img: 'finance.jpg',
+      demo: <GraphDemo />,
     },
     {
       key: 'agents',
@@ -160,7 +158,7 @@ function useSlides(): Slide[] {
         </Translate>
       ),
       tab: <Translate id="home4.tab.agents">Agents</Translate>,
-      img: 'agents.jpg',
+      demo: <AgentsDemo />,
     },
   ];
 }
@@ -172,11 +170,14 @@ function HeroSection() {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
 
+  // `index` in the deps restarts the countdown on every slide change, so a
+  // manual tab click always gets the full 5s (and an interaction with the
+  // demo isn't cut short by a timer started slides ago).
   useEffect(() => {
     if (paused || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
     const id = setInterval(() => setIndex((i) => (i + 1) % slides.length), ROTATE_MS);
     return () => clearInterval(id);
-  }, [paused, slides.length]);
+  }, [paused, index, slides.length]);
 
   const slide = slides[index];
 
@@ -218,12 +219,7 @@ function HeroSection() {
           className={styles.stage}
           aria-label={translate({id: 'home4.hero.stageAria', message: 'Product showcase'})}>
           <div key={slide.key} className={styles.fadeup} style={{height: '100%'}}>
-            <img
-              className={styles.shotImg}
-              src={useBaseUrl(`/img/landing/${slide.img}`)}
-              alt=""
-              loading={index === 0 ? 'eager' : 'lazy'}
-            />
+            {slide.demo}
           </div>
         </div>
         <div

@@ -1,0 +1,164 @@
+/**
+ * PhoneDemo — the Alfred chat playback. Styles moved out of butler.module.css
+ * (task b00f9e8f) so the demo is a self-contained module used by both /alfred
+ * (framed, standalone figure) and the homepage hero stage (frameless: the
+ * stage supplies the frame). Tokens come from the enclosing .scope.
+ */
+
+.phone {
+  background: var(--panel);
+  border: 1.5px solid var(--ink);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  max-width: 420px;
+  justify-self: end;
+  width: 100%;
+  margin: 0;
+}
+
+/* Inside the hero stage the frame (border, shadow, radius) belongs to the
+ * stage box — the demo just fills it. */
+.frameless {
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  max-width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+/* The stage is a fixed 400px frame — tighten the chat metrics slightly so all
+ * five beats fit without clipping. */
+.frameless .chat {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  padding: 12px 14px 14px;
+  gap: 8px;
+}
+.frameless .msg {
+  font-size: 0.82rem;
+  padding: 8px 12px;
+}
+
+.phoneHead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--line);
+  flex: none;
+}
+.avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1.5px solid var(--ink);
+  color: var(--ink);
+  display: grid;
+  place-items: center;
+  font-size: 1rem;
+  flex: none;
+}
+.phoneName {
+  font-weight: 750;
+  font-size: 0.92rem;
+  line-height: 1.3;
+}
+.phoneStatus {
+  font-size: 0.74rem;
+  color: var(--muted);
+}
+.replay {
+  margin-left: auto;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  border-radius: 4px;
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 11px;
+  cursor: pointer;
+}
+.replay:hover {
+  color: var(--ink);
+  border-color: var(--ink);
+}
+.chat {
+  padding: 18px 14px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 330px;
+}
+.msg {
+  max-width: 84%;
+  padding: 9px 13px;
+  border-radius: 12px;
+  font-size: 0.87rem;
+  line-height: 1.5;
+  font-weight: 400;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: rise 0.45s ease forwards;
+  animation-delay: var(--d);
+}
+.msgMe {
+  composes: msg;
+  align-self: flex-end;
+  background: transparent;
+  border: 1.5px solid var(--ink);
+  color: var(--ink);
+  font-weight: 600;
+  border-bottom-right-radius: 4px;
+}
+.msgAl {
+  composes: msg;
+  align-self: flex-start;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-bottom-left-radius: 4px;
+}
+.timegap {
+  align-self: center;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  opacity: 0;
+  animation: rise 0.45s ease forwards;
+  animation-delay: var(--d);
+}
+@keyframes rise {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .msg,
+  .msgMe,
+  .msgAl,
+  .timegap {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+}
+
+@media (max-width: 880px) {
+  .phone {
+    justify-self: stretch;
+    max-width: 100%;
+  }
+  .frameless {
+    max-width: 100%;
+  }
+}

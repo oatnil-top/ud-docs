@@ -1,0 +1,44 @@
+/** GraphDemo — draggable node graph, see demos.module.css for the frame. */
+
+.svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none; /* pointer-drag must win over scroll on touch */
+}
+
+.edge {
+  stroke: var(--line);
+  stroke-width: 1.2;
+}
+
+.node {
+  cursor: grab;
+}
+.node:active {
+  cursor: grabbing;
+}
+
+.dot {
+  fill: var(--panel);
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+.hubDot {
+  fill: var(--panel);
+  stroke: var(--ink);
+  stroke-width: 2.5;
+}
+
+.label {
+  fill: var(--ink);
+  font-family: inherit;
+  font-size: 11.5px;
+  font-weight: 600;
+  user-select: none;
+  -webkit-user-select: none;
+  paint-order: stroke;
+  stroke: var(--paper);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
