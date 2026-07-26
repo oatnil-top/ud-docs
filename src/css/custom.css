@@ -146,28 +146,32 @@ a:hover {
 
 /* Navbar CTA — the one emphasized action in the header. Scoped to the desktop
    bar so the collapsed mobile menu keeps .menu__link's own layout and the item
-   reads as a plain link like every other one. */
+   reads as a plain link like every other one. v7 iron law (task 4bd20228):
+   no filled blocks — the CTA is an ink outline with a heavy label. */
 .navbar__inner .navbar__cta {
-  background-color: #1a1a1a;
-  color: #ffffff;
+  background-color: transparent;
+  color: #0a0a0a;
+  border: 2px solid #0a0a0a;
+  font-weight: 800;
   border-radius: 4px;
-  padding: 0.35rem 0.75rem;
+  padding: 0.3rem 0.75rem;
   margin-left: 0.5rem;
 }
 
 .navbar__inner .navbar__cta:hover {
-  background-color: #333333;
-  color: #ffffff;
+  background-color: transparent;
+  color: #0a0a0a;
 }
 
 [data-theme='dark'] .navbar__inner .navbar__cta {
-  background-color: #e5e7eb;
-  color: #0f0f0f;
+  background-color: transparent;
+  color: #f4f4f4;
+  border-color: #f4f4f4;
 }
 
 [data-theme='dark'] .navbar__inner .navbar__cta:hover {
-  background-color: #f3f4f6;
-  color: #0f0f0f;
+  background-color: transparent;
+  color: #f4f4f4;
 }
 
 /* Footer — carries the secondary nav the header sheds (Contact, Privacy,

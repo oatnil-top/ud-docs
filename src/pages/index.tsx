@@ -2,18 +2,21 @@ import {useEffect, useState, type ReactNode} from 'react';
 import Link from '@docusaurus/Link';
 import Layout from '@theme/Layout';
 import Translate, {translate} from '@docusaurus/Translate';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
 import styles from './butler.module.css';
 
 /**
- * Homepage, design v4 (task 84ce8bf7, note fc24c386): the hero rotates through
- * five product angles — Alfred chat (lead) → boards → knowledge graph → finance
- * → agent orchestration — headline and stage in sync, 5s autoplay, hover pauses,
- * tabs jump directly, no autoplay under prefers-reduced-motion. Below: the
- * "start with Alfred" funnel to /alfred, the five-item engine row, and the CTA.
- * All visuals are flat UI vignettes (no screenshots). Mirrored on the Vite
- * app's /home — keep structure and copy aligned when editing either.
- * Per the design sign-off every CTA points at the docs quickstart.
+ * Homepage, design v7 (task 4bd20228, boss-approved 2026-07-26): structure and
+ * copy unchanged from v6 — the hero rotates through five product angles —
+ * Alfred chat (lead) → boards → knowledge graph → finance → agent orchestration
+ * — headline and stage in sync, 5s autoplay, hover pauses, tabs jump directly,
+ * no autoplay under prefers-reduced-motion. Below: the "start with Alfred"
+ * funnel to /alfred, the engine row, the architecture diagram, and the CTA.
+ * v7 changes visuals only: pure monochrome + bold type, and the stage shows
+ * REAL product screenshots (light theme, demo data, static/img/landing/).
+ * Mirrored on the Vite app's /home — keep structure and copy aligned when
+ * editing either. Per the design sign-off every CTA points at the quickstart.
  */
 
 /**
@@ -87,249 +90,14 @@ function AgentSetupButton() {
   );
 }
 
-// --- Stage vignettes (flat UI miniatures, one per angle) ---
-
-function VigHead({children}: {children: ReactNode}) {
-  return (
-    <div className={styles.vigHead}>
-      <span className={styles.vigDot} />
-      {children}
-    </div>
-  );
-}
-
-function ChatVignette() {
-  return (
-    <>
-      <VigHead>Telegram · Alfred</VigHead>
-      <div className={styles.miniChat}>
-        <p className={styles.mcMe}>
-          <Translate id="home4.vig.chat.me1">
-            Note this: pricing page by next Wednesday. And have someone check the login bug.
-          </Translate>
-        </p>
-        <p className={styles.mcAl}>
-          <Translate id="home4.vig.chat.al1">
-            Noted. Pricing page is with the web team; login bug is with prod-debug. I'll ping you.
-          </Translate>
-        </p>
-        <span className={styles.mcGap}>
-          <Translate id="home4.vig.chat.gap">—— two hours later ——</Translate>
-        </span>
-        <p className={styles.mcAl}>
-          <Translate id="home4.vig.chat.al2">Login bug fixed; pricing draft preview tomorrow morning.</Translate>
-        </p>
-      </div>
-    </>
-  );
-}
-
-function BoardVignette() {
-  return (
-    <>
-      <VigHead>
-        <Translate id="home4.vig.board.header">Board · This week</Translate>
-      </VigHead>
-      <div className={styles.miniBoard}>
-        <div className={styles.mbCol}>
-          <div className={styles.mbT}>
-            <Translate id="home4.vig.board.todo">To do</Translate>
-          </div>
-          <div className={styles.mbCard}>
-            <Translate id="home4.vig.board.pricingCopy">Pricing copy</Translate>
-            <br />
-            <span className={styles.chip}>gtm</span>
-          </div>
-          <div className={styles.mbCard}>
-            <Translate id="home4.vig.board.expenseReport">Expense report</Translate>
-          </div>
-        </div>
-        <div className={styles.mbCol}>
-          <div className={styles.mbT}>
-            <Translate id="home4.vig.board.doing">Doing</Translate>
-          </div>
-          <div className={styles.mbCard}>
-            <Translate id="home4.vig.board.loginBug">Login bug fix</Translate>
-            <br />
-            <span className={styles.chip}>prod</span>
-          </div>
-        </div>
-        <div className={styles.mbCol}>
-          <div className={styles.mbT}>
-            <Translate id="home4.vig.board.done">Done</Translate>
-          </div>
-          <div className={styles.mbCard}>
-            <Translate id="home4.vig.board.blogShipped">Blog shipped</Translate>
-          </div>
-          <div className={styles.mbCard}>
-            <Translate id="home4.vig.board.weeklyReport">Weekly report</Translate>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-}
-
-function KgNode({x, y, kind, label, hub}: {x: string; y: string; kind: ReactNode; label: ReactNode; hub?: boolean}) {
-  return (
-    <div className={hub ? styles.kgHub : styles.kgNode} style={{left: x, top: y}}>
-      <span className={styles.kgKind}>{kind}</span>
-      {label}
-    </div>
-  );
-}
-
-function KnowledgeVignette() {
-  return (
-    <>
-      <VigHead>
-        <Translate id="home4.vig.kg.header">Knowledge · Graph</Translate>
-      </VigHead>
-      <div className={styles.kg}>
-        <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-          <line className={styles.kgHot} x1="50" y1="46" x2="20" y2="16" />
-          <line className={styles.kgHot} x1="50" y1="46" x2="80" y2="22" />
-          <line className={styles.kgHot} x1="50" y1="46" x2="76" y2="74" />
-          <line className={styles.kgHot} x1="50" y1="46" x2="22" y2="72" />
-          <line className={styles.kgLine} x1="22" y1="72" x2="80" y2="22" />
-          <line className={styles.kgLine} x1="20" y1="16" x2="80" y2="22" />
-          <line className={styles.kgLine} x1="76" y1="74" x2="92" y2="92" />
-          <line className={styles.kgLine} x1="22" y1="72" x2="8" y2="90" />
-          <line className={styles.kgLine} x1="20" y1="16" x2="6" y2="6" />
-        </svg>
-        <KgNode
-          hub
-          x="50%"
-          y="46%"
-          kind={<Translate id="home4.vig.kg.kindNote">Note</Translate>}
-          label={<Translate id="home4.vig.kg.hub">Release process v2</Translate>}
-        />
-        <KgNode
-          x="20%"
-          y="16%"
-          kind={<Translate id="home4.vig.kg.kindTask">Task</Translate>}
-          label={<Translate id="home4.vig.kg.n1">k8s deploy checklist</Translate>}
-        />
-        <KgNode
-          x="80%"
-          y="22%"
-          kind={<Translate id="home4.vig.kg.kindDecision">Decision</Translate>}
-          label={<Translate id="home4.vig.kg.n2">Blue-green deploy</Translate>}
-        />
-        <KgNode
-          x="76%"
-          y="74%"
-          kind={<Translate id="home4.vig.kg.kindTask">Task</Translate>}
-          label={<Translate id="home4.vig.kg.n3">Pricing page launch</Translate>}
-        />
-        <KgNode
-          x="22%"
-          y="72%"
-          kind={<Translate id="home4.vig.kg.kindNote">Note</Translate>}
-          label={<Translate id="home4.vig.kg.n4">Server migration</Translate>}
-        />
-        <div className={styles.kgDot} style={{left: '92%', top: '92%'}} />
-        <div className={styles.kgDot} style={{left: '8%', top: '90%'}} />
-        <div className={styles.kgDot} style={{left: '6%', top: '6%'}} />
-      </div>
-    </>
-  );
-}
-
-function FinRow({cat, label, amt, pos}: {cat: ReactNode; label: ReactNode; amt: string; pos?: boolean}) {
-  return (
-    <div className={styles.finRow}>
-      <span className={styles.finCat}>{cat}</span>
-      <span>{label}</span>
-      <span className={`${styles.finAmt} ${pos ? styles.finPos : ''}`}>{amt}</span>
-    </div>
-  );
-}
-
-function FinanceVignette() {
-  return (
-    <>
-      <VigHead>
-        <Translate id="home4.vig.fin.header">Ledger · July</Translate>
-      </VigHead>
-      <div className={styles.miniFin}>
-        <FinRow
-          cat={<Translate id="home4.vig.fin.travel">Travel</Translate>}
-          label={<Translate id="home4.vig.fin.taxi">Taxi</Translate>}
-          amt="−¥38.00"
-        />
-        <FinRow
-          cat={<Translate id="home4.vig.fin.subs">Subs</Translate>}
-          label={<Translate id="home4.vig.fin.server">Server</Translate>}
-          amt="−$12.00"
-        />
-        <FinRow
-          cat={<Translate id="home4.vig.fin.food">Food</Translate>}
-          label={<Translate id="home4.vig.fin.lunch">Team lunch</Translate>}
-          amt="−¥216.00"
-        />
-        <FinRow
-          cat={<Translate id="home4.vig.fin.income">Income</Translate>}
-          label={<Translate id="home4.vig.fin.consulting">Consulting</Translate>}
-          amt="+$800.00"
-          pos
-        />
-        <div className={styles.finSum}>
-          <Translate id="home4.vig.fin.net">Net this month</Translate>
-          <span className={styles.finSumAmt}>+$495.20</span>
-        </div>
-      </div>
-    </>
-  );
-}
-
-function AgentKid({role, name, status}: {role: string; name: ReactNode; status: ReactNode}) {
-  return (
-    <div className={styles.agKid}>
-      <span className={styles.agR}>{role}</span>
-      {name}
-      <br />
-      <span className={styles.agS}>{status}</span>
-    </div>
-  );
-}
-
-function AgentsVignette() {
-  return (
-    <>
-      <VigHead>
-        <Translate id="home4.vig.ag.header">Agent orchestration</Translate>
-      </VigHead>
-      <div className={styles.miniAgents}>
-        <span className={styles.agRoot}>🎩 Alfred</span>
-        <div className={styles.agKids}>
-          <AgentKid
-            role="dev"
-            name={<Translate id="home4.vig.ag.web">Web team</Translate>}
-            status={<Translate id="home4.vig.ag.webStatus">Doing · pricing</Translate>}
-          />
-          <AgentKid role="ops" name="prod-debug" status={<Translate id="home4.vig.ag.opsStatus">Done · login bug</Translate>} />
-          <AgentKid
-            role="content"
-            name={<Translate id="home4.vig.ag.writer">Blog writer</Translate>}
-            status={<Translate id="home4.vig.ag.standby">Standing by</Translate>}
-          />
-          <AgentKid
-            role="finance"
-            name={<Translate id="home4.vig.ag.bookkeeper">Bookkeeper</Translate>}
-            status={<Translate id="home4.vig.ag.standby2">Standing by</Translate>}
-          />
-        </div>
-      </div>
-    </>
-  );
-}
-
 // --- Hero: five rotating angles, copy and stage in sync ---
 
-type Slide = {key: string; t1: ReactNode; t2: ReactNode; sub: ReactNode; tab: ReactNode; Vignette: () => ReactNode};
+type Slide = {key: string; t1: ReactNode; t2: ReactNode; sub: ReactNode; tab: ReactNode; img: string};
 
-// Built inside a hook, not at module scope, so the Translate ids stay statically extractable.
+// Each slide's img is a real product screenshot (light theme, demo data, no
+// private content) cropped to the stage's 1.15:1 frame; files live in
+// static/img/landing/. Built inside a hook, not at module scope, so the
+// Translate ids stay statically extractable.
 function useSlides(): Slide[] {
   return [
     {
@@ -343,7 +111,7 @@ function useSlides(): Slide[] {
         </Translate>
       ),
       tab: <Translate id="home4.tab.alfred">Chat with Alfred</Translate>,
-      Vignette: ChatVignette,
+      img: 'alfred.jpg',
     },
     {
       key: 'boards',
@@ -355,7 +123,7 @@ function useSlides(): Slide[] {
         </Translate>
       ),
       tab: <Translate id="home4.tab.boards">Boards</Translate>,
-      Vignette: BoardVignette,
+      img: 'boards.jpg',
     },
     {
       key: 'knowledge',
@@ -368,7 +136,7 @@ function useSlides(): Slide[] {
         </Translate>
       ),
       tab: <Translate id="home4.tab.knowledge">Knowledge</Translate>,
-      Vignette: KnowledgeVignette,
+      img: 'knowledge.jpg',
     },
     {
       key: 'finance',
@@ -380,7 +148,7 @@ function useSlides(): Slide[] {
         </Translate>
       ),
       tab: <Translate id="home4.tab.finance">Finance</Translate>,
-      Vignette: FinanceVignette,
+      img: 'finance.jpg',
     },
     {
       key: 'agents',
@@ -392,7 +160,7 @@ function useSlides(): Slide[] {
         </Translate>
       ),
       tab: <Translate id="home4.tab.agents">Agents</Translate>,
-      Vignette: AgentsVignette,
+      img: 'agents.jpg',
     },
   ];
 }
@@ -411,7 +179,6 @@ function HeroSection() {
   }, [paused, slides.length]);
 
   const slide = slides[index];
-  const Vignette = slide.Vignette;
 
   return (
     <header
@@ -451,7 +218,12 @@ function HeroSection() {
           className={styles.stage}
           aria-label={translate({id: 'home4.hero.stageAria', message: 'Product showcase'})}>
           <div key={slide.key} className={styles.fadeup} style={{height: '100%'}}>
-            <Vignette />
+            <img
+              className={styles.shotImg}
+              src={useBaseUrl(`/img/landing/${slide.img}`)}
+              alt=""
+              loading={index === 0 ? 'eager' : 'lazy'}
+            />
           </div>
         </div>
         <div
