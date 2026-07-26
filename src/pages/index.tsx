@@ -198,12 +198,12 @@ function HeroSection() {
           </h1>
           <p className={styles.sub}>{slide.sub}</p>
         </div>
-        {/* Boss feedback 2026-07-26: exactly one Alfred CTA, then one each for
-            Download and Self-Host. The /alfred deep-dive stays reachable via
-            the nav and the MeetAlfredSection below. */}
+        {/* Boss feedback 2026-07-26: the hero sells UnDercontrol, not "an
+            Alfred app" — exactly three CTAs, each landing on a dedicated
+            page (never a docs page): /alfred, /download, /self-hosting. */}
         <div className={styles.ctas}>
-          <Link className={styles.btnPrimary} to="/docs/intro">
-            <Translate id="home4.hero.ctaPrimary">Get started with Alfred</Translate>
+          <Link className={styles.btnPrimary} to="/alfred">
+            <Translate id="home4.hero.ctaMeet">Meet Alfred →</Translate>
           </Link>
           <Link className={styles.btnGhost} to="/download">
             <Translate id="home4.hero.ctaDownload">Download</Translate>

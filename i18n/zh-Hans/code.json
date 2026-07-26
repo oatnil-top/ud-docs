@@ -1762,6 +1762,9 @@
   "home4.hero.ctaMeet": {
     "message": "认识 Alfred →"
   },
+  "home4.hero.ctaStart": {
+    "message": "开始使用"
+  },
   "home4.hero.ctaDownload": {
     "message": "下载"
   },
