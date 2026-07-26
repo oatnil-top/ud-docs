@@ -148,7 +148,8 @@ server reads — with an interactive config builder and boot preview — see the
 | `LICENSE_HOST_SECRET` | Pro/Max | — | Host secret paired with your license token. |
 | `PERSONAL_TIER_PASSWORD` | No | `personal123` | Password of the single Personal-tier user (`personal@undercontrol.local`). Set it **before first boot**: the **Start** auto-login always uses this variable, so changing only the env var after the user exists — or changing only the password in-app — breaks auto-login (the two must match; the login name itself cannot be changed). |
 | `PORT` | No | `8080` | Port the server listens on inside the container. |
-| `TELEGRAM_BOT_TOKEN` | No | — | Bot token that switches on the Telegram messenger channel for Alfred, the built-in butler agent. Optional even as a variable: an admin can also set, change or clear the token at runtime in **Admin → System Config → Integration**, no restart needed. Leave both unset and no messenger is started — everything else works unchanged. |
+| `UD_ENCRYPTION_KEY` | Messenger | — | Key used to encrypt user-owned secrets at rest — today each user's own messenger bot token. **Required before anyone can connect a messenger**: without it the Messenger section refuses to store a token and says so. Treat it as permanent per instance — changing it strands every stored token and each user must paste theirs again. |
+| `IM_MAX_BYO_BOTS` | No | `20` | How many user-owned messenger bots this instance will run at once. Each holds one long-polling connection. |
 
 ### Optional: PostgreSQL, S3 and AI
 
@@ -165,33 +166,76 @@ environment variables:
 ### Optional: Telegram messenger for Alfred
 
 Alfred is the built-in butler agent. Users talk to him by mentioning `@alfred` in any comment
-on the web, and that works on every instance with no configuration at all. Setting
-`TELEGRAM_BOT_TOKEN` additionally lets each user link a personal Telegram account and message
-Alfred from their phone.
+on the web, and that works on every instance with no configuration at all. The messenger
+channel adds the phone: each user connects **their own Telegram bot** and messages Alfred
+from anywhere.
 
-- **Get a token** — talk to [@BotFather](https://t.me/BotFather) on Telegram, send `/newbot`,
-  and it hands you a token that looks like `123456:ABC-DEF...`.
-- **Set it** — the simplest way is in the app: **Admin → System Config → Integration**, paste the
-  token, save. It applies immediately — the messenger gateway starts, restarts or stops as the
-  token is set, changed or cleared, with no server restart. Alternatively set the
-  `TELEGRAM_BOT_TOKEN` environment variable (or `--telegram-bot-token` flag), which seeds the same
-  setting at boot; while the env var stays set it wins on every boot and the field shows as locked
-  in the admin UI, so remove the variable if you prefer to manage the token in-app.
-- **Bad token?** — a token Telegram rejects is reported right on the System Config page
-  (and in onboarding, to admins) instead of hiding in the server log.
-- **What it changes in the app** — `GET /app/info` reports the messenger under `im_providers`,
-  and that is what makes the Telegram option appear in the app (first-run onboarding step 4 and
-  Profile → Messenger). While `im_providers` is empty the app says the channel is off: admins
-  get a link to System Config, other members are told to ask their administrator.
-- **Users link themselves** — each user generates a one-time code in the app and sends
-  `/link CODE` to the bot. Codes expire after 10 minutes. The operator never handles
-  per-user credentials.
-- `DISCORD_BOT_TOKEN` / `--discord-bot-token` is accepted by the configuration, but no Discord
-  provider is implemented yet — setting it alone starts nothing.
+There is no instance-wide bot token. Every user creates a bot, holds its credential, and
+their chats arrive on it and nowhere else — which is the only arrangement that stays honest
+once more than one person uses an instance.
+
+**What the operator does — once:**
+
+- Set `UD_ENCRYPTION_KEY` to a random secret. Bot tokens are stored AES-256-GCM encrypted and
+  cannot be stored at all without it; the Messenger section tells users to ask you if it is
+  missing. Changing it later strands every stored token, so pick it before your users start.
+- Optionally raise or lower `IM_MAX_BYO_BOTS` (default 20), the number of user bots this
+  instance will run at once. It is also editable at runtime in
+  **Admin → System Config → Integration**.
+- On a multi-user instance, decide when to open the bridge beyond yourself — see
+  *Multi-user access* below.
+
+**What each user does — themselves:**
+
+1. Talk to [@BotFather](https://t.me/BotFather) on Telegram, send `/newbot`, and take the
+   token it hands back. The bot's name and picture are theirs.
+2. Paste the token in **Profile → Messenger**. The server checks it with Telegram before
+   storing anything, so a mistyped token is an error next to the field rather than a bot that
+   never answers. Once saved it can never be read back — the page shows the bot's handle and a
+   mask.
+3. Send `/start` to their own bot. Telegram requires it before a bot may message them.
+4. Generate a one-time link code in the same section and send `/link CODE` to their bot within
+   10 minutes.
+
+Each bot is a private entrance: anyone who is not its owner gets a polite refusal, and a link
+code only works on its own owner's bot. Replacing a token reconnects; removing one stops the
+connection and deletes the credential, leaving the account binding and the conversation
+history intact.
+
+A token Telegram later rejects (a reset in @BotFather, say) shows as **token rejected** in the
+user's own Messenger section with the messenger's own error, and they fix it by pasting a new
+one. There is no admin repair path any more, and nothing falls back to another user's bot.
+
+`DISCORD_BOT_TOKEN` / `--discord-bot-token` is still accepted by the configuration, but no
+Discord provider is implemented yet — setting it alone starts nothing.
+
+### Multi-user access to the messenger bridge
+
+The bridge ships locked to the instance owner: `im.multi_user_enabled` defaults to `false`, and
+while it is off any other user sees *multi-user access is not open yet* in place of the
+Messenger section. Mentioning `@alfred` on the web is unaffected.
+
+Open it in **Admin → System Config** once you are satisfied with the boundary — every message
+runs an agent session on a machine, so this is the switch that decides whose machines a second
+user's messages can reach.
+
+### Upgrading an instance that used the old shared bot
+
+Earlier versions had one operator-configured `TELEGRAM_BOT_TOKEN` for the whole instance. That
+key is gone, and the upgrade is automatic:
+
+- On the first boot after upgrading, the old token is moved into the instance owner's own bot
+  row, every conversation and delivery it created is stamped with that bot, and the old setting
+  is deleted. The owner keeps their channel with no action.
+- If `UD_ENCRYPTION_KEY` is not set, the migration skips with a warning and leaves the old
+  setting untouched — nothing is lost, but the bridge stays down until you set a key and
+  restart, after which the owner can paste their token in **Profile → Messenger**.
+- Other users are not migrated, because there was nothing of theirs to migrate: they were using
+  the operator's bot. Each connects their own.
 
 ## First-run onboarding
 
-The first time a user opens a fresh instance they get a four-step wizard. Every step is
+The first time a user opens a fresh instance they get a five-step wizard. Every step is
 skippable, and anything already configured shows up as completed instead of asking again.
 Nothing here is required for the server to run — a bare instance completes onboarding fine.
 
@@ -205,16 +249,18 @@ Nothing here is required for the server to run — a bare instance completes onb
    the headless path for a server or remote box: `npm install -g @oatnil/ud`, `ud login`,
    `ud daemon start`. Either way the step completes as soon as the server reports an online
    daemon.
-4. **Meet Alfred** — introduces the built-in butler agent (dispatching work to the right agent,
+4. **Connect Telegram** — the user creates their own bot with @BotFather and pastes its token,
+   the same flow that lives in Profile → Messenger. Skippable like every other step; the first
+   instruction points back at step 3, because a bot with no machine behind it answers nothing.
+   On an instance with no `UD_ENCRYPTION_KEY` the step explains that tokens cannot be stored yet
+   and to ask the administrator.
+5. **Meet Alfred** — introduces the built-in butler agent (dispatching work to the right agent,
    remembering preferences and decisions, filing quick captures) and points users at
-   `@alfred` mentions in web comments. If a Telegram bot token is configured, this step also
-   offers the optional Telegram link described above; if not, the step explains that the channel
-   is off and links admins straight to System Config, where the token applies without a restart.
+   `@alfred` mentions in web comments.
 
-**What the operator must do:** only step 4's Telegram option depends on server configuration.
-Add the bot token in **Admin → System Config → Integration** (takes effect immediately) or via
-`TELEGRAM_BOT_TOKEN` before your users go through onboarding if you want it to appear there;
-otherwise they can link Telegram later from Profile → Messenger once you enable it.
+**What the operator must do:** set `UD_ENCRYPTION_KEY` before your users go through onboarding
+if you want step 4 to work. Nothing else in the wizard depends on server configuration, and a
+user who skips step 4 can connect a bot later from Profile → Messenger.
 
 ## Separate frontend / backend images (advanced)
 
@@ -226,6 +272,14 @@ proxies, they are also published as separate multi-arch images:
 
 The backend takes the same environment variables as above; the frontend serves the static
 assets via nginx and proxies `/api` to the backend.
+
+**Running more than one backend replica.** Correctness no longer depends on a single
+replica: the cap of one live Alfred session per user is enforced by a database index, so a
+second replica that races the first loses its insert and hands the message to the session
+that won. The messenger bridge is still happiest on one replica, though — each replica opens
+its own long poll per user bot, and Telegram allows one consumer per bot, so several replicas
+polling the same bots steal each other's messages. Run one backend replica if users connect
+messengers; scale the frontend freely either way.
 
 ## Data & Backup
 

@@ -30,14 +30,17 @@ UnDercontrol follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 - New Telegram messenger channel: bind your account in Profile → Messenger (generate a one-time code, then send `/link CODE` to the bot) and talk to Alfred from your phone.
 - Agent replies mirror back to Telegram, so a conversation started in the app continues in chat.
 - Self-host operators enable it with the `TELEGRAM_BOT_TOKEN` env var — see the configuration reference.
+  - *Since v0.121.0: replaced by BYO bots. There is no instance-wide bot token any more — each user connects their own bot in Profile → Messenger, and the operator sets `UD_ENCRYPTION_KEY` instead. An existing token migrates to the instance owner automatically on upgrade.*
 
 **Redesigned first-run onboarding**
 - A 4-step wizard walks you through language, workspace status, registering this machine as a daemon, and meeting Alfred with optional Telegram binding.
+  - *Since v0.121.0: five steps — connecting your own Telegram bot is now its own step after daemon registration.*
 - Daemon registration is one click in the desktop app — which also detects installed agent CLIs like Claude Code and Codex — and guided commands in the browser. Every step is skippable.
 
 ### Improvements
 
 - Profile has a new Messenger section for managing IM bindings — generate a code, list them, unlink — and tells you whether the server has a bot configured.
+  - *Since v0.121.0: the section is where you connect your own bot, and it reports that bot's own health rather than the server's.*
 - The Conversations tab now uses the Inbox icon, matching iOS.
 - Download links now point to oatnil.com/download; the /subscribe page is retired.
 

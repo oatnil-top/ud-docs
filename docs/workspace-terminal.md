@@ -41,6 +41,25 @@ start a session from a task
 - **Register the device as a daemon**: after registering on the Workspaces page, the desktop app connects to the backend over SSE and waits for instructions.
 - **Backend resolves cwd / tmux (SST)**: cwd, tmux session name, and the launch command are resolved by the backend and delivered with the `workspace_init` event — the daemon does **not** read board metadata locally.
 
+### Which machine a session lands on
+
+When you pick a daemon yourself, that is the one. When an agent starts a session for you —
+an `@alfred` mention, a message from Telegram, a scheduled wake — the backend chooses, and it
+chooses **your own machines first**: a machine shared with you is used only when none of yours
+is online. Your agent runs against your files, on hardware you control, whenever that is
+possible at all.
+
+The order after that is: a daemon the agent is pinned to, then the one you last ran a session
+on, then whatever is online. Pinning an agent to a specific daemon in the agent settings
+overrides the preference — on a multi-user instance that pin applies to everyone, which the
+setting says next to the field.
+
+If none of your machines is online, nothing is lost. The message stays in its thread, and the
+bot replies with how to bring one back — open the desktop app, which connects on launch, or run
+`ud daemon start` on any machine you use. Your next message after that starts the session, and
+it reads the thread it is bound to, so it sees everything said while nobody was listening.
+There is no queue to drain and nothing replays.
+
 ## Board Configuration
 
 Each kanban board stores workspace settings in its metadata (configure them in the board settings drawer — gear icon on the board header). The backend reads these when resolving session parameters.
