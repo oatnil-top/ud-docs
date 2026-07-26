@@ -1,166 +1,20 @@
-import {useState, useEffect, type ReactNode} from 'react';
+import {useEffect, useState, type ReactNode} from 'react';
 import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import Translate, {translate} from '@docusaurus/Translate';
 
-import styles from './index.module.css';
-
-const APP_URL = 'https://ud.oatnil.com';
-
-// Mirror of ud-vite-app/src/lib/cdn.ts — pick R2 (global) or Bitiful (China) by locale.
-const CDN_BASE = {
-  en: 'https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev',
-  zh: 'https://oatnil-public.s3.bitiful.net',
-} as const;
-
-function useCdnImg() {
-  const {i18n} = useDocusaurusContext();
-  const base = i18n.currentLocale === 'zh-Hans' ? CDN_BASE.zh : CDN_BASE.en;
-  return (filename: string) => `${base}/features/${filename}`;
-}
+import styles from './butler.module.css';
 
 /**
- * Page structure: one claim, one band, one proof.
- *
- * Every band states a single claim on the left and shows the evidence for it on the
- * right, split by a continuous hairline. Do not reintroduce a summary/pillar grid that
- * restates the bands — that duplication is what this page was rebuilt to remove.
+ * Homepage, design v4 (task 84ce8bf7, note fc24c386): the hero rotates through
+ * five product angles — Alfred chat (lead) → boards → knowledge graph → finance
+ * → agent orchestration — headline and stage in sync, 5s autoplay, hover pauses,
+ * tabs jump directly, no autoplay under prefers-reduced-motion. Below: the
+ * "start with Alfred" funnel to /alfred, the five-item engine row, and the CTA.
+ * All visuals are flat UI vignettes (no screenshots). Mirrored on the Vite
+ * app's /home — keep structure and copy aligned when editing either.
+ * Per the design sign-off every CTA points at the docs quickstart.
  */
-
-// --- Shared carousel primitives ---
-// The hero reel and the All-in-One showcase are the same object: an auto-advancing
-// image strip with dots and click-to-zoom. Behaviour lives here so they cannot drift.
-
-/** Auto-advance an index over `length` images. Pass `resetKey` to jump back to 0 when
- *  the underlying set changes (the showcase swaps sets when you pick a tab). */
-function useAutoRotate(length: number, intervalMs: number, resetKey?: unknown) {
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    setIndex(0);
-  }, [resetKey]);
-
-  // `index` is a dependency so the timer restarts whenever the slide changes. Without it
-  // the interval keeps its own schedule and a dot you just clicked can be advanced past
-  // almost immediately; this way every slide — picked or automatic — gets its full dwell.
-  useEffect(() => {
-    if (length <= 1) return undefined;
-    const id = setTimeout(() => setIndex((prev) => (prev + 1) % length), intervalMs);
-    return () => clearTimeout(id);
-  }, [length, intervalMs, resetKey, index]);
-
-  return [index, setIndex] as const;
-}
-
-function CarouselDots({count, index, onSelect}: {count: number; index: number; onSelect: (i: number) => void}) {
-  if (count <= 1) return null;
-  return (
-    <span className={styles.carouselDots}>
-      {Array.from({length: count}, (_, i) => (
-        <button
-          key={i}
-          type="button"
-          className={`${styles.carouselDot} ${i === index ? styles.carouselDotActive : ''}`}
-          onClick={() => onSelect(i)}
-          aria-label={`Go to image ${i + 1}`}
-        />
-      ))}
-    </span>
-  );
-}
-
-function Lightbox({src, alt, onClose}: {src: string; alt: string; onClose: () => void}) {
-  return (
-    <div className={styles.lightbox} onClick={onClose}>
-      <button type="button" className={styles.lightboxClose} onClick={onClose} aria-label="Close lightbox">
-        ×
-      </button>
-      <img src={src} alt={alt} className={styles.lightboxImage} onClick={(e) => e.stopPropagation()} />
-    </div>
-  );
-}
-
-// --- Hero ---
-// The reel answers the subtitle in its own order — Jira, Obsidian, AI agents, Mint —
-// so the first screen shows the evidence for the claim it just made. Built inside a
-// hook, not at module scope, so the Translate/translate ids stay statically extractable.
-function useHeroShots() {
-  return [
-    {
-      file: 'home-page/v2/hero/1.jpg',
-      caption: <Translate id="homepage.hero.shot.board">Agile boards — every column is a saved query</Translate>,
-      alt: translate({
-        id: 'homepage.hero.shot.board.alt',
-        message: 'A UnDercontrol agile board with Backlog, Sprint, In Progress, Blocked, In Review and Done columns',
-      }),
-    },
-    {
-      file: 'home-page/v2/hero/2.jpg',
-      caption: <Translate id="homepage.hero.shot.explorer">Markdown docs and tasks in one tree</Translate>,
-      alt: translate({
-        id: 'homepage.hero.shot.explorer.alt',
-        message: 'The UnDercontrol explorer showing a folder tree beside a Markdown task',
-      }),
-    },
-    {
-      file: 'home-page/v2/hero/3.jpg',
-      caption: <Translate id="homepage.hero.shot.workspace">AI agents at work, grouped by agent</Translate>,
-      alt: translate({
-        id: 'homepage.hero.shot.workspace.alt',
-        message: 'UnDercontrol workspace sessions running AI agents across several machines',
-      }),
-    },
-    {
-      file: 'home-page/v2/hero/4.jpg',
-      caption: <Translate id="homepage.hero.shot.finance">Expenses and budgets, same workspace</Translate>,
-      alt: translate({
-        id: 'homepage.hero.shot.finance.alt',
-        message: 'UnDercontrol expense tracking with a monthly total and top categories',
-      }),
-    },
-  ];
-}
-
-function HeroGallery() {
-  const cdnImg = useCdnImg();
-  const shots = useHeroShots();
-  const [index, setIndex] = useAutoRotate(shots.length, 5000);
-  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
-
-  const current = shots[index];
-  const src = cdnImg(current.file);
-  const srcs = shots.map((s) => cdnImg(s.file)).join(',');
-
-  // Warm every shot up front. Rotation swaps the src, so an uncached slide would
-  // render as a blank gap until it downloaded.
-  useEffect(() => {
-    srcs.split(',').forEach((url) => {
-      const img = new Image();
-      img.src = url;
-    });
-  }, [srcs]);
-
-  return (
-    <div className={styles.heroImageWrap}>
-      {/* Caption and dots sit above the shot: heroDesktopImg deliberately bleeds off the
-          bottom of the hero, so there is no edge underneath to hang controls on. */}
-      <div className={styles.heroShotMeta}>
-        <span>{current.caption}</span>
-        <CarouselDots count={shots.length} index={index} onSelect={setIndex} />
-      </div>
-      {/* Not lazy: this is above the fold and is the page's LCP element. */}
-      <img
-        className={styles.heroDesktopImg}
-        src={src}
-        alt={current.alt}
-        fetchPriority="high"
-        onClick={() => setIsLightboxOpen(true)}
-      />
-      {isLightboxOpen && <Lightbox src={src} alt={current.alt} onClose={() => setIsLightboxOpen(false)} />}
-    </div>
-  );
-}
 
 /**
  * Agent onboarding pill.
@@ -221,7 +75,7 @@ function AgentSetupButton() {
         id: 'homepage.hero.agentSetup.aria',
         message: 'Copy the agent setup prompt',
       })}>
-      <span className={styles.agentSetupLabel}>
+      <span>
         {copied ? (
           <Translate id="homepage.hero.agentSetup.copied">Copied — paste it into your agent</Translate>
         ) : (
@@ -233,628 +87,466 @@ function AgentSetupButton() {
   );
 }
 
-function HeroSection() {
+// --- Stage vignettes (flat UI miniatures, one per angle) ---
+
+function VigHead({children}: {children: ReactNode}) {
   return (
-    <section className={styles.heroSection}>
-      <span className={styles.eyebrow}>
-        <span className={styles.dot} />
-        {/* "Since September 2024" is a trust signal, and the date is verifiable: the
-            first ud-next-web commit is 2024-09-22 (ud-server 2024-09-23). NOT the
-            current monorepo's 2025-07-03 — that is only the Go+Vite rewrite. See the
-            competitor timeline in ud task e95c1469, note d6f1e6b1.
-            "Self-hosted" was dropped from this line: it pushed the eyebrow onto two
-            rows on a phone, and the nav, the CTA row and the whole "three ways to run"
-            band already say it. Keep this line short enough to stay on one row. */}
-        <Translate id="homepage.hero.eyebrow">Free for personal use · Built since September 2024</Translate>
-      </span>
-      <h1 className={styles.heroTitle}>
-        <Translate id="homepage.hero.tagline">
-          One private place for all your valuable information.
-        </Translate>
-      </h1>
-      <p className={styles.heroSubtitle}>
-        <Translate id="homepage.hero.subtitle">
-          Knowledge base like Obsidian. Project management like Jira. Personal finance like Mint. File storage like Google Drive — one private workspace, ready for your AI agents.
-        </Translate>
-      </p>
-      {/* No keyword-pill row here. Self-hosted / local-first / AI-native / open API /
-          all-in-one were five badges restating the eyebrow and the subtitle in single
-          words — on a phone they wrapped into a second row of noise above the CTAs.
-          The hero carries at most two pill-shaped things: the eyebrow (trust) and the
-          agent onboarding action. Claims belong in the bands below, next to evidence. */}
-      <div className={styles.heroButtons}>
-        <Link className={styles.heroButtonPrimary} to={APP_URL}>
-          <Translate id="homepage.hero.tryOnlineCta">Try it online</Translate>
-        </Link>
-        <Link className={styles.heroButtonSecondary} to="/download#desktop">
-          <Translate id="homepage.hero.download">Download Desktop App</Translate>
-        </Link>
-        <Link className={styles.heroButtonText} to="#run">
-          <Translate id="homepage.hero.waysLink">Or self-host it — three ways to run ↓</Translate>
-        </Link>
-      </div>
-      <div className={styles.heroAgentRow}>
-        <AgentSetupButton />
-      </div>
-      <HeroGallery />
-    </section>
-  );
-}
-
-// --- Three ways to run it ---
-// Each column carries a spec table so the trade-off is scannable rather than prose.
-// Download is the primary action: local-with-no-server is the option people don't expect.
-const WAYS = [
-  {
-    key: 'online',
-    primary: false,
-    to: APP_URL,
-    label: <Translate id="homepage.ways.online.label">Try it online</Translate>,
-    title: <Translate id="homepage.ways.online.title">Nothing to install.</Translate>,
-    desc: (
-      <Translate id="homepage.ways.online.desc">
-        Open the cloud demo and file your first task in about a minute. Bring your data over later, or don&apos;t.
-      </Translate>
-    ),
-    where: <Translate id="homepage.ways.online.where">our server</Translate>,
-    setup: <Translate id="homepage.ways.online.setup">~1 min</Translate>,
-    offline: <Translate id="homepage.ways.online.offline">no</Translate>,
-    cta: <Translate id="homepage.ways.online.cta">Open the demo</Translate>,
-  },
-  {
-    key: 'desktop',
-    primary: true,
-    to: '/download#desktop',
-    label: <Translate id="homepage.ways.desktop.label">Download the app</Translate>,
-    title: <Translate id="homepage.ways.desktop.title">Local, with no server at all.</Translate>,
-    desc: (
-      <Translate id="homepage.ways.desktop.desc">
-        The desktop app ships its own backend. No account, no network, no Docker — your workspace is a folder on your disk.
-      </Translate>
-    ),
-    where: <Translate id="homepage.ways.desktop.where">your machine</Translate>,
-    setup: <Translate id="homepage.ways.desktop.setup">~2 min</Translate>,
-    offline: <Translate id="homepage.ways.desktop.offline">yes</Translate>,
-    cta: <Translate id="homepage.ways.desktop.cta">Download the app</Translate>,
-  },
-  {
-    key: 'selfhost',
-    primary: false,
-    to: '/self-hosting',
-    label: <Translate id="homepage.ways.selfhost.label">Self-host it</Translate>,
-    title: <Translate id="homepage.ways.selfhost.title">Your box, reachable everywhere.</Translate>,
-    desc: (
-      <Translate id="homepage.ways.selfhost.desc">
-        One Docker Compose file on a machine you control. Web, mobile, and CLI all point at it — and nothing in the middle is ours.
-      </Translate>
-    ),
-    where: <Translate id="homepage.ways.selfhost.where">your server</Translate>,
-    setup: <Translate id="homepage.ways.selfhost.setup">~15 min</Translate>,
-    offline: <Translate id="homepage.ways.selfhost.offline">on your LAN</Translate>,
-    cta: <Translate id="homepage.ways.selfhost.cta">Self-hosting guide</Translate>,
-  },
-] as const;
-
-function WaysSection() {
-  return (
-    <>
-      <section className={styles.ways} id="run">
-        {WAYS.map((way) => (
-          <div key={way.key} className={styles.way}>
-            <p className={styles.sectionLabel}>{way.label}</p>
-            <h3 className={styles.wayTitle}>{way.title}</h3>
-            <p className={styles.wayDesc}>{way.desc}</p>
-            <div className={styles.spec}>
-              <div>
-                <span><Translate id="homepage.ways.spec.where">Data lives</Translate></span>
-                <b>{way.where}</b>
-              </div>
-              <div>
-                <span><Translate id="homepage.ways.spec.setup">Setup</Translate></span>
-                <b>{way.setup}</b>
-              </div>
-              <div>
-                <span><Translate id="homepage.ways.spec.offline">Offline</Translate></span>
-                <b>{way.offline}</b>
-              </div>
-              <div>
-                <span><Translate id="homepage.ways.spec.cost">Cost</Translate></span>
-                <b><Translate id="homepage.ways.spec.free">free</Translate></b>
-              </div>
-            </div>
-            <Link
-              className={way.primary ? styles.heroButtonPrimary : styles.heroButtonSecondary}
-              to={way.to}>
-              {way.cta}
-            </Link>
-          </div>
-        ))}
-      </section>
-      <p className={styles.waysNote}>
-        <Translate id="homepage.ways.note">
-          Same app, same data model, same CLI in all three. Start on the demo, move to your laptop, graduate to your own server — nothing to migrate but the folder.
-        </Translate>
-      </p>
-    </>
-  );
-}
-
-// --- All-in-One image showcase ---
-const SHOWCASE = [
-  {key: 'tasks', images: ['home-page/v2/tasks/1.jpg', 'home-page/v2/tasks/2.jpg', 'home-page/v2/tasks/3.jpg']},
-  {key: 'graph', images: ['home-page/v2/graph/1.jpg', 'home-page/v2/graph/2.jpg']},
-  {key: 'finance', images: ['home-page/v2/finance/1.jpg', 'home-page/v2/finance/2.jpg']},
-  {key: 'resources', images: ['home-page/v2/resources/1.jpg']},
-  {key: 'workspace', images: ['home-page/v2/workspace/1.jpg']},
-] as const;
-
-const SHOWCASE_TEXT: Record<string, {label: ReactNode; desc: ReactNode}> = {
-  tasks: {
-    label: <Translate id="homepage.showcase.tasks.label">Tasks & Knowledge</Translate>,
-    desc: <Translate id="homepage.showcase.tasks.desc2">Kanban boards, Markdown docs, threaded comments.</Translate>,
-  },
-  graph: {
-    label: <Translate id="homepage.showcase.graph.label">Knowledge Graph</Translate>,
-    desc: <Translate id="homepage.showcase.graph.desc">Links and hierarchy, drawn. Plus per-task mindmaps.</Translate>,
-  },
-  finance: {
-    label: <Translate id="homepage.showcase.finance.label">Finance</Translate>,
-    desc: <Translate id="homepage.showcase.finance.desc">Expense tracking, budgets, AI receipt scanning.</Translate>,
-  },
-  resources: {
-    label: <Translate id="homepage.showcase.resources.label">Resources</Translate>,
-    desc: <Translate id="homepage.showcase.resources.desc">Attach images, draw diagrams, sync via CLI.</Translate>,
-  },
-  workspace: {
-    label: <Translate id="homepage.showcase.workspace.label">AI Workspace</Translate>,
-    desc: <Translate id="homepage.showcase.workspace.desc2">Sessions grouped by agent, running in parallel.</Translate>,
-  },
-};
-
-function ShowcaseSection() {
-  const cdnImg = useCdnImg();
-  const [activeItem, setActiveItem] = useState(0);
-  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
-  const [failed, setFailed] = useState<Record<string, boolean>>({});
-
-  const current = SHOWCASE[activeItem];
-  const images = current.images;
-  // activeItem as the reset key: picking a tab swaps the image set, so restart at its first shot.
-  const [imageIndex, setImageIndex] = useAutoRotate(images.length, 4000, activeItem);
-  const currentSrc = cdnImg(images[imageIndex] || images[0]);
-  const isFailed = failed[currentSrc];
-
-  return (
-    <section className={styles.band}>
-      <div className={styles.claim}>
-        <p className={styles.sectionLabel}>
-          <Translate id="homepage.showcase.label">All-in-One</Translate>
-        </p>
-        <h2 className={styles.claimTitle}>
-          <Translate id="homepage.showcase.title">Four tools&apos; worth of your life, in one workspace.</Translate>
-        </h2>
-        <p className={styles.claimBody}>
-          <Translate id="homepage.showcase.body">
-            Tasks, notes, money, and files stop living in four silos that never talk to each other. One data model, one search, one place your agents can reach.
-          </Translate>
-        </p>
-        <div className={styles.tabs} role="tablist">
-          {SHOWCASE.map((item, index) => {
-            const isActive = index === activeItem;
-            return (
-              <div key={item.key}>
-                <button
-                  type="button"
-                  role="tab"
-                  aria-selected={isActive}
-                  onClick={() => setActiveItem(index)}
-                  className={`${styles.tab} ${isActive ? styles.tabActive : ''}`}>
-                  <span className={styles.tabMark}>{isActive ? '●' : '○'}</span>
-                  {SHOWCASE_TEXT[item.key].label}
-                </button>
-                {isActive && <p className={styles.tabDesc}>{SHOWCASE_TEXT[item.key].desc}</p>}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-      <div className={styles.proof}>
-        <div className={styles.shotFrame}>
-          {isFailed ? (
-            <div className={styles.showcaseFallback}>{SHOWCASE_TEXT[current.key].desc}</div>
-          ) : (
-            <img
-              src={currentSrc}
-              alt={current.key}
-              className={styles.showcaseImage}
-              loading="lazy"
-              onClick={() => setIsLightboxOpen(true)}
-              onError={() => setFailed((prev) => ({...prev, [currentSrc]: true}))}
-            />
-          )}
-        </div>
-        <div className={styles.shotMeta}>
-          <span>{`${current.key}/${imageIndex + 1} of ${images.length}`}</span>
-          <CarouselDots count={images.length} index={imageIndex} onSelect={setImageIndex} />
-        </div>
-      </div>
-
-      {isLightboxOpen && !isFailed && (
-        <Lightbox src={currentSrc} alt={current.key} onClose={() => setIsLightboxOpen(false)} />
-      )}
-    </section>
-  );
-}
-
-// --- Private & Portable ---
-const TRUST_ROWS = [
-  {
-    key: 'private',
-    k: <Translate id="homepage.trust.private.title">Fully Private</Translate>,
-    v: <Translate id="homepage.trust.private.desc">AI runs on your machine. Data never leaves your device.</Translate>,
-  },
-  {
-    key: 'offline',
-    k: <Translate id="homepage.trust.offline.title">Works Offline</Translate>,
-    v: <Translate id="homepage.trust.offline.desc">Desktop app with built-in backend. No internet required.</Translate>,
-  },
-  {
-    key: 'selfhost',
-    k: <Translate id="homepage.trust.selfhost.title">Self-Hostable</Translate>,
-    v: <Translate id="homepage.trust.selfhost.desc">Deploy on your own infrastructure. Your server, your rules.</Translate>,
-  },
-  {
-    key: 'free',
-    k: <Translate id="homepage.trust.free.title">Free Forever</Translate>,
-    v: <Translate id="homepage.trust.free.desc">No ads, no tracking. Personal use is free, always.</Translate>,
-  },
-] as const;
-
-function PrivateSection() {
-  return (
-    <section className={styles.band}>
-      <div className={styles.claim}>
-        <p className={styles.sectionLabel}>
-          <Translate id="homepage.private.label">Private &amp; Portable</Translate>
-        </p>
-        <h2 className={styles.claimTitle}>
-          <Translate id="homepage.private.title">Your data is Markdown in a folder, not a hostage.</Translate>
-        </h2>
-        <p className={styles.claimBody}>
-          <Translate id="homepage.private.body">
-            Self-hosted and local-first. Every task, note, and board is declarable as Markdown with YAML frontmatter — diff it, commit it, grep it, take it. There is no export button because there is nothing to export from.
-          </Translate>
-        </p>
-      </div>
-      <div className={styles.proof}>
-        <div className={styles.code}>
-          <div className={styles.codeBar}>task.md</div>
-          <div className={styles.codeBody}>
-            <pre>
-              <span className={styles.c}>---{'\n'}</span>
-              <span className={styles.k}>title:</span> Ship the v0.113 release{'\n'}
-              <span className={styles.k}>status:</span> in-progress{'\n'}
-              <span className={styles.k}>tags:</span> [release, backend]{'\n'}
-              <span className={styles.k}>deadline:</span> 2026-07-21{'\n'}
-              <span className={styles.c}>---{'\n'}</span>
-              Cut the tag, build the Electron artifacts, verify{'\n'}
-              the uploaded DMG on a clean machine.
-            </pre>
-          </div>
-        </div>
-        <div className={styles.rows}>
-          {TRUST_ROWS.map((row) => (
-            <div key={row.key} className={styles.row}>
-              <div className={styles.rowK}>{row.k}</div>
-              <div className={styles.rowV}>{row.v}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// --- AI-Native & Open ---
-const OPEN_ROWS = [
-  {
-    key: 'api',
-    k: <Translate id="homepage.ainative.api.title">Open HTTP API</Translate>,
-    v: <Translate id="homepage.ainative.api.desc">Embed your workspace in any workflow, with an API key.</Translate>,
-  },
-  {
-    key: 'schema',
-    k: <Translate id="homepage.ainative.schema.title">Open schema</Translate>,
-    v: <Translate id="homepage.ainative.schema.desc">Hermes, OpenClaw, or a client you write yourself can CRUD your data.</Translate>,
-  },
-  {
-    key: 'skills',
-    k: <Translate id="homepage.ainative.skills.title">Shareable skills</Translate>,
-    v: <Translate id="homepage.ainative.skills.desc">Prompt templates any agent can pull and consume.</Translate>,
-  },
-  {
-    key: 'sst',
-    k: <Translate id="homepage.ainative.sst.title">Single source of truth</Translate>,
-    v: <Translate id="homepage.ainative.sst.desc">Every tool reads and writes the same place. Nothing drifts.</Translate>,
-  },
-] as const;
-
-function AiNativeSection() {
-  return (
-    <section className={styles.band}>
-      <div className={styles.claim}>
-        <p className={styles.sectionLabel}>
-          <Translate id="homepage.ainative.label">AI-Native &amp; Open</Translate>
-        </p>
-        <h2 className={styles.claimTitle}>
-          <Translate id="homepage.ainative.title">Agents already know how to use it.</Translate>
-        </h2>
-        <p className={styles.claimBody}>
-          <Translate id="homepage.ainative.body">
-            Everything is a structured schema, kubectl-style. An agent that can run a command can read and write your workspace — no plugin, no scraping, no bespoke integration to maintain.
-          </Translate>
-        </p>
-      </div>
-      <div className={styles.proof}>
-        <div className={`${styles.code} ${styles.term}`}>
-          <div className={styles.codeBar}>bash — ud CLI</div>
-          <div className={styles.codeBody}>
-            <pre>
-              <span className={styles.c}># everything-as-code: tasks are markdown, agents speak CLI{'\n'}</span>
-              <span className={styles.p}>$</span> ud apply -f task.md          <span className={styles.c}># create or update from a file</span>{'\n'}
-              <span className={styles.p}>$</span> ud get task <span className={styles.f}>--status</span> todo     <span className={styles.c}># kubectl-style queries</span>{'\n'}
-              <span className={styles.p}>$</span> ud describe task 49322857     <span className={styles.c}># full context for an agent</span>
-            </pre>
-          </div>
-        </div>
-        <div className={styles.rows}>
-          {OPEN_ROWS.map((row) => (
-            <div key={row.key} className={styles.row}>
-              <div className={styles.rowK}>{row.k}</div>
-              <div className={styles.rowV}>{row.v}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// --- Agent Orchestrator diagram ---
-function OrchestrationDiagram() {
-  // Monochrome, thin lines. Uses currentColor + opacity so it adapts to theme.
-  const bg = 'var(--ifm-background-color)';
-  const conn = {stroke: 'currentColor', strokeOpacity: 0.18, strokeWidth: 1};
-  const connThin = {stroke: 'currentColor', strokeOpacity: 0.12, strokeWidth: 0.75};
-  const label = {fill: 'currentColor', fillOpacity: 0.8};
-  const sub = {fill: 'currentColor', fillOpacity: 0.4};
-  const agentText = {fill: 'currentColor', fillOpacity: 0.5};
-  const colLabel = {fill: 'currentColor', fillOpacity: 0.32};
-  const arrowFill = {fill: 'currentColor', fillOpacity: 0.18};
-
-  return (
-    <div className={styles.orchestrationWrap}>
-      <svg viewBox="0 0 820 420" className={styles.orchestrationSvg} fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <marker id="ah" markerWidth="6" markerHeight="5" refX="6" refY="2.5" orient="auto">
-            <path d="M0,0.5 L5,2.5 L0,4.5" style={arrowFill} />
-          </marker>
-        </defs>
-
-        {/* Clients -> Server */}
-        <line x1="120" y1="85" x2="325" y2="188" style={conn} markerEnd="url(#ah)" />
-        <line x1="120" y1="205" x2="325" y2="205" style={conn} markerEnd="url(#ah)" />
-        <line x1="120" y1="325" x2="325" y2="222" style={conn} markerEnd="url(#ah)" />
-        {/* Server -> Daemons */}
-        <line x1="470" y1="182" x2="575" y2="88" style={conn} markerEnd="url(#ah)" />
-        <line x1="470" y1="205" x2="575" y2="205" style={conn} markerEnd="url(#ah)" />
-        <line x1="470" y1="228" x2="575" y2="322" style={conn} markerEnd="url(#ah)" />
-        {/* Daemons -> Agents */}
-        <line x1="660" y1="68" x2="712" y2="55" style={connThin} />
-        <line x1="660" y1="102" x2="712" y2="115" style={connThin} />
-        <line x1="660" y1="188" x2="712" y2="175" style={connThin} />
-        <line x1="660" y1="222" x2="712" y2="235" style={connThin} />
-        <line x1="660" y1="308" x2="712" y2="295" style={connThin} />
-        <line x1="660" y1="342" x2="712" y2="355" style={connThin} />
-
-        {/* Clients */}
-        <circle cx="80" cy="85" r="30" style={{stroke: 'currentColor', strokeOpacity: 0.5, strokeWidth: 1, fill: bg}} />
-        <text x="80" y="89" textAnchor="middle" fontSize="11" style={label}>Web</text>
-        <circle cx="80" cy="205" r="30" style={{stroke: 'currentColor', strokeOpacity: 0.5, strokeWidth: 1, fill: bg}} />
-        <text x="80" y="209" textAnchor="middle" fontSize="11" style={label}>Desktop</text>
-        <circle cx="80" cy="325" r="30" style={{stroke: 'currentColor', strokeOpacity: 0.5, strokeWidth: 1, fill: bg}} />
-        <text x="80" y="329" textAnchor="middle" fontSize="11" style={label}>Mobile</text>
-
-        {/* Server hub */}
-        <circle cx="400" cy="205" r="58" style={{stroke: 'currentColor', strokeOpacity: 0.7, strokeWidth: 1.5, fill: bg}} />
-        <text x="400" y="202" textAnchor="middle" fontSize="14" fontWeight="500" style={label}>Server</text>
-        <text x="400" y="219" textAnchor="middle" fontSize="9" style={sub}>relay (self-hostable)</text>
-
-        {/* Daemons */}
-        <circle cx="625" cy="85" r="40" style={{stroke: 'currentColor', strokeOpacity: 0.35, strokeWidth: 1, fill: bg}} strokeDasharray="5 4" />
-        <text x="625" y="81" textAnchor="middle" fontSize="10" style={label}>Daemon 1</text>
-        <text x="625" y="96" textAnchor="middle" fontSize="8" style={sub}>MacBook</text>
-        <circle cx="625" cy="205" r="40" style={{stroke: 'currentColor', strokeOpacity: 0.35, strokeWidth: 1, fill: bg}} strokeDasharray="5 4" />
-        <text x="625" y="201" textAnchor="middle" fontSize="10" style={label}>Daemon 2</text>
-        <text x="625" y="216" textAnchor="middle" fontSize="8" style={sub}>Linux Server</text>
-        <circle cx="625" cy="325" r="40" style={{stroke: 'currentColor', strokeOpacity: 0.35, strokeWidth: 1, fill: bg}} strokeDasharray="5 4" />
-        <text x="625" y="321" textAnchor="middle" fontSize="10" style={label}>Daemon 3</text>
-        <text x="625" y="336" textAnchor="middle" fontSize="8" style={sub}>Windows PC</text>
-
-        {/* Agents */}
-        <circle cx="745" cy="50" r="20" style={{stroke: 'currentColor', strokeOpacity: 0.25, strokeWidth: 0.75, fill: bg}} />
-        <text x="745" y="54" textAnchor="middle" fontSize="8" style={agentText}>Claude</text>
-        <circle cx="745" cy="120" r="20" style={{stroke: 'currentColor', strokeOpacity: 0.25, strokeWidth: 0.75, fill: bg}} />
-        <text x="745" y="124" textAnchor="middle" fontSize="8" style={agentText}>Codex</text>
-        <circle cx="745" cy="170" r="20" style={{stroke: 'currentColor', strokeOpacity: 0.25, strokeWidth: 0.75, fill: bg}} />
-        <text x="745" y="174" textAnchor="middle" fontSize="8" style={agentText}>Claude</text>
-        <circle cx="745" cy="240" r="20" style={{stroke: 'currentColor', strokeOpacity: 0.25, strokeWidth: 0.75, fill: bg}} />
-        <text x="745" y="244" textAnchor="middle" fontSize="8" style={agentText}>OpenCode</text>
-        <circle cx="745" cy="290" r="20" style={{stroke: 'currentColor', strokeOpacity: 0.25, strokeWidth: 0.75, fill: bg}} />
-        <text x="745" y="294" textAnchor="middle" fontSize="8" style={agentText}>Codex</text>
-        <circle cx="745" cy="360" r="20" style={{stroke: 'currentColor', strokeOpacity: 0.25, strokeWidth: 0.75, fill: bg}} />
-        <text x="745" y="364" textAnchor="middle" fontSize="8" style={agentText}>Claude</text>
-
-        {/* Column labels */}
-        <text x="80" y="405" textAnchor="middle" fontSize="9" letterSpacing="1" style={colLabel}>CLIENTS</text>
-        <text x="400" y="405" textAnchor="middle" fontSize="9" letterSpacing="1" style={colLabel}>SERVER</text>
-        <text x="625" y="405" textAnchor="middle" fontSize="9" letterSpacing="1" style={colLabel}>DAEMONS</text>
-        <text x="745" y="405" textAnchor="middle" fontSize="9" letterSpacing="1" style={colLabel}>AGENTS</text>
-      </svg>
+    <div className={styles.vigHead}>
+      <span className={styles.vigDot} />
+      {children}
     </div>
   );
 }
 
-function OrchestratorSection() {
+function ChatVignette() {
   return (
-    <section className={styles.band}>
-      <div className={styles.claim}>
-        <p className={styles.sectionLabel}>
-          <Translate id="homepage.howItWorks.label">Agent Orchestrator</Translate>
-        </p>
-        <h2 className={styles.claimTitle}>
-          <Translate id="homepage.orchestrator.title">Run agents on every machine you own.</Translate>
-        </h2>
-        <p className={styles.claimBody}>
-          <Translate id="homepage.orchestrator.body">
-            Launch a session on your MacBook from your phone. Hand a task to the Linux box and close the laptop. The relay in the middle is self-hostable, so the only thing between you and your agents is yours.
+    <>
+      <VigHead>Telegram · Alfred</VigHead>
+      <div className={styles.miniChat}>
+        <p className={styles.mcMe}>
+          <Translate id="home4.vig.chat.me1">
+            Note this: pricing page by next Wednesday. And have someone check the login bug.
           </Translate>
         </p>
+        <p className={styles.mcAl}>
+          <Translate id="home4.vig.chat.al1">
+            Noted. Pricing page is with the web team; login bug is with prod-debug. I'll ping you.
+          </Translate>
+        </p>
+        <span className={styles.mcGap}>
+          <Translate id="home4.vig.chat.gap">—— two hours later ——</Translate>
+        </span>
+        <p className={styles.mcAl}>
+          <Translate id="home4.vig.chat.al2">Login bug fixed; pricing draft preview tomorrow morning.</Translate>
+        </p>
       </div>
-      <div className={styles.proof}>
-        <OrchestrationDiagram />
-      </div>
-    </section>
+    </>
   );
 }
 
-// --- Access Everywhere ---
-const ACCESS_ROWS = [
-  {
-    key: 'web',
-    k: <Translate id="homepage.access.web.title">Web &amp; Desktop</Translate>,
-    v: <Translate id="homepage.access.web.desc">Browser, or a native app for macOS, Windows and Linux.</Translate>,
-  },
-  {
-    key: 'mobile',
-    k: <Translate id="homepage.access.mobile.title">Mobile</Translate>,
-    v: <Translate id="homepage.access.mobile.desc">iOS and Android — read, capture, and steer agents.</Translate>,
-  },
-  {
-    key: 'terminal',
-    k: <Translate id="homepage.access.terminal.title">Terminal</Translate>,
-    v: <Translate id="homepage.access.terminal.desc">The ud CLI, wherever you already live.</Translate>,
-  },
-  {
-    key: 'clipper',
-    k: <Translate id="homepage.access.clipper.title">Chrome &amp; Shortcuts</Translate>,
-    v: <Translate id="homepage.access.clipper.desc">Clip a page, or fire a capture from an Apple Shortcut.</Translate>,
-  },
-] as const;
-
-function AccessSection() {
+function BoardVignette() {
   return (
-    <section className={styles.band}>
-      <div className={styles.claim}>
-        <p className={styles.sectionLabel}>
-          <Translate id="homepage.pillarsGrid.access.title">Access Everywhere</Translate>
-        </p>
-        <h2 className={styles.claimTitle}>
-          <Translate id="homepage.access.title">Capture wherever the thought happens.</Translate>
-        </h2>
-        <p className={styles.claimBody}>
-          <Translate id="homepage.access.body">
-            A link on your laptop, a receipt photo in a queue, a note dictated to your watch. Six ways in, one workspace out — same data, same second.
-          </Translate>
-        </p>
+    <>
+      <VigHead>
+        <Translate id="home4.vig.board.header">Board · This week</Translate>
+      </VigHead>
+      <div className={styles.miniBoard}>
+        <div className={styles.mbCol}>
+          <div className={styles.mbT}>
+            <Translate id="home4.vig.board.todo">To do</Translate>
+          </div>
+          <div className={styles.mbCard}>
+            <Translate id="home4.vig.board.pricingCopy">Pricing copy</Translate>
+            <br />
+            <span className={styles.chip}>gtm</span>
+          </div>
+          <div className={styles.mbCard}>
+            <Translate id="home4.vig.board.expenseReport">Expense report</Translate>
+          </div>
+        </div>
+        <div className={styles.mbCol}>
+          <div className={styles.mbT}>
+            <Translate id="home4.vig.board.doing">Doing</Translate>
+          </div>
+          <div className={styles.mbCard}>
+            <Translate id="home4.vig.board.loginBug">Login bug fix</Translate>
+            <br />
+            <span className={styles.chip}>prod</span>
+          </div>
+        </div>
+        <div className={styles.mbCol}>
+          <div className={styles.mbT}>
+            <Translate id="home4.vig.board.done">Done</Translate>
+          </div>
+          <div className={styles.mbCard}>
+            <Translate id="home4.vig.board.blogShipped">Blog shipped</Translate>
+          </div>
+          <div className={styles.mbCard}>
+            <Translate id="home4.vig.board.weeklyReport">Weekly report</Translate>
+          </div>
+        </div>
       </div>
-      <div className={styles.proof}>
-        <div className={styles.rows}>
-          {ACCESS_ROWS.map((row) => (
-            <div key={row.key} className={styles.row}>
-              <div className={styles.rowK}>{row.k}</div>
-              <div className={styles.rowV}>{row.v}</div>
-            </div>
+    </>
+  );
+}
+
+function KgNode({x, y, kind, label, hub}: {x: string; y: string; kind: ReactNode; label: ReactNode; hub?: boolean}) {
+  return (
+    <div className={hub ? styles.kgHub : styles.kgNode} style={{left: x, top: y}}>
+      <span className={styles.kgKind}>{kind}</span>
+      {label}
+    </div>
+  );
+}
+
+function KnowledgeVignette() {
+  return (
+    <>
+      <VigHead>
+        <Translate id="home4.vig.kg.header">Knowledge · Graph</Translate>
+      </VigHead>
+      <div className={styles.kg}>
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <line className={styles.kgHot} x1="50" y1="46" x2="20" y2="16" />
+          <line className={styles.kgHot} x1="50" y1="46" x2="80" y2="22" />
+          <line className={styles.kgHot} x1="50" y1="46" x2="76" y2="74" />
+          <line className={styles.kgHot} x1="50" y1="46" x2="22" y2="72" />
+          <line className={styles.kgLine} x1="22" y1="72" x2="80" y2="22" />
+          <line className={styles.kgLine} x1="20" y1="16" x2="80" y2="22" />
+          <line className={styles.kgLine} x1="76" y1="74" x2="92" y2="92" />
+          <line className={styles.kgLine} x1="22" y1="72" x2="8" y2="90" />
+          <line className={styles.kgLine} x1="20" y1="16" x2="6" y2="6" />
+        </svg>
+        <KgNode
+          hub
+          x="50%"
+          y="46%"
+          kind={<Translate id="home4.vig.kg.kindNote">Note</Translate>}
+          label={<Translate id="home4.vig.kg.hub">Release process v2</Translate>}
+        />
+        <KgNode
+          x="20%"
+          y="16%"
+          kind={<Translate id="home4.vig.kg.kindTask">Task</Translate>}
+          label={<Translate id="home4.vig.kg.n1">k8s deploy checklist</Translate>}
+        />
+        <KgNode
+          x="80%"
+          y="22%"
+          kind={<Translate id="home4.vig.kg.kindDecision">Decision</Translate>}
+          label={<Translate id="home4.vig.kg.n2">Blue-green deploy</Translate>}
+        />
+        <KgNode
+          x="76%"
+          y="74%"
+          kind={<Translate id="home4.vig.kg.kindTask">Task</Translate>}
+          label={<Translate id="home4.vig.kg.n3">Pricing page launch</Translate>}
+        />
+        <KgNode
+          x="22%"
+          y="72%"
+          kind={<Translate id="home4.vig.kg.kindNote">Note</Translate>}
+          label={<Translate id="home4.vig.kg.n4">Server migration</Translate>}
+        />
+        <div className={styles.kgDot} style={{left: '92%', top: '92%'}} />
+        <div className={styles.kgDot} style={{left: '8%', top: '90%'}} />
+        <div className={styles.kgDot} style={{left: '6%', top: '6%'}} />
+      </div>
+    </>
+  );
+}
+
+function FinRow({cat, label, amt, pos}: {cat: ReactNode; label: ReactNode; amt: string; pos?: boolean}) {
+  return (
+    <div className={styles.finRow}>
+      <span className={styles.finCat}>{cat}</span>
+      <span>{label}</span>
+      <span className={`${styles.finAmt} ${pos ? styles.finPos : ''}`}>{amt}</span>
+    </div>
+  );
+}
+
+function FinanceVignette() {
+  return (
+    <>
+      <VigHead>
+        <Translate id="home4.vig.fin.header">Ledger · July</Translate>
+      </VigHead>
+      <div className={styles.miniFin}>
+        <FinRow
+          cat={<Translate id="home4.vig.fin.travel">Travel</Translate>}
+          label={<Translate id="home4.vig.fin.taxi">Taxi</Translate>}
+          amt="−¥38.00"
+        />
+        <FinRow
+          cat={<Translate id="home4.vig.fin.subs">Subs</Translate>}
+          label={<Translate id="home4.vig.fin.server">Server</Translate>}
+          amt="−$12.00"
+        />
+        <FinRow
+          cat={<Translate id="home4.vig.fin.food">Food</Translate>}
+          label={<Translate id="home4.vig.fin.lunch">Team lunch</Translate>}
+          amt="−¥216.00"
+        />
+        <FinRow
+          cat={<Translate id="home4.vig.fin.income">Income</Translate>}
+          label={<Translate id="home4.vig.fin.consulting">Consulting</Translate>}
+          amt="+$800.00"
+          pos
+        />
+        <div className={styles.finSum}>
+          <Translate id="home4.vig.fin.net">Net this month</Translate>
+          <span className={styles.finSumAmt}>+$495.20</span>
+        </div>
+      </div>
+    </>
+  );
+}
+
+function AgentKid({role, name, status}: {role: string; name: ReactNode; status: ReactNode}) {
+  return (
+    <div className={styles.agKid}>
+      <span className={styles.agR}>{role}</span>
+      {name}
+      <br />
+      <span className={styles.agS}>{status}</span>
+    </div>
+  );
+}
+
+function AgentsVignette() {
+  return (
+    <>
+      <VigHead>
+        <Translate id="home4.vig.ag.header">Agent orchestration</Translate>
+      </VigHead>
+      <div className={styles.miniAgents}>
+        <span className={styles.agRoot}>🎩 Alfred</span>
+        <div className={styles.agKids}>
+          <AgentKid
+            role="dev"
+            name={<Translate id="home4.vig.ag.web">Web team</Translate>}
+            status={<Translate id="home4.vig.ag.webStatus">Doing · pricing</Translate>}
+          />
+          <AgentKid role="ops" name="prod-debug" status={<Translate id="home4.vig.ag.opsStatus">Done · login bug</Translate>} />
+          <AgentKid
+            role="content"
+            name={<Translate id="home4.vig.ag.writer">Blog writer</Translate>}
+            status={<Translate id="home4.vig.ag.standby">Standing by</Translate>}
+          />
+          <AgentKid
+            role="finance"
+            name={<Translate id="home4.vig.ag.bookkeeper">Bookkeeper</Translate>}
+            status={<Translate id="home4.vig.ag.standby2">Standing by</Translate>}
+          />
+        </div>
+      </div>
+    </>
+  );
+}
+
+// --- Hero: five rotating angles, copy and stage in sync ---
+
+type Slide = {key: string; t1: ReactNode; t2: ReactNode; sub: ReactNode; tab: ReactNode; Vignette: () => ReactNode};
+
+// Built inside a hook, not at module scope, so the Translate ids stay statically extractable.
+function useSlides(): Slide[] {
+  return [
+    {
+      key: 'alfred',
+      t1: <Translate id="home4.slide.alfred.t1">You just chat.</Translate>,
+      t2: <Translate id="home4.slide.alfred.t2">Alfred handles the rest.</Translate>,
+      sub: (
+        <Translate id="home4.slide.alfred.sub">
+          A private butler living in your Telegram: he understands, remembers, delegates, tracks — and results return
+          to the chat.
+        </Translate>
+      ),
+      tab: <Translate id="home4.tab.alfred">Chat with Alfred</Translate>,
+      Vignette: ChatVignette,
+    },
+    {
+      key: 'boards',
+      t1: <Translate id="home4.slide.boards.t1">Tasks, boards, notes —</Translate>,
+      t2: <Translate id="home4.slide.boards.t2">one place.</Translate>,
+      sub: (
+        <Translate id="home4.slide.boards.sub">
+          Everything Alfred notes lands on your boards. When you want hands-on control, it's all there.
+        </Translate>
+      ),
+      tab: <Translate id="home4.tab.boards">Boards</Translate>,
+      Vignette: BoardVignette,
+    },
+    {
+      key: 'knowledge',
+      t1: <Translate id="home4.slide.knowledge.t1">Every task is a doc.</Translate>,
+      t2: <Translate id="home4.slide.knowledge.t2">Search, and it's there.</Translate>,
+      sub: (
+        <Translate id="home4.slide.knowledge.sub">
+          Markdown notes, meeting minutes, decision records — linked into one graph; full-text search brings anything
+          back in a second.
+        </Translate>
+      ),
+      tab: <Translate id="home4.tab.knowledge">Knowledge</Translate>,
+      Vignette: KnowledgeVignette,
+    },
+    {
+      key: 'finance',
+      t1: <Translate id="home4.slide.finance.t1">Say it once,</Translate>,
+      t2: <Translate id="home4.slide.finance.t2">and it's booked.</Translate>,
+      sub: (
+        <Translate id="home4.slide.finance.sub">
+          "Taxi, $6" — categorized, booked, rolled into your monthly summary. Alfred does it in passing.
+        </Translate>
+      ),
+      tab: <Translate id="home4.tab.finance">Finance</Translate>,
+      Vignette: FinanceVignette,
+    },
+    {
+      key: 'agents',
+      t1: <Translate id="home4.slide.agents.t1">A team of agents,</Translate>,
+      t2: <Translate id="home4.slide.agents.t2">at your command.</Translate>,
+      sub: (
+        <Translate id="home4.slide.agents.sub">
+          Dev, ops, writing — each has a specialist. Alfred is the head butler who hands work to the right one.
+        </Translate>
+      ),
+      tab: <Translate id="home4.tab.agents">Agents</Translate>,
+      Vignette: AgentsVignette,
+    },
+  ];
+}
+
+const ROTATE_MS = 5000;
+
+function HeroSection() {
+  const slides = useSlides();
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  useEffect(() => {
+    if (paused || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+    const id = setInterval(() => setIndex((i) => (i + 1) % slides.length), ROTATE_MS);
+    return () => clearInterval(id);
+  }, [paused, slides.length]);
+
+  const slide = slides[index];
+  const Vignette = slide.Vignette;
+
+  return (
+    <header
+      className={`${styles.hero} ${styles.wrap}`}
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}>
+      <div>
+        <div className={styles.eyebrow}>Private AI Butler &amp; Workspace</div>
+        {/* key remounts on rotation so the fade-up entrance replays; min-heights
+            in CSS keep the CTAs from jumping as headline length changes. */}
+        <div key={slide.key} className={styles.fadeup}>
+          <h1>
+            {slide.t1}
+            <br />
+            <span className={styles.turn}>{slide.t2}</span>
+          </h1>
+          <p className={styles.sub}>{slide.sub}</p>
+        </div>
+        <div className={styles.ctas}>
+          <Link className={styles.btnPrimary} to="/docs/intro">
+            <Translate id="home4.hero.ctaPrimary">Get started with Alfred</Translate>
+          </Link>
+          <Link className={styles.btnGhost} to="/alfred">
+            <Translate id="home4.hero.ctaMeet">Meet Alfred →</Translate>
+          </Link>
+        </div>
+        <p className={styles.fine}>
+          <Translate id="home4.hero.fine">Free for personal use · Self-hostable · Also on Discord</Translate>
+        </p>
+        <div className={styles.agentSetupRow}>
+          <AgentSetupButton />
+        </div>
+      </div>
+
+      <div className={styles.stageBox}>
+        <div
+          className={styles.stage}
+          aria-label={translate({id: 'home4.hero.stageAria', message: 'Product showcase'})}>
+          <div key={slide.key} className={styles.fadeup} style={{height: '100%'}}>
+            <Vignette />
+          </div>
+        </div>
+        <div
+          className={styles.angleTabs}
+          role="tablist"
+          aria-label={translate({id: 'home4.hero.stageAria', message: 'Product showcase'})}>
+          {slides.map((s, i) => (
+            <button
+              key={s.key}
+              type="button"
+              role="tab"
+              aria-selected={i === index}
+              className={i === index ? styles.tabOn : undefined}
+              onClick={() => setIndex(i)}>
+              {/* Alfred keeps a green lead-dot: he is the headline angle. */}
+              {s.key === 'alfred' && <span className={styles.leadDot} />}
+              {s.tab}
+            </button>
           ))}
         </div>
       </div>
+    </header>
+  );
+}
+
+// --- "Start with Alfred" funnel ---
+function MeetAlfredSection() {
+  return (
+    <section className={styles.section}>
+      <div className={`${styles.wrap} ${styles.meet}`}>
+        <div>
+          <div className={styles.eyebrow}>
+            <Translate id="home4.meet.eyebrow">The lead angle</Translate>
+          </div>
+          <h2>
+            <Translate id="home4.meet.title">Don't want to learn an interface? Start with Alfred.</Translate>
+          </h2>
+          <p className={styles.lede}>
+            <Translate id="home4.meet.lede">
+              Everything above — tasks, ledger, the agent team — can be driven entirely by chatting with Alfred.
+            </Translate>
+          </p>
+        </div>
+        <Link className={styles.btnGhost} to="/alfred">
+          <Translate id="home4.meet.cta">Meet Alfred →</Translate>
+        </Link>
+      </div>
     </section>
   );
 }
 
-// --- Start here (docs) ---
-const DOCS = [
-  {
-    key: 'intro',
-    to: '/docs/intro',
-    path: '/docs/intro',
-    title: <Translate id="homepage.docs.intro.title">Quickstart</Translate>,
-    desc: <Translate id="homepage.docs.intro.desc">Install, sign in, and file your first task.</Translate>,
-  },
-  {
-    key: 'eac',
-    to: '/docs/everything-as-code',
-    path: '/docs/everything-as-code',
-    title: <Translate id="homepage.docs.eac.title">Everything-as-Code</Translate>,
-    desc: <Translate id="homepage.docs.eac.desc">The Markdown + YAML model your data actually is.</Translate>,
-  },
-  {
-    key: 'cli',
-    to: '/docs/cli',
-    path: '/docs/cli',
-    title: <Translate id="homepage.docs.cli.title">CLI reference</Translate>,
-    desc: <Translate id="homepage.docs.cli.desc">get, apply, describe — and how agents use them.</Translate>,
-  },
-  {
-    key: 'selfhost',
-    to: '/docs/self-deployment',
-    path: '/docs/self-deployment',
-    title: <Translate id="homepage.docs.selfhost.title">Self-hosting</Translate>,
-    desc: <Translate id="homepage.docs.selfhost.desc">Docker Compose on a box you control.</Translate>,
-  },
-  {
-    key: 'workspace',
-    to: '/docs/workspace-terminal',
-    path: '/docs/workspace-terminal',
-    title: <Translate id="homepage.docs.workspace.title">Workspace &amp; agents</Translate>,
-    desc: <Translate id="homepage.docs.workspace.desc">Launch Claude Code or Codex straight from a task.</Translate>,
-  },
-  {
-    key: 'cookbook',
-    to: '/docs/cookbook',
-    path: '/docs/cookbook',
-    title: <Translate id="homepage.docs.cookbook.title">Cookbook</Translate>,
-    desc: <Translate id="homepage.docs.cookbook.desc">Recipes people actually run day to day.</Translate>,
-  },
-] as const;
-
-function DocsSection() {
+// --- Engine row: the five demoted angles, one line each ---
+function EngineSection() {
+  const items: Array<{key: string; t: ReactNode; d: ReactNode}> = [
+    {
+      key: 'tasks',
+      t: <Translate id="home4.engine.tasks.t">Tasks &amp; Boards</Translate>,
+      d: <Translate id="home4.engine.tasks.d">Everything is a task; views your way.</Translate>,
+    },
+    {
+      key: 'notes',
+      t: <Translate id="home4.engine.notes.t">Notes</Translate>,
+      d: <Translate id="home4.engine.notes.d">Long-form lives beside your tasks.</Translate>,
+    },
+    {
+      key: 'finance',
+      t: <Translate id="home4.engine.finance.t">Finance</Translate>,
+      d: <Translate id="home4.engine.finance.d">Multi-currency ledger, monthly rollups.</Translate>,
+    },
+    {
+      key: 'agents',
+      t: <Translate id="home4.engine.agents.t">Agent team</Translate>,
+      d: <Translate id="home4.engine.agents.d">AI colleagues you hire, team up, hand off to.</Translate>,
+    },
+    {
+      key: 'selfhost',
+      t: <Translate id="home4.engine.selfhost.t">Self-hosted</Translate>,
+      d: <Translate id="home4.engine.selfhost.d">Your data, on your own machine.</Translate>,
+    },
+  ];
   return (
-    <section className={styles.band} id="docs">
-      <div className={styles.claim}>
-        <p className={styles.sectionLabel}>
-          <Translate id="homepage.docs.label">Start Here</Translate>
-        </p>
-        <h2 className={styles.claimTitle}>
-          <Translate id="homepage.docs.title">Pick the path you came for.</Translate>
+    <section className={styles.section}>
+      <div className={styles.wrap}>
+        <div className={styles.eyebrow}>
+          <Translate id="home4.engine.eyebrow">One engine</Translate>
+        </div>
+        <h2>
+          <Translate id="home4.engine.title">Five angles, one UnDercontrol</Translate>
         </h2>
-        <p className={styles.claimBody}>
-          <Translate id="homepage.docs.body">
-            Fifteen minutes to a workspace of your own — running on someone else&apos;s machine or entirely on yours.
-          </Translate>
-        </p>
-      </div>
-      <div className={styles.proof}>
-        <div className={styles.docList}>
-          {DOCS.map((doc) => (
-            <Link key={doc.key} className={styles.doc} to={doc.to}>
-              <span>
-                <span className={styles.docTitle}>{doc.title}</span>
-                <br />
-                <span className={styles.docDesc}>{doc.desc}</span>
-              </span>
-              <span className={styles.docPath}>{doc.path}</span>
-            </Link>
+        <div className={styles.engineRow}>
+          {items.map((item) => (
+            <div key={item.key} className={styles.engineItem}>
+              <div className={styles.engineT}>{item.t}</div>
+              <div className={styles.engineD}>{item.d}</div>
+            </div>
           ))}
         </div>
       </div>
@@ -863,22 +555,19 @@ function DocsSection() {
 }
 
 // --- CTA ---
-function CTASection() {
+function CtaSection() {
   return (
-    <section className={styles.ctaSection}>
-      <h2 className={styles.ctaTitle}>
-        <Translate id="homepage.cta.title">Get your information under control.</Translate>
-      </h2>
-      <p className={styles.ctaSubtitle}>
-        <Translate id="homepage.cta.subtitle">Download the desktop app or try the cloud demo.</Translate>
-      </p>
-      <div className={styles.heroButtons}>
-        <Link className={styles.heroButtonPrimary} to="/download">
-          <Translate id="homepage.cta.getStarted">Get Started</Translate>
+    <section className={styles.ctaBand}>
+      <div className={styles.wrap}>
+        <h2>
+          <Translate id="home4.cta.title">Starting today, hand it to Alfred.</Translate>
+        </h2>
+        <Link className={styles.btnPrimary} to="/docs/intro">
+          <Translate id="home4.cta.primary">Get started with Alfred</Translate>
         </Link>
-        <Link className={styles.heroButtonSecondary} to={APP_URL}>
-          <Translate id="homepage.cta.signIn">Sign In</Translate>
-        </Link>
+        <p className={styles.fine}>
+          <Translate id="home4.cta.fine">Free for personal use · Self-hostable · Running in five minutes</Translate>
+        </p>
       </div>
     </section>
   );
@@ -889,24 +578,20 @@ export default function Home(): ReactNode {
     <Layout
       title={translate({
         id: 'homepage.title',
-        message: 'UnDercontrol — Tasks, Knowledge & AI Agent Orchestration',
+        message: 'UnDercontrol — Alfred, Your Private AI Butler',
         description: 'The homepage meta title',
       })}
       description={translate({
         id: 'homepage.description',
-        message: 'One private workspace for tasks, knowledge, and AI agents. Knowledge base like Obsidian, project management like Jira, finance like Mint — self-hosted, your data never leaves your control.',
+        message:
+          'Meet Alfred, a private AI butler living in your Telegram: he understands, remembers, delegates to your AI agents, and reports back in the chat. Behind him: tasks, knowledge, finance, and agent orchestration in one private, self-hostable workspace.',
         description: 'The homepage meta description',
       })}>
-      <main className={styles.mainContainer}>
+      <main className={styles.scope}>
         <HeroSection />
-        <WaysSection />
-        <ShowcaseSection />
-        <PrivateSection />
-        <AiNativeSection />
-        <OrchestratorSection />
-        <AccessSection />
-        <DocsSection />
-        <CTASection />
+        <MeetAlfredSection />
+        <EngineSection />
+        <CtaSection />
       </main>
     </Layout>
   );

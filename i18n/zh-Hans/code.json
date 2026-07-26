@@ -173,7 +173,7 @@
     "message": "让你的信息回到掌控之中。"
   },
   "homepage.description": {
-    "message": "任务、知识与 AI 代理的统一工作空间。从浏览器编排任何 AI 编程代理。自部署，随时随地访问 — 数据始终由你掌控。"
+    "message": "认识 Alfred：住在 Telegram 里的私人 AI 管家。发一条消息，他会理解、记住、派给你的 AI 代理，并把结果带回聊天。背后是任务、知识、财务与 agent 编排合一的私有可自托管工作空间。"
   },
   "homepage.docs.body": {
     "description": "Homepage: docs.body",
@@ -341,7 +341,7 @@
     "message": "AI 工作区"
   },
   "homepage.title": {
-    "message": "UnDercontrol — 任务、知识与 AI 代理编排"
+    "message": "UnDercontrol — Alfred，你的私人 AI 管家"
   },
   "homepage.trust.free.desc": {
     "message": "无广告、无追踪，个人使用永远免费。"
@@ -1686,5 +1686,374 @@
   "theme.tags.tagsPageTitle": {
     "description": "The title of the tag list page",
     "message": "标签"
+  },
+  "home4.slide.alfred.t1": {
+    "message": "你只管说，"
+  },
+  "home4.slide.alfred.t2": {
+    "message": "Alfred 来安排。"
+  },
+  "home4.slide.alfred.sub": {
+    "message": "住在 Telegram 里的私人管家：理解、记住、派活、追踪，结果回到聊天里。"
+  },
+  "home4.slide.boards.t1": {
+    "message": "任务、看板、笔记，"
+  },
+  "home4.slide.boards.t2": {
+    "message": "一处管齐。"
+  },
+  "home4.slide.boards.sub": {
+    "message": "Alfred 记下的每件事，都落进你的看板；想动手管理时，一切都在。"
+  },
+  "home4.slide.knowledge.t1": {
+    "message": "任务即文档，"
+  },
+  "home4.slide.knowledge.t2": {
+    "message": "搜一下，全都在。"
+  },
+  "home4.slide.knowledge.sub": {
+    "message": "Markdown 笔记、会议记录、决策存档——互相链接成一张网，全文检索一秒找回。"
+  },
+  "home4.slide.finance.t1": {
+    "message": "随口一句，"
+  },
+  "home4.slide.finance.t2": {
+    "message": "账就记好了。"
+  },
+  "home4.slide.finance.sub": {
+    "message": "「打车 38 块」——分类、入账、月度汇总，Alfred 顺手就办了。"
+  },
+  "home4.slide.agents.t1": {
+    "message": "一支 agent 团队，"
+  },
+  "home4.slide.agents.t2": {
+    "message": "听你调遣。"
+  },
+  "home4.slide.agents.sub": {
+    "message": "开发、运维、写作各有专人。Alfred 是总管，把活派给最合适的那位。"
+  },
+  "home4.tab.alfred": {
+    "message": "Alfred 对话"
+  },
+  "home4.tab.boards": {
+    "message": "任务看板"
+  },
+  "home4.tab.knowledge": {
+    "message": "知识库"
+  },
+  "home4.tab.finance": {
+    "message": "账本"
+  },
+  "home4.tab.agents": {
+    "message": "Agents"
+  },
+  "home4.hero.ctaPrimary": {
+    "message": "开始使用 Alfred"
+  },
+  "home4.hero.ctaMeet": {
+    "message": "认识 Alfred →"
+  },
+  "home4.hero.fine": {
+    "message": "个人免费 · 可自托管 · 也支持 Discord"
+  },
+  "home4.hero.stageAria": {
+    "message": "产品展示"
+  },
+  "home4.vig.chat.me1": {
+    "message": "帮我记一下：下周三前给官网加个价格页，顺便让人看看登录 bug。"
+  },
+  "home4.vig.chat.al1": {
+    "message": "记下了。价格页已派给 web 团队；登录 bug 让 prod-debug 跟进，有结果我叫你。"
+  },
+  "home4.vig.chat.gap": {
+    "message": "—— 两小时后 ——"
+  },
+  "home4.vig.chat.al2": {
+    "message": "登录 bug 修好了；价格页初稿明早给你预览链接。"
+  },
+  "home4.vig.board.header": {
+    "message": "看板 · 本周"
+  },
+  "home4.vig.board.todo": {
+    "message": "待办"
+  },
+  "home4.vig.board.doing": {
+    "message": "进行中"
+  },
+  "home4.vig.board.done": {
+    "message": "完成"
+  },
+  "home4.vig.board.pricingCopy": {
+    "message": "价格页文案"
+  },
+  "home4.vig.board.expenseReport": {
+    "message": "报销单整理"
+  },
+  "home4.vig.board.loginBug": {
+    "message": "登录 bug 修复"
+  },
+  "home4.vig.board.blogShipped": {
+    "message": "博客发布"
+  },
+  "home4.vig.board.weeklyReport": {
+    "message": "周报"
+  },
+  "home4.vig.kg.header": {
+    "message": "知识库 · 知识图谱"
+  },
+  "home4.vig.kg.kindNote": {
+    "message": "笔记"
+  },
+  "home4.vig.kg.kindTask": {
+    "message": "任务"
+  },
+  "home4.vig.kg.kindDecision": {
+    "message": "决策"
+  },
+  "home4.vig.kg.hub": {
+    "message": "发布流程 v2"
+  },
+  "home4.vig.kg.n1": {
+    "message": "k8s 部署 checklist"
+  },
+  "home4.vig.kg.n2": {
+    "message": "蓝绿部署"
+  },
+  "home4.vig.kg.n3": {
+    "message": "价格页上线"
+  },
+  "home4.vig.kg.n4": {
+    "message": "服务器迁移记录"
+  },
+  "home4.vig.fin.header": {
+    "message": "账本 · 七月"
+  },
+  "home4.vig.fin.travel": {
+    "message": "出行"
+  },
+  "home4.vig.fin.taxi": {
+    "message": "打车"
+  },
+  "home4.vig.fin.subs": {
+    "message": "订阅"
+  },
+  "home4.vig.fin.server": {
+    "message": "服务器"
+  },
+  "home4.vig.fin.food": {
+    "message": "餐饮"
+  },
+  "home4.vig.fin.lunch": {
+    "message": "团队午餐"
+  },
+  "home4.vig.fin.income": {
+    "message": "收入"
+  },
+  "home4.vig.fin.consulting": {
+    "message": "咨询费"
+  },
+  "home4.vig.fin.net": {
+    "message": "本月净额"
+  },
+  "home4.vig.ag.header": {
+    "message": "Agent 编排"
+  },
+  "home4.vig.ag.web": {
+    "message": "web 团队"
+  },
+  "home4.vig.ag.webStatus": {
+    "message": "进行中 · 价格页"
+  },
+  "home4.vig.ag.opsStatus": {
+    "message": "已完成 · 登录 bug"
+  },
+  "home4.vig.ag.writer": {
+    "message": "博客写手"
+  },
+  "home4.vig.ag.bookkeeper": {
+    "message": "记账员"
+  },
+  "home4.vig.ag.standby": {
+    "message": "待命"
+  },
+  "home4.vig.ag.standby2": {
+    "message": "待命"
+  },
+  "home4.meet.eyebrow": {
+    "message": "主打角度"
+  },
+  "home4.meet.title": {
+    "message": "不想学任何界面？从 Alfred 开始。"
+  },
+  "home4.meet.lede": {
+    "message": "上面的一切——任务、账本、agent 团队——都可以只通过和 Alfred 聊天来使用。"
+  },
+  "home4.meet.cta": {
+    "message": "认识 Alfred →"
+  },
+  "home4.engine.eyebrow": {
+    "message": "一个引擎"
+  },
+  "home4.engine.title": {
+    "message": "五个角度，同一个 UnDercontrol"
+  },
+  "home4.engine.tasks.t": {
+    "message": "任务与看板"
+  },
+  "home4.engine.tasks.d": {
+    "message": "万物皆任务，视图随你组织。"
+  },
+  "home4.engine.notes.t": {
+    "message": "笔记"
+  },
+  "home4.engine.notes.d": {
+    "message": "长内容与文档，和任务长在一起。"
+  },
+  "home4.engine.finance.t": {
+    "message": "账本"
+  },
+  "home4.engine.finance.d": {
+    "message": "多币种记账与月度汇总。"
+  },
+  "home4.engine.agents.t": {
+    "message": "Agent 团队"
+  },
+  "home4.engine.agents.d": {
+    "message": "可雇佣、可组队、可交接的 AI 同事。"
+  },
+  "home4.engine.selfhost.t": {
+    "message": "自托管"
+  },
+  "home4.engine.selfhost.d": {
+    "message": "你的数据，在你自己的机器上。"
+  },
+  "home4.cta.title": {
+    "message": "今天起，把事情交给 Alfred。"
+  },
+  "home4.cta.primary": {
+    "message": "开始使用 Alfred"
+  },
+  "home4.cta.fine": {
+    "message": "个人免费 · 可自托管 · 五分钟跑起来"
+  },
+  "alfredp.meta.title": {
+    "message": "Alfred — 你的私人 AI 管家 | UnDercontrol"
+  },
+  "alfredp.meta.description": {
+    "message": "Alfred 是住在你 Telegram / Discord 里的私人 AI 管家。发一条消息，他会理解、记住、派给你的 AI 代理，并把结果带回聊天。"
+  },
+  "alfredp.hero.t1": {
+    "message": "认识 Alfred，"
+  },
+  "alfredp.hero.t2": {
+    "message": "住在你 IM 里的管家。"
+  },
+  "alfredp.hero.sub": {
+    "message": "发一条消息，他会理解、记住、派给合适的 agent，并把结果带回聊天。整个 UnDercontrol，都在这一次对话里。"
+  },
+  "alfredp.hero.ctaPrimary": {
+    "message": "开始使用 Alfred"
+  },
+  "alfredp.hero.ctaSetup": {
+    "message": "配置 Telegram / Discord"
+  },
+  "alfredp.phone.status": {
+    "message": "私人管家 · 在线"
+  },
+  "alfredp.phone.replay": {
+    "message": "重播 ↻"
+  },
+  "alfredp.phone.aria": {
+    "message": "演示对话"
+  },
+  "alfredp.phone.me1": {
+    "message": "帮我记一下：下周三前给官网加个价格页。顺便让人看看今早报的那个登录 bug。"
+  },
+  "alfredp.phone.al1": {
+    "message": "记下了。价格页我建了任务派给 web 团队，截止下周三；登录 bug 已让 prod-debug 跟进。有结果我叫你。"
+  },
+  "alfredp.phone.gap": {
+    "message": "—— 两小时后 ——"
+  },
+  "alfredp.phone.al2": {
+    "message": "登录 bug 修好了，是 session 过期没刷新。价格页初稿明天上午给你预览链接。"
+  },
+  "alfredp.phone.me2": {
+    "message": "👍 辛苦"
+  },
+  "alfredp.verbs.eyebrow": {
+    "message": "他会做什么"
+  },
+  "alfredp.verbs.title": {
+    "message": "四件事，他一直在做"
+  },
+  "alfredp.verbs.understand.z": {
+    "message": "理解"
+  },
+  "alfredp.verbs.understand.p": {
+    "message": "口语、错字、半句话——他都能听懂你要什么。"
+  },
+  "alfredp.verbs.remember.z": {
+    "message": "记忆"
+  },
+  "alfredp.verbs.remember.p": {
+    "message": "人、事、偏好、上下文，下次不用再说一遍。"
+  },
+  "alfredp.verbs.delegate.z": {
+    "message": "派活"
+  },
+  "alfredp.verbs.delegate.p": {
+    "message": "把活派给最合适的 agent：开发、运维、写作、记账。"
+  },
+  "alfredp.verbs.track.z": {
+    "message": "追踪"
+  },
+  "alfredp.verbs.track.p": {
+    "message": "盯进度、催结果，把答案带回你的聊天。"
+  },
+  "alfredp.steps.eyebrow": {
+    "message": "怎么用"
+  },
+  "alfredp.steps.title": {
+    "message": "一条消息的旅程"
+  },
+  "alfredp.steps.send.t": {
+    "message": "发一条消息"
+  },
+  "alfredp.steps.send.p": {
+    "message": "想到什么直接说——任务、备忘、报销、点子，一句话就行。"
+  },
+  "alfredp.steps.arrange.t": {
+    "message": "Alfred 安排"
+  },
+  "alfredp.steps.arrange.p": {
+    "message": "他记住上下文，建任务、排优先级，并派给最合适的 agent 去执行。"
+  },
+  "alfredp.steps.results.t": {
+    "message": "结果回到聊天"
+  },
+  "alfredp.steps.results.p": {
+    "message": "进展与结果回到对话里。你不需要打开任何后台。"
+  },
+  "alfredp.engine.eyebrow": {
+    "message": "引擎"
+  },
+  "alfredp.engine.title": {
+    "message": "Alfred 背后，是完整的 UnDercontrol"
+  },
+  "alfredp.engine.lede": {
+    "message": "任务、看板、笔记、账本、agent 团队——你可以随时打开它们，但也可以永远不打开。"
+  },
+  "alfredp.engine.back": {
+    "message": "← 回首页看全部角度"
+  },
+  "alfredp.cta.title": {
+    "message": "今天起，把事情交给 Alfred。"
+  },
+  "alfredp.cta.primary": {
+    "message": "开始使用 Alfred"
+  },
+  "alfredp.cta.fine": {
+    "message": "个人免费 · 可自托管 · 五分钟跑起来"
   }
 }

@@ -90,6 +90,7 @@ const config: Config = {
           position: 'left',
           label: 'Docs',
         },
+        {to: '/alfred', label: 'Alfred', position: 'left'},
         {to: '/blog', label: 'Blog', position: 'left'},
         {
           to: '/self-hosting',
