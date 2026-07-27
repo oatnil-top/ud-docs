@@ -52,7 +52,7 @@ UnDercontrol follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ### Upgrade Notes (self-hosted)
 
-- The instance-wide `TELEGRAM_BOT_TOKEN` is removed in favor of per-user bots. Operators should set `UD_ENCRYPTION_KEY` to encrypt stored bot tokens; an existing token migrates to the instance owner automatically on upgrade.
+- The instance-wide `TELEGRAM_BOT_TOKEN` is removed in favor of per-user bots. Operators should set `UD_ENCRYPTION_KEY` to encrypt stored bot tokens. **Correction (2026-07-27): an existing token does _not_ migrate automatically** — this note first said it did. Save your token, set the key, upgrade, re-register it in Profile → Messenger, then restart once more so existing conversations are reattached. Until that last restart the bridge looks healthy but silently drops replies to old conversations. Full procedure: [Upgrading an instance that used the old shared bot](/docs/self-deployment#upgrading-an-instance-that-used-the-old-shared-bot).
 - New multi-user messaging switch `im.multi_user_enabled` (system config, default off); once enabled, every user on the instance can connect their own bot.
 
 ---
@@ -69,7 +69,7 @@ UnDercontrol follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 - New Telegram messenger channel: bind your account in Profile → Messenger (generate a one-time code, then send `/link CODE` to the bot) and talk to Alfred from your phone.
 - Agent replies mirror back to Telegram, so a conversation started in the app continues in chat.
 - Self-host operators enable it with the `TELEGRAM_BOT_TOKEN` env var — see the configuration reference.
-  - *Since v0.121.0: replaced by BYO bots. There is no instance-wide bot token any more — each user connects their own bot in Profile → Messenger, and the operator sets `UD_ENCRYPTION_KEY` instead. An existing token migrates to the instance owner automatically on upgrade.*
+  - *Since v0.121.0: replaced by BYO bots. There is no instance-wide bot token any more — each user connects their own bot in Profile → Messenger, and the operator sets `UD_ENCRYPTION_KEY` instead. An existing token must be re-registered by hand on upgrade — see the [upgrade procedure](/docs/self-deployment#upgrading-an-instance-that-used-the-old-shared-bot).*
 
 **Redesigned first-run onboarding**
 - A 4-step wizard walks you through language, workspace status, registering this machine as a daemon, and meeting Alfred with optional Telegram binding.
