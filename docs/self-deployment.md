@@ -222,16 +222,46 @@ user's messages can reach.
 ### Upgrading an instance that used the old shared bot
 
 Earlier versions had one operator-configured `TELEGRAM_BOT_TOKEN` for the whole instance. That
-key is gone, and the upgrade is automatic:
+key is gone, and **the upgrade needs two manual steps**. Read this section before upgrading.
 
-- On the first boot after upgrading, the old token is moved into the instance owner's own bot
-  row, every conversation and delivery it created is stamped with that bot, and the old setting
-  is deleted. The owner keeps their channel with no action.
-- If `UD_ENCRYPTION_KEY` is not set, the migration skips with a warning and leaves the old
-  setting untouched — nothing is lost, but the bridge stays down until you set a key and
-  restart, after which the owner can paste their token in **Profile → Messenger**.
-- Other users are not migrated, because there was nothing of theirs to migrate: they were using
-  the operator's bot. Each connects their own.
+The automatic migration only picks up a token that was stored as the runtime setting
+`integration.telegram.bot_token`. That setting existed only briefly during development and
+**shipped in no release**, so on every real instance the token lives in the
+`TELEGRAM_BOT_TOKEN` environment variable (or the matching flag) — which the migration does
+not read. In practice this means: **nothing is migrated automatically, and the failure is
+silent.** The container still boots healthy and the logs still say the bridge started.
+
+Upgrade like this:
+
+1. **Copy your existing `TELEGRAM_BOT_TOKEN` value somewhere safe** before you change anything.
+   It becomes inert after the upgrade, and it is the only copy you have.
+2. **Set `UD_ENCRYPTION_KEY`** to a random secret (`openssl rand -hex 32`) in the same
+   configuration. Without it the server refuses to store any bot token at all. Treat it as
+   permanent — see the variable's note above.
+3. Upgrade the image and start the instance as usual.
+4. **Re-register the token by hand.** The owner opens **Profile → Messenger** and pastes the
+   token from step 1. The server verifies it with Telegram before storing, so a mistyped token
+   is an error on the spot rather than a bot that never answers.
+5. **Restart the instance once more.** This step is easy to miss and matters: conversations and
+   deliveries created by the old shared bot are not attached to any per-user bot yet, and the
+   new runtime can only see rows that are. The restart is what attaches them, and it only works
+   once a bot exists — which is why it comes after step 4.
+
+Until step 5 is done, the bridge looks healthy but **replies to existing conversations are
+silently dropped**. There is no error in the interface; the only symptom is a log line reading
+`IM relay has no live bot for a conversation, dropping message` with `botState="unmigrated"`.
+New conversations started after the upgrade are unaffected, which can make the problem look
+intermittent.
+
+Verify by sending a real message and confirming a reply comes back — a healthy container, a
+clean log and a started bridge do not prove delivery works.
+
+Once the messenger is confirmed working you can drop `TELEGRAM_BOT_TOKEN` from your
+configuration. Keeping it until then costs nothing and lets you roll back to the previous
+version in place.
+
+Other users are not migrated, because there was nothing of theirs to migrate: they were using
+the operator's bot. Each connects their own.
 
 ## First-run onboarding
 
