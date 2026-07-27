@@ -18,6 +18,45 @@ UnDercontrol follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.121.0 (2026-07-27)
+
+### New Features
+
+**Bring your own Telegram bot — for every user**
+- Connect your own bot in Profile → Messenger: create one with @BotFather, paste the token, and message your bot to link.
+- Your bot answers only you — messages from any other Telegram account are refused, and link codes can only be redeemed by the bot's owner.
+- Multi-user messaging opens with this release: it is no longer limited to the instance owner.
+
+**My-Alfred card**
+- Profile gains a status card for your Alfred, and first-run onboarding gains a Telegram step.
+
+**Your own daemon comes first**
+- Session dispatch prefers a daemon you registered over shared ones.
+- If your daemon is offline, you get a receipt telling you exactly how to bring it back instead of silence.
+
+**Desktop: missing agent CLI detection & install guidance**
+- If an agent CLI such as Claude Code is not installed, the terminal shows install guidance in place.
+- A new zombie-session watchdog kills and reports agent sessions that produce no output.
+
+**Desktop: configurable backend data directory**
+- Keep your data in a directory of your choice (a synced folder, for example); the database switches to a single-file journal mode that is safe for sync.
+
+**CLI: `ud stop session` as a first-class verb**
+- Plus `ud describe session --tail N` to view the tail of a session, a LAST-SEEN column in the session list, and more accurate daemon liveness detection.
+
+### Bug Fixes
+
+- Fixed the desktop app failing to launch agent sessions on Intel Macs (posix_spawnp error).
+- Editing code-owned fields of builtin agents now fails with a clear message naming the field, instead of silently dropping the edit.
+- Admin system config values can now be cleared to empty.
+
+### Upgrade Notes (self-hosted)
+
+- The instance-wide `TELEGRAM_BOT_TOKEN` is removed in favor of per-user bots. Operators should set `UD_ENCRYPTION_KEY` to encrypt stored bot tokens; an existing token migrates to the instance owner automatically on upgrade.
+- New multi-user messaging switch `im.multi_user_enabled` (system config, default off); once enabled, every user on the instance can connect their own bot.
+
+---
+
 ## v0.120.0 (2026-07-25)
 
 ### New Features
