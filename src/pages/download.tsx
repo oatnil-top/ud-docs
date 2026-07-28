@@ -20,6 +20,15 @@
  * - The CLI ships through npm only (@oatnil/ud). The Homebrew tap is dead.
  * - iOS is in public beta via the TestFlight link below (Beta group, cap 1000
  *   testers). Builds expire after 90 days, so keep TestFlight uploads flowing.
+ * - Android has no artifact yet (release keystore + R2 upload is task 21be6f76).
+ *   PLATFORMS_HERO lists it as "coming soon" with NO href on purpose: the hero's
+ *   job is to answer "is my platform here?", and a link to a missing artifact is
+ *   a 404. Give it a real href only once the apk answers 200 on R2.
+ *
+ * The hero strip is the page's platform census — every surface a first-time
+ * visitor might be looking for, one line each, no versions or file sizes (those
+ * belong to the sections below). It doubles as the section nav, which is why
+ * there is no separate jump row.
  *
  * Owned by the Onboarding Experience Owner.
  */
@@ -84,6 +93,48 @@ const PLATFORMS: PlatformDl[] = [
   },
 ];
 
+// --- Hero platform census ---
+// One cell per client surface. `href` omitted = shipped-but-not-downloadable yet;
+// the cell renders as plain text so nobody clicks into a 404.
+
+interface HeroPlatform {
+  name: L;
+  meta: L;
+  href?: string;
+}
+
+const PLATFORMS_HERO: HeroPlatform[] = [
+  {
+    name: {en: 'Desktop', zh: '桌面端'},
+    meta: {en: 'macOS · Windows · Linux', zh: 'macOS · Windows · Linux'},
+    href: '#desktop',
+  },
+  {
+    name: {en: 'Web', zh: '网页版'},
+    meta: {en: 'Any browser · nothing to install', zh: '任何浏览器 · 免安装'},
+    href: '#web',
+  },
+  {
+    name: {en: 'iOS', zh: 'iOS'},
+    meta: {en: 'Public beta on TestFlight', zh: 'TestFlight 公测中'},
+    href: '#mobile',
+  },
+  {
+    name: {en: 'Android', zh: 'Android'},
+    meta: {en: 'Coming soon', zh: '即将上线'},
+  },
+  {
+    name: {en: 'Chat apps', zh: '聊天软件'},
+    meta: {en: 'Telegram · Discord', zh: 'Telegram · Discord'},
+    href: '/alfred',
+  },
+  {
+    name: {en: 'Terminal', zh: '命令行'},
+    meta: {en: 'CLI for you and your agents', zh: '给你，也给你的 AI Agent'},
+    href: '#cli',
+  },
+];
+
 function CopyBtn({text}: {text: string}) {
   const t = useT();
   const [copied, setCopied] = useState(false);
@@ -135,14 +186,6 @@ function Terminal({name, code}: {name: string; code: string}) {
 
 function Hero() {
   const t = useT();
-  const jumps: Array<{id: string; label: L}> = [
-    {id: 'desktop', label: {en: 'Desktop', zh: '桌面端'}},
-    {id: 'cli', label: {en: 'CLI', zh: '命令行'}},
-    {id: 'web', label: {en: 'Web app', zh: '网页版'}},
-    {id: 'extension', label: {en: 'Browser extension', zh: '浏览器扩展'}},
-    {id: 'mobile', label: {en: 'Mobile', zh: '移动端'}},
-    {id: 'selfhost', label: {en: 'Self-host', zh: '私有部署'}},
-  ];
   return (
     <header className={styles.hero}>
       <Link to="/docs/release-notes" className={styles.versionBadge}>
@@ -157,17 +200,44 @@ function Hero() {
       </h1>
       <p className={`${styles.lede} ${styles.heroLede}`}>
         {t({
-          en: 'UnDercontrol runs where you do — a desktop app, a zero-install web app, a CLI built for AI agents, and a browser clipper. Free to start, and every client can point at our cloud or a server you run yourself.',
-          zh: 'UnDercontrol 跟随你的工作方式——桌面应用、免安装的网页版、为 AI Agent 而生的 CLI、浏览器剪藏扩展。免费起步，每个客户端都可以连接我们的云端，或你自己部署的服务器。',
+          en: 'UnDercontrol runs where you do. Free to start on any of them, and every client can point at our cloud or a server you run yourself.',
+          zh: 'UnDercontrol 跟随你的工作方式。每一个都可以免费开始，也都可以连接我们的云端，或你自己部署的服务器。',
         })}
       </p>
-      <div className={styles.jumprow}>
-        {jumps.map((j) => (
-          <a key={j.id} href={`#${j.id}`} className={styles.jump}>
-            {t(j.label)}
-          </a>
-        ))}
+      <div className={styles.strip}>
+        {PLATFORMS_HERO.map((p) => {
+          const body = (
+            <>
+              <span className={styles.stripName}>{t(p.name)}</span>
+              <span className={styles.stripMeta}>{t(p.meta)}</span>
+            </>
+          );
+          // In-page anchors stay raw <a>; route links go through Link so the
+          // zh-Hans build keeps its locale prefix.
+          if (p.href?.startsWith('#')) {
+            return (
+              <a key={p.href} href={p.href} className={styles.stripCell}>
+                {body}
+              </a>
+            );
+          }
+          return p.href ? (
+            <Link key={p.href} to={p.href} className={styles.stripCell}>
+              {body}
+            </Link>
+          ) : (
+            <div key={t(p.name)} className={`${styles.stripCell} ${styles.stripSoon}`}>
+              {body}
+            </div>
+          );
+        })}
       </div>
+      <p className={styles.stripAlso}>
+        {t({en: 'Also: ', zh: '还有：'})}
+        <a href="#extension">{t({en: 'browser extension', zh: '浏览器扩展'})}</a>
+        {' · '}
+        <a href="#selfhost">{t({en: 'self-host it all', zh: '全部私有部署'})}</a>
+      </p>
     </header>
   );
 }
@@ -314,8 +384,8 @@ function MobileSection() {
           <h2 className={styles.h2}>{t({en: 'iOS app — now in beta.', zh: 'iOS 应用——公测中。'})}</h2>
           <p className={styles.lede}>
             {t({
-              en: 'The native iOS app is in public beta — join on TestFlight and it installs like any app, updates included. The Apple Shortcut still gives you one-tap task capture, and the web app works great on mobile browsers.',
-              zh: '原生 iOS 应用已开启公测——通过 TestFlight 加入即可像普通 App 一样安装并自动更新。Apple 快捷指令依旧支持一键创建任务，网页版在手机浏览器上也表现出色。',
+              en: 'The native iOS app is in public beta — join on TestFlight and it installs like any app, updates included. An Android build is on the way. The Apple Shortcut still gives you one-tap task capture, and the web app works great on mobile browsers.',
+              zh: '原生 iOS 应用已开启公测——通过 TestFlight 加入即可像普通 App 一样安装并自动更新。Android 版本正在路上。Apple 快捷指令依旧支持一键创建任务，网页版在手机浏览器上也表现出色。',
             })}
           </p>
         </div>
