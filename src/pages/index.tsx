@@ -213,8 +213,16 @@ function HeroSection() {
             <Translate id="home4.hero.ctaSelfhost">Self-Host</Translate>
           </Link>
         </div>
+        {/* "Built since September 2024" is a trust signal, and the date is
+            verifiable: the first ud-next-web commit is 2024-09-22 (ud-server
+            2024-09-23). NOT the current monorepo's 2025-07-03 — that is only
+            the Go+Vite rewrite. Do not restate it as another year. It lives on
+            this line rather than the eyebrow because .eyebrow is uppercase
+            monospace at 0.22em tracking (a date there overflows on mobile) and
+            because this line already carries the rest of the same credential
+            triad. See ud tasks e95c1469 (note d6f1e6b1) and 92d5ed92. */}
         <p className={styles.fine}>
-          <Translate id="home4.hero.fine">Free for personal use · Self-hostable · Also on Discord</Translate>
+          <Translate id="home4.hero.fine">Free for personal use · Self-hostable · Also on Discord · Built since September 2024</Translate>
         </p>
         <div className={styles.agentSetupRow}>
           <AgentSetupButton />
