@@ -65,11 +65,20 @@ Docs: [CLI guide](/docs/cli) · [AI agent integration](/docs/cli-ai-integration)
   on the Chrome Web Store — save web pages as tasks with full-page snapshots and
   video transcript extraction.
 
-## Mobile (iOS)
+## Mobile (iOS and Android)
 
 The native iOS app is in public beta. Join via the TestFlight link:
 https://testflight.apple.com/join/st2TnaBF (requires the TestFlight app from
-the App Store). Also available: the
+the App Store).
+
+Android installs from a direct APK download, not from Google Play:
+https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/releases/android/0.0.9/undercontrol-0.0.9.apk
+Because the file does not come from the Play Store, the first install asks where
+it came from — tap **Settings → Allow from this source** and the install
+continues. The APK carries the mobile app's own version number, which is
+independent of the desktop version above.
+
+Also available: the
 [Apple Shortcut](https://www.icloud.com/shortcuts/4e0becebe3cd48a180940ccbd04d6fa7)
 for one-tap capture, and the web app in a mobile browser.
 

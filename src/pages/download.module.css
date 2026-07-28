@@ -64,10 +64,6 @@
 }
 .glyphDefs { position: absolute; width: 0; height: 0; overflow: hidden; }
 .ic { width: 22px; height: 22px; display: block; color: var(--ink); flex: none; }
-/* Android's dashed glyph, dimmed with opacity rather than --faint: that token
-   resolves to the same grey in both themes, so it reads as muted on white but
-   as full-strength on the dark background. */
-.icSoon { opacity: .45; }
 
 .hubSide { display: grid; min-width: 0; }
 .hubSideRun { grid-template-rows: repeat(4, var(--row)); }
@@ -84,6 +80,9 @@ a.node:hover { background: var(--inset); border-color: var(--faint); color: var(
 .nodeTxt { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
 .nodeName { font-size: 14.5px; font-weight: 800; letter-spacing: -0.015em; line-height: 1.25; }
 .nodeMeta { font-family: var(--mono); font-size: 10px; line-height: 1.3; color: var(--faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* An unshipped platform (no href) is dimmed with opacity rather than --faint:
+   that token resolves to the same grey in both themes, so it reads as muted on
+   white but as full-strength on the dark background. No node uses this today. */
 .nodeSoon .nodeName { opacity: .5; }
 
 /* Wire column: one vertical trunk on the core side, one right-angle stub per

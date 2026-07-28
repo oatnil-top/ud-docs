@@ -20,10 +20,12 @@
  * - The CLI ships through npm only (@oatnil/ud). The Homebrew tap is dead.
  * - iOS is in public beta via the TestFlight link below (Beta group, cap 1000
  *   testers). Builds expire after 90 days, so keep TestFlight uploads flowing.
- * - Android has no artifact yet (release keystore + R2 upload is task 21be6f76).
- *   The hero lists it as "coming soon" with NO href on purpose: the hero's job
- *   is to answer "is my platform here?", and a link to a missing artifact is a
- *   404. Give it a real href only once the apk answers 200 on R2.
+ * - Android ships as a direct apk on R2 (since 0.0.9, 2026-07-28) — NOT through
+ *   Google Play, so first-time installs pass an "unknown sources" prompt. That
+ *   is stated as a footnote in the same plain tone as the Windows one.
+ *   The apk carries the ud-mobile app's own version, which moves independently
+ *   of version.json (that one is the desktop/web release train) — hence the
+ *   separate ANDROID_VERSION constant and R2 path.
  *
  * The hero is the page's platform census — every surface a first-time visitor
  * might be looking for, one node each, no versions or file sizes (those belong
@@ -52,6 +54,13 @@ const CHROME_STORE_URL =
   'https://chromewebstore.google.com/detail/undercontrol-web-clipper/mckkbigikfkoeddpcbhdmpncoljoagog';
 const SHORTCUT_URL = 'https://www.icloud.com/shortcuts/4e0becebe3cd48a180940ccbd04d6fa7';
 const TESTFLIGHT_URL = 'https://testflight.apple.com/join/st2TnaBF';
+
+// Android is versioned by the mobile app itself, not by version.json, and lives
+// under its own R2 prefix: releases/android/<version>/undercontrol-<version>.apk.
+// Bump both when a new apk lands and re-check the link answers 200.
+const ANDROID_VERSION = '0.0.9';
+const ANDROID_APK_FILE = `undercontrol-${ANDROID_VERSION}.apk`;
+const ANDROID_APK_URL = `${R2_RELEASES}/android/${ANDROID_VERSION}/${ANDROID_APK_FILE}`;
 
 const CLI_INSTALL = `# requires Node.js 18+
 npm install -g @oatnil/ud
@@ -105,14 +114,17 @@ const PLATFORMS: PlatformDl[] = [
 // recognise, not by whichever client we happen to consider most important.
 //
 // `href` omitted = no artifact to link at yet; the node renders as a plain div
-// so an unshipped platform stays visible without handing anyone a 404. Android
-// is that case today.
+// so an unshipped platform stays visible without handing anyone a 404. No node
+// is in that state today (Android left it when the apk shipped).
+//
+// Every href points at a section on this page, never straight at a binary: the
+// hero is a census, and the file name, version and install caveats belong to the
+// section that owns them. /alfred is the one off-page link — chat apps have no
+// artifact to describe here.
 
 interface HeroPlatform {
   /** id of a <g> in GlyphDefs. */
   glyph: string;
-  /** Draw the glyph dashed — "not shipped yet", said in the stroke. */
-  dashed?: boolean;
   name: L;
   meta: L;
   href?: string;
@@ -138,10 +150,10 @@ const HUB_RUN_ON: HeroPlatform[] = [
     href: '#mobile',
   },
   {
-    glyph: 'ud-g-ios',
-    dashed: true,
+    glyph: 'ud-g-android',
     name: {en: 'Android', zh: 'Android'},
-    meta: {en: 'Coming soon', zh: '即将上线'},
+    meta: {en: 'Direct APK download', zh: 'APK 直接下载'},
+    href: '#mobile',
   },
 ];
 
@@ -171,9 +183,9 @@ const HUB_REACH_IN: HeroPlatform[] = [
  *
  * Deliberately geometric instead of official logos: we have no licence to ship
  * Apple/Google/Chrome marks, and a single drawn set also makes seven clients
- * read as one product rather than seven integrations. Android reuses the iOS
- * body drawn dashed, so its status lives in the stroke instead of in a badge —
- * drop `dashed` and add an href the day the apk ships.
+ * read as one product rather than seven integrations. iOS and Android share one
+ * phone body and differ only in what sits at the bottom of the screen — one home
+ * bar vs three nav marks — which is a generic UI fact, not a vendor mark.
  *
  * Inline + currentColor: no icon dependency, and both themes come free.
  */
@@ -193,6 +205,10 @@ function GlyphDefs() {
           <rect x="6.75" y="2.75" width="10.5" height="18.5" />
           <path d="M10 18.75h4" />
         </g>
+        <g id="ud-g-android">
+          <rect x="6.75" y="2.75" width="10.5" height="18.5" />
+          <path d="M9 18.75h1M11.5 18.75h1M14 18.75h1" />
+        </g>
         <g id="ud-g-chat">
           <rect x="2.75" y="4.75" width="18.5" height="11.5" />
           <path d="M7.5 16.25v4.5l4.5-4.5" />
@@ -209,16 +225,15 @@ function GlyphDefs() {
   );
 }
 
-function Glyph({id, dashed}: {id: string; dashed?: boolean}) {
+function Glyph({id}: {id: string}) {
   return (
     <svg
-      className={`${styles.ic}${dashed ? ` ${styles.icSoon}` : ''}`}
+      className={styles.ic}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
       strokeWidth={1.5}
       strokeLinecap="square"
-      strokeDasharray={dashed ? '2.6 2.4' : undefined}
       aria-hidden="true">
       <use href={`#${id}`} />
     </svg>
@@ -279,7 +294,7 @@ function HubNode({p}: {p: HeroPlatform}) {
   const t = useT();
   const body = (
     <>
-      <Glyph id={p.glyph} dashed={p.dashed} />
+      <Glyph id={p.glyph} />
       <span className={styles.nodeTxt}>
         <span className={styles.nodeName}>{t(p.name)}</span>
         <span className={styles.nodeMeta}>{t(p.meta)}</span>
@@ -511,11 +526,15 @@ function MobileSection() {
       <div className={styles.band}>
         <div>
           <p className={styles.eyebrow}>{t({en: 'Mobile', zh: '移动端'})}</p>
-          <h2 className={styles.h2}>{t({en: 'iOS app — now in beta.', zh: 'iOS 应用——公测中。'})}</h2>
+          <h2 className={styles.h2}>
+            {/* zh keeps a comma rather than the usual em dash: at 390px the dash
+                wraps to the head of the second line, which reads as a stray. */}
+            {t({en: 'iOS and Android — both in beta.', zh: 'iOS 与 Android，都在公测中。'})}
+          </h2>
           <p className={styles.lede}>
             {t({
-              en: 'The native iOS app is in public beta — join on TestFlight and it installs like any app, updates included. An Android build is on the way. The Apple Shortcut still gives you one-tap task capture, and the web app works great on mobile browsers.',
-              zh: '原生 iOS 应用已开启公测——通过 TestFlight 加入即可像普通 App 一样安装并自动更新。Android 版本正在路上。Apple 快捷指令依旧支持一键创建任务，网页版在手机浏览器上也表现出色。',
+              en: 'The native iOS app is in public beta — join on TestFlight and it installs like any app, updates included. Android installs from the APK below. The Apple Shortcut still gives you one-tap task capture, and the web app works great on mobile browsers.',
+              zh: '原生 iOS 应用已开启公测——通过 TestFlight 加入即可像普通 App 一样安装并自动更新。Android 通过下方的 APK 安装。Apple 快捷指令依旧支持一键创建任务，网页版在手机浏览器上也表现出色。',
             })}
           </p>
         </div>
@@ -524,11 +543,31 @@ function MobileSection() {
             {t({en: 'Join the beta on TestFlight', zh: '通过 TestFlight 加入公测'})}
             <ExternalLink size={14} strokeWidth={2} />
           </a>
+          {/* Wrapped so the file name hangs off its own button rather than
+              floating between the two, which the column gap alone would do. */}
+          <div>
+            <a className={styles.btnPrimary} href={ANDROID_APK_URL}>
+              <DownloadIcon size={14} strokeWidth={2} />
+              {t({en: 'Download the Android APK', zh: '下载 Android APK'})}
+            </a>
+            <div className={styles.platFile}>{ANDROID_APK_FILE}</div>
+          </div>
           <a className={styles.btnGhost} href={SHORTCUT_URL} target="_blank" rel="noopener noreferrer">
             {t({en: 'Get the Apple Shortcut', zh: '获取 Apple 快捷指令'})}
             <ExternalLink size={14} strokeWidth={2} />
           </a>
         </div>
+      </div>
+      <div className={styles.footnotes}>
+        <p className={styles.footnote}>
+          <b>Android:</b>{' '}
+          {t({
+            en: 'the APK comes straight from us rather than from Google Play, so the first install asks where the file came from — tap ',
+            zh: 'APK 直接从我们这里下载，不经过 Google Play，因此首次安装时系统会询问文件来源——点击',
+          })}
+          <b>{t({en: 'Settings → Allow from this source', zh: '设置 → 允许来自此来源'})}</b>
+          {t({en: ' and the install continues.', zh: '，安装即可继续。'})}
+        </p>
       </div>
     </section>
   );
