@@ -134,6 +134,10 @@
   font-size: 0.8rem;
   font-weight: 500;
   color: var(--muted);
+  /* This line is a "·"-separated list that is too long to fit one line on a
+     phone. Left to wrap on its own it breaks mid-segment and orphans a word
+     or a stray "&"; balance moves the break onto a separator boundary. */
+  text-wrap: balance;
 }
 
 @keyframes fadeup {
