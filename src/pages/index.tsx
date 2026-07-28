@@ -222,7 +222,7 @@ function HeroSection() {
             because this line already carries the rest of the same credential
             triad. See ud tasks e95c1469 (note d6f1e6b1) and 92d5ed92. */}
         <p className={styles.fine}>
-          <Translate id="home4.hero.fine">Free for personal use · Self-hostable · Also on Discord · Built since September 2024</Translate>
+          <Translate id="home4.hero.fine">Free for personal use · Self-hostable · Desktop, web, iOS &amp; chat apps · Built since September 2024</Translate>
         </p>
         <div className={styles.agentSetupRow}>
           <AgentSetupButton />
