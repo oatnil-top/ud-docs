@@ -44,6 +44,8 @@ version first instead of hardcoding one.
 
 Platform notes:
 
+- **Windows**: the installer is unsigned, so Windows shows an "unknown publisher"
+  warning on first run. Click **More info → Run anyway** to continue.
 - **Linux**: make the AppImage executable: `chmod +x undercontrol-desktop-{VERSION}.AppImage`.
 
 ## CLI (`ud`)

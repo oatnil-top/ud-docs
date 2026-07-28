@@ -13,6 +13,10 @@
  * - macOS builds are Developer ID signed + notarized, but the owner prefers
  *   not to advertise it (2026-07-25): no "signed/notarized" badges or copy on
  *   the page. It also means never re-add xattr/right-click instructions.
+ * - Windows builds are NOT code signed and won't be (owner declined the cert,
+ *   2026-07-28), so SmartScreen flags an unknown publisher on first run. The
+ *   Windows footnote states that plainly and gives the one step past it — keep
+ *   it plain text, never a warning callout.
  * - The CLI ships through npm only (@oatnil/ud). The Homebrew tap is dead.
  * - iOS is in public beta via the TestFlight link below (Beta group, cap 1000
  *   testers). Builds expire after 90 days, so keep TestFlight uploads flowing.
@@ -197,6 +201,15 @@ function DesktopSection() {
         ))}
       </div>
       <div className={styles.footnotes}>
+        <p className={styles.footnote}>
+          <b>Windows:</b>{' '}
+          {t({
+            en: 'the installer is unsigned, so Windows shows an "unknown publisher" warning the first time you run it — click ',
+            zh: '安装包未签名，首次运行时 Windows 会提示「未知发布者」——点击',
+          })}
+          <b>{t({en: 'More info → Run anyway', zh: '更多信息 → 仍要运行'})}</b>
+          {t({en: ' to continue.', zh: '即可继续。'})}
+        </p>
         <p className={styles.footnote}>
           <b>Linux:</b>{' '}
           {t({en: 'make the AppImage executable first: ', zh: '先给 AppImage 加执行权限：'})}
