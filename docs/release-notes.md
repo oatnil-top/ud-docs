@@ -18,6 +18,54 @@ UnDercontrol follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.122.0 (2026-07-28)
+
+### Critical Fix
+
+**Reloading the page after finishing onboarding blanked the whole app**
+- Once you completed or skipped first-run onboarding, a page reload left every screen empty — the app shell itself failed to render.
+- This hit everyone who had been through onboarding. **Upgrading is recommended for all users.**
+
+### New Features
+
+**First-run onboarding: a real handshake with Alfred**
+- Onboarding opens a session on your machine and waits for Alfred to actually reply before letting you continue, showing waiting / replied / timed-out states instead of hanging silently.
+- Progress is recorded per segment, so reopening onboarding resumes where you left off.
+- The wizard is a fixed size and scrolls its own content.
+
+**Per-agent CLI and model arguments**
+- Each agent can choose which agent CLI it runs (Claude Code, Codex, Gemini, …).
+- Extra arguments can be appended per agent, for example `--model opus`.
+
+**Agent CLI availability at a glance**
+- The desktop app probes which agent CLIs are installed on the machine and reports them.
+- The web UI shows availability with version numbers, and an install command for the ones that are missing.
+
+**Session terminal output survives the session**
+- The tail of a session's terminal output is retained, so you can still read what happened after the session is gone.
+
+**Telegram group on the contact page**
+- The contact page now links the Telegram group; the documentation site's contact page was rewritten to match the homepage style.
+
+**Alfred takes on secretary duties**
+- To-dos, calendar and reminders are now part of Alfred's routine.
+- Alfred requires an acknowledgement when dispatching work, and reads the terminal before judging a session's state.
+
+### Bug Fixes
+
+- Item photos never loaded (the photo URL was always empty) — they now display correctly.
+- "Reset to default" on an agent now also clears its extra CLI arguments.
+- Onboarding no longer stalls at "Starting a session on this machine…", and the handshake timeout message no longer contradicts what actually happened.
+- Fixed occasional onboarding runs where the prompt was never delivered and Alfred never replied.
+- Sessions in the `lost` state can now be stopped, so orphaned processes can be reaped.
+- Fixed the CLI daemon showing healthy registration while its SSE connection failed with 401.
+
+### Upgrade Notes (self-hosted)
+
+- No manual action required. This release adds no environment variables and no system switches; its two database changes (additive column and table creation, all with defaults) run automatically when the new image starts.
+
+---
+
 ## v0.121.0 (2026-07-27)
 
 ### New Features
