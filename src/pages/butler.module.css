@@ -1,5 +1,6 @@
 /**
- * Butler landing theme — shared by the homepage (index.tsx) and /alfred.
+ * Butler landing theme — shared by the homepage (index.tsx), /alfred and
+ * /contact.
  * Design v7, task 4bd20228 (boss iron law 2026-07-26): pure monochrome —
  * black, white and two greys, no accent color. Hierarchy is carried by weight
  * and size contrast (display 800, H2/subheads 750, body 400); emphasis is
@@ -346,6 +347,69 @@
   margin-bottom: 24px;
 }
 
+/* ---------- Contact page ---------- */
+/* Reuses the landing language wholesale: .wrap/.eyebrow/.section/.ctaBand for
+ * rhythm, the .btn family for actions. Channels borrow .engineItem's left ink
+ * rule rather than inventing a card — the iron law forbids filled blocks, so a
+ * channel is a rule, a name, a line of prose and an underlined link. */
+.cHero {
+  padding: 56px 0 40px;
+}
+.cHero h1 {
+  font-size: clamp(2.3rem, 4.6vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  margin: 18px 0 14px;
+  text-wrap: balance;
+}
+.channels {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px 24px;
+  margin-top: 40px;
+}
+.channel {
+  border-left: 3px solid var(--ink);
+  padding-left: 14px;
+}
+/* The lead channel earns weight through its rule, not a fill. */
+.channelLead {
+  composes: channel;
+  border-left-width: 6px;
+}
+.channelT {
+  font-weight: 750;
+  font-size: 1.02rem;
+}
+.channelD {
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.6;
+  margin: 4px 0 10px;
+}
+/* Emphasis is underline + bold — never a button fill. */
+.channelLink {
+  font-size: 0.86rem;
+  font-weight: 800;
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.18em;
+}
+.channelLink:hover {
+  color: var(--ink);
+  text-decoration-thickness: 0.14em;
+}
+.infoList {
+  margin-top: 24px;
+  color: var(--muted);
+  max-width: 40em;
+}
+.infoList p {
+  margin: 0 0 10px;
+}
+
 /* ---------- Alfred page hero ---------- */
 /* The phone chat playback itself moved to HeroDemos/PhoneDemo (task b00f9e8f)
  * so the homepage stage can reuse it. */
@@ -393,6 +457,9 @@
     grid-template-columns: 1fr 1fr;
   }
   .meet {
+    grid-template-columns: 1fr;
+  }
+  .channels {
     grid-template-columns: 1fr;
   }
 }
