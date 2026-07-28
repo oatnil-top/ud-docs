@@ -21,14 +21,17 @@
  * - iOS is in public beta via the TestFlight link below (Beta group, cap 1000
  *   testers). Builds expire after 90 days, so keep TestFlight uploads flowing.
  * - Android has no artifact yet (release keystore + R2 upload is task 21be6f76).
- *   PLATFORMS_HERO lists it as "coming soon" with NO href on purpose: the hero's
- *   job is to answer "is my platform here?", and a link to a missing artifact is
- *   a 404. Give it a real href only once the apk answers 200 on R2.
+ *   The hero lists it as "coming soon" with NO href on purpose: the hero's job
+ *   is to answer "is my platform here?", and a link to a missing artifact is a
+ *   404. Give it a real href only once the apk answers 200 on R2.
  *
- * The hero strip is the page's platform census — every surface a first-time
- * visitor might be looking for, one line each, no versions or file sizes (those
- * belong to the sections below). It doubles as the section nav, which is why
- * there is no separate jump row.
+ * The hero is the page's platform census — every surface a first-time visitor
+ * might be looking for, one node each, no versions or file sizes (those belong
+ * to the sections below). It doubles as the section nav, which is why there is
+ * no separate jump row. It is drawn as a hub diagram rather than a grid of
+ * buttons because the census alone undersells the product: seven clients that
+ * all resolve to ONE workspace is the thing competitors don't have, and a
+ * picture says it faster than a sentence. See HUB_RUN_ON / HUB_REACH_IN.
  *
  * Owned by the Onboarding Experience Owner.
  */
@@ -93,47 +96,134 @@ const PLATFORMS: PlatformDl[] = [
   },
 ];
 
-// --- Hero platform census ---
-// One cell per client surface. `href` omitted = shipped-but-not-downloadable yet;
-// the cell renders as plain text so nobody clicks into a 404.
+// --- Hero platform census, drawn as a hub ---
+//
+// Two groups, and the split is a fact rather than a ranking: HUB_RUN_ON are
+// surfaces you install the app onto, HUB_REACH_IN are tools you already use
+// reaching into a workspace that is already there. A visitor arrives asking
+// "is my platform here?", and that question is answered by the group they
+// recognise, not by whichever client we happen to consider most important.
+//
+// `href` omitted = no artifact to link at yet; the node renders as a plain div
+// so an unshipped platform stays visible without handing anyone a 404. Android
+// is that case today.
 
 interface HeroPlatform {
+  /** id of a <g> in GlyphDefs. */
+  glyph: string;
+  /** Draw the glyph dashed — "not shipped yet", said in the stroke. */
+  dashed?: boolean;
   name: L;
   meta: L;
   href?: string;
 }
 
-const PLATFORMS_HERO: HeroPlatform[] = [
+const HUB_RUN_ON: HeroPlatform[] = [
   {
+    glyph: 'ud-g-desktop',
     name: {en: 'Desktop', zh: '桌面端'},
     meta: {en: 'macOS · Windows · Linux', zh: 'macOS · Windows · Linux'},
     href: '#desktop',
   },
   {
+    glyph: 'ud-g-web',
     name: {en: 'Web', zh: '网页版'},
     meta: {en: 'Any browser · nothing to install', zh: '任何浏览器 · 免安装'},
     href: '#web',
   },
   {
+    glyph: 'ud-g-ios',
     name: {en: 'iOS', zh: 'iOS'},
     meta: {en: 'Public beta on TestFlight', zh: 'TestFlight 公测中'},
     href: '#mobile',
   },
   {
+    glyph: 'ud-g-ios',
+    dashed: true,
     name: {en: 'Android', zh: 'Android'},
     meta: {en: 'Coming soon', zh: '即将上线'},
   },
+];
+
+const HUB_REACH_IN: HeroPlatform[] = [
   {
+    glyph: 'ud-g-chat',
     name: {en: 'Chat apps', zh: '聊天软件'},
     meta: {en: 'Telegram · Discord', zh: 'Telegram · Discord'},
     href: '/alfred',
   },
   {
+    glyph: 'ud-g-cli',
     name: {en: 'Terminal', zh: '命令行'},
-    meta: {en: 'CLI for you and your agents', zh: '给你，也给你的 AI Agent'},
+    meta: {en: 'For you and your agents', zh: '给你，也给你的 AI Agent'},
     href: '#cli',
   },
+  {
+    glyph: 'ud-g-ext',
+    name: {en: 'Browser extension', zh: '浏览器扩展'},
+    meta: {en: 'Chrome Web Store', zh: 'Chrome 商店 · 网页剪藏'},
+    href: '#extension',
+  },
 ];
+
+/**
+ * Platform glyphs — one 24 grid, 1.5 stroke, square caps, no fills.
+ *
+ * Deliberately geometric instead of official logos: we have no licence to ship
+ * Apple/Google/Chrome marks, and a single drawn set also makes seven clients
+ * read as one product rather than seven integrations. Android reuses the iOS
+ * body drawn dashed, so its status lives in the stroke instead of in a badge —
+ * drop `dashed` and add an href the day the apk ships.
+ *
+ * Inline + currentColor: no icon dependency, and both themes come free.
+ */
+function GlyphDefs() {
+  return (
+    <svg className={styles.glyphDefs} aria-hidden="true">
+      <defs>
+        <g id="ud-g-desktop">
+          <rect x="2.75" y="4.75" width="18.5" height="12.5" />
+          <path d="M12 17.25V20M8.5 20h7" />
+        </g>
+        <g id="ud-g-web">
+          <rect x="2.75" y="3.75" width="18.5" height="16.5" />
+          <path d="M2.75 8.25h18.5M5.75 6h1M8.75 6h1" />
+        </g>
+        <g id="ud-g-ios">
+          <rect x="6.75" y="2.75" width="10.5" height="18.5" />
+          <path d="M10 18.75h4" />
+        </g>
+        <g id="ud-g-chat">
+          <rect x="2.75" y="4.75" width="18.5" height="11.5" />
+          <path d="M7.5 16.25v4.5l4.5-4.5" />
+        </g>
+        <g id="ud-g-cli">
+          <rect x="2.75" y="4.75" width="18.5" height="14.5" />
+          <path d="M6.5 9.5l3 2.5-3 2.5M12.5 14.5h5" />
+        </g>
+        <g id="ud-g-ext">
+          <path d="M3 4.75h13.5v4.5H21v5.5h-4.5v4.5H3z" />
+        </g>
+      </defs>
+    </svg>
+  );
+}
+
+function Glyph({id, dashed}: {id: string; dashed?: boolean}) {
+  return (
+    <svg
+      className={`${styles.ic}${dashed ? ` ${styles.icSoon}` : ''}`}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.5}
+      strokeLinecap="square"
+      strokeDasharray={dashed ? '2.6 2.4' : undefined}
+      aria-hidden="true">
+      <use href={`#${id}`} />
+    </svg>
+  );
+}
 
 function CopyBtn({text}: {text: string}) {
   const t = useT();
@@ -184,6 +274,37 @@ function Terminal({name, code}: {name: string; code: string}) {
 
 // --- Sections ---
 
+/** One node of the hub. Renders as a plain div when there is nothing to link to. */
+function HubNode({p}: {p: HeroPlatform}) {
+  const t = useT();
+  const body = (
+    <>
+      <Glyph id={p.glyph} dashed={p.dashed} />
+      <span className={styles.nodeTxt}>
+        <span className={styles.nodeName}>{t(p.name)}</span>
+        <span className={styles.nodeMeta}>{t(p.meta)}</span>
+      </span>
+    </>
+  );
+  // In-page anchors stay raw <a>; route links go through Link so the zh-Hans
+  // build keeps its locale prefix.
+  return (
+    <div className={styles.hubRow}>
+      {p.href?.startsWith('#') ? (
+        <a href={p.href} className={styles.node}>
+          {body}
+        </a>
+      ) : p.href ? (
+        <Link to={p.href} className={styles.node}>
+          {body}
+        </Link>
+      ) : (
+        <div className={`${styles.node} ${styles.nodeSoon}`}>{body}</div>
+      )}
+    </div>
+  );
+}
+
 function Hero() {
   const t = useT();
   return (
@@ -198,46 +319,55 @@ function Hero() {
         {t({en: 'One workspace. ', zh: '一个工作空间。'})}
         <em>{t({en: 'Every platform.', zh: '所有平台。'})}</em>
       </h1>
+      {/* Self-hosting used to hang off a separate "Also:" line under the census.
+          The extension took its place in the hero, so the only survivor of that
+          line lives here in the body copy instead. */}
       <p className={`${styles.lede} ${styles.heroLede}`}>
         {t({
-          en: 'UnDercontrol runs where you do. Free to start on any of them, and every client can point at our cloud or a server you run yourself.',
-          zh: 'UnDercontrol 跟随你的工作方式。每一个都可以免费开始，也都可以连接我们的云端，或你自己部署的服务器。',
+          en: 'UnDercontrol runs where you do. Every client is free to start with, and they all connect to the same workspace — our cloud, or ',
+          zh: 'UnDercontrol 跟随你的工作方式。每一个都可以免费开始，也都连接同一个工作空间——我们的云端，或',
         })}
+        <a href="#selfhost">{t({en: 'a server you run yourself', zh: '你自己部署的服务器'})}</a>
+        {t({en: '.', zh: '。'})}
       </p>
-      <div className={styles.strip}>
-        {PLATFORMS_HERO.map((p) => {
-          const body = (
-            <>
-              <span className={styles.stripName}>{t(p.name)}</span>
-              <span className={styles.stripMeta}>{t(p.meta)}</span>
-            </>
-          );
-          // In-page anchors stay raw <a>; route links go through Link so the
-          // zh-Hans build keeps its locale prefix.
-          if (p.href?.startsWith('#')) {
-            return (
-              <a key={p.href} href={p.href} className={styles.stripCell}>
-                {body}
-              </a>
-            );
-          }
-          return p.href ? (
-            <Link key={p.href} to={p.href} className={styles.stripCell}>
-              {body}
-            </Link>
-          ) : (
-            <div key={t(p.name)} className={`${styles.stripCell} ${styles.stripSoon}`}>
-              {body}
-            </div>
-          );
-        })}
+      {/* Five grid columns: run-on nodes | wires | core | wires | reach-in nodes.
+          Below 860px the whole thing turns its axis (see download.module.css) —
+          the core moves to the top and the trunk runs down the left. Same
+          diagram, one axis; it is never dropped and never cropped. */}
+      <div className={styles.hub}>
+        <div className={`${styles.hubSide} ${styles.hubSideRun}`}>
+          <p className={styles.hubCap}>{t({en: 'Install the app', zh: '应用装在这里'})}</p>
+          {HUB_RUN_ON.map((p) => (
+            <HubNode key={t(p.name)} p={p} />
+          ))}
+        </div>
+        <div className={`${styles.wire} ${styles.wireRun}`} aria-hidden="true">
+          {HUB_RUN_ON.map((p) => (
+            <i key={t(p.name)} />
+          ))}
+        </div>
+        <div className={styles.core}>
+          <span className={styles.coreMark} aria-hidden="true" />
+          <span className={styles.coreName}>{t({en: 'Your workspace', zh: '你的工作空间'})}</span>
+          <span className={styles.coreMeta}>
+            {t({en: 'One account', zh: '同一个账号'})}
+            <br />
+            {t({en: 'our cloud · or your own server', zh: '云端 · 或你自建的服务器'})}
+          </span>
+        </div>
+        <span className={styles.hubStem} aria-hidden="true" />
+        <div className={`${styles.wire} ${styles.wireReach}`} aria-hidden="true">
+          {HUB_REACH_IN.map((p) => (
+            <i key={t(p.name)} />
+          ))}
+        </div>
+        <div className={`${styles.hubSide} ${styles.hubSideReach}`}>
+          <p className={styles.hubCap}>{t({en: 'Reach in from here', zh: '也可以从这里接入'})}</p>
+          {HUB_REACH_IN.map((p) => (
+            <HubNode key={t(p.name)} p={p} />
+          ))}
+        </div>
       </div>
-      <p className={styles.stripAlso}>
-        {t({en: 'Also: ', zh: '还有：'})}
-        <a href="#extension">{t({en: 'browser extension', zh: '浏览器扩展'})}</a>
-        {' · '}
-        <a href="#selfhost">{t({en: 'self-host it all', zh: '全部私有部署'})}</a>
-      </p>
     </header>
   );
 }
@@ -444,6 +574,7 @@ export default function DownloadPage(): ReactNode {
         zh: '下载 macOS、Windows、Linux 桌面版，通过 npm 安装 CLI，添加浏览器扩展，或用 all-in-one Docker 镜像私有部署 UnDercontrol。',
       })}>
       <main className={styles.page}>
+        <GlyphDefs />
         <Hero />
         <DesktopSection />
         <CliSection />

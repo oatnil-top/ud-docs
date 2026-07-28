@@ -47,22 +47,73 @@
 .heroTitle { font-size: clamp(36px, 5.5vw, 58px); font-weight: 700; line-height: 1.04; letter-spacing: -0.03em; margin: 0; text-wrap: balance; }
 .heroTitle em { font-style: normal; color: var(--ink); box-shadow: inset 0 -0.1em 0 0 var(--accent); }
 .heroLede { font-size: 18px; margin-top: 20px; }
-/* Platform census: one cell per surface, hairline seams, no fills or badges.
-   Cell seams are box-shadows rather than borders so the outer edges are clipped
-   by the container's overflow — the column count can change per breakpoint with
-   no nth-child bookkeeping. */
-.strip { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 30px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
-.stripCell { display: flex; flex-direction: column; gap: 4px; padding: 15px 18px 16px; color: var(--ink); text-decoration: none; box-shadow: 1px 0 0 var(--border), 0 1px 0 var(--border); transition: background .12s; }
-a.stripCell:hover { background: var(--inset); color: var(--ink); text-decoration: none; }
-.stripName { font-size: 15px; font-weight: 800; letter-spacing: -0.015em; }
-.stripMeta { font-family: var(--mono); font-size: 11.5px; line-height: 1.4; color: var(--faint); }
-/* Dim the name only, via opacity rather than --faint: that token resolves to the
-   same grey in both themes, so it reads as muted on white but as full-strength
-   on the dark background. The meta line stays legible — it carries the status. */
-.stripSoon .stripName { font-weight: 700; opacity: .5; }
-.stripAlso { font-size: 13.5px; color: var(--faint); margin: 14px 0 0; }
-.stripAlso a { color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
-.stripAlso a:hover { color: var(--ink); }
+/* Platform census, drawn as a hub — square corners and hairlines only, because
+   the point is that it reads as a technical drawing rather than a poster.
+   --row is the load-bearing number: the trunk is inset exactly half a row top
+   and bottom so it terminates on the first and last node's centre, which is
+   what lets the wires be a bus instead of a fan of diagonals. Change the node
+   height and --row moves with it. */
+.hub {
+  --row: 56px;
+  --stub: 34px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--stub) minmax(150px, 176px) var(--stub) minmax(0, 1fr);
+  align-items: center;
+  position: relative;
+  margin: 32px 0 46px;
+}
+.glyphDefs { position: absolute; width: 0; height: 0; overflow: hidden; }
+.ic { width: 22px; height: 22px; display: block; color: var(--ink); flex: none; }
+/* Android's dashed glyph, dimmed with opacity rather than --faint: that token
+   resolves to the same grey in both themes, so it reads as muted on white but
+   as full-strength on the dark background. */
+.icSoon { opacity: .45; }
+
+.hubSide { display: grid; min-width: 0; }
+.hubSideRun { grid-template-rows: repeat(4, var(--row)); }
+.hubSideReach { grid-template-rows: repeat(3, var(--row)); }
+.hubRow { display: grid; min-width: 0; }
+.node {
+  display: flex; align-items: center; gap: 11px; min-width: 0;
+  padding: 0 14px; margin: 3px 0;
+  border: 1px solid var(--border-2); background: var(--surface);
+  color: var(--ink); text-decoration: none;
+  transition: background .12s, border-color .12s;
+}
+a.node:hover { background: var(--inset); border-color: var(--faint); color: var(--ink); text-decoration: none; }
+.nodeTxt { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.nodeName { font-size: 14.5px; font-weight: 800; letter-spacing: -0.015em; line-height: 1.25; }
+.nodeMeta { font-family: var(--mono); font-size: 10px; line-height: 1.3; color: var(--faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.nodeSoon .nodeName { opacity: .5; }
+
+/* Wire column: one vertical trunk on the core side, one right-angle stub per
+   node. No diagonals, no radial fan, no arrows — a busy diagram reads as
+   "needs study", which is the opposite of what the picture is here to do. */
+.wire { position: relative; display: grid; }
+.wireRun { grid-template-rows: repeat(4, var(--row)); }
+.wireReach { grid-template-rows: repeat(3, var(--row)); }
+.wire::before { content: ""; position: absolute; top: calc(var(--row) / 2); bottom: calc(var(--row) / 2); width: 1px; background: var(--border-2); }
+.wireRun::before { right: 0; }
+.wireReach::before { left: 0; }
+.wire i { position: relative; }
+.wire i::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--border-2); }
+
+.core { border: 1px solid var(--ink); padding: 18px 14px; text-align: center; background: var(--surface); }
+.coreMark { display: block; width: 30px; height: 30px; margin: 0 auto 12px; border: 1.5px solid var(--ink); position: relative; }
+.coreMark::before { content: ""; position: absolute; inset: 7px; border: 1.5px solid var(--ink); }
+.coreName { display: block; font-size: 15px; font-weight: 800; letter-spacing: -0.02em; }
+.coreMeta { display: block; font-family: var(--mono); font-size: 10.5px; color: var(--muted); margin-top: 5px; line-height: 1.45; }
+
+/* Group captions sit under the outer edges on wide screens. They are absolute
+   so they stay out of the fixed-row grid the trunk is measured against, and
+   they anchor to .hub rather than to their own column so both land on ONE
+   baseline — the two sides have different row counts, so anchoring per-column
+   would step them. They turn back into ordinary inline headers once the
+   diagram flips its axis. */
+.hubCap { position: absolute; top: 100%; margin: 14px 0 0; font-family: var(--mono); font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--faint); white-space: nowrap; }
+.hubSideRun .hubCap { left: 0; }
+.hubSideReach .hubCap { right: 0; }
+.hubStem { display: none; }
 
 /* buttons */
 .btnrow { display: flex; gap: 12px; margin-top: 26px; flex-wrap: wrap; }
@@ -121,17 +172,35 @@ a.stripCell:hover { background: var(--inset); color: var(--ink); text-decoration
   .plat:nth-child(n+3) { border-bottom: none; }
 }
 
+/* The hub turns its axis rather than being dropped or letting the five-column
+   grid squeeze into an unreadable smear: the core moves to the top, one rail
+   runs down the left, one stub per row. Same diagram, one axis — a phone
+   visitor still gets the claim, not just the list. The wires are display:none
+   here, so the sides' source order carries them into place under the core. */
 @media screen and (max-width: 860px) {
   .section { padding: 48px 22px; }
   .hero { padding: 56px 22px 44px; }
   .band { grid-template-columns: 1fr; gap: 18px; }
-  .strip { grid-template-columns: repeat(2, 1fr); }
+  .hub { grid-template-columns: minmax(0, 1fr); margin: 28px 0 0; }
+  .wire { display: none; }
+  .core { order: -2; }
+  .hubStem { display: block; order: -1; width: 1px; height: 20px; margin-left: 20px; background: var(--border-2); }
+  .hubSide { grid-template-rows: none; margin-left: 20px; border-left: 1px solid var(--border-2); }
+  /* padding, not margin: the rail is this element's left border, and a margin
+     here would cut the trunk in half between the two groups. */
+  .hubSideReach { padding-top: 14px; }
+  .hubRow { position: relative; padding: 0 0 8px 18px; }
+  .hubRow::before { content: ""; position: absolute; left: 0; top: calc((100% - 8px) / 2); width: 18px; height: 1px; background: var(--border-2); }
+  .hubRow .node { margin: 0; min-height: 52px; }
+  /* no trailing rail past the last node */
+  .hubSideReach .hubRow:last-child { padding-bottom: 0; }
+  .hubCap { position: static; margin: 0 0 9px; padding-left: 18px; }
 }
 
 @media screen and (max-width: 560px) {
-  .stripCell { padding: 13px 15px 14px; }
-  .stripName { font-size: 14px; }
-  .stripMeta { font-size: 11px; }
+  .nodeName { font-size: 14px; }
+  .nodeMeta { font-size: 9.5px; }
+  .core { padding: 16px 12px; }
   .plats { grid-template-columns: 1fr; }
   .plat { border-right: none; border-bottom: 1px solid var(--border); }
   .plat:nth-child(n+3) { border-bottom: 1px solid var(--border); }
