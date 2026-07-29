@@ -18,6 +18,45 @@ UnDercontrol follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.123.0 (2026-07-29)
+
+### New Features
+
+**Alfred's chat starts a fresh thread every day**
+- The chat transcript used to append to one comment thread forever — the first one reached nearly a thousand replies in three days, which made it slow to open and impossible to skim.
+- A new thread now opens on each new day, in your own timezone, and the previous day's thread is closed off and stays readable where it is.
+
+**Alfred keeps his own memory tidy**
+- Two routine jobs — an hourly sweep and a nightly archive — now appear in your Scheduled Jobs the first time Alfred starts a session for you.
+- They are ordinary scheduled jobs: edit them, disable them, or delete them. **A routine you delete is not recreated.**
+- If you already wake Alfred on a schedule of your own, nothing is added — your arrangement is left alone.
+
+**`ud describe wctx` is readable again**
+- Notes are summarised instead of printed in full, and comment threads are listed as an index.
+- A task with a long history no longer floods the terminal.
+
+### Improvements
+
+**macOS: the app opens without the unidentified-developer warning**
+- The `.dmg` itself is now signed, notarised and stapled. Previously only the app inside it was, so macOS still showed the Gatekeeper warning on a freshly downloaded disk image. Auto-update checksums are recomputed after stapling, so updating is unaffected.
+
+**Possession pages redesigned** — a wide-screen layout in the same ink language as the iOS app.
+
+**Login page restyled** to match the rest of the app.
+
+### Bug Fixes
+
+- HTML attachments that store anything locally — bento decks, small self-contained web apps — no longer fail to open in the browser with "The operation is insecure". The preview now provides its own in-memory storage.
+- The CLI daemon writes its pending-prompt timestamp in a format the status hook can read, so an installed hook actually reports.
+- The CLI daemon confirms a prompt was delivered before submitting it, fixing occasional prompts that were silently dropped.
+
+### Upgrade Notes (self-hosted)
+
+- **No manual steps.** This release adds no environment variables and no system switches.
+- One additive database migration runs automatically when the new image starts: a column on `im_conversations` recording which day the current chat thread was opened. Existing conversations carry an empty value by design — an unknown day can never equal today, so the next message simply opens that day's thread.
+
+---
+
 ## v0.122.0 (2026-07-28)
 
 ### Critical Fix
