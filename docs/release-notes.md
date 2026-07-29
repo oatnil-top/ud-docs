@@ -18,6 +18,50 @@ UnDercontrol follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.124.0 (2026-07-29)
+
+### New Features
+
+**First-run setup is three steps instead of five**
+- Pick your language / Let this machine do the work / Meet Alfred. The separate "authorise hooks" step is gone, and Telegram is folded into the last step.
+- Every "Next" checks before it lets you through: if something isn't done the page stays put, tells you exactly what is missing, and the button becomes "Skip anyway" — press it again to move on.
+- When everything on a step is done, it gets out of your way entirely.
+
+**The machine step sets this machine up for you**
+- It installs the ud CLI and registers the daemon. The button only lights up once both are in place, and pressing it opens a plain workspace session on your own welcome card.
+- The web app shows the same three steps, with the middle one explaining what the desktop app adds and where to get it.
+
+**Hooks are installed and repaired at the start of every session, with your permission**
+- Permission starts **off**. Nothing is written to your agent CLI's configuration until you turn it on, and you can toggle it any time in Profile.
+- Once granted, every session start installs what's missing and upgrades what's outdated. If that fails, your session still starts.
+- All hook installation in the desktop app is now delegated to the ud CLI, which also cleans up registrations left behind by the old installer.
+- `ud hooks status --json` reports what is currently installed.
+
+**codex joins Claude Code with workspace hook support**
+- codex is the second agent CLI that can report live session status through a workspace hook.
+
+**Kimi Code added as the eighth built-in agent CLI**
+- This integration is written from Moonshot's published documentation and **has not been tested against the real CLI yet**. Treat it as unverified rather than supported.
+
+### Bug Fixes
+
+**The Markdown editor no longer rewrites your file**
+- Saving in visual mode used to rewrite the whole document: raw HTML blocks were dropped entirely, footnotes were flattened into malformed links, and plain text lost its trailing newline.
+- External `.md` files now open in source mode. Switching to visual mode first round-trips the document and tells you which syntax would be rewritten.
+- A file is no longer marked unsaved the moment it opens.
+- Closing a window with unsaved changes now asks first.
+- Clicking a `task://` link in a standalone editor window no longer pushes it to a backend that isn't there, or loses your unsaved work.
+
+**First-run setup can no longer get stuck on the last step**
+- If the machine handshake timed out, the status stayed "pending" forever and the Finish button stayed greyed out, leaving Skip as the only way forward.
+
+### Upgrade Notes (self-hosted)
+
+- No manual action required. This release adds no environment variables and no system switches; one seed migration (adding Kimi Code to the built-in agent CLI list) runs automatically when the new image starts.
+- Hook permission starts **off** for everyone, including existing users. If you were relying on the desktop app installing status hooks during first-run setup, turn it on in Profile or accept the prompt the next time you start a session.
+
+---
+
 ## v0.123.0 (2026-07-29)
 
 ### New Features
