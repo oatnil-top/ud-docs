@@ -95,6 +95,12 @@ docker run -d --name undercontrol \
 
 用你设置的 `ADMIN_EMAIL` / `ADMIN_PASSWORD` 登录。
 
+:::info 实例默认是私有的
+新起的实例不接受注册。你自己的管理员账号是启动时用 `ADMIN_EMAIL` 创建的，所以你可以直接登录；
+但其他人建不了账号——注册表单、GitHub/Google 首次登录、访客按钮这三条路都不行。想让别人也用你这个
+实例，设置 `REGISTRATION_ENABLED=true` 后重启。启动 banner 会打印当前状态（`Signup: closed (default)`）。
+:::
+
 :::warning Pro/Max 必须设置 ADMIN_EMAIL
 Pro/Max tier 启动时会用 `ADMIN_EMAIL` 创建初始管理员账号。如果缺失，服务会**直接拒绝启动**并给出明确报错——
 启动前请先设置它（以及 `ADMIN_PASSWORD`）。
@@ -115,6 +121,8 @@ services:
     environment:
       - HOST_DOMAIN=http://localhost:3000
       - JWT_SECRET=change-me-to-a-random-string
+      # 允许别人在这个实例上自行注册账号（默认关闭）：
+      # - REGISTRATION_ENABLED=true
       # 仅 Pro/Max：
       # - ADMIN_EMAIL=admin@example.com
       # - ADMIN_PASSWORD=your-secure-password
@@ -141,6 +149,7 @@ docker compose up -d
 | `LICENSE_HOST_SECRET` | Pro/Max | — | 与许可证 token 配套的 host secret。 |
 | `PERSONAL_TIER_PASSWORD` | 否 | `personal123` | Personal tier 唯一用户（`personal@undercontrol.local`）的密码。请在**首次启动前**设置：**Start** 自动登录始终读取该变量，用户创建后只改环境变量、或只在应用内改密码，都会导致自动登录失效（两者必须一致；登录名本身不可修改）。 |
 | `PORT` | 否 | `8080` | 服务在容器内监听的端口。 |
+| `REGISTRATION_ENABLED` | 否 | `false` | 允许别人在这个实例上自行注册账号。**默认关闭**——你的管理员账号在启动时由 `ADMIN_EMAIL` 创建，不依赖这个开关，但注册会一律被拒绝，直到你显式打开它。三条建号路径都受它管：注册表单、GitHub/Google 首次登录、访客按钮。仅在启动时生效。 |
 | `UD_ENCRYPTION_KEY` | IM 必需 | — | 用于加密用户密钥（目前是各自的 Telegram bot token）。**任何人连接 IM 之前必须设置**：未设置时「即时通讯」区会拒绝保存 token 并给出说明。视为每个实例永久不变——更换会使已保存的 token 全部失效，用户需要重新粘贴。 |
 | `IM_MAX_BYO_BOTS` | 否 | `20` | 本实例最多同时运行多少个用户自带 bot（每个 bot 占用一条长轮询连接）。 |
 | `CRON_ENABLED` | 否 | `true` | 运行定时任务（清理、备份、计划任务处理、唤醒 agent）。如果这台服务器的数据库来自别处，启动前请设为 `false`——见下。仅在启动时生效。 |

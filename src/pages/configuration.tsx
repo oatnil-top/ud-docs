@@ -118,6 +118,17 @@ const REFERENCE: Category[] = [
     title: {en: 'Accounts & authentication', zh: '账号与认证'},
     rows: [
       {
+        id: 'registration_enabled',
+        names: ['REGISTRATION_ENABLED'],
+        badges: [{kind: 'warn', label: {en: 'Off by default', zh: '默认关闭'}}],
+        desc: {
+          en: 'Lets other people create their own accounts on this instance. **Off by default** — an instance is yours until you decide otherwise. Your own admin account is created at startup from `ADMIN_EMAIL` and does not depend on this switch, so leaving it off never locks you out; it only refuses everyone else. Covers all three ways an account can be created: the register form, a first GitHub/Google login, and the visitor button. Turn it on and restart to open sign-ups. The boot banner prints the current state.',
+          zh: '允许别人在这个实例上自行注册账号。**默认关闭**——实例在你决定开放之前只属于你。你自己的管理员账号在启动时由 `ADMIN_EMAIL` 创建，不依赖这个开关，所以保持关闭永远不会把你自己锁在外面，只会拒绝其他人。三条建号路径都受它管：注册表单、GitHub/Google 首次登录、访客按钮。要开放注册，打开它并重启。启动 banner 会打印当前状态。',
+        },
+        metaDefault: '`false`',
+        metaFlags: '--registration-enabled',
+      },
+      {
         id: 'jwt_secret',
         names: ['JWT_SECRET'],
         badges: [{kind: 'warn', label: {en: 'Set it — default is public', zh: '务必设置——默认值公开'}}],

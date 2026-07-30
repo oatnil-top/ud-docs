@@ -108,6 +108,14 @@ docker run -d --name undercontrol \
 
 Log in with the `ADMIN_EMAIL` / `ADMIN_PASSWORD` you set.
 
+:::info Your instance is private by default
+A fresh instance does not accept sign-ups. Your own admin account is created at
+startup from `ADMIN_EMAIL`, so you can log in straight away — but nobody else can
+create an account, through the register form, a GitHub/Google login, or the visitor
+button. To let other people use your instance, set `REGISTRATION_ENABLED=true` and
+restart. The boot banner prints which it is (`Signup: closed (default)`).
+:::
+
 :::warning ADMIN_EMAIL is required for Pro/Max
 On Pro/Max tier the initial admin user is created from `ADMIN_EMAIL` at startup. If it is
 missing the server **refuses to boot** with a clear error — set it (and `ADMIN_PASSWORD`)
@@ -129,6 +137,8 @@ services:
     environment:
       - HOST_DOMAIN=http://localhost:3000
       - JWT_SECRET=change-me-to-a-random-string
+      # Let other people create their own accounts on this instance (default: off):
+      # - REGISTRATION_ENABLED=true
       # Pro/Max only:
       # - ADMIN_EMAIL=admin@example.com
       # - ADMIN_PASSWORD=your-secure-password
@@ -156,6 +166,7 @@ server reads — with an interactive config builder and boot preview — see the
 | `LICENSE_HOST_SECRET` | Pro/Max | — | Host secret paired with your license token. |
 | `PERSONAL_TIER_PASSWORD` | No | `personal123` | Password of the single Personal-tier user (`personal@undercontrol.local`). Set it **before first boot**: the **Start** auto-login always uses this variable, so changing only the env var after the user exists — or changing only the password in-app — breaks auto-login (the two must match; the login name itself cannot be changed). |
 | `PORT` | No | `8080` | Port the server listens on inside the container. |
+| `REGISTRATION_ENABLED` | No | `false` | Lets people create their own accounts on this instance. **Off by default** — your admin account comes from `ADMIN_EMAIL` at startup, so you can log in without it, but sign-ups are refused until you turn it on. Covers all three ways an account can be created: the register form, a first GitHub/Google login, and the visitor button. Applied at boot only. |
 | `UD_ENCRYPTION_KEY` | Messenger | — | Key used to encrypt user-owned secrets at rest — today each user's own messenger bot token. **Required before anyone can connect a messenger**: without it the Messenger section refuses to store a token and says so. Treat it as permanent per instance — changing it strands every stored token and each user must paste theirs again. |
 | `IM_MAX_BYO_BOTS` | No | `20` | How many user-owned messenger bots this instance will run at once. Each holds one long-polling connection. |
 | `CRON_ENABLED` | No | `true` | Runs scheduled jobs (cleanup, backups, scheduled-task processing, agent wake-ups). Set it to `false` before starting a server whose database came from somewhere else — see below. Applied at boot only. |

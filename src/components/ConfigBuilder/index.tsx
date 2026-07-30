@@ -33,6 +33,9 @@ interface Labels {
   ai: string;
   aiOff: string;
   aiOn: string;
+  signup: string;
+  signupClosed: string;
+  signupOpen: string;
   proOnly: string;
   hostHint: string;
   adminHint: string;
@@ -56,6 +59,9 @@ const EN: Labels = {
   ai: 'AI features',
   aiOff: 'Off',
   aiOn: 'OpenAI-compatible',
+  signup: 'Who can create accounts',
+  signupClosed: 'Only me',
+  signupOpen: 'Anyone',
   proOnly: 'Pro/Max feature',
   hostHint: 'The URL browsers will use to reach the instance — the misconfigured preview below shows what happens when it is missing or invalid.',
   adminHint: 'Login username of the initial admin — Pro/Max refuses to boot without it.',
@@ -79,6 +85,9 @@ const ZH: Labels = {
   ai: 'AI 功能',
   aiOff: '关闭',
   aiOn: 'OpenAI 兼容',
+  signup: '谁可以建账号',
+  signupClosed: '只有我',
+  signupOpen: '任何人',
   proOnly: 'Pro/Max 功能',
   hostHint: '浏览器访问实例所用的 URL——下方的失败预览展示了它缺失或非法时的启动结果。',
   adminHint: '初始管理员的登录用户名——Pro/Max 缺少它会拒绝启动。',
@@ -127,6 +136,9 @@ export default function ConfigBuilder({locale = 'en'}: {locale?: 'en' | 'zh'}): 
   const [db, setDb] = useState<Db>('sqlite');
   const [storage, setStorage] = useState<Storage>('local');
   const [ai, setAi] = useState<boolean>(false);
+  // Defaults to closed, like the backend: the preview must show a self-hoster the
+  // instance they will actually get, not the friendlier one.
+  const [openSignup, setOpenSignup] = useState<boolean>(false);
   const [host, setHost] = useState('http://localhost:3000');
   const [admin, setAdmin] = useState('');
   const [secret, setSecret] = useState(() => randomSecret());
@@ -167,8 +179,11 @@ export default function ConfigBuilder({locale = 'en'}: {locale?: 'en' | 'zh'}): 
       v.push(['S3_SECRET_ACCESS_KEY', 'your-secret-key', true]);
     }
     if (ai) v.push(['OPENAI_API_KEY', 'sk-your-key', true]);
+    // Only emitted when opting in — off is the default, so the closed config is
+    // the one with no line for it.
+    if (openSignup) v.push(['REGISTRATION_ENABLED', 'true', false]);
     return v;
-  }, [tier, db, storage, ai, hostVal, admin, secret]);
+  }, [tier, db, storage, ai, openSignup, hostVal, admin, secret]);
 
   const port = hostPort(hostVal);
 
@@ -227,7 +242,7 @@ export default function ConfigBuilder({locale = 'en'}: {locale?: 'en' | 'zh'}): 
       <>
         {RULE + '\n\n  UnDercontrol v1.x.x is ready\n\n  '}
         <span className={styles.hlOk}>{`--> Open ${url} to get started`}</span>
-        {`\n\n      Login as:  ${login}\n   ${hint}      Tier:      ${personal ? 'Personal (max users: 1)' : 'Pro (max users: 10)'}\n      Database:  ${db === 'postgres' ? 'POSTGRES' : 'SQLITE'}\n      Storage:   ${storage === 's3' ? 'S3/R2' : 'LocalFS'}\n\n` + RULE}
+        {`\n\n      Login as:  ${login}\n   ${hint}      Tier:      ${personal ? 'Personal (max users: 1)' : 'Pro (max users: 10)'}\n      Database:  ${db === 'postgres' ? 'POSTGRES' : 'SQLITE'}\n      Storage:   ${storage === 's3' ? 'S3/R2' : 'LocalFS'}\n      Signup:    ${openSignup ? 'open (env REGISTRATION_ENABLED)' : 'closed (default)'}\n\n` + RULE}
       </>
     );
   })();
@@ -311,6 +326,14 @@ export default function ConfigBuilder({locale = 'en'}: {locale?: 'en' | 'zh'}): 
               {v: 'off', label: L.aiOff},
               {v: 'on', label: L.aiOn},
             ], (v) => setAi(v === 'on'))}
+          </div>
+
+          <div className={styles.field}>
+            <p className={styles.label}>{L.signup}</p>
+            {seg(openSignup ? 'on' : 'off', [
+              {v: 'off', label: L.signupClosed},
+              {v: 'on', label: L.signupOpen},
+            ], (v) => setOpenSignup(v === 'on'))}
           </div>
 
           <div className={styles.field}>

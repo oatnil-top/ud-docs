@@ -22,6 +22,7 @@ const LICENSE_VALID_UNTIL = '2026-10-07';
 
 // --- Copy-paste-ready snippets (code is not translated) ---
 const HERO_RUN = `# the all-in-one image: frontend + backend in one container
+# only you can log in; add -e REGISTRATION_ENABLED=true to let others sign up
 docker run -d -p 3000:8080 \\
   -e HOST_DOMAIN=http://localhost:3000 \\
   -e JWT_SECRET=change-me-to-a-random-string \\
@@ -48,6 +49,8 @@ const COMPOSE_ALLINONE = `services:
       - JWT_SECRET=change-me-to-a-random-string
       - ADMIN_EMAIL=admin@example.com
       - ADMIN_PASSWORD=changeme
+      # let other people sign up too (default: only you can log in)
+      # - REGISTRATION_ENABLED=true
       # free 3-month Pro trial license
       - LICENSE_TOKEN=${LICENSE_TOKEN}
       - LICENSE_HOST_SECRET=${LICENSE_SECRET}
@@ -84,6 +87,8 @@ const COMPOSE_AIOPG = `services:
       - POSTGRES_DATABASE=undercontrol
       - ADMIN_EMAIL=admin@example.com
       - ADMIN_PASSWORD=changeme
+      # let other people sign up too (default: only you can log in)
+      # - REGISTRATION_ENABLED=true
       - LICENSE_TOKEN=${LICENSE_TOKEN}
       - LICENSE_HOST_SECRET=${LICENSE_SECRET}
     depends_on:
@@ -121,6 +126,8 @@ const COMPOSE_SPLIT = `services:
       - JWT_SECRET=change-me-to-a-random-string
       - ADMIN_EMAIL=admin@example.com
       - ADMIN_PASSWORD=changeme
+      # let other people sign up too (default: only you can log in)
+      # - REGISTRATION_ENABLED=true
       - LICENSE_TOKEN=${LICENSE_TOKEN}
       - LICENSE_HOST_SECRET=${LICENSE_SECRET}
     depends_on:
