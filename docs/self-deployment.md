@@ -139,6 +139,9 @@ services:
       - JWT_SECRET=change-me-to-a-random-string
       # Let other people create their own accounts on this instance (default: off):
       # - REGISTRATION_ENABLED=true
+      # Needed before anyone can connect a messenger. Pick a random value once and
+      # never change it — see the variable reference below:
+      # - UD_ENCRYPTION_KEY=change-me-to-a-random-string
       # Pro/Max only:
       # - ADMIN_EMAIL=admin@example.com
       # - ADMIN_PASSWORD=your-secure-password
@@ -167,7 +170,7 @@ server reads — with an interactive config builder and boot preview — see the
 | `PERSONAL_TIER_PASSWORD` | No | `personal123` | Password of the single Personal-tier user (`personal@undercontrol.local`). Set it **before first boot**: the **Start** auto-login always uses this variable, so changing only the env var after the user exists — or changing only the password in-app — breaks auto-login (the two must match; the login name itself cannot be changed). |
 | `PORT` | No | `8080` | Port the server listens on inside the container. |
 | `REGISTRATION_ENABLED` | No | `false` | Lets people create their own accounts on this instance. **Off by default** — your admin account comes from `ADMIN_EMAIL` at startup, so you can log in without it, but sign-ups are refused until you turn it on. Covers all three ways an account can be created: the register form, a first GitHub/Google login, and the visitor button. Applied at boot only. |
-| `UD_ENCRYPTION_KEY` | Messenger | — | Key used to encrypt user-owned secrets at rest — today each user's own messenger bot token. **Required before anyone can connect a messenger**: without it the Messenger section refuses to store a token and says so. Treat it as permanent per instance — changing it strands every stored token and each user must paste theirs again. |
+| `UD_ENCRYPTION_KEY` | Messenger | — | Key used to encrypt user-owned secrets at rest — today each user's own messenger bot token. **Required before anyone can connect a messenger**: without it the Messenger section refuses to store a token and says so. Treat it as permanent per instance — changing it strands every stored token and each user must paste theirs again. This is a harder constraint than `JWT_SECRET`: rotating that one only forces everybody to log in again, while rotating this one destroys data you cannot recover. |
 | `IM_MAX_BYO_BOTS` | No | `20` | How many user-owned messenger bots this instance will run at once. Each holds one long-polling connection. |
 | `CRON_ENABLED` | No | `true` | Runs scheduled jobs (cleanup, backups, scheduled-task processing, agent wake-ups). Set it to `false` before starting a server whose database came from somewhere else — see below. Applied at boot only. |
 
@@ -219,9 +222,12 @@ once more than one person uses an instance.
 
 **What the operator does — once:**
 
-- Set `UD_ENCRYPTION_KEY` to a random secret. Bot tokens are stored AES-256-GCM encrypted and
-  cannot be stored at all without it; the Messenger section tells users to ask you if it is
-  missing. Changing it later strands every stored token, so pick it before your users start.
+- Set `UD_ENCRYPTION_KEY` to a random secret (`openssl rand -hex 32`). Bot tokens are stored
+  AES-256-GCM encrypted and cannot be stored at all without it; the Messenger section tells
+  users to ask you if it is missing. **Then leave it alone for the life of the instance.**
+  Unlike `JWT_SECRET`, which you can rotate at the cost of one forced re-login, rotating this
+  key strands every token already stored — the ciphertext stays, nothing can read it, and each
+  user has to paste their token in again.
 - Optionally raise or lower `IM_MAX_BYO_BOTS` (default 20), the number of user bots this
   instance will run at once. It is also editable at runtime in
   **Admin → System Config → Integration**.

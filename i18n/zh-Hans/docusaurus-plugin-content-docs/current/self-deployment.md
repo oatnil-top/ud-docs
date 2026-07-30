@@ -123,6 +123,8 @@ services:
       - JWT_SECRET=change-me-to-a-random-string
       # 允许别人在这个实例上自行注册账号（默认关闭）：
       # - REGISTRATION_ENABLED=true
+      # 任何人连接 IM 之前必须设置。取一个随机值，设定后不要更换——见下方变量说明：
+      # - UD_ENCRYPTION_KEY=change-me-to-a-random-string
       # 仅 Pro/Max：
       # - ADMIN_EMAIL=admin@example.com
       # - ADMIN_PASSWORD=your-secure-password
@@ -150,7 +152,7 @@ docker compose up -d
 | `PERSONAL_TIER_PASSWORD` | 否 | `personal123` | Personal tier 唯一用户（`personal@undercontrol.local`）的密码。请在**首次启动前**设置：**Start** 自动登录始终读取该变量，用户创建后只改环境变量、或只在应用内改密码，都会导致自动登录失效（两者必须一致；登录名本身不可修改）。 |
 | `PORT` | 否 | `8080` | 服务在容器内监听的端口。 |
 | `REGISTRATION_ENABLED` | 否 | `false` | 允许别人在这个实例上自行注册账号。**默认关闭**——你的管理员账号在启动时由 `ADMIN_EMAIL` 创建，不依赖这个开关，但注册会一律被拒绝，直到你显式打开它。三条建号路径都受它管：注册表单、GitHub/Google 首次登录、访客按钮。仅在启动时生效。 |
-| `UD_ENCRYPTION_KEY` | IM 必需 | — | 用于加密用户密钥（目前是各自的 Telegram bot token）。**任何人连接 IM 之前必须设置**：未设置时「即时通讯」区会拒绝保存 token 并给出说明。视为每个实例永久不变——更换会使已保存的 token 全部失效，用户需要重新粘贴。 |
+| `UD_ENCRYPTION_KEY` | IM 必需 | — | 用于加密用户密钥（目前是各自的 Telegram bot token）。**任何人连接 IM 之前必须设置**：未设置时「即时通讯」区会拒绝保存 token 并给出说明。视为每个实例永久不变——更换会使已保存的 token 全部失效，用户需要重新粘贴。这比 `JWT_SECRET` 的约束更硬：轮换 `JWT_SECRET` 只是让所有人重新登录一次，轮换这把密钥则会毁掉无法恢复的数据。 |
 | `IM_MAX_BYO_BOTS` | 否 | `20` | 本实例最多同时运行多少个用户自带 bot（每个 bot 占用一条长轮询连接）。 |
 | `CRON_ENABLED` | 否 | `true` | 运行定时任务（清理、备份、计划任务处理、唤醒 agent）。如果这台服务器的数据库来自别处，启动前请设为 `false`——见下。仅在启动时生效。 |
 
@@ -191,7 +193,7 @@ Alfred 是内置的管家 Agent。用户在网页端任意评论里 @alfred 即�
 
 **运维方只需做一次：**
 
-- 把 `UD_ENCRYPTION_KEY` 设为一串随机密钥。bot token 以 AES-256-GCM 加密存储，没有密钥就无法保存；
+- 把 `UD_ENCRYPTION_KEY` 设为一串随机密钥（`openssl rand -hex 32`）。bot token 以 AES-256-GCM 加密存储，没有密钥就无法保存；**设好之后，在这个实例的整个生命周期里都不要再改动它。** 和 `JWT_SECRET` 不同——那把密钥轮换一次的代价只是所有人重新登录，而轮换这把密钥会让已经存下的 token 全部失效：密文还在，但没有任何东西能读懂它，每位用户都得重新粘贴自己的 token。
   缺失时「即时通讯」区会提示用户联系管理员。之后更换会使已存 token 全部失效，所以请在用户开始使用前定下来。
 - 可选：调整 `IM_MAX_BYO_BOTS`（默认 20），即本实例同时运行的用户 bot 数量上限。
   该值也可在**管理后台 → 系统配置 → Integration** 中随时修改。

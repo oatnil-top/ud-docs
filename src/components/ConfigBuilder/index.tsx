@@ -40,6 +40,7 @@ interface Labels {
   hostHint: string;
   adminHint: string;
   secretHint: string;
+  encKeyHint: string;
   regenerate: string;
   copy: string;
   copied: string;
@@ -66,6 +67,8 @@ const EN: Labels = {
   hostHint: 'The URL browsers will use to reach the instance — the misconfigured preview below shows what happens when it is missing or invalid.',
   adminHint: 'Login username of the initial admin — Pro/Max refuses to boot without it.',
   secretHint: 'Random value generated for you — ',
+  encKeyHint:
+    "Encrypts each user's messenger bot token. Set it once and keep it — unlike JWT_SECRET, changing this one strands every token already stored and each user must paste theirs again.",
   regenerate: 'regenerate',
   copy: 'Copy',
   copied: 'Copied',
@@ -92,6 +95,8 @@ const ZH: Labels = {
   hostHint: '浏览器访问实例所用的 URL——下方的失败预览展示了它缺失或非法时的启动结果。',
   adminHint: '初始管理员的登录用户名——Pro/Max 缺少它会拒绝启动。',
   secretHint: '已为你生成随机值——',
+  encKeyHint:
+    '用于加密每位用户的 IM bot token。设定后就不要再换——和 JWT_SECRET 不同，换掉它会让已经存下的 token 全部解不开，每位用户都得重新粘贴一遍。',
   regenerate: '重新生成',
   copy: '复制',
   copied: '已复制',
@@ -142,6 +147,10 @@ export default function ConfigBuilder({locale = 'en'}: {locale?: 'en' | 'zh'}): 
   const [host, setHost] = useState('http://localhost:3000');
   const [admin, setAdmin] = useState('');
   const [secret, setSecret] = useState(() => randomSecret());
+  // Same treatment as JWT_SECRET, and for the same reason: a key shipped as a
+  // copyable example value is a key every instance shares. Generated per visitor,
+  // always emitted, overridable.
+  const [encKey, setEncKey] = useState(() => randomSecret());
   const [tab, setTab] = useState<Tab>('run');
   const [toast, setToast] = useState('');
 
@@ -161,6 +170,7 @@ export default function ConfigBuilder({locale = 'en'}: {locale?: 'en' | 'zh'}): 
     const v: VarEntry[] = [];
     v.push(['HOST_DOMAIN', hostVal || 'http://localhost:3000', !hostVal]);
     v.push(['JWT_SECRET', secret || 'change-me-to-a-random-string', !secret]);
+    v.push(['UD_ENCRYPTION_KEY', encKey || 'change-me-to-a-random-string', !encKey]);
     if (tier === 'pro') {
       v.push(['ADMIN_EMAIL', admin.trim() || 'admin@example.com', !admin.trim()]);
       v.push(['ADMIN_PASSWORD', 'your-secure-password', true]);
@@ -183,7 +193,7 @@ export default function ConfigBuilder({locale = 'en'}: {locale?: 'en' | 'zh'}): 
     // the one with no line for it.
     if (openSignup) v.push(['REGISTRATION_ENABLED', 'true', false]);
     return v;
-  }, [tier, db, storage, ai, openSignup, hostVal, admin, secret]);
+  }, [tier, db, storage, ai, openSignup, hostVal, admin, secret, encKey]);
 
   const port = hostPort(hostVal);
 
@@ -378,6 +388,24 @@ export default function ConfigBuilder({locale = 'en'}: {locale?: 'en' | 'zh'}): 
                 {L.regenerate}
               </button>
             </p>
+          </div>
+
+          <div className={styles.field}>
+            <p className={styles.label}>UD_ENCRYPTION_KEY</p>
+            <input
+              className={styles.txt}
+              value={encKey}
+              spellCheck={false}
+              aria-label="UD_ENCRYPTION_KEY"
+              onChange={(e) => setEncKey(e.target.value)}
+            />
+            <p className={styles.hint}>
+              {L.secretHint}
+              <button type="button" className={styles.linky} onClick={() => setEncKey(randomSecret())}>
+                {L.regenerate}
+              </button>
+            </p>
+            <p className={styles.hint}>{L.encKeyHint}</p>
           </div>
         </div>
 

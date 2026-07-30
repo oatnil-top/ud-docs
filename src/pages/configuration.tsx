@@ -140,6 +140,19 @@ const REFERENCE: Category[] = [
         metaFlags: '--jwt-secret',
       },
       {
+        id: 'ud_encryption_key',
+        names: ['UD_ENCRYPTION_KEY'],
+        badges: [
+          {kind: 'warn', label: {en: 'Set once — never change', zh: '设定后不要更换'}},
+        ],
+        desc: {
+          en: "Key used to encrypt user-owned secrets at rest — today each user's own messenger bot token. It is a separate key rather than a database setting on purpose: a key kept in the same database as the ciphertext it protects protects nothing. **Set it before anyone connects a messenger**: with no key the messenger paths refuse to store a token (they say so rather than falling back to plaintext), so Alfred and the IM integration cannot be used. Generate a random value — `openssl rand -hex 32` — and treat it as permanent for the life of the instance. It is not like `JWT_SECRET`: changing that one just forces everybody to log in again, while changing this one strands every token already stored, and each user has to paste theirs in again.",
+          zh: '用于加密用户自己的密钥（目前是每位用户的 IM bot token）的密钥。它独立于数据库设置是有意的：把密钥和它保护的密文放在同一个数据库里，等于没有保护。**任何人连接 IM 之前就要设好**：没有这把密钥，IM 相关路径会拒绝保存 token（并明确说明，而不是退回明文存储），Alfred 和 IM 集成都无法使用。请生成一串随机值（`openssl rand -hex 32`），并当作这个实例永久不变的东西。它和 `JWT_SECRET` 不是一回事：换掉 `JWT_SECRET` 最多是所有人重新登录一次，而换掉这把密钥，已经存下的 token 全部解不开，每位用户都得重新粘贴一遍。',
+        },
+        metaDefault: '—',
+        metaFlags: '--encryption-key',
+      },
+      {
         id: 'jwt_expiration_minutes',
         names: ['JWT_EXPIRATION_MINUTES'],
         desc: {
