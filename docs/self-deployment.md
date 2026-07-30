@@ -45,14 +45,22 @@ and how to log in:
       Tier:      Personal (max users: 1)
       Database:  SQLITE
       Storage:   LocalFS
+      Scheduler: enabled (default), 0 scheduled job(s)
 
 ==============================================================================
 ```
 
+The `Scheduler` line states whether scheduled jobs are running, which input decided
+that (`default`, `env CRON_ENABLED`, or `flag --cron-enabled`), and how many enabled
+scheduled jobs the database holds. A fresh install shows `0`. A non-zero count on an
+instance you just created means the database came from somewhere else — see
+[Starting a server from a copied database](#starting-a-server-from-a-copied-database).
+
 If the configuration is broken, the container exits immediately and the same logs show
 a `STARTUP FAILED` block explaining exactly what to fix — a missing `HOST_DOMAIN`, a
-missing `ADMIN_EMAIL` on Pro/Max, or a port already in use. The password hint only
-appears while the account is still on the shipped default password.
+missing `ADMIN_EMAIL` on Pro/Max, a port already in use, or a setting whose value could
+not be read. The password hint only appears while the account is still on the shipped
+default password.
 
 ## Bare-metal (npm, no Docker)
 
@@ -150,6 +158,30 @@ server reads — with an interactive config builder and boot preview — see the
 | `PORT` | No | `8080` | Port the server listens on inside the container. |
 | `UD_ENCRYPTION_KEY` | Messenger | — | Key used to encrypt user-owned secrets at rest — today each user's own messenger bot token. **Required before anyone can connect a messenger**: without it the Messenger section refuses to store a token and says so. Treat it as permanent per instance — changing it strands every stored token and each user must paste theirs again. |
 | `IM_MAX_BYO_BOTS` | No | `20` | How many user-owned messenger bots this instance will run at once. Each holds one long-polling connection. |
+| `CRON_ENABLED` | No | `true` | Runs scheduled jobs (cleanup, backups, scheduled-task processing, agent wake-ups). Set it to `false` before starting a server whose database came from somewhere else — see below. Applied at boot only. |
+
+On/off variables accept `true/false`, `1/0`, `yes/no`, `on/off` and `enabled/disabled`,
+in any case. A value the server cannot read is **not** silently replaced by the default:
+it refuses to start and tells you which variable, what it received, and what is accepted.
+
+### Starting a server from a copied database
+
+Scheduled jobs live in the database, not in your configuration. A database restored from
+a backup — or copied from another machine — therefore arrives with all of the original
+instance's scheduled jobs still enabled, and the new server will start running them:
+sending messages, waking agents, writing to external services, all as if it were the
+instance they were created on.
+
+Start such a server with the scheduler off:
+
+```bash
+docker run -e CRON_ENABLED=false ...   # or: ./server --cron-enabled=false
+```
+
+Then check the `Scheduler` line in the boot banner to confirm it says `disabled` before
+you trust the instance. Decide job by job what should be re-enabled, then restart
+normally. `VISITOR_CLEANUP_ENABLED=false` is worth adding for the same reason: visitor
+cleanup deletes visitor accounts and their data on a schedule.
 
 ### Optional: PostgreSQL, S3 and AI
 

@@ -414,8 +414,8 @@ const REFERENCE: Category[] = [
         id: 'cron_enabled',
         names: ['CRON_ENABLED'],
         desc: {
-          en: 'Master switch for scheduled jobs (cleanup, backups, scheduled-task processing). Leave on unless you run a separate worker instance.',
-          zh: '定时任务总开关（清理、备份、计划任务处理）。除非另跑独立 worker 实例，否则保持开启。',
+          en: 'Master switch for scheduled jobs (cleanup, backups, scheduled-task processing). Leave on unless you run a separate worker instance. **Set it to `false` before starting a server whose database came from somewhere else** — a restored backup or a copy carries every scheduled job the original had, and those jobs belong to that instance, not this one. Applied at boot only: the value is read-only in Admin → System Config, and the startup banner prints the state, where it came from, and how many enabled scheduled jobs the database holds.',
+          zh: '定时任务总开关（清理、备份、计划任务处理）。除非另跑独立 worker 实例，否则保持开启。**如果这台服务器的数据库来自别处（恢复的备份或拷贝），启动前先把它设为 `false`** —— 那份库里原有的定时任务会全部由这个实例执行，而它们本不属于这里。仅在启动时生效：该值在「管理后台 → 系统配置」中只读展示，启动横幅会打印它的状态、来源，以及库里有多少条已启用的定时任务。',
         },
         metaDefault: '`true`',
         metaFlags: '--cron-enabled',
@@ -424,8 +424,8 @@ const REFERENCE: Category[] = [
         id: 'visitor_cleanup',
         names: ['VISITOR_CLEANUP_ENABLED', '/ VISITOR_RETENTION_DAYS / VISITOR_CLEANUP_SCHEDULE'],
         desc: {
-          en: 'Automatic removal of expired visitor (demo) accounts and their data: on by default, retention `3` days, runs daily at midnight (`0 0 * * *`, cron syntax).',
-          zh: '过期访客（演示）账号及其数据的自动清理：默认开启，保留 `3` 天，每天零点运行（`0 0 * * *`，cron 语法）。',
+          en: 'Automatic removal of expired visitor (demo) accounts and their data: on by default, retention `3` days, runs daily at midnight (`0 0 * * *`, cron syntax). Applied at boot only, like `CRON_ENABLED` — worth knowing when you boot a copy of a real database, since it deletes visitor data on a schedule.',
+          zh: '过期访客（演示）账号及其数据的自动清理：默认开启，保留 `3` 天，每天零点运行（`0 0 * * *`，cron 语法）。与 `CRON_ENABLED` 一样仅在启动时生效 —— 用真实库的拷贝起实例时要留意：它会按时删除访客数据。',
         },
         metaFlags: '--visitor-cleanup-enabled, …',
       },
@@ -487,6 +487,10 @@ const UI = {
   lede: {
     en: 'Build a working configuration below, then look anything up in the full reference. Every setting can be given three ways, in order of precedence: CLI flag › environment variable › built-in default. A `.env` file in the working directory is loaded automatically.',
     zh: '先用下面的生成器搭出一份可用配置，再到完整参考里查任何一项。每个配置项都有三种设置方式，优先级从高到低：CLI flag › 环境变量 › 内置默认值。工作目录下的 `.env` 文件会被自动加载。',
+  },
+  values: {
+    en: 'On/off settings accept `true/false`, `1/0`, `yes/no`, `on/off` and `enabled/disabled`, in any case and ignoring surrounding spaces. A value that cannot be read is **not** quietly replaced by the default: the server refuses to start and names the variable, what it received, and the accepted spellings. The same goes for numbers. Leaving a variable empty (`CRON_ENABLED=`) uses the default and logs a warning — remove the line instead if that is what you meant.',
+    zh: '开关类配置接受 `true/false`、`1/0`、`yes/no`、`on/off`、`enabled/disabled`，不区分大小写、忽略首尾空格。**读不懂的值不会被悄悄换成默认值**：服务会拒绝启动，并指明是哪个变量、收到了什么、以及可接受的写法。数字类配置同理。把变量留空（`CRON_ENABLED=`）会使用默认值并打印一条警告——如果本意就是用默认值，请直接删掉这一行。',
   },
   source: {
     en: 'Source of truth: `go-backend/internal/config/config.go` — this page tracks it.',
@@ -572,6 +576,7 @@ export default function ConfigurationPage(): ReactNode {
         <p className={styles.eyebrow}>{t(UI.eyebrow)}</p>
         <h1 className={styles.title}>{t(UI.title)}</h1>
         <p className={styles.lede}>{inline(t(UI.lede))}</p>
+        <p className={styles.lede}>{inline(t(UI.values))}</p>
         <p className={styles.sourceNote}>{inline(t(UI.source))}</p>
 
         <div className={styles.minimum}>

@@ -42,12 +42,17 @@ ready banner，直接告诉你去哪打开、用什么账号登录：
       Tier:      Personal (max users: 1)
       Database:  SQLITE
       Storage:   LocalFS
+      Scheduler: enabled (default), 0 scheduled job(s)
 
 ==============================================================================
 ```
 
+`Scheduler` 这一行说明定时任务是否在运行、是哪个输入决定的（`default`、`env CRON_ENABLED`
+或 `flag --cron-enabled`），以及库里有多少条已启用的定时任务。全新安装显示 `0`。如果你刚建好的实例
+显示非零，说明这个数据库来自别处——见[用拷贝来的数据库启动服务](#用拷贝来的数据库启动服务)。
+
 如果配置有误，容器会立即退出，同一份日志里会出现 `STARTUP FAILED` 块，明确指出要修什么——
-缺 `HOST_DOMAIN`、Pro/Max 下缺 `ADMIN_EMAIL`，或端口被占用。密码提示只在账号仍使用出厂默认密码时才会出现。
+缺 `HOST_DOMAIN`、Pro/Max 下缺 `ADMIN_EMAIL`、端口被占用，或某个配置项的值读不懂。密码提示只在账号仍使用出厂默认密码时才会出现。
 
 ## 裸机部署（npm，无需 Docker）
 
@@ -138,6 +143,26 @@ docker compose up -d
 | `PORT` | 否 | `8080` | 服务在容器内监听的端口。 |
 | `UD_ENCRYPTION_KEY` | IM 必需 | — | 用于加密用户密钥（目前是各自的 Telegram bot token）。**任何人连接 IM 之前必须设置**：未设置时「即时通讯」区会拒绝保存 token 并给出说明。视为每个实例永久不变——更换会使已保存的 token 全部失效，用户需要重新粘贴。 |
 | `IM_MAX_BYO_BOTS` | 否 | `20` | 本实例最多同时运行多少个用户自带 bot（每个 bot 占用一条长轮询连接）。 |
+| `CRON_ENABLED` | 否 | `true` | 运行定时任务（清理、备份、计划任务处理、唤醒 agent）。如果这台服务器的数据库来自别处，启动前请设为 `false`——见下。仅在启动时生效。 |
+
+开关类变量接受 `true/false`、`1/0`、`yes/no`、`on/off`、`enabled/disabled`，不区分大小写。
+**读不懂的值不会被悄悄换成默认值**：服务会拒绝启动，并告诉你是哪个变量、收到了什么、可接受哪些写法。
+
+### 用拷贝来的数据库启动服务
+
+定时任务存在数据库里，不在配置里。因此一份从备份恢复、或从别的机器拷来的数据库，会带着原实例
+全部仍处于启用状态的定时任务过来，而新服务会开始执行它们：发消息、唤醒 agent、写外部服务——
+一切都像它就是当初创建这些任务的那个实例。
+
+这种情况下请关掉调度器再启动：
+
+```bash
+docker run -e CRON_ENABLED=false ...   # 或：./server --cron-enabled=false
+```
+
+然后看启动 banner 里的 `Scheduler` 一行，确认它显示 `disabled`，再去信任这个实例。逐个决定哪些任务
+该重新启用，之后再正常重启。同理建议一并加上 `VISITOR_CLEANUP_ENABLED=false`：访客清理会按时删除
+访客账号及其数据。
 
 ### 可选：PostgreSQL、S3 与 AI
 
