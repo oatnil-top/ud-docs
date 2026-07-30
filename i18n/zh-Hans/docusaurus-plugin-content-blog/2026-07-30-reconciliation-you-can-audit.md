@@ -3,6 +3,7 @@ title: "漏掉一笔之后，账本为什么越来越难继续"
 description: "漏记真正破坏的是对账本的信任。一次可核对的对账如何找出遗漏、重复、退款和旧数据问题，把人的工作缩小到判断与确认。"
 authors: [lintao]
 tags: [story, agents]
+image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/reconciliation-you-can-audit/duplicate-channels.png
 date: 2026-07-30
 ---
 

@@ -3,6 +3,7 @@ title: "Why a Ledger Gets Harder to Continue After One Missing Entry"
 description: "A missing entry breaks trust in the ledger. An auditable reconciliation finds omissions, duplicates, refunds, and old-data problems while leaving judgment to the human."
 authors: [lintao]
 tags: [story, agents]
+image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/reconciliation-you-can-audit/duplicate-channels.png
 date: 2026-07-30
 ---
 
