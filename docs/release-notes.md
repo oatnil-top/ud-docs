@@ -18,6 +18,40 @@ UnDercontrol follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.125.0 (2026-07-30)
+
+### New Features
+
+**`REGISTRATION_ENABLED` — decide whether strangers can create accounts on your instance**
+- A new instance-level switch (env `REGISTRATION_ENABLED`, flag `--registration-enabled`). **The default is off**: on a fresh instance, nobody but the owner gets in.
+- With it off, all three self-service signup paths are closed — the invite-code signup endpoint, first-time account creation through GitHub/Google login, and the Visitor button — each answering `403 AUTH_REGISTRATION_DISABLED`. The login page hides the signup and Visitor entries, so there is no button that leads nowhere.
+- Accounts you create as the instance owner are unaffected: Admin > Users still works exactly as before.
+- To open your instance to other people, set `REGISTRATION_ENABLED=true` and restart. The startup banner prints a `Signup:` line telling you whether signups are open or closed and which env var or flag decided it.
+- `GET /auth/tier-info`, which is public, now includes `registration_enabled` — so a login page knows the answer before anyone signs in.
+
+### Improvements
+
+**Configuration values are read strictly, and startup tells you what it read**
+- Every boolean and numeric setting accepts a wider vocabulary: `true/false`, `1/0`, `yes/no`, `on/off`, `enabled/disabled`, with surrounding whitespace trimmed.
+- A value that cannot be read stops the boot with a message naming the variable, the value it was given, the spellings that are accepted, and how to get back to the default. One boot reports **every** problem it finds, so a half-wrong compose file is one fix rather than a restart per typo.
+- A variable that is set but empty (`- FOO=` in compose) uses the default and now says so with a warning in the log.
+- The ready banner names both the value **and where it came from** for the scheduler and for signups — `enabled (env CRON_ENABLED)`, `closed (default)`. When the scheduler is running it also reports how many enabled scheduled jobs this database holds, which is how you can tell a copy restored from a backup is about to act as that instance.
+
+**Admin > System Config shows startup settings read-only, with their real running value**
+- The four scheduler settings — `CRON_ENABLED`, `VISITOR_CLEANUP_ENABLED`, `VISITOR_CLEANUP_SCHEDULE`, `VISITOR_RETENTION_DAYS` — are decided once, when the process boots. The admin page now displays them read-only, showing the value actually in effect and the env var or flag that set it. Change them where they are owned: set the env var or flag, then restart.
+- Other boot-time settings behave the same way, including the JWT secret, telemetry and license.
+
+**The desktop app honours a `CRON_ENABLED` you set yourself**
+- The scheduler still defaults to on in the desktop app. If you set `CRON_ENABLED` explicitly, that value is now respected — which is what you want when you point the desktop app at a database it did not create.
+
+### Upgrade Notes (self-hosted)
+
+- **If your instance relies on open signups, you now have to say so explicitly.** `REGISTRATION_ENABLED` defaults to **off**, so after upgrading, an instance that previously accepted public registration will refuse it — including GitHub/Google first-time login and the Visitor button — until you set `REGISTRATION_ENABLED=true` and restart. Nothing else about signup changed: with the switch on, the flow is identical to before.
+- **A configuration value that cannot be read now stops the boot, instead of falling back to a default.** If your environment or compose file has a typo in a boolean or numeric setting (`CRON_ENABLED=flase`, `MAX_FILE_SIZE=10MB`), the container will refuse to start and name it. Worth a look at your env before you pull; the error message lists the accepted spellings and how to return to the default.
+- **One migration (`00062`) runs automatically when the new image starts.** It clears stored values for the four scheduler settings that are now read-only. The values in effect come from your env vars and flags and are unchanged by this.
+
+---
+
 ## v0.124.0 (2026-07-29)
 
 ### New Features
