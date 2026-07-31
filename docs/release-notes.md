@@ -18,6 +18,44 @@ UnDercontrol follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.126.0 (2026-07-31)
+
+### New Features
+
+**Public share links can accept drop-offs**
+- A share link can now be marked **allow uploads** when you create it. Anyone holding the link can leave a file — plus one optional line of text — in the task behind it, with no account and no login.
+- The two permissions are independent: a link can accept drops while handing nothing out. That is the safer configuration, and the one most people asking for "let them send me a file" actually want.
+- Visitors never see what other visitors dropped. Drops are hidden from the public attachment list and from the public download endpoint; only the task owner sees them.
+- Each link is capped at 20 files and 100 MB on top of your own storage quota, and the drop endpoints are rate limited per visitor per link.
+- Instance owners get a kill switch: `feature.public_share.upload_enabled` in Admin > System Config, **off by default**, editable without a restart. It is separate from `feature.public_share.enabled`, so you can keep read-only sharing while refusing anonymous writes.
+
+**Admins can reset a user's password**
+- Admin > Users has a **Reset Password** action. It sets a new password for that account and takes effect immediately — for the case where somebody is locked out and the instance has no mail configured.
+
+### Improvements
+
+**First-run setup: you summon Alfred yourself**
+- The "Meet Alfred" step used to post the greeting for you. Now it gives you a real comment box with the same `@`-mention autocomplete used everywhere else in the app, and the handshake starts when you press Send. Typing `@alfred` as plain text routes to nobody, so Send stays disabled until the message carries the actual mention link.
+- The first machine conversation now ends with the agent writing what was discussed into a note, unasked, and showing it to you.
+
+### Bug Fixes
+
+**Public endpoints are rate limited, and the client IP behind a proxy is trustworthy first**
+- `GET /share/code/:code` had no rate limit at all, so the space of currently-active 6-letter share codes was scannable at line speed — and a hit reads someone's shared task, notes and, when the link allows it, attachments. It now allows 20 requests per minute per client. Login (10/min) and register (5/min) are limited too: generous enough that retyping a password never trips it, tight enough that credential stuffing is not free. A throttled request gets `429` with `Retry-After`.
+- The limit is keyed on the real client IP. The server previously trusted any `X-Forwarded-For` a caller typed, which would have let one forged header per request mint a fresh budget and made the limiter decoration. `UD_TRUSTED_PROXIES` now decides which proxies may set that header, defaulting to private and loopback ranges.
+
+**The login page no longer explains a signup policy when it cannot reach the server at all**
+- A server URL missing its `/api/v1` suffix produced "Signups are closed on this instance" and a collapsed Server Settings link — a confident claim about an instance the page had never reached. An unreachable backend now says so, Server Settings opens itself so the field you need is in front of you, and the signup claim is withheld until the server actually answers.
+- The server URL field can be cleared (it used to snap back to the current value), the placeholder shows the right shape including `/api/v1`, and the hint appears only when the address is already wrong.
+
+### Upgrade Notes (self-hosted)
+
+- **Anonymous drop-off is off until you turn it on.** `feature.public_share.upload_enabled` defaults to off, so upgrading opens none of your existing links to writes — links created before this release carry the permission off. Turn it on in Admin > System Config; no restart needed.
+- **New env var `UD_TRUSTED_PROXIES`.** Leaving it unset means "trust private and loopback ranges", which is correct behind Render, nginx and Docker, and correct bare-metal. Set it explicitly if your reverse proxy sits on a public IP (`UD_TRUSTED_PROXIES=1.2.3.4`), `none` to trust nothing, or `*` to keep gin's old spoofable behaviour.
+- **Two migrations (`00063`, `00064`) run when the new image starts.** They add the drop-off permission to share links and the table that records drops.
+
+---
+
 ## v0.125.0 (2026-07-30)
 
 ### New Features
