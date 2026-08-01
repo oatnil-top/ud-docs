@@ -18,6 +18,44 @@ UnDercontrol follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.127.0 (2026-08-01)
+
+### New Features
+
+**Summon Alfred from anywhere**
+- On the web, press `Cmd+/` and a quick-input box opens over whatever you were doing: type, send, and the message lands in your Alfred conversation without leaving the page.
+- The desktop app gets a global hotkey — `Cmd/Ctrl+Shift+Space` by default — that summons a resident Alfred quick panel even while the app is in the background. The panel lives hidden rather than being built per press, so the input is there the instant you ask. Esc, clicking away, or pressing the hotkey again hides it.
+- The hotkey is editable on the profile page. If the default is taken by another app, registration walks a fallback chain (`Control+Alt+Space`, then `Cmd/Ctrl+Shift+A`) and the settings page shows which one actually stuck.
+- If Alfred replies while the panel is hidden, a system notification fires; clicking it brings the panel up. No notification while the panel is on screen — alerting you to something you are looking at is just noise.
+
+**Threads have a door now — participants can leave**
+- A subscriber bar under the thread header lists everyone in the conversation: members who wrote in it plus bound agent sessions, with exited participants grayed out.
+- You can unsubscribe an agent from a thread (or pull it back in) right from the bar — for when a topic has moved on but keeps waking an agent that finished its part long ago. Changing someone else's subscription requires write access to the task.
+- Agents learned the exit too: an agent done with its part can now leave a thread on its own instead of being dragged along by every later reply. Mentioning it again pulls it back in.
+- CLI: `ud unsubscribe comment <id>` / `ud subscribe comment <id>` (add `--member` to act for an agent).
+
+**Pick which CLI an agent runs on, per dispatch**
+- Mention a CLI alongside the agent — `@my-agent @codex go do X` — and the session started for that message runs on the chosen CLI. It is a one-session choice: the agent's own config is untouched, and an already-running session keeps the CLI it started with; the request text still carries the `@codex` in the sender's own words, so the agent can answer that a running session cannot switch.
+
+### Improvements
+
+**Daemon restarts keep their identity**
+- Shutting a daemon down now marks it offline instead of deleting its registration, so a restart comes back as the same daemon — no more orphaned duplicate daemon entries for mentions to be dispatched to.
+- Shutdown releases the health port and PID file only after everything has actually stopped, closing the race where a rapid restart found the port free while the old process was still alive.
+- A failed agent-session start now keeps its failure reason instead of having it overwritten by later status updates — a silently idle session now says why.
+
+### Bug Fixes
+
+- **Agent config reads are scoped to their owner.** One account could previously read agent configuration belonging to another; reads are now bounded to the requesting owner. (security fix)
+- **Deleted the AI provider-test routes that spent the wrong user's key.** Testing a provider could bill an API key that did not belong to the tester; the routes are gone. (security fix)
+- **The CLI no longer waits forever on an orphaned pipe.** Version reads and agent resolution now cap the wait instead of hanging.
+
+### Upgrade Notes (self-hosted)
+
+- **One migration (`00065`) runs when the new image starts.** It adds a `muted_at` column to session-thread bindings — the storage behind thread unsubscribe. Same startup-migration mechanism as previous releases.
+
+---
+
 ## v0.126.0 (2026-07-31)
 
 ### New Features
