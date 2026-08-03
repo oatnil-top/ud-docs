@@ -18,6 +18,46 @@ UnDercontrol follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.128.0 (2026-08-03)
+
+### New Features
+
+**Calling Alfred is now just `Ctrl+A`**
+- The quick input's summon key moved from `Cmd+/` to `Ctrl+A`, reachable with one hand. It only fires outside text inputs, so select-all inside a field is untouched.
+- The Meet Alfred onboarding now teaches the new key.
+
+**A bigger, calmer Alfred panel**
+- Summoning no longer flashes a blank frame: the pre-warmed transcript shows instantly and refreshes silently in the background. Dark mode no longer flashes white on open.
+- Surfaces grew — web dialog 760px, desktop panel 840×560 — and the transcript fills the window.
+- The desktop panel is draggable and resizable, and remembers the bounds you gave it.
+
+**`ud pull` starts new folders in vault layout**
+- A first `ud pull` into a fresh folder now initializes a vault-layout root — one `.md` file per task, notes under `notes/`, a starter `.udignore` — same as `ud init`.
+- The deprecated folder-per-task layout stays available via `ud pull --layout ud`; existing roots keep the layout they were created with.
+
+### Improvements
+
+**Daemon reconnects can no longer deadlock**
+- After a network blip, a reconnecting daemon could be told "already connected" by a zombie stream, and both sides would believe each other forever — the daemon sat offline until someone forced it by hand.
+- The server now always lets the newest connection take over, and the desktop client stops trusting "already connected": it retries with backoff and forces its way in on the second rejection.
+
+**A restarting daemon cleans up its own ghosts**
+- Daemon registration now sweeps that machine's provably-dead sessions (active records under an offline or heartbeat-stale daemon) to lost, so ghost sessions stop showing as running.
+
+### Bug Fixes
+
+- **The IM bot no longer sits at "Connecting…" while actually working.** A race between identity resolution and state tracking could permanently overwrite a healthy bot's status; reboots and token re-pastes replayed it. Fixed.
+- **Ask AI in advanced query now says "AI provider unavailable"** when the configured provider is down, instead of "An unexpected error occurred".
+- **Quoted-comment highlights are back** — no longer lost in hidden or deferred containers (mobile layout, long pages).
+- **Typing Chinese/Japanese: confirming a candidate word with Enter no longer sends.** Alfred quick input, mention/slash menus, inline rename and quick-create all gained an IME-composition guard.
+
+### Upgrade Notes (self-hosted)
+
+- **No new environment variables and no database migrations in this release.**
+- **The desktop app must be updated manually for the daemon-reconnect fix to fully take effect.** Half of the fix lives in the desktop app (the reconnect client). Once the backend is upgraded, old desktops already benefit from the server-side takeover, but the complete fix (backoff + auto-force) needs the new desktop build.
+
+---
+
 ## v0.127.0 (2026-08-01)
 
 ### New Features
