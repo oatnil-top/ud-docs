@@ -18,6 +18,65 @@ UnDercontrol follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.129.0 (2026-08-05)
+
+### New Features
+
+**Shared tasks are finally visible to the people you shared them with**
+- Sharing a task with a group did not reach anyone already signed in. Their session still carried the group list from the moment they logged in, so the task simply never appeared — no error, nothing to retry, and it stayed that way until they happened to sign in again.
+- Group membership changes now reach sessions that are already open. This fix has been waiting since August 4th; this is the first release that carries it.
+
+**Your built-in agents belong to you**
+- The six built-in agents used to be constants inside the server, shared by everyone. Now each person gets their own copy, created the first time they enter their workspace.
+- Because it is your own copy, you can edit it — change your `ud`'s prompt and the very next session you summon uses it. No redeploy, no restart.
+
+**Agents can be members of a group**
+- An agent can now be added to a group, and only its owner can put it there. A mention reaches your own agent, or one belonging to a group you are in.
+- The group member list tells humans and agents apart, and each agent row says who maintains it.
+
+**The @ menu was rebuilt around people**
+- The menu now asks the server who is actually reachable rather than guessing, and every agent row says whose agent it is, grouped by owner.
+- There is now one addressing space — people. An agent is a person. Links written against the retired `@session` scheme render as plain text.
+
+**You can see which human is behind an agent's reply**
+- A comment written by someone else's agent records who summoned it, and the reply says whose agent it is and whose permissions it ran with.
+- Every prompt delivered to an agent now names who is speaking to it.
+
+**Add group members by email or username**
+- Group owners can add someone by exact email or username, straight from the Groups page.
+
+**The notification panel is split in two**
+- What needs you comes first, everything else after, with each notification tiered by how it reached you.
+
+### Improvements
+
+- **The sidebar's selected state colours the icon instead of painting a block behind it**, and clicking an open panel's entry now collapses it.
+- **The language you register in is recorded as a fact about you.** Anyone without one gets the system default, which is English.
+- **The server now states what it can do**, so clients stop inferring capabilities from version numbers — the Add Member entry point hides itself on a backend that cannot resolve an identifier.
+
+### Bug Fixes
+
+- **A group that does not exist now answers 404 instead of 500.**
+- **The @ menu's result cap applies across all candidate types**, not separately within each, so one crowded category can no longer crowd out the rest.
+- **A membership row whose user no longer exists is no longer shown as a member.** These rendered as blank-named entries in group member lists; they now disappear. See the upgrade note below.
+- **The "not your bot" IM reply now explains how to fix it yourself** (`/link relink`) instead of just refusing.
+
+### Upgrade Notes (self-hosted)
+
+- **No new environment variables in this release.**
+
+- **Sessions are signed out of one request when group membership changes.** From this release, changing a group's membership immediately invalidates tokens already issued to the affected accounts. The web app refreshes and replays automatically, so people browsing will not notice. The `ud` CLI and agent sessions get a single `401 AUTH_REQUIRED` and the command fails — **re-run the command and it succeeds.** This applies to the person making the change as well as the person being added.
+
+- **Database migrations `00066`–`00070` run at startup.** Two of them cannot be cleanly undone:
+  - **`00070` will refuse to roll back** on any instance where someone has deleted an agent and then created a new one with the same name. It stops with an error rather than discarding rows, so nothing is lost silently — but a human has to decide what happens to those soft-deleted rows before the rollback can proceed.
+  - **`00068` writes the six built-in agents in as real rows.** Rolling the code back does not remove them.
+
+- **Built-in agents are no longer created when the server boots.** They are created per person, the first time each one opens their workspace. A brand-new self-hosted install therefore has no built-in agent rows until its first user arrives — this is expected, not a failed migration.
+
+- **Some group member lists will get shorter after upgrading.** Membership rows pointing at users that no longer exist stop being listed. On our own instance this removed 92 such rows across 38 groups; every one of them was already displaying as a blank name, and no named person or agent was affected. Yours may differ — the count is whatever `SELECT COUNT(*) FROM user_groups ug LEFT JOIN users u ON u.id = ug.user_id WHERE u.id IS NULL OR u.is_deleted = 1` returns before you upgrade.
+
+---
+
 ## v0.128.0 (2026-08-03)
 
 ### New Features
