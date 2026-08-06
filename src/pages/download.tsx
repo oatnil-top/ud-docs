@@ -58,7 +58,7 @@ const TESTFLIGHT_URL = 'https://testflight.apple.com/join/st2TnaBF';
 // Android is versioned by the mobile app itself, not by version.json, and lives
 // under its own R2 prefix: releases/android/<version>/undercontrol-<version>.apk.
 // Bump both when a new apk lands and re-check the link answers 200.
-const ANDROID_VERSION = '0.0.9';
+const ANDROID_VERSION = '0.0.20';
 const ANDROID_APK_FILE = `undercontrol-${ANDROID_VERSION}.apk`;
 const ANDROID_APK_URL = `${R2_RELEASES}/android/${ANDROID_VERSION}/${ANDROID_APK_FILE}`;
 
