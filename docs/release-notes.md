@@ -18,6 +18,33 @@ UnDercontrol follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.130.0 (2026-08-07)
+
+### New Features
+
+- **Task search now looks inside your notes** — searching tasks matched the title and nothing else, while every piece of help text (`ud grep task --help`, the built-in skills, the API docs) promised it also covered descriptions and notes. A keyword that lived only in a note body found nothing, and the search reported zero results rather than an error, so there was no sign anything was wrong. Search now matches titles, descriptions and note bodies. What you are allowed to see is unchanged — this widens what matches a task, never which tasks you can reach.
+
+### Improvements
+
+- **A thread reply reaches a busy agent about five times sooner** — when an agent was mid-turn, a broadcast to its thread waited 30 seconds before being offered again. That wait is now 6 seconds.
+- **Postgres instances get trigram indexes for the widened search** — on a 200k-note database the new note-body search goes from 658 ms to 7.6 ms. See the upgrade notes for what happens if your database role cannot install extensions.
+
+### Bug Fixes
+
+- **Stopping one session no longer stops a different one** — with two sessions open on the same task, stopping one could mark the *other* one exited while its window and agent kept running. The control plane then believed the task was free and put someone else on it, so two agents edited the same files. A stop now names the session that actually closed.
+- **A stopped session's agent is actually stopped** — the stop signalled the terminal only, but the agent runs as a child of the shell we launch, so it routinely kept running with no terminal attached and nothing able to reach it. The whole process group is signalled now. Known gap: an agent inside a tmux-wrapped session lives under the tmux server and is still not reached.
+- **Sessions now record the process they run**, shown by `ud describe session` — previously there was no link between a session and a process at all, which is what made a stray agent something you had to find by eyeballing `ps` and guessing.
+- **Agent comment authors show their name, not a UUID** — comments written by an agent displayed a raw identifier in the task detail view and the thread view.
+
+### Upgrade Notes (self-hosted)
+
+- **No new environment variables in this release.**
+- **Migrations `00071` and `00072` run at startup**, in both SQLite and Postgres.
+- **`00071` adds trigram indexes on Postgres and needs the `pg_trgm` extension.** Creation is deliberately guarded: if your database role may not `CREATE EXTENSION`, the migration logs a warning and continues, and search stays correct but scans the notes table. It will not fail your boot. SQLite has no equivalent and skips this.
+- **The session/process link applies to new sessions only.** `agent_pid` is `0` for every row that already exists and for every session started by an older daemon — only the daemon knows a pid and it cannot be asked about the past, so **there is no backfill**. The stop fixes above therefore take effect for sessions started *after* you upgrade, not for ones already running when you upgrade. Restart your daemon after upgrading.
+
+---
+
 ## v0.129.0 (2026-08-05)
 
 ### New Features
