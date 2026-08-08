@@ -41,6 +41,12 @@
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 10px 36px rgba(0, 0, 0, 0.5);
 }
 
+/* The one page container: every section's content sits in a .wrap. Its 24px is
+ * the site's horizontal inset — anything that also carries .wrap on the SAME
+ * element (the three heroes below) must therefore set padding with the
+ * top/bottom LONGHANDS. A `padding:` shorthand there resets left/right to 0 and
+ * wins on source order, which reads fine on desktop (max-width leaves slack)
+ * and puts the text against the screen edge on a phone. See task bc5d9e0b. */
 .wrap {
   max-width: 1080px;
   margin: 0 auto;
@@ -99,7 +105,9 @@
   grid-template-columns: 1.02fr 0.98fr;
   gap: 56px;
   align-items: center;
-  padding: 56px 0 40px;
+  /* longhand — see .wrap */
+  padding-top: 56px;
+  padding-bottom: 40px;
 }
 .hero h1 {
   font-size: clamp(2.5rem, 5.4vw, 4.1rem);
@@ -357,7 +365,9 @@
  * rule rather than inventing a card — the iron law forbids filled blocks, so a
  * channel is a rule, a name, a line of prose and an underlined link. */
 .cHero {
-  padding: 56px 0 40px;
+  /* longhand — see .wrap */
+  padding-top: 56px;
+  padding-bottom: 40px;
 }
 .cHero h1 {
   font-size: clamp(2.3rem, 4.6vw, 3.4rem);
@@ -419,7 +429,9 @@
  * so the homepage stage can reuse it. */
 .aHero {
   composes: hero;
-  padding: 56px 0 72px;
+  /* longhand — see .wrap */
+  padding-top: 56px;
+  padding-bottom: 72px;
 }
 .aHero h1,
 .aHero .sub {
