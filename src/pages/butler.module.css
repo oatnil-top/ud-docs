@@ -480,6 +480,42 @@
   }
 }
 
+/* Phone tier for CTA rows. The homepage hero carries three buttons ("Meet
+ * Alfred →" / "Download" / "Self-Host"); at the desktop metrics (24px side
+ * padding, 12px gap) they need 406.5px, while a 390px iPhone leaves only
+ * 342px inside the .wrap inset — so the third button wrapped to its own line.
+ *
+ * Only the two horizontal knobs move: side padding 24→10 and gap 12→8, which
+ * brings the row to 314.5px. Deliberately NOT touched, because each would
+ * change the design rather than fit it: the button labels (that is a copy
+ * change, not a layout fix), font-size (0.88rem stays readable), and the
+ * vertical padding — 11px keeps the tap target at ~48px, above the 44px iOS
+ * minimum. The v7 look is untouched: no fills, hierarchy still by border
+ * weight.
+ *
+ * The EN hero row then fits on one line at 430/390/375 (ZH is narrower and
+ * fits down to 320). EN cannot fit at 320px: the three labels plus borders are
+ * 238.5px of irreducible ink, so 272px of usable width would force ~4px of
+ * side padding — not a button any more. flex-wrap therefore stays on, and 320
+ * degrades to two lines by design rather than by accident.
+ *
+ * 460px is the breakpoint because the row needs 454.5px of viewport to fit at
+ * desktop metrics — every current iPhone logical width (320–430) is under it,
+ * and no tablet is.
+ *
+ * .ctas is also the CTA row on /alfred (2 buttons) and /contact (3), so they
+ * get the same phone metrics. Those rows are longer than the hero's and still
+ * wrap on a phone in EN; this rule only narrows them, it does not fix them. */
+@media (max-width: 460px) {
+  .ctas {
+    gap: 8px;
+  }
+  .ctas .btn {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
 /* ---------- Architecture section (v7: monochrome) ---------- */
 /* Box-and-arrow SVG. v7 hierarchy is line weight and dash, not hue: Alfred box
  * solid ink, spine edges solid ink, the ⑤ return edge long-dashed ink, side
