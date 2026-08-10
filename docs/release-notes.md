@@ -18,6 +18,30 @@ UnDercontrol follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.132.0 (2026-08-11)
+
+### New Features
+
+- **pi and kimi are pickable built-in agent CLIs** — both existed in some places but were missing wherever the built-in roster is enumerated, so a machine with only kimi installed resolved to no default CLI at all. They are now in the roster, in onboarding's CLI directory, and in the priority order the default pick walks (appended after the original seven).
+
+### Improvements
+
+- **Onboarding's machine step lists what this machine actually has** — the CLI block is a directory read from this machine's probe: the installed ones are listed, the rest are covered in a single sentence, and each explanation appears once, only while its own check is the one to act on.
+
+### Bug Fixes
+
+- **A human's first session launches on the CLI the machine actually has, not hardcoded claude** — the reward button "start your first session" sends no command, and the code resolving that default **never looked at the probe**, so it returned `claude --dangerously-skip-permissions` on every machine — on a box with only codex installed, the session opened straight into command-not-found. It now reuses the same pick that fills an agent's CLI. **An instance that has never received a probe report is unchanged** and keeps the old default.
+- **One metadata row stored as invalid JSON no longer aborts the whole sprint lookup** — a single bad row broke both `close-sprint` and the nightly agile sweep instead of being skipped.
+
+### Upgrade Notes (self-hosted)
+
+- **No new environment variables in this release.**
+- **This release adds one database migration**, `00073_add_pi_agent_cli` (sqlite and postgres), applied automatically at startup. It adds `pi` to the built-in CLI catalog.
+- **Behaviour change — where the default command for a command-less session comes from.** It used to be `claude --dangerously-skip-permissions`, always. It is now the first of claude → codex → gemini → opencode → aider → copilot → qwen → kimi → pi that **your daemons report installed**. **An instance that has never received a probe report is unaffected** and keeps the old default.
+- **Note the pick is instance-wide, not per-machine** — it is the union of what every daemon on the instance has ever reported, offline ones included. So if any machine on your instance has reported claude, the default stays claude even on a machine that does not have it. Single-machine self-hosted instances are where this fix actually changes the outcome.
+
+---
+
 ## v0.131.0 (2026-08-10)
 
 ### New Features
