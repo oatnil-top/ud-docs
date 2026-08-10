@@ -18,6 +18,42 @@ UnDercontrol follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.131.0 (2026-08-10)
+
+### New Features
+
+- **A task can now say who it is for** — `assignee` existed as a field, but nothing read it as a relation and nothing checked it. There is now a first-class assignment: `GET /assignments` is the roster (each assignee with their most recent cards), `PUT /assignments/{task}` is an idempotent assign, `DELETE` cancels it. People and agents are the same kind of thing here — you assign your own `ud` exactly the way you assign a colleague. **Being assigned still grants no visibility**: a card you cannot open does not appear in your roster and still answers 404 to your reads.
+- **`ud` can assign, and can tell you who a task is for** — `ud patch task <id> --assignee <name|uuid>`, `assignee:` in task frontmatter, and the four assignment commands (`ud get/describe/apply/delete assignment`, `--type human|agent`). A member is named the same way everywhere in the CLI — username, email, agent name or uuid — and an ambiguous name is refused rather than guessed at. `ud describe task` prints the display name; `-o apply` prints the id, so piping it back cannot go ambiguous later.
+- **`ud send-input session <id> <text>` types text into a running session** — the backend has always accepted this, but the CLI had no verb for it, so it had to be hand-rolled as raw HTTP. The text is positional and joined with single spaces, so an unquoted invocation sends what it looks like it sends; a lone `-` reads stdin instead, for multi-line payloads shell quoting would mangle. `ud stop session` is untouched — each action on a session stays its own named verb.
+
+### Improvements
+
+- **The @ menu greys out whoever cannot open this card** — on a private card the menu listed every colleague at full strength, so picking one, writing the comment and pressing send was the first moment you learned the mention would be refused. The row is now dimmed and reads "needs sharing", in the same words the write itself uses. The person is still listed: someone vanishing on a private card cannot be told apart from someone who does not exist.
+- **Signing in lands you on the last card you had open** — every entrance (password, GitHub, Google, personal-tier) now resolves to the same landing, the explorer docked beside your last task, instead of the AI chat. They had quietly drifted apart.
+- **A scheduled backup now reports whether the backup actually worked** — the job reported success the moment the upload was handed to a background worker, and nothing ever read the outcome. On one instance that recorded 100 consecutive "successful" runs while the storage bucket had been refusing uploads for six days, and 14 days produced no object at all. Each run now reports the previous backup's settled outcome.
+- **Empty states, onboarding and the secondary marketing pages follow one visual system** — solid fills, highlighter blocks, decorative icon squares and coloured status text are gone; emphasis is carried by rules, weight and underline.
+- **Delivered prompts no longer carry the unsubscribe hint line** — agents were told how to leave a thread on every single message. The capability is unchanged; it is taught once instead of repeated.
+
+### Bug Fixes
+
+- **@mentioning someone who cannot read a task is refused, instead of delivering it to them** — the mention put the card title and the whole comment or note body into their notification feed, for a card every one of their reads answers 404 to. Reproduced across all six entrances (comment, reply, comment edit, note, note edit, description) on both SQLite and Postgres. The refusal names who was refused and what to do instead. Agents are unaffected — @-ing your own `ud` on your own private card keeps working.
+- **Notifications no longer reach people who cannot read the card** — writing any user's id into `assignee` subscribed them to that card, and every later update then delivered the title and each field's before/after diff to them. `created_by` leaked the same way once a card was transferred or un-shared. Subscribers are now filtered by the same condition the reads themselves enforce.
+- **A meaningless `assignee` value is refused instead of stored** — the field accepted anything it was handed, so `GET /todolist/{id}` could show an assignee that `GET /assignments` had no row for: two official reads, opposite answers, from one row. See the upgrade notes — this is a behaviour change.
+- **Typing `@` in Quick Note or a task description no longer blanks the editor** — it threw `clis is not iterable` and unmounted the editor's whole React tree. The comment box was never affected, which is why it looked intermittent.
+- **`GET /expense` returns the same order every time** — the list was built through a map and Go randomises that iteration, so ten consecutive calls produced ten different sequences of the same rows. Both clients re-sorted locally and hid it; with pagination a shifting order serves a row twice or not at all. The order is now newest-first by when the money left.
+- **A symbolic link in an Obsidian vault is skipped, and says so** — following it created tasks from content outside the vault and wrote tracking frontmatter into files outside the tracking root. Skipped links are counted and named in `push` and `status`; a vault with none prints nothing.
+- **`ud subscribe/unsubscribe --member` accepts usernames and emails**, not only agent names, and `--member <uuid>` no longer waits on (or fails with) the member lookups it does not need. A partial member list also no longer resolves an ambiguous name to whichever candidate happened to load.
+
+### Upgrade Notes (self-hosted)
+
+- **No new environment variables in this release.**
+- **No new migrations in this release.**
+- **Behaviour change — a bad `assignee` value now returns 400 where it returned 200.** Both write paths (`POST /todolist/:id` with `{assignee}` and `PUT /assignments/{task}`) now require the value to be a UUID that resolves to a live user. If you have a script that writes a placeholder, a stale id, or a non-UUID into `assignee`, it will start failing. Nothing that stored a real user's id is affected.
+- **Behaviour change — who may be assigned is now decided by the card, not by the caller.** The relation path (`PUT /assignments/{task}`) requires the assignee to be someone the card is already visible to: its owner, the members of the group it is shared into, or the owner's own agents. The previous rule asked whether the *assigner* knew the assignee, which never established that the assignee could open the card. Assigning across a group boundary through the relation path is now refused; assigning a private card to your own agent is unaffected and is the case the rule is built around. **The field path (`POST /todolist/:id`) deliberately does NOT apply this membership check** — only the identity check above — so existing clients that assign across a boundary that way keep working.
+- **Upgrade the CLI together with the backend.** The assignment guidance agents read at session start ships inside the `ud` binary itself — `ud describe skill` answers from the binary's own copy and never asks the server. A new backend with an old `ud` leaves agents reading the old guidance; a new `ud` against an old backend has agents following guidance whose endpoint does not exist yet.
+
+---
+
 ## v0.130.0 (2026-08-07)
 
 ### New Features
