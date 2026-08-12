@@ -18,6 +18,34 @@ UnDercontrol follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 
 ---
 
+## v0.134.0 (2026-08-12)
+
+### New Features
+
+- **A Keyboard Shortcuts settings page, with the global "summon Alfred" hotkey recordable** — settings now carry one table, one command per row. The global Alfred row can be clicked and recorded: press the combination you want and it is captured (the VSCode interaction). In-app shortcuts stay read-only in this release and the table says so explicitly, so a row that does not respond is labelled rather than mysterious.
+- **After recording you must press the new combination once, and that press is a gate, not a hint** — nothing is applied on recording alone. The app asks you to **actually press the new combination**. Only a real press saves it; without one, nothing changes. Your existing hotkey **stays registered for the whole trial**, so if you abandon the flow — or the combination turns out to be one the OS never delivers — the key you had keeps working.
+- **A combination that overlaps an in-app command warns you instead of blocking you** — you can still choose it; the warning only tells you a press will light up both, and leaves the decision with you.
+
+### Improvements
+
+- **The in-app "Ask Alfred" shortcut moved from `Ctrl+A` to `Ctrl+Shift+A`, and it now fires from inside text editors** — the old binding collided with Select All and was swallowed while typing in an editor. The new one summons Alfred even when an editor has focus. Onboarding's instructions for this key were updated in both English and Chinese.
+
+### Bug Fixes
+
+- **A deleted expense or income can no longer be fetched back by id** — deletion hides the row, and while lists filtered hidden rows out, the by-id path did not. A deleted expense/income (amount, merchant, card tail, order number) stayed fully readable by id after it vanished from every list. By-id now matches the list and returns 404.
+
+### One cell in this release has NOT been verified by a real key press (read this as written)
+
+- **Nobody has pressed a key to confirm that the recorder's confirmation step actually catches a combination that registers successfully but never fires.** So we do not claim it verified. **Its failure direction is the safe one: no confirmed press means nothing is saved** — the worst case is "a key that would have worked cannot be set", not "your key silently stopped working". If some combination refuses to confirm, that is this cell; pick another one, and the key you already had is unaffected.
+
+### Upgrade Notes (self-hosted)
+
+- **No new environment variables in this release.**
+- **No new database migration in this release.**
+- The backend carries exactly one behaviour change: `GET /expense/:id` and `GET /income/:id` now return 404 for deleted (hidden) records. **If you have scripts that rely on reading a record back by id after deleting it, they will start getting 404 from this version.**
+
+---
+
 ## v0.132.0 (2026-08-11)
 
 ### New Features
