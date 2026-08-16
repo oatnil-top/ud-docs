@@ -6,6 +6,32 @@ sidebar_position: 1
 
 # Release Notes
 
+## v0.135.0 (2026-08-16)
+
+### New Features
+
+- **Spending breakdown on the transactions page** — a "where it went" view groups spending by category, with actual→plan cadence groups in the sidebar; the expenses summary now lists every category instead of the top three, and percentages always sum to exactly 100.
+- **Shortcut version reminders (groundwork)** — the backend can now tell when your iOS capture shortcut is out of date and sends you one in-app notice per new release, pointing at the install guide. Takes effect gradually as versioned shortcuts roll out; older shortcuts keep working unchanged.
+- **Redesigned home page** — a single-screen hero with switchable live line-sketch demos.
+
+### Improvements
+
+- **Quick capture** — an image attached to an income is now reachable from that income; a too-blurry image now fails with a clear message instead of a generic error; captured images reach their landing page immediately, before any model reply.
+- **Desktop** — every "not ready" state now opens the server panel with a specific explanation, instead of leaving you on a blank screen.
+
+### Bug Fixes
+
+- **Large receipt uploads no longer fail on slow connections.** Photographing a receipt used to spin for 30 seconds and fail if the image was large (over ~2.3 MB) on a slow link. Uploads are now accepted instantly and transferred in the background with automatic retries; if every retry fails, the task shows as failed in the queue and the Retry button re-sends the same bytes — even after an app restart.
+- **The queue page's Retry button works again** — it was being rejected before reaching the server logic. Background tasks also no longer show "completed" without actually having run after a server restart.
+- **Workspace sessions whose host was removed are now marked lost within half a minute**, instead of showing "running" forever. Sessions of a host that is merely offline are not touched.
+- **Shared hierarchy trees** now decide visibility per node by open permission, with a fixed upper bound on query cost.
+
+### Upgrade Notes (self-hosted)
+
+No manual steps are required. Database migrations apply automatically on startup, as usual. One new **optional** environment variable exists: `SHORTCUT_INSTALL_CONFIG_URL` (where the backend reads the latest published shortcut version from). It ships with a working default — set it only if you host your own shortcut install config.
+
+---
+
 Complete version history and new features for UnDercontrol.
 
 ## Version Numbering
