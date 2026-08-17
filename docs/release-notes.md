@@ -6,6 +6,27 @@ sidebar_position: 1
 
 # Release Notes
 
+## v0.136.0 (2026-08-17)
+
+### New Features
+
+- **An instance-wide upload switch (self-hosted).** An instance can now turn uploads off entirely. With it off, every human-initiated upload (task attachments, quick capture, AI image/audio input, anonymous share drops) is refused, and **all eight entry points answer with the same reason code** instead of each inventing its own. **System backups still write** — turning uploads off does not quietly stop your backups.
+- **Quick capture: one entry point recognises everything.** Hand the same entry point a screenshot and it works out whether it is an expense, an income or a task — you no longer have to decide first. **The existing single-purpose endpoints are unchanged**, so current callers and older shortcuts keep working exactly as before.
+
+### Improvements
+
+- **A failed upload now tells you why.** When an upload is refused, the upload dialog shows **the real reason per file** (out of space, file type not accepted, uploads switched off on this instance, …) instead of a flat "Upload failed".
+- The backend no longer **flattens those coded refusals into a 500** — a refusal it could explain used to arrive shaped like an internal server error, which hid the reason and counted a deliberate "no" as a fault.
+- **The outdated-shortcut notice survives this cutover** rather than disappearing silently now that the path behind it changed.
+
+### Upgrade Notes (self-hosted)
+
+- Database migrations apply automatically on startup, as usual.
+- One new **optional** environment variable: `UPLOAD_ENABLED` (default `true`). Set it to `false` to switch off every upload on this instance; an instance that never sets it behaves exactly as before.
+- ⚠️ **It is a one-way gate, so read this before using it:** once the instance has started with `UPLOAD_ENABLED=false`, setting it back to `true` **does not turn uploads back on** — a seed value equal to the default is never written to the database, so the stored `false` survives the restart. To turn uploads back on, use the **admin panel** (effective immediately, no restart), or delete that config row.
+
+---
+
 ## v0.135.0 (2026-08-16)
 
 ### New Features
