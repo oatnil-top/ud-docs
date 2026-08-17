@@ -6,7 +6,9 @@ sidebar_position: 1
 
 # Release Notes
 
-## v0.136.0 (2026-08-17)
+## v0.136.1 (2026-08-17)
+
+> v0.136.0 was superseded by v0.136.1 the same day: only the CLI and the backend image were ever published at 0.136.0, and the desktop and app images never were. The contents are the same as below.
 
 ### New Features
 
