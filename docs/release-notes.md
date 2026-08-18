@@ -6,6 +6,29 @@ sidebar_position: 1
 
 # Release Notes
 
+## v0.137.0 (2026-08-18)
+
+### New Features
+
+- **Give a task its own folder in one click.** In the resource explorer a task can now create a folder named after itself and move into it in a single action. An existing folder of that name is refused rather than merged into or duplicated, a task already sitting in its own folder is left alone (a second click cannot nest `Title/Title`), and a title with no usable characters is refused with its own message.
+- **Drag files straight in from Finder / File Explorer.** The resource tree now accepts files dropped from your desktop. The folder under the pointer is ringed while you drag and is where the files land, falling back to the focused row's folder; a drop that resolves to the root says so, since the root is the one destination with no row to highlight. Dropped directories are reported rather than uploaded as junk.
+
+### Improvements
+
+- **A failed drop names every file it failed on, in one message.** Dropping several files used to report only the last failure and swallow the rest, because only one message stays on screen at a time. Failures are now grouped by reason into a single message that lists each file; a lone failure keeps its own message and trace id.
+- **The invite-code panel closes the way you expect** — press Escape or click outside it. It previously closed only from its own X button, so it sat over a half-filled registration form until you found the icon. Dismissing it changes nothing but its own visibility: the generated code, the rest of the form, and the page all survive.
+
+### Bug Fixes
+
+- **Uploads through a public share link work again for larger accounts.** Dropping a file into someone's public share link failed with a bare internal error whenever that link's owner already stored more than the default 1 GB — no matter how small the dropped file was, because the drop was measured against a stranger's allowance while being counted against the owner's usage. An anonymous drop is now judged by the **owner's** real allowance, so drops land as intended. The per-link limits that actually guard this are unchanged and still apply: 10 MB per file, 100 MB per link, and rate limiting per link.
+- **A refused upload now says it was refused, instead of looking like a crash.** An upload rejected for being over quota arrived as a generic internal error (500), which hid the reason and counted a deliberate "no" as a fault. It now returns a proper out-of-space answer (413 `RESOURCE_QUOTA_EXCEEDED`, or 507 when the instance's own disk is full) with the limit — **at every upload entry point**, not just the one that happened to map it.
+
+### Upgrade Notes (self-hosted)
+
+No manual steps are required. **No new environment variables and no new database migrations in this release** — `goose_db_version` stays at 74.
+
+---
+
 ## v0.136.1 (2026-08-17)
 
 > v0.136.0 was superseded by v0.136.1 the same day: only the CLI and the backend image were ever published at 0.136.0, and the desktop and app images never were. The contents are the same as below.
