@@ -32,13 +32,22 @@ import styles from './butler.module.css';
  *
  * The whole onboarding contract is one line of text an agent can act on:
  * `Fetch <AGENT_SETUP_PROMPT_URL>`. The prompt itself lives in this repo at
- * static/agent-setup/prompt.md; we point at the GitHub raw URL rather than the
- * docs domain because oatnil.com's bot protection blocks some agents' fetchers,
- * whereas raw.githubusercontent.com is reliably reachable. Edit the file in this
- * repo, never here. Mirrored on the app landing page
- * (ud-vite-app/src/pages/home-page/index.tsx); keep the copied text identical.
+ * static/agent-setup/prompt.md and is served straight out of the Workers asset
+ * build, so the URL below and the file are the same bytes — there is no second
+ * copy to keep in sync. Edit the file in this repo, never here.
+ *
+ * The URL used to be the GitHub raw one, on the theory that oatnil.com's bot
+ * protection blocked some agents' fetchers. It points at the docs domain again
+ * (task 2b70fc29, owner report 2026-08-18: agents were failing to fetch GitHub
+ * content). Measured 2026-08-18 before the switch: no-UA, curl, python-requests,
+ * Go-http-client, node-fetch, Claude-User, GPTBot and ChatGPT-User each got
+ * `200 text/markdown`, 6019 bytes, from https://oatnil.com/agent-setup/prompt.md
+ * — no challenge on any of them. If an agent ever does get challenged here, the
+ * fix is a Cloudflare WAF/bot-management exception for this path, not another
+ * host: the prompt tells the agent it is published at this URL so it can
+ * re-verify authenticity, and that self-reference has to stay true.
  */
-const AGENT_SETUP_PROMPT_URL = 'https://raw.githubusercontent.com/oatnil-top/ud-docs/main/static/agent-setup/prompt.md';
+const AGENT_SETUP_PROMPT_URL = 'https://oatnil.com/agent-setup/prompt.md';
 const AGENT_SETUP_COMMAND = `Fetch ${AGENT_SETUP_PROMPT_URL}`;
 
 /** The Clipboard API needs a secure context; keep the button working over plain http. */

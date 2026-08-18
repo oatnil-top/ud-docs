@@ -13,9 +13,10 @@ Workers Builds on push to `main`. i18n: `en` (default) + `zh-Hans`.
   single-file `{en, zh}` string maps switched on `i18n.currentLocale`
   (see `src/pages/configuration.tsx`) — no page mirror files.
 - `docs/` — plain, structured markdown with stable URLs. AI agents consume these
-  raw from git (the homepage agent-setup prompt flow fetches raw GitHub URLs), so
-  keep them machine-readable: no React components, no visual tricks, facts stated
-  plainly. The rendered HTML is a byproduct for human readers.
+  as raw text (the homepage agent-setup prompt flow fetches
+  `https://oatnil.com/agent-setup/prompt.md`, served as `text/markdown` from
+  `static/`), so keep them machine-readable: no React components, no visual
+  tricks, facts stated plainly. The rendered HTML is a byproduct for human readers.
   ZH mirrors live in `i18n/zh-Hans/docusaurus-plugin-content-docs/current/` and
   must stay in sync with the EN file.
 - The same fact often appears on both surfaces (e.g. env vars on `/configuration`
@@ -31,8 +32,9 @@ Workers Builds on push to `main`. i18n: `en` (default) + `zh-Hans`.
   add/rename/default change there must update the page's `REFERENCE` data and the
   ConfigBuilder banner strings in the same task.
 - The homepage "Fetch <url>" agent-setup prompt's source of truth is
-  `static/agent-setup/prompt.md`; it is mirrored byte-identical in the main
-  repo's `ud-vite-app` home page and in `src/pages/index.tsx` here.
+  `static/agent-setup/prompt.md`. It has no mirror: `src/pages/index.tsx` only
+  holds the URL that points at it, and the main repo's `ud-vite-app` home page
+  dropped its copy when `/home` became a single screen. Edit the static file.
 
 ## Conventions
 
