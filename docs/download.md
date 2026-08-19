@@ -72,7 +72,7 @@ https://testflight.apple.com/join/st2TnaBF (requires the TestFlight app from
 the App Store).
 
 Android installs from a direct APK download, not from Google Play:
-https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/releases/android/0.0.9/undercontrol-0.0.9.apk
+https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/releases/android/0.0.20/undercontrol-0.0.20.apk
 Because the file does not come from the Play Store, the first install asks where
 it came from — tap **Settings → Allow from this source** and the install
 continues. The APK carries the mobile app's own version number, which is
