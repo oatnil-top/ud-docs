@@ -979,7 +979,7 @@
   },
   "privacy.lastUpdated": {
     "description": "Privacy page last updated date",
-    "message": "最后更新：2025年12月"
+    "message": "最后更新：2026年8月"
   },
   "privacy.meta.description": {
     "description": "The privacy page meta description",
@@ -1005,9 +1005,18 @@
     "description": "Self-host option title",
     "message": "自托管"
   },
+  "privacy.sections.appliesTo.p1": {
+    "message": "本政策覆盖所有挂 UnDercontrol 名字的东西：本网站、网页版、桌面应用、命令行工具，以及通过 App Store 与 TestFlight 分发的 iOS 移动应用。下文说到“云服务”，指的是这些客户端默认连接的托管后端 —— 不包括在本地运行的桌面应用，也不包括你自己部署的实例。"
+  },
+  "privacy.sections.appliesTo.p2": {
+    "message": "如果你用移动应用连我们的托管后端，那么下面所有内容 —— 收集什么、还有谁会处理、保留多久、怎么删除 —— 都适用于你。"
+  },
+  "privacy.sections.appliesTo.title": {
+    "message": "本政策适用于哪些产品"
+  },
   "privacy.sections.honestTake.p1": {
     "description": "Honest take paragraph 1",
-    "message": "我是一个独立开发者，不是什么大公司。我做 UnderControl 的一大初衷，就是想把自己的敏感数据——任务、财务、个人笔记——完全掌控在自己手里，而不是交给大公司。我先是为自己做的，现在分享给大家。"
+    "message": "我是一个独立开发者，不是什么大公司。我做 UnDercontrol 的一大初衷，就是想把自己的敏感数据——任务、财务、个人笔记——完全掌控在自己手里，而不是交给大公司。我先是为自己做的，现在分享给大家。"
   },
   "privacy.sections.honestTake.p2": {
     "description": "Honest take paragraph 2",
@@ -1016,6 +1025,27 @@
   "privacy.sections.honestTake.title": {
     "description": "Honest take section title",
     "message": "说点真心话"
+  },
+  "privacy.sections.retention.p1": {
+    "message": "账号存在期间，你放进去的东西我们就一直保留 —— 没有自动过期，也不会在你不知情的情况下删掉任何东西。"
+  },
+  "privacy.sections.retention.p1b": {
+    "message": "删除账号会永久删除你的账号、它拥有的一切，以及你上传的文件。你留在别人卡片上的评论仍然是那些讨论的一部分，只是不再署你的名。安全审计记录最长保留 30 天，另有少数账号生命周期记录会永久保留。"
+  },
+  "privacy.sections.retention.p2": {
+    "message": "删除是即时且不可撤销的。没有“待删除”状态、没有宽限期、没有撤销，删除前会要求你重新输入密码。账号拥有的一切一次性删除，包括对象存储里上传的文件，也包括你分享给别人的东西 —— 分享出去的内容是被删除，不是被移交。"
+  },
+  "privacy.sections.retention.p3": {
+    "message": "有三处是故意保留的，装作没有就是撒谎。第一，审计日志不随删号消失 —— 一个当事人能抹掉的审计轨迹不叫审计轨迹。它按自己的时限过期：默认 7 天；安全相关事件（登录尝试、群组与成员变更）30 天；少数账号生命周期与系统配置记录（例如“某账号被创建”）永久保留。清理任务每天 03:00 跑一次，所以实际最长比写明的时限多不到一天。第二，如果你的账号拥有 AI agent，那个 agent 的配置行是洗掉内容后退休，而不是删除 —— 它是这个 agent 在别人卡片上留下的每一条评论的作者名的唯一来源，删掉损坏的是别人的数据，不是你的。第三，你的账号拥有的群组是软删除，以便一并处理成员关系与凭据吊销。"
+  },
+  "privacy.sections.retention.p4": {
+    "message": "现在要删除账号，请用你注册时的邮箱地址发信到 lintao.amons@gmail.com，说明你要删除账号。应用内删除账号已经做好并随移动应用发布，但它的服务端那一半还没有上线到我们的生产后端 —— 在那之前，邮件是真正有效的途径；上线当天我们会更新本页。"
+  },
+  "privacy.sections.retention.p5": {
+    "message": "如果你用的是本地存储的桌面应用，或者你自己部署的实例，那这些都与我们无关：删掉数据 —— 乃至整个数据库文件 —— 完全由你自己决定。"
+  },
+  "privacy.sections.retention.title": {
+    "message": "保留多久，以及怎么删除"
   },
   "privacy.sections.security.p1": {
     "description": "Security paragraph 1",
@@ -1029,6 +1059,18 @@
     "description": "Security section title",
     "message": "安全性"
   },
+  "privacy.sections.thirdParties.p1": {
+    "message": "AI 功能会把内容发给模型供应商。当你使用内置助手，或者对任务、笔记、图片使用 AI 操作时，你提交的文字以及它处理的那条内容会被发给大语言模型供应商来生成回答。具体是哪家取决于配置：云服务使用服务端配置的供应商（OpenAI 或 Anthropic 兼容的接口），你也可以把应用指向你自己的供应商。我们不会用你的内容训练任何模型；供应商拿到内容后怎么处理，受该供应商自己的条款约束。如果你在意这一点，可以配置自己的供应商，或者改用桌面应用、自托管实例。"
+  },
+  "privacy.sections.thirdParties.p2": {
+    "message": "本网站使用 Google Analytics。oatnil.com —— 也就是你正在读这一页的这个官网与文档站 —— 加载了 Google Analytics（衡量 ID G-B3E5P48S9Y），并开启了 IP 匿名化，用来统计页面访问量。各个应用端不加载它，任何地方都没有广告或跨站追踪。"
+  },
+  "privacy.sections.thirdParties.p3": {
+    "message": "基础设施。网站和 API 经由 Cloudflare 提供服务，后端跑在租用的服务器上，配一个托管的 Postgres 数据库和 S3 兼容的对象存储。这些供应商像任何主机商一样，会在传输和存储环节处理数据。除了它们和上面那家模型供应商之外，我们不会把你的数据分享给任何人，也不会出售。"
+  },
+  "privacy.sections.thirdParties.title": {
+    "message": "还有谁会处理你的数据"
+  },
   "privacy.sections.whatWeCollect.p1": {
     "description": "What we collect paragraph 1",
     "message": "如果你使用云服务：账户信息（邮箱、用户名）和你创建的数据——任务、支出、预算等。我承诺不会查看你的数据，但你不必信任我。"
@@ -1036,6 +1078,12 @@
   "privacy.sections.whatWeCollect.p2_highlight": {
     "description": "What we collect highlight",
     "message": "选择桌面应用或者自部署，完全控制自己的数据"
+  },
+  "privacy.sections.whatWeCollect.p3": {
+    "message": "具体来说，云服务上保存四类数据。联系方式 —— 你的邮箱地址，用于登录和联系你。标识符 —— 把你的数据串起来的用户 ID。用户内容 —— 你写的任务、笔记、评论和聊天消息，以及你上传的文件、图片和文档。财务信息 —— 如果你使用财务功能，还包括你录入的支出、收入、账户、预算和资产。"
+  },
+  "privacy.sections.whatWeCollect.p4": {
+    "message": "不保存的：没有广告或追踪标识符，没有设备或崩溃诊断数据，没有位置，没有通讯录，没有健康数据。移动端、桌面端和网页端都没有集成任何分析、崩溃上报或归因 SDK。语音输入在离开应用之前就已经转成文字 —— 录音本身不会上传给我们。内购在你的设备上本地校验，我们从来收不到收据。"
   },
   "privacy.sections.whatWeCollect.title": {
     "description": "What we collect section title",
