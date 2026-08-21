@@ -6,6 +6,32 @@ sidebar_position: 1
 
 # Release Notes
 
+## v0.138.0 (2026-08-21)
+
+### New Features
+
+- **Delete your own account from inside the app.** Settings now has an account-deletion entry, so this no longer has to go through someone else. Deleting takes the account's own data and credentials with it: sign-in tokens, API keys, files and resources are all removed, and no orphaned files are left behind with nobody to claim them. **Comments you left on other people's cards stay**, because they belong to the discussion they sit in rather than to your account. The action cannot be undone.
+- **The knowledge graph can show only nodes you have filed into folders.** A new toggle hides loose nodes and leaves the filed ones. **The toggle needs a server of the same version**: a self-hosted instance that updated only its frontend will see the toggle greyed out with an explanation, while the graph itself renders as usual — that is expected, not a fault.
+- **Quick capture no longer fails when the currency is missing.** A record with no currency used to be rejected outright. The currency is now inferred in order: a symbol on the image, then the account, then the default currency you set yourself, then recently used, then what the system has learned, finally falling back to USD. **One ordering change: the default you picked in settings now comes before recently used** — a preference you stated explicitly beats one the system guessed. The trade-off is that while entering a run of foreign-currency records, the chain will not follow along just because you just entered one: your saved default keeps winning until you change it or the record itself carries a currency symbol. The inferred currency is visible in the UI and can be changed in one click.
+
+### Improvements
+
+- **Signing in and "back to app" both land in the resource explorer**, not the AI chat page.
+- **The AI assistant is now one floating window.** The full-page AI chat has been removed, and the floating window opens on narrow screens too. Existing `#/ai` bookmarks redirect to the new location.
+- **A dispatched session no longer interrupts what you are doing.** Session windows no longer pull themselves to the front. Bring one forward when you want it, from the workspaces page or the button on the card. Arrivals are shown in-app instead: sessions that started while you were not looking are listed, and clicking a row clears just that row.
+- **Which CLI runs an agent has moved into the "edit agent" form**, and the old entry in the detail panel **has been removed**. The behaviour changed with it: picking a CLI in the detail panel used to take effect immediately, whereas it now **takes effect when you press Save**, submitted together with the agent's other settings.
+- **Your default CLI now follows your account instead of being stored per browser.** Switch machines or browsers and the default comes with you. It also takes part in how a CLI is resolved: **a CLI you set on a specific agent still wins**, and the account default applies only where you have not set one.
+- **A session that never started no longer vanishes.** Sessions that failed to start are kept for 24 hours and say which step they stopped at and why (for example, "daemon did not acknowledge workspace init within 30s"). **This makes the failure visible; it does not fix session startup.**
+- **The daemon's startup can now be inspected after the fact.** Its five workspace-init steps are written to a local log file, redacted and rotated, on by default — so troubleshooting can see which step it stopped at. **Again, visibility only, not a fix.**
+
+### Upgrade Notes (self-hosted)
+
+No manual steps are required. **No new environment variables and no new database migrations in this release** — `goose_db_version` stays at 74.
+
+Upgrade the frontend and backend together: the knowledge graph's folder toggle needs a matching server version (it greys out otherwise), and in-app account deletion only appears when the backend is on the same version.
+
+---
+
 ## v0.137.0 (2026-08-18)
 
 ### New Features
