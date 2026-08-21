@@ -1071,6 +1071,12 @@
   "privacy.sections.thirdParties.title": {
     "message": "还有谁会处理你的数据"
   },
+  "privacy.sections.webClipper.p1": {
+    "message": "Web Clipper 扩展只在你点击“保存”时才抓取页面内容，并把它存到你的本地磁盘，或者发送到你配置的那台 UnDercontrol 服务器 —— 不会发给任何第三方。你的登录凭据保存在你自己的设备上，也只会发往同一个服务器地址。扩展的所有脚本都随包提供，不加载任何远程代码，也不追踪你的浏览历史或使用行为。"
+  },
+  "privacy.sections.webClipper.title": {
+    "message": "Web Clipper 浏览器扩展"
+  },
   "privacy.sections.whatWeCollect.p1": {
     "description": "What we collect paragraph 1",
     "message": "如果你使用云服务：账户信息（邮箱、用户名）和你创建的数据——任务、支出、预算等。我承诺不会查看你的数据，但你不必信任我。"

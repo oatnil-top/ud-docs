@@ -1,0 +1,20 @@
+# Cloudflare Workers static-assets redirects (copied to build/_redirects by Docusaurus).
+#
+# /privacy is the canonical privacy policy. /docs/privacy was a second, separately
+# maintained copy of the same document under the docs sidebar; the two drifted (different
+# last-updated dates, different sections) and both the footer and the docs sidebar pointed
+# at the stale one. The duplicate is retired rather than kept in sync — a legal document
+# with two texts is worse than one, and App Store Connect must name exactly one URL.
+/docs/privacy          /privacy           301
+/zh-Hans/docs/privacy  /zh-Hans/privacy   301
+
+# /support is quoted as a support URL but has never existed; /contact is the real support
+# page and returns 200. Redirect rather than ship a 404.
+/support               /contact           301
+/zh-Hans/support       /zh-Hans/contact   301
+
+# Positive control. This path backs no asset and never will, so a 301 here proves the
+# _redirects mechanism is honoured at all on Workers static assets — checked BEFORE the
+# duplicate policy page is deleted, so the deletion can never strand that URL on a 404.
+# Removed in the follow-up commit once it has done its job.
+/deploy-ops-redirect-probe  /privacy      301

@@ -204,6 +204,17 @@ function PolicyContent() {
         ]}
       />
 
+      <PolicySection
+        icon={<Monitor size={20} strokeWidth={2} />}
+        titleId="privacy.sections.webClipper.title"
+        titleDefault="Web Clipper Chrome Extension"
+        paragraphs={[
+          <Translate key="p1" id="privacy.sections.webClipper.p1">
+            {"The Web Clipper extension captures page content only when you click \u201cSave\u201d, and sends it to your local disk or to the UnDercontrol server you configured \u2014 never to a third party. Your credentials are stored on your device and are only ever sent to that same server URL. The extension bundles all of its scripts locally, loads no remote code, and does not track your browsing history or activity."}
+          </Translate>,
+        ]}
+      />
+
       {/* Options */}
       <div className={styles.optionsGrid}>
         <Link to="/download#desktop" className={styles.optionCard}>
