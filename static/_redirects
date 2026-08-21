@@ -12,9 +12,3 @@
 # page and returns 200. Redirect rather than ship a 404.
 /support               /contact           301
 /zh-Hans/support       /zh-Hans/contact   301
-
-# Positive control. This path backs no asset and never will, so a 301 here proves the
-# _redirects mechanism is honoured at all on Workers static assets — checked BEFORE the
-# duplicate policy page is deleted, so the deletion can never strand that URL on a 404.
-# Removed in the follow-up commit once it has done its job.
-/deploy-ops-redirect-probe  /privacy      301
