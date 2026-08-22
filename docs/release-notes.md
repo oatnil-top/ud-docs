@@ -6,6 +6,38 @@ sidebar_position: 1
 
 # Release Notes
 
+## v0.139.0 (2026-08-22)
+
+### New Features
+
+- **Session history on the Workspaces page.** A new History tab beside the live session list shows what your agent sessions actually left behind. Sessions are grouped by day, then by card: which agents ran, how many sessions there were, and the comments, notes and attachments produced in each session's window, plus the latest status change and a preview of the last comment. Filter by date range (last 3 days by default), by agent, by card, and with a has-output / no-output switch — that last one answers "which sessions ran but did nothing". **Sessions that ended badly are shown as such rather than smoothed over**: lost, never started, receipt-only, exited without recording a reason, and "status change not recorded" for sessions older than the 3-day audit window. **Two kinds of number are deliberately kept apart**: comment counts are attributed to the agent, while note and attachment counts carry a ⚠ and are window estimates, not attribution.
+- **A task can be a document.** Clearing a task's status now means "no workflow status = document" instead of falling back to To-do. Documents get their own icon in the resource explorer, stay out of kanban columns and status filters, and a new Status row in the card's attributes panel flips a card between task and document in one click. `ud apply` handles it too: an explicit empty `status:` creates or converts a document, while leaving the key out still defaults to To-do. **Cards you already have are unaffected** — they all carry a real status, and a card only becomes a document when its status is cleared deliberately.
+- **`ud get subscribers <comment-id>`** shows a comment thread's routing state from the CLI. There was previously no way to see who a thread would reach, which is part of why the unsubscribe bug below went unnoticed for months.
+
+### Improvements
+
+- **Notes and description edits written by an agent are now credited to that agent**, with the delegating human recorded alongside. Before this, every agent-written note was filed under the human, which made agent output impossible to tell apart from your own. Older notes are unchanged and cannot be recovered.
+- **A task's notes come back in a stated order** (oldest first) rather than whatever order the database happened to return. Editing a note no longer moves it within the list.
+- **Unsubscribing now says what it actually did.** The result carries the number of sessions affected, so an unsubscribe that wrote nothing says so instead of reporting plain success. The wording no longer mixes "you" and "them", and the docs no longer claim that a mention always re-subscribes you — it only does so in specific cases, which are now spelled out.
+- **The status row in the attributes panel lays out on one line**, matching the group and assignee rows.
+
+### Bug Fixes
+
+- **The workspace session-history endpoint was refused for everyone.** The route existed but had no permission-registry entry, so every call was rejected before authentication ever ran. This is the fix for the "Access denied" line on the History entry.
+- **An agent unsubscribing itself from a thread silently did nothing** and still reported success — it addressed the human it acts for rather than the agent, so no subscription row ever matched.
+- **Attachment counts could read zero.** Task attachments are stored under two entity types, current and legacy, and the count only recognised the current one.
+- **Session history reported "no record (older than 3 days)" for every session.** A three-day window was applied as nanoseconds, collapsing the cutoff onto "now". A session inside the window whose card genuinely did not move now correctly reads as "no change" — which is the distinction that column exists to make.
+- **An account whose username merely starts with "visitor" was shown the test-visitor warning banner.** Only accounts actually minted by the visitor entry point are treated as visitors now. No existing account changes classification.
+- **An invalid task status now returns a clear 400 error** instead of a 500.
+
+### Upgrade Notes (self-hosted)
+
+**No manual steps are required. No new environment variables and no new database migrations in this release** — `goose_db_version` stays at 74.
+
+**This is a backend-only release.** The desktop apps and the `ud` CLI are not rebuilt for 0.139.0 and downloads still point at 0.138.0; only the server image moves. The web app is already up to date, so upgrading the backend is what brings the two halves back into line.
+
+---
+
 ## v0.138.0 (2026-08-21)
 
 ### New Features
