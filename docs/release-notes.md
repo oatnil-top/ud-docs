@@ -6,6 +6,41 @@ sidebar_position: 1
 
 # Release Notes
 
+## v0.141.0 (2026-08-23)
+
+### New Features
+
+- **Files are first-class in the `ud` command line.** A file is now a `kind: File` document with `get`, `describe`, `apply` and `delete`. Upload with `ud apply --content-file <path>` — the path stays a command-line argument and never enters the document, so the same manifest works on any machine.
+- **Replacing a file's bytes keeps the bytes it replaced.** The new content is written to a new location, the file switches over only once that has landed, and the old location goes into history. **Nothing is overwritten in place**, so an interrupted replacement cannot destroy the version you had.
+- **A file has content history.** Every version you have replaced is listed on the file's page. History records where each old version is stored — not a second copy of the bytes.
+
+### Improvements
+
+- **The resource detail page has been reorganised** — the header says what the file is, and the page states what it costs against your storage.
+- **A stored diagram shows its diagram**, drawn from the same registry the editor uses, instead of a placeholder.
+- **A read-only diagram no longer offers edit controls it could never save.**
+- **Creating a dataflow is available in the app again** — the entry was temporarily hidden in the previous release.
+
+### Bug Fixes
+
+- **The resource detail panel no longer shows two invented values.** Storage read `s3-us-east-1` on every instance no matter where files were actually stored — local disk included — and the uploader always read "You" whoever uploaded the file. Each now shows the real value, or is not shown at all. They looked like ordinary values, so nobody thought to doubt them.
+- **A lookup that failed is no longer reported as "no such file."** `ud describe resource` answered `Resource not found` when it had merely been unable to ask — sending people after a file that was there all along.
+- **A file's history tells "could not load" apart from "there is no history."** Both used to render as the same empty list.
+- **A statistics block that no build has ever contained** was removed from the detail page.
+
+### Upgrade Notes (self-hosted)
+
+- **One new database migration** (`00077`, creating `resource_content_histories`). It runs automatically at startup on both SQLite and PostgreSQL, and creates one table without touching any existing one. Checked by upgrading a real v0.140.0 database in place: the table appears, existing rows unchanged. **No new environment variables.**
+- **Versions you have replaced count toward your storage usage.** Their objects are still stored — a file replaced twice occupies all three versions. **An old version cannot be deleted in this release**, so if usage matters to you, replace deliberately.
+- **`dataFile` has been removed from the dataflow schema.** Diagram content belongs inline in `data`. Drop the field from any manifest that still sets it.
+
+### Known Limitations (not in this release)
+
+- **The detail page's touch behaviour was not verified on real hardware.** The code is there — on a coarse pointer the rename entry stays visible rather than hiding behind a long press — but taps did not register in the simulator, so this ships **unverified on a real touch device**. Everything else was verified on macOS and in the browser.
+- **An old file version cannot be deleted** — content history only grows, and counts toward your usage.
+
+---
+
 ## v0.140.0 (2026-08-23)
 
 ### New Features
