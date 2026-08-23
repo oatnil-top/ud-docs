@@ -6,6 +6,55 @@ sidebar_position: 1
 
 # Release Notes
 
+## v0.140.0 (2026-08-23)
+
+### New Features
+
+- **Dataflow diagrams are now a first-class thing of their own.** A diagram you create or edit in the app is stored in its own place instead of as a file among your resources. Diagrams **appear in the resource explorer tree** alongside tasks and resources, with their own rename, move and delete; they can also **be attached to a task**, in their own row above the attachments area (a diagram has a name but no file size or file type, so it does not get mixed into the attachment list).
+- **Diagrams have version history, and you can roll back.** A rollback is written as a new save of that version — **nothing in between is erased**, and the version it replaces goes into the history.
+- **Sharing a diagram makes the images inside it visible — and only inside that diagram.** Unsharing takes that away immediately, and the image's visibility anywhere else (still attached to a private task of yours, say) does not change by a single byte.
+- **The `ud` command line can read and write diagrams directly.** `ud apply` understands `kind: Dataflow`, and the same document both creates and updates. Identity is owner + path + name, so **editing a file and applying it again updates the same diagram rather than adding a second one**; applying an unchanged document writes nothing at all. There is also `ud get / describe / delete dataflow`, `ud describe dataflow <id> --history` to list versions (saying for each whether it can still be rolled back), and `ud describe dataflow <id> -o apply` to export — **the exported document carries the diagram itself, so it pipes straight back into `ud apply` and genuinely round-trips.**
+
+### Improvements
+
+- **A saved diagram is now the diagram's own JSON rather than a PNG.** The same diagram goes from about 22 KB to about 1.9 KB. **The "Export PNG" button is unchanged** and still captures the real canvas.
+- **Diagrams you already have will be renamed from `.dataflow.png` to `.dataflow.json` on their next save, with no change to their contents.** Opening, editing and reopening all work as before. **A directory you have already `ud pull`ed will not rename itself** — a local file still called `.dataflow.png` **does not mean the rename failed or that the file is broken**; the file is fine, the name is just old, and pulling into a clean directory gives you the new name. **Existing `.dataflow.png` files keep opening forever** and need no migration from you.
+- **Diagrams do not count against your storage quota** — the quota measures object storage, and diagrams live in the database. The trade-off is that this usage is invisible to the two existing usage numbers, so the admin storage page **gains a "diagram bytes" column** (history included), flagging any owner over 1 GiB. **That column is not folded into the total.**
+- **Saving a diagram unchanged writes nothing** — the modified time does not move and no extra history entry appears.
+- **When an image in a diagram cannot be read, the node says why** ("image deleted" / "image not accessible" / "cannot preview" / "image failed to load", with a retry) instead of **going silently blank**.
+- **The server's startup banner now reports the storage that is actually in effect** rather than the one the environment asked for, and raises a difference warning when the two disagree. Self-hosted instances can now see at a glance whether what they configured is what is running.
+
+### Changes (may affect existing usage)
+
+- **Inline images are no longer allowed inside a diagram.** Any `data:` URI is refused regardless of size; an image must be uploaded as a resource first and referenced from the diagram as `resource://<id>`. **A single version is capped at 1 MiB.**
+- **Diagrams created before this release still open from your resources** (the resource and preview pages say so explicitly), while new ones use the new home. **This is a transitional state for one release, not two permanent paths.**
+
+### Bug Fixes
+
+- **Editing a `.dataflow.json` and reopening it produced a blank canvas — with no error at all.** The file's name and the file's contents were decided in two separate places and could disagree; one place decides both now, so they cannot come apart again.
+- **A diagram inside a folder could not be updated with `ud apply`.** The folder was stored in normalised form when the diagram was created, while lookup compared the string exactly as you wrote it — so the row that had just been written was not found, the apply fell through to "create", and uniqueness refused it. Diagrams at the root were unaffected.
+- **Applying an unchanged document moved the modified time.** A field merely being present in the document was treated as a field that had changed, so every apply sent an update.
+- **A diagram shared read-only could be rewritten and renamed by group members, and the changes were saved.** Writes are owner-only now, while reads still follow the share — so someone the diagram was shared with gets a clear refusal rather than "not found".
+
+### Upgrade Notes (self-hosted)
+
+**The frontend, the backend and the `ud` CLI must be upgraded together in this release.** Upgrading only the backend while the frontend stays behind means edits made by a person in the app and writes made by an agent through the CLI land in two different places, each believing it is right.
+
+**There are two new database migrations** (`00075` creates the diagram and history tables, `00076` the diagram-to-task link table). They run automatically at startup and move `goose_db_version` **from 74 to 76**. Both only create tables and **touch no existing table**; each has been verified on SQLite and PostgreSQL. **No new environment variables.**
+
+**Please sign in again after upgrading.** This release adds four diagram permissions. They are already in the default role, **but tokens you have already been issued — including agent tokens — do not carry them**, so every diagram request is refused until you sign in again or refresh the token.
+
+**An operations command `migrate-dataflows` also ships**, for copying older diagrams out of resources and into the new table (**copy only, never delete**, and safe to re-run). **It currently fails on PostgreSQL for diagrams that contain an inline image, so PostgreSQL instances should not run it yet** — not running it costs you nothing in this release, and older diagrams keep opening as they always did.
+
+### Known Limitations (not in this release)
+
+- **There is no way to share a diagram from the app** — the endpoint exists, the interface does not, so sharing is API-only today.
+- **There is no history panel in the app, and `ud` has no rollback subcommand** — history is viewable (`--history`), but rolling back is API-only for now.
+- **Opening a diagram in the app and saving it adds a history entry even if you changed nothing** (the command line does not do this).
+- **The desktop app (Electron) and Windows were not verified**; this release was verified on macOS and in the browser.
+
+---
+
 ## v0.139.0 (2026-08-22)
 
 ### New Features
