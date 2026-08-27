@@ -6,6 +6,62 @@ sidebar_position: 1
 
 # Release Notes
 
+## v0.142.0 (2026-08-27)
+
+### New Features
+
+- **Diagrams have their own page.** Opening a diagram — from the explorer tree or from a task card — lands on a detail page that draws it and nothing else. Editing is a deliberate second click that opens the editor in a new tab.
+- **The canvas follows your trackpad.** Two-finger scroll pans the canvas and pinch zooms it. A plain wheel pans; zoom moved to pinch, modifier+wheel, and the on-screen controls.
+
+### Improvements
+
+- **Write a diagram without coordinates and it lays itself out.** Left to right by default (`direction: TB` opts a document back into top-down), layers spaced by the tallest node in them, and a node that arrives without a position lands beside the neighbour it connects to instead of at the origin.
+- **Node widths follow the text they have to hold** — a nowrap line grows a shrink-wrapped node past its minimum width, a style-less note is measured at its longest content line, and a collapsed note or resource is measured at its 32px square.
+- **An edge handle your document leaves out is solved from the endpoints' relative geometry**, and a handle you did declare is never rewritten.
+- **Edge endpoints appear when the edge is selected**, painted above the nodes so their own endpoints win their pixels and can actually be grabbed. Node and field handles keep their hover affordance.
+- **Reconnecting a pipe keeps its id**, so its data and its undo history stay with it.
+- **The pipe menu opens where you clicked**, clamped inside the viewport.
+- **Labels wrap instead of vanishing.** Edge labels are no longer nailed to the path midpoint and wrap before they truncate; icon captions wrap to three lines so names sharing a prefix stop looking identical; a long field value is cut by CSS at 200px rather than by a 10-character slice the CSS never saw. Dragging a label commits where the pointer actually went, not what the last render saw.
+- **A collapsed node's handles and edges anchor to the square you can see**, not to the size the note had before it was folded.
+- **An id your document carries survives open, merge and save** — only a genuine collision mints a new one.
+
+### The diagram format converged to one
+
+The full graph JSON is now **the only** format a diagram's `spec.data` may use. Nodes carry `type` and `data` (plus optional `id`, `position`, `style`) and edges reference node ids; `position` is optional, and omitting it everywhere hands the layout to the editor.
+
+The two retired dialects — **simplified** (nodes with top-level `name` and `fields`) and **architecture** (a top-level `groups` array) — are now refused at `ud apply`, by shape. The refusal names which dialect it saw, points at the accepted format, and tells you to update the CLI if your copy still teaches the old one. The built-in `generate-dataflow` skill teaches exactly that one format and nothing else.
+
+### Bug Fixes
+
+- **Moving a task to Unfiled works over HTTP.** "Unfiled" and "pinned to the top level" had been collapsed into the same stored value since 2026-05-27, so explicit root had no carrier and the root of the explorer tree held every task nobody had filed. They are now `""` and `/` and they mean different places.
+- **Renaming a path prefix has never worked on PostgreSQL.** Fixed — on PG, moving a folder silently did nothing.
+- **The daemon's event stream stops losing frames** that were split across network chunks.
+- **The agent-session init watchdog stops blaming a machine it never checked.**
+- **The runtime page stops claiming the server cannot hold a custom CLI.**
+- **The resource inspector reads one step below the page, and its header stops shouting.**
+
+### Upgrade Notes (self-hosted)
+
+🔴 **Upgrade the `ud` CLI at the same time as the server, not after.** The server in this release refuses the two retired diagram dialects at apply time. A CLI older than this release still ships a built-in skill that teaches one of them, so agents running an old CLI will start being refused while their own documentation still tells them to write the refused shape.
+
+⚠️ **If you installed the CLI from npm, nothing upgrades it for you.** Run `npm i -g @oatnil/ud`. Until you do, the refusal stands — this residual window is real, not theoretical. The server's error message says which dialect it saw and tells you to update the CLI.
+
+⚠️ **`ud explain dataflow.spec.data` still does not state the one-format rule.** The schema text lives in a separate repository which did not ship with this release, so the schema route is silent about it: the server enforces the rule, but the schema will not warn you in advance. The other route an agent has — `ud describe skill generate-dataflow` — is correct and teaches one format. These two are separate sources and only one of them moved in this release.
+
+**No new environment variables. No new database migrations.**
+
+### Known limitations, and what got worse
+
+This release ships with these open, deliberately.
+
+- **AI generation of the full format was never tested** — the development box has no AI provider configured, so that path is unmeasured.
+- **Two layout metrics regressed**: edges crossing nodes went from 2 to 3, and overlapping labels from 10 to 14. Within-layer ordering and label avoidance are not implemented.
+- **At deep zoom-out you cannot grab an edge endpoint.** The grab radius is measured in flow units and does not scale with the screen.
+- **Real two-finger trackpad panning, and middle/right-button drag panning, remain unverified.** Only a person on real hardware can check them; both are still open.
+- **A layout you dragged into place and saved is silently discarded by an agent's next `ud apply`.** This is a deliberate decision: no guard, no merge. The previous version stays in the diagram's history.
+
+---
+
 ## v0.141.0 (2026-08-23)
 
 ### New Features
