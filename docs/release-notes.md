@@ -44,7 +44,9 @@ The two retired dialects — **simplified** (nodes with top-level `name` and `fi
 
 🔴 **Upgrade the `ud` CLI at the same time as the server, not after.** The server in this release refuses the two retired diagram dialects at apply time. A CLI older than this release still ships a built-in skill that teaches one of them, so agents running an old CLI will start being refused while their own documentation still tells them to write the refused shape.
 
-⚠️ **If you installed the CLI from npm, nothing upgrades it for you.** Run `npm i -g @oatnil/ud`. Until you do, the refusal stands — this residual window is real, not theoretical. The server's error message says which dialect it saw and tells you to update the CLI.
+⚠️ **If you installed the CLI from npm, nothing upgrades it for you.** Run `npm i -g @oatnil/ud`. Until you do, the refusal stands — this residual window is real, not theoretical.
+
+🔴 **The refusal will not tell you to upgrade.** The server has per-dialect guidance written for exactly this moment — naming the dialect it saw and telling you to update the CLI — but the web layer sends the error code's static default message instead of that text, so what you actually receive is the generic `Diagram content uses a retired format; the only accepted format is the full graph JSON`. The dialect it detected is still there, in the response's `details.dialect` field. If an agent of yours starts being refused, this note is the guidance the error was supposed to give it.
 
 ⚠️ **`ud explain dataflow.spec.data` still does not state the one-format rule.** The schema text lives in a separate repository which did not ship with this release, so the schema route is silent about it: the server enforces the rule, but the schema will not warn you in advance. The other route an agent has — `ud describe skill generate-dataflow` — is correct and teaches one format. These two are separate sources and only one of them moved in this release.
 
