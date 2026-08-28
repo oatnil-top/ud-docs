@@ -81,8 +81,23 @@ You'll be prompted for:
 The server URL comes from the active context (or the `--api-url` flag). To log in to a specific server and save it as a named context in one step, use `--api-url` with `--name/-n`:
 
 ```bash
-ud login --api-url https://ud.oatnil.com -n personal
+# Your own server — the usual case. Use its URL, including the port if it has one.
+ud login --api-url https://ud.example.com -n personal
+
+# The UnDercontrol desktop app runs a backend on your own machine:
+ud login --api-url http://localhost:8888 -n desktop
 ```
+
+No server yet and just want to try UnDercontrol? Point at `https://api.oatnil.com` — a
+**test server** we run for trying the product, not a hosting plan, so don't keep real work
+there. Sign up for it at [ud.oatnil.com](https://ud.oatnil.com) first:
+
+```bash
+ud login --api-url https://api.oatnil.com -n trial
+```
+
+`https://ud.oatnil.com` serves the web app only — passing it to `--api-url` fails with
+`status 404`. The API host is `https://api.oatnil.com`.
 
 You can also pass credentials non-interactively with `-u/--username` and `-p/--password`. Credentials are saved to `~/.config/ud/config.yaml`.
 

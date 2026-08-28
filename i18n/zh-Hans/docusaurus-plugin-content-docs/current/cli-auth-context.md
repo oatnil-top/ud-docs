@@ -26,7 +26,7 @@ current-context: personal
 contexts:
 - name: personal
   context:
-    api_url: https://api.undercontrol.app
+    api_url: https://ud.example.com
     token: eyJhbGciOi...
     user: john@example.com
 - name: work
@@ -51,7 +51,7 @@ ud config get-contexts
 输出：
 ```
 CURRENT  NAME      API URL                      USER
-*        personal  https://api.undercontrol.app john@example.com
+*        personal  https://ud.example.com john@example.com
          work      https://ud.company.com       john@company.com
          staging   http://localhost:4000        (api-key)
 ```
@@ -117,7 +117,7 @@ current-context: personal
 contexts:
 - name: personal
   context:
-    api_url: https://api.undercontrol.app
+    api_url: https://ud.example.com
     user: john@example.com
     token: eyJhbGciOi...xyz
 - name: work
@@ -197,7 +197,7 @@ UD_API_URL=http://localhost:4000 ud task list
 
 ```bash
 # 设置个人账户
-ud login --context personal --api-url https://api.undercontrol.app
+ud login --context personal --api-url https://ud.example.com
 
 # 设置工作账户
 ud login --context work --api-url https://ud.company.com
@@ -219,7 +219,7 @@ ud config set-context dev --api-url http://localhost:4000
 ud login --context dev
 
 # 生产环境
-ud login --context prod --api-url https://api.undercontrol.app
+ud login --context prod --api-url https://ud.example.com
 
 # 快速切换
 ud config use-context dev
@@ -231,7 +231,7 @@ ud config use-context prod
 ```bash
 # 使用 API 密钥创建上下文（无需交互式登录）
 ud config set-context ci \
-  --api-url https://api.undercontrol.app \
+  --api-url https://ud.example.com \
   --api-key ak_your_api_key
 
 # 在 CI/CD 脚本中使用
@@ -241,7 +241,7 @@ ud task create "部署完成" -d "版本 1.2.3"
 
 或使用环境变量：
 ```bash
-export UD_API_URL=https://api.undercontrol.app
+export UD_API_URL=https://ud.example.com
 export UD_API_KEY=ak_your_api_key
 ud task list
 ```
@@ -252,7 +252,7 @@ ud task list
 
 ```yaml
 # 旧格式
-api_url: https://api.undercontrol.app
+api_url: https://ud.example.com
 token: eyJhbGciOi...
 ```
 
@@ -264,7 +264,7 @@ current-context: default
 contexts:
 - name: default
   context:
-    api_url: https://api.undercontrol.app
+    api_url: https://ud.example.com
     token: eyJhbGciOi...
 ```
 

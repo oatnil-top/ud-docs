@@ -74,10 +74,27 @@ ud --version
 ud login
 ```
 
-系统会提示输入：
-- **服务器地址**：你的 UnderControl 服务器（如 `https://api.undercontrol.app`）
-- **用户名**：账户邮箱
-- **密码**：账户密码
+系统会提示输入**用户名**（账户邮箱）和**密码**。服务器地址取自当前上下文，或由 `--api-url`
+指定。配合 `--name/-n`，可以一步登录并保存为具名上下文：
+
+```bash
+# 你自己的服务器 —— 常规情况。填它的地址，有端口就带上端口。
+ud login --api-url https://ud.example.com -n personal
+
+# UnDercontrol 桌面版会在你自己的机器上跑一个后端：
+ud login --api-url http://localhost:8888 -n desktop
+```
+
+还没有服务器、只想先试试？可以指向 `https://api.oatnil.com` —— 那是我们跑的一台**测试服**，
+用来试用产品，不是托管服务，别把正经数据放上面。先到
+[ud.oatnil.com](https://ud.oatnil.com) 注册：
+
+```bash
+ud login --api-url https://api.oatnil.com -n trial
+```
+
+`https://ud.oatnil.com` 只提供网页应用，传给 `--api-url` 会以 `status 404` 失败；API 地址是
+`https://api.oatnil.com`。
 
 登录信息保存在 `~/.config/ud/config.yaml`。
 

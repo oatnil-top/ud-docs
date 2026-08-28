@@ -18,14 +18,20 @@ Authorization: Bearer <access_token>
 
 ## Base URL
 
+Every path below is relative to your server's API base — your own server in the usual case:
+
 ```
-https://ud.oatnil.com
+https://<your-server>/api/v1
 ```
 
 For local development:
 ```
-http://localhost:8898
+http://localhost:4000/api/v1
 ```
+
+On the test server UnDercontrol runs for trying the product, the base is
+`https://api.oatnil.com/api/v1`. Note `https://ud.oatnil.com` is the web app, not the API:
+every API path under it answers 404.
 
 ## Endpoints
 
@@ -451,13 +457,13 @@ X-RateLimit-Reset: 1706186400
 
 **List all accounts:**
 ```bash
-curl -X GET https://ud.oatnil.com/account \
+curl -X GET https://<your-server>/api/v1/account \
   -H "Authorization: Bearer YOUR_TOKEN"
 ```
 
 **Create a new account:**
 ```bash
-curl -X POST https://ud.oatnil.com/account \
+curl -X POST https://<your-server>/api/v1/account \
   -H "Authorization: Bearer YOUR_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
@@ -472,7 +478,7 @@ curl -X POST https://ud.oatnil.com/account \
 
 **Update an account:**
 ```bash
-curl -X PUT https://ud.oatnil.com/account/ACCOUNT_ID \
+curl -X PUT https://<your-server>/api/v1/account/ACCOUNT_ID \
   -H "Authorization: Bearer YOUR_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{

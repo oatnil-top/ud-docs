@@ -26,7 +26,7 @@ current-context: personal
 contexts:
 - name: personal
   context:
-    api_url: https://ud.oatnil.com
+    api_url: https://ud.example.com
     token: eyJhbGciOi...
     user: john@example.com
 - name: work
@@ -51,7 +51,7 @@ ud config get-contexts
 Output:
 ```
 CURRENT  NAME      API URL                      USER
-*        personal  https://ud.oatnil.com john@example.com
+*        personal  https://ud.example.com       john@example.com
          work      https://ud.company.com       john@company.com
          staging   http://localhost:4000        (api-key)
 ```
@@ -117,7 +117,7 @@ current-context: personal
 contexts:
 - name: personal
   context:
-    api_url: https://ud.oatnil.com
+    api_url: https://ud.example.com
     user: john@example.com
     token: eyJhbGciOi...xyz
 - name: work
@@ -197,7 +197,7 @@ UD_API_URL=http://localhost:4000 ud get task
 
 ```bash
 # Setup personal account
-ud login --context personal --api-url https://ud.oatnil.com
+ud login --context personal --api-url https://ud.example.com
 
 # Setup work account
 ud login --context work --api-url https://ud.company.com
@@ -219,7 +219,7 @@ ud config set-context dev --api-url http://localhost:4000
 ud login --context dev
 
 # Production
-ud login --context prod --api-url https://ud.oatnil.com
+ud login --context prod --api-url https://ud.example.com
 
 # Quick switching
 ud config use-context dev
@@ -231,7 +231,7 @@ ud config use-context prod
 ```bash
 # Create context with API key (no interactive login needed)
 ud config set-context ci \
-  --api-url https://ud.oatnil.com \
+  --api-url https://ud.example.com \
   --api-key ak_your_api_key
 
 # Use in CI/CD scripts
@@ -246,7 +246,7 @@ EOF
 
 Or use environment variables:
 ```bash
-export UD_API_URL=https://ud.oatnil.com
+export UD_API_URL=https://ud.example.com
 export UD_API_KEY=ak_your_api_key
 ud get task
 ```
@@ -257,7 +257,7 @@ If you have an existing config file with the old single-context format:
 
 ```yaml
 # Old format
-api_url: https://ud.oatnil.com
+api_url: https://ud.example.com
 token: eyJhbGciOi...
 ```
 
@@ -269,7 +269,7 @@ current-context: default
 contexts:
 - name: default
   context:
-    api_url: https://ud.oatnil.com
+    api_url: https://ud.example.com
     token: eyJhbGciOi...
 ```
 

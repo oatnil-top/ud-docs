@@ -18,14 +18,19 @@ Authorization: Bearer <access_token>
 
 ## Base URL
 
+下面所有路径都相对于你的服务器 API 根地址 —— 常规情况就是你自己的服务器：
+
 ```
-https://api.undercontrol.app
+https://<your-server>/api/v1
 ```
 
-For local development:
+本地开发：
 ```
-http://localhost:8898
+http://localhost:4000/api/v1
 ```
+
+如果用的是我们跑的那台试用**测试服**，根地址是 `https://api.oatnil.com/api/v1`。注意
+`https://ud.oatnil.com` 是网页应用，不是 API：它下面的每个 API 路径都返回 404。
 
 ## Endpoints
 
@@ -451,13 +456,13 @@ X-RateLimit-Reset: 1706186400
 
 **List all accounts:**
 ```bash
-curl -X GET https://api.undercontrol.app/account \
+curl -X GET https://<your-server>/api/v1/account \
   -H "Authorization: Bearer YOUR_TOKEN"
 ```
 
 **Create a new account:**
 ```bash
-curl -X POST https://api.undercontrol.app/account \
+curl -X POST https://<your-server>/api/v1/account \
   -H "Authorization: Bearer YOUR_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
@@ -472,7 +477,7 @@ curl -X POST https://api.undercontrol.app/account \
 
 **Update an account:**
 ```bash
-curl -X PUT https://api.undercontrol.app/account/ACCOUNT_ID \
+curl -X PUT https://<your-server>/api/v1/account/ACCOUNT_ID \
   -H "Authorization: Bearer YOUR_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{

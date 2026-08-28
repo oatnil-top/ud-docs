@@ -8,7 +8,7 @@ directly. The only command you hand to the user is `ud login` — it prompts for
 password — so wait for them to report back on that one. Never invent credentials, and
 never ask the user to tell you their password.
 
-- Orient the user and confirm cloud vs self-hosted
+- Orient the user and ask which server they use
 - Install the ud CLI
 - Run the onboarding check and follow it until it passes
 
@@ -21,10 +21,21 @@ you're about to set up — connecting their agent to a UnDercontrol workspace so
 and update their tasks, notes, files and finance from the terminal. Then ask the two
 questions that decide how the rest goes, and wait for the answers:
 
-1. **Cloud or self-hosted?** Cloud is `https://ud.oatnil.com`. Self-hosted means they run
-   their own server, and you'll use that server's URL everywhere below instead.
-2. **Do they already have an account?** If not, point them to sign up first — cloud users at
-   `https://ud.oatnil.com`, self-hosters at `https://oatnil.com/self-hosting`.
+1. **Which server?** UnDercontrol runs on a server the user controls, so this is the one
+   thing you cannot work out on your own — ask, and use the answer everywhere below.
+   - **Their own server** — the normal case. A machine or VPS they host, or the
+     UnDercontrol desktop app, which runs a backend on their own machine at
+     `http://localhost:8888`. Ask them for the URL. Guide:
+     `https://oatnil.com/self-hosting`.
+   - **Or, just trying it out** — if they have no server yet, they can point at
+     `https://api.oatnil.com`. Tell them plainly what it is: a **test server** we run so
+     people can try UnDercontrol, not a hosting plan, so real work does not belong on it.
+
+   Do not pick for them, and do not fall back to our test server when the answer is
+   unclear — ask again instead.
+2. **Do they already have an account?** On their own server, the first account is created
+   when the server starts — the self-hosting guide covers it. On the test server, they sign
+   up at `https://ud.oatnil.com`.
 
 Once you have both answers, work through the steps below.
 
