@@ -6,6 +6,40 @@ sidebar_position: 1
 
 # Release Notes
 
+## v0.143.0 (2026-08-29)
+
+### New Features
+
+- **`ud config onboarding` — the CLI now owns its own setup checklist.** One command reports every unmet need as a check row carrying the exact `next_command` that fixes it, machine-readable with `--json`. It never prompts, so a coding agent can run it, act on each row, and re-run until it exits 0. Rows marked `requires_human` — above all `ud login`, which asks for a password — are handed to you instead of being run.
+- **Nothing points at a server you did not choose.** On an unconfigured machine the login command now reads `ud login --api-url <YOUR-SERVER-URL>` — a visible blank someone has to fill in — instead of quietly naming the backend we host. Running your own server is the normal path; the backend we host is a test server you may point at while trying the product, and every place that offers it now says so.
+
+### Bug Fixes
+
+- **The suggested login address used to 404.** The old default was `https://ud.oatnil.com`, which serves the web app and not the API, so `ud login` against it failed with `status 404`. It is gone.
+- **An agent launched from the workspace now carries its own arguments.** The options-dropdown model pick reached the daemon only when the agent was started by @mention; started through "run as agent" the arguments were silently dropped. Both entrances now produce a byte-identical launch command.
+- **Preset argument variants appear in one order everywhere** — API response, web UI and `ud describe` all sort them by label, so the dropdown and the CLI stop disagreeing about which is first.
+- **The "no agent CLI detected" panel stopped saying something untrue.** A session does not need a detected CLI: dispatch never consults probe results, and a row pointing at an undetected command runs fine. The panel now says so and links to *Your agent CLIs* on the Runtime page.
+- **The daemon-offline notice tells you where to go.** It links to the Machines page, is written in the triggering user's language, and no longer implies that a machine which was never registered will reconnect just by launching the app.
+- **Deleting the legacy built-in CLI rows no longer empties the install list or the desktop probe** — both now select rows by what they can do rather than by the deprecated `builtin` flag.
+
+### Not in this release: the desktop app
+
+**The desktop app is not published in this release — it stays at v0.142.0.** This work is in the code but you cannot get it yet:
+
+- Find-in-page in every window the app opens (task popups, editors, the sticker, the floating viewer), not only the main window.
+- Three find-bar fixes: typing returns a result instead of leaving a masked box, Enter walks to the next match instead of circling match 1 forever, and shrinking the window no longer clips the close button off the end.
+- The session status word focuses its window again, and when it cannot, it names the reason instead of doing nothing.
+
+These ship in a later release.
+
+### Upgrade Notes (self-hosted)
+
+**No new environment variables. No new database migrations.**
+
+⚠️ **Upgrade the CLI yourself: `npm i -g @oatnil/ud`.** Nothing upgrades it for you, and `ud config onboarding` only exists from this version — an older CLI answers with an unknown-command error.
+
+---
+
 ## v0.142.0 (2026-08-27)
 
 ### New Features
