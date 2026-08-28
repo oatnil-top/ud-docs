@@ -20,26 +20,14 @@ sidebar_position: 6
 
 ## 快速设置
 
-### Claude Code
+设置步骤住在工具里,不在这个页面。CLI 自带的 onboarding 体检知道这台机器还缺什么——服务器、登录、你的 AI 助手加载的指令文件——并为每一项给出下一条命令:
 
 ```bash
-# 创建技能目录
-mkdir -p .claude/skills/ud-cli
-
-# 生成技能文件
-ud prompt --frontmatter > .claude/skills/ud-cli/SKILL.md
+ud config onboarding          # 人类可读的检查表
+ud config onboarding --json   # 给 agent 用:每项带 next_command / requires_human
 ```
 
-就这样。Claude Code 现在会在处理任务时自动使用 ud CLI。
-
-### Cursor / 其他 AI 助手
-
-```bash
-# 输出提示词并复制到 AI 指令文件中
-ud prompt > .cursorrules
-# 或
-ud prompt >> .claude/instructions.md
-```
+如果要从零开始、由 agent 代办的完整设置(安装、登录、技能文件),让你的 agent 抓取并按 [https://oatnil.com/agent-setup/prompt.md](https://oatnil.com/agent-setup/prompt.md) 执行——那份文件是设置流程的唯一权威来源,本节刻意不复述它。
 
 ## `ud prompt` 命令
 
@@ -186,9 +174,8 @@ ud config use-context work
 **问题：** 即使有技能文件，AI 也不使用 ud 命令。
 
 **解决方案：**
-1. 确认技能文件存在：`cat .claude/skills/ud-cli/SKILL.md`
-2. 确保已登录：`ud config current-context`
-3. 重新生成技能文件：`ud prompt --frontmatter > .claude/skills/ud-cli/SKILL.md`
+1. 运行 `ud config onboarding`——它会检查登录、服务器和指令文件是否就位,并为缺的那项给出下一条命令。
+2. 确认技能可以加载：`ud describe skill ud-cli`
 
 ### AI 使用了错误的上下文
 

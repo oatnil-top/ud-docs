@@ -3,15 +3,14 @@ UnDercontrol workspace — tasks, documents, files and personal finance, driven 
 terminal by the `ud` CLI. Once connected you can read the user's tasks, record progress
 as notes, attach files, and open follow-up work without leaving the terminal.
 
-Start by orienting the user, then complete the rest of the steps yourself by running the
-commands directly. The only command you hand to the user is `ud login` — it prompts for a
-password — so wait for them to report back on that one. Never invent credentials.
+Start by orienting the user, then complete the rest yourself by running the commands
+directly. The only command you hand to the user is `ud login` — it prompts for a
+password — so wait for them to report back on that one. Never invent credentials, and
+never ask the user to tell you their password.
 
 - Orient the user and confirm cloud vs self-hosted
 - Install the ud CLI
-- Sign in to the user's workspace
-- Install the UnDercontrol skill for your agent
-- Verify the connection
+- Run the onboarding check and follow it until it passes
 
 ---
 
@@ -41,96 +40,29 @@ ud --version
 If a global install is not possible, every `ud` command below also works as
 `npx @oatnil/ud <command>`.
 
-## Sign in to the user's workspace
+## Run the onboarding check
 
-**First, check whether they're already signed in** — run `ud whoami`. If it prints a user,
-skip the rest of this step. This is common when the user runs the UnDercontrol desktop app:
-logging in there automatically writes a CLI context named `personal` to
-`~/.config/ud/config.yaml`, so the CLI is already authenticated and no login command is
-needed. (Download the desktop app from `https://oatnil.com` if they'd prefer the GUI route.)
-
-Otherwise sign in from the CLI. **This is the one command the user must run themselves** —
-it prompts for a password. Ask them to run it, then continue once they confirm.
-
-Cloud workspace:
+The CLI carries its own onboarding checklist, so these instructions don't have to —
+what to configure, in what order, and the exact next command for anything missing all
+come from the tool itself and always match the installed version:
 
 ```
-ud login --api-url https://ud.oatnil.com -n personal
+ud config onboarding --json
 ```
 
-Self-hosted — substitute their own server:
+It never prompts. Read the report and act on each check whose `state` is `"action"`:
 
-```
-ud login --api-url https://ud.example.com -n home
-```
+- Run its `next_command` yourself — **unless** `requires_human` is `true`. That marks
+  the step only the user can do (above all `ud login`, which prompts for their
+  password): show the user that exact command, wait for them to run it and report
+  back, then re-run the check. The password must never pass through you.
+- The `hint` on each check carries the details — for example, which file the agent
+  instruction goes in for your agent, or what to do when the server URL is wrong.
+- Loop "run → act → re-run" until the command exits 0 (`"ok": true`). That is the
+  whole setup.
 
-If they have no account yet, point them at `https://ud.oatnil.com` to sign up, or at
-`https://oatnil.com/self-hosting` to run their own server first.
-
-Credentials and contexts are written to `~/.config/ud/config.yaml`. Confirm the session
-yourself with:
-
-```
-ud whoami
-```
-
-## Install the UnDercontrol skill for your agent
-
-The CLI carries its own agent-facing reference as a built-in skill. It is served by the
-CLI, so it always matches the installed version — read it instead of guessing flags, and
-write it to disk so future sessions pick it up without being told.
-
-Use the correct section for your agent below. Use `~/` paths instead of the project-local
-ones if the user wants UnDercontrol available in every project.
-
-### Claude Code
-
-```
-mkdir -p .claude/skills/ud-cli
-ud describe skill ud-cli > .claude/skills/ud-cli/SKILL.md
-```
-
-### Codex / OpenCode / any agent that reads `AGENTS.md`
-
-```
-mkdir -p .agents/skills/ud-cli
-ud describe skill ud-cli > .agents/skills/ud-cli/SKILL.md
-```
-
-Then append to `AGENTS.md`:
-
-```
-This project uses UnDercontrol for tasks. Read .agents/skills/ud-cli/SKILL.md
-before reading or writing tasks, notes, or boards.
-```
-
-### Cursor — `.cursor/rules/undercontrol.mdc`
-
-### Windsurf — `.windsurf/rules/undercontrol.md`
-
-### GitHub Copilot — `.github/copilot-instructions.md`
-
-Write the reference into the rules file for these three:
-
-```
-ud describe skill ud-cli > <the rules file above>
-```
-
-### Any other agent
-
-Write `ud describe skill ud-cli` output to whatever file your agent loads as persistent
-instructions, and tell the user which file you chose.
-
-Regenerate the file after upgrading the CLI to pick up new commands.
-
-## Verify the connection
-
-```
-ud get task --limit 5
-ud get board
-```
-
-An empty list is a pass — only an authentication error is a failure.
+If your installed CLI doesn't know the command (older version), upgrade first:
+`npm update -g @oatnil/ud`.
 
 Once done, tell the user:
 
@@ -138,7 +70,7 @@ Once done, tell the user:
 ┌─ UnDercontrol Setup Complete ────────────────────────┐
 │  ✓ CLI      ud <version>                             │
 │  ✓ Context  <context name> → <api url>               │
-│  ✓ Skill    <path you wrote>                         │
+│  ✓ Skill    <path the skill check reports>           │
 │                                                      │
 │  ⚡ Ask me to work on a task to get started          │
 └──────────────────────────────────────────────────────┘
@@ -148,7 +80,8 @@ Once done, tell the user:
 
 ## Before your first write
 
-The skill you just installed is the full reference. Three rules that matter most:
+The skill file the onboarding check had you install is the full reference. Three rules
+that matter most:
 
 - `ud apply` **replaces** the whole record. Read it back first
   (`ud describe task <id> -o apply`) so you don't drop fields.

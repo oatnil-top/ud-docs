@@ -61,37 +61,19 @@ ud cook board
 
 ## Quick Setup
 
-The goal is simply to tell your AI assistant to load the `ud-cli` skill before it works with tasks. Add a short instruction to your assistant's config.
-
-### Claude Code
-
-Add to your project's `.claude/instructions.md` (or a `CLAUDE.md`):
-
-```markdown
-This project uses the UnDercontrol CLI (`ud`) for task management.
-Before working with tasks, run `ud describe skill ud-cli` to load the
-full command reference, then use `ud get`, `ud describe`, `ud apply`,
-and `ud delete` to read and update tasks and notes.
-```
-
-If you prefer a persistent skill file, capture the reference content into one:
+Setup lives in the tool, not in this page. The CLI's own onboarding check knows what a
+machine is still missing — server, sign-in, and the instruction file your assistant
+loads — and names the exact next command for each:
 
 ```bash
-mkdir -p .claude/skills/ud-cli
-ud describe skill ud-cli > .claude/skills/ud-cli/SKILL.md
+ud config onboarding          # human-readable checklist
+ud config onboarding --json   # for agents: next_command / requires_human per check
 ```
 
-Regenerate it after upgrading the CLI to pick up new commands.
-
-### Cursor / Other AI Assistants
-
-Add the same instruction to your assistant's rules file:
-
-```markdown
-Use the UnDercontrol CLI for tasks. Run `ud describe skill ud-cli`
-to load the command reference, then manage tasks with
-`ud get task`, `ud describe task <id>`, and `ud apply -f -`.
-```
+For a from-scratch, agent-driven setup (install, sign-in, skill file), have your agent
+fetch and follow [https://oatnil.com/agent-setup/prompt.md](https://oatnil.com/agent-setup/prompt.md) —
+that page is the single source of truth for the setup flow, and this section
+deliberately does not restate it.
 
 ## What the Skill Teaches
 
@@ -179,9 +161,9 @@ You can also pin a single command to a context with the global `--context` flag,
 **Problem:** The agent doesn't use `ud` commands.
 
 **Solutions:**
-1. Confirm the instruction is present in your assistant's config and mentions `ud describe skill ud-cli`.
-2. Ensure you're logged in: `ud config current-context` and `ud whoami`.
-3. Verify the skill loads: `ud describe skill ud-cli`.
+1. Run `ud config onboarding` — it checks the sign-in, the server, and whether an
+   instruction file exists, and names the next command for whatever is missing.
+2. Verify the skill loads: `ud describe skill ud-cli`.
 
 ### AI Using Wrong Context
 
