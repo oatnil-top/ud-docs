@@ -20,6 +20,55 @@ sidebar_position: 1
   The card carries the positive control that distinguishes the two.
 -->
 
+## v0.144.0 (2026-08-30)
+
+### New Features
+
+- **Runtime is three tabs now: Agent CLI, Prompts, Daemons.** Five stacked blocks became three pages you can aim at. **Every `section` anchor is carried over unchanged** — renaming one degrades a deep link silently, it still resolves and just lands somewhere else. Which section belongs to which tab is data, and a test asserts that every link both names a rendered section and points at the tab that owns it.
+- **Clicking a node in a dataflow lights the pipes attached to it.** It is the highlight the field rows already use, **not a second one** — same 7-colour rotation, and not one colour, width, dash or shadow constant copied anywhere. A node selection and a field selection coexist.
+- **You can re-add default agents you deleted.** This **could not have worked before**: a renamed agent still carried its old `builtin_key`, so minting a fresh copy hit a unique index, and the code read that violation as "someone else already made it" and returned success. The button did nothing and said nothing.
+
+### Improvements
+
+- **Option presets in the "View differences" dialog read as text, not as the wire format.** That field used to hand you `{"label":"Opus","args":"--model opus"}` next to a prompt diff written in English. It now reads `Opus — --model opus`, **one per line** (comma-joining ran the halves of different options together), and **"Copy my version" copies the readable form too**. Anything unparseable falls back to the raw item: ugly beats invisible on a list you read before an action with no undo.
+- **Renaming an agent tells you, at that moment, when you are taking a system default's name** — and it names **the name you just typed**, not the agent's old one. (It used to be handed the original name in both directions: it type-checked, and it was confidently wrong.)
+- **The agent CLI rows seeded for you are private now.** They used to be attached to your first group with read-only sharing, which put **nine rows per teammate** into everyone else's "Shared with you" — each adoptable into another group-visible copy that landed there again.
+
+### Bug Fixes
+
+- **Renaming a CLI no longer silently drops your account default.** The preference stored the name; after a rename the backend found neither an id nor a name, and the default was gone. It stores the row now.
+- **An agent whose CLI no longer exists says so on its detail page.** The signal existed, and was documented as the thing behind that notice, but **`GET /agents/:id` never carried it** — and being `omitempty`, a missing value looked exactly like "this agent has no CLI set", so nothing was ever red.
+- **A renamed agent no longer keeps privileges its name had given up.** The root-orchestrator roster and the Alfred status card read `builtin_key`, which did not move when you renamed the row. They read the name now.
+
+### Upgrade Notes (self-hosted)
+
+⚠️ **Back up your database before upgrading.** This release carries **four new database migrations** (`00079`–`00082`, sqlite and postgres). They are applied automatically at startup and move `goose_db_version` **from 78 to 82**. **Three of them rewrite existing data:**
+
+1. **`00079_privatize_seeded_agent_clis`** — clears `group_id` and `sharing` on `agent_clis` rows whose name is one of nine known slugs (`claude`/`codex`/`aider`/`opencode`/`gemini`/`copilot`/`qwen`/`kimi`/`pi`) and which are not the legacy system catalog. **Visible consequence: those rows disappear from other people's "Shared with you".** The prior values are kept in `agent_cli_privatize_backup_00079` and `Down` restores them exactly.
+2. **`00080_wake_payload_agent_id`** — rewrites the agent **name** in `wake_agent_session` scheduled-job payloads to the agent's **user id**, so a rename stops silently breaking the job. The prior payload is kept in `wake_payload_agent_backup_00080` and `Down` restores it. **Jobs naming an agent already renamed or deleted are deliberately left alone** — there is nothing to resolve them to, and guessing would turn a job that fails loudly into one that wakes the wrong agent.
+3. **`00081_drop_agent_cli_builtin`** — deletes the legacy `owner_id='system'` catalog rows and the `agent_clis.builtin` column. **It is not a plain `DROP`:** it first repoints any `agent_configs` still pointing at a system row onto that owner's own row of the same name, **then** deletes. References with no replacement are **left dangling on purpose** and render as "the CLI this agent was set to run no longer exists" on the agent page — something you can see and act on, where clearing it would silently rewrite a choice you made.
+4. **`00082_drop_agent_builtin_key`** — drops `agent_configs.builtin_key`. Whether a row is a copy of a system default is decided by its **name** now, and renaming is how you opt out.
+
+🔴 **Rolling back is not symmetric — which two you can undo, and which two you cannot:**
+
+| Migration | Reversible? |
+|---|---|
+| `00079` privatize | ✅ backup table `agent_cli_privatize_backup_00079`; `Down` restores the exact prior values |
+| `00080` wake payload | ✅ backup table `wake_payload_agent_backup_00080`; `Down` restores it |
+| `00081` repoint | 🔴 in-place `UPDATE`; `Down` **does not restore which config pointed where** |
+| `00082` drop builtin_key | 🔴 `Down` restores the column's shape, not its values; recoverable from the name only if the row was never renamed |
+
+- `00081`'s `Down` restores the shape and the system rows' **content**, but **not which `agent_config` pointed where** — the repoint was an in-place `UPDATE`, and afterwards that fact exists nowhere.
+- `00082`'s `Down` adds the column back **empty**. A wrong `builtin_key` is worse than none, because the code that read it treated it as authoritative.
+
+⇒ **So the snapshot you take before upgrading is not insurance, it is the only way back.**
+
+**No new environment variables.**
+
+⚠️ **Upgrade the CLI yourself: `npm i -g @oatnil/ud`.** Nothing upgrades it for you.
+
+---
+
 ## v0.143.0 (2026-08-29)
 
 ### New Features
