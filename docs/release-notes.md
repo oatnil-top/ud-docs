@@ -22,19 +22,25 @@ sidebar_position: 1
 - **The daemon-offline notice tells you where to go.** It links to the Machines page, is written in the triggering user's language, and no longer implies that a machine which was never registered will reconnect just by launching the app.
 - **Deleting the legacy built-in CLI rows no longer empties the install list or the desktop probe** — both now select rows by what they can do rather than by the deprecated `builtin` flag.
 
-### Not in this release: the desktop app
-
-**The desktop app is not published in this release — it stays at v0.142.0.** This work is in the code but you cannot get it yet:
+### Desktop app
 
 - Find-in-page in every window the app opens (task popups, editors, the sticker, the floating viewer), not only the main window.
 - Three find-bar fixes: typing returns a result instead of leaving a masked box, Enter walks to the next match instead of circling match 1 forever, and shrinking the window no longer clips the close button off the end.
 - The session status word focuses its window again, and when it cannot, it names the reason instead of doing nothing.
 
-These ship in a later release.
-
 ### Upgrade Notes (self-hosted)
 
-**No new environment variables. No new database migrations.**
+⚠️ **Back up your database before upgrading.** This release carries **one new database migration** (`00078_agent_cli_extra_options`, sqlite and postgres). It is applied automatically at startup and moves `goose_db_version` **from 77 to 78**. It does three things to `agent_clis`:
+
+1. adds an `extra_options` column — additive, defaults to empty;
+2. **renames any rows that would collide** under the new uniqueness rule, by appending the first 8 characters of the row id to the name. **This step is not reversible** — nothing anywhere records the original name;
+3. replaces the unique index `idx_agent_clis_group_name` with `idx_agent_clis_owner_name`, so an agent CLI name is now unique per owner rather than per group.
+
+Step 2 only touches rows where two `agent_clis` rows share the same `(owner_id, name)`. On both instances we upgraded it renamed **0 rows** — but that is a fact about our data, not a promise about yours, which is why the backup comes first. Rolling back is not symmetric either: `goose down` recreates the old index **non-unique**, does not restore renamed names, and **drops the `extra_options` column** together with anything stored in it.
+
+**No new environment variables.**
+
+> *Corrected on 2026-08-29: this section first shipped saying "No new environment variables. No new database migrations." The migration half was wrong — `00078` does run. If you already upgraded without a backup, point 2 above is the part to check.*
 
 ⚠️ **Upgrade the CLI yourself: `npm i -g @oatnil/ud`.** Nothing upgrades it for you, and `ud config onboarding` only exists from this version — an older CLI answers with an unknown-command error.
 
