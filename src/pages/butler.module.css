@@ -26,13 +26,15 @@
 
   background: var(--paper);
   color: var(--ink);
-  /* Inter prepended, ud task 8496fc04. This page (and /alfred, /contact) sets
+  /* Jost prepended, ud task 8496fc04. This page (and /alfred, /contact) sets
      its own font-family and therefore does NOT read --ifm-font-family-base —
      changing the site's base face in custom.css alone would have left exactly
-     these three pages on the old stack. The tail is the previous value kept
-     VERBATIM: Inter has no CJK glyph, so Chinese still lands on PingFang SC /
-     Hiragino / YaHei exactly as before. Master 2026-08-29: 「中文那边字体不管」. */
-  font-family: 'Inter', 'Helvetica Neue', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Segoe UI', system-ui, sans-serif;
+     these three pages on the old stack, and they would then have been the only
+     place on the site still rendering a second Latin text face. The tail is the
+     previous value kept VERBATIM: Jost has no CJK glyph, so Chinese still lands
+     on PingFang SC / Hiragino / YaHei exactly as before. Master 2026-08-29:
+     「中文那边字体不管」「不用换中文」. */
+  font-family: 'Jost', 'Helvetica Neue', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Segoe UI', system-ui, sans-serif;
   font-weight: 400;
   line-height: 1.7;
 }
