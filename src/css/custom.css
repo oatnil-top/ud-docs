@@ -17,6 +17,34 @@
    brand type and no glyph of it is in this repo. */
 @import url('https://fonts.googleapis.com/css2?family=Jost:wght@200;300&display=swap');
 
+/* Text face — Inter, pairing B, master 2026-08-29 「开始实现」 (ud task
+   8496fc04). Until now the site named NO body face at all and rode Infima's
+   default system-ui stack, which means the body copy of all 248 doc pages
+   looked like whatever the reader's machine happened to have. This is the
+   line that ends that.
+
+   Why Inter and not the display face: Jost is a geometric DISPLAY type. Its
+   x-height is 0.460 em against Inter's 0.546 (read from each font's OS/2
+   sxHeight / head.unitsPerEm) — at the same font-size Jost's lowercase is
+   actually the shortest of every face considered, which is the wrong trade
+   for long-form documentation. Jost keeps the headline; Inter carries the
+   text. Both are SIL OFL 1.1 and self-hostable.
+
+   The variable axis (wght@100..900) is pulled as ONE file per unicode subset
+   rather than a list of static cuts, because this repo already uses fourteen
+   distinct weights between 200 and 800.
+
+   ⚠️ LATIN ONLY, AND THAT IS THE DECISION, NOT AN OVERSIGHT. Master, verbatim
+   2026-08-29: 「中文那边字体不管,就这样就行」. So no CJK webfont is loaded —
+   not Noto Sans SC, not anything. Inter carries no CJK glyph, so Chinese falls
+   through to the families after it, and the stack below is Infima's default
+   list kept VERBATIM for exactly that reason: Chinese resolves through the
+   identical sequence it resolves through today, so Chinese body copy renders
+   byte-for-byte as it does now (PingFang SC on macOS, and whatever the reader
+   has elsewhere — still not something we control). The cost of that is known
+   and accepted: the "change every font" only lands on the Latin half. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
 /* Technical Dot Pattern Background */
 body {
   background-image: radial-gradient(#E5E5E5 1px, transparent 1px);
@@ -39,6 +67,18 @@ body {
   --ifm-color-primary-lightest: #595959;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.05);
+
+  /* Inter in front of Infima's default stack, which is reproduced below
+     VERBATIM — the tail is load-bearing, not decoration: it is the sequence
+     Chinese falls through today, and keeping it identical is what makes the
+     Chinese half render unchanged. See the @import comment above.
+     This also reaches headings, since Infima defines
+     --ifm-heading-font-family: var(--ifm-font-family-base); only the h1 rules
+     further down override it back to the Jost display face. */
+  --ifm-font-family-base: 'Inter', system-ui, -apple-system, Segoe UI, Roboto,
+    Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI',
+    Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol';
 
   /* Thin borders and minimal styling */
   --ifm-global-border-width: 1px;
