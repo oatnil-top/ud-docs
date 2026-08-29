@@ -74,6 +74,24 @@ const config: Config = {
   ],
 
   themeConfig: {
+    /*
+     * Dark mode was never something this site opted into — with no colorMode
+     * block at all it ran on Docusaurus' defaults, which means the toggle has
+     * been in the navbar and a dark palette has been shipping all along, only
+     * half-styled. So we ADD to that machinery rather than take it over: the
+     * switch stays `[data-theme='dark']`, our colours are Infima variables,
+     * and nothing here swizzles ColorModeProvider (whose SSR anti-flash
+     * script is exactly the part you do not want to re-implement).
+     *
+     * respectPrefersColorScheme was false, so a visitor whose OS is in dark
+     * mode still landed on the light site. Turning it true is deliberately
+     * the LAST change of this batch (ud task 8496fc04): from this line
+     * onwards the dark palette is what those visitors see first, so it had to
+     * be finished before the switch was thrown, not after.
+     */
+    colorMode: {
+      respectPrefersColorScheme: true,
+    },
     navbar: {
       title: 'UnDercontrol',
       logo: {
