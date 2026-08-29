@@ -62,7 +62,6 @@
   position: relative;
   margin: 32px 0 46px;
 }
-.glyphDefs { position: absolute; width: 0; height: 0; overflow: hidden; }
 .ic { width: 22px; height: 22px; display: block; color: var(--ink); flex: none; }
 
 .hubSide { display: grid; min-width: 0; }

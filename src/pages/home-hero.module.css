@@ -1,0 +1,297 @@
+/**
+ * Homepage first screen — the "完全模仿" hero (ud task d9f0567c, master
+ * 2026-08-29: 「首屏完全模仿」, then 「开始按照这个做吧」).
+ *
+ * Layout, grid, whitespace rhythm, size ramp, colour RELATIONSHIPS, button
+ * shape and icon placement, and the tile row's arrangement and size are copied
+ * from the reference screen. Brand assets are not: the wordmark, the mark and
+ * every tile glyph are ours. See the clause table on the task.
+ *
+ * EVERY SIZE IS A SHARE OF THE HERO'S OWN WIDTH (cqw), never a pixel and never
+ * a vw. That is the whole point of the measurement: the ratios were read off a
+ * screenshot whose device-pixel-ratio was never verified, so ratios are the
+ * only part of that reading that survives being wrong — an absolute pixel value
+ * would be off by exactly the DPR factor. Copy the ratio column; do not
+ * re-derive it, and do not "translate" one of these into px.
+ *
+ * The container is capped at --shot below rather than being the raw viewport:
+ * beyond that width the copied ratios stop being a design and start being a
+ * zoom. Under it, everything scales together and the screen keeps the
+ * proportions it was drawn with.
+ *
+ * The hero paints its own near-black world and does NOT follow the site theme
+ * — it is the same screen in light and dark mode, which is what "copy the
+ * colour relationships" means here.
+ */
+
+.hero {
+  /* Ratios are relative to this box, so it must be the container. */
+  container-type: inline-size;
+  width: 100%;
+  max-width: var(--shot);
+  margin: 0 auto;
+
+  --shot: 1440px;
+  --d-bg: #141413;
+  --d-hair: #2b2a27;
+  --d-cream: #f0ede4;
+  --d-gray: #8d8b84;
+  --d-faint: #78756e;
+  --d-tile: #1c1b19;
+  --d-tileline: #312f2b;
+  --d-tilelabel: #c7c4bc;
+  --d-btn2: #33322e;
+
+  background: var(--d-bg);
+  color: var(--d-cream);
+}
+
+/* The dark band itself is full-bleed; only the content inside is capped. */
+.heroBleed {
+  background: #141413;
+}
+
+/* The strip under the navbar. On the reference page it is a parent-brand →
+   product breadcrumb; we have no parent brand, so the shape is copied and the
+   job is demoted to one in-page jump. Delete it and nothing else on this screen
+   moves. */
+.strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 3.2cqw;
+  height: 3.8cqw;
+  border-bottom: 1px solid var(--d-hair);
+  font-size: 1.18cqw;
+  color: #b6b3ab;
+}
+.stripJump {
+  display: flex;
+  align-items: center;
+  gap: 0.4cqw;
+  color: #b6b3ab;
+  text-decoration: none;
+}
+.stripJump:hover {
+  color: var(--d-cream);
+  text-decoration: none;
+}
+.stripJump svg {
+  width: 0.9cqw;
+  height: 0.9cqw;
+}
+
+.body {
+  text-align: center;
+  padding: 8.4cqw 4cqw 0;
+}
+
+/* Jost ExtraLight 200 — candidate C, chosen by master 2026-08-29 out of three
+   deliberately different readings of 「细线」. SIL OFL 1.1, so the same file the
+   draft rendered is the file production loads. The reference page's own
+   headline face is licensed brand type and has never been in this file.
+   No CJK face is loaded for it on purpose: under the chosen layout the
+   headline is the Latin product name in BOTH locales, so a Chinese glyph never
+   reaches it. If the slogan is ever promoted into the headline, this line
+   needs Noto Sans SC 200 added — and only then. */
+.h1 {
+  font-family: 'Jost', 'PingFang SC', 'Helvetica Neue', sans-serif;
+  font-weight: 200;
+  font-size: 7.9cqw;
+  line-height: 1.04;
+  letter-spacing: -0.006em;
+  color: var(--d-cream);
+  margin: 0;
+}
+
+.sub {
+  font-size: 1.92cqw;
+  line-height: 1.42;
+  color: var(--d-gray);
+  margin: 2.2cqw auto 0;
+  max-width: 57cqw;
+  font-weight: 400;
+}
+
+.ctas {
+  display: flex;
+  justify-content: center;
+  gap: 0.9cqw;
+  margin: 3.6cqw 0 0;
+  flex-wrap: wrap;
+}
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7cqw;
+  border-radius: 0.5cqw;
+  padding: 1cqw 1.7cqw;
+  font-size: 1.32cqw;
+  font-weight: 500;
+  text-decoration: none;
+}
+.cta:hover {
+  text-decoration: none;
+}
+.ctaPrimary {
+  composes: cta;
+  background: var(--d-cream);
+  color: #141413;
+}
+.ctaPrimary:hover {
+  color: #141413;
+}
+/* The reference puts an Apple mark on this button. Ours is a drawn download
+   arrow: Apple forbids third parties from using the Apple logo without an
+   express written trademark licence, and forbids modified variants too, so
+   there is no version of that button we may ship. */
+.ctaSecondary {
+  composes: cta;
+  background: var(--d-btn2);
+  color: var(--d-cream);
+}
+.ctaSecondary:hover {
+  color: var(--d-cream);
+}
+.cta svg {
+  width: 1.45cqw;
+  height: 1.45cqw;
+  flex: none;
+}
+
+.fine {
+  font-size: 1.18cqw;
+  color: var(--d-faint);
+  margin: 1.6cqw 0 0;
+}
+
+/* Seven tiles, not eight. The reference has eight; ours come from the platform
+   census on the download page (four surfaces you install onto, three tools that
+   reach in) and there is no eighth. Splitting "Chat apps" into Telegram and
+   Discord would reach eight and both are real — but that regrouping belongs to
+   the download page's census, and doing it here would be padding to a round
+   number. Seven centres fine on this grid. */
+.waysLabel {
+  font-size: 1.22cqw;
+  color: var(--d-gray);
+  margin: 6.4cqw 0 0;
+  text-align: center;
+}
+.tiles {
+  display: flex;
+  justify-content: center;
+  gap: 0.8cqw;
+  margin: 1.5cqw 0 0;
+  flex-wrap: wrap;
+  padding-bottom: 6.2cqw;
+  list-style: none;
+}
+.tile {
+  width: 6.4cqw;
+  height: 6.5cqw;
+  border-radius: 0.6cqw;
+  background: var(--d-tile);
+  border: 1px solid var(--d-tileline);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6cqw;
+  color: var(--d-tilelabel);
+  text-decoration: none;
+}
+.tile:hover {
+  border-color: #4a4741;
+  color: var(--d-cream);
+  text-decoration: none;
+}
+.tileIcon {
+  width: 1.85cqw;
+  height: 1.85cqw;
+  color: var(--d-cream);
+  opacity: 0.92;
+}
+.tileLabel {
+  font-size: 0.95cqw;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* The agent-onboarding pill. The reference's first screen has no counterpart,
+   so copying the screen means this no longer fits above the fold — it now sits
+   immediately below it. That is the price of "完全模仿" and it is a real loss:
+   it went from first-glance to one scroll away. */
+.agentRow {
+  border-top: 1px solid #262626;
+  padding: 34px 24px 40px;
+  text-align: center;
+}
+.agentLabel {
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8a8a8a;
+  margin: 0 0 12px;
+}
+
+/* Below ~700px the copied ratios stop being readable — a 7.9% headline on a
+   phone is 30px. This breakpoint is an ADDITION, not part of the reference
+   reading: the draft only ever covered the desktop screen. It keeps the same
+   elements and the same order, and only stops shrinking them. */
+@container (max-width: 700px) {
+  .strip {
+    display: none;
+  }
+  .body {
+    padding: 48px 20px 0;
+  }
+  .h1 {
+    font-size: 3rem;
+  }
+  .sub {
+    font-size: 1rem;
+    max-width: 40ch;
+    margin-top: 16px;
+  }
+  .ctas {
+    margin-top: 26px;
+    gap: 10px;
+  }
+  .cta {
+    font-size: 0.9rem;
+    padding: 11px 18px;
+    border-radius: 6px;
+    gap: 8px;
+  }
+  .cta svg {
+    width: 16px;
+    height: 16px;
+  }
+  .fine {
+    font-size: 0.78rem;
+    margin-top: 14px;
+  }
+  .waysLabel {
+    font-size: 0.8rem;
+    margin-top: 40px;
+  }
+  .tiles {
+    gap: 8px;
+    margin-top: 14px;
+    padding-bottom: 40px;
+  }
+  .tile {
+    width: 84px;
+    height: 84px;
+    border-radius: 8px;
+    gap: 8px;
+  }
+  .tileIcon {
+    width: 22px;
+    height: 22px;
+  }
+  .tileLabel {
+    font-size: 0.68rem;
+  }
+}

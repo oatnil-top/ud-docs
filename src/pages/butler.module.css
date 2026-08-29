@@ -99,7 +99,7 @@
   border-color: var(--ink);
 }
 
-/* ---------- Hero (homepage carousel + Alfred page) ---------- */
+/* ---------- Showcase (homepage carousel) ---------- */
 .hero {
   display: grid;
   grid-template-columns: 1.02fr 0.98fr;
@@ -108,6 +108,9 @@
   /* longhand — see .wrap */
   padding-top: 56px;
   padding-bottom: 40px;
+  /* It is the first screen's "Explore here" target now, and the navbar is
+     sticky — without this the section lands underneath it. */
+  scroll-margin-top: 84px;
 }
 .hero h1 {
   font-size: clamp(2.5rem, 5.4vw, 4.1rem);
@@ -215,9 +218,6 @@
 }
 
 /* ---------- Agent onboarding pill ---------- */
-.agentSetupRow {
-  margin-top: 18px;
-}
 .agentSetupButton {
   display: inline-flex;
   align-items: center;

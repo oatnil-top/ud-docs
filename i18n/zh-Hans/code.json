@@ -2230,5 +2230,47 @@
   "theme.tags.tagsPageTitle": {
     "description": "The title of the tag list page",
     "message": "标签"
+  },
+  "home5.hero.sub": {
+    "message": "把一切放回你手里。任务、笔记、文件和钱，放在一个你自己拥有的地方——从 Telegram、桌面端、网页、手机或终端里用它。"
+  },
+  "home5.hero.ctaDownload": {
+    "message": "下载 macOS 版"
+  },
+  "home5.hero.ctaDocs": {
+    "message": "阅读文档"
+  },
+  "home5.hero.fine": {
+    "message": "支持 macOS、Windows 和 Linux。"
+  },
+  "home5.hero.ways": {
+    "message": "其它使用 UnDercontrol 的方式："
+  },
+  "home5.strip.explore": {
+    "message": "往下看"
+  },
+  "home5.agent.label": {
+    "message": "带了 AI Agent？把这句粘给它"
+  },
+  "home5.tile.desktop": {
+    "message": "桌面端"
+  },
+  "home5.tile.web": {
+    "message": "网页版"
+  },
+  "home5.tile.ios": {
+    "message": "iOS"
+  },
+  "home5.tile.android": {
+    "message": "Android"
+  },
+  "home5.tile.chat": {
+    "message": "聊天软件"
+  },
+  "home5.tile.terminal": {
+    "message": "命令行"
+  },
+  "home5.tile.extension": {
+    "message": "浏览器扩展"
   }
 }

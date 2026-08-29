@@ -43,6 +43,8 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import {Check, ChevronRight, Copy, Download as DownloadIcon, ExternalLink} from 'lucide-react';
 
+import {PlatformGlyph, PlatformGlyphDefs} from '@site/src/components/PlatformGlyphs';
+
 import versionConfig from '../../version.json';
 import styles from './download.module.css';
 
@@ -123,7 +125,7 @@ const PLATFORMS: PlatformDl[] = [
 // artifact to describe here.
 
 interface HeroPlatform {
-  /** id of a <g> in GlyphDefs. */
+  /** id of a <g> in PlatformGlyphDefs (src/components/PlatformGlyphs). */
   glyph: string;
   name: L;
   meta: L;
@@ -178,67 +180,6 @@ const HUB_REACH_IN: HeroPlatform[] = [
   },
 ];
 
-/**
- * Platform glyphs — one 24 grid, 1.5 stroke, square caps, no fills.
- *
- * Deliberately geometric instead of official logos: we have no licence to ship
- * Apple/Google/Chrome marks, and a single drawn set also makes seven clients
- * read as one product rather than seven integrations. iOS and Android share one
- * phone body and differ only in what sits at the bottom of the screen — one home
- * bar vs three nav marks — which is a generic UI fact, not a vendor mark.
- *
- * Inline + currentColor: no icon dependency, and both themes come free.
- */
-function GlyphDefs() {
-  return (
-    <svg className={styles.glyphDefs} aria-hidden="true">
-      <defs>
-        <g id="ud-g-desktop">
-          <rect x="2.75" y="4.75" width="18.5" height="12.5" />
-          <path d="M12 17.25V20M8.5 20h7" />
-        </g>
-        <g id="ud-g-web">
-          <rect x="2.75" y="3.75" width="18.5" height="16.5" />
-          <path d="M2.75 8.25h18.5M5.75 6h1M8.75 6h1" />
-        </g>
-        <g id="ud-g-ios">
-          <rect x="6.75" y="2.75" width="10.5" height="18.5" />
-          <path d="M10 18.75h4" />
-        </g>
-        <g id="ud-g-android">
-          <rect x="6.75" y="2.75" width="10.5" height="18.5" />
-          <path d="M9 18.75h1M11.5 18.75h1M14 18.75h1" />
-        </g>
-        <g id="ud-g-chat">
-          <rect x="2.75" y="4.75" width="18.5" height="11.5" />
-          <path d="M7.5 16.25v4.5l4.5-4.5" />
-        </g>
-        <g id="ud-g-cli">
-          <rect x="2.75" y="4.75" width="18.5" height="14.5" />
-          <path d="M6.5 9.5l3 2.5-3 2.5M12.5 14.5h5" />
-        </g>
-        <g id="ud-g-ext">
-          <path d="M3 4.75h13.5v4.5H21v5.5h-4.5v4.5H3z" />
-        </g>
-      </defs>
-    </svg>
-  );
-}
-
-function Glyph({id}: {id: string}) {
-  return (
-    <svg
-      className={styles.ic}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={1.5}
-      strokeLinecap="square"
-      aria-hidden="true">
-      <use href={`#${id}`} />
-    </svg>
-  );
-}
 
 function CopyBtn({text}: {text: string}) {
   const t = useT();
@@ -294,7 +235,7 @@ function HubNode({p}: {p: HeroPlatform}) {
   const t = useT();
   const body = (
     <>
-      <Glyph id={p.glyph} />
+      <PlatformGlyph id={p.glyph} className={styles.ic} />
       <span className={styles.nodeTxt}>
         <span className={styles.nodeName}>{t(p.name)}</span>
         <span className={styles.nodeMeta}>{t(p.meta)}</span>
@@ -613,7 +554,7 @@ export default function DownloadPage(): ReactNode {
         zh: '下载 macOS、Windows、Linux 桌面版，通过 npm 安装 CLI，添加浏览器扩展，或用 all-in-one Docker 镜像私有部署 UnDercontrol。',
       })}>
       <main className={styles.page}>
-        <GlyphDefs />
+        <PlatformGlyphDefs />
         <Hero />
         <DesktopSection />
         <CliSection />

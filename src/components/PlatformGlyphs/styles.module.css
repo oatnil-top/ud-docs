@@ -1,0 +1,8 @@
+/* The <defs> carrier holds no visible geometry — it only has to stay in the
+   document so `<use href="#ud-g-…">` resolves. */
+.defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}

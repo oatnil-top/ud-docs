@@ -8,23 +8,33 @@ import KanbanDemo from '@site/src/components/HeroDemos/KanbanDemo';
 import GraphDemo from '@site/src/components/HeroDemos/GraphDemo';
 import AgentsDemo from '@site/src/components/HeroDemos/AgentsDemo';
 
+import {PlatformGlyph, PlatformGlyphDefs} from '@site/src/components/PlatformGlyphs';
+
 import styles from './butler.module.css';
+import hero from './home-hero.module.css';
 
 /**
- * Homepage, design v7.1 (task b00f9e8f, boss feedback 2026-07-26): the hero
- * rotates through four product angles — Alfred chat (lead) → boards →
- * knowledge graph → agent orchestration (Finance dropped per feedback) —
- * headline and stage in sync, 5s autoplay, hover pauses, tabs jump directly,
- * no autoplay under prefers-reduced-motion. The stage no longer shows
- * screenshots: each angle is a live INTERACTIVE simulation from
- * src/components/HeroDemos/ (chat playback, drag-drop kanban, draggable
- * graph, clickable agent roster), all sharing one fixed stage frame so every
- * slide has an identical footprint. Below: the "start with Alfred" funnel to
- * /alfred, the engine row, the architecture diagram, and the CTA. Structure
- * and copy were previously mirrored on the Vite app's /home — that mirror
- * still shows v7 screenshots; align it when it is next touched. Get-started
- * CTAs point at /download (boss decision 2026-07-26): everything rests on a
- * locally installed daemon, so the download IS the first step.
+ * Homepage, design v8 (ud task d9f0567c, master 2026-08-29).
+ *
+ * THE FIRST SCREEN IS A DELIBERATE COPY of the reference product page's hero —
+ * master's words were 「首屏完全模仿」. Copied: layout, grid, whitespace
+ * rhythm, size ramp, colour relationships, button shape and icon placement,
+ * and the tile row's arrangement and size (every ratio lives in
+ * home-hero.module.css). NOT copied, and never to be: the reference's mark,
+ * its wordmark, its headline typeface, or anything that would let a visitor
+ * think this is their page.
+ *
+ * Everything BELOW the first screen still follows the older rule — learn the
+ * structure and rhythm, do not copy pixels — so the four-angle showcase, the
+ * Alfred funnel, the engine row, the architecture diagram and the CTA are the
+ * v7.1 sections, unchanged apart from the showcase losing its headline role.
+ *
+ * Two consequences worth knowing before editing:
+ *  - The biggest line on the ZH homepage is now a Latin product name. That is
+ *    a known cost of copying the screen, not a missing translation.
+ *  - The agent-onboarding pill no longer sits above the fold. The reference's
+ *    first screen has no counterpart to it, so copying the screen left it no
+ *    room; it is the first thing under the fold instead.
  */
 
 /**
@@ -110,7 +120,171 @@ function AgentSetupButton() {
   );
 }
 
-// --- Hero: five rotating angles, copy and stage in sync ---
+// --- First screen: the copied hero ---
+
+/**
+ * The seven access surfaces, in the order the download page's census lists
+ * them: four you install the app onto, then three that reach into a workspace
+ * that is already there. Labels are short here — the census page carries the
+ * detail line, this row carries only "you can use it from here".
+ *
+ * Every tile links somewhere real. A tile that promises a surface and lands on
+ * nothing is worse than one tile fewer, so this list may only grow by adding a
+ * surface that has been clicked through, not by adding a name.
+ */
+type Tile = {key: string; glyph: string; href: string; label: ReactNode};
+
+function useTiles(): Tile[] {
+  return [
+    {
+      key: 'desktop',
+      glyph: 'ud-g-desktop',
+      href: '/download#desktop',
+      label: <Translate id="home5.tile.desktop">Desktop</Translate>,
+    },
+    {key: 'web', glyph: 'ud-g-web', href: '/download#web', label: <Translate id="home5.tile.web">Web</Translate>},
+    {key: 'ios', glyph: 'ud-g-ios', href: '/download#mobile', label: <Translate id="home5.tile.ios">iOS</Translate>},
+    {
+      key: 'android',
+      glyph: 'ud-g-android',
+      href: '/download#mobile',
+      label: <Translate id="home5.tile.android">Android</Translate>,
+    },
+    {key: 'chat', glyph: 'ud-g-chat', href: '/alfred', label: <Translate id="home5.tile.chat">Chat apps</Translate>},
+    {
+      key: 'terminal',
+      glyph: 'ud-g-cli',
+      href: '/download#cli',
+      label: <Translate id="home5.tile.terminal">Terminal</Translate>,
+    },
+    {
+      key: 'extension',
+      glyph: 'ud-g-ext',
+      href: '/download#extension',
+      label: <Translate id="home5.tile.extension">Extension</Translate>,
+    },
+  ];
+}
+
+/** The chevron the strip and the reference's menus both use. */
+function Chevron() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.4} aria-hidden="true">
+      <path d="M6 9l6 6 6-6" />
+    </svg>
+  );
+}
+
+function FirstScreen() {
+  const tiles = useTiles();
+  return (
+    <div className={hero.heroBleed}>
+      <PlatformGlyphDefs />
+      <header className={hero.hero}>
+        <div className={hero.strip}>
+          <span>UnDercontrol</span>
+          <a className={hero.stripJump} href="#explore">
+            <Translate id="home5.strip.explore">Explore here</Translate>
+            <Chevron />
+          </a>
+        </div>
+
+        <div className={hero.body}>
+          {/*
+            The headline is the product name in BOTH locales — the chosen layout
+            (slogan as the subtitle, master's default 2026-08-29) keeps the
+            reference's structure, and the reference's headline is its product
+            name. The ZH cost is real and known: the biggest line a Chinese
+            reader sees is a Latin word, and the Chinese claim sits one line
+            below it. Promoting the slogan into the headline is the one change
+            that buys that back, and it is a structural change, not a copy edit.
+          */}
+          <h1 className={hero.h1}>UnDercontrol</h1>
+
+          {/*
+            EN and ZH carry different sentences here on purpose. ZH gets the
+            slogan master approved verbatim (「把一切放回你手里」) plus the
+            entry list, in the reference's two-part shape. EN keeps the
+            product's existing approved subtitle — the site tagline in
+            docusaurus.config.ts — because no English wording for the slogan has
+            been approved, and an unapproved outward-facing line must not ship.
+          */}
+          <p className={hero.sub}>
+            <Translate id="home5.hero.sub">
+              One workspace for tasks, knowledge, and AI agents — private, portable, yours.
+            </Translate>
+          </p>
+
+          <div className={hero.ctas}>
+            <Link className={hero.ctaPrimary} to="/download">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={1.7}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true">
+                <path d="M12 3v12M7.5 10.5L12 15l4.5-4.5M4 19.5h16" />
+              </svg>
+              <Translate id="home5.hero.ctaDownload">Download for macOS</Translate>
+            </Link>
+            <Link className={hero.ctaSecondary} to="/docs/intro">
+              <Translate id="home5.hero.ctaDocs">Read the docs</Translate>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={1.7}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true">
+                <path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6" />
+              </svg>
+            </Link>
+          </div>
+          {/* Order follows our own download page, not the reference's. */}
+          <p className={hero.fine}>
+            <Translate id="home5.hero.fine">Available for macOS, Windows, and Linux.</Translate>
+          </p>
+
+          <p className={hero.waysLabel}>
+            <Translate id="home5.hero.ways">Other ways to use UnDercontrol:</Translate>
+          </p>
+          <div className={hero.tiles}>
+            {tiles.map((t) => (
+              <Link key={t.key} className={hero.tile} to={t.href}>
+                <PlatformGlyph id={t.glyph} className={hero.tileIcon} />
+                <span className={hero.tileLabel}>{t.label}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </header>
+    </div>
+  );
+}
+
+/**
+ * The agent pill, first thing below the fold.
+ *
+ * The pill itself stays compact (boss feedback 2026-07-26, task b00f9e8f: never
+ * print the Fetch command, only a copy glyph). The redesign draft drew it with
+ * the command printed; that instruction was never withdrawn, so the position
+ * moved and the shape did not.
+ */
+function AgentSetupRow() {
+  return (
+    <div className={hero.agentRow}>
+      <p className={hero.agentLabel}>
+        <Translate id="home5.agent.label">Brought an AI agent? Paste this into it</Translate>
+      </p>
+      <AgentSetupButton />
+    </div>
+  );
+}
+
+// --- Showcase: four rotating angles, copy and stage in sync ---
 
 type Slide = {key: string; t1: ReactNode; t2: ReactNode; sub: ReactNode; tab: ReactNode; demo: ReactNode};
 
@@ -175,7 +349,12 @@ function useSlides(): Slide[] {
 
 const ROTATE_MS = 5000;
 
-function HeroSection() {
+/**
+ * The four-angle showcase. It used to BE the hero; the copied first screen took
+ * that job, so it is now the section the first screen's "Explore here" jumps
+ * to. Copy, tabs and demos are unchanged.
+ */
+function ShowcaseSection() {
   const slides = useSlides();
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -192,7 +371,8 @@ function HeroSection() {
   const slide = slides[index];
 
   return (
-    <header
+    <section
+      id="explore"
       className={`${styles.hero} ${styles.wrap}`}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}>
@@ -233,9 +413,6 @@ function HeroSection() {
         <p className={styles.fine}>
           <Translate id="home4.hero.fine">Free for personal use · Self-hostable · Desktop, web, iOS &amp; chat apps · Built since September 2024</Translate>
         </p>
-        <div className={styles.agentSetupRow}>
-          <AgentSetupButton />
-        </div>
       </div>
 
       <div className={styles.stageBox}>
@@ -265,7 +442,7 @@ function HeroSection() {
           ))}
         </div>
       </div>
-    </header>
+    </section>
   );
 }
 
@@ -549,7 +726,9 @@ export default function Home(): ReactNode {
         description: 'The homepage meta description',
       })}>
       <main className={styles.scope}>
-        <HeroSection />
+        <FirstScreen />
+        <AgentSetupRow />
+        <ShowcaseSection />
         <MeetAlfredSection />
         <EngineSection />
         <ArchitectureSection />

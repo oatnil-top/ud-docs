@@ -7,6 +7,16 @@
 /* Import JetBrains Mono for monospace text */
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
 
+/* Display face — Jost ExtraLight/Light, chosen by master 2026-08-29 out of
+   three deliberately different readings of 「优雅一点的细线字体」 (ud task
+   d9f0567c). SIL OFL 1.1, so it can be self-hosted later without a licence
+   question; only 200 and 300 are pulled because only those two are used.
+   Latin only on purpose: every place it applies falls back to the CJK face
+   below it for Chinese, which is exactly today's rendering for those glyphs.
+   Deliberately NOT the reference page's headline face — that one is licensed
+   brand type and no glyph of it is in this repo. */
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@200;300&display=swap');
+
 /* Technical Dot Pattern Background */
 body {
   background-image: radial-gradient(#E5E5E5 1px, transparent 1px);
@@ -144,34 +154,130 @@ a:hover {
   text-decoration: none;
 }
 
-/* Navbar CTA — the one emphasized action in the header. Scoped to the desktop
-   bar so the collapsed mobile menu keeps .menu__link's own layout and the item
-   reads as a plain link like every other one. v7 iron law (task 4bd20228):
-   no filled blocks — the CTA is an ink outline with a heavy label. */
-.navbar__inner .navbar__cta {
-  background-color: transparent;
-  color: #0a0a0a;
-  border: 2px solid #0a0a0a;
-  font-weight: 800;
+/* ---------------------------------------------------------------------------
+   Site-wide dark header (ud task d9f0567c, master 2026-08-29 「首屏完全模仿」).
+
+   The copied first screen contains the header, and the header is theme-rendered
+   and shared by every page — so it is dark everywhere, on all 266 pages, in
+   both colour modes. That was chosen over swizzling a second navbar for the
+   homepage: two navbars means the header changes face when a visitor clicks
+   from the homepage into Docs, which is worse than a white doc page under a
+   dark bar. The cost is real and is exactly that: white doc pages now sit under
+   a dark bar.
+
+   This supersedes the v7 iron law of "no filled blocks in the header" (task
+   4bd20228) for this element only — the reference's header has one filled
+   button, and the filled/outlined pair IS the hierarchy being copied.
+   --------------------------------------------------------------------------- */
+.navbar {
+  --ifm-navbar-background-color: #141413;
+  --ifm-navbar-link-color: #f0ede4;
+  --ifm-navbar-link-hover-color: #ffffff;
+  border-bottom: 1px solid #2b2a27;
+  box-shadow: none;
+}
+
+.navbar__title,
+.navbar__link,
+.navbar__brand,
+.navbar .navbar__toggle,
+.navbar .dropdown > .navbar__link {
+  color: #f0ede4;
+}
+
+/* The wordmark takes the display face too — "全站的标题字族用 C" is about the
+   display type, not only the hero line. */
+.navbar__title {
+  font-family: 'Jost', 'PingFang SC', 'Helvetica Neue', sans-serif;
+  font-weight: 300;
+  letter-spacing: -0.005em;
+  font-size: 1.15rem;
+}
+
+.navbar__link:hover,
+.navbar__item.dropdown:hover .navbar__link {
+  color: #ffffff;
+}
+
+/* The colour-mode toggle is a theme button, not a navbar__link — without this
+   it keeps Infima's near-black ink and disappears into the dark bar. */
+.navbar .clean-btn,
+.navbar .clean-btn svg {
+  color: #f0ede4;
+}
+.navbar .clean-btn:hover {
+  background-color: #23221f;
+}
+
+/* The dropdown panel is a light popover hanging off a dark bar; keep it light
+   so its own items stay readable. */
+.navbar .dropdown__menu {
+  background-color: #ffffff;
+}
+[data-theme='dark'] .navbar .dropdown__menu {
+  background-color: #1c1b19;
+}
+
+/* Right-hand pair, copied in shape: outlined secondary, filled primary. */
+.navbar__inner .navbar__outline {
+  border: 1px solid #55534d;
   border-radius: 4px;
-  padding: 0.3rem 0.75rem;
+  padding: 0.4rem 0.85rem;
+  color: #f0ede4;
+  margin-left: 0.25rem;
+}
+.navbar__inner .navbar__outline:hover {
+  border-color: #f0ede4;
+  color: #ffffff;
+}
+
+.navbar__inner .navbar__cta {
+  background-color: #f0ede4;
+  color: #141413;
+  border: 1px solid #f0ede4;
+  border-radius: 4px;
+  font-weight: 500;
+  padding: 0.4rem 0.85rem;
   margin-left: 0.5rem;
 }
-
 .navbar__inner .navbar__cta:hover {
-  background-color: transparent;
-  color: #0a0a0a;
+  background-color: #ffffff;
+  color: #141413;
 }
 
-[data-theme='dark'] .navbar__inner .navbar__cta {
+/* The collapsed mobile menu drops out of the dark bar, so it inherits it. */
+.navbar-sidebar {
+  background-color: #141413;
+  color: #f0ede4;
+}
+.navbar-sidebar .menu__link,
+.navbar-sidebar .navbar__title,
+.navbar-sidebar .navbar-sidebar__back {
+  color: #f0ede4;
+}
+.navbar-sidebar .menu__link:hover {
+  background-color: #23221f;
+  color: #ffffff;
+}
+/* Inside the sheet the two buttons are list rows like every other item —
+   the filled/outlined pair only means something in the horizontal bar. */
+.navbar-sidebar .navbar__cta,
+.navbar-sidebar .navbar__outline {
   background-color: transparent;
-  color: #f4f4f4;
-  border-color: #f4f4f4;
+  border: 0;
+  color: #f0ede4;
+  padding: inherit;
+  margin-left: 0;
 }
 
-[data-theme='dark'] .navbar__inner .navbar__cta:hover {
-  background-color: transparent;
-  color: #f4f4f4;
+/* Page and doc titles take the display face as well. Chinese titles fall
+   through to PingFang SC exactly as they do today — Jost carries no CJK
+   glyphs, which is why no CJK family is loaded with it. */
+.markdown > h1,
+.markdown header > h1 {
+  font-family: 'Jost', 'PingFang SC', 'Helvetica Neue', sans-serif;
+  font-weight: 300;
+  letter-spacing: -0.012em;
 }
 
 /* Footer — carries the secondary nav the header sheds (Contact, Privacy,
