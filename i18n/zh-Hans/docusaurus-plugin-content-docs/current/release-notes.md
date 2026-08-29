@@ -6,6 +6,20 @@ sidebar_position: 1
 
 # 版本发布记录
 
+<!--
+  DO NOT REWORD THE UPGRADE-NOTES OR DESKTOP-APP LINES OF v0.143.0 WITHOUT READING ud card e011a9aa.
+
+  These exact byte strings are referenced by a release-verification criterion that greps the
+  deployed bundle for them:
+    must be PRESENT : `00078_agent_cli_extra_options`
+                      `Back up your database before upgrading` (en) / `升级前请先备份数据库` (zh)
+    must be ABSENT  : `No new database migrations` (en) / `没有新增数据库迁移` (zh)
+                      `not published in this release` (en) / `这一版不发布` (zh)
+
+  Reword any of them and the check returns zero hits -- which looks exactly like "it passed".
+  The card carries the positive control that distinguishes the two.
+-->
+
 ## v0.143.0 (2026-08-29)
 
 ### 新功能
