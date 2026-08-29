@@ -51,6 +51,42 @@
   background: #141413;
 }
 
+/* ---------------------------------------------------------------------------
+   Dark mode: the first screen stops being a BAND and becomes the page.
+   (ud task 8496fc04, master 2026-08-29 「兼容 light 和 dark 两种配色」.)
+
+   This is arithmetic, not taste. The hero paints its own near-black world and
+   deliberately does not follow the theme, so its fill is #141413 in both
+   modes. Against the grounds it actually sits on:
+
+     light  page #ffffff        vs band #141413 = 18.43:1   — unmistakable
+     dark   homepage #0c0c0c    vs band #141413 =  1.06:1   — invisible
+     dark   doc page #0f0f0f    vs band #141413 =  1.04:1   — invisible
+
+   And no colour value rescues it. Pushing the ground down to #060606 gives
+   1.10:1; lifting the band to #1c1b19 gives 1.11:1. To reach the WCAG 3:1
+   non-text ratio against #141413 the neighbouring surface has to be about
+   #626262 — a mid grey, which in a dark theme is a card, not a page ground.
+   Two near-blacks cannot be separated by luminance; that is the shape of the
+   sRGB curve at the bottom, not a palette choice.
+
+   So in dark mode the question stops being "how is the band distinguished"
+   and becomes "where does the first screen END" — and that is carried by a
+   line. This is not a workaround invented here: the seven tiles inside the
+   band are already read this way today, their fill contributing only 1.07:1
+   against it while their 1px border carries the whole shape.
+
+   The line is #4a4741 (2.11:1 against the dark homepage ground) — the same
+   value the tiles already use on hover. It does NOT meet 3:1 and is not
+   claimed to: 3:1 governs visual information required to identify a UI
+   component, and this is a decorative section boundary. That reading is ours
+   and has not been checked against the spec text — see the task's
+   「没证到什么」 column, which stays.
+   --------------------------------------------------------------------------- */
+[data-theme='dark'] .heroBleed {
+  border-bottom: 1px solid #4a4741;
+}
+
 /* The strip under the navbar. On the reference page it is a parent-brand →
    product breadcrumb; we have no parent brand, so the shape is copied and the
    job is demoted to one in-page jump. Delete it and nothing else on this screen
@@ -225,6 +261,13 @@
   border-top: 1px solid #262626;
   padding: 34px 24px 40px;
   text-align: center;
+}
+
+/* In dark mode the boundary above this row is now drawn by .heroBleed, and
+   two hairlines one pixel apart read as a smudge rather than an edge. One
+   boundary, not two. */
+[data-theme='dark'] .agentRow {
+  border-top-color: transparent;
 }
 .agentLabel {
   font-family: ui-monospace, 'SF Mono', Menlo, monospace;
