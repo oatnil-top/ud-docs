@@ -7,42 +7,50 @@
 /* Import JetBrains Mono for monospace text */
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
 
-/* Display face — Jost ExtraLight/Light, chosen by master 2026-08-29 out of
-   three deliberately different readings of 「优雅一点的细线字体」 (ud task
-   d9f0567c). SIL OFL 1.1, so it can be self-hosted later without a licence
-   question; only 200 and 300 are pulled because only those two are used.
-   Latin only on purpose: every place it applies falls back to the CJK face
-   below it for Chinese, which is exactly today's rendering for those glyphs.
-   Deliberately NOT the reference page's headline face — that one is licensed
-   brand type and no glyph of it is in this repo. */
-@import url('https://fonts.googleapis.com/css2?family=Jost:wght@200;300&display=swap');
+/* Display AND text face — Jost. SIL OFL 1.1, so it can be self-hosted later
+   without a licence question. Two decisions by master a few hours apart:
+     1. 2026-08-29, headline (ud task d9f0567c): 「优雅一点的细线字体」 → Jost
+        200/300, picked out of three deliberately different readings.
+     2. 2026-08-29, body (ud task 8496fc04), verbatim: 「除了标题,其他的字体
+        还是没变」「正文也换成 jost」 → the body copy takes it too.
+   Which is why this is the site's ONE Latin face: display and text are the same
+   family, and no second text face is loaded.
 
-/* Text face — Inter, pairing B, master 2026-08-29 「开始实现」 (ud task
-   8496fc04). Until now the site named NO body face at all and rode Infima's
-   default system-ui stack, which means the body copy of all 248 doc pages
-   looked like whatever the reader's machine happened to have. This is the
-   line that ends that.
+   The cost of (2) is known and accepted, not overlooked. Jost is a geometric
+   DISPLAY type: its x-height is 0.460 em against Inter's 0.546 and SF's 0.508
+   (OS/2 sxHeight / head.unitsPerEm), so at 16px its lowercase is 7.36px — the
+   shortest of every face considered. It is also 11.2% narrower than Inter, so
+   paragraphs reflow shorter. The places that pay most: the 12.8px right-hand
+   table of contents and the breadcrumbs, and `strong` (Jost 700, 2.48px stem)
+   sitting inside a Jost 400 paragraph (1.28px stem) — a 1.9× stem contrast.
+   Measured on macOS @2×, 2026-08-29; the numbers and the before/after
+   screenshots are in ud task 8496fc04 note 6dd862f6. If it reads too light, the
+   first knob is --ifm-font-weight-normal: 450 — the axis below already has it.
 
-   Why Inter and not the display face: Jost is a geometric DISPLAY type. Its
-   x-height is 0.460 em against Inter's 0.546 (read from each font's OS/2
-   sxHeight / head.unitsPerEm) — at the same font-size Jost's lowercase is
-   actually the shortest of every face considered, which is the wrong trade
-   for long-form documentation. Jost keeps the headline; Inter carries the
-   text. Both are SIL OFL 1.1 and self-hostable.
-
-   The variable axis (wght@100..900) is pulled as ONE file per unicode subset
-   rather than a list of static cuts, because this repo already uses fourteen
-   distinct weights between 200 and 800.
+   VARIABLE AXIS (wght@100..900), not a list of static cuts: one file per unicode
+   subset instead of five. A live DOM sweep of /docs/self-deployment/ found the
+   text family in use at three weights — 400 (body, sidebar, TOC), 500 (nav and
+   current items) and 700 (`strong`, plus h2–h6 via Infima's
+   --ifm-heading-font-family). Pinning only the weights visible today would
+   silently snap any future weight to the nearest cut, and a missing 700 would
+   leave the browser synthesising a fake bold for every `strong` on the site.
+   Per-weight element counts: note 6dd862f6.
 
    ⚠️ LATIN ONLY, AND THAT IS THE DECISION, NOT AN OVERSIGHT. Master, verbatim
-   2026-08-29: 「中文那边字体不管,就这样就行」. So no CJK webfont is loaded —
-   not Noto Sans SC, not anything. Inter carries no CJK glyph, so Chinese falls
-   through to the families after it, and the stack below is Infima's default
-   list kept VERBATIM for exactly that reason: Chinese resolves through the
-   identical sequence it resolves through today, so Chinese body copy renders
-   byte-for-byte as it does now (PingFang SC on macOS, and whatever the reader
-   has elsewhere — still not something we control). The cost of that is known
-   and accepted: the "change every font" only lands on the Latin half. */
+   2026-08-29: 「中文那边字体不管」 and 「不用换中文」. So no CJK webfont is
+   loaded — not Noto Sans SC, not anything. Jost carries no CJK glyph, so Chinese
+   falls through to the families after it, and the tail of --ifm-font-family-base
+   below is Infima's default list kept VERBATIM for exactly that reason: Chinese
+   resolves through the identical sequence it resolves through today. Measured,
+   not assumed — the same pure-Chinese span is 114.2421875px wide under the old
+   stack and the new one, digit for digit. "Change every font" only ever lands on
+   the Latin half. */
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@100..900&display=swap');
+
+/* Inter is no longer the site's text face — see above. It is still pulled here
+   for the three .scope pages (/, /alfred, /contact), which set their own
+   font-family in src/pages/butler.module.css and therefore never read
+   --ifm-font-family-base. */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
 /* Technical Dot Pattern Background */
@@ -68,14 +76,18 @@ body {
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.05);
 
-  /* Inter in front of Infima's default stack, which is reproduced below
+  /* Jost in front of Infima's default stack, which is reproduced below
      VERBATIM — the tail is load-bearing, not decoration: it is the sequence
      Chinese falls through today, and keeping it identical is what makes the
-     Chinese half render unchanged. See the @import comment above.
-     This also reaches headings, since Infima defines
-     --ifm-heading-font-family: var(--ifm-font-family-base); only the h1 rules
-     further down override it back to the Jost display face. */
-  --ifm-font-family-base: 'Inter', system-ui, -apple-system, Segoe UI, Roboto,
+     Chinese half render unchanged. ONLY the first name in this list changed;
+     touching the tail would move Chinese, which is master's red line. See the
+     @import comment above.
+     This also reaches h2–h6, since Infima defines
+     --ifm-heading-font-family: var(--ifm-font-family-base) — so they become
+     Jost 700, while the h1 and .navbar__title rules further down hold Jost 300.
+     Same family, 2.8× apart in stem weight, and that is on purpose; the second
+     knob if it reads wrong is --ifm-heading-font-weight. */
+  --ifm-font-family-base: 'Jost', system-ui, -apple-system, Segoe UI, Roboto,
     Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI',
     Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
     'Segoe UI Symbol';
