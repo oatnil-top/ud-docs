@@ -40,6 +40,22 @@ sidebar_position: 1
 - **An agent whose CLI no longer exists says so on its detail page.** The signal existed, and was documented as the thing behind that notice, but **`GET /agents/:id` never carried it** — and being `omitempty`, a missing value looked exactly like "this agent has no CLI set", so nothing was ever red.
 - **A renamed agent no longer keeps privileges its name had given up.** The root-orchestrator roster and the Alfred status card read `builtin_key`, which did not move when you renamed the row. They read the name now.
 
+### Also in this release — the agent CLI roster work
+
+These landed on `main` after v0.143.0 shipped and reach users for the first time here.
+
+- **One agent CLI roster.** A CLI added in settings used to go to browser `localStorage` under an id the backend never saw: launchable by hand in the Electron one-off picker, and invisible everywhere that matters — the agent form's *Runs with*, @mention dispatch, the daemon probe. The UI said "added" and meant "added to this browser". Settings writes the server catalog now, and a migration block turns each leftover local row into a real catalog row in one click — nothing auto-uploaded, nothing silently dropped.
+- **Every CLI picker can add a CLI where you stand.** Pickers are reached from inside an unsaved draft (the agent form, the run dialog, board settings), so "go add one and come back" used to cost you the draft. Each now ends in **+ Add a CLI…**, which opens the catalog dialog in place and selects the row it creates. *Manage CLIs…* keeps the navigation for the rarer edit/delete/adopt trip. The agent form had no way out at all before this.
+- **A way back if you deleted the default CLIs.** `POST /agent-clis/defaults/fill-missing` re-creates the ones you are missing. It **creates and never overwrites**: a slug you already have a row for is skipped, whether that row is pristine, edited or written from scratch — the way to move an existing row back to the default is the diff page, where what you lose is shown first. A slug you renamed away from **is** refilled, and your renamed row is left alone: you opted that one out, and both can coexist.
+- **Your copy can see what it drifted from.** A status line under the template fields, a diff page behind it, and restore. **And the name field is editable at last** — renaming is this design's opt-out switch, and it was unreachable: the agent name input was disabled on edit and the CLI edit dialog had no slug field, while the server allowed both. The diff page shows what you **lose** before the destructive action rather than after, and puts *Copy my version* beside the button, because there is no undo.
+- **You can see what would break before you delete a CLI** — `GET /agent-clis/:id/references` lists what points at it.
+- **The agent page stops naming a CLI that nothing can resolve.** The fallback behaviour is unchanged — a dangling CLI still degrades to your account default and then to the built-in launch command — but a session running on the built-in default used to look identical to one running on the named CLI. And a teammate opening your agent is told what **your** spawn will do; resolving in the reader's scope would invent an outage that does not exist.
+- **A teammate dispatching your agent resolves the CLI in your scope, not theirs.**
+- **The run dialog's default CLI chip stops naming a CLI nobody chose**, and **the "built-in" padlock is gone** — it advertised a restriction that was never real.
+- **Renaming an agent no longer breaks its scheduled wake-ups** (migration `00080` above). A job holding a name stopped resolving the instant it was used, then failed on every tick with nothing on any screen saying why.
+- **Links to runtime configuration point at the runtime page.** Four of six pointed at `/workspaces` for configuration that left it on 2026-08-21, and the sections of `/agents/runtime` are named now so a link can point at one.
+- **`ud` stops asking which rows are built-in** and asks which share a default's name — the same rule the web UI uses.
+
 ### Upgrade Notes (self-hosted)
 
 ⚠️ **Back up your database before upgrading.** This release carries **four new database migrations** (`00079`–`00082`, sqlite and postgres). They are applied automatically at startup and move `goose_db_version` **from 78 to 82**. **Three of them rewrite existing data:**
