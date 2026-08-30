@@ -180,6 +180,14 @@ const config: Config = {
         {
           title: 'Community',
           items: [
+            // The components page, not a repo link: it is the surface that
+            // says which repositories are published and under what license.
+            // The "Chrome Extension" entry above points at the same repo URL
+            // the page's card does, so the two never send a reader elsewhere.
+            {
+              label: 'Open Source Components',
+              to: '/open-source',
+            },
             {
               label: 'Discord',
               href: 'https://discord.gg/vkw2nhxE',

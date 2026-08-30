@@ -2272,5 +2272,101 @@
   },
   "home5.tile.extension": {
     "message": "浏览器扩展"
+  },
+  "oss.hero.eyebrow": {
+    "message": "开源组件"
+  },
+  "oss.hero.title.a": {
+    "message": "三个组件，"
+  },
+  "oss.hero.title.b": {
+    "message": "各自独立发布。"
+  },
+  "oss.hero.lede": {
+    "message": "这些组件从 UnDercontrol 中抽离出来，以开源许可证发布。你可以阅读它们、把它们装进自己的项目、基于它们开发——完全不需要运行 UnDercontrol。"
+  },
+  "oss.hero.pill1": {
+    "message": "个仓库"
+  },
+  "oss.hero.pill2": {
+    "message": "与 AGPL-3.0"
+  },
+  "oss.hero.pill3a": {
+    "message": "无需账号"
+  },
+  "oss.hero.pill3b": {
+    "message": "即可使用"
+  },
+  "oss.boundary.title": {
+    "message": "这里发布了什么，没发布什么"
+  },
+  "oss.boundary.p1": {
+    "message": "下面每个组件都以其卡片上标注的开源许可证发布。该许可证只覆盖那一个仓库，不覆盖其他任何东西。"
+  },
+  "oss.boundary.p2": {
+    "message": "UnDercontrol 本身——后端、Web 应用、桌面应用和 CLI——是专有产品，其源码并不公开。安装本页的任何东西，得到的是那个组件，不是产品。"
+  },
+  "oss.repos.label": {
+    "message": "组件"
+  },
+  "oss.repos.title": {
+    "message": "每一个都能单独用起来。"
+  },
+  "oss.repos.lede": {
+    "message": "一个仓库要出现在这里，得满足三条：今天就装得上、带许可证、并且能用一句话回答「它和 UnDercontrol 是什么关系」。"
+  },
+  "oss.dataflow.what": {
+    "message": "这是 UnDercontrol 内置的图编辑器，抽离成了一个可以装进你自己应用的 React 组件库。UnDercontrol 就是从这同一个仓库构建的，所以你装到的就是产品里在跑的那个编辑器，不是精简版。"
+  },
+  "oss.dataflow.why": {
+    "message": "让 agent 用 JSON 写出图，让人用手拖动调整。它从一份普通的 JSON 文档渲染出数据流图或架构图，并把编辑结果以同样的结构交还给你。"
+  },
+  "oss.schemas.what": {
+    "message": "UnDercontrol 所存对象的 JSON Schema——共 21 个，覆盖任务、笔记、看板、评论、文件、图、agent 等。它们是数据结构的书面定义，和提供数据的服务端分开发布。"
+  },
+  "oss.schemas.why": {
+    "message": "你要写自己的客户端、导入工具或集成。照着它们做校验，而不是从 API 响应里反推结构；字段变了你会立刻知道，而不是在生产环境里才发现。"
+  },
+  "oss.clipper.what": {
+    "message": "Web Clipper 浏览器扩展。它把网页存成完整的 HTML 快照或 Markdown，可以存到本地文件，也可以存进 UnDercontrol——存本地那一半完全不需要账号。"
+  },
+  "oss.clipper.why": {
+    "message": "你想把读过的东西留下来。剪藏工具必然会看到你访问的每一个页面；这一个是完整公开的，所以你可以在安装之前，先读清楚它到底拿这份权限做了什么。"
+  },
+  "oss.link.repo": {
+    "message": "仓库"
+  },
+  "oss.link.npm": {
+    "message": "npm 包"
+  },
+  "oss.link.playground": {
+    "message": "在线试玩"
+  },
+  "oss.more": {
+    "message": "同一个组织下还有其他仓库。等它们能独立站住了，才会列到这里——读者应该能装上其中一个就直接用，而不必先把其余的都了解一遍。"
+  },
+  "oss.cta.title": {
+    "message": "带走其中一块。"
+  },
+  "oss.cta.lede": {
+    "message": "读代码、提 issue，或者发 pull request。每个仓库按各自的方式接受贡献。"
+  },
+  "oss.cta.org": {
+    "message": "浏览组织"
+  },
+  "oss.cta.docs": {
+    "message": "文档"
+  },
+  "oss.cta.contact": {
+    "message": "联系我们"
+  },
+  "oss.title": {
+    "message": "开源组件"
+  },
+  "oss.description": {
+    "message": "三个从 UnDercontrol 抽离并以开源许可证发布的组件：ud-dataflow-diagram React 编辑器（MIT）、ud-schemas JSON Schema（MIT），以及 Web Clipper 浏览器扩展（AGPL-3.0）。"
+  },
+  "oss.reachwhen": {
+    "message": "适合这种场景："
   }
 }
