@@ -20,6 +20,37 @@ sidebar_position: 1
   The card carries the positive control that distinguishes the two.
 -->
 
+## v0.145.0 (2026-08-31)
+
+### New Features
+
+- **A calendar, built the way Google Calendar works.** Week, day and month views over your existing tasks — `kickoff` is the start, `deadline` is the end, and nothing new had to be stored to make it work. **Drag on empty space to create a task, drag a block to move it, drag its edge to change how long it takes.** Click one and a peek popover opens with the details; `t` jumps to today, `j`/`k` step through, `d`/`w`/`m` switch views. A now-line tracks the current time.
+- **The left rail is a set of layers, and a layer is a saved query.** Each one fetches on its own and carries its own colour, so "my tasks", "this sprint" and any query you write can be switched on and off independently. Create and edit a layer from the list with `＋`. The rail collapses, and it remembers that you collapsed it.
+- **Quick-create can find a task you already have.** Type in the box after painting a slot and it searches your existing tasks — pick one and it takes the slot you painted, instead of creating a duplicate.
+- **On a phone the calendar is an agenda list**, with an Agenda/Day header and the same `＋` quick-create.
+- **Edit a task's title and description without leaving the calendar** — the peek's Open task now sits next to a button that opens a right-hand drawer.
+- **The peek's status control is a split button.** Mark done / Mark todo stays exactly where it was; the other five statuses are behind the menu next to it.
+
+### Improvements
+
+- **The task detail sidebar shows the card's virtual path**, so you can see where a task lives without opening the explorer.
+- **Gantt shows every task on the board.** It asked for 200 and the repository handed back 100 without saying so, so a board past 100 tasks was quietly cut off. It pages now.
+
+### Bug Fixes
+
+- **Timed tasks are no longer drawn hours away from where you put them.** On PostgreSQL, `kickoff` and `deadline` were stored as wall-clock digits in a column that cannot hold a time zone: a task set for 09:00+08:00 came back as 09:00Z — eight hours later than the truth — and 09:00-05:00 came back as that same 09:00Z. Every timed task on the calendar was therefore off by the writer's offset. They are normalized to UTC instants at the single point every write path goes through. **SQLite instances were never affected.**
+- **Reveal and move no longer fail silently on some tasks.** A path copied out of the explorer into the task cache was being copied verbatim rather than translated, which left the two disagreeing about where the task was.
+- **A deleted user's session cannot mint new credentials.** Refresh now declines to issue a token for a subject with no user row.
+- **The calendar's edit drawer can always be closed** — it has three ways out now — and the page no longer leaves a strip of blank space at the bottom.
+
+### Upgrade Notes (self-hosted)
+
+- **No new database migrations, and no new environment variables.**
+- **Existing `kickoff` / `deadline` values written before this version are left as they are.** The fix changes what gets stored from now on; it does not rewrite history, and this is deliberate. If you are on PostgreSQL and an old task shows the wrong time on the calendar, re-save that task's date to correct it. PostgreSQL only — SQLite instances never had the skew.
+- **Building the all-in-one image from source now needs a second repository.** The dataflow editor moved out into `ud-dataflow-diagram`, consumed as source through a Vite alias, and the image build expects it checked out beside the monorepo at the commit named in `ud-dataflow-diagram.lock`. **Pulling the published image needs nothing** — this only affects you if you build it yourself.
+
+---
+
 ## v0.144.0 (2026-08-30)
 
 ### New Features
