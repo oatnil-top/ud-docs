@@ -20,6 +20,35 @@ sidebar_position: 1
   The card carries the positive control that distinguishes the two.
 -->
 
+## v0.146.0 (2026-08-31)
+
+### New Features
+
+- **The desktop app has tabs.** The main window keeps a strip of tabs across the top — it appears once you have more than one, so a single tab costs you no space. Click to switch, middle-click to close, and the active tab carries a marker rather than only a shade of colour. Open enough and they compress (full → compact → icon) then scroll sideways, never spilling off the window. **The tab list and which tab you were on survive a restart**, and the address bar always mirrors the active tab in both directions.
+- **Desktop keyboard shortcuts for tabs.** `Cmd/Ctrl+T` opens a new tab, `Ctrl+Tab` (and `+Shift`) cycles, `Cmd/Ctrl+1..9` jumps to the Nth with 9 meaning the last. **`Cmd/Ctrl+W` closes the tab when you have more than one, and closes the window otherwise** — windows that have no tab strip (the workspace terminal, a sticker, the floating viewer, the Alfred panel) close exactly as they always did.
+- **Right-click a tab → "Move to new window".** It becomes a real OS window and leaves the strip.
+- **`/tabs` in the command palette** lists every tab in this window and searches them by title and by path. The tab you are already on is listed and marked `current`; choosing it just closes the palette instead of pretending to navigate. It sits alongside `/windows`.
+
+### Improvements
+
+- **On the desktop, `cmd/ctrl+click` and middle-click on an in-app link now open a background tab instead of an OS window** — the page opens behind you and your focus does not move. `shift+cmd/ctrl+click` still opens a real OS window when you want one. **The web app is unchanged.**
+- **The "open in new tab" buttons around the app open an in-app tab** — except when the thing you asked for is the page you are already standing on, where they open a real window instead. Tabs dedupe by path, so the alternative was focusing the tab you were already in — a button that appears to do nothing. Unlike `cmd+click`, these switch to what they opened.
+- **Deleting from the explorer now asks only about what cannot be undone.** A selection of tasks alone deletes immediately, because a deleted task is recoverable. A selection containing a resource file or a dataflow diagram still asks, because those are permanent — the diagram's history rows go with it.
+- **A collapsed note in a dataflow diagram no longer leaves its line behind.** Hovering either end fades the line and the note's content back in together. The read-only viewer also stopped painting connection handles on hover.
+- **The two "open in new tab" buttons on a task's detail page have accessible names**, so a screen reader announces what they do instead of just "button".
+
+### Bug Fixes
+
+- **Middle-clicking an in-app link never did anything, on any platform.** A middle press fires `auxclick`, and the handler was listening for `click`, so that branch had been dead the whole time. It works now — and right-click is explicitly held back, so opening a context menu can no longer navigate you away.
+
+### Upgrade Notes (self-hosted)
+
+- **This release adds no database migrations and no new environment variables.** `goose_db_version` stays at 82, where v0.145.0 left it.
+- **Tabs are desktop-only, deliberately.** The web app is byte-for-byte unchanged by this release's tab work: a browser owns `Cmd+T` and `Cmd+W` and a page cannot take them back, so the same thing built twice would be a worse version of what your browser already does.
+- **Building the all-in-one image from source still needs `ud-dataflow-diagram` checked out beside the monorepo**, at the commit named in `ud-vite-app/ud-dataflow-diagram.lock` — which this release moves forward. **Pulling the published image needs nothing.**
+
+---
+
 ## v0.145.0 (2026-08-31)
 
 ### New Features
