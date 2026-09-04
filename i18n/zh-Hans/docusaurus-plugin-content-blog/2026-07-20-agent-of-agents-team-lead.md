@@ -93,6 +93,6 @@ Team 可以嵌套——一个成员自己也可以是另一个 Team 的 lead。�
 
 ### 说到底
 
-选什么 agent 当 lead 都行。Claude Code、Codex、OpenCode，任何终端 agent 都可以是 lead 或成员——角色由提示词和技能定义，工具由 Agent CLI 配置决定。UnDercontrol 不绑定任何一家 AI。
+选什么 agent 当 lead 都行。Claude Code、Codex、OpenCode，任何终端 agent 都可以是 lead 或成员——角色由提示词和技能定义，工具由 Agent CLI 配置决定，而它们全都通过同一个 [AI Agent CLI](/zh-Hans/docs/cli-ai-integration/) 与这个组织对话。UnDercontrol 不绑定任何一家 AI。
 
 它只负责一件事：**当 agent 多到需要被管理的时候，给你一层管理结构，而不是让你自己去当那层结构。**

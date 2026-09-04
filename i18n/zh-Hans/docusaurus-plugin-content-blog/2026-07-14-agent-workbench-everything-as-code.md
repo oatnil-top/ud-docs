@@ -58,7 +58,7 @@ EOF
 
 **可复用的技能（Skills）。** Skill 是存在服务器上的可复用 prompt 模板，通过 `ud prompt` 注入给任意 Agent。而因为一切皆代码，**Agent 能用 `ud apply` 自己写、自己改 Skill**——技能库本身也是可编程的资产，越用越厚。
 
-**不绑定单一 Agent。** UnDercontrol 是 agent-agnostic 的：通过 Agent CLI 命令模板接入 Claude Code、Codex、Cursor、Hermes 或任意终端智能体。换模型、换工具，不用换工作台。
+**不绑定单一 Agent。** UnDercontrol 是 agent-agnostic 的：通过 Agent CLI 命令模板接入 Claude Code、Codex、Cursor、Hermes 或任意终端智能体。不管你选哪个，它们驱动的都是同一个 [AI Agent CLI](/zh-Hans/docs/cli-ai-integration/)——所以换模型、换工具，不用换工作台。
 
 **数据自主。** 任务和笔记就是带 YAML frontmatter 的纯 Markdown 文件，格式定义为开放的 [JSON Schema](https://github.com/oatnil-top/ud-schemas)（MIT）——可以用 Git 管版本、随时导出，也支持自托管（Docker Compose / K8s，SQLite / Postgres）。
 

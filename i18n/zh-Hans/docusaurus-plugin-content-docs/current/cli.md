@@ -1,12 +1,12 @@
 ---
 title: CLI 命令参考
-description: UnderControl 命令行工具完整参考手册
+description: UnDercontrol 命令行工具完整参考手册
 sidebar_position: 4
 ---
 
 # CLI 命令参考
 
-UnderControl CLI (`ud`) 是一个用于从终端管理任务的命令行工具。支持直接命令和带有 vim 风格快捷键的交互式 TUI 模式。
+UnDercontrol CLI (`ud`) 是一个用于从终端管理任务的命令行工具。支持直接命令和带有 vim 风格快捷键的交互式 TUI 模式。
 
 ## 安装
 
@@ -391,7 +391,7 @@ ud task note delete abc123 4223db11
 
 ### AI 助手工作流
 
-备注功能实现了人机无缝协作：
+备注功能实现了人机无缝协作。关于 Claude Code、Cursor 和 Codex 如何把 `ud` 当作 [AI Agent CLI](./cli-ai-integration.md) 驱动——包括教会它们这些命令的内置技能——见该指南。
 
 ```bash
 # AI 从计划创建任务
@@ -656,7 +656,7 @@ export EDITOR=vim
 ```markdown
 # 任务管理
 
-使用 UnderControl CLI 管理项目任务：
+使用 UnDercontrol CLI 管理项目任务：
 
 - 列出任务：`ud get task`
 - 查看任务详情：`ud describe task <id>`

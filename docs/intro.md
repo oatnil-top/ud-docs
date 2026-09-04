@@ -32,7 +32,7 @@ Send images, text, or voice to the AI to quickly log expenses and create tasks. 
 Upload files via drag-and-drop, paste, or file selection. Attach resources to any task, expense, or note. Choose between local storage or remote S3.
 
 ### CLI Tool
-Manage tasks and record progress directly from the terminal with the `ud` command-line tool. It doubles as an [AI agent CLI](/docs/cli-ai-integration/): Claude Code, Cursor, and Codex can read and write your tasks through the same commands.
+Manage tasks and record progress directly from the terminal with the `ud` command-line tool. It doubles as an [AI agent CLI](./cli-ai-integration.md): Claude Code, Cursor, and Codex can read and write your tasks through the same commands.
 
 ### Flexible Deployment
 Deploy via Docker Compose for simplicity or Kubernetes for larger setups. Supports SQLite for single-user and PostgreSQL for multi-user environments.

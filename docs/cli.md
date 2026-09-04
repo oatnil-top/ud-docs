@@ -378,7 +378,7 @@ ud delete note 4223db11
 
 ### AI Agent Workflow
 
-Notes enable seamless collaboration between humans and AI agents. For how Claude Code, Cursor, and Codex drive `ud` as an [AI agent CLI](/docs/cli-ai-integration/) — including the built-in skills that teach them these commands — see that guide.
+Notes enable seamless collaboration between humans and AI agents. For how Claude Code, Cursor, and Codex drive `ud` as an [AI agent CLI](./cli-ai-integration.md) — including the built-in skills that teach them these commands — see that guide.
 
 ```bash
 # AI creates a task from a plan (no id = create)

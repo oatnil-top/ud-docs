@@ -53,7 +53,7 @@ image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/claude-
 
 ### 组合是你定的
 
-Claude + Codex 只是一种搭配。UnDercontrol 不绑定任何 AI 工具——Claude Code、Codex、OpenCode 或任意终端 agent 都能当 lead 或成员；角色由 prompt 和 skill 决定，工具由 Agent CLI 配置决定。手里有哪些订阅、哪个模型擅长什么，编排权都在你。
+Claude + Codex 只是一种搭配。UnDercontrol 不绑定任何 AI 工具——Claude Code、Codex、OpenCode 或任意终端 agent 都能当 lead 或成员，因为它们都通过同一个 [AI Agent CLI](/zh-Hans/docs/cli-ai-integration/) 接上那块共享任务板；角色由 prompt 和 skill 决定，工具由 Agent CLI 配置决定。手里有哪些订阅、哪个模型擅长什么，编排权都在你。
 
 顺带一提：agent 写回的进度和你手写的内容在同一套 Markdown 体系里——任务、备注、评论、账目，所有文本面共用同一个编辑体验。
 
