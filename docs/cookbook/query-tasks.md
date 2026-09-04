@@ -78,5 +78,5 @@ curl -X POST https://your-server.com/todolist/nl-query \
 ```
 
 :::tip
-See [Query Syntax](../query-syntax) for the full list of operators, fields, and date shortcuts.
+See [Query Syntax](../../query-syntax/) for the full list of operators, fields, and date shortcuts.
 :::

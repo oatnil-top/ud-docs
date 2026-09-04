@@ -93,6 +93,6 @@ Worth noting: everything agents write back and forth — task descriptions, comm
 
 ### In the end
 
-Any agent can be the lead. Claude Code, Codex, OpenCode, any terminal-based agent can be a lead or a member — roles are defined by prompts and skills, tools by Agent CLI configuration. UnDercontrol isn't tied to any AI vendor.
+Any agent can be the lead. Claude Code, Codex, OpenCode, any terminal-based agent can be a lead or a member — roles are defined by prompts and skills, tools by Agent CLI configuration, and every one of them talks to the org through the same [AI agent CLI](/docs/cli-ai-integration/). UnDercontrol isn't tied to any AI vendor.
 
 It does one thing: **when you have enough agents that they need managing, it gives you a management layer — instead of making you be that layer.**

@@ -18,6 +18,10 @@ const config: Config = {
   url: 'https://oatnil.com',
   baseUrl: '/',
 
+  // Canonicalize on the trailing-slash form: Google had accumulated impressions
+  // against both /docs/x and /docs/x/ for the same page, splitting the signal.
+  trailingSlash: true,
+
   organizationName: 'oatnil-top',
   projectName: 'ud-docs',
 

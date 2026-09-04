@@ -43,7 +43,7 @@ status = 'in-progress' AND tags = 'work'
 title ILIKE '%report%' AND status != 'done'
 ```
 
-For full query syntax details, see the [Query Syntax](./query-syntax) documentation.
+For full query syntax details, see the [Query Syntax](./query-syntax.md) documentation.
 
 ---
 
@@ -138,5 +138,5 @@ Here are some practical examples of saved queries:
 
 ## Related
 
-- [Query Syntax](./query-syntax) — Full reference for the query language
-- [CLI Reference](./cli) — Use `ud query` to run queries from the terminal
+- [Query Syntax](./query-syntax.md) — Full reference for the query language
+- [CLI Reference](./cli.md) — Use `ud query` to run queries from the terminal

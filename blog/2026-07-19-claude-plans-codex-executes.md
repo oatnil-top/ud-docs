@@ -53,7 +53,7 @@ Open a board for the big picture: how much got planned, what's executing, what's
 
 ### The combo is yours to choose
 
-Claude + Codex is just one pairing. UnDercontrol is not tied to any AI tool — Claude Code, Codex, OpenCode, or any terminal-based agent can be a lead or a member. Roles are defined by prompts and skills; tools by Agent CLI configuration. Whatever subscriptions you hold and whatever each model is best at, the orchestration is in your hands.
+Claude + Codex is just one pairing. UnDercontrol is not tied to any AI tool — Claude Code, Codex, OpenCode, or any terminal-based agent can be a lead or a member, because each of them reaches the shared task board through the same [AI agent CLI](/docs/cli-ai-integration/). Roles are defined by prompts and skills; tools by Agent CLI configuration. Whatever subscriptions you hold and whatever each model is best at, the orchestration is in your hands.
 
 One more thing: the progress agents write back lives in the same Markdown system as everything you write by hand — tasks, notes, comments, even finance records share one editing experience.
 

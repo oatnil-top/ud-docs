@@ -43,7 +43,7 @@ status = 'in-progress' AND tags = 'work'
 title ILIKE '%report%' AND status != 'done'
 ```
 
-完整的查询语法详情请参阅[查询语法](./query-syntax)文档。
+完整的查询语法详情请参阅[查询语法](./query-syntax.md)文档。
 
 ---
 
@@ -138,5 +138,5 @@ title ILIKE '%report%' AND status != 'done'
 
 ## 相关内容
 
-- [查询语法](./query-syntax) — 查询语言完整参考
-- [CLI 参考](./cli) — 使用 `ud query` 从终端运行查询
+- [查询语法](./query-syntax.md) — 查询语言完整参考
+- [CLI 参考](./cli.md) — 使用 `ud query` 从终端运行查询

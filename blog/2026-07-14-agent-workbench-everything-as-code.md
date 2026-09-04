@@ -58,7 +58,7 @@ In short: the AI isn't only a **worker** inside the platform — it can also be 
 
 **Reusable skills.** A Skill is a reusable prompt template stored on the server and injected into any agent via `ud prompt`. And because everything is code, **an agent can write and revise Skills itself with `ud apply`** — the skill library is a programmable asset that compounds over time.
 
-**Not tied to any one agent.** UnDercontrol is agent-agnostic: an Agent CLI command template plugs in Claude Code, Codex, Cursor, Hermes, or any terminal-based agent. Swap models or tools without swapping workbenches.
+**Not tied to any one agent.** UnDercontrol is agent-agnostic: an Agent CLI command template plugs in Claude Code, Codex, Cursor, Hermes, or any terminal-based agent. Whichever you pick, it drives the same [AI agent CLI](/docs/cli-ai-integration/) — so you can swap models or tools without swapping workbenches.
 
 **You own your data.** Tasks and notes are plain Markdown files with YAML frontmatter, defined by an open [JSON Schema](https://github.com/oatnil-top/ud-schemas) (MIT) — version them with Git, export anytime, and self-host (Docker Compose / K8s, SQLite / Postgres).
 

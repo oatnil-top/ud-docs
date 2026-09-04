@@ -103,7 +103,7 @@ You can also pass credentials non-interactively with `-u/--username` and `-p/--p
 
 ### Multi-Context Support
 
-The CLI supports kubectl-style contexts for managing multiple accounts. See [CLI Multi-Context Authentication](./cli-auth-context) for details.
+The CLI supports kubectl-style contexts for managing multiple accounts. See [CLI Multi-Context Authentication](./cli-auth-context.md) for details.
 
 ```bash
 # List contexts
@@ -216,7 +216,7 @@ ud apply -f board.yaml
 ud apply -f setup.yaml
 ```
 
-For the full schema reference, all supported fields, and YAML resource format details, see the [Apply & Resource Schema](./cli-apply-schema) guide.
+For the full schema reference, all supported fields, and YAML resource format details, see the [Apply & Resource Schema](./cli-apply-schema.md) guide.
 
 ### Delete Resource
 
@@ -259,7 +259,7 @@ You can also apply a file directly:
 ud apply -f task.md
 ```
 
-If `title` is omitted, it's derived from the first line of the body (or the filename). See the [Apply & Resource Schema](./cli-apply-schema) guide for all fields.
+If `title` is omitted, it's derived from the first line of the body (or the filename). See the [Apply & Resource Schema](./cli-apply-schema.md) guide for all fields.
 
 ### Update a Task / Change Status
 
@@ -378,7 +378,7 @@ ud delete note 4223db11
 
 ### AI Agent Workflow
 
-Notes enable seamless collaboration between humans and AI agents:
+Notes enable seamless collaboration between humans and AI agents. For how Claude Code, Cursor, and Codex drive `ud` as an [AI agent CLI](/docs/cli-ai-integration/) — including the built-in skills that teach them these commands — see that guide.
 
 ```bash
 # AI creates a task from a plan (no id = create)

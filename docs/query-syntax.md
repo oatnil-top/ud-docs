@@ -384,7 +384,7 @@ ud query "(status = 'todo' OR status = 'in-progress') AND deadline <= 'today'" -
 ud query "status != 'archived'" --page 2 --limit 20
 ```
 
-For full CLI documentation, see the [CLI Reference](./cli).
+For full CLI documentation, see the [CLI Reference](./cli.md).
 
 ---
 
@@ -410,7 +410,7 @@ Use `ud query` to run structured queries from the terminal:
 ud query "deadline BETWEEN 'today' AND '+7d' AND status != 'done'"
 ```
 
-See the [CLI Reference](./cli) for the full list of query flags and options.
+See the [CLI Reference](./cli.md) for the full list of query flags and options.
 
 ---
 

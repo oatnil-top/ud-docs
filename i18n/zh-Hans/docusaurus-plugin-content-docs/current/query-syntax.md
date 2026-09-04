@@ -384,7 +384,7 @@ ud query "(status = 'todo' OR status = 'in-progress') AND deadline <= 'today'" -
 ud query "status != 'archived'" --page 2 --limit 20
 ```
 
-完整的 CLI 文档请参阅 [CLI 参考](./cli)。
+完整的 CLI 文档请参阅 [CLI 参考](./cli.md)。
 
 ---
 

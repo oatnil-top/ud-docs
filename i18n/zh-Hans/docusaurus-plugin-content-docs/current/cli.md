@@ -100,7 +100,7 @@ ud login --api-url https://api.oatnil.com -n trial
 
 ### 多账户支持
 
-CLI 支持 kubectl 风格的上下文管理多个账户。详见 [CLI 多上下文认证](./cli-auth-context)。
+CLI 支持 kubectl 风格的上下文管理多个账户。详见 [CLI 多上下文认证](./cli-auth-context.md)。
 
 ```bash
 # 列出上下文
@@ -213,7 +213,7 @@ ud apply -f board.yaml
 ud apply -f setup.yaml
 ```
 
-完整的 schema 参考、所有支持的字段和 YAML 资源格式详情，请参阅 [Apply 与资源 Schema](./cli-apply-schema) 指南。
+完整的 schema 参考、所有支持的字段和 YAML 资源格式详情，请参阅 [Apply 与资源 Schema](./cli-apply-schema.md) 指南。
 
 ### 删除资源
 

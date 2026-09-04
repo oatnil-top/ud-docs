@@ -399,7 +399,7 @@ function CliSection() {
           {t({en: 'CLI documentation', zh: 'CLI 文档'})}
         </Link>
         <Link className={styles.btnGhost} to="/docs/cli-ai-integration">
-          {t({en: 'Use it with AI agents', zh: '配合 AI Agent 使用'})}
+          {t({en: 'Use it as an AI agent CLI', zh: '当作 AI Agent CLI 使用'})}
         </Link>
       </div>
     </section>
