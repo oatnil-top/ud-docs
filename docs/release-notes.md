@@ -20,6 +20,60 @@ sidebar_position: 1
   The card carries the positive control that distinguishes the two.
 -->
 
+## v0.147.0 (2026-09-05)
+
+### New Features
+
+- **Presentations: create and edit `.bento.html` decks inside the app.** "New Presentation" sits in the explorer's context menu and in a task's attachments, starting from a pinned official shell. `⌘S` saves back to the same resource instead of downloading a copy, and a deck previews in the sandbox with its own Presentation icon. The deck runs in an opaque-origin frame with scripts but no same-origin access, so it cannot reach your session; a save that cannot cleanly strip the editor bridge back out is refused rather than written.
+- **Dataflow: AI Collaborate is a right-side dock.** It folds, remembers that you folded it, and keeps your draft. The DSL grows icon and group verbs — structure is sayable, geometry never is — with a chunked prompt dropdown and a worked example. Pipes take route anchors that persist (drag a section, click a dot to add, double-click to remove) alongside an orthogonal auto-router, grid arrange joins the selection bar, and whole-file import (JSON, or a diagram embedded in a PNG) sits beside the exports — one `Ctrl+Z` from whatever it replaced.
+- **The calendar can plot tasks by when they were created or last updated.** A second axis beside Day/Week/Month: which field a task's day comes from. `schedule` (kickoff → deadline) is the calendar as it was; `created` and `updated` each plot one server-written instant and are **read-only — enforced by absence, not by refusal**. In those two there is no create button, no edit drawer and no drag: nothing renders a control it then declines to honour. Clicking still opens the peek.
+- **Manage a task's tags from the calendar peek.** The tag row was read-only; it is now the control. Free text plus autocomplete, and every add and every remove writes immediately — dismissing the popover cannot lose the edit.
+- **"Remove from calendar", in the peek.** It clears `kickoff` and `deadline` — the two fields that put the task on the calendar. The task itself is untouched and stays in its board column, list and tree. Five-second undo restores exactly what was cleared, and `Backspace`/`Delete` with a peek open does the same thing.
+- **`Alt+C` jumps to the calendar** on the desktop app, and "Go to Calendar" is in the command palette, which is where the key is taught.
+- **Comments render restrained markdown.** Line breaks, paragraph gaps, `**bold**`, `` `code` `` and flat `-` / `1.` lists. Everything outside that whitelist — italics, links, headings, tables, raw HTML — renders verbatim as text. Agent replies used to arrive as one blob with literal asterisks and backticks.
+- **Tabs have a visible way to open one.** The strip now shows from a single tab and carries a `+` at its tail that cannot be scrolled away, and the desktop menu has `Window → New Tab` with the shortcut printed next to it. A detail tab shows the content's own name — the file name, the task's title — instead of the generic route word.
+
+### Improvements
+
+- **The resource inspector folds to the right edge, dock-style**, and the canvas actually regains the width rather than leaving it blank. The folded state survives a reload. Wide screens only; the narrow-screen accordion is untouched.
+- **The lightweight editor opens in visual mode by default.** Because a visual save re-serialises the whole document, a file whose markdown the visual schema cannot represent now warns you **before** the save, with a "don't show again" option. Source-mode saves and lossless files write straight through.
+- **Calendar cards that start at the same minute overlap at one pitch instead of shrinking into slivers**, each keeping a readable left strip. A week column that runs out of room draws a counted `+N` chip that lists everything on at that minute — eighteen concurrent items used to be eighteen nine-pixel slivers.
+- **Fewer redundant buttons.** The explorer header drops New task and Close, and a resource's detail header drops its back button; tabs made all three redundant.
+- **`ud` CLI truncation notices print to stderr, before the rows.** `ud … | head` discarded the trailing notice precisely when it mattered, and past the pipe buffer the process died before ever printing it. `-o apply` is now a clean machine-readable stream on stdout, and it warns about truncation at all, where before it truncated in silence.
+- **The desktop app is called UnDercontrol** in the dock, the menu bar, About and the window title.
+
+### Bug Fixes
+
+- **Saving a storage-class resolution no longer wipes the backup assignment.** The backend replaces the whole row on every save and an omitted backup means "no backup", but the UI's payload had carried only the primary — so every primary change silently cleared your backup, and the Backup dropdown could never save at all while the confirm dialog kept showing it as unchanged.
+- **A revoked or expired invite link no longer leaks the group.** It used to answer with the group's name, description and live member count alongside "invalid"; now an invalid token returns only that it is invalid.
+- **A task created on a board keeps its original author.**
+- **Bad input to the storage-class order update answers `400`, not `500`.**
+- **A task filed at the explorer's root is written as `/`** rather than the empty string that means "unfiled".
+
+### Security
+
+- **An uploaded `.html` or `.svg` is now downloaded, never rendered inline.** Any user could upload an HTML file, attach it to a task, share that task publicly, and the download served it inline at the app's own origin — so the file's script ran as the trusted app, and on an all-in-one deployment (frontend and backend on one origin) it could read the viewer's session token out of local storage. The fix is at the single point where bytes leave, so it covers share pages, every list and gallery view and direct links, and **every upload that already exists — no migration needed**. Other text and image types preview exactly as before.
+- **The sharing table gained data-layer guarantees**: the unique index now includes the resource type, and owner-consistency plus a permission whitelist are enforced where shares are written.
+- **Expense shares are permission-aware on write.**
+
+### Upgrade Notes (self-hosted)
+
+- **This release adds one database migration.** `goose_db_version` moves 82 → 83. **Back up your database before upgrading.**
+- **Migration `00083` refuses rather than repairs, by design.** It widens the unique index on `shared_resources` to `(resource_type, resource_id, shared_with_id)`, and first asserts that no `(resource_type, resource_id)` pair carries more than one owner. If one does, the migration raises an exception and **the deploy stops** — those rows are a finding for a human to look at, not a mess to auto-clean. You can check before upgrading; `0` means it will apply cleanly:
+
+  ```sql
+  SELECT COUNT(*) FROM (
+    SELECT resource_type, resource_id FROM shared_resources
+    GROUP BY resource_type, resource_id HAVING COUNT(DISTINCT owner_id) > 1
+  ) t;
+  ```
+
+- **No new environment variables.**
+- **The desktop app's user-data directory is renamed** `UnderControl` → `UnDercontrol`, once, at startup. macOS and Windows filesystems are case-insensitive, so there it is a no-op; on a case-sensitive filesystem the old directory is moved across. If you had pointed the app at a data directory nested inside the old one, that stored path is rewritten to match — an external data directory (iCloud, Dropbox) does not match and is left alone. **If the app ever starts up empty after this upgrade, your data is in the `UnderControl` directory beside the new one; move it across by hand.**
+- **Building the all-in-one image from source still needs `ud-dataflow-diagram` checked out beside the monorepo**, at the commit named in `ud-vite-app/ud-dataflow-diagram.lock`, which this release moves forward to `2537eba`. **Pulling the published image needs nothing.**
+
+---
+
 ## v0.146.0 (2026-08-31)
 
 ### New Features
