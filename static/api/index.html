@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>API Reference — UnDercontrol</title>
+<!--
+  Standalone Redoc viewer for the UnDercontrol backend API.
+
+  Why a static HTML file in static/ rather than a Docusaurus page: the spec is a
+  1.1 MB Swagger 2.0 document, and every renderer for it is a heavy client-side
+  bundle. Keeping it out of the Docusaurus build means no new site dependency and
+  no effect on build time — the same reasoning as static/slides/*.html.
+
+  The spec served here is a byte-for-byte copy of go-backend/docs/swagger.json in
+  the ud-all-in-one repo (see docs/api-reference.md for how to refresh it).
+  It is NOT fetched from the live server: https://api.oatnil.com/swagger/doc.json
+  returns 200 with 0 bytes, because the generated docs package is imported only
+  under `//go:build dev` (go-backend/cmd/server/swagger_dev.go) and release
+  binaries build with `-tags prod`. This page is the working substitute.
+-->
+<style>
+  body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+  #banner {
+    padding: 10px 16px;
+    background: #0f172a;
+    color: #e2e8f0;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  #banner a { color: #60a5fa; }
+  #banner code { background: rgba(255,255,255,0.1); padding: 1px 5px; border-radius: 3px; }
+  #fallback { display: none; padding: 32px 16px; max-width: 720px; margin: 0 auto; color: #334155; }
+  #fallback a { color: #2563eb; }
+</style>
+</head>
+<body>
+
+<div id="banner">
+  <strong>UnDercontrol Backend API</strong> — base URL <code>https://api.oatnil.com</code>.
+  The <code>host: localhost:8888</code> shown below is the generator's dev default; ignore it.
+  Raw spec: <a href="/api/openapi.json">/api/openapi.json</a> ·
+  <a href="/docs/api-reference">About this document</a>
+</div>
+
+<div id="fallback">
+  <h2>The rendered view could not load</h2>
+  <p>
+    This page renders the spec with Redoc, loaded from a CDN. If that script is
+    blocked, the raw document is always available at
+    <a href="/api/openapi.json">/api/openapi.json</a> — a Swagger 2.0 JSON file you
+    can open in any OpenAPI viewer or feed to an agent directly.
+  </p>
+</div>
+
+<redoc spec-url="/api/openapi.json" hide-download-button></redoc>
+
+<script
+  src="https://cdn.jsdelivr.net/npm/redoc@2.1.5/bundles/redoc.standalone.js"
+  onerror="document.getElementById('fallback').style.display='block';document.querySelector('redoc').style.display='none';"
+></script>
+
+</body>
+</html>
