@@ -20,6 +20,34 @@ sidebar_position: 1
   The card carries the positive control that distinguishes the two.
 -->
 
+## v0.148.0 (2026-09-06)
+
+### New Features
+
+- **Saved accounts now work across servers.** A saved account remembers which backend it belongs to, so the same person on `api.oatnil.com` and on a self-hosted instance is two entries instead of one silently overwriting the other. Switching to an entry moves the app to that server and signs you in there. The login page, the sidebar switcher and Settings → Saved Accounts show the server under an entry only when it could be misread — when the entries span more than one server, or one of them is not the server the app is on right now. Web app and desktop app alike.
+
+### Improvements
+
+- **A switch is checked with the server before the app reloads.** If the server rejects the saved sign-in, the entry is removed and you are told the session expired; if the server cannot be reached, the entry is kept and the server's own error is shown. Either way you land on the login page already pointed at that server, so signing in again goes to the right place.
+- **Desktop: the built-in backend is no longer listed as a saved account.** It is a server choice (Settings → Backend URL), not an account to switch to — its port is chosen at launch, and a stale entry could have pointed the app at a port nothing listens on. The mobile app already follows this rule.
+
+### Bug Fixes
+
+- **Desktop: Sign out is always on the settings page.** It was hidden on the desktop on the reasoning that the personal account signs itself in — but in a half-dead session (the app renders with every panel empty) it was the last control that could clear the state, and hiding it left no way out short of clearing app data.
+- **Desktop: signing out and back in could leave the app fully rendered but empty**, every request going out without a sign-in. Several desktop windows share one sign-in but each kept its own copy; every request now reads the shared one, so a login in any window heals all of them and a sign-out disarms all of them.
+- **A server answering an unexpected shape no longer takes the whole app to "Something went wrong".** Lists — daemons, agents, sessions, linked providers, API keys — treat a non-list answer as an empty list, and a bad value already cached in the browser is repaired on the next load instead of crashing on every load until "Clear Cache & Login".
+- **Desktop: a sign-in refresh finishing in one window after an account switch in another no longer undoes the switch.**
+
+### Upgrade Notes (self-hosted)
+
+- **No new database migrations.** `goose_db_version` stays at 83.
+- **No new environment variables.**
+- **Nothing in this release changes the backend.** Every change is in the web frontend and the desktop app; the backend image is republished under the new tag unchanged. Pulling the published image needs nothing.
+- **Desktop: saved accounts from earlier versions are kept** and treated as belonging to the server the app is pointed at the first time this version opens. If one of them stops working after the upgrade, remove it from the list and sign in again.
+- **Building the all-in-one image from source still needs `ud-dataflow-diagram` checked out beside the monorepo**, at the commit named in `ud-vite-app/ud-dataflow-diagram.lock` (unchanged, `2537eba`).
+
+---
+
 ## v0.147.0 (2026-09-05)
 
 ### New Features
