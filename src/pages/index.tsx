@@ -377,7 +377,9 @@ function ShowcaseSection() {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}>
       <div>
-        <div className={styles.eyebrow}>Private AI Butler &amp; Workspace</div>
+        <div className={styles.eyebrow}>
+          <Translate id="home4.hero.eyebrow">Private AI Butler &amp; Workspace</Translate>
+        </div>
         {/* key remounts on rotation so the fade-up entrance replays; min-heights
             in CSS keep the CTAs from jumping as headline length changes. */}
         <div key={slide.key} className={styles.fadeup}>
