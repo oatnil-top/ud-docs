@@ -1,0 +1,8 @@
+# Crawl policy for oatnil.com. Cloudflare prepends its content-signals block
+# (search / ai-input / ai-train) when this file is served; those signals are set
+# in the Cloudflare dashboard, not here. The four lines below are the site's own.
+User-agent: *
+Allow: /
+
+Sitemap: https://oatnil.com/sitemap.xml
+Sitemap: https://oatnil.com/zh-Hans/sitemap.xml
