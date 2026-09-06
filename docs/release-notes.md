@@ -20,6 +20,40 @@ sidebar_position: 1
   The card carries the positive control that distinguishes the two.
 -->
 
+## v0.148.1 (2026-09-06)
+
+### Correction to the v0.148.0 notes
+
+- **v0.148.0 said "signing out and back in could leave the app fully rendered but empty" was fixed. That fix was real but for a different defect.** The case people actually hit — the profile page and every panel empty after signing in, on a server address that starts with `http://` — was caused by the server redirecting to `https://`, and it is fixed only in this release (see the first bug fix below).
+
+### Bug Fixes
+
+- **Empty app after signing in when the server address uses `http://` and the server answers with a redirect to `https://`.** A change of scheme is a change of origin, and on a cross-origin redirect the browser drops the `Authorization` header — so sign-in succeeded (token in the body) while every other request reached the server anonymous, and the app rendered from its caches with every panel blank. The client now re-issues such a request once at the final address and rewrites its saved server address to the `https://` origin so it does not happen again. Desktop app: this is a frontend fix, so the installed app gets it with the next desktop release — until then, set Settings → Backend URL to the `https://` address.
+- **"Failed to create board" for a shared board that was in fact created.** Creating a shared board makes you a member of its group, which invalidates your existing sign-in as a security measure; the refreshed sign-in minted in the same second was refused too. Tokens are now minted past that cut-over.
+- **A fresh board's two default columns showed "No tasks".** Their query is only an `ORDER BY`, and the board's own tag filter was appended after it, which the server rejected as an invalid query. The filter now lands before the `ORDER BY`.
+- **A group that backs a board can no longer be deleted from the Groups page** (the delete button is hidden, and the server refuses with `GROUP_BACKS_BOARD`). Deleting the board removes its group; deleting the group alone used to leave an orphan board nobody could list. Reading a group you are not a member of now answers 404, the same as the board endpoints, instead of 403.
+- **Kanban: you are told before being bounced.** Losing access to a board says "This board is no longer available" before falling back to All Tasks, and a member who signs back in lands on their board rather than being told it is gone. When a sign-in expires, the login page says so inline and returns you to the page you were on after signing in. Leaving a group refreshes your sign-in like joining one does.
+- **Group invite page: an invalid link is described as expired or revoked**, not "already used" — invite links are multi-use. The members table no longer overlaps or overflows on a long e-mail-shaped username at 1280px.
+
+### Improvements
+
+- **Explorer: "Open in new tab" on a task row's context menu** — an in-app tab on the desktop, a browser tab on the web.
+- **The dataflow preview page lays out like the resource detail page**: same header position, same stage padding and ground.
+
+### Removed
+
+- **The status-changes feed on task detail** (desktop and web).
+- **The kanban list view, the activity heatmap and the dashboard page.** `/kanban/<board>/list`, `/tasks` and `/dashboard` redirect to the board.
+
+### Upgrade Notes (self-hosted)
+
+- **No new database migrations.** `goose_db_version` stays at 83.
+- **No new environment variables.**
+- **Both images change.** The backend carries the sign-in and group fixes; the frontend carries the rest. Pull both.
+- **Building the all-in-one image from source still needs `ud-dataflow-diagram` checked out beside the monorepo**, at the commit named in `ud-vite-app/ud-dataflow-diagram.lock` (unchanged, `2537eba`).
+
+---
+
 ## v0.148.0 (2026-09-06)
 
 ### New Features
