@@ -24,8 +24,12 @@ npx @oatnil/ud --help
 
 ```bash
 brew tap oatnil-top/ud
+brew trust oatnil-top/ud   # Homebrew 6 and newer only; older versions have no `trust`
 brew install ud
 ```
+
+Homebrew 6 refuses to load a formula from a third-party tap until you trust it,
+and reports it as an error rather than a prompt.
 
 ### Install Script
 

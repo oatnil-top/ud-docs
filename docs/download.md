@@ -50,11 +50,19 @@ Platform notes:
 
 ## CLI (`ud`)
 
-npm is the only distribution channel (the former Homebrew tap is discontinued):
+npm is the recommended channel:
 
 ```bash
 npm install -g @oatnil/ud   # requires Node.js 18+
 ud --version
+```
+
+Homebrew works too (macOS and Linux):
+
+```bash
+brew tap oatnil-top/ud
+brew trust oatnil-top/ud   # Homebrew 6 and newer only
+brew install ud
 ```
 
 Docs: [CLI guide](/docs/cli) · [AI agent integration](/docs/cli-ai-integration)

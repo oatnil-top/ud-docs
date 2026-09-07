@@ -41,7 +41,7 @@ Once you have both answers, work through the steps below.
 
 ## Install the ud CLI
 
-npm is the only supported channel — the Homebrew tap and the install script are retired.
+npm is the recommended channel. The Homebrew tap (`brew tap oatnil-top/ud && brew install ud`) also works; the install script is retired.
 
 ```
 npm install -g @oatnil/ud
