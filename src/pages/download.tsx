@@ -57,12 +57,19 @@ const CHROME_STORE_URL =
 const SHORTCUT_URL = 'https://www.icloud.com/shortcuts/4e0becebe3cd48a180940ccbd04d6fa7';
 const TESTFLIGHT_URL = 'https://testflight.apple.com/join/st2TnaBF';
 
-// Android is versioned by the mobile app itself, not by version.json, and lives
-// under its own R2 prefix: releases/android/<version>/undercontrol-<version>.apk.
-// Bump both when a new apk lands and re-check the link answers 200.
+// Android is versioned by the mobile app itself, not by version.json, and since
+// 2026-09-07 lives in its OWN bucket (undercontrol-releases-android), not under
+// R2_RELEASES: the teammate who builds it holds a token scoped to that bucket
+// only, so the desktop update manifests in the main bucket stay out of reach.
+// Key shape: android/<version>/undercontrol-<version>.apk. 0.0.20 and earlier
+// stay in the old bucket for 30 days after this switch, then get deleted.
+// Bumping ANDROID_VERSION IS the publish moment: do it only after
+// auto/verify-android-release.sh <version> (monorepo) reports all four gates
+// green — the script prints the sha256 and signer to paste on the release card.
+const R2_ANDROID_RELEASES = 'https://pub-366894d3b9a34981b42199be2ebdad70.r2.dev/android';
 const ANDROID_VERSION = '0.0.20';
 const ANDROID_APK_FILE = `undercontrol-${ANDROID_VERSION}.apk`;
-const ANDROID_APK_URL = `${R2_RELEASES}/android/${ANDROID_VERSION}/${ANDROID_APK_FILE}`;
+const ANDROID_APK_URL = `${R2_ANDROID_RELEASES}/${ANDROID_VERSION}/${ANDROID_APK_FILE}`;
 
 const CLI_INSTALL = `# requires Node.js 18+
 npm install -g @oatnil/ud
