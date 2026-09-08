@@ -20,6 +20,41 @@ sidebar_position: 1
   The card carries the positive control that distinguishes the two.
 -->
 
+## v0.149.0 (2026-09-08)
+
+### New Features
+
+- **`SystemConfigList` — read and apply an instance's whole configuration as one document.** `ud get systemconfiglist` exports every setting the instance has; `ud apply` writes a document back. This is its first public release, so there is nothing existing to migrate — the names below are simply what the resource ships as.
+  - Fields: `forServer` (top level, **required** — it names the machine the document is for), and per entry `setBy` (`default` | `env` | `admin`), `settableFrom` (`boot-only` | `env-or-admin` | `admin-only`), `readOnly`, `envVar`, `valueType`, `valueMasked`.
+  - Four refusals, each meaning something different for a script: `CONFIG_ENVELOPE_INVALID` (400 — not a SystemConfigList, or `forServer` missing), `CONFIG_SERVER_MISMATCH` (400 — the document names another machine; you are pointed at the wrong instance), `CONFIG_UNKNOWN_FIELD` (400 — a key or field nobody declares, refused by name rather than silently dropped), and `CONFIG_READONLY_FIELD` (**409**, not 400 — a read-only field differs from this machine, so the whole document is refused and nothing is written; the same bytes are a 200 on the box they came from).
+- **Search titles only.** `searchIn=title` on the task list restricts matching to titles instead of all content.
+- **Capture plain text.** `POST /quick-capture/text` puts a text note into the quick-capture queue with the same three landings as the other capture types.
+- **Dataflow diagrams:** group nodes can be collapsed and connected, and the read-only viewer now draws its edges.
+
+### Improvements
+
+- The account menu's current-account row always names its server, so it is obvious which instance you are on.
+- `brew install ud` works again — the Homebrew formula had been left far behind and every download URL in it was a 404.
+- Onboarding records what you said about Alfred and only seeds his routines if you asked for them; instances that were seeded without asking have those retracted, and anyone who had linked a messenger keeps theirs.
+
+### Bug Fixes
+
+- Sign-up no longer reveals whether an email address is already registered.
+- Share links now follow the account's own server instead of a loopback default, so a copied link works for the person you send it to.
+- Search no longer breaks on `%` and `_` in the search text.
+- The `ud` CLI's `--context` is honoured by the background daemon instead of being replaced by whatever the environment names.
+- npm, `.deb` and the CLI's own metadata no longer link to a repository nobody can open.
+
+### Removed
+
+- The standalone income and expense pages are gone; Transactions is the one list.
+- The calendar's "Remove from calendar" link and its ⌫/⌦ shortcut are gone.
+
+### Upgrade Notes (self-hosted)
+
+- Back up your database before upgrading. This release adds migration `00084`, which retracts the Alfred hygiene routines from instances that were seeded without being asked; anyone who had linked a messenger keeps theirs.
+- No new environment variables are required.
+
 ## v0.148.1 (2026-09-06)
 
 ### Correction to the v0.148.0 notes
