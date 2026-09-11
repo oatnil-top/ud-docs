@@ -20,6 +20,36 @@ sidebar_position: 1
   The card carries the positive control that distinguishes the two.
 -->
 
+## 未发布 (Unreleased)
+
+已合入 `main`、尚未随任何已发布版本出去的改动;它们随下一版一起发布。
+
+<!--
+  写下一版发版说明之前先读这里。 (ud 卡 2b308cff)
+
+  这一段为什么存在:一个用户能感觉到的后果,可能在承载它的 commit 标题里完全看不出来。
+  `fix(cli): ud get comments ... 接上真正的分页` 完全诚实,但读不出「默认页大小变了」。
+  所以后果写在这里,由改动的人在知识还在的时候写下来。
+
+  写下一版的人的规矩(release skill Phase 2 Step 0):
+    1. 把下面每一条折进新的 `## vX.Y.Z` 段 —— 本文件和 docs/release-notes.md 两边都要。
+    2. ⛔ 不要从 commit 标题重新推措辞。那正是这一段要挡住的失败。
+    3. 折完把这一段留在原位、下面不留条目。删掉这一段,它就不再被人读到。
+
+  欠着、且故意还没写措辞的(用户能感觉到,措辞在发版时补;ud 卡 ff1c5378,
+  2026-09-11 在 main 上实读):
+    - a57756fd / 5a01f560 / 7065b324 / 288e80fa —— `ud get comments` 默认只返回未 resolved
+      的线程(连同它的回复)。比下面那条页大小更大。
+    - 860a31ec —— `ud whoami` 的 `User:` 行改为读正在用的那个凭据;委托 token 会多印
+      `acting for`。
+    - 2139a10d —— 分页信封不再撒谎(超限曾悄悄退回 50,却仍然写 `totalPages: 1`)。
+    - 2139a10d / 5a01f560 —— 短 ID 解析不再卡在最近一页。
+  射程说明:上面这份只扫了 CLI 这条线。v0.150.0 之后的 web 侧 commit 没有扫
+  (例如 be3ad51a,日历 chip 排版)。
+-->
+
+- `ud get comments`(不带 `--task`)默认页大小由 50 变为 20;`--all` / `--limit` / `--page` 现在生效。
+
 ## v0.150.0 (2026-09-11)
 
 ### 新功能

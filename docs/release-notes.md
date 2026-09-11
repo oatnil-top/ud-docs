@@ -20,6 +20,41 @@ sidebar_position: 1
   The card carries the positive control that distinguishes the two.
 -->
 
+## Unreleased
+
+Merged to `main`, not in any published build yet. These ship with the next version.
+
+<!--
+  READ THIS BEFORE WRITING THE NEXT RELEASE NOTE.  (ud card 2b308cff)
+
+  Why this section exists: a user-visible consequence can be invisible in the commit title
+  that carries it. `fix(cli): ud get comments ... real pagination` is completely honest and
+  you still cannot read "the default page size changed" off it. So the consequence gets
+  written here, by whoever made the change, while the knowledge still exists.
+
+  Rules for whoever writes the next release (release skill, Phase 2 Step 0):
+    1. Fold every bullet below into the new `## vX.Y.Z` section -- in this file AND in
+       i18n/zh-Hans/docusaurus-plugin-content-docs/current/release-notes.md.
+    2. Do NOT re-derive the wording from the commit titles. That is the exact failure this
+       section exists to stop.
+    3. Then leave the section here with no bullets under it. Deleting the section is how it
+       stops being read.
+
+  Owed but deliberately not worded yet -- user-visible, wording due at release time
+  (ud card ff1c5378; read live on main, 2026-09-11):
+    - a57756fd / 5a01f560 / 7065b324 / 288e80fa -- `ud get comments` returns only unresolved
+      threads (and their replies) by default. Bigger than the page-size line below.
+    - 860a31ec -- `ud whoami`'s `User:` line reads the credential actually in use; a
+      delegated token additionally prints `acting for`.
+    - 2139a10d -- the pagination envelope no longer lies (an over-limit request used to fall
+      back to 50 silently while still reporting `totalPages: 1`).
+    - 2139a10d / 5a01f560 -- short-ID resolution is no longer confined to the most recent page.
+  Scope note: that list is the CLI line only. Web-side commits since v0.150.0 were not swept
+  (e.g. be3ad51a, calendar chip layout).
+-->
+
+- `ud get comments` (without `--task`) now pages: `--all`, `--limit` and `--page` take effect, and the default page size is 20 instead of 50.
+
 ## v0.150.0 (2026-09-11)
 
 ### New Features
