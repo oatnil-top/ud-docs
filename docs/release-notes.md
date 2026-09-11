@@ -20,6 +20,30 @@ sidebar_position: 1
   The card carries the positive control that distinguishes the two.
 -->
 
+## v0.150.0 (2026-09-11)
+
+### New Features
+
+- **A task can now occupy several time blocks on the calendar.** The calendar's *by schedule* view draws **scheduled slots** instead of a task's kickoff and deadline dates. Drag on empty space to create a slot, drag a block to move it, drag its edge to resize it — each of those writes a slot, so one task can appear as several blocks. The Agenda view shows slots too, and the all-day row now renders only when something is actually in it.
+- **A Schedule section on the task detail page**, below the deadline: every slot the task has, with past slots collapsed into one line carrying their count and total duration. The same section appears in the kanban card preview.
+- **Calendar layers now carry slots.** Each enabled layer fetches its own slots and tags them, so a block shows which layer it came from, and layer colours come from a fixed slot per layer rather than the layer's position in the list.
+
+### Bug Fixes
+
+- The ＋ buttons in the calendar's *by schedule* view (header, sidebar and mobile) created a task that then did not appear on the calendar — they wrote the wrong date column. A card created with ＋ now shows up where you created it.
+
+### Removed
+
+- The **Sprints** layer has been removed from the calendar.
+
+### Upgrade Notes (self-hosted)
+
+- Back up your database before upgrading. This release adds migration `00085_create_task_slots`: one new `task_slots` table plus two indexes, applied automatically at startup on both SQLite and PostgreSQL. No existing table is altered.
+- **Existing kickoff and deadline dates are not converted into slots.** On an upgraded instance the *by schedule* view starts empty and fills as slots are created — that is deliberate, not a failed migration.
+- No new environment variables are required.
+
+---
+
 ## v0.149.0 (2026-09-08)
 
 ### New Features
