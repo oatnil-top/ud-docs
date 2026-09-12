@@ -1,7 +1,20 @@
 {
   "name": "ud-docs",
+  "main": "./worker/index.js",
   "compatibility_date": "2025-10-12",
   "assets": {
-    "directory": "./build"
+    "directory": "./build",
+    "binding": "ASSETS",
+    // The Worker must see every request before the asset server answers,
+    // otherwise the workers.dev redirect in worker/index.js never fires for
+    // paths that exist (i.e. all of them). See that file for why the redirect
+    // cannot live in a Cloudflare Redirect Rule.
+    //
+    // The cost of `true` is that every asset request is now a Worker invocation
+    // instead of a free static-asset hit. This option also takes a path-pattern
+    // array (e.g. ["/*", "!/assets/*"]) to keep the hashed bundles on the free
+    // path, which was measured as not worth the extra rule at this site's
+    // traffic (~50 active users/day) — revisit if invocations ever matter.
+    "run_worker_first": true
   }
 }
