@@ -54,6 +54,19 @@ const config: Config = {
     },
   },
 
+  // Cloudflare Web Analytics (privacy-first RUM). The udctl.com site in the Cloudflare
+  // account is set to "Enable with JS Snippet installation" because automatic
+  // injection never appeared on this Workers static-assets site (checked 2026-09-12,
+  // 10+ min, curl saw no beacon). The token is public by design: it is the same value
+  // Cloudflare would have injected into every page. ud task f02f82bb.
+  scripts: [
+    {
+      src: 'https://static.cloudflareinsights.com/beacon.min.js',
+      defer: true,
+      'data-cf-beacon': '{"token": "a806539ae03c4726a749ef2e59f227de"}',
+    },
+  ],
+
   presets: [
     [
       'classic',
