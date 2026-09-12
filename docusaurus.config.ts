@@ -111,6 +111,11 @@ const config: Config = {
   ],
 
   themeConfig: {
+    // Site-wide social card (audit efb0ebf3 #4): every docs/blog page shares it when a
+    // link is pasted into Telegram / X / Discord. The homepage swaps in the zh card by
+    // locale (src/pages/index.tsx). 1200×630, text-only, generated with PIL from system
+    // fonts; replace the PNGs when design delivers a real card, keep the paths.
+    image: 'img/social-card.png',
     /*
      * Dark mode was never something this site opted into — with no colorMode
      * block at all it ran on Docusaurus' defaults, which means the toggle has

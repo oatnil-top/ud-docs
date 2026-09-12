@@ -2,6 +2,7 @@ import {useEffect, useState, type ReactNode} from 'react';
 import Link from '@docusaurus/Link';
 import Layout from '@theme/Layout';
 import Head from '@docusaurus/Head';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Translate, {translate} from '@docusaurus/Translate';
 
 import PhoneDemo from '@site/src/components/HeroDemos/PhoneDemo';
@@ -760,6 +761,11 @@ function homepageJsonLd(description: string): string {
 }
 
 export default function Home(): ReactNode {
+  // The zh homepage gets the zh social card; every other page falls back to
+  // themeConfig.image. react-helmet-async keeps the last og:image, so this
+  // overrides the site-wide one instead of adding a second tag.
+  const {i18n: {currentLocale}, siteConfig: {url}} = useDocusaurusContext();
+  const socialCard = `${url}/img/social-card${currentLocale === 'zh-Hans' ? '.zh-Hans' : ''}.png`;
   const metaDescription = translate({
     id: 'homepage.description',
     message:
@@ -775,6 +781,9 @@ export default function Home(): ReactNode {
       })}
       description={metaDescription}>
       <Head>
+        <meta property="og:image" content={socialCard} />
+        <meta name="twitter:image" content={socialCard} />
+        <meta name="twitter:card" content="summary_large_image" />
         <script type="application/ld+json">{homepageJsonLd(metaDescription)}</script>
       </Head>
       <main className={styles.scope}>
