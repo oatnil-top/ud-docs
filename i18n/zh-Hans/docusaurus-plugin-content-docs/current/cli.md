@@ -122,7 +122,7 @@ ud get task [id] [--status <status>]
 以表格形式显示一个或多个任务。
 
 **选项：**
-- `--status`：按状态过滤（`todo`、`in-progress`、`pending`、`stale`、`done`、`archived`）
+- `--status`：按状态过滤（`todo`、`in-progress`、`pending`、`stale`、`done`、`archived`）。文档（status 为 `""`）无法用这个选项筛选 —— 空值会被当成「不过滤」；请改用 `ud query "status = ''"`。
 
 **示例：**
 ```bash
@@ -741,7 +741,7 @@ export EDITOR=vim  # 或 nano、code 等
 
 **问题：** 使用 `apply` 时出现 `API error: An unexpected error occurred`
 
-**解决方案：** 确保状态是以下值之一：`todo`、`in-progress`、`pending`、`stale`、`done`、`archived`
+**解决方案：** 确保状态是以下值之一：`todo`、`in-progress`、`pending`、`stale`、`done`、`archived`，或 `""`（空串，表示这张卡是文档）
 
 ### 上下文未找到
 

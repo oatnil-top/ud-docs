@@ -53,7 +53,7 @@ created_at >= '-7d' ORDER BY created_at DESC
 |------|------|------|
 | `title` | 文本 | 任务标题 |
 | `description` | 文本 | 任务描述 |
-| `status` | 文本 | 任务状态：`todo`、`in-progress`、`done`、`archived` |
+| `status` | 文本 | 任务状态：`todo`、`in-progress`、`pending`、`stale`、`done`、`archived`，或 `''`（空串 = 这张卡是文档，没有工作流状态） |
 | `tags` | 数组 | 任务的标签列表 |
 | `deadline` | 日期时间 | 截止日期 |
 | `created_at` | 日期时间 | 创建时间 |
@@ -577,7 +577,7 @@ ORDER BY title ASC
 
 2. **字段名区分大小写** — 始终使用小写字段名：`status`、`deadline`、`created_at` 等。
 
-3. **有效的状态值** — 内置的状态值为：`todo`、`in-progress`、`done`、`archived`。
+3. **有效的状态值** — 内置的状态值为：`todo`、`in-progress`、`pending`、`stale`、`done`、`archived`，以及空串 `''` —— 空串表示这张卡是**文档**（没有工作流状态）。查文档用 `status = ''`。注意：文档也满足 `status != 'x'`（对任意 `x`），所以只想要任务时要显式排除：`status != 'done' AND status != ''`。
 
 4. **数组字段行为** — `tags` 字段是数组类型。使用 `=` 检查是否包含某个标签，使用 `IN` 检查是否包含任一标签，使用 `CONTAINS_ALL` 要求包含所有指定标签。
 

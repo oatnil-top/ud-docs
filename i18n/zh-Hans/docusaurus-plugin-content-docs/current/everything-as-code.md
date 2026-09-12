@@ -55,7 +55,7 @@ v1 发布前的最终清单：
 |------|------|------|------|
 | `id` | UUID | 否 | 有值 = 更新现有任务。无值 = 创建新任务。 |
 | `title` | string | 是 | 任务标题。也用于生成文件名。 |
-| `status` | string | 否 | 可选值：`todo`、`in-progress`、`pending`、`stale`、`done`、`archived`。默认：`todo` |
+| `status` | string | 否 | 可选值：`todo`、`in-progress`、`pending`、`stale`、`done`、`archived`，以及 `""`。默认：`todo`。空串表示*没有工作流状态*，即这张卡是**文档**。不写这个字段则沿用默认（新建为 `todo`，更新时保持原值）。 |
 | `tags` | string[] | 否 | 标签列表 |
 | `deadline` | string | 否 | ISO 8601 或 `YYYY-MM-DD` 格式的截止日期 |
 | `created_at` | date-time | 否 | 由服务器设置，请勿修改。 |

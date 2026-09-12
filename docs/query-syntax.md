@@ -53,7 +53,7 @@ created_at >= '-7d' ORDER BY created_at DESC
 |-------|------|-------------|
 | `title` | Text | Task title |
 | `description` | Text | Task description |
-| `status` | Text | Task status: `todo`, `in-progress`, `done`, `archived` |
+| `status` | Text | Task status: `todo`, `in-progress`, `pending`, `stale`, `done`, `archived`, or `''` (empty = the card is a document and has no workflow status) |
 | `tags` | Array | List of tags attached to the task |
 | `deadline` | Datetime | Due date |
 | `created_at` | Datetime | When the task was created |
@@ -577,7 +577,7 @@ ORDER BY title ASC
 
 2. **Field names are case-sensitive** — Always use lowercase field names: `status`, `deadline`, `created_at`, etc.
 
-3. **Valid status values** — The built-in status values are: `todo`, `in-progress`, `done`, `archived`.
+3. **Valid status values** — The built-in status values are: `todo`, `in-progress`, `pending`, `stale`, `done`, `archived`, plus the empty string `''`, which means the card is a **document** (no workflow status). Query documents with `status = ''`. Note that a document also satisfies `status != 'x'` for every `x`, so when you want tasks only, exclude it explicitly: `status != 'done' AND status != ''`.
 
 4. **Array field behavior** — The `tags` field is an array. Use `=` to check if it contains a specific tag, `IN` to check for any of several tags, and `CONTAINS_ALL` to require all specified tags.
 

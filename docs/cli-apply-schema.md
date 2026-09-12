@@ -63,7 +63,7 @@ Final checklist before the v1 launch:
 |-------|------|----------|-------------|
 | `id` | string | no | Task UUID or prefix. Present = update, absent = create. |
 | `title` | string | no | Derived from body first line or filename if omitted. |
-| `status` | string | no | `todo` (default), `in-progress`, `pending`, `stale`, `done`, `archived` |
+| `status` | string | no | `todo` (default), `in-progress`, `pending`, `stale`, `done`, `archived`, or `""` — the empty string means *no workflow status*: the card is a **document** (no status control beside its title, in no default kanban column). Omit the field to keep the default: create gets `todo`, update leaves the status alone. |
 | `tags` | array | no | List of tags. |
 | `kickoff` | string | no | Start date (`YYYY-MM-DD` or ISO 8601). |
 | `deadline` | string | no | Due date (`YYYY-MM-DD` or ISO 8601). |

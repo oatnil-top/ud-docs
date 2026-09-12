@@ -55,7 +55,7 @@ Final checklist before the v1 launch:
 |-------|------|----------|-------------|
 | `id` | UUID | No | Present = update existing task. Absent = create new task. |
 | `title` | string | Yes | Task title. Also used to derive the filename. |
-| `status` | string | No | One of: `todo`, `in-progress`, `pending`, `stale`, `done`, `archived`. Default: `todo` |
+| `status` | string | No | One of: `todo`, `in-progress`, `pending`, `stale`, `done`, `archived`, or `""`. Default: `todo`. The empty string means *no workflow status* — the card is a **document**. Omitting the field keeps the default (create → `todo`, update → unchanged). |
 | `tags` | string[] | No | List of tags |
 | `deadline` | string | No | Deadline in ISO 8601 or `YYYY-MM-DD` format |
 | `created_at` | date-time | No | Set by server. Do not modify. |

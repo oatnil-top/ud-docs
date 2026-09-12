@@ -63,7 +63,7 @@ v1 发布前的最终清单：
 |------|------|------|------|
 | `id` | string | 否 | 任务 UUID 或前缀。有 = 更新，无 = 创建。 |
 | `title` | string | 否 | 未指定时从正文首行或文件名推导。 |
-| `status` | string | 否 | `todo`（默认）、`in-progress`、`pending`、`stale`、`done`、`archived` |
+| `status` | string | 否 | `todo`（默认）、`in-progress`、`pending`、`stale`、`done`、`archived`，或 `""` —— 空串表示*没有工作流状态*：这张卡是**文档**（标题旁不显示状态控件，也不落入任何默认看板列）。不写这个字段则沿用默认：新建为 `todo`，更新时保持原值。 |
 | `tags` | array | 否 | 标签列表。 |
 | `kickoff` | string | 否 | 开始日期（`YYYY-MM-DD` 或 ISO 8601）。 |
 | `deadline` | string | 否 | 截止日期（`YYYY-MM-DD` 或 ISO 8601）。 |

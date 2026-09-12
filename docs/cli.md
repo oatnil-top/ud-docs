@@ -129,7 +129,7 @@ ud get task [id] [--status <status>]
 Display one or many tasks in a table format.
 
 **Options:**
-- `--status`: Filter by status (`todo`, `in-progress`, `pending`, `stale`, `done`, `archived`)
+- `--status`: Filter by status (`todo`, `in-progress`, `pending`, `stale`, `done`, `archived`). Documents (status `""`) cannot be selected with this flag — an empty value reads as "no filter"; use `ud query "status = ''"` instead.
 
 **Examples:**
 ```bash
@@ -751,7 +751,7 @@ export EDITOR=vim  # or nano, code, etc.
 
 **Problem:** `API error: An unexpected error occurred` when using `apply`
 
-**Solution:** Ensure status is one of: `todo`, `in-progress`, `pending`, `stale`, `done`, `archived`
+**Solution:** Ensure status is one of: `todo`, `in-progress`, `pending`, `stale`, `done`, `archived`, or `""` (the empty string, which makes the card a document)
 
 ### Context Not Found
 
