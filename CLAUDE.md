@@ -1,7 +1,10 @@
 # UnDercontrol Docs Site (ud-docs)
 
-Docusaurus site served at https://oatnil.com. Deploys automatically via Cloudflare
-Workers Builds on push to `main`. i18n: `en` (default) + `zh-Hans`.
+Docusaurus site served at https://udctl.com — the canonical host since 2026-09-12
+(epic `f02f82bb`). `oatnil.com` and `www.udctl.com` 301 to it, and so does the
+worker's own `*.workers.dev` hostname (see `worker/index.js`). Deploys
+automatically via Cloudflare Workers Builds on push to `main`. i18n: `en`
+(default) + `zh-Hans`.
 
 ## Audience positioning (decided 2026-07-24)
 
@@ -14,7 +17,7 @@ Workers Builds on push to `main`. i18n: `en` (default) + `zh-Hans`.
   (see `src/pages/configuration.tsx`) — no page mirror files.
 - `docs/` — plain, structured markdown with stable URLs. AI agents consume these
   as raw text (the homepage agent-setup prompt flow fetches
-  `https://oatnil.com/agent-setup/prompt.md`, served as `text/markdown` from
+  `https://udctl.com/agent-setup/prompt.md`, served as `text/markdown` from
   `static/`), so keep them machine-readable: no React components, no visual
   tricks, facts stated plainly. The rendered HTML is a byproduct for human readers.
   ZH mirrors live in `i18n/zh-Hans/docusaurus-plugin-content-docs/current/` and
