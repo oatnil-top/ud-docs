@@ -716,13 +716,13 @@ export default function Home(): ReactNode {
     <Layout
       title={translate({
         id: 'homepage.title',
-        message: 'UnDercontrol — Alfred, Your Private AI Butler',
+        message: 'Run a Team of AI Agents on Your Own Machine',
         description: 'The homepage meta title',
       })}
       description={translate({
         id: 'homepage.description',
         message:
-          'Meet Alfred, a private AI butler living in your Telegram: he understands, remembers, delegates to your AI agents, and reports back in the chat. Behind him: tasks, knowledge, finance, and agent orchestration in one private, self-hostable workspace.',
+          'UnDercontrol schedules, retries, and remembers for a team of AI agents that use real CLIs. Delegate from chat; results land in your tasks. Self-hosted.',
         description: 'The homepage meta description',
       })}>
       <main className={styles.scope}>
