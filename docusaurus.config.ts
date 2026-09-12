@@ -59,6 +59,14 @@ const config: Config = {
   // injection never appeared on this Workers static-assets site (checked 2026-09-12,
   // 10+ min, curl saw no beacon). The token is public by design: it is the same value
   // Cloudflare would have injected into every page. ud task f02f82bb.
+  // Google Fonts are pulled by @import in src/css/custom.css; preconnecting to both hosts
+  // removes a DNS+TLS round trip from the critical path (audit efb0ebf3 #7, step 1;
+  // self-hosting the woff2 files is the follow-up).
+  headTags: [
+    {tagName: 'link', attributes: {rel: 'preconnect', href: 'https://fonts.googleapis.com'}},
+    {tagName: 'link', attributes: {rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: 'anonymous'}},
+  ],
+
   scripts: [
     {
       src: 'https://static.cloudflareinsights.com/beacon.min.js',
@@ -88,6 +96,9 @@ const config: Config = {
           onInlineAuthors: 'warn',
           onUntruncatedBlogPosts: 'warn',
         },
+        // lastmod from git history lets Google spend its crawl on pages that changed
+        // (audit #11); changefreq/priority are ignored by Google and only add bytes.
+        sitemap: {lastmod: 'date', changefreq: null, priority: null},
         theme: {
           customCss: './src/css/custom.css',
         },

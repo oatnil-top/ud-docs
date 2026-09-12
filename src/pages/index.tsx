@@ -1,6 +1,7 @@
 import {useEffect, useState, type ReactNode} from 'react';
 import Link from '@docusaurus/Link';
 import Layout from '@theme/Layout';
+import Head from '@docusaurus/Head';
 import Translate, {translate} from '@docusaurus/Translate';
 
 import PhoneDemo from '@site/src/components/HeroDemos/PhoneDemo';
@@ -713,7 +714,58 @@ function CtaSection() {
   );
 }
 
+/**
+ * Structured data for the homepage (audit efb0ebf3 #6). Two nodes in one graph:
+ * the Organization is what search engines attach the brand ("udctl", formerly
+ * "UnDercontrol") and the sameAs profiles to; the SoftwareApplication is what
+ * lets a result carry the app category / price / platforms. `name` is not
+ * translated on purpose — the brand token is the same in every locale — while
+ * the description reuses the localized meta description so the two never drift.
+ */
+function homepageJsonLd(description: string): string {
+  const url = 'https://udctl.com';
+  return JSON.stringify({
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Organization',
+        '@id': `${url}/#organization`,
+        name: 'udctl',
+        alternateName: 'UnDercontrol',
+        url,
+        logo: `${url}/img/favicon.svg`,
+        sameAs: [
+          'https://github.com/oatnil-top',
+          'https://www.npmjs.com/package/@oatnil/ud',
+          'https://discord.gg/vkw2nhxE',
+          'https://t.me/+qoTRSTL82lMxZjJl',
+          'https://chromewebstore.google.com/detail/undercontrol-web-clipper/mckkbigikfkoeddpcbhdmpncoljoagog',
+        ],
+      },
+      {
+        '@type': 'SoftwareApplication',
+        '@id': `${url}/#software`,
+        name: 'udctl',
+        alternateName: 'UnDercontrol',
+        description,
+        url,
+        downloadUrl: `${url}/download`,
+        applicationCategory: 'ProductivityApplication',
+        operatingSystem: 'macOS, Windows, Linux, iOS, Android, Web',
+        offers: {'@type': 'Offer', price: '0', priceCurrency: 'USD', description: 'Free for personal use'},
+        author: {'@id': `${url}/#organization`},
+      },
+    ],
+  });
+}
+
 export default function Home(): ReactNode {
+  const metaDescription = translate({
+    id: 'homepage.description',
+    message:
+      'udctl (UnDercontrol) schedules, retries, and remembers for a team of AI agents on real CLIs. Delegate from chat; results land in your tasks. Self-hosted.',
+    description: 'The homepage meta description',
+  });
   return (
     <Layout
       title={translate({
@@ -721,12 +773,10 @@ export default function Home(): ReactNode {
         message: 'Run a Team of AI Agents on Your Own Machine',
         description: 'The homepage meta title',
       })}
-      description={translate({
-        id: 'homepage.description',
-        message:
-          'udctl (UnDercontrol) schedules, retries, and remembers for a team of AI agents on real CLIs. Delegate from chat; results land in your tasks. Self-hosted.',
-        description: 'The homepage meta description',
-      })}>
+      description={metaDescription}>
+      <Head>
+        <script type="application/ld+json">{homepageJsonLd(metaDescription)}</script>
+      </Head>
       <main className={styles.scope}>
         <FirstScreen />
         <AgentSetupRow />
