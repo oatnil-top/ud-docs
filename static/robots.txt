@@ -1,8 +1,10 @@
-# Crawl policy for udctl.com. Cloudflare prepends its content-signals block
-# (search / ai-input / ai-train) when this file is served; those signals are set
-# in the Cloudflare dashboard, not here. The four lines below are the site's own.
+# Crawl policy for udctl.com.
+# Content-Signal (contentsignals.org): the owner's 2026-09-12 decision is "allow all" —
+# search, use as AI input, and AI training are all permitted. Cloudflare's own
+# "Managed robots.txt" toggle can only write ai-train=no, so the signal lives here.
 User-agent: *
 Allow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
 
 Sitemap: https://udctl.com/sitemap.xml
 Sitemap: https://udctl.com/zh-Hans/sitemap.xml
