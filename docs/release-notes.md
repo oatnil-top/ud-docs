@@ -40,19 +40,47 @@ Merged to `main`, not in any published build yet. These ship with the next versi
     3. Then leave the section here with no bullets under it. Deleting the section is how it
        stops being read.
 
-  Owed but deliberately not worded yet -- user-visible, wording due at release time
-  (ud card ff1c5378; read live on main, 2026-09-11):
-    - a57756fd / 5a01f560 / 7065b324 / 288e80fa -- `ud get comments` returns only unresolved
-      threads (and their replies) by default. Bigger than the page-size line below.
-    - 860a31ec -- `ud whoami`'s `User:` line reads the credential actually in use; a
-      delegated token additionally prints `acting for`.
-    - 2139a10d -- the pagination envelope no longer lies (an over-limit request used to fall
-      back to 50 silently while still reporting `totalPages: 1`).
-    - 2139a10d / 5a01f560 -- short-ID resolution is no longer confined to the most recent page.
-  Scope note: that list is the CLI line only. Web-side commits since v0.150.0 were not swept
-  (e.g. be3ad51a, calendar chip layout).
+  (Nothing owed right now: every bullet that was listed here was folded into v0.151.0.)
 -->
 
+
+## v0.152.0 (2026-09-12)
+
+### Desktop app
+
+- **macOS no longer shows "Support Ending for Intel-based Apps" when you open UnDercontrol.** Each package now contains only the binaries for its own architecture instead of every platform's. The macOS arm64 disk image went from **229,652,351 to 148,920,090 bytes — 77.0 MiB smaller, a 35.14% reduction**; the Windows and Linux packages shrank the same way. Nothing you use is missing from them: the packages were carrying other platforms' binaries, not extra features.
+
+### Improvements
+
+- **The calendar can colour events by layer or by status.** A new colour-mode control switches between the two; by layer stays the default. In status mode a completed task keeps its own colour rather than falling back to the grey that `todo` uses, so "done" and "not started" are no longer the same colour.
+- **The product now says what an empty `status` means.** An empty status marks a document rather than a task — that has always been true, and nothing in the product ever said it. It is now written in `ud explain`, `ud apply --help`, the operator reference in `ud query help`, the CLI's own help text, the natural-language query prompt, the in-app documentation in both languages, and the AI chat tool schema.
+- **The built-in `ud-guide` skill reads the product instead of remembering it.** Every agent reads this skill when a session starts. It carried 11 worked command examples; replayed against the current product, **all 11 were wrong** — they described shapes the product no longer has. They are gone, and what replaces them is how to ask the product for the current shape. The skill went from 640 lines to 300, and adds no new mechanism of its own.
+
+### Bug Fixes
+
+- **`ud describe comment` with an 8-character short ID returns the thread's replies.** The short ID resolved to the right comment and the reply lookup then used the short form again, so the thread came back with its root and nothing else. Every `on_mention` wake-up sends a short ID, so every agent wake-up had been hitting this.
+- **`ud apply` given a YAML manifest no longer creates a blank card.** A document with `apiVersion:` / `kind:` that reached the markdown path used to be read as a task with no title, which silently created an empty card and reported success — so a typo in a file extension produced junk that looked like a successful apply. It now refuses with an error naming the problem.
+- **Waking an agent no longer tells it to overwrite the card's body.** The wake-up prompt's "update the task" template carried a `<brief description>` line alongside the title, so an agent that followed the instruction it was given rewrote the description of the very card it had just been dispatched on. The template now sets the title only and leaves the body exactly as it was.
+
+### Upgrade Notes (self-hosted)
+
+- **No schema changes in this release** — nothing runs against your database.
+- **No new environment variables.**
+
+⚠️ **Upgrading the CLI is something you do yourself — publishing a release does not change the `ud` on anyone's machine.** There are three routes and you should use exactly one:
+
+```bash
+npm i -g @oatnil/ud            # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If you got `ud` from the desktop app, neither of those is your route — install the new desktop app instead.** The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run *is* the one shipped inside the app, and replacing the app upgrades it.
+
+🔴 **This release matters more than usual for whichever `ud` is first on your `PATH`.** The `ud-guide` rewrite above is read by your agents out of the CLI binary they run, so an agent keeps reading the old, wrong examples until that specific binary is replaced. A Homebrew-installed `/opt/homebrew/bin/ud` is a real file, not a link into the app — it changes only when you run `brew upgrade`, and upgrading the desktop app does not touch it. If `/opt/homebrew/bin` comes before `/usr/local/bin` on your `PATH`, upgrading only the app leaves your agents on the old guide **with nothing to tell you**: the version number updates elsewhere, the daemon is online, commands answer normally, and the content is stale.
+
+Then check it took: `ud --version` must print `udctl version 0.152.0`.
+
+---
 
 ## v0.151.0 (2026-09-12)
 
