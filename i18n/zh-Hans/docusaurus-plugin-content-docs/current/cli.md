@@ -27,12 +27,6 @@ brew tap oatnil-top/ud
 brew install ud
 ```
 
-### 安装脚本
-
-```bash
-curl -fsSL https://get.oatnil.com/ud | bash
-```
-
 ### 手动下载
 
 下载适合你平台的版本：

@@ -31,12 +31,6 @@ brew install ud
 Homebrew 6 refuses to load a formula from a third-party tap until you trust it,
 and reports it as an error rather than a prompt.
 
-### Install Script
-
-```bash
-curl -fsSL https://get.oatnil.com/ud | bash
-```
-
 ### Manual Download
 
 Download the appropriate version for your platform:
