@@ -86,11 +86,13 @@ sidebar_position: 1
 ⚠️ **CLI 要你自己升 —— 发布一个新版本不会让任何人机器上的 `ud` 变新。** 按你当初的安装方式:
 
 ```bash
-npm i -g @oatnil/ud            # npm
-brew update && brew upgrade ud # Homebrew(同时会装上新的 `udctl` 名字)
+npm i -g @oatnil/ud            # 当初用 npm 装的
+brew update && brew upgrade ud # 当初用 Homebrew 装的(同时会装上新的 `udctl` 名字)
 ```
 
-然后确认升上去了:`ud --version` 必须打印 `udctl version 0.151.0`。一个几个月前装的 `ud` 照样能用、也照样会复现本版修掉的那些 bug,**而且没有任何东西会告诉你它落后了**。
+**如果你的 `ud` 是桌面端装的,上面两条都不是你的路 —— 装新版桌面 app 就是升级。** 桌面端的「安装 ud CLI」把 `/usr/local/bin/ud` 做成指向 app bundle 内部的软链,所以你跑的那个 `ud` **就是** app 里带的那个,换掉 app 就换掉了它。在这种情况下再去 `npm i -g` 会装出**第二个**互不相干的 `ud`,最后跑到哪一个取决于你的 `PATH`。
+
+**三条路只走一条,⛔ 别混用。** 然后确认升上去了:`ud --version` 必须打印 `udctl version 0.151.0`。一个几个月前装的 `ud` 照样能用、也照样会复现本版修掉的那些 bug,**而且没有任何东西会告诉你它落后了**。
 
 ---
 

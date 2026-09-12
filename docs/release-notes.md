@@ -91,11 +91,13 @@ Merged to `main`, not in any published build yet. These ship with the next versi
 ⚠️ **Upgrading the CLI is something you do yourself — publishing a release does not change the `ud` on anyone's machine.** Whichever way you installed it:
 
 ```bash
-npm i -g @oatnil/ud            # npm
-brew update && brew upgrade ud # Homebrew (also gets you the new `udctl` name)
+npm i -g @oatnil/ud            # installed via npm
+brew update && brew upgrade ud # installed via Homebrew (also gets you the new `udctl` name)
 ```
 
-Then check it took: `ud --version` must print `udctl version 0.151.0`. An `ud` that is months old keeps working and keeps reproducing bugs this release fixed, with nothing to tell you it is behind.
+**If you got `ud` from the desktop app, neither of those is your route — install the new desktop app instead.** The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run *is* the one shipped inside the app, and replacing the app upgrades it. Running `npm i -g` on top of that installs a second, separate `ud`, and which one you get then depends on your `PATH`.
+
+**Use one of the three routes, not two.** Then check it took: `ud --version` must print `udctl version 0.151.0`. An `ud` that is months old keeps working and keeps reproducing bugs this release fixed, with nothing to tell you it is behind.
 
 ---
 
