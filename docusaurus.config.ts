@@ -32,7 +32,7 @@ const config: Config = {
   trailingSlash: true,
 
   organizationName: 'oatnil-top',
-  projectName: 'ud-docs',
+  projectName: 'udctl', // GitHub repo renamed from ud-docs on 2026-09-12 (epic f02f82bb); old URLs redirect
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -61,7 +61,7 @@ const config: Config = {
         docs: {
           sidebarPath: './sidebars.ts',
           editUrl:
-            'https://github.com/oatnil-top/ud-docs/tree/main/',
+            'https://github.com/oatnil-top/udctl/tree/main/',
         },
         blog: {
           showReadingTime: true,
@@ -70,7 +70,7 @@ const config: Config = {
             xslt: true,
           },
           editUrl:
-            'https://github.com/oatnil-top/ud-docs/tree/main/',
+            'https://github.com/oatnil-top/udctl/tree/main/',
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
           onUntruncatedBlogPosts: 'warn',
@@ -207,11 +207,11 @@ const config: Config = {
             },
             {
               label: 'GitHub',
-              href: 'https://github.com/oatnil-top/ud-docs',
+              href: 'https://github.com/oatnil-top/udctl',
             },
             {
               label: 'GitHub Discussions',
-              href: 'https://github.com/oatnil-top/ud-docs/discussions',
+              href: 'https://github.com/oatnil-top/udctl/discussions',
             },
           ],
         },
