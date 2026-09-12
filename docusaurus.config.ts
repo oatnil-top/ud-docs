@@ -7,7 +7,12 @@ const versionConfig = require('./version.json');
 const VERSION = versionConfig.version;
 
 const config: Config = {
-  title: 'UnDercontrol',
+  // Search-facing brand token. 'udctl' is the suffix every page's <title> and
+  // og:title carry (theme formats `${page} | ${title}`). Chosen 2026-09-12 (ud task
+  // f02f82bb): 'ud' and 'undercontrol' cannot be ranked for (two letters / the
+  // phrase "under control"), 'udctl' has no competing owner anywhere we checked.
+  // The navbar/h1 still read UnDercontrol on purpose; this is the <title> only.
+  title: 'udctl',
   tagline: 'One workspace for tasks, knowledge, and AI agents — private, portable, yours.',
   favicon: 'img/favicon.svg',
 

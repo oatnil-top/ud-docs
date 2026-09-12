@@ -663,7 +663,7 @@
     "message": "让你的信息回到掌控之中。"
   },
   "homepage.description": {
-    "message": "UnDercontrol 给一支用真实 CLI 干活的 AI 代理团队做调度、重试与记忆。聊天里派工，结果写回任务。可自托管。"
+    "message": "udctl（UnDercontrol）给一支用真实 CLI 的 AI 代理团队做调度、重试与记忆。聊天里派工，结果写回任务。可自托管。"
   },
   "homepage.docs.body": {
     "description": "Homepage: docs.body",

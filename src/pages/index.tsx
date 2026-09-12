@@ -722,7 +722,7 @@ export default function Home(): ReactNode {
       description={translate({
         id: 'homepage.description',
         message:
-          'UnDercontrol schedules, retries, and remembers for a team of AI agents that use real CLIs. Delegate from chat; results land in your tasks. Self-hosted.',
+          'udctl (UnDercontrol) schedules, retries, and remembers for a team of AI agents on real CLIs. Delegate from chat; results land in your tasks. Self-hosted.',
         description: 'The homepage meta description',
       })}>
       <main className={styles.scope}>
