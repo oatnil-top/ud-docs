@@ -53,7 +53,51 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (e.g. be3ad51a, calendar chip layout).
 -->
 
+
+## v0.151.0 (2026-09-12)
+
+### The product is now called udctl
+
+- **UnDercontrol is now udctl** (lower case everywhere, including at the start of a sentence — like `kubectl`). This release carries the rename across the CLI: `ud --version` now prints `udctl version 0.151.0`, and the help text, README and npm description use the new name. The desktop app and the docs site are moving with it.
+- **The command has not changed.** `ud` is still `ud`, the npm package is still `@oatnil/ud`, the config directory and context format are untouched, and nothing you have scripted needs editing. The Homebrew formula additionally installs `udctl` as a second name for the same binary, so either one works.
+
+### Security
+
+- **A failed Telegram send no longer puts the bot token into the log.** When the transport call failed, the error it built embedded the full bot token, so the token reached the server log — and therefore `docker logs` — in plain text, enough for anyone who can read the logs to take the bot over. The token is redacted before the error is constructed. **If your instance has been running a Telegram bot, treat any token that has appeared in your existing logs as exposed and re-issue it through BotFather.**
+
+### Improvements
+
+- **`ud get comments --task <id>` hides resolved threads by default.** Filtering selects whole threads, so a matching root always arrives with all of its replies. Add `--all` (or `--status all`) to include closed threads, or pick one with `--status open|resolved|annotated|unresolved`. The listing does not say how many it left out, so a task whose threads are all closed looks the same as one with no comments.
 - `ud get comments` (without `--task`) now pages: `--all`, `--limit` and `--page` take effect, and the default page size is 20 instead of 50.
+- **`ud whoami`'s `User:` line reports the credential actually in use**, instead of whatever the config file happened to say. A delegated token also prints an `acting for` line, so acting on someone else's behalf is visible rather than implied.
+- **The calendar downloads far less to draw the same grid.** Its window query now asks for a lite row projection that leaves out task bodies, notes and share links: on one real account and window a page went from 1,619,762 B to 41,959 B — 38.6× smaller. Rows fetched this way no longer overwrite a task body already in the cache.
+- **Instant events on the calendar render on two lines**, so the time no longer squeezes the title out.
+
+### Bug Fixes
+
+- **Opening a task's edit drawer and saving without changing anything could erase the task body.** The explorer tree seeded the cache with an empty description for tasks whose body it had not fetched — indistinguishable from a body that really is empty — and the editor loaded that empty value, so the save wrote it back. Observed on a task losing 1,848 characters. Both the write path and the rows already in browsers are fixed; see Upgrade Notes below.
+- **Pagination no longer reports a page count it did not honour.** Asking for more than the maximum silently fell back to 50 items while still reporting `totalPages: 1`.
+- **Short-ID resolution is no longer confined to the most recent page of comments.**
+- **Search trims whitespace from the query.** A title that plainly contained the text could not be found if the query carried a stray space. Fixed in the web app, the backend and the Explorer.
+- **A single-character bold no longer swallows the rest of the line.** `**a**` followed by more `**` on the same line used to bold everything up to the last one. Fixed in the web app and the desktop app.
+- **The calendar's "scheduled" wording matches what it draws.** Scheduled means a task has a scheduled slot; one carrying only a deadline is not scheduled. The marker that claimed otherwise was removed rather than re-pointed: the list it lived on has no slot data to answer the question.
+
+### Upgrade Notes (self-hosted)
+
+- **No schema changes in this release** — nothing runs against your database.
+- **The browser task cache is cleared once, on first load after upgrading.** The body-erasure fix above cannot repair rows already stored in a browser, so the persisted cache version was raised; that discards the stored task rows and keeps your preferences. The only visible effect is that the first screen after the upgrade is not instant.
+- **Telegram bot tokens** — see the Security note above. Re-issue any token that has been in your logs.
+
+⚠️ **Upgrading the CLI is something you do yourself — publishing a release does not change the `ud` on anyone's machine.** Whichever way you installed it:
+
+```bash
+npm i -g @oatnil/ud            # npm
+brew update && brew upgrade ud # Homebrew (also gets you the new `udctl` name)
+```
+
+Then check it took: `ud --version` must print `udctl version 0.151.0`. An `ud` that is months old keeps working and keeps reproducing bugs this release fixed, with nothing to tell you it is behind.
+
+---
 
 ## v0.150.0 (2026-09-11)
 
