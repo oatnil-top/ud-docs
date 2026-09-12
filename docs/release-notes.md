@@ -48,7 +48,7 @@ Merged to `main`, not in any published build yet. These ship with the next versi
 
 ### Desktop app
 
-- **macOS no longer shows "Support Ending for Intel-based Apps" when you open UnDercontrol.** Each package now contains only the binaries for its own architecture instead of every platform's. The macOS arm64 disk image went from **229,652,351 to 148,920,090 bytes — 77.0 MiB smaller, a 35.14% reduction**; the Windows and Linux packages shrank the same way. Nothing you use is missing from them: the packages were carrying other platforms' binaries, not extra features.
+- **macOS no longer shows "Support Ending for Intel-based Apps" when you open UnDercontrol.** Each package now contains only the binaries for its own architecture instead of every platform's. Measured against v0.151.0's published packages: the macOS arm64 disk image went from **229,652,351 to 148,858,229 bytes (−77.05 MiB, −35.18%)**, macOS x64 from **237,379,681 to 159,484,547 (−74.29 MiB, −32.81%)**, and the Windows installer from **184,956,101 to 128,508,034 (−53.83 MiB, −30.52%)**. Nothing you use is missing from them: the packages were carrying other platforms' binaries, not extra features.
 
 ### Improvements
 
