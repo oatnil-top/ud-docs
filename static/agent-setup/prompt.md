@@ -26,7 +26,7 @@ questions that decide how the rest goes, and wait for the answers:
    - **Their own server** — the normal case. A machine or VPS they host, or the
      udctl desktop app, which runs a backend on their own machine at
      `http://localhost:8888`. Ask them for the URL. Guide:
-     `https://oatnil.com/self-hosting`.
+     `https://udctl.com/self-hosting`.
    - **Or, just trying it out** — if they have no server yet, they can point at
      `https://api.oatnil.com`. Tell them plainly what it is: a **test server** we run so
      people can try udctl, not a hosting plan, so real work does not belong on it.
@@ -102,11 +102,11 @@ that matter most:
 
 ## Resources
 
-- CLI reference: `https://oatnil.com/docs/cli`
-- AI agent integration: `https://oatnil.com/docs/cli-ai-integration`
-- Self-hosting: `https://oatnil.com/self-hosting`
+- CLI reference: `https://udctl.com/docs/cli`
+- AI agent integration: `https://udctl.com/docs/cli-ai-integration`
+- Self-hosting: `https://udctl.com/self-hosting`
 - Portable skill for agentskills.io-compatible agents:
   `https://raw.githubusercontent.com/oatnil-top/ud-schemas/main/skills/ud-integration/SKILL.md`
 
-These instructions are published at `https://oatnil.com/agent-setup/prompt.md` so you can
+These instructions are published at `https://udctl.com/agent-setup/prompt.md` so you can
 re-verify their authenticity at any time.

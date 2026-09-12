@@ -54,7 +54,7 @@ ud config onboarding --json   # for agents: next_command / requires_human per ch
 ```
 
 For a from-scratch, agent-driven setup (install, sign-in, skill file), have your agent
-fetch and follow [https://oatnil.com/agent-setup/prompt.md](https://oatnil.com/agent-setup/prompt.md) —
+fetch and follow [https://udctl.com/agent-setup/prompt.md](https://udctl.com/agent-setup/prompt.md) —
 that page is the single source of truth for the setup flow, and this section deliberately
 does not restate it.
 

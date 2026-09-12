@@ -51,13 +51,13 @@ import hero from './home-hero.module.css';
  * (task 2b70fc29, owner report 2026-08-18: agents were failing to fetch GitHub
  * content). Measured 2026-08-18 before the switch: no-UA, curl, python-requests,
  * Go-http-client, node-fetch, Claude-User, GPTBot and ChatGPT-User each got
- * `200 text/markdown`, 6019 bytes, from https://oatnil.com/agent-setup/prompt.md
+ * `200 text/markdown`, 6019 bytes, from https://udctl.com/agent-setup/prompt.md
  * — no challenge on any of them. If an agent ever does get challenged here, the
  * fix is a Cloudflare WAF/bot-management exception for this path, not another
  * host: the prompt tells the agent it is published at this URL so it can
  * re-verify authenticity, and that self-reference has to stay true.
  */
-const AGENT_SETUP_PROMPT_URL = 'https://oatnil.com/agent-setup/prompt.md';
+const AGENT_SETUP_PROMPT_URL = 'https://udctl.com/agent-setup/prompt.md';
 const AGENT_SETUP_COMMAND = `Fetch ${AGENT_SETUP_PROMPT_URL}`;
 
 /** The Clipboard API needs a secure context; keep the button working over plain http. */

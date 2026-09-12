@@ -40,7 +40,7 @@ ud config onboarding          # 人类可读的检查表
 ud config onboarding --json   # 给 agent 用：每项带 next_command / requires_human
 ```
 
-如果要从零开始、由 agent 代办的完整设置（安装、登录、技能文件），让你的 agent 抓取并按 [https://oatnil.com/agent-setup/prompt.md](https://oatnil.com/agent-setup/prompt.md) 执行——那份文件是设置流程的唯一权威来源，本节刻意不复述它。
+如果要从零开始、由 agent 代办的完整设置（安装、登录、技能文件），让你的 agent 抓取并按 [https://udctl.com/agent-setup/prompt.md](https://udctl.com/agent-setup/prompt.md) 执行——那份文件是设置流程的唯一权威来源，本节刻意不复述它。
 
 ## 内置技能：CLI 自己教会 agent
 

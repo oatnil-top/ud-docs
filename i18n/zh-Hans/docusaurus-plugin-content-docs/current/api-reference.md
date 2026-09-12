@@ -39,7 +39,7 @@ Authorization: Bearer <access_token>
 原始 JSON 以静态文件方式提供,agent 可以直接抓取:
 
 ```
-https://oatnil.com/api/openapi.json
+https://udctl.com/api/openapi.json
 ```
 
 任何 OpenAPI 工具(Postman、Insomnia、`openapi-generator`、Swagger Editor)也可以直接

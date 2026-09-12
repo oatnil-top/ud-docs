@@ -21,7 +21,10 @@ const config: Config = {
     v4: true,
   },
 
-  url: 'https://oatnil.com',
+  // Canonical host since 2026-09-12 (epic f02f82bb): the owner bought udctl.com for the
+  // rename. Everything derived from this — canonical, hreflang, og:url, sitemap, RSS
+  // links — flips together. oatnil.com stays registered and 301s here (Cloudflare rule).
+  url: 'https://udctl.com',
   baseUrl: '/',
 
   // Canonicalize on the trailing-slash form: Google had accumulated impressions

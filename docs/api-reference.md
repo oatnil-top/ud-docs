@@ -44,7 +44,7 @@ refresh-token, health, version).
 The raw JSON is served as a plain static file, so an agent can fetch it directly:
 
 ```
-https://oatnil.com/api/openapi.json
+https://udctl.com/api/openapi.json
 ```
 
 It is also loadable by any OpenAPI tool — Postman, Insomnia, `openapi-generator`,
