@@ -99,6 +99,27 @@ Custom field names are the slugs you defined when creating the field. For exampl
 | `=` | Equal to | `status = 'todo'` |
 | `!=` | Not equal to | `status != 'archived'` |
 
+:::info `status` is always set — and `''` is one of its values
+Every card has a `status`. The empty string `''` is a legal value of that field and
+means *this card is a document* (no workflow status). Being a value like any other,
+it takes part in comparisons:
+
+- a document matches `status = ''`;
+- a document also matches `status != 'done'`, and `status != 'archived'`, and so on —
+  it is genuinely not `'done'`;
+- `status IN ('todo', 'in-progress')` does **not** match a document, because `''` is
+  not in the list.
+
+So a view meant to show workflow tasks only says so explicitly:
+
+```sql
+-- Overdue tasks, documents excluded
+deadline < 'today' AND status != 'done' AND status != ''
+```
+
+The full list of values is in `ud explain task.frontmatter.status`.
+:::
+
 #### Numeric and Date Comparisons
 
 | Operator | Description | Example |

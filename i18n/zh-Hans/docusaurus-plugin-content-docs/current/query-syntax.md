@@ -99,6 +99,24 @@ cf.department = 'engineering'
 | `=` | 等于 | `status = 'todo'` |
 | `!=` | 不等于 | `status != 'archived'` |
 
+:::info `status` 永远有值 —— 空串 `''` 也是其中一个
+每张卡都有 `status`。空串 `''` 是这个字段的一个合法值，含义是*这张卡是文档*（没有工作流状态）。
+既然它和别的值一样，它就一样参与比较：
+
+- 文档满足 `status = ''`；
+- 文档也满足 `status != 'done'`、`status != 'archived'` 等等 —— 它确实不是 `'done'`；
+- `status IN ('todo', 'in-progress')` **不**匹配文档，因为 `''` 不在列举里。
+
+所以只想看工作流任务的视图，把这件事显式写出来：
+
+```sql
+-- 逾期任务，不含文档
+deadline < 'today' AND status != 'done' AND status != ''
+```
+
+完整取值见 `ud explain task.frontmatter.status`。
+:::
+
 #### 数值和日期比较
 
 | 运算符 | 说明 | 示例 |
