@@ -1,6 +1,6 @@
 ---
 title: Release Notes
-description: Complete version history and changelog for UnDercontrol
+description: Complete version history and changelog for udctl
 sidebar_position: 1
 ---
 
@@ -196,7 +196,7 @@ Merged to `main`, not in any published build yet. These ship with the next versi
 - **Calendar cards that start at the same minute overlap at one pitch instead of shrinking into slivers**, each keeping a readable left strip. A week column that runs out of room draws a counted `+N` chip that lists everything on at that minute — eighteen concurrent items used to be eighteen nine-pixel slivers.
 - **Fewer redundant buttons.** The explorer header drops New task and Close, and a resource's detail header drops its back button; tabs made all three redundant.
 - **`ud` CLI truncation notices print to stderr, before the rows.** `ud … | head` discarded the trailing notice precisely when it mattered, and past the pipe buffer the process died before ever printing it. `-o apply` is now a clean machine-readable stream on stdout, and it warns about truncation at all, where before it truncated in silence.
-- **The desktop app is called UnDercontrol** in the dock, the menu bar, About and the window title.
+- **The desktop app is called udctl** in the dock, the menu bar, About and the window title.
 
 ### Bug Fixes
 
@@ -225,7 +225,7 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   ```
 
 - **No new environment variables.**
-- **The desktop app's user-data directory is renamed** `UnderControl` → `UnDercontrol`, once, at startup. macOS and Windows filesystems are case-insensitive, so there it is a no-op; on a case-sensitive filesystem the old directory is moved across. If you had pointed the app at a data directory nested inside the old one, that stored path is rewritten to match — an external data directory (iCloud, Dropbox) does not match and is left alone. **If the app ever starts up empty after this upgrade, your data is in the `UnderControl` directory beside the new one; move it across by hand.**
+- **The desktop app's user-data directory is renamed** `UnderControl` → `udctl`, once, at startup. macOS and Windows filesystems are case-insensitive, so there it is a no-op; on a case-sensitive filesystem the old directory is moved across. If you had pointed the app at a data directory nested inside the old one, that stored path is rewritten to match — an external data directory (iCloud, Dropbox) does not match and is left alone. **If the app ever starts up empty after this upgrade, your data is in the `UnderControl` directory beside the new one; move it across by hand.**
 - **Building the all-in-one image from source still needs `ud-dataflow-diagram` checked out beside the monorepo**, at the commit named in `ud-vite-app/ud-dataflow-diagram.lock`, which this release moves forward to `2537eba`. **Pulling the published image needs nothing.**
 
 ---
@@ -669,11 +669,11 @@ No manual steps are required. Database migrations apply automatically on startup
 
 ---
 
-Complete version history and new features for UnDercontrol.
+Complete version history and new features for udctl.
 
 ## Version Numbering
 
-UnDercontrol follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., `v0.19.0`:
+udctl follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., `v0.19.0`:
 
 - **MAJOR version 0**: Indicates development version, API and features may change significantly
 - **MINOR version** (e.g., 0.**19**.0): Incremented for new features, major improvements, or breaking changes
@@ -1213,7 +1213,7 @@ UnDercontrol follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 ### New Features
 
 **Self-host without Docker — npm bare-metal install**
-- `npm install -g @oatnil/ud-server @oatnil/ud` now gives you the complete UnDercontrol stack: the server binary ships with the web UI built in.
+- `npm install -g @oatnil/ud-server @oatnil/ud` now gives you the complete udctl stack: the server binary ships with the web UI built in.
 - One command starts the full site: `ud-server -host-domain http://localhost:8080 -data-path ./data` — then log in from the browser. No Docker required.
 
 **Clear startup banner for self-hosted servers**
@@ -1259,7 +1259,7 @@ UnDercontrol follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 - It opens the possession form pre-filled from that expense, so a purchase becomes a tracked possession in one step.
 - The expense itself is never modified — a new possession is created and linked back to it.
 
-**"Onboard your agent to UnDercontrol" button on the homepage**
+**"Onboard your agent to udctl" button on the homepage**
 - One click copies a single line you can paste into any AI agent.
 - The agent reads the setup instructions itself, installs the CLI, and connects to your workspace.
 
@@ -1695,7 +1695,7 @@ UnDercontrol follows **Semantic Versioning** (format: MAJOR.MINOR.PATCH), e.g., 
 ### New Features
 
 - Workspaces, redesigned — Active Sessions now use a full-height master–detail layout at /workspaces, with sub-navigation showing live session-count pills and a more inviting empty state with a clear "New Session" action
-- Smoother onboarding — after you pick a language, UnDercontrol seeds a welcome board and opens a maximized Quick Note so you can start right away
+- Smoother onboarding — after you pick a language, udctl seeds a welcome board and opens a maximized Quick Note so you can start right away
 - System-wide storage limit — admins can now set a total storage volume cap across all users from Admin → Storage, alongside the per-file and per-user limits
 - Desktop apps now offer to install the ud CLI for you when you launch a local workspace without it
 
@@ -4341,7 +4341,7 @@ This release contains internal build and release workflow updates only.
 ### New Features
 
 - Workspace switcher dropdown in workspace TaskPanel
-- "Save to UnDercontrol" button in standalone editor
+- "Save to udctl" button in standalone editor
 
 ### Bug Fixes
 
@@ -5533,7 +5533,7 @@ Export tasks with their notes as PDF files for offline sharing and archiving.
 
 #### Web Clipper (Chrome Extension)
 
-New Chrome browser extension to save web pages as UnDercontrol tasks:
+New Chrome browser extension to save web pages as udctl tasks:
 
 - Click the extension icon, edit the title, and save the entire page
 - Captures full-page HTML snapshots using SingleFile technology

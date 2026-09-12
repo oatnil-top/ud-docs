@@ -1,12 +1,12 @@
 ---
 title: API 参考
-description: UnDercontrol 后端 HTTP API 的完整 OpenAPI(Swagger 2.0)规范
+description: udctl 后端 HTTP API 的完整 OpenAPI(Swagger 2.0)规范
 sidebar_position: 9
 ---
 
 # API 参考
 
-UnDercontrol 后端提供 REST API,其完整的机器可读规范发布在这里:
+udctl 后端提供 REST API,其完整的机器可读规范发布在这里:
 
 - **在线阅读:** [oatnil.com/api/](pathname:///api/)
 - **原始规范文件:** [oatnil.com/api/openapi.json](pathname:///api/openapi.json)

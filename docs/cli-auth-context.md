@@ -6,7 +6,7 @@ sidebar_position: 5
 
 # CLI Multi-Context Authentication
 
-The UnDercontrol CLI supports managing multiple accounts and API endpoints using a kubectl-style context system. This allows you to easily switch between different servers, accounts, or environments.
+The udctl CLI supports managing multiple accounts and API endpoints using a kubectl-style context system. This allows you to easily switch between different servers, accounts, or environments.
 
 ## Overview
 

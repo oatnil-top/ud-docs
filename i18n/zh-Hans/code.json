@@ -18,7 +18,7 @@
     "message": "任务、看板、笔记、账本、agent 团队——你可以随时打开它们，但也可以永远不打开。"
   },
   "alfredp.engine.title": {
-    "message": "Alfred 背后，是完整的 UnDercontrol"
+    "message": "Alfred 背后，是完整的 udctl"
   },
   "alfredp.hero.ctaPrimary": {
     "message": "开始使用 Alfred"
@@ -27,7 +27,7 @@
     "message": "配置 Telegram / Discord"
   },
   "alfredp.hero.sub": {
-    "message": "发一条消息，他会理解、记住、派给合适的 agent，并把结果带回聊天。整个 UnDercontrol，都在这一次对话里。"
+    "message": "发一条消息，他会理解、记住、派给合适的 agent，并把结果带回聊天。整个 udctl，都在这一次对话里。"
   },
   "alfredp.hero.t1": {
     "message": "认识 Alfred，"
@@ -39,7 +39,7 @@
     "message": "Alfred 是住在你 Telegram / Discord 里的私人 AI 管家。发一条消息，他会理解、记住、派给你的 AI 代理，并把结果带回聊天。"
   },
   "alfredp.meta.title": {
-    "message": "Alfred — 你的私人 AI 管家 | UnDercontrol"
+    "message": "Alfred — 你的私人 AI 管家 | udctl"
   },
   "alfredp.phone.al1": {
     "message": "记下了。价格页我建了任务派给 web 团队，截止下周三；登录 bug 已让 prod-debug 跟进。有结果我叫你。"
@@ -172,7 +172,7 @@
     "message": "其他信息"
   },
   "contact.meta.description": {
-    "message": "联系 UnDercontrol 团队 —— Telegram 群、邮件、Discord 或 GitHub。"
+    "message": "联系 udctl 团队 —— Telegram 群、邮件、Discord 或 GitHub。"
   },
   "contact.meta.title": {
     "description": "The contact page meta title",
@@ -248,7 +248,7 @@
     "message": "私人管家"
   },
   "home4.arch.aria": {
-    "message": "UnDercontrol 架构图"
+    "message": "udctl 架构图"
   },
   "home4.arch.cli": {
     "message": "CLI 执行层 — 真正干活的"
@@ -299,7 +299,7 @@
     "message": "⑤ 结果回到聊天"
   },
   "home4.arch.title": {
-    "message": "UnDercontrol 是怎么搭起来的"
+    "message": "udctl 是怎么搭起来的"
   },
   "home4.arch.writesBack": {
     "message": "写回记录"
@@ -350,7 +350,7 @@
     "message": "任务与看板"
   },
   "home4.engine.title": {
-    "message": "五个角度，同一个 UnDercontrol"
+    "message": "五个角度，同一个 udctl"
   },
   "home4.hero.ctaDownload": {
     "message": "下载"
@@ -732,7 +732,7 @@
     "message": "已复制 — 粘贴给你的 AI 代理"
   },
   "homepage.hero.agentSetup.label": {
-    "message": "让你的 AI 代理接入 UnDercontrol"
+    "message": "让你的 AI 代理接入 udctl"
   },
   "homepage.hero.download": {
     "message": "下载桌面应用"
@@ -743,7 +743,7 @@
   },
   "homepage.hero.imageAlt": {
     "description": "Homepage: hero.imageAlt",
-    "message": "UnDercontrol 看板：追踪一次版本发布"
+    "message": "udctl 看板：追踪一次版本发布"
   },
   "homepage.hero.subtitle": {
     "message": "知识库如 Obsidian，项目管理如 Jira，个人财务如 Mint，文件存储如 Google Drive — 一个私有空间，为你和你的 AI 代理而生。"
@@ -1006,7 +1006,7 @@
     "message": "自托管"
   },
   "privacy.sections.appliesTo.p1": {
-    "message": "本政策覆盖所有挂 UnDercontrol 名字的东西：本网站、网页版、桌面应用、命令行工具，以及通过 App Store 与 TestFlight 分发的 iOS 移动应用。下文说到“云服务”，指的是这些客户端默认连接的托管后端 —— 不包括在本地运行的桌面应用，也不包括你自己部署的实例。"
+    "message": "本政策覆盖所有挂 udctl 名字的东西：本网站、网页版、桌面应用、命令行工具，以及通过 App Store 与 TestFlight 分发的 iOS 移动应用。下文说到“云服务”，指的是这些客户端默认连接的托管后端 —— 不包括在本地运行的桌面应用，也不包括你自己部署的实例。"
   },
   "privacy.sections.appliesTo.p2": {
     "message": "如果你用移动应用连我们的托管后端，那么下面所有内容 —— 收集什么、还有谁会处理、保留多久、怎么删除 —— 都适用于你。"
@@ -1016,7 +1016,7 @@
   },
   "privacy.sections.honestTake.p1": {
     "description": "Honest take paragraph 1",
-    "message": "我是一个独立开发者，不是什么大公司。我做 UnDercontrol 的一大初衷，就是想把自己的敏感数据——任务、财务、个人笔记——完全掌控在自己手里，而不是交给大公司。我先是为自己做的，现在分享给大家。"
+    "message": "我是一个独立开发者，不是什么大公司。我做 udctl 的一大初衷，就是想把自己的敏感数据——任务、财务、个人笔记——完全掌控在自己手里，而不是交给大公司。我先是为自己做的，现在分享给大家。"
   },
   "privacy.sections.honestTake.p2": {
     "description": "Honest take paragraph 2",
@@ -1039,7 +1039,7 @@
     "message": "有三处是故意保留的，装作没有就是撒谎。第一，审计日志不随删号消失 —— 一个当事人能抹掉的审计轨迹不叫审计轨迹。它按自己的时限过期：默认 7 天；安全相关事件（登录尝试、群组与成员变更）30 天；少数账号生命周期与系统配置记录（例如“某账号被创建”）永久保留。清理任务每天 03:00 跑一次，所以实际最长比写明的时限多不到一天。第二，如果你的账号拥有 AI agent，那个 agent 的配置行是洗掉内容后退休，而不是删除 —— 它是这个 agent 在别人卡片上留下的每一条评论的作者名的唯一来源，删掉损坏的是别人的数据，不是你的。第三，你的账号拥有的群组是软删除，以便一并处理成员关系与凭据吊销。"
   },
   "privacy.sections.retention.p4": {
-    "message": "现在要删除账号，请用你注册时的邮箱地址发信到 lintao.amons@gmail.com，说明你要删除账号。应用内删除账号已于 2026 年 8 月 21 日上线，在移动应用里可用。网页端没有自助删除入口 —— 如果你只在浏览器里使用 UnDercontrol，邮件就是对你有效的那条途径。"
+    "message": "现在要删除账号，请用你注册时的邮箱地址发信到 lintao.amons@gmail.com，说明你要删除账号。应用内删除账号已于 2026 年 8 月 21 日上线，在移动应用里可用。网页端没有自助删除入口 —— 如果你只在浏览器里使用 udctl，邮件就是对你有效的那条途径。"
   },
   "privacy.sections.retention.p5": {
     "message": "如果你用的是本地存储的桌面应用，或者你自己部署的实例，那这些都与我们无关：删掉数据 —— 乃至整个数据库文件 —— 完全由你自己决定。"
@@ -1072,7 +1072,7 @@
     "message": "还有谁会处理你的数据"
   },
   "privacy.sections.webClipper.p1": {
-    "message": "Web Clipper 扩展只在你点击“保存”时才抓取页面内容，并把它存到你的本地磁盘，或者发送到你配置的那台 UnDercontrol 服务器 —— 不会发给任何第三方。你的登录凭据保存在你自己的设备上，也只会发往同一个服务器地址。扩展的所有脚本都随包提供，不加载任何远程代码，也不追踪你的浏览历史或使用行为。"
+    "message": "Web Clipper 扩展只在你点击“保存”时才抓取页面内容，并把它存到你的本地磁盘，或者发送到你配置的那台 udctl 服务器 —— 不会发给任何第三方。你的登录凭据保存在你自己的设备上，也只会发往同一个服务器地址。扩展的所有脚本都随包提供，不加载任何远程代码，也不追踪你的浏览历史或使用行为。"
   },
   "privacy.sections.webClipper.title": {
     "message": "Web Clipper 浏览器扩展"
@@ -1174,7 +1174,7 @@
     "message": "复制一份 compose 文件，即可运行。"
   },
   "selfhosting.description": {
-    "message": "在你自己的基础设施上自部署 UnDercontrol —— 单个 all-in-one 镜像，或 Docker Compose 与 Kubernetes。PostgreSQL 或 SQLite，本地或 S3 存储。你的数据永不离开你的网络。"
+    "message": "在你自己的基础设施上自部署 udctl —— 单个 all-in-one 镜像，或 Docker Compose 与 Kubernetes。PostgreSQL 或 SQLite，本地或 S3 存储。你的数据永不离开你的网络。"
   },
   "selfhosting.grow.add.k8s": {
     "message": "+ k8s"
@@ -1240,7 +1240,7 @@
     "message": "自部署"
   },
   "selfhosting.hero.lede": {
-    "message": "UnDercontrol 以单个 all-in-one 容器交付——前端和后端打包在一起。用一条命令部署到你自己的基础设施。没有厂商锁定，数据永不离开你的网络。"
+    "message": "udctl 以单个 all-in-one 容器交付——前端和后端打包在一起。用一条命令部署到你自己的基础设施。没有厂商锁定，数据永不离开你的网络。"
   },
   "selfhosting.hero.pill1": {
     "message": "个容器"
@@ -1267,7 +1267,7 @@
     "message": "解锁 PostgreSQL、S3/R2 存储、多用户及角色权限，以及管理员控制台。"
   },
   "selfhosting.license.cardTitle": {
-    "message": "UnDercontrol Pro — 自部署试用"
+    "message": "udctl Pro — 自部署试用"
   },
   "selfhosting.license.label": {
     "message": "免费试用许可证"
@@ -1312,7 +1312,7 @@
     "message": "想用 S3 / R2 存储？"
   },
   "selfhosting.title": {
-    "message": "自部署 UnDercontrol — 你的服务器，你的数据，你说了算"
+    "message": "自部署 udctl — 你的服务器，你的数据，你说了算"
   },
   "selfhosting.why.control.desc": {
     "message": "自由选择数据库、存储、备份与扩展方式。树莓派、家用服务器、VPS 还是 Kubernetes 集群，全凭你决定。"
@@ -1330,7 +1330,7 @@
     "message": "没有厂商锁定"
   },
   "selfhosting.why.offline.desc": {
-    "message": "可部署在私有网络甚至完全隔离的内网环境。UnDercontrol 无需任何外网访问也能正常运行。"
+    "message": "可部署在私有网络甚至完全隔离的内网环境。udctl 无需任何外网访问也能正常运行。"
   },
   "selfhosting.why.offline.title": {
     "message": "离线与内网隔离"
@@ -1902,7 +1902,7 @@
     "message": "任务 · 知识 · AI 代理"
   },
   "subscribe.titleLine2": {
-    "message": "私有、便携、由你掌控 — 一切尽在 UnDercontrol。"
+    "message": "私有、便携、由你掌控 — 一切尽在 udctl。"
   },
   "subscribe.whatsNew": {
     "description": "What's new badge text",
@@ -2244,7 +2244,7 @@
     "message": "支持 macOS、Windows 和 Linux。"
   },
   "home5.hero.ways": {
-    "message": "其它使用 UnDercontrol 的方式："
+    "message": "其它使用 udctl 的方式："
   },
   "home5.strip.explore": {
     "message": "往下看"
@@ -2283,7 +2283,7 @@
     "message": "各自独立发布。"
   },
   "oss.hero.lede": {
-    "message": "这些组件从 UnDercontrol 中抽离出来，以开源许可证发布。你可以阅读它们、把它们装进自己的项目、基于它们开发——完全不需要运行 UnDercontrol。"
+    "message": "这些组件从 udctl 中抽离出来，以开源许可证发布。你可以阅读它们、把它们装进自己的项目、基于它们开发——完全不需要运行 udctl。"
   },
   "oss.hero.pill1": {
     "message": "个仓库"
@@ -2304,7 +2304,7 @@
     "message": "下面每个组件都以其卡片上标注的开源许可证发布。该许可证只覆盖那一个仓库，不覆盖其他任何东西。"
   },
   "oss.boundary.p2": {
-    "message": "UnDercontrol 本身——后端、Web 应用、桌面应用和 CLI——是专有产品，其源码并不公开。安装本页的任何东西，得到的是那个组件，不是产品。"
+    "message": "udctl 本身——后端、Web 应用、桌面应用和 CLI——是专有产品，其源码并不公开。安装本页的任何东西，得到的是那个组件，不是产品。"
   },
   "oss.repos.label": {
     "message": "组件"
@@ -2313,22 +2313,22 @@
     "message": "每一个都能单独用起来。"
   },
   "oss.repos.lede": {
-    "message": "一个仓库要出现在这里，得满足三条：今天就装得上、带许可证、并且能用一句话回答「它和 UnDercontrol 是什么关系」。"
+    "message": "一个仓库要出现在这里，得满足三条：今天就装得上、带许可证、并且能用一句话回答「它和 udctl 是什么关系」。"
   },
   "oss.dataflow.what": {
-    "message": "这是 UnDercontrol 内置的图编辑器，抽离成了一个可以装进你自己应用的 React 组件库。UnDercontrol 就是从这同一个仓库构建的，所以你装到的就是产品里在跑的那个编辑器，不是精简版。"
+    "message": "这是 udctl 内置的图编辑器，抽离成了一个可以装进你自己应用的 React 组件库。udctl 就是从这同一个仓库构建的，所以你装到的就是产品里在跑的那个编辑器，不是精简版。"
   },
   "oss.dataflow.why": {
     "message": "让 agent 用 JSON 写出图，让人用手拖动调整。它从一份普通的 JSON 文档渲染出数据流图或架构图，并把编辑结果以同样的结构交还给你。"
   },
   "oss.schemas.what": {
-    "message": "UnDercontrol 所存对象的 JSON Schema——共 21 个，覆盖任务、笔记、看板、评论、文件、图、agent 等。它们是数据结构的书面定义，和提供数据的服务端分开发布。"
+    "message": "udctl 所存对象的 JSON Schema——共 21 个，覆盖任务、笔记、看板、评论、文件、图、agent 等。它们是数据结构的书面定义，和提供数据的服务端分开发布。"
   },
   "oss.schemas.why": {
     "message": "你要写自己的客户端、导入工具或集成。照着它们做校验，而不是从 API 响应里反推结构；字段变了你会立刻知道，而不是在生产环境里才发现。"
   },
   "oss.clipper.what": {
-    "message": "Web Clipper 浏览器扩展。它把网页存成完整的 HTML 快照或 Markdown，可以存到本地文件，也可以存进 UnDercontrol——存本地那一半完全不需要账号。"
+    "message": "Web Clipper 浏览器扩展。它把网页存成完整的 HTML 快照或 Markdown，可以存到本地文件，也可以存进 udctl——存本地那一半完全不需要账号。"
   },
   "oss.clipper.why": {
     "message": "你想把读过的东西留下来。剪藏工具必然会看到你访问的每一个页面；这一个是完整公开的，所以你可以在安装之前，先读清楚它到底拿这份权限做了什么。"
@@ -2364,7 +2364,7 @@
     "message": "开源组件"
   },
   "oss.description": {
-    "message": "三个从 UnDercontrol 抽离并以开源许可证发布的组件：ud-dataflow-diagram React 编辑器（MIT）、ud-schemas JSON Schema（MIT），以及 Web Clipper 浏览器扩展（AGPL-3.0）。"
+    "message": "三个从 udctl 抽离并以开源许可证发布的组件：ud-dataflow-diagram React 编辑器（MIT）、ud-schemas JSON Schema（MIT），以及 Web Clipper 浏览器扩展（AGPL-3.0）。"
   },
   "oss.reachwhen": {
     "message": "适合这种场景："

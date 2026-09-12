@@ -5,11 +5,11 @@ sidebar_position: 1
 
 # Configure AI Provider
 
-Learn how to add your own AI provider to UnDercontrol for AI chat and smart features like task summaries and intelligent categorization.
+Learn how to add your own AI provider to udctl for AI chat and smart features like task summaries and intelligent categorization.
 
 ## Prerequisites
 
-- An UnDercontrol account (registered user, not visitor)
+- An udctl account (registered user, not visitor)
 - An API key from an AI provider (OpenAI, GitHub Models, or any OpenAI-compatible service)
 
 ## Steps

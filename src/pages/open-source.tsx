@@ -11,14 +11,14 @@ import styles from './open-source.module.css';
  * worded the way it is (ud task ce943e6e):
  *
  *   Every sentence containing the phrase "open source" must have a COMPONENT or
- *   a REPOSITORY as its subject — never UnDercontrol. The product is
+ *   a REPOSITORY as its subject — never udctl. The product is
  *   proprietary; only these extracted pieces are published.
  *
  * The check is literal: `grep -n -i 'open.source'` over this file, then read the
  * subject of each hit. That is why the boundary note states the proprietary half
  * WITHOUT the phrase — it says "its source is not published". Stating the same
  * fact the obvious way, as a negative sentence about the product, would put
- * UnDercontrol in the subject slot of a matching line: right meaning, failed
+ * udctl in the subject slot of a matching line: right meaning, failed
  * check. The wording above is the one that is both true and greppable.
  *
  * Only three repositories are listed, and that is a decision, not a backlog:
@@ -50,7 +50,7 @@ function HeroSection() {
       </h1>
       <p className={`${styles.lede} ${styles.heroLede}`}>
         <Translate id="oss.hero.lede">
-          These components were extracted from UnDercontrol and released under open source licenses. You can read them, install them into your own projects, and build against them — without running UnDercontrol at all.
+          These components were extracted from udctl and released under open source licenses. You can read them, install them into your own projects, and build against them — without running udctl at all.
         </Translate>
       </p>
       <div className={styles.pillrow}>
@@ -84,7 +84,7 @@ function BoundaryNote() {
         </p>
         <p>
           <Translate id="oss.boundary.p2">
-            UnDercontrol itself — the backend, the web app, the desktop app and the CLI — is a proprietary product, and its source is not published. Installing anything on this page gives you that component, not the product.
+            udctl itself — the backend, the web app, the desktop app and the CLI — is a proprietary product, and its source is not published. Installing anything on this page gives you that component, not the product.
           </Translate>
         </p>
       </div>
@@ -103,7 +103,7 @@ function ReposSection() {
       </h2>
       <p className={styles.lede}>
         <Translate id="oss.repos.lede">
-          A repository earns a place here by being installable today, carrying a license, and having a one-sentence answer to “what does this have to do with UnDercontrol?”
+          A repository earns a place here by being installable today, carrying a license, and having a one-sentence answer to “what does this have to do with udctl?”
         </Translate>
       </p>
 
@@ -117,7 +117,7 @@ function ReposSection() {
           </div>
           <p>
             <Translate id="oss.dataflow.what">
-              This is the diagram editor built into UnDercontrol, extracted into a React component library you can install in your own app. UnDercontrol builds from this same repository, so what you install is the editor that ships in the product — not a reduced copy of it.
+              This is the diagram editor built into udctl, extracted into a React component library you can install in your own app. udctl builds from this same repository, so what you install is the editor that ships in the product — not a reduced copy of it.
             </Translate>
           </p>
           <p>
@@ -153,7 +153,7 @@ function ReposSection() {
           </div>
           <p>
             <Translate id="oss.schemas.what">
-              The JSON Schemas for the objects UnDercontrol stores — 21 of them, covering tasks, notes, boards, comments, files, diagrams, agents and more. They are the written-down shape of the data, published separately from the server that serves it.
+              The JSON Schemas for the objects udctl stores — 21 of them, covering tasks, notes, boards, comments, files, diagrams, agents and more. They are the written-down shape of the data, published separately from the server that serves it.
             </Translate>
           </p>
           <p>
@@ -180,7 +180,7 @@ function ReposSection() {
           </div>
           <p>
             <Translate id="oss.clipper.what">
-              The Web Clipper browser extension. It saves a page as a full HTML snapshot or as Markdown, either to a local file or into UnDercontrol — and the local half works with no account at all.
+              The Web Clipper browser extension. It saves a page as a full HTML snapshot or as Markdown, either to a local file or into udctl — and the local half works with no account at all.
             </Translate>
           </p>
           <p>
@@ -245,7 +245,7 @@ export default function OpenSource(): ReactNode {
       description={translate({
         id: 'oss.description',
         message:
-          'Three components extracted from UnDercontrol and released under open source licenses: the ud-dataflow-diagram React editor (MIT), the ud-schemas JSON Schemas (MIT), and the Web Clipper browser extension (AGPL-3.0).',
+          'Three components extracted from udctl and released under open source licenses: the ud-dataflow-diagram React editor (MIT), the ud-schemas JSON Schemas (MIT), and the Web Clipper browser extension (AGPL-3.0).',
         description: 'The open source components page meta description',
       })}>
       <main className={styles.page}>

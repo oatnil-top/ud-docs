@@ -1,11 +1,11 @@
 ---
 title: Download
-description: All UnDercontrol distribution channels — desktop apps, CLI, web app, browser extension, and self-host image
+description: All udctl distribution channels — desktop apps, CLI, web app, browser extension, and self-host image
 ---
 
 # Download
 
-All ways to get UnDercontrol. Humans should prefer the [Download page](/download);
+All ways to get udctl. Humans should prefer the [Download page](/download);
 this document states the same facts in a machine-readable form.
 
 ## Web app
@@ -69,7 +69,7 @@ Docs: [CLI guide](/docs/cli) · [AI agent integration](/docs/cli-ai-integration)
 
 ## Browser extension
 
-- [UnDercontrol Web Clipper](https://chromewebstore.google.com/detail/undercontrol-web-clipper/mckkbigikfkoeddpcbhdmpncoljoagog)
+- [udctl Web Clipper](https://chromewebstore.google.com/detail/undercontrol-web-clipper/mckkbigikfkoeddpcbhdmpncoljoagog)
   on the Chrome Web Store — save web pages as tasks with full-page snapshots and
   video transcript extraction.
 

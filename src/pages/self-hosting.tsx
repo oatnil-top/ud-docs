@@ -33,7 +33,7 @@ docker run -d -p 3000:8080 \\
   -v undercontrol-data:/app/data \\
   lintao0o0/undercontrol:latest`;
 
-const ENV_FILE = `# UnDercontrol - free 3-month Pro trial license
+const ENV_FILE = `# udctl - free 3-month Pro trial license
 LICENSE_TOKEN=${LICENSE_TOKEN}
 LICENSE_HOST_SECRET=${LICENSE_SECRET}`;
 
@@ -233,7 +233,7 @@ function HeroSection() {
       </h1>
       <p className={`${styles.lede} ${styles.heroLede}`}>
         <Translate id="selfhosting.hero.lede">
-          UnDercontrol ships as a single all-in-one container — frontend and backend baked together. Run it on your own infrastructure with one command. No vendor lock-in, and nothing ever leaves your network.
+          udctl ships as a single all-in-one container — frontend and backend baked together. Run it on your own infrastructure with one command. No vendor lock-in, and nothing ever leaves your network.
         </Translate>
       </p>
       <div className={styles.pillrow}>
@@ -326,7 +326,7 @@ const WHY_TEXT: Record<string, {title: ReactNode; desc: ReactNode}> = {
     title: <Translate id="selfhosting.why.offline.title">Offline & air-gapped</Translate>,
     desc: (
       <Translate id="selfhosting.why.offline.desc">
-        Run inside a private network or a fully air-gapped environment. UnDercontrol keeps working without any outbound internet access.
+        Run inside a private network or a fully air-gapped environment. udctl keeps working without any outbound internet access.
       </Translate>
     ),
   },
@@ -481,7 +481,7 @@ function LicenseSection() {
           ◆ <Translate id="selfhosting.license.tag">Free · Pro tier</Translate>
         </span>
         <h3>
-          <Translate id="selfhosting.license.cardTitle">UnDercontrol Pro — Self-Host Trial</Translate>
+          <Translate id="selfhosting.license.cardTitle">udctl Pro — Self-Host Trial</Translate>
         </h3>
         <p>
           <Translate id="selfhosting.license.cardDesc">
@@ -715,12 +715,12 @@ export default function SelfHosting(): ReactNode {
     <Layout
       title={translate({
         id: 'selfhosting.title',
-        message: 'Self-Host UnDercontrol — Your Server, Your Data, Your Rules',
+        message: 'Self-Host udctl — Your Server, Your Data, Your Rules',
         description: 'The self-hosting page meta title',
       })}
       description={translate({
         id: 'selfhosting.description',
-        message: 'Self-host UnDercontrol on your own infrastructure — one all-in-one image, or Docker Compose and Kubernetes. PostgreSQL or SQLite, local or S3 storage. Your data never leaves your network.',
+        message: 'Self-host udctl on your own infrastructure — one all-in-one image, or Docker Compose and Kubernetes. PostgreSQL or SQLite, local or S3 storage. Your data never leaves your network.',
         description: 'The self-hosting page meta description',
       })}>
       <main className={styles.page}>

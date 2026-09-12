@@ -11,7 +11,8 @@ const config: Config = {
   // og:title carry (theme formats `${page} | ${title}`). Chosen 2026-09-12 (ud task
   // f02f82bb): 'ud' and 'undercontrol' cannot be ranked for (two letters / the
   // phrase "under control"), 'udctl' has no competing owner anywhere we checked.
-  // The navbar/h1 still read UnDercontrol on purpose; this is the <title> only.
+  // Since the rename (same day, same task) the navbar, h1 and body copy say udctl
+  // too; UnDercontrol survives as the former name in the intro and the copyright.
   title: 'udctl',
   tagline: 'One workspace for tasks, knowledge, and AI agents — private, portable, yours.',
   favicon: 'img/favicon.svg',
@@ -102,9 +103,9 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: 'UnDercontrol',
+      title: 'udctl',
       logo: {
-        alt: 'UnDercontrol Logo',
+        alt: 'udctl Logo',
         src: 'img/favicon.svg',
       },
       // Three destinations on the left, three controls on the right — the

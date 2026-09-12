@@ -1,12 +1,12 @@
 ---
 title: CLI 命令参考
-description: UnDercontrol 命令行工具完整参考手册
+description: udctl 命令行工具完整参考手册
 sidebar_position: 4
 ---
 
 # CLI 命令参考
 
-UnDercontrol CLI (`ud`) 是一个用于从终端管理任务的命令行工具。支持直接命令和带有 vim 风格快捷键的交互式 TUI 模式。
+udctl CLI (`ud`) 是一个用于从终端管理任务的命令行工具。支持直接命令和带有 vim 风格快捷键的交互式 TUI 模式。
 
 ## 安装
 
@@ -81,7 +81,7 @@ ud login
 # 你自己的服务器 —— 常规情况。填它的地址，有端口就带上端口。
 ud login --api-url https://ud.example.com -n personal
 
-# UnDercontrol 桌面版会在你自己的机器上跑一个后端：
+# udctl 桌面版会在你自己的机器上跑一个后端：
 ud login --api-url http://localhost:8888 -n desktop
 ```
 
@@ -656,7 +656,7 @@ export EDITOR=vim
 ```markdown
 # 任务管理
 
-使用 UnDercontrol CLI 管理项目任务：
+使用 udctl CLI 管理项目任务：
 
 - 列出任务：`ud get task`
 - 查看任务详情：`ud describe task <id>`

@@ -6,7 +6,7 @@ sidebar_position: 4
 
 ## Overview
 
-The Accounts API provides RESTful endpoints for managing financial accounts in UnDercontrol. All endpoints require authentication via Bearer token.
+The Accounts API provides RESTful endpoints for managing financial accounts in udctl. All endpoints require authentication via Bearer token.
 
 ## Authentication
 
@@ -29,7 +29,7 @@ For local development:
 http://localhost:4000/api/v1
 ```
 
-On the test server UnDercontrol runs for trying the product, the base is
+On the test server udctl runs for trying the product, the base is
 `https://api.oatnil.com/api/v1`. Note `https://ud.oatnil.com` is the web app, not the API:
 every API path under it answers 404.
 

@@ -5,7 +5,7 @@ sidebar_position: 25
 
 # Visualise a Database Schema with Dataflow Diagrams
 
-Turn a running PostgreSQL database into an interactive dataflow diagram in UnDercontrol. This guide uses Keycloak's database as a worked example.
+Turn a running PostgreSQL database into an interactive dataflow diagram in udctl. This guide uses Keycloak's database as a worked example.
 
 ## Overview
 
@@ -84,7 +84,7 @@ The AI creates a node for each table and draws pipes for foreign key relationshi
 
 ### Option B: External AI + JSON Import
 
-If you don't have an AI provider configured in UnDercontrol, use an external AI to generate the JSON.
+If you don't have an AI provider configured in udctl, use an external AI to generate the JSON.
 
 1. Click **Copy Prompt** in the toolbar — this copies a system prompt to your clipboard
 2. Paste it into any AI tool (ChatGPT, Claude, etc.) along with your schema file content

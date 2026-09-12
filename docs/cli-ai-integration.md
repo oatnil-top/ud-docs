@@ -7,7 +7,7 @@ sidebar_position: 6
 
 # The AI Agent CLI
 
-`ud` is the UnDercontrol command-line tool, and it is built to be driven by AI coding
+`ud` is the udctl command-line tool, and it is built to be driven by AI coding
 agents as much as by you. It ships with **built-in skills** — self-describing command
 references an agent loads on demand — so your agents can read tasks, record progress,
 upload files, and close work without you hand-maintaining a prompt file.
@@ -130,7 +130,7 @@ ud cook board
 ## Human-in-the-loop by @mention
 
 Agents work on their own, but you stay the review gate. Comments on a task are the channel:
-**@mention an agent in a task comment and it wakes up** — UnDercontrol starts a workspace
+**@mention an agent in a task comment and it wakes up** — udctl starts a workspace
 session for it on the machine running your daemon, and the agent picks the task up with the
 description, notes, and links as context.
 
@@ -245,7 +245,7 @@ notes, and attach files, all through the same terminal it already uses for your 
 
 `ud` does. It is a plain command-line tool with no editor plugin and no vendor lock-in, so
 any terminal-based agent — Codex, Claude Code, Cursor, OpenCode — can drive it with the
-shell access it already has. UnDercontrol treats the agent CLI as configuration: you point
+shell access it already has. udctl treats the agent CLI as configuration: you point
 it at whichever command you run, and the same task board serves all of them.
 
 ### How do AI agents learn CLI commands?
@@ -258,7 +258,7 @@ installed, so there is nothing to regenerate after an upgrade.
 
 ### Can I run this self-hosted?
 
-Yes. UnDercontrol is self-hostable: deploy with Docker Compose or Kubernetes, using SQLite
+Yes. udctl is self-hostable: deploy with Docker Compose or Kubernetes, using SQLite
 for a single user or PostgreSQL for a team, and point the CLI at your own server with
 `ud login --api-url https://your-server`. Your tasks, notes, and files stay on infrastructure
 you control. See the [Self-Deployment Guide](./self-deployment.md) for the deployment

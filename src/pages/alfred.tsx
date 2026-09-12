@@ -34,7 +34,7 @@ function AlfredHero() {
         <p className={styles.sub}>
           <Translate id="alfredp.hero.sub">
             Send one message — he understands, remembers, delegates to the right agent, and brings the result back to
-            the chat. All of UnDercontrol, one conversation away.
+            the chat. All of udctl, one conversation away.
           </Translate>
         </p>
         <div className={styles.ctas}>
@@ -175,7 +175,7 @@ function EngineSection() {
             <Translate id="alfredp.engine.eyebrow">The engine</Translate>
           </div>
           <h2>
-            <Translate id="alfredp.engine.title">Behind Alfred: all of UnDercontrol</Translate>
+            <Translate id="alfredp.engine.title">Behind Alfred: all of udctl</Translate>
           </h2>
           <p className={styles.lede}>
             <Translate id="alfredp.engine.lede">
@@ -214,7 +214,7 @@ export default function AlfredPage(): ReactNode {
     <Layout
       title={translate({
         id: 'alfredp.meta.title',
-        message: 'Alfred — Your Private AI Butler | UnDercontrol',
+        message: 'Alfred — Your Private AI Butler | udctl',
         description: 'The Alfred page meta title',
       })}
       description={translate({

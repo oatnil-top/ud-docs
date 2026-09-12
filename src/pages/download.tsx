@@ -280,8 +280,8 @@ function Hero() {
           line lives here in the body copy instead. */}
       <p className={`${styles.lede} ${styles.heroLede}`}>
         {t({
-          en: 'UnDercontrol runs where you do. Every client is free to start with, and they all connect to the same workspace — our cloud, or ',
-          zh: 'UnDercontrol 跟随你的工作方式。每一个都可以免费开始，也都连接同一个工作空间——我们的云端，或',
+          en: 'udctl runs where you do. Every client is free to start with, and they all connect to the same workspace — our cloud, or ',
+          zh: 'udctl 跟随你的工作方式。每一个都可以免费开始，也都连接同一个工作空间——我们的云端，或',
         })}
         <a href="#selfhost">{t({en: 'a server you run yourself', zh: '你自己部署的服务器'})}</a>
         {t({en: '.', zh: '。'})}
@@ -444,8 +444,8 @@ function ExtensionSection() {
           </h2>
           <p className={styles.lede}>
             {t({
-              en: 'UnDercontrol Web Clipper saves any page as a task with a full-page snapshot — video transcripts included.',
-              zh: 'UnDercontrol Web Clipper 把任意网页存为任务，附带整页快照——还能提取视频字幕。',
+              en: 'udctl Web Clipper saves any page as a task with a full-page snapshot — video transcripts included.',
+              zh: 'udctl Web Clipper 把任意网页存为任务，附带整页快照——还能提取视频字幕。',
             })}
           </p>
         </div>
@@ -546,12 +546,12 @@ export default function DownloadPage(): ReactNode {
   return (
     <Layout
       title={t({
-        en: 'Download UnDercontrol — Desktop, CLI, Web, and Self-Host',
-        zh: '下载 UnDercontrol——桌面端、CLI、网页版与私有部署',
+        en: 'Download udctl — Desktop, CLI, Web, and Self-Host',
+        zh: '下载 udctl——桌面端、CLI、网页版与私有部署',
       })}
       description={t({
-        en: 'Download UnDercontrol for macOS, Windows, and Linux, install the CLI from npm, add the browser extension, or self-host the all-in-one Docker image.',
-        zh: '下载 macOS、Windows、Linux 桌面版，通过 npm 安装 CLI，添加浏览器扩展，或用 all-in-one Docker 镜像私有部署 UnDercontrol。',
+        en: 'Download udctl for macOS, Windows, and Linux, install the CLI from npm, add the browser extension, or self-host the all-in-one Docker image.',
+        zh: '下载 macOS、Windows、Linux 桌面版，通过 npm 安装 CLI，添加浏览器扩展，或用 all-in-one Docker 镜像私有部署 udctl。',
       })}>
       <main className={styles.page}>
         <PlatformGlyphDefs />

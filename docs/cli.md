@@ -1,12 +1,12 @@
 ---
 title: CLI Reference
-description: Complete command reference for the UnDercontrol CLI tool
+description: Complete command reference for the udctl CLI tool
 sidebar_position: 4
 ---
 
 # CLI Reference
 
-The UnDercontrol CLI (`ud`) is a command-line tool for managing tasks from the terminal. It supports both direct commands and an interactive TUI mode with vim-style keybindings.
+The udctl CLI (`ud`) is a command-line tool for managing tasks from the terminal. It supports both direct commands and an interactive TUI mode with vim-style keybindings.
 
 ## Installation
 
@@ -88,11 +88,11 @@ The server URL comes from the active context (or the `--api-url` flag). To log i
 # Your own server — the usual case. Use its URL, including the port if it has one.
 ud login --api-url https://ud.example.com -n personal
 
-# The UnDercontrol desktop app runs a backend on your own machine:
+# The udctl desktop app runs a backend on your own machine:
 ud login --api-url http://localhost:8888 -n desktop
 ```
 
-No server yet and just want to try UnDercontrol? Point at `https://api.oatnil.com` — a
+No server yet and just want to try udctl? Point at `https://api.oatnil.com` — a
 **test server** we run for trying the product, not a hosting plan, so don't keep real work
 there. Sign up for it at [ud.oatnil.com](https://ud.oatnil.com) first:
 
@@ -666,7 +666,7 @@ Create `.claude/instructions.md` or `.cursorrules` in your project:
 ```markdown
 # Task Management
 
-Use UnDercontrol CLI to manage project tasks:
+Use udctl CLI to manage project tasks:
 
 - List tasks: `ud get task`
 - View task details: `ud describe task <id>`

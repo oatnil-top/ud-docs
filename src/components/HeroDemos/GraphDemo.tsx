@@ -18,7 +18,7 @@ const VB_W = 460;
 const VB_H = 360;
 
 const INITIAL: Node[] = [
-  {id: 'ud', x: 232, y: 186, label: 'UnDercontrol', hub: true},
+  {id: 'ud', x: 232, y: 186, label: 'udctl', hub: true},
   {id: 'pricing', x: 110, y: 84, label: 'Pricing page'},
   {id: 'login', x: 352, y: 76, label: 'Login bug'},
   {id: 'meeting', x: 84, y: 274, label: 'Meeting notes'},

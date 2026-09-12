@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Pricing
 
-UnDercontrol is **self-hostable** — run any tier on your own infrastructure for complete data control, or use our hosted app at [ud.oatnil.com](https://ud.oatnil.com). Flexible pricing to match your needs.
+udctl is **self-hostable** — run any tier on your own infrastructure for complete data control, or use our hosted app at [ud.oatnil.com](https://ud.oatnil.com). Flexible pricing to match your needs.
 
 ## Subscription Tiers
 
@@ -32,7 +32,7 @@ Perfect for individual users managing their own finances.
 **Perfect for:**
 - Personal finance management
 - Individual budget tracking
-- Getting started with UnDercontrol
+- Getting started with udctl
 - Testing before upgrading
 
 ---
@@ -76,7 +76,7 @@ Support the project while enjoying Pro features.
 **Features:** Identical to Pro tier
 
 **Why choose Max?**
-- 🎁 Support continued development of UnDercontrol
+- 🎁 Support continued development of udctl
 - 🚀 Help fund new features and improvements
 - ⭐ Show your appreciation for the project
 - 💪 Enable faster updates and better support
@@ -87,7 +87,7 @@ Support the project while enjoying Pro features.
 - Users who value the project's sustainability
 
 :::info Supporter Tier
-Max tier has the same features as Pro. The higher price directly supports UnDercontrol's development and helps keep the project thriving. Thank you for your support!
+Max tier has the same features as Pro. The higher price directly supports udctl's development and helps keep the project thriving. Thank you for your support!
 :::
 
 ---
@@ -116,14 +116,14 @@ Max tier has the same features as Pro. The higher price directly supports UnDerc
 ## How Licensing Works
 
 ### Personal Tier (Free)
-- **No license needed** - Just install and start using UnDercontrol
+- **No license needed** - Just install and start using udctl
 - Perfect for personal use
 - Get started in minutes
 
 ### Pro/Max Tiers (Paid)
 1. Purchase your license
 2. Receive a license key via email
-3. Add the license key when installing UnDercontrol
+3. Add the license key when installing udctl
 4. All Pro/Max features unlock automatically
 
 :::tip Simple Setup
@@ -134,7 +134,7 @@ After purchasing, you'll receive detailed instructions on how to activate your l
 
 ## Installation
 
-UnDercontrol works on any platform:
+udctl works on any platform:
 
 - **Windows** - One-click installation
 - **Mac** - Simple setup via Terminal
@@ -178,23 +178,23 @@ Simply replace your Pro license with a Max license. All features remain the same
 
 ## Frequently Asked Questions
 
-### Where does UnDercontrol run?
+### Where does udctl run?
 
 You choose. Self-host it on your own infrastructure (server, VPS, or local machine) for complete control of your data — or use our hosted app at [ud.oatnil.com](https://ud.oatnil.com) if you'd rather not run your own server. For maximum privacy, self-hosting keeps everything on hardware you control.
 
 ### Do I need technical knowledge to self-host?
 
-**Personal tier:** No! Our one-line installation script handles everything. If you can copy and paste a command, you can run UnDercontrol.
+**Personal tier:** No! Our one-line installation script handles everything. If you can copy and paste a command, you can run udctl.
 
 **Pro/Max tiers:** Basic computer skills are enough. Advanced features like cloud storage are optional and come with step-by-step guides.
 
 ### Can I try Pro features before purchasing?
 
-Yes! The Personal tier includes all core features. You can evaluate UnDercontrol thoroughly before upgrading. Pro/Max mainly adds multi-user support and storage flexibility.
+Yes! The Personal tier includes all core features. You can evaluate udctl thoroughly before upgrading. Pro/Max mainly adds multi-user support and storage flexibility.
 
 ### What happens if my Pro/Max license expires?
 
-Don't worry - your data is safe! Your UnDercontrol installation automatically switches back to Personal tier (free version):
+Don't worry - your data is safe! Your udctl installation automatically switches back to Personal tier (free version):
 - Only one user can access the system (the admin)
 - Advanced features like team management become unavailable
 - Cloud storage switches to local storage
@@ -215,7 +215,7 @@ You can also use local storage (files saved on your server) with any tier.
 
 ### Is the license per server or per user?
 
-**One license per installation.** If you install UnDercontrol on one server, you need one license - no matter how many people use it (up to your license's user limit).
+**One license per installation.** If you install udctl on one server, you need one license - no matter how many people use it (up to your license's user limit).
 
 Example: If you have a Pro license for 10 users, all 10 people can use the same installation with one license.
 
@@ -240,7 +240,7 @@ We're here to help!
 
 ### Try Personal Tier (Free)
 
-Start using UnDercontrol in minutes with our Personal tier:
+Start using udctl in minutes with our Personal tier:
 
 **Mac/Linux:**
 ```bash

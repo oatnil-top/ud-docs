@@ -212,7 +212,7 @@ export default function ContactPage(): ReactNode {
       })}
       description={translate({
         id: 'contact.meta.description',
-        message: 'Get in touch with the UnDercontrol team — Telegram group, email, Discord, or GitHub.',
+        message: 'Get in touch with the udctl team — Telegram group, email, Discord, or GitHub.',
         description: 'The contact page meta description',
       })}>
       <main className={styles.scope}>

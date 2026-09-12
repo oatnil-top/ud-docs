@@ -41,8 +41,8 @@ function Hero() {
       </h1>
       <p className={styles.lede}>
         {t({
-          en: 'We are building a hosted UnDercontrol you can subscribe to — no servers, no maintenance. It is not ready yet, and we would rather say "coming" than run a service we cannot make reliable. Until then, everything works today on infrastructure you control.',
-          zh: '我们正在打造可以直接订阅的 UnDercontrol 托管云服务——无需服务器、无需运维。它还没准备好，与其上线一个我们无法保证可靠性的服务，不如坦诚地说"即将推出"。在那之前，所有功能今天就能跑在你自己掌控的环境里。',
+          en: 'We are building a hosted udctl you can subscribe to — no servers, no maintenance. It is not ready yet, and we would rather say "coming" than run a service we cannot make reliable. Until then, everything works today on infrastructure you control.',
+          zh: '我们正在打造可以直接订阅的 udctl 托管云服务——无需服务器、无需运维。它还没准备好，与其上线一个我们无法保证可靠性的服务，不如坦诚地说"即将推出"。在那之前，所有功能今天就能跑在你自己掌控的环境里。',
         })}
       </p>
     </header>
@@ -111,8 +111,8 @@ export default function SubscribePage(): ReactNode {
         zh: '订阅——云端托管即将推出',
       })}
       description={t({
-        en: 'The hosted UnDercontrol cloud subscription is coming soon. Until then, self-host with Docker or npm, or run the fully-local desktop app for free.',
-        zh: 'UnDercontrol 云端托管订阅即将推出。在此之前，可通过 Docker 或 npm 私有部署，或免费使用完全本地的桌面应用。',
+        en: 'The hosted udctl cloud subscription is coming soon. Until then, self-host with Docker or npm, or run the fully-local desktop app for free.',
+        zh: 'udctl 云端托管订阅即将推出。在此之前，可通过 Docker 或 npm 私有部署，或免费使用完全本地的桌面应用。',
       })}>
       <main className={styles.page}>
         <Hero />

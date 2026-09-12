@@ -2,13 +2,13 @@
 sidebar_position: 1
 ---
 
-# Welcome to UnDercontrol
+# Welcome to udctl
 
-UnDercontrol is a self-hosted personal finance and task management app. Track your budget, log expenses, manage tasks, and organize files — all in one place, with full ownership of your data.
+udctl (formerly UnDercontrol) is a self-hosted personal finance and task management app. Track your budget, log expenses, manage tasks, and organize files — all in one place, with full ownership of your data.
 
-## What is UnDercontrol?
+## What is udctl?
 
-Built by an indie developer + AI, UnDercontrol gives you a unified workspace for managing your money and time without relying on third-party services:
+Built by an indie developer + AI, udctl gives you a unified workspace for managing your money and time without relying on third-party services:
 
 - **Budget & Expense Tracking**: Create budgets, log expenses, and monitor your spending
 - **Task & Issue Tracker**: A lightweight issue tracker with markdown editing, bi-directional linking, and query syntax for advanced filtering
@@ -39,7 +39,7 @@ Deploy via Docker Compose for simplicity or Kubernetes for larger setups. Suppor
 
 ## Getting Started
 
-Ready to deploy UnDercontrol? Check out our [Self-Deployment Guide](./self-deployment.md) to get started.
+Ready to deploy udctl? Check out our [Self-Deployment Guide](./self-deployment.md) to get started.
 
 ### Quick Links
 
@@ -50,7 +50,7 @@ Ready to deploy UnDercontrol? Check out our [Self-Deployment Guide](./self-deplo
 
 ## Requirements
 
-To deploy UnDercontrol, you'll need:
+To deploy udctl, you'll need:
 
 - Docker and Docker Compose (or Kubernetes)
 - Basic understanding of container deployments

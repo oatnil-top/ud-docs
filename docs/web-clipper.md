@@ -1,12 +1,12 @@
 ---
 title: Web Clipper (Chrome Extension)
-description: Save web pages as UnDercontrol tasks with full-page snapshots
+description: Save web pages as udctl tasks with full-page snapshots
 sidebar_position: 8
 ---
 
 # Web Clipper (Chrome Extension)
 
-The UnDercontrol Web Clipper is a Chrome browser extension that saves web pages as UnDercontrol tasks with a full-page HTML snapshot attached as a resource.
+The udctl Web Clipper is a Chrome browser extension that saves web pages as udctl tasks with a full-page HTML snapshot attached as a resource.
 
 ## Features
 
@@ -14,13 +14,13 @@ The UnDercontrol Web Clipper is a Chrome browser extension that saves web pages 
 - **Full-page snapshot** — Captures the entire page as a single HTML file using [SingleFile](https://github.com/gildas-lormeau/SingleFile)
 - **Auto-attachment** — The HTML snapshot is attached as a resource to the newly created task
 - **Custom title** — Edit the task title before saving (defaults to the page title)
-- **API Key auth** — Connects securely using your UnDercontrol API key
+- **API Key auth** — Connects securely using your udctl API key
 
 ## Installation
 
 Install directly from the [Chrome Web Store](https://chromewebstore.google.com/detail/undercontrol-web-clipper/mckkbigikfkoeddpcbhdmpncoljoagog):
 
-1. Visit the [UnDercontrol Web Clipper](https://chromewebstore.google.com/detail/undercontrol-web-clipper/mckkbigikfkoeddpcbhdmpncoljoagog) page on the Chrome Web Store
+1. Visit the [udctl Web Clipper](https://chromewebstore.google.com/detail/undercontrol-web-clipper/mckkbigikfkoeddpcbhdmpncoljoagog) page on the Chrome Web Store
 2. Click **Add to Chrome**
 3. Confirm by clicking **Add extension**
 
@@ -30,7 +30,7 @@ The extension icon will appear in the Chrome toolbar.
 
 ### Step 1: Get an API Key
 
-1. Log in to the UnDercontrol web app
+1. Log in to the udctl web app
 2. Go to **Settings** → **API Keys**
 3. Click **Create API Key** — the key starts with `ak_`
 4. Copy the key (it's only shown once)
@@ -39,7 +39,7 @@ The extension icon will appear in the Chrome toolbar.
 
 ### Step 2: Configure the Extension
 
-1. Click the UnDercontrol icon in the Chrome toolbar
+1. Click the udctl icon in the Chrome toolbar
 2. Enter your **API URL** — your own server, e.g. `https://ud.example.com` (or `https://api.oatnil.com` if you are on the test server; `https://ud.oatnil.com` is the web app, not the API)
 3. Enter your **API Key** (starts with `ak_`)
 4. Click **Test** to verify the connection
@@ -51,12 +51,12 @@ The extension icon will appear in the Chrome toolbar.
 ### Saving a Page
 
 1. Navigate to the web page you want to save
-2. Click the UnDercontrol icon in the toolbar
+2. Click the udctl icon in the toolbar
 3. Edit the task title if desired (pre-filled with the page title)
 4. Click **Save Page**
 5. Wait for the capture to complete — the popup auto-closes on success
 
-The saved page appears as a new task in your UnDercontrol task list. The full-page HTML snapshot is attached as a resource.
+The saved page appears as a new task in your udctl task list. The full-page HTML snapshot is attached as a resource.
 
 ### Managing Settings
 
@@ -68,7 +68,7 @@ The saved page appears as a new task in your UnDercontrol task list. The full-pa
 
 1. When you click **Save Page**, the extension injects the SingleFile library into the current tab
 2. SingleFile captures the entire page (HTML, CSS, images, fonts) into a single self-contained HTML file
-3. The extension uploads the HTML file to your UnDercontrol server via the [Resource API](/docs/features/resources)
+3. The extension uploads the HTML file to your udctl server via the [Resource API](/docs/features/resources)
 4. A new task is created with the HTML file attached as a resource
 
 ## Limitations
@@ -100,11 +100,11 @@ The saved page appears as a new task in your UnDercontrol task list. The full-pa
 ### "Invalid format" error
 
 - This usually means the server version is outdated
-- Update your UnDercontrol backend to the latest version
+- Update your udctl backend to the latest version
 
 ## Open Source
 
-The Web Clipper **browser extension** is open source under the **AGPL-3.0** license, as it incorporates the [SingleFile](https://github.com/gildas-lormeau/SingleFile) library. This applies to the extension only — the UnDercontrol platform itself is proprietary.
+The Web Clipper **browser extension** is open source under the **AGPL-3.0** license, as it incorporates the [SingleFile](https://github.com/gildas-lormeau/SingleFile) library. This applies to the extension only — the udctl platform itself is proprietary.
 
 - Source code: [github.com/oatnil-top/ud-chrome-extension](https://github.com/oatnil-top/ud-chrome-extension)
 - License: AGPL-3.0 (extension only)

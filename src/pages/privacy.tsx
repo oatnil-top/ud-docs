@@ -73,7 +73,7 @@ function PolicyContent() {
         titleDefault="An Honest Take"
         paragraphs={[
           <Translate key="p1" id="privacy.sections.honestTake.p1">
-            {"I'm an indie developer, not a big corporation. One of my main motivations for building UnDercontrol was that I wanted full control over my own sensitive data — tasks, finances, personal notes — instead of handing them to big tech companies. I built this for myself first, and now I'm sharing it with you."}
+            {"I'm an indie developer, not a big corporation. One of my main motivations for building udctl was that I wanted full control over my own sensitive data — tasks, finances, personal notes — instead of handing them to big tech companies. I built this for myself first, and now I'm sharing it with you."}
           </Translate>,
           <Translate key="p2" id="privacy.sections.honestTake.p2">
             {"I have zero interest, ability, resources, or motivation to do anything with your data. That said, I understand if you don't fully trust me — you shouldn't blindly trust anyone online. Big companies with entire security teams still get breached. So why would you trust a solo developer? You have every right to be skeptical."}
@@ -108,7 +108,7 @@ function PolicyContent() {
         titleDefault="Where This Policy Applies"
         paragraphs={[
           <Translate key="p1" id="privacy.sections.appliesTo.p1">
-            {"This policy covers everything that carries the UnDercontrol name: this website, the web app, the desktop app, the command-line tool, and the mobile app for iOS distributed through the App Store and TestFlight. Where a section below says \u201cthe cloud service\u201d, it means the hosted backend the apps talk to by default \u2014 not the desktop app running locally, and not an instance you host yourself."}
+            {"This policy covers everything that carries the udctl name: this website, the web app, the desktop app, the command-line tool, and the mobile app for iOS distributed through the App Store and TestFlight. Where a section below says \u201cthe cloud service\u201d, it means the hosted backend the apps talk to by default \u2014 not the desktop app running locally, and not an instance you host yourself."}
           </Translate>,
           <Translate key="p2" id="privacy.sections.appliesTo.p2">
             {"If you use the mobile app against our hosted backend, everything below \u2014 what is collected, who else processes it, how long it is kept, and how to delete it \u2014 applies to you."}
@@ -182,7 +182,7 @@ function PolicyContent() {
             {"Three things are kept on purpose, and it would be a lie to claim otherwise. First, audit logs are not erased by account deletion \u2014 an audit trail the subject can erase is not an audit trail. They expire on their own schedule instead: 7 days by default, 30 days for security-relevant events (sign-in attempts, group and membership changes), and a small number of account-lifecycle and system-configuration records (such as \u201cthis account was created\u201d) indefinitely. The cleanup job runs once a day at 03:00, so the real maximum is less than a day longer than the period stated. Second, if your account owns an AI agent, that agent\u2019s configuration row is emptied and retired rather than deleted \u2014 it is the only source of the author name on every comment that agent left on other people\u2019s cards, and deleting it would damage their data, not yours. Third, a group your account owns is soft-deleted, so that membership and credential revocation can be handled."}
           </Translate>,
           <Translate key="p4" id="privacy.sections.retention.p4">
-            {"To delete your account today, email lintao.amons@gmail.com from the address you signed up with and say you want it deleted. In-app account deletion went live on 21 August 2026 and is available in the mobile app. The web app has no self-service deletion \u2014 if you use UnDercontrol only in the browser, email is the route that works for you."}
+            {"To delete your account today, email lintao.amons@gmail.com from the address you signed up with and say you want it deleted. In-app account deletion went live on 21 August 2026 and is available in the mobile app. The web app has no self-service deletion \u2014 if you use udctl only in the browser, email is the route that works for you."}
           </Translate>,
           <Translate key="p5" id="privacy.sections.retention.p5">
             {"On the desktop app with local storage, or on an instance you host yourself, none of this involves us: deleting the data \u2014 or the whole database file \u2014 is entirely in your hands."}
@@ -210,7 +210,7 @@ function PolicyContent() {
         titleDefault="Web Clipper Chrome Extension"
         paragraphs={[
           <Translate key="p1" id="privacy.sections.webClipper.p1">
-            {"The Web Clipper extension captures page content only when you click \u201cSave\u201d, and sends it to your local disk or to the UnDercontrol server you configured \u2014 never to a third party. Your credentials are stored on your device and are only ever sent to that same server URL. The extension bundles all of its scripts locally, loads no remote code, and does not track your browsing history or activity."}
+            {"The Web Clipper extension captures page content only when you click \u201cSave\u201d, and sends it to your local disk or to the udctl server you configured \u2014 never to a third party. Your credentials are stored on your device and are only ever sent to that same server URL. The extension bundles all of its scripts locally, loads no remote code, and does not track your browsing history or activity."}
           </Translate>,
         ]}
       />
@@ -273,7 +273,7 @@ function FooterSection() {
   return (
     <footer className={styles.footerSection}>
       <div className={styles.footerBrand}>
-        <span className={styles.footerLogo}>UnDercontrol</span>
+        <span className={styles.footerLogo}>udctl</span>
         <span className={styles.footerCopyright}>© {new Date().getFullYear()}</span>
       </div>
       <div className={styles.footerLinks}>

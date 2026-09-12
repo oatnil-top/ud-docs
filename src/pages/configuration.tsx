@@ -506,7 +506,7 @@ function inline(text: string): ReactNode {
 }
 
 const UI = {
-  eyebrow: {en: 'UnDercontrol · Self-hosting', zh: 'UnDercontrol · 自部署'},
+  eyebrow: {en: 'udctl · Self-hosting', zh: 'udctl · 自部署'},
   title: {en: 'Configuration Reference', zh: '配置参考'},
   lede: {
     en: 'Build a working configuration below, then look anything up in the full reference. Every setting can be given three ways, in order of precedence: CLI flag › environment variable › built-in default. A `.env` file in the working directory is loaded automatically.',
@@ -593,8 +593,8 @@ export default function ConfigurationPage(): ReactNode {
       title={t(UI.title)}
       description={
         zh
-          ? 'UnDercontrol 服务端的全部配置项——含交互式配置生成器和启动预览。'
-          : 'Every setting the UnDercontrol server reads — with an interactive config builder and boot preview.'
+          ? 'udctl 服务端的全部配置项——含交互式配置生成器和启动预览。'
+          : 'Every setting the udctl server reads — with an interactive config builder and boot preview.'
       }>
       <main className={styles.shell}>
         <p className={styles.eyebrow}>{t(UI.eyebrow)}</p>

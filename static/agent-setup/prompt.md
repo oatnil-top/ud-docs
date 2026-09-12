@@ -1,5 +1,5 @@
-These are official instructions from UnDercontrol to connect your AI coding agent to a
-UnDercontrol workspace — tasks, documents, files and personal finance, driven from the
+These are official instructions from udctl to connect your AI coding agent to a
+udctl workspace — tasks, documents, files and personal finance, driven from the
 terminal by the `ud` CLI. Once connected you can read the user's tasks, record progress
 as notes, attach files, and open follow-up work without leaving the terminal.
 
@@ -16,20 +16,20 @@ never ask the user to tell you their password.
 
 ## Orient the user
 
-Before running anything, tell the user in a sentence or two what UnDercontrol is and what
-you're about to set up — connecting their agent to a UnDercontrol workspace so you can read
+Before running anything, tell the user in a sentence or two what udctl is and what
+you're about to set up — connecting their agent to a udctl workspace so you can read
 and update their tasks, notes, files and finance from the terminal. Then ask the two
 questions that decide how the rest goes, and wait for the answers:
 
-1. **Which server?** UnDercontrol runs on a server the user controls, so this is the one
+1. **Which server?** udctl runs on a server the user controls, so this is the one
    thing you cannot work out on your own — ask, and use the answer everywhere below.
    - **Their own server** — the normal case. A machine or VPS they host, or the
-     UnDercontrol desktop app, which runs a backend on their own machine at
+     udctl desktop app, which runs a backend on their own machine at
      `http://localhost:8888`. Ask them for the URL. Guide:
      `https://oatnil.com/self-hosting`.
    - **Or, just trying it out** — if they have no server yet, they can point at
      `https://api.oatnil.com`. Tell them plainly what it is: a **test server** we run so
-     people can try UnDercontrol, not a hosting plan, so real work does not belong on it.
+     people can try udctl, not a hosting plan, so real work does not belong on it.
 
    Do not pick for them, and do not fall back to our test server when the answer is
    unclear — ask again instead.
@@ -78,7 +78,7 @@ If your installed CLI doesn't know the command (older version), upgrade first:
 Once done, tell the user:
 
 ```
-┌─ UnDercontrol Setup Complete ────────────────────────┐
+┌─ udctl Setup Complete ────────────────────────┐
 │  ✓ CLI      ud <version>                             │
 │  ✓ Context  <context name> → <api url>               │
 │  ✓ Skill    <path the skill check reports>           │

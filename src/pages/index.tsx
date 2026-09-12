@@ -112,7 +112,7 @@ function AgentSetupButton() {
         {copied ? (
           <Translate id="homepage.hero.agentSetup.copied">Copied — paste it into your agent</Translate>
         ) : (
-          <Translate id="homepage.hero.agentSetup.label">Onboard your agent to UnDercontrol</Translate>
+          <Translate id="homepage.hero.agentSetup.label">Onboard your agent to udctl</Translate>
         )}
       </span>
       <code className={styles.agentSetupCode}>{copied ? '✓' : '⧉'}</code>
@@ -182,7 +182,7 @@ function FirstScreen() {
       <PlatformGlyphDefs />
       <header className={hero.hero}>
         <div className={hero.strip}>
-          <span>UnDercontrol</span>
+          <span>udctl</span>
           <a className={hero.stripJump} href="#explore">
             <Translate id="home5.strip.explore">Explore here</Translate>
             <Chevron />
@@ -199,7 +199,7 @@ function FirstScreen() {
             below it. Promoting the slogan into the headline is the one change
             that buys that back, and it is a structural change, not a copy edit.
           */}
-          <h1 className={hero.h1}>UnDercontrol</h1>
+          <h1 className={hero.h1}>udctl</h1>
 
           {/*
             EN and ZH carry different sentences here on purpose. ZH gets the
@@ -249,7 +249,7 @@ function FirstScreen() {
           </p>
 
           <p className={hero.waysLabel}>
-            <Translate id="home5.hero.ways">Other ways to use UnDercontrol:</Translate>
+            <Translate id="home5.hero.ways">Other ways to use udctl:</Translate>
           </p>
           <div className={hero.tiles}>
             {tiles.map((t) => (
@@ -388,7 +388,7 @@ function ShowcaseSection() {
           </h1>
           <p className={styles.sub}>{slide.sub}</p>
         </div>
-        {/* Boss feedback 2026-07-26: the hero sells UnDercontrol, not "an
+        {/* Boss feedback 2026-07-26: the hero sells udctl, not "an
             Alfred app" — exactly three CTAs, each landing on a dedicated
             page (never a docs page): /alfred, /download, /self-hosting. */}
         <div className={styles.ctas}>
@@ -508,7 +508,7 @@ function EngineSection() {
           <Translate id="home4.engine.eyebrow">One engine</Translate>
         </div>
         <h2>
-          <Translate id="home4.engine.title">Five angles, one UnDercontrol</Translate>
+          <Translate id="home4.engine.title">Five angles, one udctl</Translate>
         </h2>
         <div className={styles.engineRow}>
           {items.map((item) => (
@@ -539,7 +539,7 @@ function ArchitectureSection() {
           <Translate id="home4.arch.eyebrow">Architecture</Translate>
         </div>
         <h2>
-          <Translate id="home4.arch.title">How UnDercontrol is put together</Translate>
+          <Translate id="home4.arch.title">How udctl is put together</Translate>
         </h2>
         <p className={s.lede}>
           <Translate id="home4.arch.lede">
@@ -553,7 +553,7 @@ function ArchitectureSection() {
             className={s.archsvg}
             viewBox="0 0 880 530"
             role="img"
-            aria-label={translate({id: 'home4.arch.aria', message: 'UnDercontrol architecture diagram'})}>
+            aria-label={translate({id: 'home4.arch.aria', message: 'udctl architecture diagram'})}>
             <defs>
               <marker id="arch-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
                 <path d="M0,0 L10,5 L0,10 z" className={s.aMk} />

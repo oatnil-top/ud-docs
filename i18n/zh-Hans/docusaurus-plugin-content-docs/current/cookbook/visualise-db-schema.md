@@ -5,7 +5,7 @@ sidebar_position: 20
 
 # 使用数据流图可视化数据库结构
 
-将运行中的 PostgreSQL 数据库转换为 UnDercontrol 中的交互式数据流图。本指南以 Keycloak 数据库为例。
+将运行中的 PostgreSQL 数据库转换为 udctl 中的交互式数据流图。本指南以 Keycloak 数据库为例。
 
 ## 概览
 
@@ -84,7 +84,7 @@ AI 会为每张表创建一个节点，并自动为外键关系绘制连线。�
 
 ### 方式 B：外部 AI + JSON 导入
 
-如果没有在 UnDercontrol 中配置 AI 提供商，可以使用外部 AI 生成 JSON。
+如果没有在 udctl 中配置 AI 提供商，可以使用外部 AI 生成 JSON。
 
 1. 点击工具栏中的**复制提示词** — 将系统提示词复制到剪贴板
 2. 将提示词和 schema 文件内容一起粘贴到任意 AI 工具（ChatGPT、Claude 等）

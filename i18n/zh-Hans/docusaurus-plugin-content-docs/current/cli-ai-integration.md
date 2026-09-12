@@ -7,7 +7,7 @@ sidebar_position: 6
 
 # AI Agent CLI
 
-`ud` 是 UnDercontrol 的命令行工具，它从一开始就同时面向你和你的 AI agent。它自带**内置技能**——一份 agent 按需加载的自描述命令参考——所以你的 agent 可以读取任务、记录进度、上传文件、收尾工作，而你不必手工维护一个提示词文件。
+`ud` 是 udctl 的命令行工具，它从一开始就同时面向你和你的 AI agent。它自带**内置技能**——一份 agent 按需加载的自描述命令参考——所以你的 agent 可以读取任务、记录进度、上传文件、收尾工作，而你不必手工维护一个提示词文件。
 
 ## 什么是 AI agent CLI？
 
@@ -109,7 +109,7 @@ ud cook board
 
 ## 用 @mention 把人放回环路
 
-agent 自己干活，但你始终是那道验收关卡。任务上的评论就是这条通道：**在任务评论里 @ 某个 agent，它就会被唤醒**——UnDercontrol 会在跑着 daemon 的那台机器上为它启动一个 workspace 会话，agent 带着任务的描述、备注和关联接手工作。
+agent 自己干活，但你始终是那道验收关卡。任务上的评论就是这条通道：**在任务评论里 @ 某个 agent，它就会被唤醒**——udctl 会在跑着 daemon 的那台机器上为它启动一个 workspace 会话，agent 带着任务的描述、备注和关联接手工作。
 
 它也用同样的方式回报：进度写进任务的备注（包含 commit），结论写进评论线程，做完之后任务变成 `pending` 状态——等你验收，而不是自动关闭。agent 之间也能互相 @，所以一个 lead 可以把子任务派给成员，而这条委派链永远不会让 agent 拿到比你更大的权限。
 
@@ -206,7 +206,7 @@ ud describe skill ud-cli > .claude/skills/ud-cli/SKILL.md
 
 ### 有哪个 CLI 能配合 OpenAI Codex 使用？
 
-`ud` 可以。它就是一个普通的命令行工具，没有编辑器插件，也不绑定任何厂商，所以任何基于终端的 agent——Codex、Claude Code、Cursor、OpenCode——都能用它本来就有的 shell 权限驱动它。UnDercontrol 把 agent CLI 当作配置项：你指定实际要执行的命令，同一块任务板服务所有这些 agent。
+`ud` 可以。它就是一个普通的命令行工具，没有编辑器插件，也不绑定任何厂商，所以任何基于终端的 agent——Codex、Claude Code、Cursor、OpenCode——都能用它本来就有的 shell 权限驱动它。udctl 把 agent CLI 当作配置项：你指定实际要执行的命令，同一块任务板服务所有这些 agent。
 
 ### AI agent 是怎么学会 CLI 命令的？
 
@@ -214,4 +214,4 @@ ud describe skill ud-cli > .claude/skills/ud-cli/SKILL.md
 
 ### 可以私有部署吗？
 
-可以。UnDercontrol 支持私有部署：用 Docker Compose 或 Kubernetes 部署，单人用 SQLite、多人用 PostgreSQL，然后用 `ud login --api-url https://your-server` 把 CLI 指向你自己的服务器。你的任务、笔记和文件都留在你掌控的基础设施上。部署方式详见[私有部署指南](./self-deployment.md)。
+可以。udctl 支持私有部署：用 Docker Compose 或 Kubernetes 部署，单人用 SQLite、多人用 PostgreSQL，然后用 `ud login --api-url https://your-server` 把 CLI 指向你自己的服务器。你的任务、笔记和文件都留在你掌控的基础设施上。部署方式详见[私有部署指南](./self-deployment.md)。

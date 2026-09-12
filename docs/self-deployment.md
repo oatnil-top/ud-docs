@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Self-Deployment Guide
 
-Self-host UnDercontrol with a single Docker command. The **all-in-one image** bundles
+Self-host udctl with a single Docker command. The **all-in-one image** bundles
 the frontend and backend in one container, so there is nothing to wire together — just
 run it and open your browser.
 
@@ -36,7 +36,7 @@ and how to log in:
 ```text
 ==============================================================================
 
-  UnDercontrol v1.x.x is ready
+  udctl v1.x.x is ready
 
   --> Open http://localhost:3000 to get started
 
@@ -91,7 +91,7 @@ and uploads), so backing up or moving the instance is copying that directory.
 ## Pro / Max (Multi-user)
 
 Add a license token and an admin account to unlock multi-user, PostgreSQL, S3 storage and
-the admin dashboard. Contact the UnDercontrol team for a license token.
+the admin dashboard. Contact the udctl team for a license token.
 
 ```bash
 docker run -d --name undercontrol \
@@ -323,7 +323,7 @@ Nothing here is required for the server to run — a bare instance completes onb
    project's `.claude/settings.local.json`, which is what lets the desktop app show live agent
    status (running / waiting / idle). Nothing is written unless the user allows it.
 3. **Register this machine as a daemon** — a daemon is the machine that runs agent sessions.
-   In the UnDercontrol desktop app this is one click, plus a scan of the agent CLIs installed
+   In the udctl desktop app this is one click, plus a scan of the agent CLIs installed
    locally (Claude Code, Codex, …). In a browser the step recommends the desktop app, or gives
    the headless path for a server or remote box: `npm install -g @oatnil/ud`, `ud login`,
    `ud daemon start`. Either way the step completes as soon as the server reports an online

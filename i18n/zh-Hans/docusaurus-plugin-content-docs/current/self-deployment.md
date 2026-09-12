@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # 自部署指南
 
-用一条 Docker 命令即可自部署 UnDercontrol。**all-in-one 镜像**把前端和后端打包在同一个容器里，
+用一条 Docker 命令即可自部署 udctl。**all-in-one 镜像**把前端和后端打包在同一个容器里，
 无需自己拼装——运行即可打开浏览器使用。
 
 镜像同时发布 **linux/amd64** 和 **linux/arm64**（Apple 芯片、ARM 服务器），同一条命令在任何机器上都能用。
@@ -33,7 +33,7 @@ ready banner，直接告诉你去哪打开、用什么账号登录：
 ```text
 ==============================================================================
 
-  UnDercontrol v1.x.x is ready
+  udctl v1.x.x is ready
 
   --> Open http://localhost:3000 to get started
 
@@ -78,7 +78,7 @@ ud-server -host-domain http://localhost:8080 -data-path ./data
 
 ## Pro / Max（多用户）
 
-加上许可证和管理员账号即可启用多用户、PostgreSQL、S3 存储和管理后台。许可证请联系 UnDercontrol 团队获取。
+加上许可证和管理员账号即可启用多用户、PostgreSQL、S3 存储和管理后台。许可证请联系 udctl 团队获取。
 
 ```bash
 docker run -d --name undercontrol \
@@ -267,7 +267,7 @@ IM 通道默认只对实例所有者开放：`im.multi_user_enabled` 默认为 `
 1. **语言** —— 界面使用英文还是中文。
 2. **工作区状态 hooks** —— 询问是否允许向工作区项目的 `.claude/settings.local.json` 添加 Claude Code
    hooks，桌面端正是靠它展示实时的 Agent 状态（运行中 / 等待中 / 空闲）。未获许可不会写入任何内容。
-3. **把本机注册为 daemon** —— daemon 是实际运行 Agent 会话的机器。在 UnDercontrol 桌面应用里这是一键完成的，
+3. **把本机注册为 daemon** —— daemon 是实际运行 Agent 会话的机器。在 udctl 桌面应用里这是一键完成的，
    同时会扫描本机已安装的 Agent CLI（Claude Code、Codex 等）。在浏览器里，该步骤会推荐安装桌面应用，
    或给出适用于服务器/远程机器的无界面方案：`npm install -g @oatnil/ud`、`ud login`、`ud daemon start`。
    两种方式都一样：只要服务端看到有 daemon 在线，该步骤即完成。

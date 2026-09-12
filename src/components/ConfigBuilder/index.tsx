@@ -225,7 +225,7 @@ export default function ConfigBuilder({locale = 'en'}: {locale?: 'en' | 'zh'}): 
       </>
     ) : (
       <>
-        <span className={styles.cm}>{`# UnDercontrol — ${tier} tier / ${db} / ${storage} storage\n`}</span>
+        <span className={styles.cm}>{`# udctl — ${tier} tier / ${db} / ${storage} storage\n`}</span>
         {vars.map((v) => varSpan(v, '', ''))}
       </>
     );
@@ -250,7 +250,7 @@ export default function ConfigBuilder({locale = 'en'}: {locale?: 'en' | 'zh'}): 
       : '           default password: admin123 — change it after first login\n';
     return (
       <>
-        {RULE + '\n\n  UnDercontrol v1.x.x is ready\n\n  '}
+        {RULE + '\n\n  udctl v1.x.x is ready\n\n  '}
         <span className={styles.hlOk}>{`--> Open ${url} to get started`}</span>
         {`\n\n      Login as:  ${login}\n   ${hint}      Tier:      ${personal ? 'Personal (max users: 1)' : 'Pro (max users: 10)'}\n      Database:  ${db === 'postgres' ? 'POSTGRES' : 'SQLITE'}\n      Storage:   ${storage === 's3' ? 'S3/R2' : 'LocalFS'}\n      Signup:    ${openSignup ? 'open (env REGISTRATION_ENABLED)' : 'closed (default)'}\n\n` + RULE}
       </>
