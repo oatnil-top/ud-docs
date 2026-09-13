@@ -530,10 +530,19 @@ function EngineSection() {
 // --- Architecture (design v6): box-and-arrow SVG between engine row and CTA ---
 // Main line 你 → IM entry → Alfred → orchestration → CLI execution layer, with
 // memory (bidirectional), scheduling and the prompt/cwd config plane as side
-// inputs, and the green dashed ⑤ edge returning results to the chat. Colors go
-// through the .scope tokens so light/dark adapt; narrow screens scroll the
-// diagram horizontally. Mirrored in the Vite app's ArchitectureSection — keep
-// the two SVGs identical.
+// inputs, and the dashed ⑤ edge returning results to the chat. Colors go
+// through the .scope tokens so light/dark adapt.
+//
+// Two compositions of the same diagram, swapped by CSS at 820px (task 704a59ea):
+// the landscape SVG (880×530) for wide screens, and a portrait SVG (360×668)
+// for phones — on a 390px phone the landscape version left only a 342px window
+// onto a 760px drawing, with the whole spine off-screen. Both carry the exact
+// same nodes, numbered steps and return edges (⑤ results→chat, writes back,
+// configures); reuse the same Translate ids so the two can never say different
+// things. Change one → change both. Markers are duplicated with `2`-suffixed
+// ids because url(#…) refs into a display:none <svg> don't render.
+// (The old note "mirrored in the Vite app's ArchitectureSection" is obsolete —
+// ud-vite-app dropped its copy; this file is the only home of the diagram.)
 function ArchitectureSection() {
   const s = styles;
   return (
@@ -691,6 +700,152 @@ function ArchitectureSection() {
             </text>
           </svg>
         </div>
+
+        {/* Portrait composition for phones — same nodes, same edges, same
+            Translate ids as the landscape SVG above. Spine runs down x=180;
+            side systems flank it (memory left, scheduling right, config left);
+            the two return flows ride the margins: writes-back rail up the left
+            (x=16), ⑤ results rail up the right (x=352). */}
+        <svg
+          className={`${s.archsvg} ${s.archMob}`}
+          viewBox="0 0 360 668"
+          role="img"
+          aria-label={translate({id: 'home4.arch.aria', message: 'udctl architecture diagram'})}>
+          <defs>
+            <marker id="arch2-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" className={s.aMk} />
+            </marker>
+            <marker id="arch2-arrM" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" className={s.aMkM} />
+            </marker>
+            <marker id="arch2-arrA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" className={s.aMkA} />
+            </marker>
+          </defs>
+
+          {/* you */}
+          <rect x="120" y="8" width="120" height="36" rx="18" className={s.aBox} />
+          <text x="180" y="31" textAnchor="middle" className={s.aTt}>
+            <Translate id="home4.arch.you">💬 You</Translate>
+          </text>
+
+          {/* ① you -> IM */}
+          <line x1="180" y1="44" x2="180" y2="80" className={s.aEdge} markerEnd="url(#arch2-arr)" />
+          <text x="172" y="66" textAnchor="end" className={s.aEstep}>
+            <Translate id="home4.arch.step1">① Send a message</Translate>
+          </text>
+
+          {/* IM entry */}
+          <rect x="50" y="84" width="260" height="52" rx="10" className={s.aBox} />
+          <text x="180" y="105" textAnchor="middle" className={s.aTt}>
+            <Translate id="home4.arch.im">IM entry</Translate>
+          </text>
+          <text x="180" y="124" textAnchor="middle" className={s.aSub}>
+            Telegram · Discord · Web
+          </text>
+
+          {/* IM -> Alfred; ⑤ label sits in this gap, next to the right rail */}
+          <line x1="180" y1="136" x2="180" y2="172" className={s.aEdge} markerEnd="url(#arch2-arr)" />
+          <text x="344" y="160" textAnchor="end" className={s.aEstep}>
+            <Translate id="home4.arch.step5">⑤ Results return to chat</Translate>
+          </text>
+
+          {/* Alfred */}
+          <rect x="90" y="176" width="180" height="56" rx="12" className={s.aBoxAccent} />
+          <text x="180" y="199" textAnchor="middle" className={`${s.aTt} ${s.aOnAccent}`}>
+            🎩 Alfred
+          </text>
+          <text x="180" y="218" textAnchor="middle" className={`${s.aSub} ${s.aOnAccent}`}>
+            <Translate id="home4.arch.alfredSub">Private butler</Translate>
+          </text>
+
+          {/* ② Alfred <-> Memory (read/write) */}
+          <line x1="126" y1="232" x2="126" y2="276" className={s.aEdge} markerStart="url(#arch2-arr)" markerEnd="url(#arch2-arr)" />
+          <text x="136" y="258" textAnchor="start" className={s.aEstep}>
+            <Translate id="home4.arch.step2">② Understand &amp; remember</Translate>
+          </text>
+
+          {/* memory */}
+          <rect x="12" y="280" width="160" height="66" rx="10" className={s.aBox} />
+          <text x="92" y="302" textAnchor="middle" className={s.aTt}>
+            <Translate id="home4.arch.memory">Memory</Translate>
+          </text>
+          <text x="92" y="320" textAnchor="middle" className={s.aSub}>
+            tasks · notes · boards
+          </text>
+          <text x="92" y="336" textAnchor="middle" className={s.aSub}>
+            — markdown
+          </text>
+
+          {/* ③ Alfred -> Orchestration */}
+          <line x1="180" y1="232" x2="180" y2="466" className={s.aEdge} markerEnd="url(#arch2-arr)" />
+          <text x="188" y="444" textAnchor="start" className={s.aEstep}>
+            <Translate id="home4.arch.step3">③ Delegate</Translate>
+          </text>
+
+          {/* scheduling */}
+          <rect x="200" y="300" width="140" height="52" rx="10" className={s.aBox} />
+          <text x="270" y="322" textAnchor="middle" className={s.aTt}>
+            <Translate id="home4.arch.sched">Scheduling</Translate>
+          </text>
+          <text x="270" y="340" textAnchor="middle" className={s.aSub}>
+            scheduled jobs &amp; agents
+          </text>
+
+          {/* scheduling -> orchestration */}
+          <line x1="270" y1="352" x2="270" y2="466" className={s.aEdgeM} markerEnd="url(#arch2-arrM)" />
+          <text x="344" y="380" textAnchor="end" className={s.aElabel}>
+            <Translate id="home4.arch.fires">fires on schedule</Translate>
+          </text>
+
+          {/* prompt/cwd config plane */}
+          <rect x="24" y="380" width="148" height="62" rx="10" className={s.aBoxDash} />
+          <text x="98" y="404" textAnchor="middle" className={s.aTt}>
+            prompt · cwd
+          </text>
+          <text x="98" y="424" textAnchor="middle" className={s.aSub}>
+            <Translate id="home4.arch.configSub">agent definition · project</Translate>
+          </text>
+
+          {/* config -> orchestration */}
+          <line x1="98" y1="442" x2="98" y2="466" className={s.aEdgeM} markerEnd="url(#arch2-arrM)" />
+          <text x="108" y="460" textAnchor="start" className={s.aElabel}>
+            <Translate id="home4.arch.configures">configures</Translate>
+          </text>
+
+          {/* orchestration */}
+          <rect x="50" y="470" width="260" height="66" rx="10" className={s.aBox} />
+          <text x="180" y="496" textAnchor="middle" className={s.aTt}>
+            <Translate id="home4.arch.orch">Orchestration</Translate>
+          </text>
+          <text x="180" y="516" textAnchor="middle" className={s.aSub}>
+            <Translate id="home4.arch.orchSub">agent team + resident daemons</Translate>
+          </text>
+
+          {/* ④ orchestration -> CLI */}
+          <line x1="180" y1="536" x2="180" y2="586" className={s.aEdge} markerEnd="url(#arch2-arr)" />
+          <text x="188" y="566" textAnchor="start" className={s.aEstep}>
+            <Translate id="home4.arch.step4">④ Execute</Translate>
+          </text>
+
+          {/* CLI layer */}
+          <rect x="30" y="590" width="300" height="66" rx="10" className={s.aBox} />
+          <text x="180" y="616" textAnchor="middle" className={s.aTt}>
+            <Translate id="home4.arch.cli">Execution — the real CLIs</Translate>
+          </text>
+          <text x="180" y="636" textAnchor="middle" className={s.aSub}>
+            Claude Code · Codex · OpenCode · …
+          </text>
+
+          {/* CLI writes back to memory — left margin rail */}
+          <path d="M 30,623 L 16,623 L 16,346" className={s.aEdgeM} markerEnd="url(#arch2-arrM)" />
+          <text x="24" y="368" textAnchor="start" className={s.aElabel}>
+            <Translate id="home4.arch.writesBack">writes back</Translate>
+          </text>
+
+          {/* ⑤ results return to chat — right margin rail, label up in the IM gap */}
+          <path d="M 330,623 L 352,623 L 352,110 L 314,110" className={s.aEdgeA} markerEnd="url(#arch2-arrA)" />
+        </svg>
       </div>
     </section>
   );

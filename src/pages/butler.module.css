@@ -528,7 +528,13 @@
 /* Box-and-arrow SVG. v7 hierarchy is line weight and dash, not hue: Alfred box
  * solid ink, spine edges solid ink, the ⑤ return edge long-dashed ink, side
  * inputs grey-dashed. Colors go through the .scope tokens so light/dark adapt.
- * Narrow screens scroll horizontally instead of shrinking the type. */
+ *
+ * Two compositions (task 704a59ea): landscape (in .archScroll) above 820px,
+ * portrait (.archMob) at or below it. 820 is where the landscape SVG's 760px
+ * minimum plus the wrap's side padding stops fitting the viewport — below
+ * that the old behavior was a scroll pane showing a 342px window onto a
+ * 760px drawing (spine off-screen on first paint). The portrait SVG never
+ * scrolls: it fits the column and grows taller instead. */
 .archScroll {
   overflow-x: auto;
   margin-top: 40px;
@@ -538,6 +544,27 @@
   width: 100%;
   min-width: 760px;
   height: auto;
+}
+.archMob {
+  display: none;
+}
+@media (max-width: 820px) {
+  .archScroll {
+    display: none;
+  }
+  .archMob {
+    display: block;
+    min-width: 0;
+    max-width: 430px;
+    margin: 40px auto 0;
+  }
+  /* At 390px CSS viewport the portrait SVG renders at ~342px (scale ×0.95 of
+   * the 360 viewBox). Small type is bumped so the smallest label still lands
+   * at ≥ 10.9 CSS px on a phone. */
+  .archMob .aSub,
+  .archMob .aElabel {
+    font-size: 12px;
+  }
 }
 .archsvg text {
   fill: var(--ink);
