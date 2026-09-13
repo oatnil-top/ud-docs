@@ -2292,7 +2292,7 @@
     "message": "一个知识库"
   },
   "home6.what.docs.d": {
-    "message": "每张卡都是一篇 Markdown 文档；笔记、全文搜索、链接图谱。"
+    "message": "每张卡都是一篇 Markdown 文档；笔记、全文搜索、链接图谱——你原本要写在 Confluence 里的那些页面。"
   },
   "home6.what.vault.t": {
     "message": "一个本地笔记文件夹"

@@ -496,9 +496,13 @@ function WhatIsSection() {
     {
       key: 'docs',
       t: <Translate id="home6.what.docs.t">A knowledge base</Translate>,
+      // Confluence is named on master's explicit ruling (task 1e56b4ca,
+      // 2026-09-14 「就是要点名」), in the same scoped sense as Jira above:
+      // "where you would otherwise do this", never "we are Confluence".
       d: (
         <Translate id="home6.what.docs.d">
-          every card is a Markdown document; notes, full-text search, a graph of links.
+          every card is a Markdown document; notes, full-text search, a graph of links — the pages you would
+          otherwise keep in Confluence.
         </Translate>
       ),
     },
