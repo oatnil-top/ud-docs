@@ -2298,7 +2298,13 @@
     "message": "一个本地笔记文件夹"
   },
   "home6.what.vault.d": {
-    "message": "{pull} 把任务铺成 Obsidian 能直接打开的 .md 文件；改完，{push} 推回去。"
+    "message": "{pull} 把任务铺成 Obsidian 能直接打开的 .md 文件；改完，{push} 推回去。同步不另买，图片等附件跟着卡走，落地就是 ![[…]] 嵌入。"
+  },
+  "home6.what.vpath.t": {
+    "message": "一棵虚拟目录树"
+  },
+  "home6.what.vpath.d": {
+    "message": "任务、文件、技能、图表挂在同一棵目录树上，在 app 里像文件管理器一样翻。"
   },
   "home6.what.ledger.t": {
     "message": "一本账"
@@ -2319,16 +2325,16 @@
     "message": "{get}、{apply}——同一批卡，在终端里管。"
   },
   "home6.what.agents.t": {
-    "message": "一支 AI agent 团队"
+    "message": "一个 agent 编排台"
   },
   "home6.what.agents.d": {
-    "message": "还有一位住在你 Telegram 里的管家。"
+    "message": "雇一支各有所长的 agent 团队——组队、派活、定时唤醒；还有一位住在你 Telegram 里的管家。"
   },
   "home6.what.selfhost.t": {
     "message": "……而且自部署"
   },
   "home6.what.selfhost.d": {
-    "message": "这一整套，可以跑在你自己的机器上。"
+    "message": "这一整套，可以跑在你自己的机器上——个人免费，账单里没有「每人每月」。"
   },
   "home6.what.turn": {
     "message": "看着就很难学？没错——如果要你亲自操作，它确实复杂。"

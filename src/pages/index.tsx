@@ -509,9 +509,25 @@ function WhatIsSection() {
     {
       key: 'vault',
       t: <Translate id="home6.what.vault.t">A local notes folder</Translate>,
+      // The advantage clause states OUR packaging ("not a separate purchase",
+      // "attachments follow the card") and never claims Obsidian lacks sync —
+      // Obsidian Sync exists, it is a paid per-user add-on (obsidian.md/sync,
+      // checked 2026-09-14: $4-8/user/mo). Attachments landing as ![[..]]
+      // embeds is ud-cli fetchattach.go behaviour. Keep the sentence about us.
       d: (
         <Translate id="home6.what.vault.d" values={{pull: code('ud pull'), push: code('ud push')}}>
-          {'{pull} lays your tasks out as plain .md files Obsidian opens as a vault; edit them, {push} them back.'}
+          {
+            '{pull} lays your tasks out as plain .md files Obsidian opens as a vault; {push} them back. Sync is not a separate purchase, and attachments follow the card — landing as ![[…]] embeds.'
+          }
+        </Translate>
+      ),
+    },
+    {
+      key: 'vpath',
+      t: <Translate id="home6.what.vpath.t">A virtual file tree</Translate>,
+      d: (
+        <Translate id="home6.what.vpath.d">
+          tasks, files, skills, diagrams — all hanging on one folder tree you browse like a file manager.
         </Translate>
       ),
     },
@@ -544,19 +560,26 @@ function WhatIsSection() {
     },
     {
       key: 'agents',
-      t: <Translate id="home6.what.agents.t">A team of AI agents</Translate>,
+      t: <Translate id="home6.what.agents.t">An agent orchestra</Translate>,
       d: (
         <Translate id="home6.what.agents.d">
-          plus a butler who lives in your Telegram.
+          hire a team of specialist agents — group them, hand off work, wake them on schedule; plus a butler living
+          in your Telegram.
         </Translate>
       ),
     },
     {
       key: 'selfhost',
+      // Cost is stated as structure, not numbers (task 1e56b4ca round 3):
+      // we have no public price to cite (the subscribe page says the hosted
+      // plan is coming soon), and competitor prices are tiered and change —
+      // a dated comparison is the easiest claim on the page to falsify.
+      // "No per-seat line" is structurally true of self-hosting and cannot
+      // expire.
       t: <Translate id="home6.what.selfhost.t">… self-hosted</Translate>,
       d: (
         <Translate id="home6.what.selfhost.d">
-          the whole thing runs on your own machine, if you want it to.
+          the whole thing runs on your own machine — free for personal use, with no per-seat line on any bill.
         </Translate>
       ),
     },
