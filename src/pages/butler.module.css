@@ -322,6 +322,58 @@
   margin-top: 3px;
 }
 
+/* ---------- "What is udctl?" (count-then-catch) ---------- */
+/* Beat one is a pile-up, so the list is one stacked column of thin-line rows:
+ * a tile grid would read as a tidy feature matrix and kill the "this is a
+ * lot" effect the section exists for (task 1e56b4ca). Rows keep the flat
+ * language — 1px --line separators, hierarchy by weight, no fills. */
+.whatList {
+  margin-top: 36px;
+  border-top: 1px solid var(--line);
+}
+.whatItem {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 20px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+}
+.whatT {
+  font-weight: 750;
+  font-size: 0.97rem;
+}
+.whatD {
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+.whatTurn {
+  margin: 46px 0 0;
+  font-size: clamp(1.3rem, 2.6vw, 1.8rem);
+  font-weight: 750;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  max-width: 24em;
+  text-wrap: balance;
+}
+.whatCatch {
+  margin: 14px 0 0;
+  color: var(--muted);
+  max-width: 46em;
+}
+/* Inline code inside this section — overrides Infima's bare-<code> styling so
+ * the chips stay on the page's own tokens in both themes. */
+.whatCode {
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 0.86em;
+  background: var(--bubble);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 1px 6px;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
 .steps {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -498,6 +550,12 @@
   }
   .engineRow {
     grid-template-columns: 1fr 1fr;
+  }
+  /* Lead and detail stack on phones; the thin-line rows keep the pile-up
+   * reading vertically, which a 390px screen only amplifies. */
+  .whatItem {
+    grid-template-columns: 1fr;
+    gap: 2px;
   }
   .meet {
     grid-template-columns: 1fr;

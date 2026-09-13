@@ -463,6 +463,142 @@ function ShowcaseSection() {
   );
 }
 
+// --- "What is udctl?" — count, then catch ---
+/**
+ * Two beats, heavy then light (ud task 1e56b4ca, master 2026-09-13). Beat one
+ * piles up everything udctl is — the reader is MEANT to finish the list
+ * thinking "that's a lot, this must be complex". Beat two catches it: you are
+ * not the one operating any of it, your AI is. The contrast IS the section's
+ * value; an edit that flattens it into a feature grid has removed its reason
+ * to exist. Every line is backed by a shipped feature (per-line evidence is
+ * recorded on the task), and the two product names are scoped to exactly what
+ * we do — Jira: the board/sprint/backlog/burndown loop; Obsidian: `ud pull`
+ * writes a folder of plain .md files it opens natively. Do not widen either,
+ * and do not add a line that is not shipped: the list must survive a hostile
+ * reader trying each item.
+ *
+ * It sits directly above MeetAlfredSection on purpose: the catch ("your AI
+ * drives it") hands straight into "Don't want to learn an interface? Start
+ * with Alfred."
+ */
+function WhatIsSection() {
+  const code = (s: string) => <code className={styles.whatCode}>{s}</code>;
+  const items: Array<{key: string; t: ReactNode; d: ReactNode}> = [
+    {
+      key: 'agile',
+      t: <Translate id="home6.what.agile.t">An agile tracker</Translate>,
+      d: (
+        <Translate id="home6.what.agile.d">
+          boards, sprints, backlog, burndown — the loop you would otherwise run in Jira.
+        </Translate>
+      ),
+    },
+    {
+      key: 'docs',
+      t: <Translate id="home6.what.docs.t">A knowledge base</Translate>,
+      d: (
+        <Translate id="home6.what.docs.d">
+          every card is a Markdown document; notes, full-text search, a graph of links.
+        </Translate>
+      ),
+    },
+    {
+      key: 'vault',
+      t: <Translate id="home6.what.vault.t">A local notes folder</Translate>,
+      d: (
+        <Translate id="home6.what.vault.d" values={{pull: code('ud pull'), push: code('ud push')}}>
+          {'{pull} lays your tasks out as plain .md files Obsidian opens as a vault; edit them, {push} them back.'}
+        </Translate>
+      ),
+    },
+    {
+      key: 'ledger',
+      t: <Translate id="home6.what.ledger.t">A ledger</Translate>,
+      d: (
+        <Translate id="home6.what.ledger.d">
+          expenses, budgets, accounts — multi-currency.
+        </Translate>
+      ),
+    },
+    {
+      key: 'calendar',
+      t: <Translate id="home6.what.calendar.t">A calendar, plus a Gantt chart</Translate>,
+      d: (
+        <Translate id="home6.what.calendar.d">
+          kickoffs and deadlines on a month grid, and on a timeline.
+        </Translate>
+      ),
+    },
+    {
+      key: 'cli',
+      t: <Translate id="home6.what.cli.t">A kubectl-style CLI</Translate>,
+      d: (
+        <Translate id="home6.what.cli.d" values={{get: code('ud get'), apply: code('ud apply')}}>
+          {'{get}, {apply} — the same cards, from your terminal.'}
+        </Translate>
+      ),
+    },
+    {
+      key: 'agents',
+      t: <Translate id="home6.what.agents.t">A team of AI agents</Translate>,
+      d: (
+        <Translate id="home6.what.agents.d">
+          plus a butler who lives in your Telegram.
+        </Translate>
+      ),
+    },
+    {
+      key: 'selfhost',
+      t: <Translate id="home6.what.selfhost.t">… self-hosted</Translate>,
+      d: (
+        <Translate id="home6.what.selfhost.d">
+          the whole thing runs on your own machine, if you want it to.
+        </Translate>
+      ),
+    },
+  ];
+  return (
+    <section className={styles.section}>
+      <div className={styles.wrap}>
+        <div className={styles.eyebrow}>
+          <Translate id="home6.what.eyebrow">What is udctl</Translate>
+        </div>
+        <h2>
+          <Translate id="home6.what.title">Honestly? It's a lot of things.</Translate>
+        </h2>
+        <div className={styles.whatList}>
+          {items.map((item) => (
+            <div key={item.key} className={styles.whatItem}>
+              <div className={styles.whatT}>{item.t}</div>
+              <div className={styles.whatD}>{item.d}</div>
+            </div>
+          ))}
+        </div>
+        <p className={styles.whatTurn}>
+          <Translate id="home6.what.turn">
+            Sounds like a lot to learn? It would be — if you were the one operating it.
+          </Translate>
+        </p>
+        <p className={styles.whatCatch}>
+          <Translate
+            id="home6.what.catch"
+            values={{
+              mention: (
+                <code className={styles.whatCode}>
+                  <Translate id="home6.what.mention">@dev fix this bug</Translate>
+                </code>
+              ),
+            }}>
+            {
+              "You don't have to. Leave one sentence on any card — {mention} — and that sentence starts an agent session: bound to the card, progress written back onto it, the result replied right under your words. Board, CLI, chat — one copy of the data underneath. Your AI drives all of it; you learn none of it."
+            }
+          </Translate>
+        </p>
+      </div>
+    </section>
+  );
+}
+
 // --- "Start with Alfred" funnel ---
 function MeetAlfredSection() {
   return (
@@ -958,6 +1094,7 @@ export default function Home(): ReactNode {
         <FirstScreen />
         <AgentSetupRow />
         <ShowcaseSection />
+        <WhatIsSection />
         <MeetAlfredSection />
         <EngineSection />
         <ArchitectureSection />

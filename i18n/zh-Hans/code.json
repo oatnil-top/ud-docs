@@ -2276,6 +2276,69 @@
   "home5.tile.extension": {
     "message": "浏览器扩展"
   },
+  "home6.what.eyebrow": {
+    "message": "udctl 是什么"
+  },
+  "home6.what.title": {
+    "message": "老实说，它是一大堆东西。"
+  },
+  "home6.what.agile.t": {
+    "message": "一套敏捷项目追踪"
+  },
+  "home6.what.agile.d": {
+    "message": "看板、sprint、backlog、燃尽图——你原本要在 Jira 里跑的那一套。"
+  },
+  "home6.what.docs.t": {
+    "message": "一个知识库"
+  },
+  "home6.what.docs.d": {
+    "message": "每张卡都是一篇 Markdown 文档；笔记、全文搜索、链接图谱。"
+  },
+  "home6.what.vault.t": {
+    "message": "一个本地笔记文件夹"
+  },
+  "home6.what.vault.d": {
+    "message": "{pull} 把任务铺成 Obsidian 能直接打开的 .md 文件；改完，{push} 推回去。"
+  },
+  "home6.what.ledger.t": {
+    "message": "一本账"
+  },
+  "home6.what.ledger.d": {
+    "message": "支出、预算、账户——多币种。"
+  },
+  "home6.what.calendar.t": {
+    "message": "一个日历，外加甘特图"
+  },
+  "home6.what.calendar.d": {
+    "message": "启动和截止，落在月历上，也落在时间轴上。"
+  },
+  "home6.what.cli.t": {
+    "message": "一个 kubectl 风格的命令行"
+  },
+  "home6.what.cli.d": {
+    "message": "{get}、{apply}——同一批卡，在终端里管。"
+  },
+  "home6.what.agents.t": {
+    "message": "一支 AI agent 团队"
+  },
+  "home6.what.agents.d": {
+    "message": "还有一位住在你 Telegram 里的管家。"
+  },
+  "home6.what.selfhost.t": {
+    "message": "……而且自部署"
+  },
+  "home6.what.selfhost.d": {
+    "message": "这一整套，可以跑在你自己的机器上。"
+  },
+  "home6.what.turn": {
+    "message": "看着就很难学？没错——如果要你亲自操作，它确实复杂。"
+  },
+  "home6.what.mention": {
+    "message": "@dev 把这个 bug 修了"
+  },
+  "home6.what.catch": {
+    "message": "但你不用。在任何一张卡上留一句 {mention}——这句话本身就会启动一个 agent 会话：绑在这张卡上，进度写回卡里，结果回到你这句话底下。看板、命令行、聊天窗，底下是同一份数据。AI 替你操作这一切，你一样都不用学。"
+  },
   "oss.hero.eyebrow": {
     "message": "开源组件"
   },
