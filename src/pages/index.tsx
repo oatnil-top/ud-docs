@@ -382,15 +382,28 @@ function ShowcaseSection() {
         <div className={styles.eyebrow}>
           <Translate id="home4.hero.eyebrow">Private AI Butler &amp; Workspace</Translate>
         </div>
-        {/* key remounts on rotation so the fade-up entrance replays; min-heights
-            in CSS keep the CTAs from jumping as headline length changes. */}
-        <div key={slide.key} className={styles.fadeup}>
-          <h1>
-            {slide.t1}
-            <br />
-            <span className={styles.turn}>{slide.t2}</span>
-          </h1>
-          <p className={styles.sub}>{slide.sub}</p>
+        {/* All four copy blocks stay mounted, stacked in one grid cell
+            (.copyStack); the tallest sets the column height at every viewport
+            width, so switching tabs never changes the section height — the
+            page used to jump one h1 line (71px at 1440, task 340300ec).
+            This stack IS the height reservation: the old h1/sub min-heights
+            are gone on purpose, do not reintroduce them. Swapping the class
+            (fadeup ↔ copyGhost) replays the entrance animation, which the
+            key-remount used to do. */}
+        <div className={styles.copyStack}>
+          {slides.map((s, i) => (
+            <div
+              key={s.key}
+              className={i === index ? styles.fadeup : styles.copyGhost}
+              aria-hidden={i !== index}>
+              <h1>
+                {s.t1}
+                <br />
+                <span className={styles.turn}>{s.t2}</span>
+              </h1>
+              <p className={styles.sub}>{s.sub}</p>
+            </div>
+          ))}
         </div>
         {/* Boss feedback 2026-07-26: the hero sells udctl, not "an
             Alfred app" — exactly three CTAs, each landing on a dedicated

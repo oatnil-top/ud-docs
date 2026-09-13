@@ -127,7 +127,22 @@
   letter-spacing: -0.015em;
   margin: 18px 0 14px;
   text-wrap: balance;
-  min-height: 2.4em;
+}
+/* Height reservation for the rotating copy: all four slides' blocks share one
+ * grid cell, so the tallest one sizes the column at any width and any locale,
+ * and switching slides never moves the CTAs or the document height (task
+ * 340300ec — it used to jump one h1 line). Deliberately NOT a min-height:
+ * a hand-tuned reservation goes stale silently when copy or width changes
+ * (the old `min-height: 2.4em` here was already below the real 3–4 lines).
+ * .copyGhost keeps layout but leaves paint and the a11y tree. */
+.copyStack {
+  display: grid;
+}
+.copyStack > * {
+  grid-area: 1 / 1;
+}
+.copyGhost {
+  visibility: hidden;
 }
 /* v7 emphasis: thick underline, no color. */
 .turn {
@@ -140,6 +155,8 @@
   font-size: 1.04rem;
   max-width: 30em;
   margin: 0 0 28px;
+  /* Kept for /alfred and /contact, which use .sub with static copy. The
+   * showcase no longer relies on it — its reservation is .copyStack. */
   min-height: 3.2em;
 }
 .ctas {
@@ -466,7 +483,9 @@
     justify-self: stretch;
     max-width: 100%;
   }
-  .hero h1,
+  /* .sub only: releases the /alfred and /contact reservation on phones.
+   * (.hero h1 no longer carries a min-height — the showcase copy is height-
+   * reserved by .copyStack at every width, so it is absent here on purpose.) */
   .sub {
     min-height: 0;
   }
