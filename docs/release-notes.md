@@ -44,6 +44,43 @@ Merged to `main`, not in any published build yet. These ship with the next versi
 -->
 
 
+## v0.153.0 (2026-09-14)
+
+### New Features
+
+- **Skill packages: install a skill with everything it needs, and publish it back.** `ud describe skill <name> --dir` installs the whole package into `~/.claude/skills/<name>/` — the skill's body plus every script, template and reference file attached to it. `ud apply -f ~/.claude/skills/<name>` publishes the directory back; the directory is the identity, so there is no name to pass. `--dry-run` lists what would change first, including the files at the skill's path a publish leaves alone.
+- **Videos posted into a conversation play where they are.** A video attached to a session or a comment now renders a player inline. It used to fall through to a download link, which for a video is not a viewer at all: object storage returns `content-disposition: attachment` for every file, so clicking it saved the video instead of playing it.
+
+### Improvements
+
+- **`ud sprint close` no longer sweeps unfinished cards away without being asked.** A bare close used to move every unfinished member to the backlog with no prompt. Now, if the sprint still has unfinished members and you did not name a rollover target, the close is refused and every blocker is listed by id, title and status. Pass `--rollover <sprint>` or `--rollover backlog` to say where they go. A sprint whose members are all done still closes with no rollover. The gate lives in the server, so the desktop app is covered too.
+- **The in-app Quick Start was rewritten against the current product**, with every command on the page actually run.
+
+### Bug Fixes
+
+- **A date filter carrying a timezone offset returned the wrong rows.** `>= '2026-08-31T00:00:00+08:00'` was compared as though it said 00:00 UTC, so rows inside the gap went missing with no error. Measured on production: 585 rows came back where the same instant spelled `Z` returned 594. Offsets are now respected everywhere a datetime reaches SQL.
+- **Uploading an iPhone screenshot no longer fails.** iOS writes an invisible narrow no-break space into the filename, and the storage gateway refused the resulting key with a 400, which surfaced as a 500 on upload. Keys are now normalised where they are minted. Files already stored are untouched, and the filename you see is still your own.
+- **`ud apply` with unterminated frontmatter now fails instead of creating a junk card.** A missing closing `---` was read as "no frontmatter at all", so the whole block fell into the body, an intended update became a create, and the new card was titled `---` — reported with the same `Task created:` line as a success.
+- **`ud apply -f <directory> <name>` refuses instead of silently dropping the name.**
+
+### Upgrade Notes (self-hosted)
+
+- **No schema changes in this release** — nothing runs against your database.
+- **No new environment variables.**
+
+Upgrading the CLI is something you do yourself: publishing a release does not change the `ud` on anyone's machine. There are three routes and you should use exactly one.
+
+```bash
+npm i -g @oatnil/ud            # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If you got `ud` from the desktop app, neither of those is your route — install the new desktop app instead.** Its "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one shipped inside the app.
+
+Then check it took: `ud --version` must print `udctl version 0.153.0`.
+
+---
+
 ## v0.152.0 (2026-09-12)
 
 ### Desktop app
