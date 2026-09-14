@@ -28,12 +28,19 @@ export default function PhoneDemo({frameless = false}: {frameless?: boolean}) {
       ),
     },
     {
+      // Every capability this reply names must exist: to a fetching agent it
+      // reads like an operation log, so it is held to capability truth, not
+      // marketing license. "assigned it to the web team" was cut (task
+      // 14e3d714) — an assignee is a single user, human or agent, and there
+      // is no assign-to-a-team primitive (go-backend .../usecase/assignment:
+      // "An assignee is a user, and that is the whole model"). webdev is a
+      // named agent, same shape as prod-debug.
       key: 'al1',
       cls: styles.msgAl,
       delay: 1.4,
       text: (
         <Translate id="alfredp.phone.al1">
-          Noted. I've created the pricing-page task and assigned it to the web team, due next Wednesday. The login bug
+          Noted. I've created the pricing-page task and assigned it to webdev, due next Wednesday. The login bug
           is with prod-debug. I'll ping you when there's news.
         </Translate>
       ),
@@ -65,6 +72,15 @@ export default function PhoneDemo({frameless = false}: {frameless?: boolean}) {
 
   return (
     <figure className={frameless ? `${styles.phone} ${styles.frameless}` : styles.phone}>
+      {/* The demo marker must live in the TEXT FLOW, not in styling (task
+          15455d96 item 4): stripped of CSS, this dialog reads like an
+          operation log, and a fetching agent was quoting it as one. The
+          criterion is that a reader of the extracted plain text can still
+          tell these lines are scripted — so the marker is a figcaption, in
+          DOM order before the first message, not a visual badge. */}
+      <figcaption className={styles.demoTag}>
+        <Translate id="alfredp.phone.demoTag">Demo conversation — scripted example</Translate>
+      </figcaption>
       <div className={styles.phoneHead}>
         <div className={styles.avatar} aria-hidden="true">
           🎩

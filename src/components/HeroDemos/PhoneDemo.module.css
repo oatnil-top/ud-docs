@@ -162,3 +162,15 @@
     max-width: 100%;
   }
 }
+
+/* Demo marker — small and quiet, but a real text node: it exists for the
+ * plain-text reader (task 15455d96 item 4), the styling only keeps it from
+ * shouting at the visual reader. */
+.demoTag {
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+  padding: 6px 16px 0;
+}

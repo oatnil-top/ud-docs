@@ -42,13 +42,16 @@
     "message": "Alfred — 你的私人 AI 管家 | udctl"
   },
   "alfredp.phone.al1": {
-    "message": "记下了。价格页我建了任务派给 web 团队，截止下周三；登录 bug 已让 prod-debug 跟进。有结果我叫你。"
+    "message": "记下了。价格页我建了任务派给 webdev，截止下周三；登录 bug 已让 prod-debug 跟进。有结果我叫你。"
   },
   "alfredp.phone.al2": {
     "message": "登录 bug 修好了，是 session 过期没刷新。价格页初稿明天上午给你预览链接。"
   },
   "alfredp.phone.aria": {
     "message": "演示对话"
+  },
+  "alfredp.phone.demoTag": {
+    "message": "演示对话 — 预设脚本示例"
   },
   "alfredp.phone.gap": {
     "message": "—— 两小时后 ——"
