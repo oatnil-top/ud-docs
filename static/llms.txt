@@ -19,4 +19,5 @@ udctl was formerly named UnDercontrol; udctl.com is the canonical host and oatni
 ## Optional
 
 - [Self-hosting guide](https://udctl.com/docs/self-deployment/): run the whole thing on your own machine.
+- [Pricing and license tiers](https://udctl.com/subscribe/): self-hosted license prices by team-size band; free for personal use.
 - [Release notes](https://udctl.com/docs/release-notes/)
