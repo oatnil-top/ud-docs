@@ -18,6 +18,10 @@
 // This is fast local feedback. The LOAD-BEARING gate is the monorepo's
 // auto/verify-release-surfaces.sh agent-guide surface, which compares what
 // udctl.com actually serves.
+//
+// Editing the corpus content? The edit duty (sync + rerun the six-question
+// result probe) is pinned next to the source:
+// go-backend/internal/domain/core/skill/builtin/WEBSITE-CORPUS.md.
 import {readFileSync, existsSync} from 'node:fs';
 import {fileURLToPath} from 'node:url';
 import {dirname, join} from 'node:path';
