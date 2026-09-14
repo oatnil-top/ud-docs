@@ -509,15 +509,24 @@ function WhatIsSection() {
     {
       key: 'vault',
       t: <Translate id="home6.what.vault.t">A local notes folder</Translate>,
-      // The advantage clause states OUR packaging ("not a separate purchase",
-      // "attachments follow the card") and never claims Obsidian lacks sync —
-      // Obsidian Sync exists, it is a paid per-user add-on (obsidian.md/sync,
-      // checked 2026-09-14: $4-8/user/mo). Attachments landing as ![[..]]
-      // embeds is ud-cli fetchattach.go behaviour. Keep the sentence about us.
+      // The advantage clause states OUR packaging and never claims Obsidian
+      // lacks sync — Obsidian Sync exists, it is a paid per-user add-on
+      // (obsidian.md/sync, checked 2026-09-14: $4-8/user/mo). Keep the
+      // sentence about us. "Ships with self-hosting" is verified against
+      // route_table.go: the sync endpoints (todolist/batch-upsert,
+      // synced-paths) and every /resources route carry no Tier — only
+      // admin/multi-user surfaces do — so sync is built into every tier,
+      // license or none. Do NOT strengthen it to "free": team self-host
+      // license pricing is being decided (master, task 1e56b4ca 2026-09-14),
+      // only personal is flatly free. "Manage themselves" is the ud-cli
+      // round trip: pull downloads web-uploaded attachments into the vault
+      // and rewrites them to ![[..]] embeds (fetchattach.go); push uploads
+      // new local files and re-attaches embeds to the card (push.go
+      // bindEmbeddedResources).
       d: (
         <Translate id="home6.what.vault.d" values={{pull: code('ud pull'), push: code('ud push')}}>
           {
-            '{pull} lays your tasks out as plain .md files Obsidian opens as a vault; {push} them back. Sync is not a separate purchase, and attachments follow the card — landing as ![[…]] embeds.'
+            '{pull} lays your tasks out as plain .md files Obsidian opens as a vault; {push} them back. Sync ships with self-hosting — nothing you buy on top — and image attachments manage themselves: pulled down as ![[…]] embeds, pushed back onto the card.'
           }
         </Translate>
       ),

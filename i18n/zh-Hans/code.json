@@ -2298,7 +2298,7 @@
     "message": "一个本地笔记文件夹"
   },
   "home6.what.vault.d": {
-    "message": "{pull} 把任务铺成 Obsidian 能直接打开的 .md 文件；改完，{push} 推回去。同步不另买，图片等附件跟着卡走，落地就是 ![[…]] 嵌入。"
+    "message": "{pull} 把任务铺成 Obsidian 能直接打开的 .md 文件；改完，{push} 推回去。自部署自带同步，不是另外买的东西；图片等嵌入资源自动管理——拉下来就是 ![[…]] 嵌入，推回去自动挂回卡。"
   },
   "home6.what.vpath.t": {
     "message": "一棵虚拟目录树"
