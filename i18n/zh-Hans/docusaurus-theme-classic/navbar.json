@@ -26,5 +26,9 @@
   "item.label.Alfred": {
     "message": "Alfred",
     "description": "Navbar item with label Alfred"
+  },
+  "item.label.Pricing": {
+    "message": "定价",
+    "description": "Navbar item with label Pricing"
   }
 }

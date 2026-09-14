@@ -20,7 +20,7 @@ udctl offers three tiers to fit your needs:
 | **Pro** | Paid | Multiple users | Teams and businesses |
 | **Max** | Paid (Supporter) | Multiple users | Supporting the project |
 
-For detailed feature comparison, visit the [Pricing](/docs/pricing) page.
+For current tiers and prices, visit the [Pricing](/subscribe) page.
 
 ---
 
@@ -235,7 +235,7 @@ Having trouble with license activation? We're here to help!
 
 - 📧 **Contact**: [Get in touch](/contact)
 - 📚 **Documentation**: [Installation Guide](/docs/self-deployment)
-- 💰 **Pricing Questions**: [Pricing Page](/docs/pricing)
+- 💰 **Pricing Questions**: [Pricing Page](/subscribe)
 
 ### Common Questions
 
