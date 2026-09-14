@@ -9,7 +9,9 @@ sidebar_position: 3
 API keys give you programmatic access to the udctl API. Use them to connect the CLI, build integrations, or automate workflows - all without sharing your password. Each key has its own set of permissions and expiration, so you stay in control.
 
 :::info
-API keys are available on **Pro and Max tiers** only. Personal tier users can upgrade to access this feature.
+API keys require a licensed deployment. The **Personal** tier does not include them; every
+licensed band does — **Small team** (free license), **Team**, and **Unlimited**. See the
+[Pricing](/subscribe) page.
 :::
 
 ## Main Features
