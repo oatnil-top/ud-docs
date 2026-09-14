@@ -4,3 +4,15 @@
 # HTML is deliberately NOT listed: it must stay max-age=0 so a deploy shows up at once.
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
+
+# Agent-facing text files must declare their encoding: without a charset the
+# consumer is free to decode as anything, and these files carry non-ASCII.
+# The media types stay exactly as the platform serves them — text/markdown was
+# measured working across six agent UAs on 2026-09-14 (card 15455d96), so only
+# the charset is added, per path, no globs.
+/agent-setup/prompt.md
+  Content-Type: text/markdown; charset=utf-8
+/agent-setup/guide.md
+  Content-Type: text/markdown; charset=utf-8
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
