@@ -307,8 +307,17 @@
   "home4.arch.you": {
     "message": "💬 你"
   },
+  "home4.cta.apiRef": {
+    "message": "API 参考"
+  },
+  "home4.cta.cliRef": {
+    "message": "CLI 参考"
+  },
   "home4.cta.fine": {
     "message": "个人免费 · 可自托管 · 五分钟跑起来"
+  },
+  "home4.cta.installLead": {
+    "message": "更喜欢终端？"
   },
   "home4.cta.primary": {
     "message": "开始使用 Alfred"

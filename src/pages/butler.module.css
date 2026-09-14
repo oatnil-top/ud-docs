@@ -243,6 +243,9 @@
 }
 
 /* ---------- Agent onboarding pill ---------- */
+/* The pill is an <a> since task 15455d96 (the href must survive a text-mode
+ * fetch), so it has to opt out of the theme's link color and hover underline
+ * to keep looking like the button it visually is. */
 .agentSetupButton {
   display: inline-flex;
   align-items: center;
@@ -257,9 +260,12 @@
   font-size: 0.84rem;
   font-weight: 500;
   cursor: pointer;
+  text-decoration: none;
 }
 .agentSetupButton:hover {
   background: var(--bubble);
+  color: var(--ink);
+  text-decoration: none;
 }
 .agentSetupCode {
   display: inline-block;

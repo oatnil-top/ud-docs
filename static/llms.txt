@@ -1,0 +1,21 @@
+# udctl (UnDercontrol)
+
+> udctl schedules, retries, and remembers for a team of AI agents on real CLIs. Delegate from chat; results land in your tasks. Self-hosted, free for personal use.
+
+udctl was formerly named UnDercontrol; udctl.com is the canonical host and oatnil.com redirects here. The CLI installs with `npm install -g @oatnil/ud` (Node.js 18+).
+
+## Start here
+
+- [Agent setup prompt](https://udctl.com/agent-setup/prompt.md): paste-ready onboarding prompt for an AI agent — install, pick a server, `ud login`, first commands. Served as plain text/markdown.
+- [Download and install](https://udctl.com/download/): desktop, web, mobile, CLI — every install path with exact commands and artifact names.
+
+## Reference
+
+- [CLI reference](https://udctl.com/docs/cli/): the kubectl-style `ud` command — `ud get`, `ud apply`, tasks, notes, boards.
+- [API reference](https://udctl.com/docs/api-reference/): the OpenAPI (Swagger 2.0) specification for the backend HTTP API.
+- [Documentation](https://udctl.com/docs/intro/): user-facing docs — tasks, knowledge, finance, agents, self-hosting.
+
+## Optional
+
+- [Self-hosting guide](https://udctl.com/docs/self-deployment/): run the whole thing on your own machine.
+- [Release notes](https://udctl.com/docs/release-notes/)

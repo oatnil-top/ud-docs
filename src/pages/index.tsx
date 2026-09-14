@@ -1,4 +1,4 @@
-import {useEffect, useState, type ReactNode} from 'react';
+import {useEffect, useState, type MouseEvent, type ReactNode} from 'react';
 import Link from '@docusaurus/Link';
 import Layout from '@theme/Layout';
 import Head from '@docusaurus/Head';
@@ -100,11 +100,24 @@ function AgentSetupButton() {
   // Boss feedback 2026-07-26 (task b00f9e8f): the pill stays compact — never
   // print the Fetch command itself, only a copy glyph; the command lives in
   // the title tooltip and the clipboard.
+  //
+  // This is an <a href={prompt url}>, not a <button>, and the href is the
+  // load-bearing part (task 15455d96): a text/markdown conversion of this page
+  // drops `title` and `onClick`, so a <button> made the prompt invisible to
+  // exactly the audience it exists for — a fetched copy of the page carried no
+  // path to prompt.md at all. A plain left click still copies instead of
+  // navigating (the human behavior is unchanged); modified clicks and
+  // non-click fetchers get the real URL.
+  const onClick = (e: MouseEvent<HTMLAnchorElement>) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+    e.preventDefault();
+    copy();
+  };
   return (
-    <button
-      type="button"
+    <a
+      href={AGENT_SETUP_PROMPT_URL}
       className={styles.agentSetupButton}
-      onClick={copy}
+      onClick={onClick}
       title={AGENT_SETUP_COMMAND}
       aria-label={translate({
         id: 'homepage.hero.agentSetup.aria',
@@ -118,7 +131,7 @@ function AgentSetupButton() {
         )}
       </span>
       <code className={styles.agentSetupCode}>{copied ? '✓' : '⧉'}</code>
-    </button>
+    </a>
   );
 }
 
@@ -1049,6 +1062,24 @@ function CtaSection() {
         </Link>
         <p className={styles.fine}>
           <Translate id="home4.cta.fine">Free for personal use · Self-hostable · Running in five minutes</Translate>
+        </p>
+        {/* Executable text, in the text flow on purpose (task 15455d96): the
+            page advertised `ud get`/`ud apply` above while carrying zero
+            install commands and never linking its own CLI/API references. A
+            text-mode fetch keeps only what is in the flow — commands and
+            links must never retreat into a tooltip or a click handler. */}
+        <p className={styles.fine}>
+          <Translate id="home4.cta.installLead">Prefer the terminal?</Translate>{' '}
+          <code className={styles.whatCode}>npm install -g @oatnil/ud</code>
+        </p>
+        <p className={styles.fine}>
+          <Link to="/docs/cli">
+            <Translate id="home4.cta.cliRef">CLI reference</Translate>
+          </Link>
+          {' · '}
+          <Link to="/docs/api-reference">
+            <Translate id="home4.cta.apiRef">API reference</Translate>
+          </Link>
         </p>
       </div>
     </section>
