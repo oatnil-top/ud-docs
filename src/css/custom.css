@@ -306,14 +306,34 @@ a:hover {
   color: #ffffff;
 }
 /* Inside the sheet the two buttons are list rows like every other item —
-   the filled/outlined pair only means something in the horizontal bar. */
+   the filled/outlined pair only means something in the horizontal bar.
+   Only strip what makes them buttons (fill, border, ink); padding is NOT
+   overridden — `padding: inherit` used to zero it (the parent li has none),
+   which rendered Self-Host and Download as bare flush-left text while every
+   other row kept its .menu__link padding (ud task 9b50033d). The bar's own
+   padding/margin rules can't leak in here: they are scoped .navbar__inner. */
 .navbar-sidebar .navbar__cta,
 .navbar-sidebar .navbar__outline {
   background-color: transparent;
   border: 0;
   color: #f0ede4;
-  padding: inherit;
-  margin-left: 0;
+}
+
+/* ---------------------------------------------------------------------------
+   Docs sidebar (ud task 9b50033d). Two measured problems, not a restyle:
+   1. The container was transparent, so the body's dot-grid ran underneath the
+      menu text — the rail read as part of the page instead of as a rail. A
+      solid background (the Infima variable, so dark mode follows) keeps the
+      hairline border-right as the only separator, per the thin-line language.
+   2. nav.menu had padding 8px 0 8px 8px: the first item sat 8px under the
+      navbar and the item pills touched the right hairline. Even it out.
+   --------------------------------------------------------------------------- */
+.theme-doc-sidebar-container {
+  background-color: var(--ifm-background-color);
+}
+
+.theme-doc-sidebar-container nav.menu {
+  padding: 1rem 0.75rem 2rem;
 }
 
 /* Page and doc titles take the display face as well. Chinese titles fall
