@@ -44,6 +44,42 @@ Merged to `main`, not in any published build yet. These ship with the next versi
 -->
 
 
+## v0.154.0 (2026-09-15)
+
+### New Features
+
+- **A daily free AI quota, so one user cannot drain the instance's shared AI providers.** Every user now gets a number of free AI calls per UTC day on the AI providers the instance shares — **10 by default**. Calls made on a user's own API key are never counted. An audio capture costs 2 (it is two AI calls under the hood). When the limit is reached, chat requests fail with a quota message instead of a generic error, and the AI quick-create dialog shows how many calls are left today.
+- **A quick capture refused for quota now tells you, instead of vanishing.** Quick capture answers "queued" before the chargeable AI call happens, so a quota refusal used to leave you with a success receipt and silence: no task in Explorer, no bell, no toast. Each refused capture now raises a For You bell notification that echoes the text you captured, so the note itself is not lost. The item also shows as **Failed** under Queue Tasks.
+- **Self-hosted admins are warned before the license expires.** An expired license makes the server **refuse to start** — it does not downgrade — so a daily sweep now warns this instance's own admins at 60, 30, 7 and 1 days left, in the For You panel. The warning says how long is left, that the server will refuse to start, and where to get a new license. A band crossed on a day the instance was off still fires on the next run, and renewing the license resets the warnings.
+- **See what AI is being spent.** `GET /ai/usage` reports your own used / limit / reset time; `GET /ai/admin/usage` aggregates usage per user, per UTC day, per capability and per provider.
+
+### Improvements
+
+- **`ud --help` is 21 lines instead of 94.** The full grouped command tree moved to a new `ud commands`, which root help points at. Four commands that had been falling silently into cobra's "Additional Commands" bucket — `sprint`, `subscribe`, `unsubscribe`, `migrate-layout` — now sit in real groups, so reaching `ud sprint close` from `ud --help` takes three calls.
+- **Quick capture routes carry a 20/minute per-IP throttle**, an anti-spam floor underneath the daily quota.
+
+### Bug Fixes
+
+- **An image pasted into a dataflow diagram now renders before you save.** Images in a saved diagram resolve through a diagram-scoped endpoint that refuses anything the saved content does not yet reference — and a freshly pasted image is not referenced until you save, so it showed "Image not accessible".
+
+### Upgrade Notes (self-hosted)
+
+- **Back up your database before upgrading.** Two migrations run on first boot: `00086_create_ai_usage` and `00087_add_license_expiry_notices`.
+- **New setting `AI_DAILY_FREE_QUOTA` (flag: `--ai-daily-free-quota`), default `10`** — free AI calls per user per UTC day on the instance's shared AI providers. **`0` means zero quota: every shared-provider AI call is refused. `-1` means unlimited.** Those two read backwards from most settings, so set it deliberately. Leaving it unset gives every user 10 calls a day, where earlier versions placed no limit at all.
+
+CLI upgrades are yours to run: publishing a release does not change the `ud` on anybody's machine. There are three routes — **take only one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route — install the new desktop app instead.** The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.154.0`.
+
+---
+
 ## v0.153.0 (2026-09-14)
 
 ### New Features
