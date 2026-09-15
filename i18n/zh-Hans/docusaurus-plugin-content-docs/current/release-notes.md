@@ -40,6 +40,39 @@ sidebar_position: 1
 -->
 
 
+## v0.155.0 (2026-09-15)
+
+### 新功能
+
+- **agent 可以带 principles —— 一组会被追加到它收到的每一条 prompt 末尾的红线。** 每个 agent 现在有一个 `principles` 字段,上限 200 个字符。你写在那里的内容会追加到发给这个 agent 的每一条 prompt 末尾,所以它是每次投递都被重读一遍,而不是在一段长会话的开头读一次。只留最重要的一两句:编辑器在你写长了的时候会提醒,因为越短的 principles 越容易被反复读到。
+- **只有 agent 的 owner 能改,而且每次改都要写明理由。** principles 编辑入口在 Web 端 agent 详情页。保存一次修改必须填一句变更说明,完整的历史 —— 谁改的、什么时候、为什么 —— 在同一个对话框的**变更历史**里读得到。
+- **同一个字段在 CLI 上。** `ud describe agent <名字>` 会显示这个 agent 的 principles;`ud describe agent <名字> -o prompt` 把它渲染进这个 agent 真正收到的那份 prompt 里;`ud describe agent <名字> --principles-history` 打印变更日志。
+- **每次投递都会记下 principles 这一环发生了什么。** 每条 prompt 投递会记录 principles 是注入了、本来就是空的、还是没取到。取不到**不会**挡住投递 —— agent 照样收到消息,失败被记下来,而不是被放大成整个 agent 不可用。
+
+### 改进
+
+- **`ud explain agent` 会把只读字段标成只读。** 那些由服务端掌握、写入时会被拒绝的字段 —— `principles` 就是其中之一 —— 现在在 `ud explain` 里渲染成 read-only,于是一个你设不了的字段,不再看起来像一个你忘了设的字段。
+- **自托管实例的对象存储一旦回退,现在会大声说出来。** 当配置的存储类解析不出来时,服务端会回退到启动时 `--s3-*` 参数构建的那个存储。三处回退里有两处只打了一条说明失败、但没说后果的 Warn,第三处什么都没打。现在三处统一打 `BLOB_FALLBACK_USED`,Error 级别,带原因和累计次数。这一条在做存储迁移时要紧:从旧桶供文件和从新桶供文件看起来一模一样,直到旧桶被删掉那一刻。
+
+### 升级注意(自托管)
+
+- **升级前请先备份数据库。** 首次启动会跑两个迁移:`00088_add_principles_to_agent_configs` 和 `00089_create_agent_principles_revisions`。
+- **内置的 `alfred` agent 带了一份 seed principles,而 seed 只会到达新建出来的 agent。** 已经建过内置 agent 的实例,升级后会看到 `alfred` 的 principles 是空的 —— 这是预期,不是迁移失败。想要的话在 agent 详情页自己填。其余内置 agent 都不带 seed principles。
+- 没有新增配置项,也没有移除任何配置项。
+
+CLI 要你自己升:发布一个新版本不会让任何人机器上的 `ud` 变新。一共三条路,**只走其中一条**。
+
+```bash
+npm i -g @oatnil/ud # npm 装的
+brew update && brew upgrade ud # Homebrew 装的
+```
+
+**如果你的 `ud` 是从桌面端装的,上面两条都不是你的路 —— 装新版桌面 App 就行。** App 的「Install ud CLI」把 `/usr/local/bin/ud` 做成了指进 App 包里的符号链接,所以你跑的那个 `ud` 就是 App 里带的那个。
+
+然后确认升上去了:`ud --version` 必须打印 `udctl version 0.155.0`。
+
+---
+
 ## v0.154.0 (2026-09-15)
 
 ### 新功能

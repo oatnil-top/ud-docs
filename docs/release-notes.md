@@ -44,6 +44,39 @@ Merged to `main`, not in any published build yet. These ship with the next versi
 -->
 
 
+## v0.155.0 (2026-09-15)
+
+### New Features
+
+- **Agents can carry principles — a short set of red lines re-injected into every prompt they receive.** Each agent now has a `principles` field, capped at 200 characters. Whatever you write there is appended to the end of every prompt that agent is sent, so it is re-read on every delivery rather than once at the top of a long session. Keep it to the one or two lines that matter most; the editor warns you as it gets long, because shorter principles are re-read more reliably.
+- **Only the agent's owner can change them, and every change needs a reason.** The principles editor lives on the agent's detail page in the web app. Saving a change requires a one-line change note, and the full history — who changed it, when, and why — is readable from the same dialog under **Change history**.
+- **The same field from the CLI.** `ud describe agent <name>` shows an agent's principles, `ud describe agent <name> -o prompt` renders them inside the prompt the agent actually receives, and `ud describe agent <name> --principles-history` prints the change journal.
+- **A delivery says what happened to the principles.** Every prompt delivery records whether the principles were injected, were empty, or could not be fetched. A failure to read them does **not** block the prompt — the agent still gets its message, and the failure is recorded rather than turned into an outage.
+
+### Improvements
+
+- **`ud explain agent` marks read-only fields as read-only.** Fields the server owns and refuses to accept from a write — `principles` among them — now render as read-only in `ud explain`, so a field you cannot set no longer looks like one you forgot to set.
+- **A self-hosted instance whose object storage falls back now says so, loudly.** When the configured storage class cannot be resolved, the server falls back to the storage built from its startup `--s3-*` flags. Two of the three places this happens logged a warning that named the failure but not the consequence, and the third logged nothing at all. All three now log `BLOB_FALLBACK_USED` at error level with the reason and a running count. This matters during a storage migration: serving from the old bucket looks exactly like serving from the new one, until the old bucket is deleted.
+
+### Upgrade Notes (self-hosted)
+
+- **Back up your database before upgrading.** Two migrations run on first boot: `00088_add_principles_to_agent_configs` and `00089_create_agent_principles_revisions`.
+- **The built-in `alfred` agent ships with seed principles, and a seed only reaches a newly created agent.** An instance that already created its built-in agents will find `alfred`'s principles empty after this upgrade — that is expected, not a failed migration. Set them from the agent's detail page if you want them. No other built-in agent carries seed principles.
+- No new configuration settings, and no settings removed.
+
+CLI upgrades are yours to run: publishing a release does not change the `ud` on anybody's machine. There are three routes — **take only one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route — install the new desktop app instead.** The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.155.0`.
+
+---
+
 ## v0.154.0 (2026-09-15)
 
 ### New Features
